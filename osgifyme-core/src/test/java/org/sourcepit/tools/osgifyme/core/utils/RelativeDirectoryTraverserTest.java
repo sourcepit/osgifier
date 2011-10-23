@@ -10,9 +10,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.sourcepit.tools.osgifyme.core.utils.IResourceVisitor;
-import org.sourcepit.tools.osgifyme.core.utils.RelativeDirectoryTraverser;
-
 public class RelativeDirectoryTraverserTest extends AbstractTraverserTest
 {
    @Override

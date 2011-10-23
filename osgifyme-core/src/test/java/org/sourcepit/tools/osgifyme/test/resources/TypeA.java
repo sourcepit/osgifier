@@ -8,5 +8,30 @@ package org.sourcepit.tools.osgifyme.test.resources;
 
 public class TypeA
 {
+   private Object o;
 
+   public Object getO()
+   {
+      Boolean b = new Boolean(false);
+      if (b.booleanValue())
+      {
+         return null;
+      }
+      return o;
+   }
+
+   public static class Hans
+   {
+      private Runnable r = new Runnable()
+      {
+         public void run()
+         {
+         }
+      };
+
+      public Hans()
+      {
+         r.run();
+      }
+   }
 }

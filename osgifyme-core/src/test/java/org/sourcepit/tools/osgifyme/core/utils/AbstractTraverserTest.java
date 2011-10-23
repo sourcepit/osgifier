@@ -16,7 +16,6 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.tools.osgifyme.core.utils.IResourceVisitor;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
 public abstract class AbstractTraverserTest

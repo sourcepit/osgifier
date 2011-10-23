@@ -1,4 +1,7 @@
-#Thu Oct 20 23:10:07 CEST 2011
+#Mon Oct 24 21:55:13 CEST 2011
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/model=UTF-8
+encoding//src/main/model/java.ecore=UTF-8
+encoding//src/main/model/java.ecorediag=UTF-8
 encoding//src/test/java=UTF-8
