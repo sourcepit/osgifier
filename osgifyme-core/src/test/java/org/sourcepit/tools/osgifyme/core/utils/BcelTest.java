@@ -9,9 +9,12 @@ package org.sourcepit.tools.osgifyme.core.utils;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ConstantClass;
@@ -22,9 +25,11 @@ import org.apache.bcel.classfile.InnerClass;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassLoaderRepository;
 import org.junit.Test;
+import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
+import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.tools.osgifyme.core.java.utils.JavaUtils;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
@@ -50,27 +55,68 @@ public class BcelTest
             final boolean isPackage = isDirectory && JavaUtils.isFullyQiallifiedPackageName(path, "/");
             if (isPackage)
             {
-               javaArchive.getPackage(path.replace('/', '.'), true);
+               javaArchive.getPackage(toPackageName(path), true);
             }
             else if (path.endsWith(".class"))
             {
-               int idx = path.lastIndexOf("/");
-               final String pkgName;
-               final String typeName;
-               if (idx == -1)
-               {
-                  pkgName = "";
-                  typeName = path.substring(0, path.length() - 6);
-               }
-               else
-               {
-                  pkgName = path.substring(0, idx).replace('/', '.');
-                  typeName = path.substring(idx + 1, path.length() - 6);
-               }
+               final String[] result = getPackageAndFileName(path);
+               final String pkgName = result[0];
+               final String typeName = result[1].substring(0, result[1].length() - 6);
                javaArchive.getType(pkgName, typeName, true);
             }
+            else if (path.endsWith("packageinfo"))
+            {
+               try
+               {
+                  final Properties props = new Properties();
+                  props.load(content);
+                  if (!props.isEmpty())
+                  {
+                     final JavaPackage pgk = javaArchive.getPackage(getPackageAndFileName(path)[0], true);
+                     final Annotation annotation = pgk.getAnnotation("packageinfo", true);
+                     for (Entry<Object, Object> entry : props.entrySet())
+                     {
+                        annotation.setData((String) entry.getKey(), (String) entry.getValue());
+                     }
+                     System.out.println();
+                  }
+               }
+               catch (IOException e)
+               { // TODO log warning
+               }
+            }
+
             return isPackage;
          }
+
+         private String toPackageName(String path)
+         {
+            String pkgName = path.replace('/', '.');
+            if (pkgName.endsWith("."))
+            {
+               pkgName = pkgName.substring(0, pkgName.length() - 1);
+            }
+            return pkgName;
+         }
+
+         private String[] getPackageAndFileName(String path)
+         {
+            int idx = path.lastIndexOf("/");
+            final String pkgName;
+            final String typeName;
+            if (idx == -1)
+            {
+               pkgName = "";
+               typeName = path;
+            }
+            else
+            {
+               pkgName = toPackageName(path.substring(0, idx));
+               typeName = path.substring(idx + 1);
+            }
+            return new String[] {pkgName, typeName};
+         }
+
       });
 
 

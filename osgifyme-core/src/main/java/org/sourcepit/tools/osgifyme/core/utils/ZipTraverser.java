@@ -155,10 +155,11 @@ public class ZipTraverser implements IResourceTraverser
       }
       finally
       {
-         if (streamDelegate != null)
-         {
-            streamDelegate.closeDelegate();
-         }
+         // zip input stream will closed by caller
+         // if (streamDelegate != null)
+         // {
+         // streamDelegate.closeDelegate();
+         // }
       }
 
       return visitChildren;

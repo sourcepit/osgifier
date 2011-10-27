@@ -33,6 +33,12 @@ public abstract class UnclosableInputStreamDelegate extends InputStream
 
    protected abstract InputStream openInputStream() throws IOException;
 
+   @Override
+   public void close() throws IOException
+   {
+      super.close();
+   }
+
    public void closeDelegate()
    {
       closed = true;
