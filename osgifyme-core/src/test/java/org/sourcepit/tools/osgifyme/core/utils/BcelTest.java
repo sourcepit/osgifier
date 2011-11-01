@@ -30,7 +30,7 @@ import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
-import org.sourcepit.tools.osgifyme.core.java.utils.JavaUtils;
+import org.sourcepit.tools.osgifyme.core.java.utils.JavaLangUtils;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
 public class BcelTest
@@ -52,7 +52,7 @@ public class BcelTest
       {
          public boolean visit(String path, boolean isDirectory, InputStream content)
          {
-            final boolean isPackage = isDirectory && JavaUtils.isFullyQiallifiedPackageName(path, "/");
+            final boolean isPackage = isDirectory && JavaLangUtils.isFullyQuallifiedPackageName(path, "/");
             if (isPackage)
             {
                javaArchive.getPackage(toPackageName(path), true);
@@ -78,7 +78,6 @@ public class BcelTest
                      {
                         annotation.setData((String) entry.getKey(), (String) entry.getValue());
                      }
-                     System.out.println();
                   }
                }
                catch (IOException e)

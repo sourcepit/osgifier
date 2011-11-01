@@ -20,7 +20,7 @@ import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
 public abstract class AbstractTraverserTest
 {
-   private static final String TEST_RESOURCES_PACKAGE_PATH = TypeA.class.getPackage().getName().replace('.', '/') + "/";
+   public static final String TEST_RESOURCES_PACKAGE_PATH = TypeA.class.getPackage().getName().replace('.', '/') + "/";
 
    @Test
    public void testTravers()
