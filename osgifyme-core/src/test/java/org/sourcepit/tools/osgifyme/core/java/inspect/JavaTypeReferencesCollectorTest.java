@@ -14,6 +14,7 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,22 +54,22 @@ public class JavaTypeReferencesCollectorTest
       Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(3));
       
-      List<String> expectedRefs = new ArrayList<String>();
+      Set<String> expectedRefs = new HashSet<String>();
       expectedRefs.add("java.lang.Object");
       expectedRefs.add("java.lang.String");
       expectedRefs.add("java.lang.Boolean");
       
-      assertThat(new ArrayList<String>(typeRefs), IsEqual.equalTo(expectedRefs));
+      assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
       
       jClass = classRepo.loadClass(TypeA.Hans.class.getName());
       
       typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(2));
       
-      expectedRefs = new ArrayList<String>();
+      expectedRefs = new HashSet<String>();
       expectedRefs.add("java.lang.Object");
       expectedRefs.add("java.lang.Runnable");
       
-      assertThat(new ArrayList<String>(typeRefs), IsEqual.equalTo(expectedRefs));
+      assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
    }
 }
