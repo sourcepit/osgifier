@@ -15,6 +15,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.ConstantClass;
@@ -30,6 +31,7 @@ import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.tools.osgifyme.core.java.inspect.JavaTypeReferencesCollector;
 import org.sourcepit.tools.osgifyme.core.java.utils.JavaLangUtils;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
@@ -122,6 +124,9 @@ public class BcelTest
       JavaClass jc = repo.loadClass(TypeA.class.getName());
 
       jc = repo.loadClass(TypeA.Hans.class.getName());
+
+      Set<String> collect = JavaTypeReferencesCollector.collect(jc);
+      System.out.println(collect);
 
 
       new DescendingVisitor(jc, new EmptyVisitor()

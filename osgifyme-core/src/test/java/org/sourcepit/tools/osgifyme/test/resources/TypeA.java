@@ -6,12 +6,16 @@
 
 package org.sourcepit.tools.osgifyme.test.resources;
 
+import java.util.Comparator;
+
 public class TypeA
 {
    private Object o;
 
    public Object getO()
    {
+      new String().charAt(0);
+
       Boolean b = new Boolean(false);
       if (b.booleanValue())
       {
@@ -32,6 +36,14 @@ public class TypeA
       public Hans()
       {
          r.run();
+
+         new Comparator<String>()
+         {
+            public int compare(String o1, String o2)
+            {
+               return 0;
+            }
+         }.compare(null, null);
       }
    }
 }

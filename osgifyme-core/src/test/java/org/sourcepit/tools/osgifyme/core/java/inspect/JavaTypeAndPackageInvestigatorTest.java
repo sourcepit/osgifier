@@ -11,6 +11,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 
@@ -19,6 +21,7 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
@@ -38,7 +41,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateJar(null, null);
+         new JavaTypeAndPackageInvestigator().investigateJar(null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -48,7 +51,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, null);
+         new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -59,7 +62,7 @@ public class JavaTypeAndPackageInvestigatorTest
       assertTrue(jarFile.exists());
 
       javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, jarFile);
+      new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, jarFile, null);
 
       JavaPackage pgk = javaArchive.getPackage(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
@@ -88,7 +91,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateProject(null, null);
+         new JavaTypeAndPackageInvestigator().investigateProject(null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -98,7 +101,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateProject(javaProject, null);
+         new JavaTypeAndPackageInvestigator().investigateProject(javaProject, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -110,7 +113,7 @@ public class JavaTypeAndPackageInvestigatorTest
 
       javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaTypeAndPackageInvestigator().investigateProject(javaProject, projectDir);
+      new JavaTypeAndPackageInvestigator().investigateProject(javaProject, projectDir, null);
 
       JavaPackage pgk = javaProject.getPackage("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
@@ -132,6 +135,40 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaType innerType2 = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName() + "." + TypeA.Hans.class.getSimpleName(), false);
       assertThat(innerType, IsEqual.equalTo(innerType2));
+   }
+
+   @Test
+   public void testWithReferenceCollector()
+   {
+      File projectDir = new File("target/testResources");
+      assertTrue(projectDir.exists());
+
+      JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
+
+      new JavaTypeAndPackageInvestigator()
+         .investigateProject(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
+
+      JavaType jType = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
+         TypeA.class.getSimpleName(), false);
+
+      Annotation typeRefs = jType.getAnnotation("referencedTypes");
+
+      Set<String> expectedRefs = new HashSet<String>();
+      expectedRefs.add("java.lang.Object");
+      expectedRefs.add("java.lang.String");
+      expectedRefs.add("java.lang.Boolean");
+
+      assertThat(typeRefs.getReferences().keySet(), IsEqual.equalTo(expectedRefs));
+
+      jType = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, "TypeA.Hans", false);
+
+      typeRefs = jType.getAnnotation("referencedTypes");
+
+      expectedRefs = new HashSet<String>();
+      expectedRefs.add("java.lang.Object");
+      expectedRefs.add("java.lang.Runnable");
+
+      assertThat(typeRefs.getReferences().keySet(), IsEqual.equalTo(expectedRefs));
    }
 
 }

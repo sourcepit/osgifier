@@ -52,8 +52,12 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
       final String[] result = JavaLangUtils.getPackageAndFileName(path);
       final String pkgName = result[0];
       final String typeName = result[1].substring(0, result[1].length() - 6);
-      getType(pkgName, typeName, true);
+      JavaType javaType = getType(pkgName, typeName, true);
+      
+      visitType(javaType, content);
    }
+
+   protected abstract void visitType(JavaType javaType, InputStream content);
 
    protected void visitResource(String path, boolean isDirectory, InputStream content)
    {
