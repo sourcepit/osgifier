@@ -151,6 +151,8 @@
 							<goal>jar</goal>
 						</goals>
 						<configuration>
+							<useDefaultManifestFile>true</useDefaultManifestFile>
+							<defaultManifestFile>${project.build.directory}/testResources/META-INF/MANIFEST.MF</defaultManifestFile>
 							<finalName>${project.artifactId}</finalName>
 							<classesDirectory>${project.build.directory}/testResources</classesDirectory>
 							<outputDirectory>${project.build.directory}/testResources</outputDirectory>
