@@ -70,19 +70,32 @@ public final class JavaLangUtils
    @NotNull
    public static String[] getPackageAndFileName(@NotNull String resourcePath)
    {
+      String[] pathAndFileName = trimFileName(resourcePath);
+      String packageName = toPackageName(pathAndFileName[0]);
+      String typeName = pathAndFileName[1];
+      if (typeName.endsWith(".class"))
+      {
+         typeName = typeName.substring(0, typeName.length() - 6);
+      }
+      return new String[] {packageName, typeName};
+   }
+
+   @NotNull
+   public static String[] trimFileName(@NotNull String resourcePath)
+   {
       int idx = resourcePath.lastIndexOf("/");
-      final String pkgName;
-      final String typeName;
+      final String parentPath;
+      final String fileName;
       if (idx == -1)
       {
-         pkgName = "";
-         typeName = resourcePath;
+         parentPath = "";
+         fileName = resourcePath;
       }
       else
       {
-         pkgName = toPackageName(resourcePath.substring(0, idx));
-         typeName = resourcePath.substring(idx + 1);
+         parentPath = resourcePath.substring(0, idx);
+         fileName = resourcePath.substring(idx + 1);
       }
-      return new String[] {pkgName, typeName};
+      return new String[] {parentPath, fileName};
    }
 }

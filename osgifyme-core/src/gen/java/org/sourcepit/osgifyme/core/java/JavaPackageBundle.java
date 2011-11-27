@@ -7,7 +7,6 @@
 package org.sourcepit.osgifyme.core.java;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.sourcepit.modeling.common.Annotatable;
 
 /**
@@ -18,9 +17,8 @@ import org.sourcepit.modeling.common.Annotatable;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPathToRootPackagesMap <em>Path To Root Packages Map
- * </em>}</li>
  * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPackageRoots <em>Package Roots</em>}</li>
  * </ul>
  * </p>
  * 
@@ -30,25 +28,6 @@ import org.sourcepit.modeling.common.Annotatable;
  */
 public interface JavaPackageBundle extends Annotatable
 {
-   /**
-    * Returns the value of the '<em><b>Path To Root Packages Map</b></em>' map.
-    * The key is of type {@link java.lang.String},
-    * and the value is of type list of {@link org.sourcepit.osgifyme.core.java.JavaPackage},
-    * <!-- begin-user-doc -->
-    * <p>
-    * If the meaning of the '<em>Path To Root Packages Map</em>' map isn't clear, there really should be more of a
-    * description here...
-    * </p>
-    * <!-- end-user-doc -->
-    * 
-    * @return the value of the '<em>Path To Root Packages Map</em>' map.
-    * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageBundle_PathToRootPackagesMap()
-    * @model mapType=
-    *        "org.sourcepit.osgifyme.core.java.JavaPackageMapEntry<org.eclipse.emf.ecore.EString, org.sourcepit.osgifyme.core.java.JavaPackage>"
-    * @generated
-    */
-   EMap<String, EList<JavaPackage>> getPathToRootPackagesMap();
-
    /**
     * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifyme.core.java.DependencyNode}.
@@ -70,13 +49,33 @@ public interface JavaPackageBundle extends Annotatable
    EList<DependencyNode> getDependencies();
 
    /**
+    * Returns the value of the '<em><b>Package Roots</b></em>' containment reference list.
+    * The list contents are of type {@link org.sourcepit.osgifyme.core.java.JavaPackageRoot}.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle
+    * <em>Package Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Package Roots</em>' containment reference list isn't clear, there really should be more
+    * of a description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Package Roots</em>' containment reference list.
+    * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageBundle_PackageRoots()
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle
+    * @model opposite="packageBundle" containment="true"
+    * @generated
+    */
+   EList<JavaPackageRoot> getPackageRoots();
+
+   /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @model kind="operation" required="true"
+    * @model required="true"
     * @generated
     */
-   EList<JavaPackage> getRootPackages();
+   EList<JavaPackage> getRootPackages(String path);
 
    /**
     * <!-- begin-user-doc -->
@@ -95,5 +94,23 @@ public interface JavaPackageBundle extends Annotatable
     * @generated
     */
    JavaType getType(String path, String packageName, String typeName, boolean createOnDemand);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   JavaPackageRoot getPackageRoot(String path);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   JavaPackageRoot getPackageRoot(String path, boolean createOnDemand);
 
 } // JavaPackageBundle

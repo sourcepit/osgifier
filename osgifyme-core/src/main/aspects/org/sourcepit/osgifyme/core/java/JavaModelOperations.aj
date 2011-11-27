@@ -15,11 +15,17 @@ import org.sourcepit.osgifyme.core.java.internal.impl.TypeOperations;
 
 public aspect JavaModelOperations extends CommonModelOperationsAspects
 {
-   pointcut getRootPackages(JavaPackageBundle bundle): target(bundle) && args() && execution(EList<JavaPackage> getRootPackages());
+   pointcut getPackageRoot(JavaPackageBundle bundle, String path): target(bundle) && args(path) && execution(JavaPackageRoot getPackageRoot(String));
+
+   pointcut getPackageRootCreateOnDemand(JavaPackageBundle bundle, String path, boolean createOnDemand): target(bundle) && args(path, createOnDemand) && execution(JavaPackageRoot getPackageRoot(String, boolean));
+
+   pointcut getRootPackages(JavaPackageBundle bundle, String path): target(bundle) && args(path) && execution(EList<JavaPackage> getRootPackages(String));
 
    pointcut getPackage(JavaPackageBundle bundle, String path, String fullyQualified, boolean createOnDemand): target(bundle) && args(path, fullyQualified, createOnDemand) && execution(JavaPackage getPackage(String, String, boolean));
 
    pointcut getPackageOnArchive(JavaArchive bundle, String fullyQualified, boolean createOnDemand): target(bundle) && args(fullyQualified, createOnDemand) && execution(JavaPackage getPackage(String, boolean));
+
+   pointcut getPackageRootForPackage(JavaPackage pkg): target(pkg) && execution(JavaPackageRoot getPackageRoot());
 
    pointcut getSubPackage(JavaPackage segment, String name, boolean createOnDemand): target(segment) && args(name, createOnDemand) && execution(JavaPackage getSubPackage(String, boolean));
 
@@ -33,8 +39,16 @@ public aspect JavaModelOperations extends CommonModelOperationsAspects
 
    pointcut getTypeOnArchive(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand): target(bundle) && args(packageName, typeName, createOnDemand) && execution(JavaType getType(String, String, boolean));
 
-   EList<JavaPackage> around(JavaPackageBundle bundle) : getRootPackages(bundle){
-      return PackageBundleOperations.getRootPackages(bundle);
+   JavaPackageRoot around(JavaPackageBundle bundle, String path) : getPackageRoot(bundle, path){
+      return PackageBundleOperations.getPackageRoot(bundle, path);
+   }
+
+   JavaPackageRoot around(JavaPackageBundle bundle, String path, boolean createOnDeamnd) : getPackageRootCreateOnDemand(bundle, path, createOnDeamnd){
+      return PackageBundleOperations.getPackageRoot(bundle, path, createOnDeamnd);
+   }
+
+   EList<JavaPackage> around(JavaPackageBundle bundle, String path) : getRootPackages(bundle, path){
+      return PackageBundleOperations.getRootPackages(bundle, path);
    }
 
    JavaPackage around(JavaPackageBundle bundle, String path, String fullyQualified, boolean createOnDemand) : getPackage(bundle, path, fullyQualified, createOnDemand){
@@ -51,6 +65,10 @@ public aspect JavaModelOperations extends CommonModelOperationsAspects
 
    JavaType around(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand) : getTypeOnArchive(bundle, packageName, typeName, createOnDemand){
       return PackageBundleOperations.getType(bundle, packageName, typeName, createOnDemand);
+   }
+
+   JavaPackageRoot around(JavaPackage pkg) : getPackageRootForPackage(pkg){
+      return PackageOperations.getPackageRoot(pkg);
    }
 
    JavaPackage around(JavaPackage segment, String name, boolean createOnDemand) : getSubPackage(segment, name, createOnDemand){

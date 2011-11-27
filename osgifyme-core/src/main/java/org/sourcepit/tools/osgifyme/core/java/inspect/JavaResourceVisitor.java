@@ -11,8 +11,12 @@ import java.io.InputStream;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.sourcepit.common.manifest.Manifest;
+import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaType;
 import org.sourcepit.tools.osgifyme.core.java.utils.JavaLangUtils;
 import org.sourcepit.tools.osgifyme.core.utils.IResourceVisitor;
@@ -26,7 +30,7 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
       {
          visitPackage(path);
       }
-      else if (path.endsWith(".class"))
+      else if (isJavaClassFile(path))
       {
          visitClassFile(path, content);
       }
@@ -34,12 +38,18 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
       {
          visitResource(path, isDirectory, content);
       }
-      return isPackage;
+      return true;
    }
 
    protected boolean isJavaPackage(String path)
    {
       return JavaLangUtils.isFullyQuallifiedPackageName(path, "/");
+   }
+
+   protected boolean isJavaClassFile(String path)
+   {
+      return path.endsWith(".class")
+         && JavaLangUtils.isFullyQuallifiedPackageName(JavaLangUtils.trimFileName(path)[0], "/");
    }
 
    protected void visitPackage(String path)
@@ -51,9 +61,9 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
    {
       final String[] result = JavaLangUtils.getPackageAndFileName(path);
       final String pkgName = result[0];
-      final String typeName = result[1].substring(0, result[1].length() - 6);
+      final String typeName = result[1];
       JavaType javaType = getType(pkgName, typeName, true);
-      
+
       visitType(javaType, content);
    }
 
@@ -81,7 +91,24 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
          { // TODO log warning
          }
       }
+
+      if (!isDirectory && path.equals("META-INF/MANIFEST.MF"))
+      {
+         Resource resource = new GenericManifestResourceImpl();
+         try
+         {
+            resource.load(content, null);
+            Manifest manifest = (Manifest) resource.getContents().get(0);
+            Annotation annotation = getPackageRoot(true).getAnnotation("manifest", true);
+            annotation.setContent(manifest);
+         }
+         catch (IOException e)
+         {// TODO log warning
+         }
+      }
    }
+
+   protected abstract JavaPackageRoot getPackageRoot(boolean createOnDemand);
 
    protected abstract JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand);
 

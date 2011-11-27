@@ -10,13 +10,10 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.modeling.common.CommonModelPackage;
@@ -24,6 +21,7 @@ import org.sourcepit.osgifyme.core.java.DependencyNode;
 import org.sourcepit.osgifyme.core.java.JavaModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaType;
 
 /**
@@ -34,9 +32,9 @@ import org.sourcepit.osgifyme.core.java.JavaType;
  * The following features are implemented:
  * <ul>
  * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageBundleImpl#getAnnotations <em>Annotations</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageBundleImpl#getPathToRootPackagesMap <em>Path To
- * Root Packages Map</em>}</li>
  * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageBundleImpl#getDependencies <em>Dependencies
+ * </em>}</li>
+ * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageBundleImpl#getPackageRoots <em>Package Roots
  * </em>}</li>
  * </ul>
  * </p>
@@ -57,17 +55,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
    protected EList<Annotation> annotations;
 
    /**
-    * The cached value of the '{@link #getPathToRootPackagesMap() <em>Path To Root Packages Map</em>}' map.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getPathToRootPackagesMap()
-    * @generated
-    * @ordered
-    */
-   protected EMap<String, EList<JavaPackage>> pathToRootPackagesMap;
-
-   /**
     * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -77,6 +64,17 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
     * @ordered
     */
    protected EList<DependencyNode> dependencies;
+
+   /**
+    * The cached value of the '{@link #getPackageRoots() <em>Package Roots</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getPackageRoots()
+    * @generated
+    * @ordered
+    */
+   protected EList<JavaPackageRoot> packageRoots;
 
    /**
     * <!-- begin-user-doc -->
@@ -123,23 +121,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
     * 
     * @generated
     */
-   public EMap<String, EList<JavaPackage>> getPathToRootPackagesMap()
-   {
-      if (pathToRootPackagesMap == null)
-      {
-         pathToRootPackagesMap = new EcoreEMap<String, EList<JavaPackage>>(
-            JavaModelPackage.Literals.JAVA_PACKAGE_MAP_ENTRY, JavaPackageMapEntryImpl.class, this,
-            JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP);
-      }
-      return pathToRootPackagesMap;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    public EList<DependencyNode> getDependencies()
    {
       if (dependencies == null)
@@ -156,7 +137,23 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
     * 
     * @generated
     */
-   public EList<JavaPackage> getRootPackages()
+   public EList<JavaPackageRoot> getPackageRoots()
+   {
+      if (packageRoots == null)
+      {
+         packageRoots = new EObjectContainmentWithInverseEList<JavaPackageRoot>(JavaPackageRoot.class, this,
+            JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS, JavaModelPackage.JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE);
+      }
+      return packageRoots;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<JavaPackage> getRootPackages(String path)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -183,6 +180,32 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
     * @generated
     */
    public JavaType getType(String path, String packageName, String typeName, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaPackageRoot getPackageRoot(String path)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaPackageRoot getPackageRoot(String path, boolean createOnDemand)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -244,6 +267,8 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getDependencies()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getPackageRoots()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -261,10 +286,10 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
       {
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__ANNOTATIONS :
             return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP :
-            return ((InternalEList<?>) getPathToRootPackagesMap()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            return ((InternalEList<?>) getPackageRoots()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -282,13 +307,10 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
       {
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__ANNOTATIONS :
             return getAnnotations();
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP :
-            if (coreType)
-               return getPathToRootPackagesMap();
-            else
-               return getPathToRootPackagesMap().map();
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             return getDependencies();
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            return getPackageRoots();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -309,12 +331,13 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             getAnnotations().clear();
             getAnnotations().addAll((Collection<? extends Annotation>) newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP :
-            ((EStructuralFeature.Setting) getPathToRootPackagesMap()).set(newValue);
-            return;
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             getDependencies().clear();
             getDependencies().addAll((Collection<? extends DependencyNode>) newValue);
+            return;
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            getPackageRoots().clear();
+            getPackageRoots().addAll((Collection<? extends JavaPackageRoot>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -334,11 +357,11 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__ANNOTATIONS :
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP :
-            getPathToRootPackagesMap().clear();
-            return;
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             getDependencies().clear();
+            return;
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            getPackageRoots().clear();
             return;
       }
       super.eUnset(featureID);
@@ -357,10 +380,10 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
       {
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__ANNOTATIONS :
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP :
-            return pathToRootPackagesMap != null && !pathToRootPackagesMap.isEmpty();
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__DEPENDENCIES :
             return dependencies != null && !dependencies.isEmpty();
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
+            return packageRoots != null && !packageRoots.isEmpty();
       }
       return super.eIsSet(featureID);
    }

@@ -119,6 +119,16 @@ public interface JavaModelFactory extends EFactory
    DependencyNode createDependencyNode();
 
    /**
+    * Returns a new object of class '<em>Java Package Root</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Package Root</em>'.
+    * @generated
+    */
+   JavaPackageRoot createJavaPackageRoot();
+
+   /**
     * Returns the package supported by this factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

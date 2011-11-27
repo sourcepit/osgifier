@@ -8,15 +8,14 @@ package org.sourcepit.tools.osgifyme.core.utils;
 
 import java.io.ByteArrayOutputStream;
 
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.junit.Test;
 import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaProject;
 
 public class ModelTest
@@ -29,12 +28,9 @@ public class ModelTest
       JavaProject prj = JavaModelFactory.eINSTANCE.createJavaProject();
       javaModel.getProjects().add(prj);
 
-      EMap<String, EList<JavaPackage>> pkgMap = prj.getPathToRootPackagesMap();
+      JavaPackageRoot packageRoot = prj.getPackageRoot("src", true);
 
-      BasicEList<JavaPackage> eList2 = new BasicEList<JavaPackage>();
-      pkgMap.put("src", eList2);
-
-      EList<JavaPackage> eList3 = pkgMap.get("src");
+      EList<JavaPackage> eList3 = packageRoot.getRootPackages();
 
       JavaPackage pkg = JavaModelFactory.eINSTANCE.createJavaPackage();
       pkg.setSimpleName("java");

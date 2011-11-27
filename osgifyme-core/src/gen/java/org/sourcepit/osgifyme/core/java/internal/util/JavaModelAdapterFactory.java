@@ -6,12 +6,9 @@
 
 package org.sourcepit.osgifyme.core.java.internal.util;
 
-import java.util.Map.Entry;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Annotatable;
 import org.sourcepit.osgifyme.core.java.DependencyNode;
@@ -24,6 +21,7 @@ import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaProject;
 import org.sourcepit.osgifyme.core.java.JavaType;
 import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
@@ -139,12 +137,6 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
-      public Adapter caseJavaPackageMapEntry(Entry<String, EList<JavaPackage>> object)
-      {
-         return createJavaPackageMapEntryAdapter();
-      }
-
-      @Override
       public Adapter caseJavaArchive(JavaArchive object)
       {
          return createJavaArchiveAdapter();
@@ -172,6 +164,12 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
       public Adapter caseFullyQualified(FullyQualified object)
       {
          return createFullyQualifiedAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaPackageRoot(JavaPackageRoot object)
+      {
+         return createJavaPackageRootAdapter();
       }
 
       @Override
@@ -323,22 +321,6 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Java Package Map Entry</em>}'.
-    * <!-- begin-user-doc -->
-    * This default implementation returns null so that we can easily ignore cases;
-    * it's useful to ignore a case when inheritance will catch all the cases anyway.
-    * <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see java.util.Map.Entry
-    * @generated
-    */
-   public Adapter createJavaPackageMapEntryAdapter()
-   {
-      return null;
-   }
-
-   /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgifyme.core.java.JavaArchive
     * <em>Java Archive</em>}'.
     * <!-- begin-user-doc -->
@@ -419,6 +401,23 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    public Adapter createFullyQualifiedAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot
+    * <em>Java Package Root</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot
+    * @generated
+    */
+   public Adapter createJavaPackageRootAdapter()
    {
       return null;
    }

@@ -430,16 +430,6 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE_BUNDLE__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Path To Root Packages Map</b></em>' map.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
-
-   /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -447,7 +437,17 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_BUNDLE__DEPENDENCIES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_PACKAGE_BUNDLE__DEPENDENCIES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+
+   /**
+    * The feature id for the '<em><b>Package Roots</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The number of structural features of the '<em>Java Package Bundle</em>' class.
@@ -460,48 +460,6 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE_BUNDLE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageMapEntryImpl
-    * <em>Java Package Map Entry</em>}' class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageMapEntryImpl
-    * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaPackageMapEntry()
-    * @generated
-    */
-   int JAVA_PACKAGE_MAP_ENTRY = 7;
-
-   /**
-    * The feature id for the '<em><b>Value</b></em>' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PACKAGE_MAP_ENTRY__VALUE = 0;
-
-   /**
-    * The feature id for the '<em><b>Key</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PACKAGE_MAP_ENTRY__KEY = 1;
-
-   /**
-    * The number of structural features of the '<em>Java Package Map Entry</em>' class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PACKAGE_MAP_ENTRY_FEATURE_COUNT = 2;
-
-   /**
     * The meta object id for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaArchiveImpl
     * <em>Java Archive</em>}' class.
     * <!-- begin-user-doc -->
@@ -511,7 +469,7 @@ public interface JavaModelPackage extends EPackage
     * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaArchive()
     * @generated
     */
-   int JAVA_ARCHIVE = 8;
+   int JAVA_ARCHIVE = 7;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -524,16 +482,6 @@ public interface JavaModelPackage extends EPackage
    int JAVA_ARCHIVE__ANNOTATIONS = JAVA_PACKAGE_BUNDLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Path To Root Packages Map</b></em>' map.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_ARCHIVE__PATH_TO_ROOT_PACKAGES_MAP = JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP;
-
-   /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -542,6 +490,16 @@ public interface JavaModelPackage extends EPackage
     * @ordered
     */
    int JAVA_ARCHIVE__DEPENDENCIES = JAVA_PACKAGE_BUNDLE__DEPENDENCIES;
+
+   /**
+    * The feature id for the '<em><b>Package Roots</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_ARCHIVE__PACKAGE_ROOTS = JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS;
 
    /**
     * The number of structural features of the '<em>Java Archive</em>' class.
@@ -563,7 +521,7 @@ public interface JavaModelPackage extends EPackage
     * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaProject()
     * @generated
     */
-   int JAVA_PROJECT = 9;
+   int JAVA_PROJECT = 8;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -576,16 +534,6 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PROJECT__ANNOTATIONS = JAVA_PACKAGE_BUNDLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Path To Root Packages Map</b></em>' map.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PROJECT__PATH_TO_ROOT_PACKAGES_MAP = JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP;
-
-   /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -594,6 +542,16 @@ public interface JavaModelPackage extends EPackage
     * @ordered
     */
    int JAVA_PROJECT__DEPENDENCIES = JAVA_PACKAGE_BUNDLE__DEPENDENCIES;
+
+   /**
+    * The feature id for the '<em><b>Package Roots</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PROJECT__PACKAGE_ROOTS = JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS;
 
    /**
     * The number of structural features of the '<em>Java Project</em>' class.
@@ -615,7 +573,7 @@ public interface JavaModelPackage extends EPackage
     * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaModel()
     * @generated
     */
-   int JAVA_MODEL = 10;
+   int JAVA_MODEL = 9;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -667,7 +625,7 @@ public interface JavaModelPackage extends EPackage
     * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getDependencyNode()
     * @generated
     */
-   int DEPENDENCY_NODE = 11;
+   int DEPENDENCY_NODE = 10;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -769,7 +727,7 @@ public interface JavaModelPackage extends EPackage
     * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getFullyQualified()
     * @generated
     */
-   int FULLY_QUALIFIED = 12;
+   int FULLY_QUALIFIED = 11;
 
    /**
     * The number of structural features of the '<em>Fully Qualified</em>' class.
@@ -780,6 +738,68 @@ public interface JavaModelPackage extends EPackage
     * @ordered
     */
    int FULLY_QUALIFIED_FEATURE_COUNT = 0;
+
+   /**
+    * The meta object id for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageRootImpl
+    * <em>Java Package Root</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageRootImpl
+    * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaPackageRoot()
+    * @generated
+    */
+   int JAVA_PACKAGE_ROOT = 12;
+
+   /**
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+
+   /**
+    * The feature id for the '<em><b>Path</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT__PATH = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+
+   /**
+    * The feature id for the '<em><b>Root Packages</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT__ROOT_PACKAGES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+
+   /**
+    * The feature id for the '<em><b>Package Bundle</b></em>' container reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+
+   /**
+    * The number of structural features of the '<em>Java Package Root</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 3;
 
 
    /**
@@ -1006,20 +1026,6 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaPackageBundle();
 
    /**
-    * Returns the meta object for the map '
-    * {@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPathToRootPackagesMap
-    * <em>Path To Root Packages Map</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the map '<em>Path To Root Packages Map</em>'.
-    * @see org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPathToRootPackagesMap()
-    * @see #getJavaPackageBundle()
-    * @generated
-    */
-   EReference getJavaPackageBundle_PathToRootPackagesMap();
-
-   /**
     * Returns the meta object for the containment reference list '
     * {@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getDependencies <em>Dependencies</em>}'.
     * <!-- begin-user-doc -->
@@ -1033,42 +1039,17 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaPackageBundle_Dependencies();
 
    /**
-    * Returns the meta object for class '{@link java.util.Map.Entry <em>Java Package Map Entry</em>}'.
+    * Returns the meta object for the containment reference list '
+    * {@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPackageRoots <em>Package Roots</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>Java Package Map Entry</em>'.
-    * @see java.util.Map.Entry
-    * @model features="value key"
-    *        valueType="org.sourcepit.osgifyme.core.java.JavaPackage" valueContainment="true" valueMany="true"
-    *        keyDataType="org.eclipse.emf.ecore.EString"
+    * @return the meta object for the containment reference list '<em>Package Roots</em>'.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPackageRoots()
+    * @see #getJavaPackageBundle()
     * @generated
     */
-   EClass getJavaPackageMapEntry();
-
-   /**
-    * Returns the meta object for the containment reference list '{@link java.util.Map.Entry <em>Value</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the containment reference list '<em>Value</em>'.
-    * @see java.util.Map.Entry
-    * @see #getJavaPackageMapEntry()
-    * @generated
-    */
-   EReference getJavaPackageMapEntry_Value();
-
-   /**
-    * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the attribute '<em>Key</em>'.
-    * @see java.util.Map.Entry
-    * @see #getJavaPackageMapEntry()
-    * @generated
-    */
-   EAttribute getJavaPackageMapEntry_Key();
+   EReference getJavaPackageBundle_PackageRoots();
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgifyme.core.java.JavaArchive <em>Java Archive</em>}'.
@@ -1243,6 +1224,57 @@ public interface JavaModelPackage extends EPackage
     * @generated
     */
    EClass getFullyQualified();
+
+   /**
+    * Returns the meta object for class '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot
+    * <em>Java Package Root</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for class '<em>Java Package Root</em>'.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot
+    * @generated
+    */
+   EClass getJavaPackageRoot();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPath
+    * <em>Path</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Path</em>'.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPath()
+    * @see #getJavaPackageRoot()
+    * @generated
+    */
+   EAttribute getJavaPackageRoot_Path();
+
+   /**
+    * Returns the meta object for the containment reference list '
+    * {@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getRootPackages <em>Root Packages</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the containment reference list '<em>Root Packages</em>'.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot#getRootPackages()
+    * @see #getJavaPackageRoot()
+    * @generated
+    */
+   EReference getJavaPackageRoot_RootPackages();
+
+   /**
+    * Returns the meta object for the container reference '
+    * {@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle <em>Package Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the container reference '<em>Package Bundle</em>'.
+    * @see org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle()
+    * @see #getJavaPackageRoot()
+    * @generated
+    */
+   EReference getJavaPackageRoot_PackageBundle();
 
    /**
     * Returns the factory that creates the instances of the model.
@@ -1453,16 +1485,6 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_PACKAGE_BUNDLE = eINSTANCE.getJavaPackageBundle();
 
       /**
-       * The meta object literal for the '<em><b>Path To Root Packages Map</b></em>' map feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EReference JAVA_PACKAGE_BUNDLE__PATH_TO_ROOT_PACKAGES_MAP = eINSTANCE
-         .getJavaPackageBundle_PathToRootPackagesMap();
-
-      /**
        * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
@@ -1472,34 +1494,13 @@ public interface JavaModelPackage extends EPackage
       EReference JAVA_PACKAGE_BUNDLE__DEPENDENCIES = eINSTANCE.getJavaPackageBundle_Dependencies();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageMapEntryImpl
-       * <em>Java Package Map Entry</em>}' class.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageMapEntryImpl
-       * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaPackageMapEntry()
-       * @generated
-       */
-      EClass JAVA_PACKAGE_MAP_ENTRY = eINSTANCE.getJavaPackageMapEntry();
-
-      /**
-       * The meta object literal for the '<em><b>Value</b></em>' containment reference list feature.
+       * The meta object literal for the '<em><b>Package Roots</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
        * @generated
        */
-      EReference JAVA_PACKAGE_MAP_ENTRY__VALUE = eINSTANCE.getJavaPackageMapEntry_Value();
-
-      /**
-       * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EAttribute JAVA_PACKAGE_MAP_ENTRY__KEY = eINSTANCE.getJavaPackageMapEntry_Key();
+      EReference JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = eINSTANCE.getJavaPackageBundle_PackageRoots();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaArchiveImpl
@@ -1641,6 +1642,45 @@ public interface JavaModelPackage extends EPackage
        * @generated
        */
       EClass FULLY_QUALIFIED = eINSTANCE.getFullyQualified();
+
+      /**
+       * The meta object literal for the '{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageRootImpl
+       * <em>Java Package Root</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageRootImpl
+       * @see org.sourcepit.osgifyme.core.java.internal.impl.JavaModelPackageImpl#getJavaPackageRoot()
+       * @generated
+       */
+      EClass JAVA_PACKAGE_ROOT = eINSTANCE.getJavaPackageRoot();
+
+      /**
+       * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute JAVA_PACKAGE_ROOT__PATH = eINSTANCE.getJavaPackageRoot_Path();
+
+      /**
+       * The meta object literal for the '<em><b>Root Packages</b></em>' containment reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference JAVA_PACKAGE_ROOT__ROOT_PACKAGES = eINSTANCE.getJavaPackageRoot_RootPackages();
+
+      /**
+       * The meta object literal for the '<em><b>Package Bundle</b></em>' container reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE = eINSTANCE.getJavaPackageRoot_PackageBundle();
 
    }
 

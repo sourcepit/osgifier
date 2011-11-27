@@ -6,9 +6,6 @@
 
 package org.sourcepit.osgifyme.core.java.internal.impl;
 
-import java.util.Map.Entry;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,6 +20,7 @@ import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaProject;
 import org.sourcepit.osgifyme.core.java.JavaType;
 
@@ -93,8 +91,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
             return createJavaClass();
          case JavaModelPackage.JAVA_PACKAGE :
             return createJavaPackage();
-         case JavaModelPackage.JAVA_PACKAGE_MAP_ENTRY :
-            return (EObject) createJavaPackageMapEntry();
          case JavaModelPackage.JAVA_ARCHIVE :
             return createJavaArchive();
          case JavaModelPackage.JAVA_PROJECT :
@@ -103,6 +99,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
             return createJavaModel();
          case JavaModelPackage.DEPENDENCY_NODE :
             return createDependencyNode();
+         case JavaModelPackage.JAVA_PACKAGE_ROOT :
+            return createJavaPackageRoot();
          default :
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
@@ -174,18 +172,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public Entry<String, EList<JavaPackage>> createJavaPackageMapEntry()
-   {
-      JavaPackageMapEntryImpl javaPackageMapEntry = new JavaPackageMapEntryImpl();
-      return javaPackageMapEntry;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    public JavaArchive createJavaArchive()
    {
       JavaArchiveImpl javaArchive = new JavaArchiveImpl();
@@ -226,6 +212,18 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       DependencyNodeImpl dependencyNode = new DependencyNodeImpl();
       return dependencyNode;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaPackageRoot createJavaPackageRoot()
+   {
+      JavaPackageRootImpl javaPackageRoot = new JavaPackageRootImpl();
+      return javaPackageRoot;
    }
 
    /**

@@ -34,6 +34,7 @@
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getPackageBundle" lowerBound="1" eType="#//JavaPackageBundle"/>
+    <eOperations name="getPackageRoot" lowerBound="1" eType="#//JavaPackageRoot"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeRoots" upperBound="-1"
         eType="#//JavaTypeRoot" containment="true" eOpposite="#//JavaTypeRoot/parentPackage"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" lowerBound="1"
@@ -44,7 +45,9 @@
         transient="true" eOpposite="#//JavaPackage/packages"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaPackageBundle" abstract="true" eSuperTypes="../../../../common-modeling/src/main/model/common.ecore#//Annotatable">
-    <eOperations name="getRootPackages" lowerBound="1" upperBound="-1" eType="#//JavaPackage"/>
+    <eOperations name="getRootPackages" lowerBound="1" upperBound="-1" eType="#//JavaPackage">
+      <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eOperations name="getPackage" eType="#//JavaPackage">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="fullyQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -56,15 +59,17 @@
       <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathToRootPackagesMap"
-        upperBound="-1" eType="#//JavaPackageMapEntry" containment="true"/>
+    <eOperations name="getPackageRoot" eType="#//JavaPackageRoot">
+      <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getPackageRoot" eType="#//JavaPackageRoot">
+      <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
         eType="#//DependencyNode" containment="true" eOpposite="#//DependencyNode/packageBundle"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageMapEntry" instanceClassName="java.util.Map.Entry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//JavaPackage" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packageRoots" upperBound="-1"
+        eType="#//JavaPackageRoot" containment="true" eOpposite="#//JavaPackageRoot/packageBundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaArchive" eSuperTypes="#//JavaPackageBundle">
     <eOperations name="getPackage" eType="#//JavaPackage">
@@ -100,5 +105,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="FullyQualified" abstract="true" interface="true">
     <eOperations name="getFullyQualifiedName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getSimpleName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageRoot" eSuperTypes="../../../../common-modeling/src/main/model/common.ecore#//Annotatable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootPackages" upperBound="-1"
+        eType="#//JavaPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packageBundle" lowerBound="1"
+        eType="#//JavaPackageBundle" eOpposite="#//JavaPackageBundle/packageRoots"/>
   </eClassifiers>
 </ecore:EPackage>

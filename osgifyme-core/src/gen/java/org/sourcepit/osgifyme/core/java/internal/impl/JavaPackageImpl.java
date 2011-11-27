@@ -23,6 +23,7 @@ import org.sourcepit.modeling.common.CommonModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
 
 /**
@@ -269,6 +270,19 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * @generated
     */
    public JavaPackageBundle getPackageBundle()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaPackageRoot getPackageRoot()
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT

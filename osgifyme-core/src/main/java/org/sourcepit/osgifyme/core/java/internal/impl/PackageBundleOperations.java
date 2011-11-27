@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgifyme.core.java.internal.impl;
 
-import java.util.Map.Entry;
+import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -14,6 +14,7 @@ import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaModelFactory;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaType;
 import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
 
@@ -103,18 +104,39 @@ public final class PackageBundleOperations
       return null;
    }
 
-   public static EList<JavaPackage> getRootPackages(JavaPackageBundle bundle)
+   public static JavaPackageRoot getPackageRoot(@NotNull JavaPackageBundle bundle, @NotNull String path)
    {
-      final BasicEList<JavaPackage> pkgs = new BasicEList<JavaPackage>();
-      for (Entry<String, EList<JavaPackage>> entry : bundle.getPathToRootPackagesMap())
+      for (JavaPackageRoot packageRoot : bundle.getPackageRoots())
       {
-         final EList<JavaPackage> value = entry.getValue();
-         if (value != null)
+         if (path.equals(path))
          {
-            pkgs.addAll(value);
+            return packageRoot;
          }
       }
-      return pkgs;
+      return null;
+   }
+
+   public static EList<JavaPackage> getRootPackages(JavaPackageBundle bundle, String path)
+   {
+      final JavaPackageRoot packageRoot = bundle.getPackageRoot(path);
+      if (packageRoot != null)
+      {
+         return new BasicEList<JavaPackage>(packageRoot.getRootPackages());
+      }
+      return new BasicEList<JavaPackage>();
+   }
+
+
+   public static JavaPackageRoot getPackageRoot(JavaPackageBundle bundle, String path, boolean createOnDeamnd)
+   {
+      JavaPackageRoot packageRoot = getPackageRoot(bundle, path);
+      if (packageRoot == null && createOnDeamnd)
+      {
+         packageRoot = JavaModelFactory.eINSTANCE.createJavaPackageRoot();
+         packageRoot.setPath(path);
+         bundle.getPackageRoots().add(packageRoot);
+      }
+      return packageRoot;
    }
 
    public static JavaPackage getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand)
@@ -138,12 +160,14 @@ public final class PackageBundleOperations
          throw new IllegalArgumentException("Fully qualified must not be null.");
       }
 
-      EList<JavaPackage> pkgs = bundle.getPathToRootPackagesMap().get(path);
-      if (pkgs == null)
+      JavaPackageRoot packageRoot = getPackageRoot(bundle, path, createOnDemand);
+      if (packageRoot == null)
       {
-         pkgs = new BasicEList<JavaPackage>();
-         bundle.getPathToRootPackagesMap().put(path, pkgs);
+         return null;
       }
+
+      EList<JavaPackage> pkgs = packageRoot.getRootPackages();
+
       final String[] names = fullyQualified.replace('/', '.').split("\\.");
       JavaPackage pkg = null;
       for (String name : names)

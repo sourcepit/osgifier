@@ -13,9 +13,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
@@ -48,28 +46,28 @@ public class JavaTypeReferencesCollectorTest
       assertTrue(jarFile.exists());
 
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(new URL[] {jarFile.toURL()}));
-      
+
       JavaClass jClass = classRepo.loadClass(TypeA.class.getName());
-      
+
       Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(3));
-      
+
       Set<String> expectedRefs = new HashSet<String>();
       expectedRefs.add("java.lang.Object");
       expectedRefs.add("java.lang.String");
       expectedRefs.add("java.lang.Boolean");
-      
+
       assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
-      
+
       jClass = classRepo.loadClass(TypeA.Hans.class.getName());
-      
+
       typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(2));
-      
+
       expectedRefs = new HashSet<String>();
       expectedRefs.add("java.lang.Object");
       expectedRefs.add("java.lang.Runnable");
-      
+
       assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
    }
 }

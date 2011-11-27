@@ -60,12 +60,14 @@ public abstract class AbstractTraverserTest
             if (isDirectory)
             {
                assertThat(content, IsNull.nullValue());
+               pathToIsDir.put(path, Boolean.valueOf(isDirectory));
             }
-            pathToIsDir.put(path, Boolean.valueOf(isDirectory));
             return false;
          }
       };
       travers(visitor);
-      assertThat(2, IsEqual.equalTo(pathToIsDir.size()));
+      assertThat(pathToIsDir.size(), IsEqual.equalTo(2));
+      assertThat(pathToIsDir.containsKey("META-INF/"), IsEqual.equalTo(true));
+      assertThat(pathToIsDir.containsKey("org/"), IsEqual.equalTo(true));
    }
 }

@@ -6,9 +6,6 @@
 
 package org.sourcepit.osgifyme.core.java.internal.util;
 
-import java.util.Map.Entry;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -23,6 +20,7 @@ import org.sourcepit.osgifyme.core.java.JavaModel;
 import org.sourcepit.osgifyme.core.java.JavaModelPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaProject;
 import org.sourcepit.osgifyme.core.java.JavaType;
 import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
@@ -173,15 +171,6 @@ public class JavaModelSwitch<T> extends Switch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PACKAGE_MAP_ENTRY :
-         {
-            @SuppressWarnings("unchecked")
-            Entry<String, EList<JavaPackage>> javaPackageMapEntry = (Entry<String, EList<JavaPackage>>) theEObject;
-            T result = caseJavaPackageMapEntry(javaPackageMapEntry);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
          case JavaModelPackage.JAVA_ARCHIVE :
          {
             JavaArchive javaArchive = (JavaArchive) theEObject;
@@ -230,6 +219,16 @@ public class JavaModelSwitch<T> extends Switch<T>
          {
             FullyQualified fullyQualified = (FullyQualified) theEObject;
             T result = caseFullyQualified(fullyQualified);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_PACKAGE_ROOT :
+         {
+            JavaPackageRoot javaPackageRoot = (JavaPackageRoot) theEObject;
+            T result = caseJavaPackageRoot(javaPackageRoot);
+            if (result == null)
+               result = caseAnnotatable(javaPackageRoot);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -359,23 +358,6 @@ public class JavaModelSwitch<T> extends Switch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Package Map Entry</em>'.
-    * <!-- begin-user-doc -->
-    * This implementation returns null;
-    * returning a non-null result will terminate the switch.
-    * <!-- end-user-doc -->
-    * 
-    * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Package Map Entry</em>'.
-    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-    * @generated
-    */
-   public T caseJavaPackageMapEntry(Entry<String, EList<JavaPackage>> object)
-   {
-      return null;
-   }
-
-   /**
     * Returns the result of interpreting the object as an instance of '<em>Java Archive</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
@@ -456,6 +438,23 @@ public class JavaModelSwitch<T> extends Switch<T>
     * @generated
     */
    public T caseFullyQualified(FullyQualified object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Package Root</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Package Root</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaPackageRoot(JavaPackageRoot object)
    {
       return null;
    }

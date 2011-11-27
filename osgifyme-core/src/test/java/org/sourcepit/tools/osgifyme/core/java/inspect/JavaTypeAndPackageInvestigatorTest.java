@@ -10,13 +10,18 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -37,7 +42,7 @@ public class JavaTypeAndPackageInvestigatorTest
 {
 
    @Test
-   public void testJar()
+   public void testJar() throws Exception
    {
       try
       {
@@ -84,6 +89,8 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaType innerType2 = javaArchive.getType(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName() + "." + TypeA.Hans.class.getSimpleName(), false);
       assertThat(innerType, IsEqual.equalTo(innerType2));
+
+      print(javaArchive);
    }
 
    @Test
@@ -135,6 +142,17 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaType innerType2 = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName() + "." + TypeA.Hans.class.getSimpleName(), false);
       assertThat(innerType, IsEqual.equalTo(innerType2));
+
+      print(javaProject);
+   }
+
+   protected void print(EObject eObject) throws IOException, UnsupportedEncodingException
+   {
+      XMLResourceImpl resource = new XMLResourceImpl();
+      resource.getContents().add(eObject);
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      resource.save(out, null);
+      System.out.println(new String(out.toByteArray(), "UTF-8"));
    }
 
    @Test

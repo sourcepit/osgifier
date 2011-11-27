@@ -150,4 +150,13 @@ public interface JavaPackage extends Annotatable, FullyQualified
     */
    JavaPackageBundle getPackageBundle();
 
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model kind="operation" required="true"
+    * @generated
+    */
+   JavaPackageRoot getPackageRoot();
+
 } // JavaPackage

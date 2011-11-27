@@ -8,6 +8,7 @@ package org.sourcepit.osgifyme.core.java.internal.impl;
 
 import org.sourcepit.osgifyme.core.java.JavaPackage;
 import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 
 public final class PackageOperations
 {
@@ -18,11 +19,17 @@ public final class PackageOperations
 
    public static JavaPackageBundle getPackageBundle(JavaPackage pkg)
    {
+      JavaPackageRoot packageRoot = pkg.getPackageRoot();
+      return packageRoot == null ? null : packageRoot.getPackageBundle();
+   }
+
+   public static JavaPackageRoot getPackageRoot(JavaPackage pkg)
+   {
       JavaPackage current = pkg;
       while (current.getParentPackage() != null)
       {
          current = current.getParentPackage();
       }
-      return (JavaPackageBundle) pkg.eContainer().eContainer();
+      return (JavaPackageRoot) pkg.eContainer();
    }
 }

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.sourcepit.osgifyme.core.java.JavaArchive;
 import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
 import org.sourcepit.osgifyme.core.java.JavaProject;
 import org.sourcepit.osgifyme.core.java.JavaType;
 import org.sourcepit.tools.osgifyme.core.utils.RelativeDirectoryTraverser;
@@ -25,6 +26,12 @@ public class JavaTypeAndPackageInvestigator
    {
       new ZipTraverser(jarFile).travers(new JavaResourceVisitor()
       {
+         @Override
+         protected JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         {
+            return javaArchive.getPackageRoot("", createOnDemand);
+         }
+
          @Override
          protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
          {
@@ -70,6 +77,12 @@ public class JavaTypeAndPackageInvestigator
    {
       new RelativeDirectoryTraverser(binDir).travers(new JavaResourceVisitor()
       {
+         @Override
+         protected JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         {
+            return javaProject.getPackageRoot(binDirPath, createOnDemand);
+         }
+
          @Override
          protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
          {
