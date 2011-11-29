@@ -1,0 +1,92 @@
+/**
+ * <copyright>
+ * </copyright>
+ * 
+ * $Id$
+ */
+
+package org.sourcepit.osgify.java;
+
+import org.sourcepit.modeling.common.Annotatable;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Java Type Root</b></em>'.
+ * <!-- end-user-doc -->
+ * 
+ * <p>
+ * The following features are supported:
+ * <ul>
+ * <li>{@link org.sourcepit.osgify.java.JavaTypeRoot#getType <em>Type</em>}</li>
+ * <li>{@link org.sourcepit.osgify.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}</li>
+ * </ul>
+ * </p>
+ * 
+ * @see org.sourcepit.osgify.java.JavaModelPackage#getJavaTypeRoot()
+ * @model interface="true" abstract="true"
+ * @generated
+ */
+public interface JavaTypeRoot extends Annotatable
+{
+   /**
+    * Returns the value of the '<em><b>Type</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Type</em>' containment reference isn't clear, there really should be more of a
+    * description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Type</em>' containment reference.
+    * @see #setType(JavaType)
+    * @see org.sourcepit.osgify.java.JavaModelPackage#getJavaTypeRoot_Type()
+    * @model containment="true" required="true"
+    * @generated
+    */
+   JavaType getType();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.java.JavaTypeRoot#getType <em>Type</em>}' containment
+    * reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Type</em>' containment reference.
+    * @see #getType()
+    * @generated
+    */
+   void setType(JavaType value);
+
+   /**
+    * Returns the value of the '<em><b>Parent Package</b></em>' container reference.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.java.JavaPackage#getTypeRoots
+    * <em>Type Roots</em>}'.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Parent Package</em>' container reference isn't clear, there really should be more of a
+    * description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Parent Package</em>' container reference.
+    * @see #setParentPackage(JavaPackage)
+    * @see org.sourcepit.osgify.java.JavaModelPackage#getJavaTypeRoot_ParentPackage()
+    * @see org.sourcepit.osgify.java.JavaPackage#getTypeRoots
+    * @model opposite="typeRoots" required="true" transient="false"
+    * @generated
+    */
+   JavaPackage getParentPackage();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}'
+    * container reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Parent Package</em>' container reference.
+    * @see #getParentPackage()
+    * @generated
+    */
+   void setParentPackage(JavaPackage value);
+
+} // JavaTypeRoot

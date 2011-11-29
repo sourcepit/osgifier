@@ -13,17 +13,17 @@ import org.sourcepit.modeling.common.Annotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Package</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getTypeRoots <em>Type Roots</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getSimpleName <em>Simple Name</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getPackages <em>Packages</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage <em>Parent Package</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getTypeRoots <em>Type Roots</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage <em>Parent Package</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackage()
  * @model
  * @generated
@@ -33,15 +33,13 @@ public interface JavaPackage extends Annotatable, FullyQualified
    /**
     * Returns the value of the '<em><b>Type Roots</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifyme.core.java.JavaTypeRoot}.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage
-    * <em>Parent Package</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Type Roots</em>' containment reference list isn't clear, there really should be more of
     * a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Type Roots</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackage_TypeRoots()
     * @see org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage
@@ -59,7 +57,6 @@ public interface JavaPackage extends Annotatable, FullyQualified
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Simple Name</em>' attribute.
     * @see #setSimpleName(String)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackage_SimpleName()
@@ -69,11 +66,9 @@ public interface JavaPackage extends Annotatable, FullyQualified
    String getSimpleName();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getSimpleName <em>Simple Name</em>}'
-    * attribute.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getSimpleName <em>Simple Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Simple Name</em>' attribute.
     * @see #getSimpleName()
     * @generated
@@ -83,15 +78,13 @@ public interface JavaPackage extends Annotatable, FullyQualified
    /**
     * Returns the value of the '<em><b>Packages</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifyme.core.java.JavaPackage}.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage
-    * <em>Parent Package</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage <em>Parent Package</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Packages</em>' containment reference list isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Packages</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackage_Packages()
     * @see org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage
@@ -102,15 +95,13 @@ public interface JavaPackage extends Annotatable, FullyQualified
 
    /**
     * Returns the value of the '<em><b>Parent Package</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getPackages
-    * <em>Packages</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getPackages <em>Packages</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Parent Package</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Parent Package</em>' container reference.
     * @see #setParentPackage(JavaPackage)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackage_ParentPackage()
@@ -121,11 +112,9 @@ public interface JavaPackage extends Annotatable, FullyQualified
    JavaPackage getParentPackage();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage
-    * <em>Parent Package</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getParentPackage <em>Parent Package</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Parent Package</em>' container reference.
     * @see #getParentPackage()
     * @generated
@@ -135,7 +124,6 @@ public interface JavaPackage extends Annotatable, FullyQualified
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -144,7 +132,6 @@ public interface JavaPackage extends Annotatable, FullyQualified
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation" required="true"
     * @generated
     */
@@ -153,7 +140,6 @@ public interface JavaPackage extends Annotatable, FullyQualified
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation" required="true"
     * @generated
     */

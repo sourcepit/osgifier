@@ -15,6 +15,9 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.modeling.common.utils.EcoreUtils;
 import org.sourcepit.modeling.common.utils.EcoreUtils.RunnableWithEObject;
+import org.sourcepit.osgify.java.JavaModelPackage;
+import org.sourcepit.osgify.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaPackageBundle;
 
 public class PackageBundleTest
 {

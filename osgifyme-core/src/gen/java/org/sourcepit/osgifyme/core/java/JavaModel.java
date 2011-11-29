@@ -13,15 +13,15 @@ import org.sourcepit.modeling.common.Annotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Model</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaModel#getProjects <em>Projects</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaModel#getArchives <em>Archives</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaModel#getProjects <em>Projects</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaModel#getArchives <em>Archives</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaModel()
  * @model
  * @generated
@@ -37,7 +37,6 @@ public interface JavaModel extends Annotatable
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Projects</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaModel_Projects()
     * @model containment="true"
@@ -54,7 +53,6 @@ public interface JavaModel extends Annotatable
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Archives</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaModel_Archives()
     * @model containment="true"

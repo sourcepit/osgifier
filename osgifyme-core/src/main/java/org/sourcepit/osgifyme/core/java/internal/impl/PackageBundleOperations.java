@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.osgifyme.core.java.JavaArchive;
-import org.sourcepit.osgifyme.core.java.JavaModelFactory;
-import org.sourcepit.osgifyme.core.java.JavaPackage;
-import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
-import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
-import org.sourcepit.osgifyme.core.java.JavaType;
-import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
+import org.sourcepit.osgify.java.JavaArchive;
+import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaPackageBundle;
+import org.sourcepit.osgify.java.JavaPackageRoot;
+import org.sourcepit.osgify.java.JavaType;
+import org.sourcepit.osgify.java.JavaTypeRoot;
 
 public final class PackageBundleOperations
 {
@@ -108,7 +108,7 @@ public final class PackageBundleOperations
    {
       for (JavaPackageRoot packageRoot : bundle.getPackageRoots())
       {
-         if (path.equals(path))
+         if (path.equals(packageRoot.getPath()))
          {
             return packageRoot;
          }

@@ -27,10 +27,9 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassLoaderRepository;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.osgifyme.core.java.JavaArchive;
-import org.sourcepit.osgifyme.core.java.JavaModel;
-import org.sourcepit.osgifyme.core.java.JavaModelFactory;
-import org.sourcepit.osgifyme.core.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaArchive;
+import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.java.JavaPackage;
 import org.sourcepit.tools.osgifyme.core.java.inspect.JavaTypeReferencesCollector;
 import org.sourcepit.tools.osgifyme.core.java.utils.JavaLangUtils;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
@@ -46,8 +45,6 @@ public class BcelTest
       URLClassLoader cl = new URLClassLoader(new URL[] {jarFile.toURL()});
 
       final ClassLoaderRepository repo = new ClassLoaderRepository(cl);
-
-      final JavaModel javaModel = JavaModelFactory.eINSTANCE.createJavaModel();
 
       final JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       new ZipTraverser(jarFile).travers(new IResourceVisitor()

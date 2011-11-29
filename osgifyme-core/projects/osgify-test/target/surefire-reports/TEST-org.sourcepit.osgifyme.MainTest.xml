@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.062" errors="0" skipped="0" tests="1" name="org.sourcepit.osgifyme.MainTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="D:\bin\Java\jdk1.6.0_21\jre\bin"/>
+    <property name="java.vm.version" value="17.0-b17"/>
+    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="DE"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\src\emfx\ws\osgify-test"/>
+    <property name="java.runtime.version" value="1.6.0_21-b07"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="basedir" value="D:\src\emfx\ws\osgify-test"/>
+    <property name="java.endorsed.dirs" value="D:\bin\Java\jdk1.6.0_21\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="surefire.real.class.path" value="D:\src\emfx\ws\osgify-test\target\surefire\surefirebooter2086579033978126780.jar"/>
+    <property name="java.io.tmpdir" value="C:\Users\Bernd\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="D:\bin\Java\jdk1.6.0_21\jre\bin;.;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\WIDCOMM\Bluetooth Software\;C:\Program Files\WIDCOMM\Bluetooth Software\syswow64;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\SlikSvn\bin\;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\PuTTY;C:\Program Files (x86)\Git\cmd;C:\Program Files\Common Files\Microsoft Shared\Windows Live;D:\bin\Java\jdk1.6.0_21\bin;D:\bin\android-sdk-windows\tools;D:\bin\maven\apache-maven-3.0.3\bin;D:\bin\ant\apache-ant-1.8.2\\bin"/>
+    <property name="surefire.test.class.path" value="D:\src\emfx\ws\osgify-test\target\test-classes;D:\src\emfx\ws\osgify-test\target\classes;D:\var\maven\repository\org\osgi\org.osgi.core\4.3.0\org.osgi.core-4.3.0.jar;D:\var\maven\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;D:\var\maven\repository\org\aspectj\aspectjrt\1.6.12\aspectjrt-1.6.12.jar;D:\var\maven\repository\org\hamcrest\hamcrest-core\1.2\hamcrest-core-1.2.jar;D:\var\maven\repository\junit\junit\4.10\junit-4.10.jar;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Server Compiler"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\Bernd"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="user.name" value="Bernd"/>
+    <property name="java.class.path" value="D:\src\emfx\ws\osgify-test\target\test-classes;D:\src\emfx\ws\osgify-test\target\classes;D:\var\maven\repository\org\osgi\org.osgi.core\4.3.0\org.osgi.core-4.3.0.jar;D:\var\maven\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;D:\var\maven\repository\org\aspectj\aspectjrt\1.6.12\aspectjrt-1.6.12.jar;D:\var\maven\repository\org\hamcrest\hamcrest-core\1.2\hamcrest-core-1.2.jar;D:\var\maven\repository\junit\junit\4.10\junit-4.10.jar;"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="D:\bin\Java\jdk1.6.0_21\jre"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="de"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_21"/>
+    <property name="java.ext.dirs" value="D:\bin\Java\jdk1.6.0_21\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="D:\bin\Java\jdk1.6.0_21\jre\lib\resources.jar;D:\bin\Java\jdk1.6.0_21\jre\lib\rt.jar;D:\bin\Java\jdk1.6.0_21\jre\lib\sunrsasign.jar;D:\bin\Java\jdk1.6.0_21\jre\lib\jsse.jar;D:\bin\Java\jdk1.6.0_21\jre\lib\jce.jar;D:\bin\Java\jdk1.6.0_21\jre\lib\charsets.jar;D:\bin\Java\jdk1.6.0_21\jre\classes"/>
+    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="localRepository" value="D:\var\maven\repository"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase time="0" classname="org.sourcepit.osgifyme.MainTest" name="test"/>
+</testsuite>

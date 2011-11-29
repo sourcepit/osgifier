@@ -13,6 +13,7 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,11 +28,11 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.osgifyme.core.java.JavaArchive;
-import org.sourcepit.osgifyme.core.java.JavaModelFactory;
-import org.sourcepit.osgifyme.core.java.JavaPackage;
-import org.sourcepit.osgifyme.core.java.JavaProject;
-import org.sourcepit.osgifyme.core.java.JavaType;
+import org.sourcepit.osgify.java.JavaArchive;
+import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaProject;
+import org.sourcepit.osgify.java.JavaType;
 import org.sourcepit.tools.osgifyme.core.utils.AbstractTraverserTest;
 import org.sourcepit.tools.osgifyme.test.resources.TypeA;
 
@@ -46,7 +47,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateJar(null, null, null);
+         new JavaPackageBundleScanner().scan((JavaArchive) null, (InputStream) null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -56,7 +57,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, null, null);
+         new JavaPackageBundleScanner().scan(javaArchive, (InputStream) null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -67,7 +68,7 @@ public class JavaTypeAndPackageInvestigatorTest
       assertTrue(jarFile.exists());
 
       javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      new JavaTypeAndPackageInvestigator().investigateJar(javaArchive, jarFile, null);
+      new JavaPackageBundleScanner().scan(javaArchive, jarFile, null);
 
       JavaPackage pgk = javaArchive.getPackage(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
@@ -98,7 +99,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateProject(null, null, null);
+         new JavaPackageBundleScanner().scan((JavaProject) null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -108,7 +109,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
       try
       {
-         new JavaTypeAndPackageInvestigator().investigateProject(javaProject, null, null);
+         new JavaPackageBundleScanner().scan(javaProject, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -120,7 +121,7 @@ public class JavaTypeAndPackageInvestigatorTest
 
       javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaTypeAndPackageInvestigator().investigateProject(javaProject, projectDir, null);
+      new JavaPackageBundleScanner().scan(javaProject, projectDir, null);
 
       JavaPackage pgk = javaProject.getPackage("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
@@ -163,8 +164,7 @@ public class JavaTypeAndPackageInvestigatorTest
 
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaTypeAndPackageInvestigator()
-         .investigateProject(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
+      new JavaPackageBundleScanner().scan(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
 
       JavaType jType = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName(), false);

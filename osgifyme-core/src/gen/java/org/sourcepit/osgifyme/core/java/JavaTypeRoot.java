@@ -12,15 +12,15 @@ import org.sourcepit.modeling.common.Annotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Type Root</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getType <em>Type</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getType <em>Type</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaTypeRoot()
  * @model interface="true" abstract="true"
  * @generated
@@ -35,7 +35,6 @@ public interface JavaTypeRoot extends Annotatable
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Type</em>' containment reference.
     * @see #setType(JavaType)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaTypeRoot_Type()
@@ -45,11 +44,9 @@ public interface JavaTypeRoot extends Annotatable
    JavaType getType();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getType <em>Type</em>}' containment
-    * reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getType <em>Type</em>}' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Type</em>' containment reference.
     * @see #getType()
     * @generated
@@ -58,15 +55,13 @@ public interface JavaTypeRoot extends Annotatable
 
    /**
     * Returns the value of the '<em><b>Parent Package</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getTypeRoots
-    * <em>Type Roots</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackage#getTypeRoots <em>Type Roots</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Parent Package</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Parent Package</em>' container reference.
     * @see #setParentPackage(JavaPackage)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaTypeRoot_ParentPackage()
@@ -77,11 +72,9 @@ public interface JavaTypeRoot extends Annotatable
    JavaPackage getParentPackage();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage
-    * <em>Parent Package</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaTypeRoot#getParentPackage <em>Parent Package</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Parent Package</em>' container reference.
     * @see #getParentPackage()
     * @generated

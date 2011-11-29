@@ -8,7 +8,7 @@ package org.sourcepit.tools.osgifyme.core.java.inspect;
 
 import java.io.InputStream;
 
-import org.sourcepit.osgifyme.core.java.JavaType;
+import org.sourcepit.osgify.java.JavaType;
 
 public interface IJavaTypeAnalyzer
 {

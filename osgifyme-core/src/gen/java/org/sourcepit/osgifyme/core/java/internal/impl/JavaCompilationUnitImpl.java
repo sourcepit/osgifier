@@ -33,16 +33,13 @@ import org.sourcepit.osgifyme.core.java.JavaType;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getAnnotations <em>Annotations
- * </em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getType <em>Type</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getParentPackage <em>Parent Package
- * </em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getImportDeclarations <em>Import
- * Declarations</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getParentPackage <em>Parent Package</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaCompilationUnitImpl#getImportDeclarations <em>Import Declarations</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilationUnit
@@ -51,7 +48,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -62,7 +58,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
     * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getType()
     * @generated
     * @ordered
@@ -70,11 +65,9 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    protected JavaType type;
 
    /**
-    * The cached value of the '{@link #getImportDeclarations() <em>Import Declarations</em>}' containment reference
-    * list.
+    * The cached value of the '{@link #getImportDeclarations() <em>Import Declarations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getImportDeclarations()
     * @generated
     * @ordered
@@ -84,7 +77,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaCompilationUnitImpl()
@@ -95,7 +87,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -107,15 +98,13 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -123,7 +112,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType()
@@ -134,7 +122,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetType(JavaType newType, NotificationChain msgs)
@@ -143,12 +130,8 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
       type = newType;
       if (eNotificationRequired())
       {
-         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-            JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, oldType, newType);
-         if (msgs == null)
-            msgs = notification;
-         else
-            msgs.add(notification);
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, oldType, newType);
+         if (msgs == null) msgs = notification; else msgs.add(notification);
       }
       return msgs;
    }
@@ -156,7 +139,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setType(JavaType newType)
@@ -165,56 +147,46 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
       {
          NotificationChain msgs = null;
          if (type != null)
-            msgs = ((InternalEObject) type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-               - JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, null, msgs);
+            msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, null, msgs);
          if (newType != null)
-            msgs = ((InternalEObject) newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-               - JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, null, msgs);
+            msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, null, msgs);
          msgs = basicSetType(newType, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, newType,
-            newType));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE, newType, newType));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getParentPackage()
    {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE)
-         return null;
-      return (JavaPackage) eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE) return null;
+      return (JavaPackage)eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetParentPackage(JavaPackage newParentPackage, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject) newParentPackage,
-         JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE, msgs);
+      msgs = eBasicSetContainer((InternalEObject)newParentPackage, JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setParentPackage(JavaPackage newParentPackage)
    {
-      if (newParentPackage != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE && newParentPackage != null))
+      if (newParentPackage != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE && newParentPackage != null))
       {
          if (EcoreUtil.isAncestor(this, newParentPackage))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -222,30 +194,24 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newParentPackage != null)
-            msgs = ((InternalEObject) newParentPackage).eInverseAdd(this, JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS,
-               JavaPackage.class, msgs);
+            msgs = ((InternalEObject)newParentPackage).eInverseAdd(this, JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS, JavaPackage.class, msgs);
          msgs = basicSetParentPackage(newParentPackage, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE,
-            newParentPackage, newParentPackage));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE, newParentPackage, newParentPackage));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<ImportDeclaration> getImportDeclarations()
    {
       if (importDeclarations == null)
       {
-         importDeclarations = new EObjectContainmentWithInverseEList<ImportDeclaration>(ImportDeclaration.class, this,
-            JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS,
-            JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT);
+         importDeclarations = new EObjectContainmentWithInverseEList<ImportDeclaration>(ImportDeclaration.class, this, JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT);
       }
       return importDeclarations;
    }
@@ -253,7 +219,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -266,7 +231,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -279,7 +243,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -292,7 +255,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -301,15 +263,14 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetParentPackage((JavaPackage) otherEnd, msgs);
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getImportDeclarations()).basicAdd(otherEnd,
-               msgs);
+            return basicSetParentPackage((JavaPackage)otherEnd, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getImportDeclarations()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -317,7 +278,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -325,14 +285,14 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
+            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE:
             return basicSetType(null, msgs);
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
             return basicSetParentPackage(null, msgs);
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
-            return ((InternalEList<?>) getImportDeclarations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
+            return ((InternalEList<?>)getImportDeclarations()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -340,7 +300,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -348,9 +307,8 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS,
-               JavaPackage.class, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS, JavaPackage.class, msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -358,7 +316,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -366,13 +323,13 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
             return getAnnotations();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE:
             return getType();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
             return getParentPackage();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             return getImportDeclarations();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -381,7 +338,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -390,19 +346,19 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE :
-            setType((JavaType) newValue);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE:
+            setType((JavaType)newValue);
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) newValue);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
+            setParentPackage((JavaPackage)newValue);
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             getImportDeclarations().clear();
-            getImportDeclarations().addAll((Collection<? extends ImportDeclaration>) newValue);
+            getImportDeclarations().addAll((Collection<? extends ImportDeclaration>)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -411,7 +367,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -419,16 +374,16 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE :
-            setType((JavaType) null);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE:
+            setType((JavaType)null);
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) null);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
+            setParentPackage((JavaPackage)null);
             return;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             getImportDeclarations().clear();
             return;
       }
@@ -438,7 +393,6 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -446,13 +400,13 @@ public class JavaCompilationUnitImpl extends EObjectImpl implements JavaCompilat
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__ANNOTATIONS:
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__TYPE:
             return type != null;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__PARENT_PACKAGE:
             return getParentPackage() != null;
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             return importDeclarations != null && !importDeclarations.isEmpty();
       }
       return super.eIsSet(featureID);

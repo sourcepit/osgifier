@@ -31,13 +31,13 @@ import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getAnnotations <em>Annotations</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getInnerTypes <em>Inner Types</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getOuterType <em>Outer Type</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getInnerTypes <em>Inner Types</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getOuterType <em>Outer Type</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaTypeImpl#getSimpleName <em>Simple Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaTypeImpl extends EObjectImpl implements JavaType
@@ -46,7 +46,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -57,7 +56,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * The cached value of the '{@link #getInnerTypes() <em>Inner Types</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getInnerTypes()
     * @generated
     * @ordered
@@ -68,7 +66,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSimpleName()
     * @generated
     * @ordered
@@ -79,7 +76,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSimpleName()
     * @generated
     * @ordered
@@ -89,7 +85,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaTypeImpl()
@@ -100,7 +95,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -112,15 +106,13 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -128,15 +120,13 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaType> getInnerTypes()
    {
       if (innerTypes == null)
       {
-         innerTypes = new EObjectContainmentWithInverseEList<JavaType>(JavaType.class, this,
-            JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaModelPackage.JAVA_TYPE__OUTER_TYPE);
+         innerTypes = new EObjectContainmentWithInverseEList<JavaType>(JavaType.class, this, JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaModelPackage.JAVA_TYPE__OUTER_TYPE);
       }
       return innerTypes;
    }
@@ -144,38 +134,33 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getOuterType()
    {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE)
-         return null;
-      return (JavaType) eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE) return null;
+      return (JavaType)eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetOuterType(JavaType newOuterType, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject) newOuterType, JavaModelPackage.JAVA_TYPE__OUTER_TYPE, msgs);
+      msgs = eBasicSetContainer((InternalEObject)newOuterType, JavaModelPackage.JAVA_TYPE__OUTER_TYPE, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setOuterType(JavaType newOuterType)
    {
-      if (newOuterType != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE && newOuterType != null))
+      if (newOuterType != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE && newOuterType != null))
       {
          if (EcoreUtil.isAncestor(this, newOuterType))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -183,21 +168,17 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newOuterType != null)
-            msgs = ((InternalEObject) newOuterType).eInverseAdd(this, JavaModelPackage.JAVA_TYPE__INNER_TYPES,
-               JavaType.class, msgs);
+            msgs = ((InternalEObject)newOuterType).eInverseAdd(this, JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaType.class, msgs);
          msgs = basicSetOuterType(newOuterType, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_TYPE__OUTER_TYPE, newOuterType,
-            newOuterType));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_TYPE__OUTER_TYPE, newOuterType, newOuterType));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getSimpleName()
@@ -208,7 +189,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setSimpleName(String newSimpleName)
@@ -216,14 +196,12 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
       String oldSimpleName = simpleName;
       simpleName = newSimpleName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_TYPE__SIMPLE_NAME, oldSimpleName,
-            simpleName));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_TYPE__SIMPLE_NAME, oldSimpleName, simpleName));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaTypeRoot getTypeRoot()
@@ -236,7 +214,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getFullyQualifiedName()
@@ -249,7 +226,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -262,7 +238,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -275,7 +250,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -288,7 +262,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -297,14 +270,14 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getInnerTypes()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getInnerTypes()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetOuterType((JavaType) otherEnd, msgs);
+            return basicSetOuterType((JavaType)otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -312,7 +285,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -320,11 +292,11 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
-            return ((InternalEList<?>) getInnerTypes()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
+            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
+            return ((InternalEList<?>)getInnerTypes()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
             return basicSetOuterType(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -333,7 +305,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -341,9 +312,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaType.class,
-               msgs);
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaType.class, msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -351,7 +321,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -359,13 +328,13 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
             return getAnnotations();
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
             return getInnerTypes();
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
             return getOuterType();
-         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME:
             return getSimpleName();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -374,7 +343,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -383,19 +351,19 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
             return;
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
             getInnerTypes().clear();
-            getInnerTypes().addAll((Collection<? extends JavaType>) newValue);
+            getInnerTypes().addAll((Collection<? extends JavaType>)newValue);
             return;
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
-            setOuterType((JavaType) newValue);
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
+            setOuterType((JavaType)newValue);
             return;
-         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME :
-            setSimpleName((String) newValue);
+         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME:
+            setSimpleName((String)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -404,7 +372,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -412,16 +379,16 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
             getInnerTypes().clear();
             return;
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
-            setOuterType((JavaType) null);
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
+            setOuterType((JavaType)null);
             return;
-         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME:
             setSimpleName(SIMPLE_NAME_EDEFAULT);
             return;
       }
@@ -431,7 +398,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -439,13 +405,13 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS:
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
+         case JavaModelPackage.JAVA_TYPE__INNER_TYPES:
             return innerTypes != null && !innerTypes.isEmpty();
-         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
+         case JavaModelPackage.JAVA_TYPE__OUTER_TYPE:
             return getOuterType() != null;
-         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_TYPE__SIMPLE_NAME:
             return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
       }
       return super.eIsSet(featureID);
@@ -454,14 +420,12 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy())
-         return super.toString();
+      if (eIsProxy()) return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (simpleName: ");

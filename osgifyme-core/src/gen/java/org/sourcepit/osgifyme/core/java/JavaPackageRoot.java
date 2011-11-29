@@ -13,16 +13,16 @@ import org.sourcepit.modeling.common.Annotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Package Root</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPath <em>Path</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getRootPackages <em>Root Packages</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle <em>Package Bundle</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPath <em>Path</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getRootPackages <em>Root Packages</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle <em>Package Bundle</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageRoot()
  * @model
  * @generated
@@ -36,7 +36,6 @@ public interface JavaPackageRoot extends Annotatable
     * If the meaning of the '<em>Path</em>' attribute isn't clear, there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Path</em>' attribute.
     * @see #setPath(String)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageRoot_Path()
@@ -49,7 +48,6 @@ public interface JavaPackageRoot extends Annotatable
     * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPath <em>Path</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Path</em>' attribute.
     * @see #getPath()
     * @generated
@@ -65,7 +63,6 @@ public interface JavaPackageRoot extends Annotatable
     * of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Root Packages</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageRoot_RootPackages()
     * @model containment="true"
@@ -75,15 +72,13 @@ public interface JavaPackageRoot extends Annotatable
 
    /**
     * Returns the value of the '<em><b>Package Bundle</b></em>' container reference.
-    * It is bidirectional and its opposite is '
-    * {@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPackageRoots <em>Package Roots</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getPackageRoots <em>Package Roots</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Package Bundle</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Package Bundle</em>' container reference.
     * @see #setPackageBundle(JavaPackageBundle)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaPackageRoot_PackageBundle()
@@ -94,11 +89,9 @@ public interface JavaPackageRoot extends Annotatable
    JavaPackageBundle getPackageBundle();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle
-    * <em>Package Bundle</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.JavaPackageRoot#getPackageBundle <em>Package Bundle</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Package Bundle</em>' container reference.
     * @see #getPackageBundle()
     * @generated

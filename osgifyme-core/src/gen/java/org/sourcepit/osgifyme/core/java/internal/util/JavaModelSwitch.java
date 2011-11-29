@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.osgifyme.core.java.*;
 import org.sourcepit.osgifyme.core.java.DependencyNode;
 import org.sourcepit.osgifyme.core.java.FullyQualified;
 import org.sourcepit.osgifyme.core.java.ImportDeclaration;
@@ -35,7 +36,6 @@ import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * 
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage
  * @generated
  */
@@ -45,7 +45,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * The cached model package
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected static JavaModelPackage modelPackage;
@@ -54,7 +53,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * Creates an instance of the switch.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModelSwitch()
@@ -69,7 +67,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * Checks whether this is a switch for the given package.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @parameter ePackage the package in question.
     * @return whether this is a switch for the given package.
     * @generated
@@ -84,7 +81,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
@@ -93,148 +89,116 @@ public class JavaModelSwitch<T> extends Switch<T>
    {
       switch (classifierID)
       {
-         case JavaModelPackage.JAVA_TYPE :
+         case JavaModelPackage.JAVA_TYPE:
          {
-            JavaType javaType = (JavaType) theEObject;
+            JavaType javaType = (JavaType)theEObject;
             T result = caseJavaType(javaType);
-            if (result == null)
-               result = caseAnnotatable(javaType);
-            if (result == null)
-               result = caseFullyQualified(javaType);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaType);
+            if (result == null) result = caseFullyQualified(javaType);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_COMPILATION_UNIT :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT:
          {
-            JavaCompilationUnit javaCompilationUnit = (JavaCompilationUnit) theEObject;
+            JavaCompilationUnit javaCompilationUnit = (JavaCompilationUnit)theEObject;
             T result = caseJavaCompilationUnit(javaCompilationUnit);
-            if (result == null)
-               result = caseJavaTypeRoot(javaCompilationUnit);
-            if (result == null)
-               result = caseAnnotatable(javaCompilationUnit);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseJavaTypeRoot(javaCompilationUnit);
+            if (result == null) result = caseAnnotatable(javaCompilationUnit);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.IMPORT_DECLARATION :
+         case JavaModelPackage.IMPORT_DECLARATION:
          {
-            ImportDeclaration importDeclaration = (ImportDeclaration) theEObject;
+            ImportDeclaration importDeclaration = (ImportDeclaration)theEObject;
             T result = caseImportDeclaration(importDeclaration);
-            if (result == null)
-               result = caseAnnotatable(importDeclaration);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(importDeclaration);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_TYPE_ROOT :
+         case JavaModelPackage.JAVA_TYPE_ROOT:
          {
-            JavaTypeRoot javaTypeRoot = (JavaTypeRoot) theEObject;
+            JavaTypeRoot javaTypeRoot = (JavaTypeRoot)theEObject;
             T result = caseJavaTypeRoot(javaTypeRoot);
-            if (result == null)
-               result = caseAnnotatable(javaTypeRoot);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaTypeRoot);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_CLASS :
+         case JavaModelPackage.JAVA_CLASS:
          {
-            JavaClass javaClass = (JavaClass) theEObject;
+            JavaClass javaClass = (JavaClass)theEObject;
             T result = caseJavaClass(javaClass);
-            if (result == null)
-               result = caseJavaTypeRoot(javaClass);
-            if (result == null)
-               result = caseAnnotatable(javaClass);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseJavaTypeRoot(javaClass);
+            if (result == null) result = caseAnnotatable(javaClass);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PACKAGE :
+         case JavaModelPackage.JAVA_PACKAGE:
          {
-            JavaPackage javaPackage = (JavaPackage) theEObject;
+            JavaPackage javaPackage = (JavaPackage)theEObject;
             T result = caseJavaPackage(javaPackage);
-            if (result == null)
-               result = caseAnnotatable(javaPackage);
-            if (result == null)
-               result = caseFullyQualified(javaPackage);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaPackage);
+            if (result == null) result = caseFullyQualified(javaPackage);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE :
+         case JavaModelPackage.JAVA_PACKAGE_BUNDLE:
          {
-            JavaPackageBundle javaPackageBundle = (JavaPackageBundle) theEObject;
+            JavaPackageBundle javaPackageBundle = (JavaPackageBundle)theEObject;
             T result = caseJavaPackageBundle(javaPackageBundle);
-            if (result == null)
-               result = caseAnnotatable(javaPackageBundle);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaPackageBundle);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_ARCHIVE :
+         case JavaModelPackage.JAVA_ARCHIVE:
          {
-            JavaArchive javaArchive = (JavaArchive) theEObject;
+            JavaArchive javaArchive = (JavaArchive)theEObject;
             T result = caseJavaArchive(javaArchive);
-            if (result == null)
-               result = caseJavaPackageBundle(javaArchive);
-            if (result == null)
-               result = caseAnnotatable(javaArchive);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseJavaPackageBundle(javaArchive);
+            if (result == null) result = caseAnnotatable(javaArchive);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PROJECT :
+         case JavaModelPackage.JAVA_PROJECT:
          {
-            JavaProject javaProject = (JavaProject) theEObject;
+            JavaProject javaProject = (JavaProject)theEObject;
             T result = caseJavaProject(javaProject);
-            if (result == null)
-               result = caseJavaPackageBundle(javaProject);
-            if (result == null)
-               result = caseAnnotatable(javaProject);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseJavaPackageBundle(javaProject);
+            if (result == null) result = caseAnnotatable(javaProject);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_MODEL :
+         case JavaModelPackage.JAVA_MODEL:
          {
-            JavaModel javaModel = (JavaModel) theEObject;
+            JavaModel javaModel = (JavaModel)theEObject;
             T result = caseJavaModel(javaModel);
-            if (result == null)
-               result = caseAnnotatable(javaModel);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaModel);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.DEPENDENCY_NODE :
+         case JavaModelPackage.DEPENDENCY_NODE:
          {
-            DependencyNode dependencyNode = (DependencyNode) theEObject;
+            DependencyNode dependencyNode = (DependencyNode)theEObject;
             T result = caseDependencyNode(dependencyNode);
-            if (result == null)
-               result = caseAnnotatable(dependencyNode);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(dependencyNode);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.FULLY_QUALIFIED :
+         case JavaModelPackage.FULLY_QUALIFIED:
          {
-            FullyQualified fullyQualified = (FullyQualified) theEObject;
+            FullyQualified fullyQualified = (FullyQualified)theEObject;
             T result = caseFullyQualified(fullyQualified);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PACKAGE_ROOT :
+         case JavaModelPackage.JAVA_PACKAGE_ROOT:
          {
-            JavaPackageRoot javaPackageRoot = (JavaPackageRoot) theEObject;
+            JavaPackageRoot javaPackageRoot = (JavaPackageRoot)theEObject;
             T result = caseJavaPackageRoot(javaPackageRoot);
-            if (result == null)
-               result = caseAnnotatable(javaPackageRoot);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseAnnotatable(javaPackageRoot);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         default :
-            return defaultCase(theEObject);
+         default: return defaultCase(theEObject);
       }
    }
 
@@ -244,7 +208,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Type</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -261,7 +224,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Compilation Unit</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -278,7 +240,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -295,7 +256,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Type Root</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -312,7 +272,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Class</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -329,7 +288,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Package</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -346,7 +304,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Package Bundle</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -363,7 +320,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Archive</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -380,7 +336,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Project</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -397,7 +352,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Model</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -414,7 +368,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Dependency Node</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -431,7 +384,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Fully Qualified</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -448,7 +400,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Package Root</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -465,7 +416,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Annotatable</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -482,7 +432,6 @@ public class JavaModelSwitch<T> extends Switch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch, but this is the last case anyway.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject)

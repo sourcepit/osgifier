@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.sourcepit.osgifyme.core.java.*;
 import org.sourcepit.osgifyme.core.java.DependencyNode;
 import org.sourcepit.osgifyme.core.java.ImportDeclaration;
 import org.sourcepit.osgifyme.core.java.JavaArchive;
@@ -28,7 +29,6 @@ import org.sourcepit.osgifyme.core.java.JavaType;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFactory
@@ -37,15 +37,13 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * Creates the default factory implementation.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public static JavaModelFactory init()
    {
       try
       {
-         JavaModelFactory theJavaModelFactory = (JavaModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory("http://org.sourcepit.osgifyme.java/1.0");
+         JavaModelFactory theJavaModelFactory = (JavaModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://org.sourcepit.osgifyme.java/1.0"); 
          if (theJavaModelFactory != null)
          {
             return theJavaModelFactory;
@@ -62,7 +60,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * Creates an instance of the factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModelFactoryImpl()
@@ -73,7 +70,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -81,27 +77,17 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       switch (eClass.getClassifierID())
       {
-         case JavaModelPackage.JAVA_TYPE :
-            return createJavaType();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT :
-            return createJavaCompilationUnit();
-         case JavaModelPackage.IMPORT_DECLARATION :
-            return createImportDeclaration();
-         case JavaModelPackage.JAVA_CLASS :
-            return createJavaClass();
-         case JavaModelPackage.JAVA_PACKAGE :
-            return createJavaPackage();
-         case JavaModelPackage.JAVA_ARCHIVE :
-            return createJavaArchive();
-         case JavaModelPackage.JAVA_PROJECT :
-            return createJavaProject();
-         case JavaModelPackage.JAVA_MODEL :
-            return createJavaModel();
-         case JavaModelPackage.DEPENDENCY_NODE :
-            return createDependencyNode();
-         case JavaModelPackage.JAVA_PACKAGE_ROOT :
-            return createJavaPackageRoot();
-         default :
+         case JavaModelPackage.JAVA_TYPE: return createJavaType();
+         case JavaModelPackage.JAVA_COMPILATION_UNIT: return createJavaCompilationUnit();
+         case JavaModelPackage.IMPORT_DECLARATION: return createImportDeclaration();
+         case JavaModelPackage.JAVA_CLASS: return createJavaClass();
+         case JavaModelPackage.JAVA_PACKAGE: return createJavaPackage();
+         case JavaModelPackage.JAVA_ARCHIVE: return createJavaArchive();
+         case JavaModelPackage.JAVA_PROJECT: return createJavaProject();
+         case JavaModelPackage.JAVA_MODEL: return createJavaModel();
+         case JavaModelPackage.DEPENDENCY_NODE: return createDependencyNode();
+         case JavaModelPackage.JAVA_PACKAGE_ROOT: return createJavaPackageRoot();
+         default:
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
    }
@@ -109,7 +95,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType createJavaType()
@@ -121,7 +106,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaCompilationUnit createJavaCompilationUnit()
@@ -133,7 +117,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public ImportDeclaration createImportDeclaration()
@@ -145,7 +128,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaClass createJavaClass()
@@ -157,7 +139,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage createJavaPackage()
@@ -169,7 +150,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaArchive createJavaArchive()
@@ -181,7 +161,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaProject createJavaProject()
@@ -193,7 +172,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModel createJavaModel()
@@ -205,7 +183,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public DependencyNode createDependencyNode()
@@ -217,7 +194,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackageRoot createJavaPackageRoot()
@@ -229,18 +205,16 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModelPackage getJavaModelPackage()
    {
-      return (JavaModelPackage) getEPackage();
+      return (JavaModelPackage)getEPackage();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @deprecated
     * @generated
     */

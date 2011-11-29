@@ -11,8 +11,8 @@ package org.sourcepit.osgifyme.core.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Class</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getJavaClass()
  * @model
  * @generated

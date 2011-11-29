@@ -13,20 +13,21 @@ import org.sourcepit.modeling.common.Annotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Dependency Node</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getTarget <em>Target</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#isOptional <em>Optional</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getDependencies <em>Dependencies</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#isEnabled <em>Enabled</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode <em>Parent Node</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getPackageBundle <em>Package Bundle</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getScope <em>Scope</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#isEnabled <em>Enabled</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode <em>Parent Node</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getPackageBundle <em>Package Bundle</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getScope <em>Scope</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.DependencyNode#getVersionRange <em>Version Range</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode()
  * @model
  * @generated
@@ -41,7 +42,6 @@ public interface DependencyNode extends Annotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Target</em>' reference.
     * @see #setTarget(JavaPackageBundle)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_Target()
@@ -51,11 +51,9 @@ public interface DependencyNode extends Annotatable
    JavaPackageBundle getTarget();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getTarget <em>Target</em>}'
-    * reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getTarget <em>Target</em>}' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Target</em>' reference.
     * @see #getTarget()
     * @generated
@@ -70,7 +68,6 @@ public interface DependencyNode extends Annotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Optional</em>' attribute.
     * @see #setOptional(boolean)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_Optional()
@@ -80,11 +77,9 @@ public interface DependencyNode extends Annotatable
    boolean isOptional();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#isOptional <em>Optional</em>}'
-    * attribute.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#isOptional <em>Optional</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Optional</em>' attribute.
     * @see #isOptional()
     * @generated
@@ -94,15 +89,13 @@ public interface DependencyNode extends Annotatable
    /**
     * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifyme.core.java.DependencyNode}.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode
-    * <em>Parent Node</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode <em>Parent Node</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear, there really should be more
     * of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Dependencies</em>' containment reference list.
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_Dependencies()
     * @see org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode
@@ -119,7 +112,6 @@ public interface DependencyNode extends Annotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Enabled</em>' attribute.
     * @see #setEnabled(boolean)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_Enabled()
@@ -129,11 +121,9 @@ public interface DependencyNode extends Annotatable
    boolean isEnabled();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#isEnabled <em>Enabled</em>}'
-    * attribute.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#isEnabled <em>Enabled</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Enabled</em>' attribute.
     * @see #isEnabled()
     * @generated
@@ -142,15 +132,13 @@ public interface DependencyNode extends Annotatable
 
    /**
     * Returns the value of the '<em><b>Parent Node</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getDependencies
-    * <em>Dependencies</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getDependencies <em>Dependencies</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Parent Node</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Parent Node</em>' container reference.
     * @see #setParentNode(DependencyNode)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_ParentNode()
@@ -161,11 +149,9 @@ public interface DependencyNode extends Annotatable
    DependencyNode getParentNode();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode <em>Parent Node</em>}'
-    * container reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getParentNode <em>Parent Node</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Parent Node</em>' container reference.
     * @see #getParentNode()
     * @generated
@@ -174,15 +160,13 @@ public interface DependencyNode extends Annotatable
 
    /**
     * Returns the value of the '<em><b>Package Bundle</b></em>' container reference.
-    * It is bidirectional and its opposite is '
-    * {@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getDependencies <em>Dependencies</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgifyme.core.java.JavaPackageBundle#getDependencies <em>Dependencies</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Package Bundle</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Package Bundle</em>' container reference.
     * @see #setPackageBundle(JavaPackageBundle)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_PackageBundle()
@@ -193,11 +177,9 @@ public interface DependencyNode extends Annotatable
    JavaPackageBundle getPackageBundle();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getPackageBundle
-    * <em>Package Bundle</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getPackageBundle <em>Package Bundle</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Package Bundle</em>' container reference.
     * @see #getPackageBundle()
     * @generated
@@ -212,7 +194,6 @@ public interface DependencyNode extends Annotatable
     * If the meaning of the '<em>Scope</em>' attribute isn't clear, there really should be more of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Scope</em>' attribute.
     * @see #setScope(String)
     * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_Scope()
@@ -225,11 +206,36 @@ public interface DependencyNode extends Annotatable
     * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getScope <em>Scope</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Scope</em>' attribute.
     * @see #getScope()
     * @generated
     */
    void setScope(String value);
+
+   /**
+    * Returns the value of the '<em><b>Version Range</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Version Range</em>' attribute isn't clear,
+    * there really should be more of a description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * @return the value of the '<em>Version Range</em>' attribute.
+    * @see #setVersionRange(String)
+    * @see org.sourcepit.osgifyme.core.java.JavaModelPackage#getDependencyNode_VersionRange()
+    * @model
+    * @generated
+    */
+   String getVersionRange();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgifyme.core.java.DependencyNode#getVersionRange <em>Version Range</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * @param value the new value of the '<em>Version Range</em>' attribute.
+    * @see #getVersionRange()
+    * @generated
+    */
+   void setVersionRange(String value);
 
 } // DependencyNode

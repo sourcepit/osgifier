@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.osgifyme.core.java.JavaType;
+import org.sourcepit.osgify.java.JavaType;
 
 public class JavaTypeReferencesAnalyzer extends AbstractJavaTypeAnalyzer
 {

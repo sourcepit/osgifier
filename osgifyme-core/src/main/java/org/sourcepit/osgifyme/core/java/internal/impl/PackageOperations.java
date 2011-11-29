@@ -6,9 +6,9 @@
 
 package org.sourcepit.osgifyme.core.java.internal.impl;
 
-import org.sourcepit.osgifyme.core.java.JavaPackage;
-import org.sourcepit.osgifyme.core.java.JavaPackageBundle;
-import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
+import org.sourcepit.osgify.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaPackageBundle;
+import org.sourcepit.osgify.java.JavaPackageRoot;
 
 public final class PackageOperations
 {

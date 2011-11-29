@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.osgifyme.core.java.JavaPackage;
-import org.sourcepit.osgifyme.core.java.JavaPackageRoot;
-import org.sourcepit.osgifyme.core.java.JavaType;
+import org.sourcepit.osgify.java.JavaPackage;
+import org.sourcepit.osgify.java.JavaPackageRoot;
+import org.sourcepit.osgify.java.JavaType;
 import org.sourcepit.tools.osgifyme.core.java.utils.JavaLangUtils;
 import org.sourcepit.tools.osgifyme.core.utils.IResourceVisitor;
 
@@ -48,8 +48,12 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
 
    protected boolean isJavaClassFile(String path)
    {
-      return path.endsWith(".class")
-         && JavaLangUtils.isFullyQuallifiedPackageName(JavaLangUtils.trimFileName(path)[0], "/");
+      return path.endsWith(".class") && isInJavaPackage(path);
+   }
+
+   protected boolean isInJavaPackage(String path)
+   {
+      return JavaLangUtils.isFullyQuallifiedPackageName(JavaLangUtils.trimFileName(path)[0], "/");
    }
 
    protected void visitPackage(String path)
@@ -71,7 +75,7 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
 
    protected void visitResource(String path, boolean isDirectory, InputStream content)
    {
-      if (!isDirectory && path.endsWith("packageinfo"))
+      if (!isDirectory && path.endsWith("packageinfo") && isInJavaPackage(path))
       {
          try
          {

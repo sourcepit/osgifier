@@ -16,7 +16,7 @@ import org.sourcepit.osgifyme.core.java.JavaProject;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaProjectImpl extends JavaPackageBundleImpl implements JavaProject
@@ -24,7 +24,6 @@ public class JavaProjectImpl extends JavaPackageBundleImpl implements JavaProjec
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaProjectImpl()
@@ -35,7 +34,6 @@ public class JavaProjectImpl extends JavaPackageBundleImpl implements JavaProjec
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override

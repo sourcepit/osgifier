@@ -33,14 +33,14 @@ import org.sourcepit.osgifyme.core.java.JavaTypeRoot;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getAnnotations <em>Annotations</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getTypeRoots <em>Type Roots</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getSimpleName <em>Simple Name</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getPackages <em>Packages</em>}</li>
- * <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getParentPackage <em>Parent Package</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getTypeRoots <em>Type Roots</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getSimpleName <em>Simple Name</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getPackages <em>Packages</em>}</li>
+ *   <li>{@link org.sourcepit.osgifyme.core.java.internal.impl.JavaPackageImpl#getParentPackage <em>Parent Package</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaPackageImpl extends EObjectImpl implements JavaPackage
@@ -49,7 +49,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -60,7 +59,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * The cached value of the '{@link #getTypeRoots() <em>Type Roots</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getTypeRoots()
     * @generated
     * @ordered
@@ -71,7 +69,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSimpleName()
     * @generated
     * @ordered
@@ -82,7 +79,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSimpleName()
     * @generated
     * @ordered
@@ -93,7 +89,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
     * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getPackages()
     * @generated
     * @ordered
@@ -103,7 +98,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaPackageImpl()
@@ -114,7 +108,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -126,15 +119,13 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -142,15 +133,13 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaTypeRoot> getTypeRoots()
    {
       if (typeRoots == null)
       {
-         typeRoots = new EObjectContainmentWithInverseEList<JavaTypeRoot>(JavaTypeRoot.class, this,
-            JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS, JavaModelPackage.JAVA_TYPE_ROOT__PARENT_PACKAGE);
+         typeRoots = new EObjectContainmentWithInverseEList<JavaTypeRoot>(JavaTypeRoot.class, this, JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS, JavaModelPackage.JAVA_TYPE_ROOT__PARENT_PACKAGE);
       }
       return typeRoots;
    }
@@ -158,7 +147,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getSimpleName()
@@ -169,7 +157,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setSimpleName(String newSimpleName)
@@ -177,22 +164,19 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
       String oldSimpleName = simpleName;
       simpleName = newSimpleName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME,
-            oldSimpleName, simpleName));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME, oldSimpleName, simpleName));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaPackage> getPackages()
    {
       if (packages == null)
       {
-         packages = new EObjectContainmentWithInverseEList<JavaPackage>(JavaPackage.class, this,
-            JavaModelPackage.JAVA_PACKAGE__PACKAGES, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE);
+         packages = new EObjectContainmentWithInverseEList<JavaPackage>(JavaPackage.class, this, JavaModelPackage.JAVA_PACKAGE__PACKAGES, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE);
       }
       return packages;
    }
@@ -200,38 +184,33 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getParentPackage()
    {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE)
-         return null;
-      return (JavaPackage) eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE) return null;
+      return (JavaPackage)eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetParentPackage(JavaPackage newParentPackage, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject) newParentPackage, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE, msgs);
+      msgs = eBasicSetContainer((InternalEObject)newParentPackage, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setParentPackage(JavaPackage newParentPackage)
    {
-      if (newParentPackage != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE && newParentPackage != null))
+      if (newParentPackage != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE && newParentPackage != null))
       {
          if (EcoreUtil.isAncestor(this, newParentPackage))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -239,21 +218,17 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newParentPackage != null)
-            msgs = ((InternalEObject) newParentPackage).eInverseAdd(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES,
-               JavaPackage.class, msgs);
+            msgs = ((InternalEObject)newParentPackage).eInverseAdd(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES, JavaPackage.class, msgs);
          msgs = basicSetParentPackage(newParentPackage, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE,
-            newParentPackage, newParentPackage));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE, newParentPackage, newParentPackage));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getSubPackage(String name, boolean createOnDemand)
@@ -266,7 +241,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackageBundle getPackageBundle()
@@ -279,7 +253,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackageRoot getPackageRoot()
@@ -292,7 +265,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getFullyQualifiedName()
@@ -305,7 +277,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -318,7 +289,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -331,7 +301,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -344,7 +313,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -353,16 +321,16 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getTypeRoots()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getPackages()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeRoots()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getPackages()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetParentPackage((JavaPackage) otherEnd, msgs);
+            return basicSetParentPackage((JavaPackage)otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -370,7 +338,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -378,13 +345,13 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return ((InternalEList<?>) getTypeRoots()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return ((InternalEList<?>) getPackages()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
+            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
+            return ((InternalEList<?>)getTypeRoots()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
+            return ((InternalEList<?>)getPackages()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
             return basicSetParentPackage(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -393,7 +360,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -401,9 +367,8 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES,
-               JavaPackage.class, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES, JavaPackage.class, msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -411,7 +376,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -419,15 +383,15 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
             return getAnnotations();
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
             return getTypeRoots();
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME:
             return getSimpleName();
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
             return getPackages();
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
             return getParentPackage();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -436,7 +400,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -445,23 +408,23 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
             getTypeRoots().clear();
-            getTypeRoots().addAll((Collection<? extends JavaTypeRoot>) newValue);
+            getTypeRoots().addAll((Collection<? extends JavaTypeRoot>)newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
-            setSimpleName((String) newValue);
+         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME:
+            setSimpleName((String)newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
             getPackages().clear();
-            getPackages().addAll((Collection<? extends JavaPackage>) newValue);
+            getPackages().addAll((Collection<? extends JavaPackage>)newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) newValue);
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
+            setParentPackage((JavaPackage)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -470,7 +433,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -478,20 +440,20 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
             getTypeRoots().clear();
             return;
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME:
             setSimpleName(SIMPLE_NAME_EDEFAULT);
             return;
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
             getPackages().clear();
             return;
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) null);
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
+            setParentPackage((JavaPackage)null);
             return;
       }
       super.eUnset(featureID);
@@ -500,7 +462,6 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -508,15 +469,15 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS :
+         case JavaModelPackage.JAVA_PACKAGE__ANNOTATIONS:
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
+         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS:
             return typeRoots != null && !typeRoots.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
+         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME:
             return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
+         case JavaModelPackage.JAVA_PACKAGE__PACKAGES:
             return packages != null && !packages.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
+         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE:
             return getParentPackage() != null;
       }
       return super.eIsSet(featureID);
@@ -525,14 +486,12 @@ public class JavaPackageImpl extends EObjectImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy())
-         return super.toString();
+      if (eIsProxy()) return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (simpleName: ");

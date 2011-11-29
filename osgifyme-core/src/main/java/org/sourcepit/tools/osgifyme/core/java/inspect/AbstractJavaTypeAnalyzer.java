@@ -12,7 +12,7 @@ import java.io.InputStream;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
-import org.sourcepit.osgifyme.core.java.JavaType;
+import org.sourcepit.osgify.java.JavaType;
 
 public abstract class AbstractJavaTypeAnalyzer implements IJavaTypeAnalyzer
 {
