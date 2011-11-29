@@ -438,16 +438,6 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PACKAGE_BUNDLE__VERSION = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
-
-   /**
     * The number of structural features of the '<em>Java Package Bundle</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -455,7 +445,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_BUNDLE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+   int JAVA_PACKAGE_BUNDLE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.impl.JavaArchiveImpl <em>Java Archive</em>}' class.
@@ -487,16 +477,6 @@ public interface JavaModelPackage extends EPackage
     * @ordered
     */
    int JAVA_ARCHIVE__PACKAGE_ROOTS = JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS;
-
-   /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_ARCHIVE__VERSION = JAVA_PACKAGE_BUNDLE__VERSION;
 
    /**
     * The number of structural features of the '<em>Java Archive</em>' class.
@@ -538,16 +518,6 @@ public interface JavaModelPackage extends EPackage
     * @ordered
     */
    int JAVA_PROJECT__PACKAGE_ROOTS = JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS;
-
-   /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int JAVA_PROJECT__VERSION = JAVA_PACKAGE_BUNDLE__VERSION;
 
    /**
     * The number of structural features of the '<em>Java Project</em>' class.
@@ -880,19 +850,6 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaPackageBundle_PackageRoots();
 
    /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.java.JavaPackageBundle#getVersion
-    * <em>Version</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the attribute '<em>Version</em>'.
-    * @see org.sourcepit.osgify.java.JavaPackageBundle#getVersion()
-    * @see #getJavaPackageBundle()
-    * @generated
-    */
-   EAttribute getJavaPackageBundle_Version();
-
-   /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.java.JavaArchive <em>Java Archive</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -1189,15 +1146,6 @@ public interface JavaModelPackage extends EPackage
        * @generated
        */
       EReference JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = eINSTANCE.getJavaPackageBundle_PackageRoots();
-
-      /**
-       * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EAttribute JAVA_PACKAGE_BUNDLE__VERSION = eINSTANCE.getJavaPackageBundle_Version();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.java.impl.JavaArchiveImpl <em>Java Archive</em>}'

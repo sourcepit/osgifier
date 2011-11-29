@@ -69,7 +69,6 @@ public class FooTest
       scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
 
       JavaProject project = scanner.scan(new File("projects/osgify-test"), "target/classes", "target/test-classes");
-      project.setVersion("0.1.0-SNAPSHOT");
 
       BundleTree tree = BundleTreeModelFactory.eINSTANCE.createBundleTree();
 
@@ -87,7 +86,7 @@ public class FooTest
       JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
       scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
 
-      JavaArchive archive = scan(scanner, "/lib/osgify-test-0.1.0-SNAPSHOT.jar", "0.1.0-SNAPSHOT");
+      JavaArchive archive = scan(scanner, "/lib/osgify-test-0.1.0-SNAPSHOT.jar");
 
       BundleTree tree = BundleTreeModelFactory.eINSTANCE.createBundleTree();
 
@@ -109,7 +108,7 @@ public class FooTest
       node.setVersion(Version.parse("4.3.0"));
       node.setEnabled(true);
       node.setOptional(true);
-      node.setTarget(scan(scanner, "/lib/org.osgi.core-4.3.0.jar", "4.3.0"));
+      node.setTarget(scan(scanner, "/lib/org.osgi.core-4.3.0.jar"));
       model.getNodes().add(node);
       tree.getBundles().add(node.getTarget());
 
@@ -118,7 +117,7 @@ public class FooTest
       node.setVersion(Version.parse("1.0.1"));
       node.setEnabled(true);
       node.setScope("provided");
-      node.setTarget(scan(scanner, "/lib/stax-api-1.0.1.jar", "1.0.1"));
+      node.setTarget(scan(scanner, "/lib/stax-api-1.0.1.jar"));
       model.getNodes().add(node);
       tree.getBundles().add(node.getTarget());
 
@@ -126,7 +125,7 @@ public class FooTest
       node.setVersionRange(VersionRange.parse("[1.6,1.7)"));
       node.setVersion(Version.parse("1.6.12"));
       node.setEnabled(true);
-      node.setTarget(scan(scanner, "/lib/aspectjrt-1.6.12.jar", "1.6.12"));
+      node.setTarget(scan(scanner, "/lib/aspectjrt-1.6.12.jar"));
       model.getNodes().add(node);
       tree.getBundles().add(node.getTarget());
 
@@ -134,7 +133,7 @@ public class FooTest
       node.setVersionRange(VersionRange.parse("1.2"));
       node.setVersion(Version.parse("1.2"));
       node.setEnabled(true);
-      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.2.jar", "1.2"));
+      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.2.jar"));
       model.getNodes().add(node);
       tree.getBundles().add(node.getTarget());
 
@@ -143,7 +142,7 @@ public class FooTest
       node.setVersion(Version.parse("4.10"));
       node.setEnabled(true);
       node.setScope("test");
-      node.setTarget(scan(scanner, "/lib/junit-4.10.jar", "4.10"));
+      node.setTarget(scan(scanner, "/lib/junit-4.10.jar"));
       model.getNodes().add(node);
       tree.getBundles().add(node.getTarget());
 
@@ -154,18 +153,16 @@ public class FooTest
       node.setVersion(Version.parse("1.1"));
       node.setEnabled(true);
       node.setScope("test");
-      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.1.jar", "1.1"));
+      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.1.jar"));
       tree.getBundles().add(node.getTarget());
    }
 
-   protected JavaArchive scan(JavaPackageBundleScanner scanner, String name, String version)
+   protected JavaArchive scan(JavaPackageBundleScanner scanner, String name)
    {
       final InputStream in = getClass().getResourceAsStream(name);
       try
       {
-         JavaArchive archive = scanner.scan(in);
-         archive.setVersion(version);
-         return archive;
+         return scanner.scan(in);
       }
       finally
       {

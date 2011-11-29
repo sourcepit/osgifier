@@ -422,17 +422,6 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EAttribute getJavaPackageBundle_Version()
-   {
-      return (EAttribute) javaPackageBundleEClass.getEStructuralFeatures().get(1);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    public EClass getJavaArchive()
    {
       return javaArchiveEClass;
@@ -563,7 +552,6 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
 
       javaPackageBundleEClass = createEClass(JAVA_PACKAGE_BUNDLE);
       createEReference(javaPackageBundleEClass, JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS);
-      createEAttribute(javaPackageBundleEClass, JAVA_PACKAGE_BUNDLE__VERSION);
 
       javaArchiveEClass = createEClass(JAVA_ARCHIVE);
 
@@ -694,9 +682,6 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
          this.getJavaPackageRoot_PackageBundle(), "packageRoots", null, 0, -1, JavaPackageBundle.class, !IS_TRANSIENT,
          !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
          IS_ORDERED);
-      initEAttribute(getJavaPackageBundle_Version(), ecorePackage.getEString(), "version", null, 0, 1,
-         JavaPackageBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-         !IS_DERIVED, IS_ORDERED);
 
       op = addEOperation(javaPackageBundleEClass, this.getJavaPackage(), "getRootPackages", 1, -1, IS_UNIQUE,
          IS_ORDERED);

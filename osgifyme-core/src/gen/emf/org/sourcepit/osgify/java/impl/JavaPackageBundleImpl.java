@@ -9,12 +9,10 @@ package org.sourcepit.osgify.java.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -35,7 +33,6 @@ import org.sourcepit.osgify.java.JavaType;
  * <ul>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageBundleImpl#getAnnotations <em>Annotations</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageBundleImpl#getPackageRoots <em>Package Roots</em>}</li>
- * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageBundleImpl#getVersion <em>Version</em>}</li>
  * </ul>
  * </p>
  * 
@@ -64,28 +61,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
     * @ordered
     */
    protected EList<JavaPackageRoot> packageRoots;
-
-   /**
-    * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getVersion()
-    * @generated
-    * @ordered
-    */
-   protected static final String VERSION_EDEFAULT = null;
-
-   /**
-    * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getVersion()
-    * @generated
-    * @ordered
-    */
-   protected String version = VERSION_EDEFAULT;
 
    /**
     * <!-- begin-user-doc -->
@@ -140,32 +115,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS, JavaModelPackage.JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE);
       }
       return packageRoots;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getVersion()
-   {
-      return version;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public void setVersion(String newVersion)
-   {
-      String oldVersion = version;
-      version = newVersion;
-      if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE_BUNDLE__VERSION,
-            oldVersion, version));
    }
 
    /**
@@ -326,8 +275,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             return getAnnotations();
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
             return getPackageRoots();
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__VERSION :
-            return getVersion();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -352,9 +299,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             getPackageRoots().clear();
             getPackageRoots().addAll((Collection<? extends JavaPackageRoot>) newValue);
             return;
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__VERSION :
-            setVersion((String) newValue);
-            return;
       }
       super.eSet(featureID, newValue);
    }
@@ -376,9 +320,6 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
             getPackageRoots().clear();
             return;
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__VERSION :
-            setVersion(VERSION_EDEFAULT);
-            return;
       }
       super.eUnset(featureID);
    }
@@ -398,29 +339,8 @@ public abstract class JavaPackageBundleImpl extends EObjectImpl implements JavaP
             return annotations != null && !annotations.isEmpty();
          case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
             return packageRoots != null && !packageRoots.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__VERSION :
-            return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
       }
       return super.eIsSet(featureID);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   @Override
-   public String toString()
-   {
-      if (eIsProxy())
-         return super.toString();
-
-      StringBuffer result = new StringBuffer(super.toString());
-      result.append(" (version: ");
-      result.append(version);
-      result.append(')');
-      return result.toString();
    }
 
 } // JavaPackageBundleImpl

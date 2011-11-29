@@ -68,7 +68,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageRoots" upperBound="-1"
         eType="#//JavaPackageRoot" containment="true" eOpposite="#//JavaPackageRoot/packageBundle"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaArchive" eSuperTypes="#//JavaPackageBundle">
     <eOperations name="getPackage" eType="#//JavaPackage">
