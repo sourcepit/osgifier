@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.sourcepit.osgify.bundletree.BundleNode;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.Bundle;
+import org.sourcepit.osgify.bundletree.BundleReference;
 import org.sourcepit.osgify.bundletree.BundleTreeModelFactory;
 import org.sourcepit.osgify.bundletree.BundleTreeModelPackage;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,12 +75,12 @@ public class BundleTreeModelFactoryImpl extends EFactoryImpl implements BundleTr
    {
       switch (eClass.getClassifierID())
       {
-         case BundleTreeModelPackage.BUNDLE_TREE :
-            return createBundleTree();
-         case BundleTreeModelPackage.ROOT_BUNDLE_NODE :
-            return createRootBundleNode();
-         case BundleTreeModelPackage.BUNDLE_NODE :
-            return createBundleNode();
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT :
+            return createOSGiFyContext();
+         case BundleTreeModelPackage.BUNDLE :
+            return createBundle();
+         case BundleTreeModelPackage.BUNDLE_REFERENCE :
+            return createBundleReference();
          default :
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
@@ -92,10 +92,10 @@ public class BundleTreeModelFactoryImpl extends EFactoryImpl implements BundleTr
     * 
     * @generated
     */
-   public BundleTree createBundleTree()
+   public OSGiFyContext createOSGiFyContext()
    {
-      BundleTreeImpl bundleTree = new BundleTreeImpl();
-      return bundleTree;
+      OSGiFyContextImpl osGiFyContext = new OSGiFyContextImpl();
+      return osGiFyContext;
    }
 
    /**
@@ -104,10 +104,10 @@ public class BundleTreeModelFactoryImpl extends EFactoryImpl implements BundleTr
     * 
     * @generated
     */
-   public RootBundleNode createRootBundleNode()
+   public Bundle createBundle()
    {
-      RootBundleNodeImpl rootBundleNode = new RootBundleNodeImpl();
-      return rootBundleNode;
+      BundleImpl bundle = new BundleImpl();
+      return bundle;
    }
 
    /**
@@ -116,10 +116,10 @@ public class BundleTreeModelFactoryImpl extends EFactoryImpl implements BundleTr
     * 
     * @generated
     */
-   public BundleNode createBundleNode()
+   public BundleReference createBundleReference()
    {
-      BundleNodeImpl bundleNode = new BundleNodeImpl();
-      return bundleNode;
+      BundleReferenceImpl bundleReference = new BundleReferenceImpl();
+      return bundleReference;
    }
 
    /**

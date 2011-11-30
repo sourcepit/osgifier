@@ -11,6 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
 import org.eclipse.emf.ecore.EObject;
@@ -18,13 +21,12 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgify.bundletree.BundleNode;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.Bundle;
+import org.sourcepit.osgify.bundletree.BundleReference;
 import org.sourcepit.osgify.bundletree.BundleTreeModelFactory;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaPackageBundle;
-import org.sourcepit.osgify.java.JavaProject;
 import org.sourcepit.tools.osgifyme.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.tools.osgifyme.core.java.inspect.JavaTypeReferencesAnalyzer;
 
@@ -33,18 +35,18 @@ import org.sourcepit.tools.osgifyme.core.java.inspect.JavaTypeReferencesAnalyzer
  */
 public class FooTest
 {
-   // osgify-test-0.1.0-SNAPSHOT.jar
-   // org.osgi.core-4.3.0.jar optional
-   // stax-api-1.0.1.jar provided
-   // aspectjrt-1.6.12.jar [1.6,1.7)
-   // hamcrest-core-1.2.jar
-   // junit-4.10.jar test
-   // hamcrest-core-1.1.jar test disables
+   // osgify-test-0.1.0-SNAPSHOT.jar (root)
+   // -> org.osgi.core-4.3.0.jar (optional)
+   // -> stax-api-1.0.1.jar (provided)
+   // -> aspectjrt-1.6.12.jar [1.6,1.7)
+   // -> hamcrest-core-1.2.jar
+   // -> junit-4.10.jar (test)
+   // ----> hamcrest-core-1.1.jar (test) (disables)
 
    @Test
    public void testFoo() throws Exception, IOException
    {
-      BundleTree model = newJavaProjectModel();
+      OSGiFyContext model = newJavaArchiveModel();
       print(model);
    }
 
@@ -63,98 +65,215 @@ public class FooTest
       // System.out.println(new String(out.toByteArray(), "UTF-8"));
    }
 
-   protected BundleTree newJavaProjectModel()
+   // protected BundleTree newJavaProjectModel()
+   // {
+   // JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
+   // scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
+   //
+   // JavaProject project = scanner.scan(new File("projects/osgify-test"), "target/classes", "target/test-classes");
+   //
+   // BundleTree tree = BundleTreeModelFactory.eINSTANCE.createBundleTree();
+   //
+   // RootBundleNode root = BundleTreeModelFactory.eINSTANCE.createRootBundleNode();
+   // root.setVersion(Version.parse("0.1.0.SNAPSHOT"));
+   // tree.getNodes().add(root);
+   // tree.getBundles().add(project);
+   //
+   // addDependencies(root, scanner, project);
+   // return tree;
+   // }
+
+   protected OSGiFyContext newJavaArchiveModel()
+   {
+      // osgify-test-0.1.0-SNAPSHOT.jar (root)
+      // -> org.osgi.core-4.3.0.jar (optional)
+      // -> stax-api-1.0.1.jar (provided)
+      // -> aspectjrt-1.6.12.jar [1.6,1.7)
+      // -> hamcrest-core-1.2.jar
+      // -> junit-4.10.jar (test)
+      // ----> hamcrest-core-1.1.jar (test) (disables)
+      final Map<String, JavaPackageBundle> nameToBundle = new LinkedHashMap<String, JavaPackageBundle>();
+      nameToBundle.put("osgify-test-0.1.0-SNAPSHOT.jar", null);
+      nameToBundle.put("org.osgi.core-4.3.0.jar", null);
+      nameToBundle.put("stax-api-1.0.1.jar", null);
+      nameToBundle.put("aspectjrt-1.6.12.jar", null);
+      nameToBundle.put("hamcrest-core-1.2.jar", null);
+      nameToBundle.put("junit-4.10.jar", null);
+      nameToBundle.put("hamcrest-core-1.1.jar", null);
+
+      OSGiFyContext tree = BundleTreeModelFactory.eINSTANCE.createOSGiFyContext();
+      for (Entry<String, JavaPackageBundle> entry : nameToBundle.entrySet())
+      {
+         JavaArchive bundle = scan("/lib/" + entry.getKey());
+         nameToBundle.put(entry.getKey(), bundle);
+      }
+
+      Bundle bundle;
+
+      bundle = newRootBundleNode("0.1.0.SNAPSHOT");
+      bundle.setContent(nameToBundle.get("osgify-test-0.1.0-SNAPSHOT.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("4.3.0");
+      bundle.setContent(nameToBundle.get("org.osgi.core-4.3.0.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("1.0.1");
+      bundle.setContent(nameToBundle.get("stax-api-1.0.1.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("1.6.12");
+      bundle.setContent(nameToBundle.get("aspectjrt-1.6.12.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("1.2");
+      bundle.setContent(nameToBundle.get("hamcrest-core-1.2.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("4.10");
+      bundle.setContent(nameToBundle.get("junit-4.10.jar"));
+      tree.getBundles().add(bundle);
+
+      bundle = newRootBundleNode("1.1");
+      bundle.setContent(nameToBundle.get("hamcrest-core-1.1.jar"));
+      tree.getBundles().add(bundle);
+
+      BundleReference reference;
+
+      // (0) osgify-test-0.1.0-SNAPSHOT.jar
+      // (1) org.osgi.core-4.3.0.jar
+      // (2) stax-api-1.0.1.jar
+      // (3) aspectjrt-1.6.12.jar
+      // (4) hamcrest-core-1.2.jar
+      // (5) junit-4.10.jar
+      // (6) hamcrest-core-1.1.jar
+      bundle = tree.getBundles().get(0);
+
+      reference = newBundleReference("4.3.0", true, false);
+      reference.setTarget(tree.getBundles().get(1));
+      bundle.getDependencies().add(reference);
+
+      reference = newBundleReference("1.0.1", false, true);
+      reference.setTarget(tree.getBundles().get(2));
+      bundle.getDependencies().add(reference);
+
+      reference = newBundleNode("[1.6,1.7)", "1.6.12", false, false);
+      reference.setTarget(tree.getBundles().get(3));
+      bundle.getDependencies().add(reference);
+
+      reference = newBundleNode("1.2");
+      reference.setTarget(tree.getBundles().get(4));
+      bundle.getDependencies().add(reference);
+
+      bundle = tree.getBundles().get(5);
+
+      reference = newBundleNode("1.1");
+      reference.setTarget(tree.getBundles().get(6));
+      bundle.getDependencies().add(reference);
+
+      return tree;
+   }
+
+   protected Bundle newRootBundleNode(String version)
+   {
+      final Bundle root = BundleTreeModelFactory.eINSTANCE.createBundle();
+      root.setVersion(Version.parse(version));
+      return root;
+   }
+
+   protected BundleReference newBundleNode(String versionRange, String version, boolean optional, boolean provided)
+   {
+      final BundleReference node = BundleTreeModelFactory.eINSTANCE.createBundleReference();
+      node.setVersionRange(VersionRange.parse(versionRange));
+      node.setVersion(Version.parse(version));
+      node.setOptional(optional);
+      node.setProvided(provided);
+      return node;
+   }
+
+   protected BundleReference newBundleReference(String version, boolean optional, boolean provided)
+   {
+      return newBundleNode(version, version, optional, provided);
+   }
+
+   protected BundleReference newBundleNode(String version)
+   {
+      return newBundleNode(version, version, false, false);
+   }
+
+   //
+   // protected void addDependencies(RootBundleNode model, JavaPackageBundleScanner scanner, JavaPackageBundle bundle)
+   // {
+   // BundleTree tree = (BundleTree) model.eContainer();
+   //
+   // BundleNode node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
+   // node.setVersionRange(VersionRange.parse("4.3.0"));
+   // node.setVersion(Version.parse("4.3.0"));
+   // node.setEnabled(true);
+   // node.setOptional(true);
+   // node.setTarget(scan(scanner, "/lib/org.osgi.core-4.3.0.jar"));
+   // model.getNodes().add(node);
+   // tree.getBundles().add(node.getTarget());
+   //
+   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
+   // node.setVersionRange(VersionRange.parse("1.0.1"));
+   // node.setVersion(Version.parse("1.0.1"));
+   // node.setEnabled(true);
+   // node.setScope("provided");
+   // node.setTarget(scan(scanner, "/lib/stax-api-1.0.1.jar"));
+   // model.getNodes().add(node);
+   // tree.getBundles().add(node.getTarget());
+   //
+   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
+   // node.setVersionRange(VersionRange.parse("[1.6,1.7)"));
+   // node.setVersion(Version.parse("1.6.12"));
+   // node.setEnabled(true);
+   // node.setTarget(scan(scanner, "/lib/aspectjrt-1.6.12.jar"));
+   // model.getNodes().add(node);
+   // tree.getBundles().add(node.getTarget());
+   //
+   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
+   // node.setVersionRange(VersionRange.parse("1.2"));
+   // node.setVersion(Version.parse("1.2"));
+   // node.setEnabled(true);
+   // node.setTarget(scan(scanner, "/lib/hamcrest-core-1.2.jar"));
+   // model.getNodes().add(node);
+   // tree.getBundles().add(node.getTarget());
+   //
+   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
+   // node.setVersionRange(VersionRange.parse("4.10"));
+   // node.setVersion(Version.parse("4.10"));
+   // node.setEnabled(true);
+   // node.setScope("test");
+   // node.setTarget(scan(scanner, "/lib/junit-4.10.jar"));
+   // model.getNodes().add(node);
+   // tree.getBundles().add(node.getTarget());
+   //
+   // node.getNodes().add(BundleTreeModelFactory.eINSTANCE.createBundleNode());
+   //
+   // node = node.getNodes().get(0);
+   // node.setVersionRange(VersionRange.parse("1.1"));
+   // node.setVersion(Version.parse("1.1"));
+   // node.setEnabled(true);
+   // node.setScope("test");
+   // node.setTarget(scan(scanner, "/lib/hamcrest-core-1.1.jar"));
+   // tree.getBundles().add(node.getTarget());
+   // }
+
+   protected JavaArchive scan(String name)
    {
       JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
       scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
 
-      JavaProject project = scanner.scan(new File("projects/osgify-test"), "target/classes", "target/test-classes");
-
-      BundleTree tree = BundleTreeModelFactory.eINSTANCE.createBundleTree();
-
-      RootBundleNode root = BundleTreeModelFactory.eINSTANCE.createRootBundleNode();
-      root.setVersion(Version.parse("0.1.0.SNAPSHOT"));
-      tree.getNodes().add(root);
-      tree.getBundles().add(project);
-
-      addDependencies(root, scanner, project);
-      return tree;
-   }
-
-   protected BundleTree newJavaArchiveModel()
-   {
-      JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
-      scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
-
-      JavaArchive archive = scan(scanner, "/lib/osgify-test-0.1.0-SNAPSHOT.jar");
-
-      BundleTree tree = BundleTreeModelFactory.eINSTANCE.createBundleTree();
-
-      RootBundleNode root = BundleTreeModelFactory.eINSTANCE.createRootBundleNode();
-      root.setVersion(Version.parse("0.1.0.SNAPSHOT"));
-      tree.getNodes().add(root);
-      tree.getBundles().add(archive);
-
-      addDependencies(root, scanner, archive);
-      return tree;
-   }
-
-   protected void addDependencies(RootBundleNode model, JavaPackageBundleScanner scanner, JavaPackageBundle bundle)
-   {
-      BundleTree tree = (BundleTree) model.eContainer();
-
-      BundleNode node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-      node.setVersionRange(VersionRange.parse("4.3.0"));
-      node.setVersion(Version.parse("4.3.0"));
-      node.setEnabled(true);
-      node.setOptional(true);
-      node.setTarget(scan(scanner, "/lib/org.osgi.core-4.3.0.jar"));
-      model.getNodes().add(node);
-      tree.getBundles().add(node.getTarget());
-
-      node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-      node.setVersionRange(VersionRange.parse("1.0.1"));
-      node.setVersion(Version.parse("1.0.1"));
-      node.setEnabled(true);
-      node.setScope("provided");
-      node.setTarget(scan(scanner, "/lib/stax-api-1.0.1.jar"));
-      model.getNodes().add(node);
-      tree.getBundles().add(node.getTarget());
-
-      node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-      node.setVersionRange(VersionRange.parse("[1.6,1.7)"));
-      node.setVersion(Version.parse("1.6.12"));
-      node.setEnabled(true);
-      node.setTarget(scan(scanner, "/lib/aspectjrt-1.6.12.jar"));
-      model.getNodes().add(node);
-      tree.getBundles().add(node.getTarget());
-
-      node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-      node.setVersionRange(VersionRange.parse("1.2"));
-      node.setVersion(Version.parse("1.2"));
-      node.setEnabled(true);
-      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.2.jar"));
-      model.getNodes().add(node);
-      tree.getBundles().add(node.getTarget());
-
-      node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-      node.setVersionRange(VersionRange.parse("4.10"));
-      node.setVersion(Version.parse("4.10"));
-      node.setEnabled(true);
-      node.setScope("test");
-      node.setTarget(scan(scanner, "/lib/junit-4.10.jar"));
-      model.getNodes().add(node);
-      tree.getBundles().add(node.getTarget());
-
-      node.getNodes().add(BundleTreeModelFactory.eINSTANCE.createBundleNode());
-
-      node = node.getNodes().get(0);
-      node.setVersionRange(VersionRange.parse("1.1"));
-      node.setVersion(Version.parse("1.1"));
-      node.setEnabled(true);
-      node.setScope("test");
-      node.setTarget(scan(scanner, "/lib/hamcrest-core-1.1.jar"));
-      tree.getBundles().add(node.getTarget());
+      final InputStream in = getClass().getResourceAsStream(name);
+      try
+      {
+         return scanner.scan(in);
+      }
+      finally
+      {
+         IOUtils.closeQuietly(in);
+      }
    }
 
    protected JavaArchive scan(JavaPackageBundleScanner scanner, String name)

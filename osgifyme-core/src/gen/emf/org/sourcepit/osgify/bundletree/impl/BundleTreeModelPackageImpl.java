@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.common.manifest.osgi.BundleManifestPackage;
 import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.osgify.bundletree.AbstractBundleNode;
-import org.sourcepit.osgify.bundletree.BundleNode;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.AbstractBundleCoordinate;
+import org.sourcepit.osgify.bundletree.Bundle;
+import org.sourcepit.osgify.bundletree.BundleReference;
 import org.sourcepit.osgify.bundletree.BundleTreeModelFactory;
 import org.sourcepit.osgify.bundletree.BundleTreeModelPackage;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 import org.sourcepit.osgify.java.JavaModelPackage;
 import org.sourcepit.osgify.java.impl.JavaModelPackageImpl;
 
@@ -39,7 +39,7 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   private EClass bundleTreeEClass = null;
+   private EClass osGiFyContextEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -47,7 +47,7 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   private EClass abstractBundleNodeEClass = null;
+   private EClass abstractBundleCoordinateEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -55,7 +55,7 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   private EClass rootBundleNodeEClass = null;
+   private EClass bundleEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   private EClass bundleNodeEClass = null;
+   private EClass bundleReferenceEClass = null;
 
    /**
     * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -150,9 +150,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EClass getBundleTree()
+   public EClass getOSGiFyContext()
    {
-      return bundleTreeEClass;
+      return osGiFyContextEClass;
    }
 
    /**
@@ -161,9 +161,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EReference getBundleTree_Nodes()
+   public EReference getOSGiFyContext_Bundles()
    {
-      return (EReference) bundleTreeEClass.getEStructuralFeatures().get(0);
+      return (EReference) osGiFyContextEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -172,9 +172,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EReference getBundleTree_Bundles()
+   public EClass getAbstractBundleCoordinate()
    {
-      return (EReference) bundleTreeEClass.getEStructuralFeatures().get(1);
+      return abstractBundleCoordinateEClass;
    }
 
    /**
@@ -183,9 +183,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EClass getAbstractBundleNode()
+   public EAttribute getAbstractBundleCoordinate_Version()
    {
-      return abstractBundleNodeEClass;
+      return (EAttribute) abstractBundleCoordinateEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -194,9 +194,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EReference getAbstractBundleNode_Nodes()
+   public EAttribute getAbstractBundleCoordinate_SymbolicName()
    {
-      return (EReference) abstractBundleNodeEClass.getEStructuralFeatures().get(0);
+      return (EAttribute) abstractBundleCoordinateEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -205,9 +205,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EReference getAbstractBundleNode_Target()
+   public EClass getBundle()
    {
-      return (EReference) abstractBundleNodeEClass.getEStructuralFeatures().get(1);
+      return bundleEClass;
    }
 
    /**
@@ -216,9 +216,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EAttribute getAbstractBundleNode_Version()
+   public EReference getBundle_Content()
    {
-      return (EAttribute) abstractBundleNodeEClass.getEStructuralFeatures().get(2);
+      return (EReference) bundleEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -227,9 +227,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EAttribute getAbstractBundleNode_SymbolicName()
+   public EReference getBundle_Dependencies()
    {
-      return (EAttribute) abstractBundleNodeEClass.getEStructuralFeatures().get(3);
+      return (EReference) bundleEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -238,9 +238,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EAttribute getAbstractBundleNode_Scope()
+   public EClass getBundleReference()
    {
-      return (EAttribute) abstractBundleNodeEClass.getEStructuralFeatures().get(4);
+      return bundleReferenceEClass;
    }
 
    /**
@@ -249,9 +249,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EClass getRootBundleNode()
+   public EAttribute getBundleReference_VersionRange()
    {
-      return rootBundleNodeEClass;
+      return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -260,9 +260,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EClass getBundleNode()
+   public EAttribute getBundleReference_Optional()
    {
-      return bundleNodeEClass;
+      return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -271,9 +271,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EAttribute getBundleNode_VersionRange()
+   public EReference getBundleReference_Target()
    {
-      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(0);
+      return (EReference) bundleReferenceEClass.getEStructuralFeatures().get(2);
    }
 
    /**
@@ -282,20 +282,9 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
     * 
     * @generated
     */
-   public EAttribute getBundleNode_Enabled()
+   public EAttribute getBundleReference_Provided()
    {
-      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(1);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EAttribute getBundleNode_Optional()
-   {
-      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(2);
+      return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(3);
    }
 
    /**
@@ -332,23 +321,22 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
       isCreated = true;
 
       // Create classes and their features
-      bundleTreeEClass = createEClass(BUNDLE_TREE);
-      createEReference(bundleTreeEClass, BUNDLE_TREE__NODES);
-      createEReference(bundleTreeEClass, BUNDLE_TREE__BUNDLES);
+      osGiFyContextEClass = createEClass(OS_GI_FY_CONTEXT);
+      createEReference(osGiFyContextEClass, OS_GI_FY_CONTEXT__BUNDLES);
 
-      abstractBundleNodeEClass = createEClass(ABSTRACT_BUNDLE_NODE);
-      createEReference(abstractBundleNodeEClass, ABSTRACT_BUNDLE_NODE__NODES);
-      createEReference(abstractBundleNodeEClass, ABSTRACT_BUNDLE_NODE__TARGET);
-      createEAttribute(abstractBundleNodeEClass, ABSTRACT_BUNDLE_NODE__VERSION);
-      createEAttribute(abstractBundleNodeEClass, ABSTRACT_BUNDLE_NODE__SYMBOLIC_NAME);
-      createEAttribute(abstractBundleNodeEClass, ABSTRACT_BUNDLE_NODE__SCOPE);
+      abstractBundleCoordinateEClass = createEClass(ABSTRACT_BUNDLE_COORDINATE);
+      createEAttribute(abstractBundleCoordinateEClass, ABSTRACT_BUNDLE_COORDINATE__VERSION);
+      createEAttribute(abstractBundleCoordinateEClass, ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME);
 
-      rootBundleNodeEClass = createEClass(ROOT_BUNDLE_NODE);
+      bundleEClass = createEClass(BUNDLE);
+      createEReference(bundleEClass, BUNDLE__CONTENT);
+      createEReference(bundleEClass, BUNDLE__DEPENDENCIES);
 
-      bundleNodeEClass = createEClass(BUNDLE_NODE);
-      createEAttribute(bundleNodeEClass, BUNDLE_NODE__VERSION_RANGE);
-      createEAttribute(bundleNodeEClass, BUNDLE_NODE__ENABLED);
-      createEAttribute(bundleNodeEClass, BUNDLE_NODE__OPTIONAL);
+      bundleReferenceEClass = createEClass(BUNDLE_REFERENCE);
+      createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__VERSION_RANGE);
+      createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__OPTIONAL);
+      createEReference(bundleReferenceEClass, BUNDLE_REFERENCE__TARGET);
+      createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__PROVIDED);
    }
 
    /**
@@ -379,59 +367,57 @@ public class BundleTreeModelPackageImpl extends EPackageImpl implements BundleTr
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
-      JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI);
       BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
          .getEPackage(BundleManifestPackage.eNS_URI);
+      JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
+         .getEPackage(JavaModelPackage.eNS_URI);
 
       // Create type parameters
 
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      rootBundleNodeEClass.getESuperTypes().add(this.getAbstractBundleNode());
-      bundleNodeEClass.getESuperTypes().add(this.getAbstractBundleNode());
+      bundleEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
+      bundleReferenceEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
 
       // Initialize classes and features; add operations and parameters
-      initEClass(bundleTreeEClass, BundleTree.class, "BundleTree", !IS_ABSTRACT, !IS_INTERFACE,
+      initEClass(osGiFyContextEClass, OSGiFyContext.class, "OSGiFyContext", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getBundleTree_Nodes(), this.getRootBundleNode(), null, "nodes", null, 0, -1, BundleTree.class,
+      initEReference(getOSGiFyContext_Bundles(), this.getBundle(), null, "bundles", null, 0, -1, OSGiFyContext.class,
          !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
-      initEReference(getBundleTree_Bundles(), theJavaModelPackage.getJavaPackageBundle(), null, "bundles", null, 0, -1,
-         BundleTree.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(abstractBundleNodeEClass, AbstractBundleNode.class, "AbstractBundleNode", IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getAbstractBundleNode_Nodes(), this.getBundleNode(), null, "nodes", null, 0, -1,
-         AbstractBundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getAbstractBundleNode_Target(), theJavaModelPackage.getJavaPackageBundle(), null, "target", null,
-         0, 1, AbstractBundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
-         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getAbstractBundleNode_Version(), theBundleManifestPackage.getVersion(), "version", null, 0, 1,
-         AbstractBundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-         !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getAbstractBundleNode_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
-         AbstractBundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-         !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getAbstractBundleNode_Scope(), ecorePackage.getEString(), "scope", null, 0, 1,
-         AbstractBundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+      initEClass(abstractBundleCoordinateEClass, AbstractBundleCoordinate.class, "AbstractBundleCoordinate",
+         IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getAbstractBundleCoordinate_Version(), theBundleManifestPackage.getVersion(), "version", null, 0,
+         1, AbstractBundleCoordinate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+         IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getAbstractBundleCoordinate_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
+         AbstractBundleCoordinate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
 
-      initEClass(rootBundleNodeEClass, RootBundleNode.class, "RootBundleNode", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
+      initEClass(bundleEClass, Bundle.class, "Bundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getBundle_Content(), theJavaModelPackage.getJavaPackageBundle(), null, "content", null, 1, 1,
+         Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+         IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getBundle_Dependencies(), this.getBundleReference(), null, "dependencies", null, 0, -1,
+         Bundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+         IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(bundleNodeEClass, BundleNode.class, "BundleNode", !IS_ABSTRACT, !IS_INTERFACE,
+      initEClass(bundleReferenceEClass, BundleReference.class, "BundleReference", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getBundleNode_VersionRange(), theBundleManifestPackage.getVersionRange(), "versionRange", null, 0,
-         1, BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+      initEAttribute(getBundleReference_VersionRange(), theBundleManifestPackage.getVersionRange(), "versionRange",
+         null, 0, 1, BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
+         IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleReference_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1,
+         BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getBundleNode_Enabled(), ecorePackage.getEBoolean(), "enabled", null, 0, 1, BundleNode.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getBundleNode_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1, BundleNode.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getBundleReference_Target(), this.getBundle(), null, "target", null, 0, 1, BundleReference.class,
+         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleReference_Provided(), ecorePackage.getEBoolean(), "provided", null, 0, 1,
+         BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
 
       // Create resource
       createResource(eNS_URI);

@@ -11,11 +11,11 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.osgify.bundletree.AbstractBundleNode;
-import org.sourcepit.osgify.bundletree.BundleNode;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.AbstractBundleCoordinate;
+import org.sourcepit.osgify.bundletree.Bundle;
+import org.sourcepit.osgify.bundletree.BundleReference;
 import org.sourcepit.osgify.bundletree.BundleTreeModelPackage;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,27 +86,27 @@ public class BundleTreeModelAdapterFactory extends AdapterFactoryImpl
    protected BundleTreeModelSwitch<Adapter> modelSwitch = new BundleTreeModelSwitch<Adapter>()
    {
       @Override
-      public Adapter caseBundleTree(BundleTree object)
+      public Adapter caseOSGiFyContext(OSGiFyContext object)
       {
-         return createBundleTreeAdapter();
+         return createOSGiFyContextAdapter();
       }
 
       @Override
-      public Adapter caseAbstractBundleNode(AbstractBundleNode object)
+      public Adapter caseAbstractBundleCoordinate(AbstractBundleCoordinate object)
       {
-         return createAbstractBundleNodeAdapter();
+         return createAbstractBundleCoordinateAdapter();
       }
 
       @Override
-      public Adapter caseRootBundleNode(RootBundleNode object)
+      public Adapter caseBundle(Bundle object)
       {
-         return createRootBundleNodeAdapter();
+         return createBundleAdapter();
       }
 
       @Override
-      public Adapter caseBundleNode(BundleNode object)
+      public Adapter caseBundleReference(BundleReference object)
       {
-         return createBundleNodeAdapter();
+         return createBundleReferenceAdapter();
       }
 
       @Override
@@ -133,69 +133,68 @@ public class BundleTreeModelAdapterFactory extends AdapterFactoryImpl
 
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.BundleTree
-    * <em>Bundle Tree</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.OSGiFyContext
+    * <em>OS Gi Fy Context</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.bundletree.BundleTree
+    * @see org.sourcepit.osgify.bundletree.OSGiFyContext
     * @generated
     */
-   public Adapter createBundleTreeAdapter()
+   public Adapter createOSGiFyContextAdapter()
    {
       return null;
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.AbstractBundleNode
-    * <em>Abstract Bundle Node</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.AbstractBundleCoordinate
+    * <em>Abstract Bundle Coordinate</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode
+    * @see org.sourcepit.osgify.bundletree.AbstractBundleCoordinate
     * @generated
     */
-   public Adapter createAbstractBundleNodeAdapter()
+   public Adapter createAbstractBundleCoordinateAdapter()
    {
       return null;
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.RootBundleNode
-    * <em>Root Bundle Node</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.Bundle <em>Bundle</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.bundletree.RootBundleNode
+    * @see org.sourcepit.osgify.bundletree.Bundle
     * @generated
     */
-   public Adapter createRootBundleNodeAdapter()
+   public Adapter createBundleAdapter()
    {
       return null;
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.BundleNode
-    * <em>Bundle Node</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.bundletree.BundleReference
+    * <em>Bundle Reference</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.bundletree.BundleNode
+    * @see org.sourcepit.osgify.bundletree.BundleReference
     * @generated
     */
-   public Adapter createBundleNodeAdapter()
+   public Adapter createBundleReferenceAdapter()
    {
       return null;
    }

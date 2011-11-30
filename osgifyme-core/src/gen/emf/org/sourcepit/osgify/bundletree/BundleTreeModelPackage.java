@@ -67,26 +67,16 @@ public interface BundleTreeModelPackage extends EPackage
    BundleTreeModelPackage eINSTANCE = org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl.init();
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.BundleTreeImpl <em>Bundle Tree</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.OSGiFyContextImpl
+    * <em>OS Gi Fy Context</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeImpl
-    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleTree()
+    * @see org.sourcepit.osgify.bundletree.impl.OSGiFyContextImpl
+    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getOSGiFyContext()
     * @generated
     */
-   int BUNDLE_TREE = 0;
-
-   /**
-    * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_TREE__NODES = 0;
+   int OS_GI_FY_CONTEXT = 0;
 
    /**
     * The feature id for the '<em><b>Bundles</b></em>' containment reference list.
@@ -96,49 +86,29 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_TREE__BUNDLES = 1;
+   int OS_GI_FY_CONTEXT__BUNDLES = 0;
 
    /**
-    * The number of structural features of the '<em>Bundle Tree</em>' class.
+    * The number of structural features of the '<em>OS Gi Fy Context</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int BUNDLE_TREE_FEATURE_COUNT = 2;
+   int OS_GI_FY_CONTEXT_FEATURE_COUNT = 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.AbstractBundleNodeImpl
-    * <em>Abstract Bundle Node</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.AbstractBundleCoordinateImpl
+    * <em>Abstract Bundle Coordinate</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @see org.sourcepit.osgify.bundletree.impl.AbstractBundleNodeImpl
-    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getAbstractBundleNode()
+    * @see org.sourcepit.osgify.bundletree.impl.AbstractBundleCoordinateImpl
+    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getAbstractBundleCoordinate()
     * @generated
     */
-   int ABSTRACT_BUNDLE_NODE = 1;
-
-   /**
-    * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_NODE__NODES = 0;
-
-   /**
-    * The feature id for the '<em><b>Target</b></em>' reference.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_NODE__TARGET = 1;
+   int ABSTRACT_BUNDLE_COORDINATE = 1;
 
    /**
     * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -148,7 +118,7 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int ABSTRACT_BUNDLE_NODE__VERSION = 2;
+   int ABSTRACT_BUNDLE_COORDINATE__VERSION = 0;
 
    /**
     * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
@@ -158,59 +128,28 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int ABSTRACT_BUNDLE_NODE__SYMBOLIC_NAME = 3;
+   int ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME = 1;
 
    /**
-    * The feature id for the '<em><b>Scope</b></em>' attribute.
+    * The number of structural features of the '<em>Abstract Bundle Coordinate</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int ABSTRACT_BUNDLE_NODE__SCOPE = 4;
+   int ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT = 2;
 
    /**
-    * The number of structural features of the '<em>Abstract Bundle Node</em>' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.BundleImpl <em>Bundle</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_NODE_FEATURE_COUNT = 5;
-
-   /**
-    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.RootBundleNodeImpl
-    * <em>Root Bundle Node</em>}' class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see org.sourcepit.osgify.bundletree.impl.RootBundleNodeImpl
-    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getRootBundleNode()
+    * @see org.sourcepit.osgify.bundletree.impl.BundleImpl
+    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundle()
     * @generated
     */
-   int ROOT_BUNDLE_NODE = 2;
-
-   /**
-    * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ROOT_BUNDLE_NODE__NODES = ABSTRACT_BUNDLE_NODE__NODES;
-
-   /**
-    * The feature id for the '<em><b>Target</b></em>' reference.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ROOT_BUNDLE_NODE__TARGET = ABSTRACT_BUNDLE_NODE__TARGET;
+   int BUNDLE = 2;
 
    /**
     * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -220,7 +159,7 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int ROOT_BUNDLE_NODE__VERSION = ABSTRACT_BUNDLE_NODE__VERSION;
+   int BUNDLE__VERSION = ABSTRACT_BUNDLE_COORDINATE__VERSION;
 
    /**
     * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
@@ -230,59 +169,49 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int ROOT_BUNDLE_NODE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_NODE__SYMBOLIC_NAME;
+   int BUNDLE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
 
    /**
-    * The feature id for the '<em><b>Scope</b></em>' attribute.
+    * The feature id for the '<em><b>Content</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int ROOT_BUNDLE_NODE__SCOPE = ABSTRACT_BUNDLE_NODE__SCOPE;
+   int BUNDLE__CONTENT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
 
    /**
-    * The number of structural features of the '<em>Root Bundle Node</em>' class.
+    * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int ROOT_BUNDLE_NODE_FEATURE_COUNT = ABSTRACT_BUNDLE_NODE_FEATURE_COUNT + 0;
+   int BUNDLE__DEPENDENCIES = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.BundleNodeImpl <em>Bundle Node</em>}'
-    * class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see org.sourcepit.osgify.bundletree.impl.BundleNodeImpl
-    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleNode()
-    * @generated
-    */
-   int BUNDLE_NODE = 3;
-
-   /**
-    * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
+    * The number of structural features of the '<em>Bundle</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__NODES = ABSTRACT_BUNDLE_NODE__NODES;
+   int BUNDLE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
 
    /**
-    * The feature id for the '<em><b>Target</b></em>' reference.
+    * The meta object id for the '{@link org.sourcepit.osgify.bundletree.impl.BundleReferenceImpl
+    * <em>Bundle Reference</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
+    * @see org.sourcepit.osgify.bundletree.impl.BundleReferenceImpl
+    * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleReference()
     * @generated
-    * @ordered
     */
-   int BUNDLE_NODE__TARGET = ABSTRACT_BUNDLE_NODE__TARGET;
+   int BUNDLE_REFERENCE = 3;
 
    /**
     * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -292,7 +221,7 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__VERSION = ABSTRACT_BUNDLE_NODE__VERSION;
+   int BUNDLE_REFERENCE__VERSION = ABSTRACT_BUNDLE_COORDINATE__VERSION;
 
    /**
     * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
@@ -302,17 +231,7 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_NODE__SYMBOLIC_NAME;
-
-   /**
-    * The feature id for the '<em><b>Scope</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_NODE__SCOPE = ABSTRACT_BUNDLE_NODE__SCOPE;
+   int BUNDLE_REFERENCE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
 
    /**
     * The feature id for the '<em><b>Version Range</b></em>' attribute.
@@ -322,17 +241,7 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__VERSION_RANGE = ABSTRACT_BUNDLE_NODE_FEATURE_COUNT + 0;
-
-   /**
-    * The feature id for the '<em><b>Enabled</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_NODE__ENABLED = ABSTRACT_BUNDLE_NODE_FEATURE_COUNT + 1;
+   int BUNDLE_REFERENCE__VERSION_RANGE = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -342,194 +251,202 @@ public interface BundleTreeModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__OPTIONAL = ABSTRACT_BUNDLE_NODE_FEATURE_COUNT + 2;
+   int BUNDLE_REFERENCE__OPTIONAL = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
 
    /**
-    * The number of structural features of the '<em>Bundle Node</em>' class.
+    * The feature id for the '<em><b>Target</b></em>' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE_FEATURE_COUNT = ABSTRACT_BUNDLE_NODE_FEATURE_COUNT + 3;
-
+   int BUNDLE_REFERENCE__TARGET = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.BundleTree <em>Bundle Tree</em>}'.
+    * The feature id for the '<em><b>Provided</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>Bundle Tree</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleTree
     * @generated
+    * @ordered
     */
-   EClass getBundleTree();
+   int BUNDLE_REFERENCE__PROVIDED = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.bundletree.BundleTree#getNodes <em>Nodes</em>}'.
+    * The number of structural features of the '<em>Bundle Reference</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for the containment reference list '<em>Nodes</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleTree#getNodes()
-    * @see #getBundleTree()
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_REFERENCE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 4;
+
+
+   /**
+    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.OSGiFyContext <em>OS Gi Fy Context</em>}
+    * '.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for class '<em>OS Gi Fy Context</em>'.
+    * @see org.sourcepit.osgify.bundletree.OSGiFyContext
     * @generated
     */
-   EReference getBundleTree_Nodes();
+   EClass getOSGiFyContext();
 
    /**
     * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.bundletree.BundleTree#getBundles <em>Bundles</em>}'.
+    * {@link org.sourcepit.osgify.bundletree.OSGiFyContext#getBundles <em>Bundles</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the containment reference list '<em>Bundles</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleTree#getBundles()
-    * @see #getBundleTree()
+    * @see org.sourcepit.osgify.bundletree.OSGiFyContext#getBundles()
+    * @see #getOSGiFyContext()
     * @generated
     */
-   EReference getBundleTree_Bundles();
+   EReference getOSGiFyContext_Bundles();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.AbstractBundleNode
-    * <em>Abstract Bundle Node</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.AbstractBundleCoordinate
+    * <em>Abstract Bundle Coordinate</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>Abstract Bundle Node</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode
+    * @return the meta object for class '<em>Abstract Bundle Coordinate</em>'.
+    * @see org.sourcepit.osgify.bundletree.AbstractBundleCoordinate
     * @generated
     */
-   EClass getAbstractBundleNode();
+   EClass getAbstractBundleCoordinate();
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.bundletree.AbstractBundleNode#getNodes <em>Nodes</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the containment reference list '<em>Nodes</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode#getNodes()
-    * @see #getAbstractBundleNode()
-    * @generated
-    */
-   EReference getAbstractBundleNode_Nodes();
-
-   /**
-    * Returns the meta object for the reference '{@link org.sourcepit.osgify.bundletree.AbstractBundleNode#getTarget
-    * <em>Target</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the reference '<em>Target</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode#getTarget()
-    * @see #getAbstractBundleNode()
-    * @generated
-    */
-   EReference getAbstractBundleNode_Target();
-
-   /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.AbstractBundleNode#getVersion
-    * <em>Version</em>}'.
+    * Returns the meta object for the attribute '
+    * {@link org.sourcepit.osgify.bundletree.AbstractBundleCoordinate#getVersion <em>Version</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Version</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode#getVersion()
-    * @see #getAbstractBundleNode()
+    * @see org.sourcepit.osgify.bundletree.AbstractBundleCoordinate#getVersion()
+    * @see #getAbstractBundleCoordinate()
     * @generated
     */
-   EAttribute getAbstractBundleNode_Version();
+   EAttribute getAbstractBundleCoordinate_Version();
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.bundletree.AbstractBundleNode#getSymbolicName <em>Symbolic Name</em>}'.
+    * {@link org.sourcepit.osgify.bundletree.AbstractBundleCoordinate#getSymbolicName <em>Symbolic Name</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Symbolic Name</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode#getSymbolicName()
-    * @see #getAbstractBundleNode()
+    * @see org.sourcepit.osgify.bundletree.AbstractBundleCoordinate#getSymbolicName()
+    * @see #getAbstractBundleCoordinate()
     * @generated
     */
-   EAttribute getAbstractBundleNode_SymbolicName();
+   EAttribute getAbstractBundleCoordinate_SymbolicName();
 
    /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.AbstractBundleNode#getScope
-    * <em>Scope</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.Bundle <em>Bundle</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for the attribute '<em>Scope</em>'.
-    * @see org.sourcepit.osgify.bundletree.AbstractBundleNode#getScope()
-    * @see #getAbstractBundleNode()
+    * @return the meta object for class '<em>Bundle</em>'.
+    * @see org.sourcepit.osgify.bundletree.Bundle
     * @generated
     */
-   EAttribute getAbstractBundleNode_Scope();
+   EClass getBundle();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.RootBundleNode
-    * <em>Root Bundle Node</em>}'.
+    * Returns the meta object for the containment reference '{@link org.sourcepit.osgify.bundletree.Bundle#getContent
+    * <em>Content</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>Root Bundle Node</em>'.
-    * @see org.sourcepit.osgify.bundletree.RootBundleNode
+    * @return the meta object for the containment reference '<em>Content</em>'.
+    * @see org.sourcepit.osgify.bundletree.Bundle#getContent()
+    * @see #getBundle()
     * @generated
     */
-   EClass getRootBundleNode();
+   EReference getBundle_Content();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.BundleNode <em>Bundle Node</em>}'.
+    * Returns the meta object for the containment reference list '
+    * {@link org.sourcepit.osgify.bundletree.Bundle#getDependencies <em>Dependencies</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>Bundle Node</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleNode
+    * @return the meta object for the containment reference list '<em>Dependencies</em>'.
+    * @see org.sourcepit.osgify.bundletree.Bundle#getDependencies()
+    * @see #getBundle()
     * @generated
     */
-   EClass getBundleNode();
+   EReference getBundle_Dependencies();
 
    /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleNode#getVersionRange
+    * Returns the meta object for class '{@link org.sourcepit.osgify.bundletree.BundleReference
+    * <em>Bundle Reference</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for class '<em>Bundle Reference</em>'.
+    * @see org.sourcepit.osgify.bundletree.BundleReference
+    * @generated
+    */
+   EClass getBundleReference();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleReference#getVersionRange
     * <em>Version Range</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Version Range</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleNode#getVersionRange()
-    * @see #getBundleNode()
+    * @see org.sourcepit.osgify.bundletree.BundleReference#getVersionRange()
+    * @see #getBundleReference()
     * @generated
     */
-   EAttribute getBundleNode_VersionRange();
+   EAttribute getBundleReference_VersionRange();
 
    /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleNode#isEnabled
-    * <em>Enabled</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the attribute '<em>Enabled</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleNode#isEnabled()
-    * @see #getBundleNode()
-    * @generated
-    */
-   EAttribute getBundleNode_Enabled();
-
-   /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleNode#isOptional
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleReference#isOptional
     * <em>Optional</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Optional</em>'.
-    * @see org.sourcepit.osgify.bundletree.BundleNode#isOptional()
-    * @see #getBundleNode()
+    * @see org.sourcepit.osgify.bundletree.BundleReference#isOptional()
+    * @see #getBundleReference()
     * @generated
     */
-   EAttribute getBundleNode_Optional();
+   EAttribute getBundleReference_Optional();
+
+   /**
+    * Returns the meta object for the reference '{@link org.sourcepit.osgify.bundletree.BundleReference#getTarget
+    * <em>Target</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the reference '<em>Target</em>'.
+    * @see org.sourcepit.osgify.bundletree.BundleReference#getTarget()
+    * @see #getBundleReference()
+    * @generated
+    */
+   EReference getBundleReference_Target();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.bundletree.BundleReference#isProvided
+    * <em>Provided</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Provided</em>'.
+    * @see org.sourcepit.osgify.bundletree.BundleReference#isProvided()
+    * @see #getBundleReference()
+    * @generated
+    */
+   EAttribute getBundleReference_Provided();
 
    /**
     * Returns the factory that creates the instances of the model.
@@ -557,25 +474,16 @@ public interface BundleTreeModelPackage extends EPackage
    interface Literals
    {
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.BundleTreeImpl
-       * <em>Bundle Tree</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.OSGiFyContextImpl
+       * <em>OS Gi Fy Context</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeImpl
-       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleTree()
+       * @see org.sourcepit.osgify.bundletree.impl.OSGiFyContextImpl
+       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getOSGiFyContext()
        * @generated
        */
-      EClass BUNDLE_TREE = eINSTANCE.getBundleTree();
-
-      /**
-       * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EReference BUNDLE_TREE__NODES = eINSTANCE.getBundleTree_Nodes();
+      EClass OS_GI_FY_CONTEXT = eINSTANCE.getOSGiFyContext();
 
       /**
        * The meta object literal for the '<em><b>Bundles</b></em>' containment reference list feature.
@@ -584,37 +492,19 @@ public interface BundleTreeModelPackage extends EPackage
        * 
        * @generated
        */
-      EReference BUNDLE_TREE__BUNDLES = eINSTANCE.getBundleTree_Bundles();
+      EReference OS_GI_FY_CONTEXT__BUNDLES = eINSTANCE.getOSGiFyContext_Bundles();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.AbstractBundleNodeImpl
-       * <em>Abstract Bundle Node</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.AbstractBundleCoordinateImpl
+       * <em>Abstract Bundle Coordinate</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.osgify.bundletree.impl.AbstractBundleNodeImpl
-       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getAbstractBundleNode()
+       * @see org.sourcepit.osgify.bundletree.impl.AbstractBundleCoordinateImpl
+       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getAbstractBundleCoordinate()
        * @generated
        */
-      EClass ABSTRACT_BUNDLE_NODE = eINSTANCE.getAbstractBundleNode();
-
-      /**
-       * The meta object literal for the '<em><b>Nodes</b></em>' containment reference list feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EReference ABSTRACT_BUNDLE_NODE__NODES = eINSTANCE.getAbstractBundleNode_Nodes();
-
-      /**
-       * The meta object literal for the '<em><b>Target</b></em>' reference feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EReference ABSTRACT_BUNDLE_NODE__TARGET = eINSTANCE.getAbstractBundleNode_Target();
+      EClass ABSTRACT_BUNDLE_COORDINATE = eINSTANCE.getAbstractBundleCoordinate();
 
       /**
        * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
@@ -623,7 +513,7 @@ public interface BundleTreeModelPackage extends EPackage
        * 
        * @generated
        */
-      EAttribute ABSTRACT_BUNDLE_NODE__VERSION = eINSTANCE.getAbstractBundleNode_Version();
+      EAttribute ABSTRACT_BUNDLE_COORDINATE__VERSION = eINSTANCE.getAbstractBundleCoordinate_Version();
 
       /**
        * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
@@ -632,40 +522,49 @@ public interface BundleTreeModelPackage extends EPackage
        * 
        * @generated
        */
-      EAttribute ABSTRACT_BUNDLE_NODE__SYMBOLIC_NAME = eINSTANCE.getAbstractBundleNode_SymbolicName();
+      EAttribute ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME = eINSTANCE.getAbstractBundleCoordinate_SymbolicName();
 
       /**
-       * The meta object literal for the '<em><b>Scope</b></em>' attribute feature.
+       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.BundleImpl <em>Bundle</em>}'
+       * class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @see org.sourcepit.osgify.bundletree.impl.BundleImpl
+       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundle()
+       * @generated
+       */
+      EClass BUNDLE = eINSTANCE.getBundle();
+
+      /**
+       * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
        * @generated
        */
-      EAttribute ABSTRACT_BUNDLE_NODE__SCOPE = eINSTANCE.getAbstractBundleNode_Scope();
+      EReference BUNDLE__CONTENT = eINSTANCE.getBundle_Content();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.RootBundleNodeImpl
-       * <em>Root Bundle Node</em>}' class.
+       * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.osgify.bundletree.impl.RootBundleNodeImpl
-       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getRootBundleNode()
        * @generated
        */
-      EClass ROOT_BUNDLE_NODE = eINSTANCE.getRootBundleNode();
+      EReference BUNDLE__DEPENDENCIES = eINSTANCE.getBundle_Dependencies();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.BundleNodeImpl
-       * <em>Bundle Node</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.bundletree.impl.BundleReferenceImpl
+       * <em>Bundle Reference</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.osgify.bundletree.impl.BundleNodeImpl
-       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleNode()
+       * @see org.sourcepit.osgify.bundletree.impl.BundleReferenceImpl
+       * @see org.sourcepit.osgify.bundletree.impl.BundleTreeModelPackageImpl#getBundleReference()
        * @generated
        */
-      EClass BUNDLE_NODE = eINSTANCE.getBundleNode();
+      EClass BUNDLE_REFERENCE = eINSTANCE.getBundleReference();
 
       /**
        * The meta object literal for the '<em><b>Version Range</b></em>' attribute feature.
@@ -674,16 +573,7 @@ public interface BundleTreeModelPackage extends EPackage
        * 
        * @generated
        */
-      EAttribute BUNDLE_NODE__VERSION_RANGE = eINSTANCE.getBundleNode_VersionRange();
-
-      /**
-       * The meta object literal for the '<em><b>Enabled</b></em>' attribute feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EAttribute BUNDLE_NODE__ENABLED = eINSTANCE.getBundleNode_Enabled();
+      EAttribute BUNDLE_REFERENCE__VERSION_RANGE = eINSTANCE.getBundleReference_VersionRange();
 
       /**
        * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
@@ -692,7 +582,25 @@ public interface BundleTreeModelPackage extends EPackage
        * 
        * @generated
        */
-      EAttribute BUNDLE_NODE__OPTIONAL = eINSTANCE.getBundleNode_Optional();
+      EAttribute BUNDLE_REFERENCE__OPTIONAL = eINSTANCE.getBundleReference_Optional();
+
+      /**
+       * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_REFERENCE__TARGET = eINSTANCE.getBundleReference_Target();
+
+      /**
+       * The meta object literal for the '<em><b>Provided</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_REFERENCE__PROVIDED = eINSTANCE.getBundleReference_Provided();
 
    }
 

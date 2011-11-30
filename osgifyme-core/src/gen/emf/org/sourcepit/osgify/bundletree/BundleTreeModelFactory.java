@@ -30,34 +30,34 @@ public interface BundleTreeModelFactory extends EFactory
    BundleTreeModelFactory eINSTANCE = org.sourcepit.osgify.bundletree.impl.BundleTreeModelFactoryImpl.init();
 
    /**
-    * Returns a new object of class '<em>Bundle Tree</em>'.
+    * Returns a new object of class '<em>OS Gi Fy Context</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Bundle Tree</em>'.
+    * @return a new object of class '<em>OS Gi Fy Context</em>'.
     * @generated
     */
-   BundleTree createBundleTree();
+   OSGiFyContext createOSGiFyContext();
 
    /**
-    * Returns a new object of class '<em>Root Bundle Node</em>'.
+    * Returns a new object of class '<em>Bundle</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Root Bundle Node</em>'.
+    * @return a new object of class '<em>Bundle</em>'.
     * @generated
     */
-   RootBundleNode createRootBundleNode();
+   Bundle createBundle();
 
    /**
-    * Returns a new object of class '<em>Bundle Node</em>'.
+    * Returns a new object of class '<em>Bundle Reference</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Bundle Node</em>'.
+    * @return a new object of class '<em>Bundle Reference</em>'.
     * @generated
     */
-   BundleNode createBundleNode();
+   BundleReference createBundleReference();
 
    /**
     * Returns the package supported by this factory.

@@ -57,7 +57,7 @@
 			<artifactId>commons-io</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>bcel</groupId>
+			<groupId>org.apache.bcel</groupId>
 			<artifactId>bcel</artifactId>
 		</dependency>
 		<dependency>

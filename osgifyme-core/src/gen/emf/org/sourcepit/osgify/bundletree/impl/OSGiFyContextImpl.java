@@ -16,38 +16,25 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.Bundle;
 import org.sourcepit.osgify.bundletree.BundleTreeModelPackage;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
-import org.sourcepit.osgify.java.JavaPackageBundle;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bundle Tree</b></em>'.
+ * An implementation of the model object '<em><b>OS Gi Fy Context</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.bundletree.impl.BundleTreeImpl#getNodes <em>Nodes</em>}</li>
- * <li>{@link org.sourcepit.osgify.bundletree.impl.BundleTreeImpl#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgify.bundletree.impl.OSGiFyContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class BundleTreeImpl extends EObjectImpl implements BundleTree
+public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
 {
-   /**
-    * The cached value of the '{@link #getNodes() <em>Nodes</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getNodes()
-    * @generated
-    * @ordered
-    */
-   protected EList<RootBundleNode> nodes;
-
    /**
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -57,7 +44,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
     * @generated
     * @ordered
     */
-   protected EList<JavaPackageBundle> bundles;
+   protected EList<Bundle> bundles;
 
    /**
     * <!-- begin-user-doc -->
@@ -65,7 +52,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
     * 
     * @generated
     */
-   protected BundleTreeImpl()
+   protected OSGiFyContextImpl()
    {
       super();
    }
@@ -79,7 +66,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    @Override
    protected EClass eStaticClass()
    {
-      return BundleTreeModelPackage.Literals.BUNDLE_TREE;
+      return BundleTreeModelPackage.Literals.OS_GI_FY_CONTEXT;
    }
 
    /**
@@ -88,28 +75,12 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
     * 
     * @generated
     */
-   public EList<RootBundleNode> getNodes()
-   {
-      if (nodes == null)
-      {
-         nodes = new EObjectContainmentEList<RootBundleNode>(RootBundleNode.class, this,
-            BundleTreeModelPackage.BUNDLE_TREE__NODES);
-      }
-      return nodes;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EList<JavaPackageBundle> getBundles()
+   public EList<Bundle> getBundles()
    {
       if (bundles == null)
       {
-         bundles = new EObjectContainmentEList<JavaPackageBundle>(JavaPackageBundle.class, this,
-            BundleTreeModelPackage.BUNDLE_TREE__BUNDLES);
+         bundles = new EObjectContainmentEList<Bundle>(Bundle.class, this,
+            BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES);
       }
       return bundles;
    }
@@ -125,9 +96,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    {
       switch (featureID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE__NODES :
-            return ((InternalEList<?>) getNodes()).basicRemove(otherEnd, msgs);
-         case BundleTreeModelPackage.BUNDLE_TREE__BUNDLES :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
             return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -144,9 +113,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    {
       switch (featureID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE__NODES :
-            return getNodes();
-         case BundleTreeModelPackage.BUNDLE_TREE__BUNDLES :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
             return getBundles();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -164,13 +131,9 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    {
       switch (featureID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE__NODES :
-            getNodes().clear();
-            getNodes().addAll((Collection<? extends RootBundleNode>) newValue);
-            return;
-         case BundleTreeModelPackage.BUNDLE_TREE__BUNDLES :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
             getBundles().clear();
-            getBundles().addAll((Collection<? extends JavaPackageBundle>) newValue);
+            getBundles().addAll((Collection<? extends Bundle>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -187,10 +150,7 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    {
       switch (featureID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE__NODES :
-            getNodes().clear();
-            return;
-         case BundleTreeModelPackage.BUNDLE_TREE__BUNDLES :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
       }
@@ -208,12 +168,10 @@ public class BundleTreeImpl extends EObjectImpl implements BundleTree
    {
       switch (featureID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE__NODES :
-            return nodes != null && !nodes.isEmpty();
-         case BundleTreeModelPackage.BUNDLE_TREE__BUNDLES :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }
       return super.eIsSet(featureID);
    }
 
-} // BundleTreeImpl
+} // OSGiFyContextImpl

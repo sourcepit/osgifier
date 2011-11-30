@@ -11,11 +11,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.osgify.bundletree.AbstractBundleNode;
-import org.sourcepit.osgify.bundletree.BundleNode;
-import org.sourcepit.osgify.bundletree.BundleTree;
+import org.sourcepit.osgify.bundletree.AbstractBundleCoordinate;
+import org.sourcepit.osgify.bundletree.Bundle;
+import org.sourcepit.osgify.bundletree.BundleReference;
 import org.sourcepit.osgify.bundletree.BundleTreeModelPackage;
-import org.sourcepit.osgify.bundletree.RootBundleNode;
+import org.sourcepit.osgify.bundletree.OSGiFyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,38 +103,38 @@ public class BundleTreeModelSwitch<T>
    {
       switch (classifierID)
       {
-         case BundleTreeModelPackage.BUNDLE_TREE :
+         case BundleTreeModelPackage.OS_GI_FY_CONTEXT :
          {
-            BundleTree bundleTree = (BundleTree) theEObject;
-            T result = caseBundleTree(bundleTree);
+            OSGiFyContext osGiFyContext = (OSGiFyContext) theEObject;
+            T result = caseOSGiFyContext(osGiFyContext);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case BundleTreeModelPackage.ABSTRACT_BUNDLE_NODE :
+         case BundleTreeModelPackage.ABSTRACT_BUNDLE_COORDINATE :
          {
-            AbstractBundleNode abstractBundleNode = (AbstractBundleNode) theEObject;
-            T result = caseAbstractBundleNode(abstractBundleNode);
+            AbstractBundleCoordinate abstractBundleCoordinate = (AbstractBundleCoordinate) theEObject;
+            T result = caseAbstractBundleCoordinate(abstractBundleCoordinate);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case BundleTreeModelPackage.ROOT_BUNDLE_NODE :
+         case BundleTreeModelPackage.BUNDLE :
          {
-            RootBundleNode rootBundleNode = (RootBundleNode) theEObject;
-            T result = caseRootBundleNode(rootBundleNode);
+            Bundle bundle = (Bundle) theEObject;
+            T result = caseBundle(bundle);
             if (result == null)
-               result = caseAbstractBundleNode(rootBundleNode);
+               result = caseAbstractBundleCoordinate(bundle);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case BundleTreeModelPackage.BUNDLE_NODE :
+         case BundleTreeModelPackage.BUNDLE_REFERENCE :
          {
-            BundleNode bundleNode = (BundleNode) theEObject;
-            T result = caseBundleNode(bundleNode);
+            BundleReference bundleReference = (BundleReference) theEObject;
+            T result = caseBundleReference(bundleReference);
             if (result == null)
-               result = caseAbstractBundleNode(bundleNode);
+               result = caseAbstractBundleCoordinate(bundleReference);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -145,69 +145,69 @@ public class BundleTreeModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Bundle Tree</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>OS Gi Fy Context</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Bundle Tree</em>'.
+    * @return the result of interpreting the object as an instance of '<em>OS Gi Fy Context</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleTree(BundleTree object)
+   public T caseOSGiFyContext(OSGiFyContext object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Abstract Bundle Node</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Abstract Bundle Coordinate</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Abstract Bundle Node</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Abstract Bundle Coordinate</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseAbstractBundleNode(AbstractBundleNode object)
+   public T caseAbstractBundleCoordinate(AbstractBundleCoordinate object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Root Bundle Node</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Bundle</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Root Bundle Node</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Bundle</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseRootBundleNode(RootBundleNode object)
+   public T caseBundle(Bundle object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Bundle Node</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Bundle Reference</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Bundle Node</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Bundle Reference</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleNode(BundleNode object)
+   public T caseBundleReference(BundleReference object)
    {
       return null;
    }
