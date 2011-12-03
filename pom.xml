@@ -101,7 +101,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.5.3.201107060350</version>
+				<version>0.5.4.201111111111</version>
 				<executions>
 					<execution>
 						<goals>
@@ -110,7 +110,9 @@
 						<configuration>
 							<append>true</append>
 							<destFile>${sonar.jacoco.reportPath}</destFile>
-							<includes>org.sourcepit.*</includes>
+							<includes>
+								<value>org.sourcepit.*</value>
+							</includes>
 							<propertyName>sonar.jacoco.args</propertyName>
 						</configuration>
 					</execution>
@@ -123,7 +125,9 @@
 						<configuration>
 							<append>true</append>
 							<destFile>${sonar.jacoco.itReportPath}</destFile>
-							<includes>org.sourcepit.*</includes>
+							<includes>
+								<value>org.sourcepit.*</value>
+							</includes>
 							<propertyName>sonar.jacoco.itArgs</propertyName>
 						</configuration>
 					</execution>
