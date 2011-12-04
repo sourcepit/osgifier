@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>osgify-core</module>
+		<module>osgify-maven-plugin</module>
 	</modules>
 
 	<repositories>
