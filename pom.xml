@@ -53,7 +53,12 @@
 				<plugin>
 					<groupId>org.sourcepit.tools</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>0.1.0-alpha-1</version>
+					<version>0.1.0-SNAPSHOT</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>2.7</version>
 				</plugin>
 				<!-- To assure that all artifact will be installed with its base version 
 					we use our own install mojo (org.sourcepit.tools:maven-install-mojo). See 
@@ -113,7 +118,7 @@
 					<execution>
 						<id>install-base</id>
 						<goals>
-							<goal>install-base</goal>
+							<goal>install</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -123,11 +128,38 @@
 
 	<profiles>
 		<profile>
+			<id>dev</id>
+			<activation>
+				<property>
+					<name>it.localRepository</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sourcepit.tools</groupId>
+						<artifactId>maven-install-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>pre-integration-test</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>install</goal>
+								</goals>
+								<configuration>
+									<localRepositoryPath>${it.localRepository}</localRepositoryPath>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>its</id>
 			<properties>
-				<it.repo.activeByDefault>true</it.repo.activeByDefault>
-				<it.repo.dir>${user.dir}/target/it-repository</it.repo.dir>
-				<it.repo.url>file://${it.repo.dir}</it.repo.url>
+				<it.repo.active>true</it.repo.active>
+				<it.repo.url>file://${user.dir}/target/it-repository</it.repo.url>
 			</properties>
 			<modules>
 				<module>osgify-integration-tests</module>
@@ -137,7 +169,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-deploy-plugin</artifactId>
-						<version>2.7</version>
 						<executions>
 							<execution>
 								<id>gather-artifacts</id>

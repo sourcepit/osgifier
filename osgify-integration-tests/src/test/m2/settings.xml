@@ -52,7 +52,7 @@ under the License.
    | Default: ~/.m2/repository
   <localRepository>/path/to/local/repo</localRepository>
   -->
-
+  ${it.localRepositoryXml}
   <!-- interactiveMode
    | This will determine whether maven prompts you when it needs input. If set to false,
    | maven will use a sensible default value, perhaps based on some other setting, for
@@ -214,7 +214,7 @@ under the License.
       <id>it-repository</id>
 
       <activation>
-        <activeByDefault>${it.repo.activeByDefault}</activeByDefault>
+        <activeByDefault>${it.repo.active}</activeByDefault>
       </activation>
       
       <repositories>

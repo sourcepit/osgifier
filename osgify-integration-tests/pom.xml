@@ -12,6 +12,7 @@
 	<properties>
 		<test.user.home>${project.build.directory}/test-user.home</test.user.home>
 		<test.localRepository>${test.user.home}/.m2/repository</test.localRepository>
+		<it.localRepositoryXml />
 	</properties>
 
 	<dependencies>
