@@ -176,4 +176,9 @@ public class Environment
    {
       return getPropertyAsFile("java-dir", true);
    }
+
+   boolean isDebugAllowed()
+   {
+      return Boolean.TRUE.toString().equals(getProperty("debug-allowed"));
+   }
 }

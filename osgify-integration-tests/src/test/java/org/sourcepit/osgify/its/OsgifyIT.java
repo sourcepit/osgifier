@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public class OsgifyIT
 {
-   private final static boolean DEBUG = false;
+   private final static boolean DEBUG = true;
 
    protected Environment environment = Environment.getInstance();
 
@@ -44,7 +44,7 @@ public class OsgifyIT
 
    protected CommandLine newMavenCmd(String... arguments)
    {
-      final String mvnExec = DEBUG ? "mvnDebug" : "mvn";
+      final String mvnExec = isDebug() ? "mvnDebug" : "mvn";
 
       final CommandLine cmd;
       final File mavenBinDir = new File(environment.getMavenDir(), "/bin");
@@ -62,6 +62,11 @@ public class OsgifyIT
       }
       cmd.addArguments(arguments);
       return cmd;
+   }
+
+   protected boolean isDebug()
+   {
+      return environment.isDebugAllowed() && DEBUG;
    }
 
    protected File getProjectDir(String projectName) throws IOException
