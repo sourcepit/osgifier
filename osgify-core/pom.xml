@@ -83,9 +83,19 @@
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>common-modeling</id>
 						<goals>
 							<goal>compile</goal>
+							<goal>test-compile</goal>
 						</goals>
+						<configuration>
+							<aspectLibraries>
+								<aspectLibrary>
+									<groupId>org.sourcepit.common</groupId>
+									<artifactId>common-modeling</artifactId>
+								</aspectLibrary>
+							</aspectLibraries>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

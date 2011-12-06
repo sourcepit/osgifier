@@ -10,15 +10,15 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
- * @requiresDependencyResolution compile
- * @goal osgify
- * @phase compile
+ * @requiresDependencyResolution test
+ * @goal osgify-tests
+ * @phase test-compile
  * @author bernd
  */
-public class OsgifyMojo extends AbstractOsgifyMojo
+public class OsgifyTestsMojo extends AbstractOsgifyMojo
 {
    public void execute() throws MojoExecutionException, MojoFailureException
    {
-      doExecute(Goal.OSGIFY);
+      doExecute(Goal.OSGIFY_TESTS);
    }
 }

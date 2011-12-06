@@ -7,13 +7,12 @@
 package org.sourcepit.osgify.java;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modeling.common.CommonModelOperationsAspects;
 import org.sourcepit.osgify.core.java.internal.impl.FullyQualifiedOperations;
 import org.sourcepit.osgify.core.java.internal.impl.PackageBundleOperations;
 import org.sourcepit.osgify.core.java.internal.impl.PackageOperations;
 import org.sourcepit.osgify.core.java.internal.impl.TypeOperations;
 
-public aspect JavaModelOperations extends CommonModelOperationsAspects
+public aspect JavaModelOperations
 {
    pointcut getPackageRoot(JavaPackageBundle bundle, String path): target(bundle) && args(path) && execution(JavaPackageRoot getPackageRoot(String));
 

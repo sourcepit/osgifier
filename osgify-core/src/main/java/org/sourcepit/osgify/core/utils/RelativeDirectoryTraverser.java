@@ -35,6 +35,11 @@ public class RelativeDirectoryTraverser implements IResourceTraverser
 
    private void accept(File rootDirectory, File[] filesToVisit, IResourceVisitor visitor)
    {
+      if (filesToVisit == null)
+      {
+         return;
+      }
+      
       for (final File file : filesToVisit)
       {
          final boolean isDirectory = file.isDirectory();

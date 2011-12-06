@@ -10,7 +10,6 @@ import java.io.File;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.maven.model.Build;
 import org.apache.maven.project.MavenProject;
 
 public final class MavenUtils
@@ -20,27 +19,35 @@ public final class MavenUtils
       super();
    }
 
-   public boolean getName(String name)
+   public static File getOutputDir(@NotNull MavenProject project)
    {
-      return true;
+      final String path = project.getBuild().getOutputDirectory(); // getBuild never returns null
+      return getDirInProject(project, path);
    }
 
-   public static File getOutputDir(MavenProject project)
+   public static File getTestOutputDir(@NotNull MavenProject project)
    {
-      Build build = project.getBuild();
-      if (build != null)
+      final String path = project.getBuild().getTestOutputDirectory(); // getBuild never returns null
+      return getDirInProject(project, path);
+   }
+
+   private static File getDirInProject(MavenProject project, String path)
+   {
+      if (path != null)
       {
-         String path = build.getOutputDirectory();
-         if (path != null)
+         final File file = new File(path);
+         if (!file.isAbsolute())
          {
-            File file = new File(path);
-            if (!file.isAbsolute())
-            {
-               return new File(project.getFile(), path);
-            }
-            return file;
+            return new File(getProjectFile(project), path);
          }
+         return file;
       }
       return null;
+   }
+
+   @NotNull
+   private static File getProjectFile(MavenProject project)
+   {
+      return project.getFile();
    }
 }

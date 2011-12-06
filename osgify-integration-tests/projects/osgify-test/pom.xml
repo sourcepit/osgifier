@@ -67,6 +67,7 @@
 					<execution>
 						<goals>
 							<goal>osgify</goal>
+							<goal>osgify-tests</goal>
 						</goals>
 					</execution>
 				</executions>

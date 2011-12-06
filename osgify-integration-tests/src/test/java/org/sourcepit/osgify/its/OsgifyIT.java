@@ -39,7 +39,7 @@ public class OsgifyIT
    {
       final Map<String, String> envVars = environment.newEnvironmentVariables();
       final File projectDir = getProjectDir(projectName);
-      externalProcess.execute(envVars, projectDir, newMavenCmd("-B", "clean", "package"));
+      externalProcess.execute(envVars, projectDir, newMavenCmd("-B", "-e", "clean", "package"));
    }
 
    protected CommandLine newMavenCmd(String... arguments)
