@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context"
     nsURI="http://www.sourcepit.org/osgify/context/0.1" nsPrefix="ctx">
-  <eClassifiers xsi:type="ecore:EClass" name="OSGiFyContext">
+  <eClassifiers xsi:type="ecore:EClass" name="OsgifyContext">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bundles" upperBound="-1"
         eType="#//BundleNode" containment="true"/>
   </eClassifiers>

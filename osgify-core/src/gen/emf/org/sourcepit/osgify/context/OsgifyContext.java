@@ -17,15 +17,15 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.context.OSGiFyContext#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.OsgifyContext#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.sourcepit.osgify.context.ContextModelPackage#getOSGiFyContext()
+ * @see org.sourcepit.osgify.context.ContextModelPackage#getOsgifyContext()
  * @model
  * @generated
  */
-public interface OSGiFyContext extends EObject
+public interface OsgifyContext extends EObject
 {
    /**
     * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
@@ -38,7 +38,7 @@ public interface OSGiFyContext extends EObject
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Bundles</em>' containment reference list.
-    * @see org.sourcepit.osgify.context.ContextModelPackage#getOSGiFyContext_Bundles()
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getOsgifyContext_Bundles()
     * @model containment="true"
     * @generated
     */

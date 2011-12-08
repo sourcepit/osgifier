@@ -15,7 +15,7 @@ import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.ContextModelPackage;
-import org.sourcepit.osgify.context.OSGiFyContext;
+import org.sourcepit.osgify.context.OsgifyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    {
       switch (eClass.getClassifierID())
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT :
-            return createOSGiFyContext();
+         case ContextModelPackage.OSGIFY_CONTEXT :
+            return createOsgifyContext();
          case ContextModelPackage.BUNDLE_NODE :
             return createBundleNode();
          case ContextModelPackage.BUNDLE_REFERENCE :
@@ -91,10 +91,10 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public OSGiFyContext createOSGiFyContext()
+   public OsgifyContext createOsgifyContext()
    {
-      OSGiFyContextImpl osGiFyContext = new OSGiFyContextImpl();
-      return osGiFyContext;
+      OsgifyContextImpl osgifyContext = new OsgifyContextImpl();
+      return osgifyContext;
    }
 
    /**

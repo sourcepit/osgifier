@@ -66,16 +66,16 @@ public interface ContextModelPackage extends EPackage
    ContextModelPackage eINSTANCE = org.sourcepit.osgify.context.impl.ContextModelPackageImpl.init();
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.context.impl.OSGiFyContextImpl <em>OS Gi Fy Context</em>}'
+    * The meta object id for the '{@link org.sourcepit.osgify.context.impl.OsgifyContextImpl <em>Osgify Context</em>}'
     * class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @see org.sourcepit.osgify.context.impl.OSGiFyContextImpl
-    * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getOSGiFyContext()
+    * @see org.sourcepit.osgify.context.impl.OsgifyContextImpl
+    * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getOsgifyContext()
     * @generated
     */
-   int OS_GI_FY_CONTEXT = 0;
+   int OSGIFY_CONTEXT = 0;
 
    /**
     * The feature id for the '<em><b>Bundles</b></em>' containment reference list.
@@ -85,17 +85,17 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OS_GI_FY_CONTEXT__BUNDLES = 0;
+   int OSGIFY_CONTEXT__BUNDLES = 0;
 
    /**
-    * The number of structural features of the '<em>OS Gi Fy Context</em>' class.
+    * The number of structural features of the '<em>Osgify Context</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
     */
-   int OS_GI_FY_CONTEXT_FEATURE_COUNT = 1;
+   int OSGIFY_CONTEXT_FEATURE_COUNT = 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
@@ -284,28 +284,28 @@ public interface ContextModelPackage extends EPackage
 
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.context.OSGiFyContext <em>OS Gi Fy Context</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.context.OsgifyContext <em>Osgify Context</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return the meta object for class '<em>OS Gi Fy Context</em>'.
-    * @see org.sourcepit.osgify.context.OSGiFyContext
+    * @return the meta object for class '<em>Osgify Context</em>'.
+    * @see org.sourcepit.osgify.context.OsgifyContext
     * @generated
     */
-   EClass getOSGiFyContext();
+   EClass getOsgifyContext();
 
    /**
     * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.context.OSGiFyContext#getBundles <em>Bundles</em>}'.
+    * {@link org.sourcepit.osgify.context.OsgifyContext#getBundles <em>Bundles</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for the containment reference list '<em>Bundles</em>'.
-    * @see org.sourcepit.osgify.context.OSGiFyContext#getBundles()
-    * @see #getOSGiFyContext()
+    * @see org.sourcepit.osgify.context.OsgifyContext#getBundles()
+    * @see #getOsgifyContext()
     * @generated
     */
-   EReference getOSGiFyContext_Bundles();
+   EReference getOsgifyContext_Bundles();
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.context.AbstractBundleCoordinate
@@ -472,16 +472,16 @@ public interface ContextModelPackage extends EPackage
    interface Literals
    {
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.OSGiFyContextImpl
-       * <em>OS Gi Fy Context</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.OsgifyContextImpl
+       * <em>Osgify Context</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.osgify.context.impl.OSGiFyContextImpl
-       * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getOSGiFyContext()
+       * @see org.sourcepit.osgify.context.impl.OsgifyContextImpl
+       * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getOsgifyContext()
        * @generated
        */
-      EClass OS_GI_FY_CONTEXT = eINSTANCE.getOSGiFyContext();
+      EClass OSGIFY_CONTEXT = eINSTANCE.getOsgifyContext();
 
       /**
        * The meta object literal for the '<em><b>Bundles</b></em>' containment reference list feature.
@@ -490,7 +490,7 @@ public interface ContextModelPackage extends EPackage
        * 
        * @generated
        */
-      EReference OS_GI_FY_CONTEXT__BUNDLES = eINSTANCE.getOSGiFyContext_Bundles();
+      EReference OSGIFY_CONTEXT__BUNDLES = eINSTANCE.getOsgifyContext_Bundles();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl

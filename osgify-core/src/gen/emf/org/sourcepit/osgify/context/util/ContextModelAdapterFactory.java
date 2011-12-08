@@ -14,7 +14,7 @@ import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
-import org.sourcepit.osgify.context.OSGiFyContext;
+import org.sourcepit.osgify.context.OsgifyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -85,9 +85,9 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    protected ContextModelSwitch<Adapter> modelSwitch = new ContextModelSwitch<Adapter>()
    {
       @Override
-      public Adapter caseOSGiFyContext(OSGiFyContext object)
+      public Adapter caseOsgifyContext(OsgifyContext object)
       {
-         return createOSGiFyContextAdapter();
+         return createOsgifyContextAdapter();
       }
 
       @Override
@@ -132,18 +132,18 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.context.OSGiFyContext
-    * <em>OS Gi Fy Context</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.context.OsgifyContext
+    * <em>Osgify Context</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.context.OSGiFyContext
+    * @see org.sourcepit.osgify.context.OsgifyContext
     * @generated
     */
-   public Adapter createOSGiFyContextAdapter()
+   public Adapter createOsgifyContextAdapter()
    {
       return null;
    }

@@ -14,7 +14,7 @@ import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
-import org.sourcepit.osgify.context.OSGiFyContext;
+import org.sourcepit.osgify.context.OsgifyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -102,10 +102,10 @@ public class ContextModelSwitch<T>
    {
       switch (classifierID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT :
+         case ContextModelPackage.OSGIFY_CONTEXT :
          {
-            OSGiFyContext osGiFyContext = (OSGiFyContext) theEObject;
-            T result = caseOSGiFyContext(osGiFyContext);
+            OsgifyContext osgifyContext = (OsgifyContext) theEObject;
+            T result = caseOsgifyContext(osgifyContext);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -144,18 +144,18 @@ public class ContextModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>OS Gi Fy Context</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Osgify Context</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>OS Gi Fy Context</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Osgify Context</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseOSGiFyContext(OSGiFyContext object)
+   public T caseOsgifyContext(OsgifyContext object)
    {
       return null;
    }

@@ -52,11 +52,11 @@ public class MavenUtilsTest
       outputDir = MavenUtils.getOutputDir(project);
       assertThat(outputDir, IsNull.notNullValue());
       assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
-      
+
       project.getBuild().setOutputDirectory("/target/classes");
       assertThat(outputDir, IsEqual.equalTo(new File("/target/classes")));
    }
-   
+
    @Test
    public void testGetTestOutputDir()
    {
@@ -89,7 +89,7 @@ public class MavenUtilsTest
       outputDir = MavenUtils.getTestOutputDir(project);
       assertThat(outputDir, IsNull.notNullValue());
       assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
-      
+
       project.getBuild().setTestOutputDirectory("/target/classes");
       assertThat(outputDir, IsEqual.equalTo(new File("/target/classes")));
    }

@@ -24,7 +24,7 @@ import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.context.OSGiFyContext;
+import org.sourcepit.osgify.context.OsgifyContext;
 import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.java.JavaArchive;
@@ -46,7 +46,7 @@ public class FooTest
    @Test
    public void testFoo() throws Exception, IOException
    {
-      OSGiFyContext model = newJavaArchiveModel();
+      OsgifyContext model = newJavaArchiveModel();
       print(model);
    }
 
@@ -63,7 +63,7 @@ public class FooTest
       out.close();
    }
 
-   protected OSGiFyContext newJavaArchiveModel()
+   protected OsgifyContext newJavaArchiveModel()
    {
       // osgify-test-0.1.0-SNAPSHOT.jar (root)
       // -> org.osgi.core-4.3.0.jar (optional)
@@ -81,7 +81,7 @@ public class FooTest
       nameToBundle.put("junit-4.10.jar", null);
       nameToBundle.put("hamcrest-core-1.1.jar", null);
 
-      OSGiFyContext tree = ContextModelFactory.eINSTANCE.createOSGiFyContext();
+      OsgifyContext tree = ContextModelFactory.eINSTANCE.createOsgifyContext();
       for (Entry<String, JavaPackageBundle> entry : nameToBundle.entrySet())
       {
          JavaArchive bundle = scan("/lib/" + entry.getKey());

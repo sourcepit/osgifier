@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.ContextModelPackage;
-import org.sourcepit.osgify.context.OSGiFyContext;
+import org.sourcepit.osgify.context.OsgifyContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,13 +26,13 @@ import org.sourcepit.osgify.context.OSGiFyContext;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.context.impl.OSGiFyContextImpl#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
+public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
 {
    /**
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
     * 
     * @generated
     */
-   protected OSGiFyContextImpl()
+   protected OsgifyContextImpl()
    {
       super();
    }
@@ -65,7 +65,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    @Override
    protected EClass eStaticClass()
    {
-      return ContextModelPackage.Literals.OS_GI_FY_CONTEXT;
+      return ContextModelPackage.Literals.OSGIFY_CONTEXT;
    }
 
    /**
@@ -79,7 +79,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
       if (bundles == null)
       {
          bundles = new EObjectContainmentEList<BundleNode>(BundleNode.class, this,
-            ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES);
+            ContextModelPackage.OSGIFY_CONTEXT__BUNDLES);
       }
       return bundles;
    }
@@ -95,7 +95,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -112,7 +112,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return getBundles();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -130,7 +130,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
             getBundles().addAll((Collection<? extends BundleNode>) newValue);
             return;
@@ -149,7 +149,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
       }
@@ -167,7 +167,7 @@ public class OSGiFyContextImpl extends EObjectImpl implements OSGiFyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OS_GI_FY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }
       return super.eIsSet(featureID);
