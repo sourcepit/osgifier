@@ -13,6 +13,7 @@ import java.io.File;
 
 import javax.validation.ConstraintViolationException;
 
+import org.apache.commons.lang.SystemUtils;
 import org.apache.maven.project.MavenProject;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -53,8 +54,10 @@ public class MavenUtilsTest
       assertThat(outputDir, IsNull.notNullValue());
       assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
 
-      project.getBuild().setOutputDirectory("/target/classes");
-      assertThat(outputDir, IsEqual.equalTo(new File("/target/classes")));
+      String absolutePath = SystemUtils.IS_OS_UNIX ? "/target/classes" : "c:/target/classes";
+      project.getBuild().setOutputDirectory(absolutePath);
+      outputDir = MavenUtils.getOutputDir(project);
+      assertThat(outputDir, IsEqual.equalTo(new File(absolutePath)));
    }
 
    @Test
@@ -90,7 +93,9 @@ public class MavenUtilsTest
       assertThat(outputDir, IsNull.notNullValue());
       assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
 
-      project.getBuild().setTestOutputDirectory("/target/classes");
-      assertThat(outputDir, IsEqual.equalTo(new File("/target/classes")));
+      String absolutePath = SystemUtils.IS_OS_UNIX ? "/target/classes" : "c:/target/classes";
+      project.getBuild().setTestOutputDirectory(absolutePath);
+      outputDir = MavenUtils.getTestOutputDir(project);
+      assertThat(outputDir, IsEqual.equalTo(new File(absolutePath)));
    }
 }
