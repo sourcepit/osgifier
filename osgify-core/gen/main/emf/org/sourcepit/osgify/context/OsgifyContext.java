@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>OS Gi Fy Context</b></em>'.
+ * A representation of the model object '<em><b>Osgify Context</b></em>'.
  * <!-- end-user-doc -->
  * 
  * <p>
@@ -44,4 +44,4 @@ public interface OsgifyContext extends EObject
     */
    EList<BundleNode> getBundles();
 
-} // OSGiFyContext
+} // OsgifyContext

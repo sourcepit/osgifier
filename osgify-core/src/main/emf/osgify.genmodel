@@ -2,15 +2,16 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying&#xD;&#xA;materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,&#xD;&#xA;and is available at http://www.eclipse.org/legal/epl-v10.html"
-    modelDirectory="/osgify-core/src/gen/emf" editorDirectory="/osgifyme-core.editor/src/gen/emf"
-    modelPluginID="" modelName="Osgify" modelPluginClass="" updateClasspath="false"
+    modelDirectory="/osgify-core/gen/main/emf" editDirectory="/osgify-core.edit/gen/main/emf"
+    editorDirectory="/osgifyme-core.editor/gen/main/emf" modelPluginID="" modelName="Osgify"
+    modelPluginClass="" updateClasspath="false" testsDirectory="/osgify-core.tests/gen/test/emf"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
     copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/common.genmodel#//common ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
   <foreignModel>Tree.ecore</foreignModel>
   <genPackages prefix="ContextModel" basePackage="org.sourcepit.osgify" disposableProviderFactory="true"
       ecorePackage="Tree.ecore#/">
-    <genClasses ecoreClass="Tree.ecore#//OSGiFyContext">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//OSGiFyContext/bundles"/>
+    <genClasses ecoreClass="Tree.ecore#//OsgifyContext">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//OsgifyContext/bundles"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Tree.ecore#//AbstractBundleCoordinate">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//AbstractBundleCoordinate/version"/>

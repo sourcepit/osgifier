@@ -21,7 +21,7 @@ import org.sourcepit.osgify.context.OsgifyContext;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>OS Gi Fy Context</b></em>'.
+ * An implementation of the model object '<em><b>Osgify Context</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -173,4 +173,4 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
       return super.eIsSet(featureID);
    }
 
-} // OSGiFyContextImpl
+} // OsgifyContextImpl

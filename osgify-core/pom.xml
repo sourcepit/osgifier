@@ -80,7 +80,7 @@
 						<configuration>
 							<sources>
 								<source>${basedir}/src/main/aspectj</source>
-								<source>${basedir}/src/gen/emf</source>
+								<source>${basedir}/gen/main/emf</source>
 							</sources>
 						</configuration>
 					</execution>
