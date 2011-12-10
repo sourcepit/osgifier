@@ -12,10 +12,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -28,6 +31,7 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * <p>
  * The following features are implemented:
  * <ul>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getExtensions <em>Extensions</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getContent <em>Content</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getDependencies <em>Dependencies</em>}</li>
  * </ul>
@@ -37,6 +41,17 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  */
 public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements BundleNode
 {
+   /**
+    * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getExtensions()
+    * @generated
+    * @ordered
+    */
+   protected EList<EObject> extensions;
+
    /**
     * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference.
     * <!-- begin-user-doc -->
@@ -80,6 +95,22 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
    protected EClass eStaticClass()
    {
       return ContextModelPackage.Literals.BUNDLE_NODE;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<EObject> getExtensions()
+   {
+      if (extensions == null)
+      {
+         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
+            ContextModelPackage.BUNDLE_NODE__EXTENSIONS);
+      }
+      return extensions;
    }
 
    /**
@@ -163,11 +194,78 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
     * 
     * @generated
     */
+   public <T extends EObject> T getExtension(Class<T> extensionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void addExtension(T extension)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void removeExtension(T extension)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void removeExtensions(Class<T> extentionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
          case ContextModelPackage.BUNDLE_NODE__CONTENT :
             return basicSetContent(null, msgs);
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
@@ -187,6 +285,8 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+            return getExtensions();
          case ContextModelPackage.BUNDLE_NODE__CONTENT :
             return getContent();
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
@@ -207,6 +307,10 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+            getExtensions().clear();
+            getExtensions().addAll((Collection<? extends EObject>) newValue);
+            return;
          case ContextModelPackage.BUNDLE_NODE__CONTENT :
             setContent((JavaPackageBundle) newValue);
             return;
@@ -229,6 +333,9 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+            getExtensions().clear();
+            return;
          case ContextModelPackage.BUNDLE_NODE__CONTENT :
             setContent((JavaPackageBundle) null);
             return;
@@ -250,12 +357,58 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+            return extensions != null && !extensions.isEmpty();
          case ContextModelPackage.BUNDLE_NODE__CONTENT :
             return content != null;
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
             return dependencies != null && !dependencies.isEmpty();
       }
       return super.eIsSet(featureID);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+   {
+      if (baseClass == Extendable.class)
+      {
+         switch (derivedFeatureID)
+         {
+            case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default :
+               return -1;
+         }
+      }
+      return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+   {
+      if (baseClass == Extendable.class)
+      {
+         switch (baseFeatureID)
+         {
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+               return ContextModelPackage.BUNDLE_NODE__EXTENSIONS;
+            default :
+               return -1;
+         }
+      }
+      return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
    }
 
 } // BundleNodeImpl

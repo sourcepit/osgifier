@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
@@ -109,6 +110,12 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
+      public Adapter caseExtendable(Extendable object)
+      {
+         return createExtendableAdapter();
+      }
+
+      @Override
       public Adapter defaultCase(EObject object)
       {
          return createEObjectAdapter();
@@ -195,6 +202,23 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    public Adapter createBundleReferenceAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
+    * '.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.modeling.common.Extendable
+    * @generated
+    */
+   public Adapter createExtendableAdapter()
    {
       return null;
    }

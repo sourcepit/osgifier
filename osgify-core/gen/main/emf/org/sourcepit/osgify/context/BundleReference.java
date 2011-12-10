@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.context;
 
 import org.sourcepit.common.manifest.osgi.VersionRange;
+import org.sourcepit.modeling.common.Extendable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +28,7 @@ import org.sourcepit.common.manifest.osgi.VersionRange;
  * @model
  * @generated
  */
-public interface BundleReference extends AbstractBundleCoordinate
+public interface BundleReference extends AbstractBundleCoordinate, Extendable
 {
    /**
     * Returns the value of the '<em><b>Version Range</b></em>' attribute.

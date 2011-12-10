@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.sourcepit.modeling.common.CommonModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,6 +79,16 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT = 0;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int OSGIFY_CONTEXT__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Bundles</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -85,7 +96,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OSGIFY_CONTEXT__BUNDLES = 0;
+   int OSGIFY_CONTEXT__BUNDLES = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
 
    /**
     * The number of structural features of the '<em>Osgify Context</em>' class.
@@ -95,7 +106,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OSGIFY_CONTEXT_FEATURE_COUNT = 1;
+   int OSGIFY_CONTEXT_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
@@ -171,6 +182,16 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_NODE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_NODE__EXTENSIONS = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+
+   /**
     * The feature id for the '<em><b>Content</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -178,7 +199,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__CONTENT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+   int BUNDLE_NODE__CONTENT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
@@ -188,7 +209,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__DEPENDENCIES = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
+   int BUNDLE_NODE__DEPENDENCIES = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
 
    /**
     * The number of structural features of the '<em>Bundle Node</em>' class.
@@ -198,7 +219,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
+   int BUNDLE_NODE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl
@@ -233,6 +254,16 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_REFERENCE__EXTENSIONS = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+
+   /**
     * The feature id for the '<em><b>Version Range</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -240,7 +271,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__VERSION_RANGE = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+   int BUNDLE_REFERENCE__VERSION_RANGE = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -250,7 +281,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__OPTIONAL = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
+   int BUNDLE_REFERENCE__OPTIONAL = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Target</b></em>' reference.
@@ -260,7 +291,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__TARGET = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
+   int BUNDLE_REFERENCE__TARGET = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
 
    /**
     * The feature id for the '<em><b>Provided</b></em>' attribute.
@@ -270,7 +301,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__PROVIDED = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
+   int BUNDLE_REFERENCE__PROVIDED = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 4;
 
    /**
     * The number of structural features of the '<em>Bundle Reference</em>' class.
@@ -280,7 +311,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 4;
+   int BUNDLE_REFERENCE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 5;
 
 
    /**

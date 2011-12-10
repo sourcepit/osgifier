@@ -6,11 +6,20 @@
 
 package org.sourcepit.osgify.context.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.common.manifest.osgi.VersionRange;
+import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -22,6 +31,7 @@ import org.sourcepit.osgify.context.ContextModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl#getExtensions <em>Extensions</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl#getVersionRange <em>Version Range</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl#isOptional <em>Optional</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl#getTarget <em>Target</em>}</li>
@@ -33,6 +43,17 @@ import org.sourcepit.osgify.context.ContextModelPackage;
  */
 public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements BundleReference
 {
+   /**
+    * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getExtensions()
+    * @generated
+    * @ordered
+    */
+   protected EList<EObject> extensions;
+
    /**
     * The default value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -131,6 +152,22 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
    protected EClass eStaticClass()
    {
       return ContextModelPackage.Literals.BUNDLE_REFERENCE;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<EObject> getExtensions()
+   {
+      if (extensions == null)
+      {
+         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
+            ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS);
+      }
+      return extensions;
    }
 
    /**
@@ -265,11 +302,95 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
     * 
     * @generated
     */
+   public <T extends EObject> T getExtension(Class<T> extensionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void addExtension(T extension)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void removeExtension(T extension)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public <T extends EObject> void removeExtensions(Class<T> extentionType)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+   {
+      switch (featureID)
+      {
+         case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
+      }
+      return super.eInverseRemove(otherEnd, featureID, msgs);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    @Override
    public Object eGet(int featureID, boolean resolve, boolean coreType)
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+            return getExtensions();
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             return getVersionRange();
          case ContextModelPackage.BUNDLE_REFERENCE__OPTIONAL :
@@ -290,11 +411,16 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
     * 
     * @generated
     */
+   @SuppressWarnings("unchecked")
    @Override
    public void eSet(int featureID, Object newValue)
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+            getExtensions().clear();
+            getExtensions().addAll((Collection<? extends EObject>) newValue);
+            return;
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             setVersionRange((VersionRange) newValue);
             return;
@@ -322,6 +448,9 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+            getExtensions().clear();
+            return;
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             setVersionRange(VERSION_RANGE_EDEFAULT);
             return;
@@ -349,6 +478,8 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+            return extensions != null && !extensions.isEmpty();
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             return VERSION_RANGE_EDEFAULT == null ? versionRange != null : !VERSION_RANGE_EDEFAULT.equals(versionRange);
          case ContextModelPackage.BUNDLE_REFERENCE__OPTIONAL :
@@ -359,6 +490,50 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
             return provided != PROVIDED_EDEFAULT;
       }
       return super.eIsSet(featureID);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+   {
+      if (baseClass == Extendable.class)
+      {
+         switch (derivedFeatureID)
+         {
+            case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
+               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default :
+               return -1;
+         }
+      }
+      return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+   {
+      if (baseClass == Extendable.class)
+      {
+         switch (baseFeatureID)
+         {
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+               return ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS;
+            default :
+               return -1;
+         }
+      }
+      return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
    }
 
    /**

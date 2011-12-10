@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.context;
 
 import org.eclipse.emf.common.util.EList;
+import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.java.JavaPackageBundle;
 
 /**
@@ -26,7 +27,7 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * @model
  * @generated
  */
-public interface BundleNode extends AbstractBundleCoordinate
+public interface BundleNode extends AbstractBundleCoordinate, Extendable
 {
    /**
     * Returns the value of the '<em><b>Content</b></em>' containment reference.

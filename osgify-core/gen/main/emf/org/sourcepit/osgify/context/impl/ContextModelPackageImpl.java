@@ -366,6 +366,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
+      CommonModelPackage theCommonModelPackage = (CommonModelPackage) EPackage.Registry.INSTANCE
+         .getEPackage(CommonModelPackage.eNS_URI);
       BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
          .getEPackage(BundleManifestPackage.eNS_URI);
       JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
@@ -376,8 +378,11 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Set bounds for type parameters
 
       // Add supertypes to classes
+      osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
       bundleNodeEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
+      bundleNodeEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
       bundleReferenceEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
+      bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
 
       // Initialize classes and features; add operations and parameters
       initEClass(osgifyContextEClass, OsgifyContext.class, "OsgifyContext", !IS_ABSTRACT, !IS_INTERFACE,
