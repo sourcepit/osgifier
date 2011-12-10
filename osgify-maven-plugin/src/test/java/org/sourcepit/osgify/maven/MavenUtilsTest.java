@@ -48,11 +48,12 @@ public class MavenUtilsTest
       {
       }
 
-      project.setFile(new File(""));
+      final File pomFile = new File("pom.xml").getAbsoluteFile();
+      project.setFile(pomFile);
 
       outputDir = MavenUtils.getOutputDir(project);
       assertThat(outputDir, IsNull.notNullValue());
-      assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
+      assertThat(outputDir, IsEqual.equalTo(new File(pomFile.getParentFile(), "target/classes")));
 
       String absolutePath = SystemUtils.IS_OS_UNIX ? "/target/classes" : "c:/target/classes";
       project.getBuild().setOutputDirectory(absolutePath);
@@ -87,11 +88,12 @@ public class MavenUtilsTest
       {
       }
 
-      project.setFile(new File(""));
+      final File pomFile = new File("pom.xml").getAbsoluteFile();
+      project.setFile(pomFile);
 
       outputDir = MavenUtils.getTestOutputDir(project);
       assertThat(outputDir, IsNull.notNullValue());
-      assertThat(outputDir, IsEqual.equalTo(new File("", "target/classes")));
+      assertThat(outputDir, IsEqual.equalTo(new File(pomFile.getParentFile(), "target/classes")));
 
       String absolutePath = SystemUtils.IS_OS_UNIX ? "/target/classes" : "c:/target/classes";
       project.getBuild().setTestOutputDirectory(absolutePath);

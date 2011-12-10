@@ -38,7 +38,7 @@ public final class MavenUtils
          final File file = new File(path);
          if (!file.isAbsolute())
          {
-            return new File(getProjectFile(project), path);
+            return new File(getProjectBaseDir(project), path);
          }
          return file;
       }
@@ -46,8 +46,8 @@ public final class MavenUtils
    }
 
    @NotNull
-   private static File getProjectFile(MavenProject project)
+   private static File getProjectBaseDir(MavenProject project)
    {
-      return project.getFile();
+      return project.getBasedir();
    }
 }
