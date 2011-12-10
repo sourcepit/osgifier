@@ -15,11 +15,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -41,7 +40,7 @@ import org.sourcepit.osgify.context.ContextModelPackage;
  * 
  * @generated
  */
-public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements BundleReference
+public class BundleReferenceImpl extends EObjectImpl implements BundleReference
 {
    /**
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
@@ -490,50 +489,6 @@ public class BundleReferenceImpl extends AbstractBundleCoordinateImpl implements
             return provided != PROVIDED_EDEFAULT;
       }
       return super.eIsSet(featureID);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (derivedFeatureID)
-         {
-            case ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS :
-               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default :
-               return -1;
-         }
-      }
-      return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (baseFeatureID)
-         {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
-               return ContextModelPackage.BUNDLE_REFERENCE__EXTENSIONS;
-            default :
-               return -1;
-         }
-      }
-      return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
    }
 
    /**

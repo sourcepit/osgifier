@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.common.manifest.osgi.BundleManifestPackage;
 import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
@@ -39,14 +38,6 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * @generated
     */
    private EClass osgifyContextEClass = null;
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   private EClass abstractBundleCoordinateEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -171,39 +162,6 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getAbstractBundleCoordinate()
-   {
-      return abstractBundleCoordinateEClass;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EAttribute getAbstractBundleCoordinate_Version()
-   {
-      return (EAttribute) abstractBundleCoordinateEClass.getEStructuralFeatures().get(0);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EAttribute getAbstractBundleCoordinate_SymbolicName()
-   {
-      return (EAttribute) abstractBundleCoordinateEClass.getEStructuralFeatures().get(1);
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    public EClass getBundleNode()
    {
       return bundleNodeEClass;
@@ -229,6 +187,28 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    public EReference getBundleNode_Dependencies()
    {
       return (EReference) bundleNodeEClass.getEStructuralFeatures().get(1);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EAttribute getBundleNode_Version()
+   {
+      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(2);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EAttribute getBundleNode_SymbolicName()
+   {
+      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(3);
    }
 
    /**
@@ -323,13 +303,11 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       osgifyContextEClass = createEClass(OSGIFY_CONTEXT);
       createEReference(osgifyContextEClass, OSGIFY_CONTEXT__BUNDLES);
 
-      abstractBundleCoordinateEClass = createEClass(ABSTRACT_BUNDLE_COORDINATE);
-      createEAttribute(abstractBundleCoordinateEClass, ABSTRACT_BUNDLE_COORDINATE__VERSION);
-      createEAttribute(abstractBundleCoordinateEClass, ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME);
-
       bundleNodeEClass = createEClass(BUNDLE_NODE);
       createEReference(bundleNodeEClass, BUNDLE_NODE__CONTENT);
       createEReference(bundleNodeEClass, BUNDLE_NODE__DEPENDENCIES);
+      createEAttribute(bundleNodeEClass, BUNDLE_NODE__VERSION);
+      createEAttribute(bundleNodeEClass, BUNDLE_NODE__SYMBOLIC_NAME);
 
       bundleReferenceEClass = createEClass(BUNDLE_REFERENCE);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__VERSION_RANGE);
@@ -368,10 +346,10 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Obtain other dependent packages
       CommonModelPackage theCommonModelPackage = (CommonModelPackage) EPackage.Registry.INSTANCE
          .getEPackage(CommonModelPackage.eNS_URI);
-      BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
-         .getEPackage(BundleManifestPackage.eNS_URI);
       JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
          .getEPackage(JavaModelPackage.eNS_URI);
+      BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
+         .getEPackage(BundleManifestPackage.eNS_URI);
 
       // Create type parameters
 
@@ -379,9 +357,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       // Add supertypes to classes
       osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
-      bundleNodeEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
       bundleNodeEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
-      bundleReferenceEClass.getESuperTypes().add(this.getAbstractBundleCoordinate());
       bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
 
       // Initialize classes and features; add operations and parameters
@@ -391,15 +367,6 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
          OsgifyContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(abstractBundleCoordinateEClass, AbstractBundleCoordinate.class, "AbstractBundleCoordinate",
-         IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getAbstractBundleCoordinate_Version(), theBundleManifestPackage.getVersion(), "version", null, 0,
-         1, AbstractBundleCoordinate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID,
-         IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getAbstractBundleCoordinate_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
-         AbstractBundleCoordinate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
-         !IS_DERIVED, IS_ORDERED);
-
       initEClass(bundleNodeEClass, BundleNode.class, "BundleNode", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
       initEReference(getBundleNode_Content(), theJavaModelPackage.getJavaPackageBundle(), null, "content", null, 1, 1,
@@ -408,6 +375,12 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEReference(getBundleNode_Dependencies(), this.getBundleReference(), null, "dependencies", null, 0, -1,
          BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleNode_Version(), theBundleManifestPackage.getVersion(), "version", null, 0, 1,
+         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+         IS_ORDERED);
+      initEAttribute(getBundleNode_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
+         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
+         IS_ORDERED);
 
       initEClass(bundleReferenceEClass, BundleReference.class, "BundleReference", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);

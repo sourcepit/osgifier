@@ -15,10 +15,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -34,12 +34,14 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getExtensions <em>Extensions</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getContent <em>Content</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements BundleNode
+public class BundleNodeImpl extends EObjectImpl implements BundleNode
 {
    /**
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
@@ -73,6 +75,50 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
     * @ordered
     */
    protected EList<BundleReference> dependencies;
+
+   /**
+    * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getVersion()
+    * @generated
+    * @ordered
+    */
+   protected static final Version VERSION_EDEFAULT = null;
+
+   /**
+    * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getVersion()
+    * @generated
+    * @ordered
+    */
+   protected Version version = VERSION_EDEFAULT;
+
+   /**
+    * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getSymbolicName()
+    * @generated
+    * @ordered
+    */
+   protected static final String SYMBOLIC_NAME_EDEFAULT = null;
+
+   /**
+    * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getSymbolicName()
+    * @generated
+    * @ordered
+    */
+   protected String symbolicName = SYMBOLIC_NAME_EDEFAULT;
 
    /**
     * <!-- begin-user-doc -->
@@ -194,6 +240,58 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
     * 
     * @generated
     */
+   public Version getVersion()
+   {
+      return version;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setVersion(Version newVersion)
+   {
+      Version oldVersion = version;
+      version = newVersion;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_NODE__VERSION, oldVersion,
+            version));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String getSymbolicName()
+   {
+      return symbolicName;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setSymbolicName(String newSymbolicName)
+   {
+      String oldSymbolicName = symbolicName;
+      symbolicName = newSymbolicName;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME,
+            oldSymbolicName, symbolicName));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public <T extends EObject> T getExtension(Class<T> extensionType)
    {
       // TODO: implement this method
@@ -291,6 +389,10 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
             return getContent();
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
             return getDependencies();
+         case ContextModelPackage.BUNDLE_NODE__VERSION :
+            return getVersion();
+         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+            return getSymbolicName();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -318,6 +420,12 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
             getDependencies().clear();
             getDependencies().addAll((Collection<? extends BundleReference>) newValue);
             return;
+         case ContextModelPackage.BUNDLE_NODE__VERSION :
+            setVersion((Version) newValue);
+            return;
+         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+            setSymbolicName((String) newValue);
+            return;
       }
       super.eSet(featureID, newValue);
    }
@@ -342,6 +450,12 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
             getDependencies().clear();
             return;
+         case ContextModelPackage.BUNDLE_NODE__VERSION :
+            setVersion(VERSION_EDEFAULT);
+            return;
+         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+            setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
+            return;
       }
       super.eUnset(featureID);
    }
@@ -363,6 +477,10 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
             return content != null;
          case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
             return dependencies != null && !dependencies.isEmpty();
+         case ContextModelPackage.BUNDLE_NODE__VERSION :
+            return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
+         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+            return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
       }
       return super.eIsSet(featureID);
    }
@@ -374,41 +492,18 @@ public class BundleNodeImpl extends AbstractBundleCoordinateImpl implements Bund
     * @generated
     */
    @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+   public String toString()
    {
-      if (baseClass == Extendable.class)
-      {
-         switch (derivedFeatureID)
-         {
-            case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
-               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default :
-               return -1;
-         }
-      }
-      return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-   }
+      if (eIsProxy())
+         return super.toString();
 
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (baseFeatureID)
-         {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
-               return ContextModelPackage.BUNDLE_NODE__EXTENSIONS;
-            default :
-               return -1;
-         }
-      }
-      return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+      StringBuffer result = new StringBuffer(super.toString());
+      result.append(" (version: ");
+      result.append(version);
+      result.append(", symbolicName: ");
+      result.append(symbolicName);
+      result.append(')');
+      return result.toString();
    }
 
 } // BundleNodeImpl

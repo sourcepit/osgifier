@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -92,12 +91,6 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
-      public Adapter caseAbstractBundleCoordinate(AbstractBundleCoordinate object)
-      {
-         return createAbstractBundleCoordinateAdapter();
-      }
-
-      @Override
       public Adapter caseBundleNode(BundleNode object)
       {
          return createBundleNodeAdapter();
@@ -151,23 +144,6 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    public Adapter createOsgifyContextAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.context.AbstractBundleCoordinate
-    * <em>Abstract Bundle Coordinate</em>}'.
-    * <!-- begin-user-doc -->
-    * This default implementation returns null so that we can easily ignore cases;
-    * it's useful to ignore a case when inheritance will catch all the cases anyway.
-    * <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.context.AbstractBundleCoordinate
-    * @generated
-    */
-   public Adapter createAbstractBundleCoordinateAdapter()
    {
       return null;
    }

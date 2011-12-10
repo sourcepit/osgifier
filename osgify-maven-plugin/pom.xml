@@ -15,6 +15,10 @@
 			<artifactId>common-constraints</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.sourcepit.common</groupId>
+			<artifactId>common-modeling</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.sourcepit.tools</groupId>
 			<artifactId>osgify-core</artifactId>
 		</dependency>
@@ -37,11 +41,19 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<version>1.8.5</version>
 		</dependency>
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/emf</directory>
+				<targetPath>META-INF/emf</targetPath>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.plexus</groupId>
@@ -58,6 +70,24 @@
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/src/main/aspectj</source>
+								<source>${basedir}/gen/main/emf</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<executions>
 					<execution>
@@ -67,6 +97,10 @@
 						</goals>
 						<configuration>
 							<aspectLibraries>
+								<aspectLibrary>
+									<groupId>org.sourcepit.common</groupId>
+									<artifactId>common-modeling</artifactId>
+								</aspectLibrary>
 								<aspectLibrary>
 									<groupId>org.sourcepit.common</groupId>
 									<artifactId>common-constraints</artifactId>

@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.osgify.context.AbstractBundleCoordinate;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -113,20 +112,10 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.ABSTRACT_BUNDLE_COORDINATE :
-         {
-            AbstractBundleCoordinate abstractBundleCoordinate = (AbstractBundleCoordinate) theEObject;
-            T result = caseAbstractBundleCoordinate(abstractBundleCoordinate);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
          case ContextModelPackage.BUNDLE_NODE :
          {
             BundleNode bundleNode = (BundleNode) theEObject;
             T result = caseBundleNode(bundleNode);
-            if (result == null)
-               result = caseAbstractBundleCoordinate(bundleNode);
             if (result == null)
                result = caseExtendable(bundleNode);
             if (result == null)
@@ -137,8 +126,6 @@ public class ContextModelSwitch<T>
          {
             BundleReference bundleReference = (BundleReference) theEObject;
             T result = caseBundleReference(bundleReference);
-            if (result == null)
-               result = caseAbstractBundleCoordinate(bundleReference);
             if (result == null)
                result = caseExtendable(bundleReference);
             if (result == null)
@@ -163,23 +150,6 @@ public class ContextModelSwitch<T>
     * @generated
     */
    public T caseOsgifyContext(OsgifyContext object)
-   {
-      return null;
-   }
-
-   /**
-    * Returns the result of interpreting the object as an instance of '<em>Abstract Bundle Coordinate</em>'.
-    * <!-- begin-user-doc -->
-    * This implementation returns null;
-    * returning a non-null result will terminate the switch.
-    * <!-- end-user-doc -->
-    * 
-    * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Abstract Bundle Coordinate</em>'.
-    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-    * @generated
-    */
-   public T caseAbstractBundleCoordinate(AbstractBundleCoordinate object)
    {
       return null;
    }

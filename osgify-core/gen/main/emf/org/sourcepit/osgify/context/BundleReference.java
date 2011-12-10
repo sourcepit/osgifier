@@ -28,7 +28,7 @@ import org.sourcepit.modeling.common.Extendable;
  * @model
  * @generated
  */
-public interface BundleReference extends AbstractBundleCoordinate, Extendable
+public interface BundleReference extends Extendable
 {
    /**
     * Returns the value of the '<em><b>Version Range</b></em>' attribute.

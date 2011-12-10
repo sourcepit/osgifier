@@ -1,5 +1,7 @@
-#Sun Dec 04 13:37:51 CET 2011
+#Sat Dec 10 18:48:41 CET 2011
 eclipse.preferences.version=1
+encoding//src/main/emf=UTF-8
+encoding//src/main/emf/maven.ecorediag=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/test/java=UTF-8

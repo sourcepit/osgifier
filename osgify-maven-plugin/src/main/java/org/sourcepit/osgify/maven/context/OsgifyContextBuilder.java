@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven;
+package org.sourcepit.osgify.maven.context;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -28,6 +28,9 @@ import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaProject;
+import org.sourcepit.osgify.maven.Goal;
+import org.sourcepit.osgify.maven.model.maven.MavenArtifact;
+import org.sourcepit.osgify.maven.model.maven.MavenDependency;
 
 /**
  * @author Bernd
@@ -51,10 +54,13 @@ public class OsgifyContextBuilder
 
       final BundleNode bundleNode = newNode(goal, project);
 
-      String id = project.getArtifact().getId();
+      Artifact artifact = project.getArtifact();
+      String id = artifact.getId();
       mvnIdToBundleNode.put(id, bundleNode);
 
-      addBundleReferences(bundleNode, project.getArtifacts());
+      // we must re-resolve the artifacts... if we use the already resolved artifacts from the project, we lose version
+      // ranges
+      addBundleReferences(bundleNode, resolveDependencies(artifact, project.getDependencyArtifacts()));
 
       OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().addAll(mvnIdToBundleNode.values());
@@ -72,34 +78,36 @@ public class OsgifyContextBuilder
          {
             bundleNode = newNode(artifact);
             mvnIdToBundleNode.put(id, bundleNode);
-
-            final ArtifactResolutionRequest request = new ArtifactResolutionRequest();
-            request.setArtifact(artifact);
-            request.setResolveRoot(false);
-            request.setResolveTransitively(true);
-            request.setRemoteRepositories(remoteRepositories);
-            request.setLocalRepository(localRepository);
-
-            // TODO not sure about this...
-            // request.setManagedVersionMap(managedVersionMap);
-
-            ArtifactResolutionResult result = repositorySystem.resolve(request);
-            addBundleReferences(bundleNode, result.getArtifacts());
+            addBundleReferences(bundleNode, resolveDependencies(artifact, null));
          }
          parentNode.getDependencies().add(newBundleReference(bundleNode, artifact));
       }
    }
 
+   private Set<Artifact> resolveDependencies(Artifact artifact, Set<Artifact> dependencyArtifacts)
+   {
+      final ArtifactResolutionRequest request = new ArtifactResolutionRequest();
+      request.setArtifact(artifact);
+      request.setArtifactDependencies(dependencyArtifacts);
+      request.setResolveRoot(false);
+      request.setResolveTransitively(true);
+      request.setRemoteRepositories(remoteRepositories);
+      request.setLocalRepository(localRepository);
+
+      ArtifactResolutionResult result = repositorySystem.resolve(request);
+      return result.getArtifacts();
+   }
+
    private BundleReference newBundleReference(BundleNode bundleNode, Artifact mappedArtifact)
    {
+      MavenDependency dependency = MavenModelUtils.toMavenDependecy(mappedArtifact);
+
       final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.addExtension(dependency);
+
       reference.setTarget(bundleNode);
       reference.setOptional(mappedArtifact.isOptional());
       reference.setProvided(Artifact.SCOPE_PROVIDED.equals(mappedArtifact.getScope()));
-
-      // TODO may be unnecessary? info available in target
-      reference.setSymbolicName(bundleNode.getSymbolicName());
-      reference.setVersion(bundleNode.getVersion());
 
       // TODO artifact artifact.getVersionRange() to OSGi range
       reference.setVersionRange(null);
@@ -122,9 +130,13 @@ public class OsgifyContextBuilder
 
    private BundleNode newNode(Artifact artifact)
    {
-      JavaArchive jArchive = scanArtifact(artifact);
+      final MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
+
+      JavaArchive jArchive = scanArtifact(mArtifact);
 
       BundleNode node = ContextModelFactory.eINSTANCE.createBundleNode();
+      node.addExtension(mArtifact);
+
       node.setContent(jArchive);
       // TODO converter
       node.setSymbolicName(null);
@@ -168,7 +180,7 @@ public class OsgifyContextBuilder
       return paths;
    }
 
-   private JavaArchive scanArtifact(Artifact artifact)
+   private JavaArchive scanArtifact(MavenArtifact artifact)
    {
       final JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
       scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());

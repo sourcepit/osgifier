@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven;
+package org.sourcepit.osgify.maven.context;
 
 import static junit.framework.Assert.fail;
 import static org.junit.Assert.assertThat;
@@ -18,6 +18,7 @@ import org.apache.maven.project.MavenProject;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.sourcepit.osgify.maven.context.MavenUtils;
 
 public class MavenUtilsTest
 {

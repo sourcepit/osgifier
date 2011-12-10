@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.context;
 
 import org.eclipse.emf.common.util.EList;
+import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.osgify.java.JavaPackageBundle;
 
@@ -20,6 +21,8 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * <ul>
  * <li>{@link org.sourcepit.osgify.context.BundleNode#getContent <em>Content</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.BundleNode#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleNode#getVersion <em>Version</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleNode#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
  * 
@@ -27,7 +30,7 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * @model
  * @generated
  */
-public interface BundleNode extends AbstractBundleCoordinate, Extendable
+public interface BundleNode extends Extendable
 {
    /**
     * Returns the value of the '<em><b>Content</b></em>' containment reference.
@@ -74,5 +77,62 @@ public interface BundleNode extends AbstractBundleCoordinate, Extendable
     * @generated
     */
    EList<BundleReference> getDependencies();
+
+   /**
+    * Returns the value of the '<em><b>Version</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Version</em>' attribute isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Version</em>' attribute.
+    * @see #setVersion(Version)
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_Version()
+    * @model dataType="org.sourcepit.common.manifest.osgi.Version"
+    * @generated
+    */
+   Version getVersion();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleNode#getVersion <em>Version</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Version</em>' attribute.
+    * @see #getVersion()
+    * @generated
+    */
+   void setVersion(Version value);
+
+   /**
+    * Returns the value of the '<em><b>Symbolic Name</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Symbolic Name</em>' attribute isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Symbolic Name</em>' attribute.
+    * @see #setSymbolicName(String)
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_SymbolicName()
+    * @model
+    * @generated
+    */
+   String getSymbolicName();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleNode#getSymbolicName <em>Symbolic Name</em>}'
+    * attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Symbolic Name</em>' attribute.
+    * @see #getSymbolicName()
+    * @generated
+    */
+   void setSymbolicName(String value);
 
 } // BundleNode

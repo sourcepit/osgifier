@@ -165,7 +165,6 @@ public class FooTest
    {
       final BundleReference node = ContextModelFactory.eINSTANCE.createBundleReference();
       node.setVersionRange(VersionRange.parse(versionRange));
-      node.setVersion(Version.parse(version));
       node.setOptional(optional);
       node.setProvided(provided);
       return node;
@@ -180,65 +179,6 @@ public class FooTest
    {
       return newBundleNode(version, version, false, false);
    }
-
-   //
-   // protected void addDependencies(RootBundleNode model, JavaPackageBundleScanner scanner, JavaPackageBundle bundle)
-   // {
-   // BundleTree tree = (BundleTree) model.eContainer();
-   //
-   // BundleNode node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-   // node.setVersionRange(VersionRange.parse("4.3.0"));
-   // node.setVersion(Version.parse("4.3.0"));
-   // node.setEnabled(true);
-   // node.setOptional(true);
-   // node.setTarget(scan(scanner, "/lib/org.osgi.core-4.3.0.jar"));
-   // model.getNodes().add(node);
-   // tree.getBundles().add(node.getTarget());
-   //
-   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-   // node.setVersionRange(VersionRange.parse("1.0.1"));
-   // node.setVersion(Version.parse("1.0.1"));
-   // node.setEnabled(true);
-   // node.setScope("provided");
-   // node.setTarget(scan(scanner, "/lib/stax-api-1.0.1.jar"));
-   // model.getNodes().add(node);
-   // tree.getBundles().add(node.getTarget());
-   //
-   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-   // node.setVersionRange(VersionRange.parse("[1.6,1.7)"));
-   // node.setVersion(Version.parse("1.6.12"));
-   // node.setEnabled(true);
-   // node.setTarget(scan(scanner, "/lib/aspectjrt-1.6.12.jar"));
-   // model.getNodes().add(node);
-   // tree.getBundles().add(node.getTarget());
-   //
-   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-   // node.setVersionRange(VersionRange.parse("1.2"));
-   // node.setVersion(Version.parse("1.2"));
-   // node.setEnabled(true);
-   // node.setTarget(scan(scanner, "/lib/hamcrest-core-1.2.jar"));
-   // model.getNodes().add(node);
-   // tree.getBundles().add(node.getTarget());
-   //
-   // node = BundleTreeModelFactory.eINSTANCE.createBundleNode();
-   // node.setVersionRange(VersionRange.parse("4.10"));
-   // node.setVersion(Version.parse("4.10"));
-   // node.setEnabled(true);
-   // node.setScope("test");
-   // node.setTarget(scan(scanner, "/lib/junit-4.10.jar"));
-   // model.getNodes().add(node);
-   // tree.getBundles().add(node.getTarget());
-   //
-   // node.getNodes().add(BundleTreeModelFactory.eINSTANCE.createBundleNode());
-   //
-   // node = node.getNodes().get(0);
-   // node.setVersionRange(VersionRange.parse("1.1"));
-   // node.setVersion(Version.parse("1.1"));
-   // node.setEnabled(true);
-   // node.setScope("test");
-   // node.setTarget(scan(scanner, "/lib/hamcrest-core-1.1.jar"));
-   // tree.getBundles().add(node.getTarget());
-   // }
 
    protected JavaArchive scan(String name)
    {

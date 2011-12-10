@@ -109,48 +109,6 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
-    * <em>Abstract Bundle Coordinate</em>}' class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
-    * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getAbstractBundleCoordinate()
-    * @generated
-    */
-   int ABSTRACT_BUNDLE_COORDINATE = 1;
-
-   /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_COORDINATE__VERSION = 0;
-
-   /**
-    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME = 1;
-
-   /**
-    * The number of structural features of the '<em>Abstract Bundle Coordinate</em>' class.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT = 2;
-
-   /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.BundleNodeImpl <em>Bundle Node</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -159,27 +117,7 @@ public interface ContextModelPackage extends EPackage
     * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getBundleNode()
     * @generated
     */
-   int BUNDLE_NODE = 2;
-
-   /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_NODE__VERSION = ABSTRACT_BUNDLE_COORDINATE__VERSION;
-
-   /**
-    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_NODE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
+   int BUNDLE_NODE = 1;
 
    /**
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -189,7 +127,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__EXTENSIONS = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+   int BUNDLE_NODE__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Content</b></em>' containment reference.
@@ -199,7 +137,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__CONTENT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
+   int BUNDLE_NODE__CONTENT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
@@ -209,7 +147,27 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE__DEPENDENCIES = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
+   int BUNDLE_NODE__DEPENDENCIES = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
+
+   /**
+    * The feature id for the '<em><b>Version</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_NODE__VERSION = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 2;
+
+   /**
+    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_NODE__SYMBOLIC_NAME = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 3;
 
    /**
     * The number of structural features of the '<em>Bundle Node</em>' class.
@@ -219,7 +177,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_NODE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
+   int BUNDLE_NODE_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 4;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl
@@ -231,27 +189,7 @@ public interface ContextModelPackage extends EPackage
     * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getBundleReference()
     * @generated
     */
-   int BUNDLE_REFERENCE = 3;
-
-   /**
-    * The feature id for the '<em><b>Version</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_REFERENCE__VERSION = ABSTRACT_BUNDLE_COORDINATE__VERSION;
-
-   /**
-    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    * @ordered
-    */
-   int BUNDLE_REFERENCE__SYMBOLIC_NAME = ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME;
+   int BUNDLE_REFERENCE = 2;
 
    /**
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
@@ -261,7 +199,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__EXTENSIONS = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 0;
+   int BUNDLE_REFERENCE__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Version Range</b></em>' attribute.
@@ -271,7 +209,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__VERSION_RANGE = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 1;
+   int BUNDLE_REFERENCE__VERSION_RANGE = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -281,7 +219,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__OPTIONAL = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 2;
+   int BUNDLE_REFERENCE__OPTIONAL = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Target</b></em>' reference.
@@ -291,7 +229,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__TARGET = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 3;
+   int BUNDLE_REFERENCE__TARGET = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Provided</b></em>' attribute.
@@ -301,7 +239,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__PROVIDED = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 4;
+   int BUNDLE_REFERENCE__PROVIDED = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 3;
 
    /**
     * The number of structural features of the '<em>Bundle Reference</em>' class.
@@ -311,7 +249,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE_FEATURE_COUNT = ABSTRACT_BUNDLE_COORDINATE_FEATURE_COUNT + 5;
+   int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 4;
 
 
    /**
@@ -337,44 +275,6 @@ public interface ContextModelPackage extends EPackage
     * @generated
     */
    EReference getOsgifyContext_Bundles();
-
-   /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.context.AbstractBundleCoordinate
-    * <em>Abstract Bundle Coordinate</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for class '<em>Abstract Bundle Coordinate</em>'.
-    * @see org.sourcepit.osgify.context.AbstractBundleCoordinate
-    * @generated
-    */
-   EClass getAbstractBundleCoordinate();
-
-   /**
-    * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.context.AbstractBundleCoordinate#getVersion <em>Version</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the attribute '<em>Version</em>'.
-    * @see org.sourcepit.osgify.context.AbstractBundleCoordinate#getVersion()
-    * @see #getAbstractBundleCoordinate()
-    * @generated
-    */
-   EAttribute getAbstractBundleCoordinate_Version();
-
-   /**
-    * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.context.AbstractBundleCoordinate#getSymbolicName <em>Symbolic Name</em>}'.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @return the meta object for the attribute '<em>Symbolic Name</em>'.
-    * @see org.sourcepit.osgify.context.AbstractBundleCoordinate#getSymbolicName()
-    * @see #getAbstractBundleCoordinate()
-    * @generated
-    */
-   EAttribute getAbstractBundleCoordinate_SymbolicName();
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.context.BundleNode <em>Bundle Node</em>}'.
@@ -412,6 +312,32 @@ public interface ContextModelPackage extends EPackage
     * @generated
     */
    EReference getBundleNode_Dependencies();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.context.BundleNode#getVersion
+    * <em>Version</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Version</em>'.
+    * @see org.sourcepit.osgify.context.BundleNode#getVersion()
+    * @see #getBundleNode()
+    * @generated
+    */
+   EAttribute getBundleNode_Version();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.context.BundleNode#getSymbolicName
+    * <em>Symbolic Name</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Symbolic Name</em>'.
+    * @see org.sourcepit.osgify.context.BundleNode#getSymbolicName()
+    * @see #getBundleNode()
+    * @generated
+    */
+   EAttribute getBundleNode_SymbolicName();
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.context.BundleReference <em>Bundle Reference</em>}
@@ -524,36 +450,6 @@ public interface ContextModelPackage extends EPackage
       EReference OSGIFY_CONTEXT__BUNDLES = eINSTANCE.getOsgifyContext_Bundles();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
-       * <em>Abstract Bundle Coordinate</em>}' class.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @see org.sourcepit.osgify.context.impl.AbstractBundleCoordinateImpl
-       * @see org.sourcepit.osgify.context.impl.ContextModelPackageImpl#getAbstractBundleCoordinate()
-       * @generated
-       */
-      EClass ABSTRACT_BUNDLE_COORDINATE = eINSTANCE.getAbstractBundleCoordinate();
-
-      /**
-       * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EAttribute ABSTRACT_BUNDLE_COORDINATE__VERSION = eINSTANCE.getAbstractBundleCoordinate_Version();
-
-      /**
-       * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
-       * <!-- begin-user-doc -->
-       * <!-- end-user-doc -->
-       * 
-       * @generated
-       */
-      EAttribute ABSTRACT_BUNDLE_COORDINATE__SYMBOLIC_NAME = eINSTANCE.getAbstractBundleCoordinate_SymbolicName();
-
-      /**
        * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.BundleNodeImpl <em>Bundle Node</em>}'
        * class.
        * <!-- begin-user-doc -->
@@ -582,6 +478,24 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EReference BUNDLE_NODE__DEPENDENCIES = eINSTANCE.getBundleNode_Dependencies();
+
+      /**
+       * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_NODE__VERSION = eINSTANCE.getBundleNode_Version();
+
+      /**
+       * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_NODE__SYMBOLIC_NAME = eINSTANCE.getBundleNode_SymbolicName();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl
