@@ -19,18 +19,18 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.context.BundleNode#getContent <em>Content</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.BundleNode#getDependencies <em>Dependencies</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.BundleNode#getVersion <em>Version</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.BundleNode#getSymbolicName <em>Symbolic Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleCandidate#getContent <em>Content</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleCandidate#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleCandidate#getVersion <em>Version</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
  * 
- * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode()
+ * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleCandidate()
  * @model
  * @generated
  */
-public interface BundleNode extends Extendable
+public interface BundleCandidate extends Extendable
 {
    /**
     * Returns the value of the '<em><b>Content</b></em>' containment reference.
@@ -43,15 +43,15 @@ public interface BundleNode extends Extendable
     * 
     * @return the value of the '<em>Content</em>' containment reference.
     * @see #setContent(JavaPackageBundle)
-    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_Content()
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleCandidate_Content()
     * @model containment="true" required="true"
     * @generated
     */
    JavaPackageBundle getContent();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleNode#getContent <em>Content</em>}' containment
-    * reference.
+    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleCandidate#getContent <em>Content</em>}'
+    * containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
@@ -72,7 +72,7 @@ public interface BundleNode extends Extendable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Dependencies</em>' containment reference list.
-    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_Dependencies()
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleCandidate_Dependencies()
     * @model containment="true"
     * @generated
     */
@@ -89,14 +89,15 @@ public interface BundleNode extends Extendable
     * 
     * @return the value of the '<em>Version</em>' attribute.
     * @see #setVersion(Version)
-    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_Version()
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleCandidate_Version()
     * @model dataType="org.sourcepit.common.manifest.osgi.Version"
     * @generated
     */
    Version getVersion();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleNode#getVersion <em>Version</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleCandidate#getVersion <em>Version</em>}'
+    * attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
@@ -117,15 +118,15 @@ public interface BundleNode extends Extendable
     * 
     * @return the value of the '<em>Symbolic Name</em>' attribute.
     * @see #setSymbolicName(String)
-    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleNode_SymbolicName()
+    * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleCandidate_SymbolicName()
     * @model
     * @generated
     */
    String getSymbolicName();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleNode#getSymbolicName <em>Symbolic Name</em>}'
-    * attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}
+    * ' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 

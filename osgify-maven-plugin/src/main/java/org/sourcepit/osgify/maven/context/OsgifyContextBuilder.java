@@ -24,7 +24,7 @@ import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
 import org.sourcepit.common.utils.path.PathUtils;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.OsgifyContext;
@@ -40,7 +40,7 @@ import org.sourcepit.osgify.maven.Goal;
 @Component(role = OsgifyContextBuilder.class, instantiationStrategy = "per-lookup")
 public class OsgifyContextBuilder
 {
-   private final Map<String, BundleNode> mvnIdToBundleNode = new LinkedHashMap<String, BundleNode>();
+   private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
 
    @Requirement
    private RepositorySystem repositorySystem;
@@ -54,7 +54,7 @@ public class OsgifyContextBuilder
       this.remoteRepositories = project.getRemoteArtifactRepositories();
       this.localRepository = localRepository;
 
-      final BundleNode bundleNode = newNode(goal, project);
+      final BundleCandidate bundleNode = newNode(goal, project);
 
       Artifact artifact = project.getArtifact();
       String id = artifact.getId();
@@ -70,12 +70,12 @@ public class OsgifyContextBuilder
       return context;
    }
 
-   private void addBundleReferences(final BundleNode parentNode, Set<Artifact> artifacts)
+   private void addBundleReferences(final BundleCandidate parentNode, Set<Artifact> artifacts)
    {
       for (Artifact artifact : artifacts)
       {
          final String id = artifact.getId();
-         BundleNode bundleNode = mvnIdToBundleNode.get(id);
+         BundleCandidate bundleNode = mvnIdToBundleNode.get(id);
          if (bundleNode == null)
          {
             bundleNode = newNode(artifact);
@@ -100,7 +100,7 @@ public class OsgifyContextBuilder
       return result.getArtifacts();
    }
 
-   private BundleReference newBundleReference(BundleNode bundleNode, Artifact mappedArtifact)
+   private BundleReference newBundleReference(BundleCandidate bundleNode, Artifact mappedArtifact)
    {
       MavenDependency dependency = MavenModelUtils.toMavenDependecy(mappedArtifact);
 
@@ -117,11 +117,11 @@ public class OsgifyContextBuilder
       return reference;
    }
 
-   private BundleNode newNode(Goal goal, MavenProject project)
+   private BundleCandidate newNode(Goal goal, MavenProject project)
    {
       JavaProject jProject = scanProject(goal, project);
 
-      BundleNode node = ContextModelFactory.eINSTANCE.createBundleNode();
+      BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       node.setContent(jProject);
       // TODO converter
       node.setSymbolicName(null);
@@ -130,13 +130,13 @@ public class OsgifyContextBuilder
       return node;
    }
 
-   private BundleNode newNode(Artifact artifact)
+   private BundleCandidate newNode(Artifact artifact)
    {
       final MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
 
       JavaArchive jArchive = scanArtifact(mArtifact);
 
-      BundleNode node = ContextModelFactory.eINSTANCE.createBundleNode();
+      BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       node.addExtension(mArtifact);
 
       node.setContent(jArchive);

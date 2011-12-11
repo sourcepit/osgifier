@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
 
@@ -106,7 +106,7 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
     * @generated
     * @ordered
     */
-   protected BundleNode target;
+   protected BundleCandidate target;
 
    /**
     * The default value of the '{@link #isProvided() <em>Provided</em>}' attribute.
@@ -227,12 +227,12 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
     * 
     * @generated
     */
-   public BundleNode getTarget()
+   public BundleCandidate getTarget()
    {
       if (target != null && target.eIsProxy())
       {
          InternalEObject oldTarget = (InternalEObject) target;
-         target = (BundleNode) eResolveProxy(oldTarget);
+         target = (BundleCandidate) eResolveProxy(oldTarget);
          if (target != oldTarget)
          {
             if (eNotificationRequired())
@@ -249,7 +249,7 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
     * 
     * @generated
     */
-   public BundleNode basicGetTarget()
+   public BundleCandidate basicGetTarget()
    {
       return target;
    }
@@ -260,9 +260,9 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
     * 
     * @generated
     */
-   public void setTarget(BundleNode newTarget)
+   public void setTarget(BundleCandidate newTarget)
    {
-      BundleNode oldTarget = target;
+      BundleCandidate oldTarget = target;
       target = newTarget;
       if (eNotificationRequired())
          eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_REFERENCE__TARGET, oldTarget,
@@ -427,7 +427,7 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
             setOptional((Boolean) newValue);
             return;
          case ContextModelPackage.BUNDLE_REFERENCE__TARGET :
-            setTarget((BundleNode) newValue);
+            setTarget((BundleCandidate) newValue);
             return;
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             setProvided((Boolean) newValue);
@@ -457,7 +457,7 @@ public class BundleReferenceImpl extends EObjectImpl implements BundleReference
             setOptional(OPTIONAL_EDEFAULT);
             return;
          case ContextModelPackage.BUNDLE_REFERENCE__TARGET :
-            setTarget((BundleNode) null);
+            setTarget((BundleCandidate) null);
             return;
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             setProvided(PROVIDED_EDEFAULT);

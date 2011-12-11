@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.OsgifyContext;
@@ -88,7 +88,7 @@ public class FooTest
          nameToBundle.put(entry.getKey(), bundle);
       }
 
-      BundleNode bundle;
+      BundleCandidate bundle;
 
       bundle = newRootBundleNode("0.1.0.SNAPSHOT");
       bundle.setContent(nameToBundle.get("osgify-test-0.1.0-SNAPSHOT.jar"));
@@ -154,9 +154,9 @@ public class FooTest
       return tree;
    }
 
-   protected BundleNode newRootBundleNode(String version)
+   protected BundleCandidate newRootBundleNode(String version)
    {
-      final BundleNode root = ContextModelFactory.eINSTANCE.createBundleNode();
+      final BundleCandidate root = ContextModelFactory.eINSTANCE.createBundleCandidate();
       root.setVersion(Version.parse(version));
       return root;
    }

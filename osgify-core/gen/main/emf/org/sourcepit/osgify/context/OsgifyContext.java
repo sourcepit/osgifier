@@ -29,7 +29,7 @@ public interface OsgifyContext extends Extendable
 {
    /**
     * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
-    * The list contents are of type {@link org.sourcepit.osgify.context.BundleNode}.
+    * The list contents are of type {@link org.sourcepit.osgify.context.BundleCandidate}.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Bundles</em>' containment reference list isn't clear, there really should be more of a
@@ -42,6 +42,6 @@ public interface OsgifyContext extends Extendable
     * @model containment="true"
     * @generated
     */
-   EList<BundleNode> getBundles();
+   EList<BundleCandidate> getBundles();
 
 } // OsgifyContext

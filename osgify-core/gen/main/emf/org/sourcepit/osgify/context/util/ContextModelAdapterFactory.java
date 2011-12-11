@@ -11,7 +11,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
 import org.sourcepit.osgify.context.OsgifyContext;
@@ -91,9 +91,9 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
-      public Adapter caseBundleNode(BundleNode object)
+      public Adapter caseBundleCandidate(BundleCandidate object)
       {
-         return createBundleNodeAdapter();
+         return createBundleCandidateAdapter();
       }
 
       @Override
@@ -149,18 +149,18 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.context.BundleNode <em>Bundle Node</em>}
-    * '.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.context.BundleCandidate
+    * <em>Bundle Candidate</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.context.BundleNode
+    * @see org.sourcepit.osgify.context.BundleCandidate
     * @generated
     */
-   public Adapter createBundleNodeAdapter()
+   public Adapter createBundleCandidateAdapter()
    {
       return null;
    }

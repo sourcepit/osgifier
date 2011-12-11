@@ -98,12 +98,12 @@ public interface BundleReference extends Extendable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Target</em>' reference.
-    * @see #setTarget(BundleNode)
+    * @see #setTarget(BundleCandidate)
     * @see org.sourcepit.osgify.context.ContextModelPackage#getBundleReference_Target()
     * @model
     * @generated
     */
-   BundleNode getTarget();
+   BundleCandidate getTarget();
 
    /**
     * Sets the value of the '{@link org.sourcepit.osgify.context.BundleReference#getTarget <em>Target</em>}' reference.
@@ -114,7 +114,7 @@ public interface BundleReference extends Extendable
     * @see #getTarget()
     * @generated
     */
-   void setTarget(BundleNode value);
+   void setTarget(BundleCandidate value);
 
    /**
     * Returns the value of the '<em><b>Provided</b></em>' attribute.

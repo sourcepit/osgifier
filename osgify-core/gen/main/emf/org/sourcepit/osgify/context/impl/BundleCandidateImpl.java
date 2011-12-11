@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
 import org.sourcepit.osgify.java.JavaPackageBundle;
@@ -31,17 +31,17 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getExtensions <em>Extensions</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getContent <em>Content</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getDependencies <em>Dependencies</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getVersion <em>Version</em>}</li>
- * <li>{@link org.sourcepit.osgify.context.impl.BundleNodeImpl#getSymbolicName <em>Symbolic Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl#getExtensions <em>Extensions</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl#getContent <em>Content</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl#getVersion <em>Version</em>}</li>
+ * <li>{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class BundleNodeImpl extends EObjectImpl implements BundleNode
+public class BundleCandidateImpl extends EObjectImpl implements BundleCandidate
 {
    /**
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
@@ -126,7 +126,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
     * 
     * @generated
     */
-   protected BundleNodeImpl()
+   protected BundleCandidateImpl()
    {
       super();
    }
@@ -140,7 +140,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    @Override
    protected EClass eStaticClass()
    {
-      return ContextModelPackage.Literals.BUNDLE_NODE;
+      return ContextModelPackage.Literals.BUNDLE_CANDIDATE;
    }
 
    /**
@@ -154,7 +154,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
       if (extensions == null)
       {
          extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
-            ContextModelPackage.BUNDLE_NODE__EXTENSIONS);
+            ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS);
       }
       return extensions;
    }
@@ -183,7 +183,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
       if (eNotificationRequired())
       {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-            ContextModelPackage.BUNDLE_NODE__CONTENT, oldContent, newContent);
+            ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, oldContent, newContent);
          if (msgs == null)
             msgs = notification;
          else
@@ -205,17 +205,17 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
          NotificationChain msgs = null;
          if (content != null)
             msgs = ((InternalEObject) content).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-               - ContextModelPackage.BUNDLE_NODE__CONTENT, null, msgs);
+               - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
          if (newContent != null)
             msgs = ((InternalEObject) newContent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-               - ContextModelPackage.BUNDLE_NODE__CONTENT, null, msgs);
+               - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
          msgs = basicSetContent(newContent, msgs);
          if (msgs != null)
             msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_NODE__CONTENT, newContent,
-            newContent));
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__CONTENT,
+            newContent, newContent));
    }
 
    /**
@@ -229,7 +229,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
       if (dependencies == null)
       {
          dependencies = new EObjectContainmentEList<BundleReference>(BundleReference.class, this,
-            ContextModelPackage.BUNDLE_NODE__DEPENDENCIES);
+            ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES);
       }
       return dependencies;
    }
@@ -256,8 +256,8 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
       Version oldVersion = version;
       version = newVersion;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_NODE__VERSION, oldVersion,
-            version));
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__VERSION,
+            oldVersion, version));
    }
 
    /**
@@ -282,7 +282,7 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
       String oldSymbolicName = symbolicName;
       symbolicName = newSymbolicName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME,
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME,
             oldSymbolicName, symbolicName));
    }
 
@@ -362,11 +362,11 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+         case ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS :
             return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
-         case ContextModelPackage.BUNDLE_NODE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return basicSetContent(null, msgs);
-         case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -383,15 +383,15 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+         case ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS :
             return getExtensions();
-         case ContextModelPackage.BUNDLE_NODE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return getContent();
-         case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             return getDependencies();
-         case ContextModelPackage.BUNDLE_NODE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
             return getVersion();
-         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             return getSymbolicName();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -409,21 +409,21 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+         case ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS :
             getExtensions().clear();
             getExtensions().addAll((Collection<? extends EObject>) newValue);
             return;
-         case ContextModelPackage.BUNDLE_NODE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             setContent((JavaPackageBundle) newValue);
             return;
-         case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();
             getDependencies().addAll((Collection<? extends BundleReference>) newValue);
             return;
-         case ContextModelPackage.BUNDLE_NODE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
             setVersion((Version) newValue);
             return;
-         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             setSymbolicName((String) newValue);
             return;
       }
@@ -441,19 +441,19 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+         case ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS :
             getExtensions().clear();
             return;
-         case ContextModelPackage.BUNDLE_NODE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             setContent((JavaPackageBundle) null);
             return;
-         case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();
             return;
-         case ContextModelPackage.BUNDLE_NODE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
             setVersion(VERSION_EDEFAULT);
             return;
-         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
             return;
       }
@@ -471,15 +471,15 @@ public class BundleNodeImpl extends EObjectImpl implements BundleNode
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_NODE__EXTENSIONS :
+         case ContextModelPackage.BUNDLE_CANDIDATE__EXTENSIONS :
             return extensions != null && !extensions.isEmpty();
-         case ContextModelPackage.BUNDLE_NODE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return content != null;
-         case ContextModelPackage.BUNDLE_NODE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             return dependencies != null && !dependencies.isEmpty();
-         case ContextModelPackage.BUNDLE_NODE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
             return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-         case ContextModelPackage.BUNDLE_NODE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
       }
       return super.eIsSet(featureID);

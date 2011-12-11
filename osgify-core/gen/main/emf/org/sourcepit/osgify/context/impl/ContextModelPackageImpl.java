@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.common.manifest.osgi.BundleManifestPackage;
 import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -45,7 +45,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   private EClass bundleNodeEClass = null;
+   private EClass bundleCandidateEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -162,9 +162,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getBundleNode()
+   public EClass getBundleCandidate()
    {
-      return bundleNodeEClass;
+      return bundleCandidateEClass;
    }
 
    /**
@@ -173,9 +173,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleNode_Content()
+   public EReference getBundleCandidate_Content()
    {
-      return (EReference) bundleNodeEClass.getEStructuralFeatures().get(0);
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -184,9 +184,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleNode_Dependencies()
+   public EReference getBundleCandidate_Dependencies()
    {
-      return (EReference) bundleNodeEClass.getEStructuralFeatures().get(1);
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(1);
    }
 
    /**
@@ -195,9 +195,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleNode_Version()
+   public EAttribute getBundleCandidate_Version()
    {
-      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(2);
+      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(2);
    }
 
    /**
@@ -206,9 +206,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleNode_SymbolicName()
+   public EAttribute getBundleCandidate_SymbolicName()
    {
-      return (EAttribute) bundleNodeEClass.getEStructuralFeatures().get(3);
+      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(3);
    }
 
    /**
@@ -303,11 +303,11 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       osgifyContextEClass = createEClass(OSGIFY_CONTEXT);
       createEReference(osgifyContextEClass, OSGIFY_CONTEXT__BUNDLES);
 
-      bundleNodeEClass = createEClass(BUNDLE_NODE);
-      createEReference(bundleNodeEClass, BUNDLE_NODE__CONTENT);
-      createEReference(bundleNodeEClass, BUNDLE_NODE__DEPENDENCIES);
-      createEAttribute(bundleNodeEClass, BUNDLE_NODE__VERSION);
-      createEAttribute(bundleNodeEClass, BUNDLE_NODE__SYMBOLIC_NAME);
+      bundleCandidateEClass = createEClass(BUNDLE_CANDIDATE);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__CONTENT);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__DEPENDENCIES);
+      createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__VERSION);
+      createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__SYMBOLIC_NAME);
 
       bundleReferenceEClass = createEClass(BUNDLE_REFERENCE);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__VERSION_RANGE);
@@ -357,30 +357,30 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       // Add supertypes to classes
       osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
-      bundleNodeEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
+      bundleCandidateEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
       bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
 
       // Initialize classes and features; add operations and parameters
       initEClass(osgifyContextEClass, OsgifyContext.class, "OsgifyContext", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getOsgifyContext_Bundles(), this.getBundleNode(), null, "bundles", null, 0, -1,
+      initEReference(getOsgifyContext_Bundles(), this.getBundleCandidate(), null, "bundles", null, 0, -1,
          OsgifyContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      initEClass(bundleNodeEClass, BundleNode.class, "BundleNode", !IS_ABSTRACT, !IS_INTERFACE,
+      initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getBundleNode_Content(), theJavaModelPackage.getJavaPackageBundle(), null, "content", null, 1, 1,
-         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+      initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaPackageBundle(), null, "content", null,
+         1, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getBundleNode_Dependencies(), this.getBundleReference(), null, "dependencies", null, 0, -1,
-         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+      initEReference(getBundleCandidate_Dependencies(), this.getBundleReference(), null, "dependencies", null, 0, -1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getBundleNode_Version(), theBundleManifestPackage.getVersion(), "version", null, 0, 1,
-         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-         IS_ORDERED);
-      initEAttribute(getBundleNode_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
-         BundleNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED,
-         IS_ORDERED);
+      initEAttribute(getBundleCandidate_Version(), theBundleManifestPackage.getVersion(), "version", null, 0, 1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleCandidate_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
 
       initEClass(bundleReferenceEClass, BundleReference.class, "BundleReference", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
@@ -390,7 +390,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEAttribute(getBundleReference_Optional(), ecorePackage.getEBoolean(), "optional", null, 0, 1,
          BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
-      initEReference(getBundleReference_Target(), this.getBundleNode(), null, "target", null, 0, 1,
+      initEReference(getBundleReference_Target(), this.getBundleCandidate(), null, "target", null, 0, 1,
          BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEAttribute(getBundleReference_Provided(), ecorePackage.getEBoolean(), "provided", null, 0, 1,

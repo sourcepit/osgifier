@@ -5,9 +5,9 @@
     nsURI="http://www.sourcepit.org/osgify/context/0.1" nsPrefix="ctx">
   <eClassifiers xsi:type="ecore:EClass" name="OsgifyContext" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Extendable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bundles" upperBound="-1"
-        eType="#//BundleNode" containment="true"/>
+        eType="#//BundleCandidate" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BundleNode" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Extendable">
+  <eClassifiers xsi:type="ecore:EClass" name="BundleCandidate" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Extendable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="content" lowerBound="1"
         eType="ecore:EClass Java.ecore#//JavaPackageBundle" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
@@ -18,7 +18,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BundleReference" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Extendable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionRange" eType="ecore:EDataType ../../../../common-manifest/src/main/emf/manifest.ecore#//osgi/VersionRange"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//BundleNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//BundleCandidate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="provided" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

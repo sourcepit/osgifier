@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
 import org.sourcepit.osgify.context.OsgifyContext;
@@ -112,12 +112,12 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_NODE :
+         case ContextModelPackage.BUNDLE_CANDIDATE :
          {
-            BundleNode bundleNode = (BundleNode) theEObject;
-            T result = caseBundleNode(bundleNode);
+            BundleCandidate bundleCandidate = (BundleCandidate) theEObject;
+            T result = caseBundleCandidate(bundleCandidate);
             if (result == null)
-               result = caseExtendable(bundleNode);
+               result = caseExtendable(bundleCandidate);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -155,18 +155,18 @@ public class ContextModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Bundle Node</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Bundle Candidate</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Bundle Node</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Bundle Candidate</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleNode(BundleNode object)
+   public T caseBundleCandidate(BundleCandidate object)
    {
       return null;
    }

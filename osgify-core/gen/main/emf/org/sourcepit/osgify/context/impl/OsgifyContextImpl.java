@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.ContextModelPackage;
 import org.sourcepit.osgify.context.OsgifyContext;
 
@@ -55,7 +55,7 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
     * @generated
     * @ordered
     */
-   protected EList<BundleNode> bundles;
+   protected EList<BundleCandidate> bundles;
 
    /**
     * <!-- begin-user-doc -->
@@ -102,11 +102,11 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
     * 
     * @generated
     */
-   public EList<BundleNode> getBundles()
+   public EList<BundleCandidate> getBundles()
    {
       if (bundles == null)
       {
-         bundles = new EObjectContainmentEList<BundleNode>(BundleNode.class, this,
+         bundles = new EObjectContainmentEList<BundleCandidate>(BundleCandidate.class, this,
             ContextModelPackage.OSGIFY_CONTEXT__BUNDLES);
       }
       return bundles;
@@ -233,7 +233,7 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
             return;
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
-            getBundles().addAll((Collection<? extends BundleNode>) newValue);
+            getBundles().addAll((Collection<? extends BundleCandidate>) newValue);
             return;
       }
       super.eSet(featureID, newValue);

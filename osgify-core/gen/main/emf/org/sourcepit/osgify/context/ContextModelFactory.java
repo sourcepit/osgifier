@@ -39,14 +39,14 @@ public interface ContextModelFactory extends EFactory
    OsgifyContext createOsgifyContext();
 
    /**
-    * Returns a new object of class '<em>Bundle Node</em>'.
+    * Returns a new object of class '<em>Bundle Candidate</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Bundle Node</em>'.
+    * @return a new object of class '<em>Bundle Candidate</em>'.
     * @generated
     */
-   BundleNode createBundleNode();
+   BundleCandidate createBundleCandidate();
 
    /**
     * Returns a new object of class '<em>Bundle Reference</em>'.

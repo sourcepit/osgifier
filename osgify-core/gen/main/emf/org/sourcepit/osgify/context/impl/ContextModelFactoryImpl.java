@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.sourcepit.osgify.context.BundleNode;
+import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -76,8 +76,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
       {
          case ContextModelPackage.OSGIFY_CONTEXT :
             return createOsgifyContext();
-         case ContextModelPackage.BUNDLE_NODE :
-            return createBundleNode();
+         case ContextModelPackage.BUNDLE_CANDIDATE :
+            return createBundleCandidate();
          case ContextModelPackage.BUNDLE_REFERENCE :
             return createBundleReference();
          default :
@@ -103,10 +103,10 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public BundleNode createBundleNode()
+   public BundleCandidate createBundleCandidate()
    {
-      BundleNodeImpl bundleNode = new BundleNodeImpl();
-      return bundleNode;
+      BundleCandidateImpl bundleCandidate = new BundleCandidateImpl();
+      return bundleCandidate;
    }
 
    /**
