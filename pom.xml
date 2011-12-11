@@ -51,6 +51,16 @@
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
+				<groupId>org.sourcepit.common</groupId>
+				<artifactId>common-utils</artifactId>
+				<version>0.1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sourcepit.common</groupId>
+				<artifactId>common-maven</artifactId>
+				<version>0.1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>org.sourcepit.tools</groupId>
 				<artifactId>osgify-core</artifactId>
 				<version>${project.version}</version>

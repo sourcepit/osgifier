@@ -19,6 +19,10 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
+import org.sourcepit.common.maven.model.MavenArtifact;
+import org.sourcepit.common.maven.model.MavenDependency;
+import org.sourcepit.common.maven.model.util.MavenModelUtils;
+import org.sourcepit.common.maven.util.MavenProjectUtils;
 import org.sourcepit.common.utils.path.PathUtils;
 import org.sourcepit.osgify.context.BundleNode;
 import org.sourcepit.osgify.context.BundleReference;
@@ -29,8 +33,6 @@ import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaProject;
 import org.sourcepit.osgify.maven.Goal;
-import org.sourcepit.osgify.maven.model.maven.MavenArtifact;
-import org.sourcepit.osgify.maven.model.maven.MavenDependency;
 
 /**
  * @author Bernd
@@ -157,7 +159,7 @@ public class OsgifyContextBuilder
    private String[] getPathsToScan(Goal goal, MavenProject project)
    {
       final File projectDir = project.getBasedir();
-      final File outputDir = MavenUtils.getOutputDir(project);
+      final File outputDir = MavenProjectUtils.getOutputDir(project);
 
       File testOutputDir = null;
 
@@ -169,7 +171,7 @@ public class OsgifyContextBuilder
             paths[0] = PathUtils.getRelativePath(outputDir, projectDir, "/");
             break;
          case OSGIFY_TESTS :
-            testOutputDir = MavenUtils.getTestOutputDir(project);
+            testOutputDir = MavenProjectUtils.getTestOutputDir(project);
             paths = new String[2];
             paths[0] = PathUtils.getRelativePath(outputDir, projectDir, "/");
             paths[1] = PathUtils.getRelativePath(testOutputDir, projectDir, "/");

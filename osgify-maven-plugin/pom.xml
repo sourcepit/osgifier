@@ -23,6 +23,10 @@
 			<artifactId>common-modeling</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.sourcepit.common</groupId>
+			<artifactId>common-maven</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.sourcepit.tools</groupId>
 			<artifactId>osgify-core</artifactId>
 		</dependency>
@@ -41,10 +45,12 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
