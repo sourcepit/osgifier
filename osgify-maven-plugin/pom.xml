@@ -12,6 +12,10 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
+			<artifactId>common-utils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sourcepit.common</groupId>
 			<artifactId>common-constraints</artifactId>
 		</dependency>
 		<dependency>

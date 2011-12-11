@@ -18,7 +18,6 @@ import org.apache.maven.project.MavenProject;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.osgify.maven.context.MavenUtils;
 
 public class MavenUtilsTest
 {

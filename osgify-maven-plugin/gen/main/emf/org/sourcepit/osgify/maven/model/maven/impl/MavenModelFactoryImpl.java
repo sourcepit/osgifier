@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.sourcepit.osgify.maven.model.maven.*;
 import org.sourcepit.osgify.maven.model.maven.MavenArtifact;
 import org.sourcepit.osgify.maven.model.maven.MavenDependency;
 import org.sourcepit.osgify.maven.model.maven.MavenModelFactory;

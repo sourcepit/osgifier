@@ -17,7 +17,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.sourcepit.osgify.core.internal.utils.UnclosableInputStreamDelegate;
+import org.sourcepit.common.utils.io.UnclosableInputStreamDelegate;
 
 public class ZipTraverser implements IResourceTraverser
 {

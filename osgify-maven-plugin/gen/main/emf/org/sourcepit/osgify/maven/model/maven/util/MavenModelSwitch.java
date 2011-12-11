@@ -10,7 +10,6 @@ package org.sourcepit.osgify.maven.model.maven.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.sourcepit.osgify.maven.model.maven.*;
 import org.sourcepit.osgify.maven.model.maven.Classified;
 import org.sourcepit.osgify.maven.model.maven.Identifiable;
 import org.sourcepit.osgify.maven.model.maven.MavenArtifact;

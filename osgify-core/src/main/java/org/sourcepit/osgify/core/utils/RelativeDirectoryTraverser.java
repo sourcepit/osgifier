@@ -11,8 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.sourcepit.osgify.core.internal.utils.PathUtils;
-import org.sourcepit.osgify.core.internal.utils.UnclosableInputStreamDelegate;
+import org.sourcepit.common.utils.io.UnclosableInputStreamDelegate;
+import org.sourcepit.common.utils.path.PathUtils;
 
 public class RelativeDirectoryTraverser implements IResourceTraverser
 {
