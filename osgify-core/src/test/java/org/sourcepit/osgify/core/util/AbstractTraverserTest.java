@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.utils;
+package org.sourcepit.osgify.core.util;
 
 import static org.junit.Assert.assertThat;
 
@@ -16,6 +16,7 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.sourcepit.osgify.core.util.IResourceVisitor;
 import org.sourcepit.osgify.test.resources.TypeA;
 
 public abstract class AbstractTraverserTest

@@ -4,19 +4,22 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.utils;
+package org.sourcepit.osgify.core.util;
 
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-public class ZipTraverserTest extends AbstractTraverserTest
+import org.sourcepit.osgify.core.util.IResourceVisitor;
+import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
+
+public class RelativeDirectoryTraverserTest extends AbstractTraverserTest
 {
    @Override
    protected void travers(IResourceVisitor visitor)
    {
-      File jarFile = new File("target/testResources/osgify-core.jar");
-      assertTrue(jarFile.exists());
-      new ZipTraverser(jarFile).travers(visitor);
+      File testResources = new File("target/testResources");
+      assertTrue(testResources.exists());
+      new RelativeDirectoryTraverser(testResources).travers(visitor);
    }
 }

@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.utils;
+package org.sourcepit.osgify.core.util;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,7 +28,9 @@ import org.apache.bcel.util.ClassLoaderRepository;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesCollector;
-import org.sourcepit.osgify.core.java.utils.JavaLangUtils;
+import org.sourcepit.osgify.core.java.util.JavaLangUtils;
+import org.sourcepit.osgify.core.util.IResourceVisitor;
+import org.sourcepit.osgify.core.util.ZipTraverser;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaModelFactory;
 import org.sourcepit.osgify.java.JavaPackage;

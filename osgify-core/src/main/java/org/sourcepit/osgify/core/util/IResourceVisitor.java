@@ -4,9 +4,12 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.utils;
+package org.sourcepit.osgify.core.util;
 
-public interface IResourceTraverser
+import java.io.InputStream;
+
+
+public interface IResourceVisitor
 {
-   public void travers(IResourceVisitor resourceVisitor);
+   boolean visit(String path, boolean isDirectory, InputStream content);
 }

@@ -11,8 +11,8 @@ import java.io.InputStream;
 
 import javax.validation.constraints.NotNull;
 
-import org.sourcepit.osgify.core.utils.RelativeDirectoryTraverser;
-import org.sourcepit.osgify.core.utils.ZipTraverser;
+import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
+import org.sourcepit.osgify.core.util.ZipTraverser;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaModelFactory;
 import org.sourcepit.osgify.java.JavaPackage;

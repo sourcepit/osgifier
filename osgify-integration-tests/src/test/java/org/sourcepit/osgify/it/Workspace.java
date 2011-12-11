@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.its;
+package org.sourcepit.osgify.it;
 
 import java.io.File;
 import java.io.IOException;

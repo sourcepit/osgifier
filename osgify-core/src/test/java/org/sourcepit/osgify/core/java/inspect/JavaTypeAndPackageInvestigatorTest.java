@@ -28,7 +28,7 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.osgify.core.utils.AbstractTraverserTest;
+import org.sourcepit.osgify.core.util.AbstractTraverserTest;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaModelFactory;
 import org.sourcepit.osgify.java.JavaPackage;

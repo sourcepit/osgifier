@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java.utils;
+package org.sourcepit.osgify.core.java.util;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
+import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 
 public class JavaLangUtilsTest
 {
