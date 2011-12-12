@@ -50,6 +50,10 @@
 			<artifactId>bcel</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-component-annotations</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -111,6 +115,19 @@
 								</aspectLibrary>
 							</aspectLibraries>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-component-metadata</artifactId>
+				<executions>
+					<execution>
+						<id>generate-metadata</id>
+						<goals>
+							<goal>generate-metadata</goal>
+							<goal>generate-test-metadata</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

@@ -103,8 +103,7 @@ public abstract class JavaResourceVisitor implements IResourceVisitor
          {
             resource.load(content, null);
             Manifest manifest = (Manifest) resource.getContents().get(0);
-            Annotation annotation = getPackageRoot(true).getAnnotation("manifest", true);
-            annotation.setContent(manifest);
+            getPackageRoot(true).addExtension(manifest);
          }
          catch (IOException e)
          {// TODO log warning

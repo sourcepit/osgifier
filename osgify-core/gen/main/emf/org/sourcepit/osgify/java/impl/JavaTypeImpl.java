@@ -14,12 +14,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.java.JavaModelPackage;
 import org.sourcepit.osgify.java.JavaType;
 import org.sourcepit.osgify.java.JavaTypeRoot;
@@ -31,7 +29,6 @@ import org.sourcepit.osgify.java.JavaTypeRoot;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.java.impl.JavaTypeImpl#getAnnotations <em>Annotations</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaTypeImpl#getInnerTypes <em>Inner Types</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaTypeImpl#getOuterType <em>Outer Type</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaTypeImpl#getSimpleName <em>Simple Name</em>}</li>
@@ -40,19 +37,8 @@ import org.sourcepit.osgify.java.JavaTypeRoot;
  * 
  * @generated
  */
-public class JavaTypeImpl extends EObjectImpl implements JavaType
+public class JavaTypeImpl extends XAnnotatableImpl implements JavaType
 {
-   /**
-    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getAnnotations()
-    * @generated
-    * @ordered
-    */
-   protected EList<Annotation> annotations;
-
    /**
     * The cached value of the '{@link #getInnerTypes() <em>Inner Types</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -107,22 +93,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    protected EClass eStaticClass()
    {
       return JavaModelPackage.Literals.JAVA_TYPE;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
-      }
-      return annotations;
    }
 
    /**
@@ -252,53 +222,12 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getAnnotationData(String source, String key)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    @SuppressWarnings("unchecked")
    @Override
    public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getInnerTypes()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
@@ -320,8 +249,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             return ((InternalEList<?>) getInnerTypes()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
@@ -359,8 +286,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return getAnnotations();
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             return getInnerTypes();
          case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
@@ -383,10 +308,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
-            return;
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             getInnerTypes().clear();
             getInnerTypes().addAll((Collection<? extends JavaType>) newValue);
@@ -412,9 +333,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            getAnnotations().clear();
-            return;
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             getInnerTypes().clear();
             return;
@@ -439,8 +357,6 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-            return annotations != null && !annotations.isEmpty();
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
             return innerTypes != null && !innerTypes.isEmpty();
          case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :

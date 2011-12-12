@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.java;
 
-import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.sourcepit.modeling.common.Annotatable;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface JavaTypeRoot extends Annotatable
+public interface JavaTypeRoot extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Type</b></em>' containment reference.

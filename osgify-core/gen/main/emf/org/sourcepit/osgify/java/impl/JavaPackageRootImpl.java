@@ -14,13 +14,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.java.JavaModelPackage;
 import org.sourcepit.osgify.java.JavaPackage;
 import org.sourcepit.osgify.java.JavaPackageBundle;
@@ -33,7 +30,6 @@ import org.sourcepit.osgify.java.JavaPackageRoot;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageRootImpl#getAnnotations <em>Annotations</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageRootImpl#getPath <em>Path</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageRootImpl#getRootPackages <em>Root Packages</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaPackageRootImpl#getPackageBundle <em>Package Bundle</em>}</li>
@@ -42,19 +38,8 @@ import org.sourcepit.osgify.java.JavaPackageRoot;
  * 
  * @generated
  */
-public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
+public class JavaPackageRootImpl extends XAnnotatableImpl implements JavaPackageRoot
 {
-   /**
-    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getAnnotations()
-    * @generated
-    * @ordered
-    */
-   protected EList<Annotation> annotations;
-
    /**
     * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -109,22 +94,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    protected EClass eStaticClass()
    {
       return JavaModelPackage.Literals.JAVA_PACKAGE_ROOT;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
-      }
-      return annotations;
    }
 
    /**
@@ -228,53 +197,12 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getAnnotationData(String source, String key)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    @SuppressWarnings("unchecked")
    @Override
    public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE :
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
@@ -294,8 +222,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_PACKAGE_ROOT__ROOT_PACKAGES :
             return ((InternalEList<?>) getRootPackages()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE :
@@ -333,8 +259,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            return getAnnotations();
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PATH :
             return getPath();
          case JavaModelPackage.JAVA_PACKAGE_ROOT__ROOT_PACKAGES :
@@ -357,10 +281,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
-            return;
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PATH :
             setPath((String) newValue);
             return;
@@ -386,9 +306,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            getAnnotations().clear();
-            return;
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PATH :
             setPath(PATH_EDEFAULT);
             return;
@@ -413,8 +330,6 @@ public class JavaPackageRootImpl extends EObjectImpl implements JavaPackageRoot
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_ROOT__ANNOTATIONS :
-            return annotations != null && !annotations.isEmpty();
          case JavaModelPackage.JAVA_PACKAGE_ROOT__PATH :
             return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
          case JavaModelPackage.JAVA_PACKAGE_ROOT__ROOT_PACKAGES :

@@ -30,6 +30,7 @@ import org.sourcepit.osgify.context.ContextModelFactory;
 import org.sourcepit.osgify.context.OsgifyContext;
 import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
+import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.java.JavaArchive;
 import org.sourcepit.osgify.java.JavaProject;
 import org.sourcepit.osgify.maven.Goal;
@@ -41,6 +42,9 @@ import org.sourcepit.osgify.maven.Goal;
 public class OsgifyContextBuilder
 {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
+
+   @Requirement
+   private SymbolicNameResolver symbolicNameResolver;
 
    @Requirement
    private RepositorySystem repositorySystem;
@@ -136,15 +140,18 @@ public class OsgifyContextBuilder
 
       JavaArchive jArchive = scanArtifact(mArtifact);
 
-      BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      node.addExtension(mArtifact);
+      BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      bundleCandidate.addExtension(mArtifact);
 
-      node.setContent(jArchive);
-      // TODO converter
-      node.setSymbolicName(null);
-      node.setVersion(null);
+      bundleCandidate.setContent(jArchive);
 
-      return node;
+
+      final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundleCandidate);
+      bundleCandidate.setSymbolicName(symbolicName);
+
+      bundleCandidate.setVersion(null);
+
+      return bundleCandidate;
    }
 
    private JavaProject scanProject(Goal goal, MavenProject project)

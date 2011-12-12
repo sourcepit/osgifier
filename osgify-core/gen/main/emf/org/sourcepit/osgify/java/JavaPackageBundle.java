@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.java;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +25,7 @@ import org.sourcepit.modeling.common.Annotatable;
  * @model abstract="true"
  * @generated
  */
-public interface JavaPackageBundle extends Annotatable
+public interface JavaPackageBundle extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Package Roots</b></em>' containment reference list.

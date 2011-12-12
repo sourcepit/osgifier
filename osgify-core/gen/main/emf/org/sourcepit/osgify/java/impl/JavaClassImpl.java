@@ -6,20 +6,13 @@
 
 package org.sourcepit.osgify.java.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.java.JavaClass;
 import org.sourcepit.osgify.java.JavaModelPackage;
 import org.sourcepit.osgify.java.JavaPackage;
@@ -32,7 +25,6 @@ import org.sourcepit.osgify.java.JavaType;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.java.impl.JavaClassImpl#getAnnotations <em>Annotations</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaClassImpl#getType <em>Type</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.JavaClassImpl#getParentPackage <em>Parent Package</em>}</li>
  * </ul>
@@ -40,19 +32,8 @@ import org.sourcepit.osgify.java.JavaType;
  * 
  * @generated
  */
-public class JavaClassImpl extends EObjectImpl implements JavaClass
+public class JavaClassImpl extends XAnnotatableImpl implements JavaClass
 {
-   /**
-    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getAnnotations()
-    * @generated
-    * @ordered
-    */
-   protected EList<Annotation> annotations;
-
    /**
     * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
     * <!-- begin-user-doc -->
@@ -85,22 +66,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    protected EClass eStaticClass()
    {
       return JavaModelPackage.Literals.JAVA_CLASS;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_CLASS__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
-      }
-      return annotations;
    }
 
    /**
@@ -220,53 +185,12 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getAnnotationData(String source, String key)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    @SuppressWarnings("unchecked")
    @Override
    public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_CLASS__PARENT_PACKAGE :
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
@@ -286,8 +210,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_CLASS__TYPE :
             return basicSetType(null, msgs);
          case JavaModelPackage.JAVA_CLASS__PARENT_PACKAGE :
@@ -325,8 +247,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            return getAnnotations();
          case JavaModelPackage.JAVA_CLASS__TYPE :
             return getType();
          case JavaModelPackage.JAVA_CLASS__PARENT_PACKAGE :
@@ -347,10 +267,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
-            return;
          case JavaModelPackage.JAVA_CLASS__TYPE :
             setType((JavaType) newValue);
             return;
@@ -372,9 +288,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            getAnnotations().clear();
-            return;
          case JavaModelPackage.JAVA_CLASS__TYPE :
             setType((JavaType) null);
             return;
@@ -396,8 +309,6 @@ public class JavaClassImpl extends EObjectImpl implements JavaClass
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_CLASS__ANNOTATIONS :
-            return annotations != null && !annotations.isEmpty();
          case JavaModelPackage.JAVA_CLASS__TYPE :
             return type != null;
          case JavaModelPackage.JAVA_CLASS__PARENT_PACKAGE :

@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java"
     nsURI="http://www.sourcepit.org/osgify/java/0.1" nsPrefix="java">
-  <eClassifiers xsi:type="ecore:EClass" name="JavaType" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable #//FullyQualified">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaType" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable #//FullyQualified">
     <eOperations name="getTypeRoot" lowerBound="1" eType="#//JavaTypeRoot"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="innerTypes" upperBound="-1"
         eType="#//JavaType" containment="true" eOpposite="#//JavaType/outerType"/>
@@ -16,19 +16,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarations" upperBound="-1"
         eType="#//ImportDeclaration" containment="true" eOpposite="#//ImportDeclaration/compilationUnit"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable">
+  <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnit" lowerBound="1"
         eType="#//JavaCompilationUnit" transient="true" eOpposite="#//JavaCompilationUnit/importDeclarations"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaTypeRoot" abstract="true" interface="true"
-      eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable">
+      eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JavaType"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentPackage" lowerBound="1"
         eType="#//JavaPackage" eOpposite="#//JavaPackage/typeRoots"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//JavaTypeRoot"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaPackage" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable #//FullyQualified">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaPackage" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable #//FullyQualified">
     <eOperations name="getSubPackage" eType="#//JavaPackage">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -44,7 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentPackage" eType="#//JavaPackage"
         transient="true" eOpposite="#//JavaPackage/packages"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageBundle" abstract="true" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageBundle" abstract="true" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
     <eOperations name="getRootPackages" lowerBound="1" upperBound="-1" eType="#//JavaPackage">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -85,7 +85,7 @@
     <eOperations name="getFullyQualifiedName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eOperations name="getSimpleName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageRoot" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//Annotatable">
+  <eClassifiers xsi:type="ecore:EClass" name="JavaPackageRoot" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rootPackages" upperBound="-1"
         eType="#//JavaPackage" containment="true"/>

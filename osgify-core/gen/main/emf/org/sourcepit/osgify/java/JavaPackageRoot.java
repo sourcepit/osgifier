@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.java;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +27,7 @@ import org.sourcepit.modeling.common.Annotatable;
  * @model
  * @generated
  */
-public interface JavaPackageRoot extends Annotatable
+public interface JavaPackageRoot extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Path</b></em>' attribute.

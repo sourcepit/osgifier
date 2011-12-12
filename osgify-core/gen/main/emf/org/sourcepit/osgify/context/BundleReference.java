@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.context;
 
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +28,7 @@ import org.sourcepit.modeling.common.Extendable;
  * @model
  * @generated
  */
-public interface BundleReference extends Extendable
+public interface BundleReference extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Version Range</b></em>' attribute.

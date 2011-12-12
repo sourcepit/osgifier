@@ -10,7 +10,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.sourcepit.modeling.common.Annotatable;
 import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.BundleReference;
 import org.sourcepit.osgify.context.ContextModelPackage;
@@ -107,7 +109,11 @@ public class ContextModelSwitch<T>
             OsgifyContext osgifyContext = (OsgifyContext) theEObject;
             T result = caseOsgifyContext(osgifyContext);
             if (result == null)
+               result = caseXAnnotatable(osgifyContext);
+            if (result == null)
                result = caseExtendable(osgifyContext);
+            if (result == null)
+               result = caseAnnotatable(osgifyContext);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -117,7 +123,11 @@ public class ContextModelSwitch<T>
             BundleCandidate bundleCandidate = (BundleCandidate) theEObject;
             T result = caseBundleCandidate(bundleCandidate);
             if (result == null)
+               result = caseXAnnotatable(bundleCandidate);
+            if (result == null)
                result = caseExtendable(bundleCandidate);
+            if (result == null)
+               result = caseAnnotatable(bundleCandidate);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -127,7 +137,11 @@ public class ContextModelSwitch<T>
             BundleReference bundleReference = (BundleReference) theEObject;
             T result = caseBundleReference(bundleReference);
             if (result == null)
+               result = caseXAnnotatable(bundleReference);
+            if (result == null)
                result = caseExtendable(bundleReference);
+            if (result == null)
+               result = caseAnnotatable(bundleReference);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -201,6 +215,40 @@ public class ContextModelSwitch<T>
     * @generated
     */
    public T caseExtendable(Extendable object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Annotatable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Annotatable</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseAnnotatable(Annotatable object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseXAnnotatable(XAnnotatable object)
    {
       return null;
    }

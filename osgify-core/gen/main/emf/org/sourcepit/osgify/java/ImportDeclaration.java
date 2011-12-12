@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.java;
 
-import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.sourcepit.modeling.common.Annotatable;
  * @model
  * @generated
  */
-public interface ImportDeclaration extends Annotatable
+public interface ImportDeclaration extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Compilation Unit</b></em>' container reference.

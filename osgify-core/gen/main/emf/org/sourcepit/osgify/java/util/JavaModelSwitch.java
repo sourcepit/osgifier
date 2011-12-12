@@ -11,6 +11,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.java.FullyQualified;
 import org.sourcepit.osgify.java.ImportDeclaration;
 import org.sourcepit.osgify.java.JavaArchive;
@@ -115,9 +117,13 @@ public class JavaModelSwitch<T>
             JavaType javaType = (JavaType) theEObject;
             T result = caseJavaType(javaType);
             if (result == null)
-               result = caseAnnotatable(javaType);
+               result = caseXAnnotatable(javaType);
             if (result == null)
                result = caseFullyQualified(javaType);
+            if (result == null)
+               result = caseExtendable(javaType);
+            if (result == null)
+               result = caseAnnotatable(javaType);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -129,6 +135,10 @@ public class JavaModelSwitch<T>
             if (result == null)
                result = caseJavaTypeRoot(javaCompilationUnit);
             if (result == null)
+               result = caseXAnnotatable(javaCompilationUnit);
+            if (result == null)
+               result = caseExtendable(javaCompilationUnit);
+            if (result == null)
                result = caseAnnotatable(javaCompilationUnit);
             if (result == null)
                result = defaultCase(theEObject);
@@ -139,6 +149,10 @@ public class JavaModelSwitch<T>
             ImportDeclaration importDeclaration = (ImportDeclaration) theEObject;
             T result = caseImportDeclaration(importDeclaration);
             if (result == null)
+               result = caseXAnnotatable(importDeclaration);
+            if (result == null)
+               result = caseExtendable(importDeclaration);
+            if (result == null)
                result = caseAnnotatable(importDeclaration);
             if (result == null)
                result = defaultCase(theEObject);
@@ -148,6 +162,10 @@ public class JavaModelSwitch<T>
          {
             JavaTypeRoot javaTypeRoot = (JavaTypeRoot) theEObject;
             T result = caseJavaTypeRoot(javaTypeRoot);
+            if (result == null)
+               result = caseXAnnotatable(javaTypeRoot);
+            if (result == null)
+               result = caseExtendable(javaTypeRoot);
             if (result == null)
                result = caseAnnotatable(javaTypeRoot);
             if (result == null)
@@ -161,6 +179,10 @@ public class JavaModelSwitch<T>
             if (result == null)
                result = caseJavaTypeRoot(javaClass);
             if (result == null)
+               result = caseXAnnotatable(javaClass);
+            if (result == null)
+               result = caseExtendable(javaClass);
+            if (result == null)
                result = caseAnnotatable(javaClass);
             if (result == null)
                result = defaultCase(theEObject);
@@ -171,9 +193,13 @@ public class JavaModelSwitch<T>
             JavaPackage javaPackage = (JavaPackage) theEObject;
             T result = caseJavaPackage(javaPackage);
             if (result == null)
-               result = caseAnnotatable(javaPackage);
+               result = caseXAnnotatable(javaPackage);
             if (result == null)
                result = caseFullyQualified(javaPackage);
+            if (result == null)
+               result = caseExtendable(javaPackage);
+            if (result == null)
+               result = caseAnnotatable(javaPackage);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -182,6 +208,10 @@ public class JavaModelSwitch<T>
          {
             JavaPackageBundle javaPackageBundle = (JavaPackageBundle) theEObject;
             T result = caseJavaPackageBundle(javaPackageBundle);
+            if (result == null)
+               result = caseXAnnotatable(javaPackageBundle);
+            if (result == null)
+               result = caseExtendable(javaPackageBundle);
             if (result == null)
                result = caseAnnotatable(javaPackageBundle);
             if (result == null)
@@ -195,6 +225,10 @@ public class JavaModelSwitch<T>
             if (result == null)
                result = caseJavaPackageBundle(javaArchive);
             if (result == null)
+               result = caseXAnnotatable(javaArchive);
+            if (result == null)
+               result = caseExtendable(javaArchive);
+            if (result == null)
                result = caseAnnotatable(javaArchive);
             if (result == null)
                result = defaultCase(theEObject);
@@ -206,6 +240,10 @@ public class JavaModelSwitch<T>
             T result = caseJavaProject(javaProject);
             if (result == null)
                result = caseJavaPackageBundle(javaProject);
+            if (result == null)
+               result = caseXAnnotatable(javaProject);
+            if (result == null)
+               result = caseExtendable(javaProject);
             if (result == null)
                result = caseAnnotatable(javaProject);
             if (result == null)
@@ -224,6 +262,10 @@ public class JavaModelSwitch<T>
          {
             JavaPackageRoot javaPackageRoot = (JavaPackageRoot) theEObject;
             T result = caseJavaPackageRoot(javaPackageRoot);
+            if (result == null)
+               result = caseXAnnotatable(javaPackageRoot);
+            if (result == null)
+               result = caseExtendable(javaPackageRoot);
             if (result == null)
                result = caseAnnotatable(javaPackageRoot);
             if (result == null)
@@ -423,6 +465,23 @@ public class JavaModelSwitch<T>
    }
 
    /**
+    * Returns the result of interpreting the object as an instance of '<em>Extendable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Extendable</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseExtendable(Extendable object)
+   {
+      return null;
+   }
+
+   /**
     * Returns the result of interpreting the object as an instance of '<em>Annotatable</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
@@ -435,6 +494,23 @@ public class JavaModelSwitch<T>
     * @generated
     */
    public T caseAnnotatable(Annotatable object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseXAnnotatable(XAnnotatable object)
    {
       return null;
    }

@@ -11,11 +11,10 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.context.ContextModelPackage;
 import org.sourcepit.osgify.context.OsgifyContext;
@@ -27,25 +26,14 @@ import org.sourcepit.osgify.context.OsgifyContext;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.context.impl.OsgifyContextImpl#getExtensions <em>Extensions</em>}</li>
  * <li>{@link org.sourcepit.osgify.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
+public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
 {
-   /**
-    * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getExtensions()
-    * @generated
-    * @ordered
-    */
-   protected EList<EObject> extensions;
    /**
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -86,22 +74,6 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
     * 
     * @generated
     */
-   public EList<EObject> getExtensions()
-   {
-      if (extensions == null)
-      {
-         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
-            ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS);
-      }
-      return extensions;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    public EList<BundleCandidate> getBundles()
    {
       if (bundles == null)
@@ -118,78 +90,11 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
     * 
     * @generated
     */
-   public <T extends EObject> T getExtension(Class<T> extensionType)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public <T extends EObject> void addExtension(T extension)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public <T extends EObject> void removeExtension(T extension)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public <T extends EObject> void removeExtensions(Class<T> extentionType)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS :
-            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
@@ -207,8 +112,6 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS :
-            return getExtensions();
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return getBundles();
       }
@@ -227,10 +130,6 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS :
-            getExtensions().clear();
-            getExtensions().addAll((Collection<? extends EObject>) newValue);
-            return;
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
             getBundles().addAll((Collection<? extends BundleCandidate>) newValue);
@@ -250,9 +149,6 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS :
-            getExtensions().clear();
-            return;
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
@@ -271,8 +167,6 @@ public class OsgifyContextImpl extends EObjectImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__EXTENSIONS :
-            return extensions != null && !extensions.isEmpty();
          case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }

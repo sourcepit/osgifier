@@ -11,6 +11,8 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.java.FullyQualified;
 import org.sourcepit.osgify.java.ImportDeclaration;
 import org.sourcepit.osgify.java.JavaArchive;
@@ -159,9 +161,21 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
+      public Adapter caseExtendable(Extendable object)
+      {
+         return createExtendableAdapter();
+      }
+
+      @Override
       public Adapter caseAnnotatable(Annotatable object)
       {
          return createAnnotatableAdapter();
+      }
+
+      @Override
+      public Adapter caseXAnnotatable(XAnnotatable object)
+      {
+         return createXAnnotatableAdapter();
       }
 
       @Override
@@ -373,6 +387,23 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
+    * '.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.modeling.common.Extendable
+    * @generated
+    */
+   public Adapter createExtendableAdapter()
+   {
+      return null;
+   }
+
+   /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Annotatable
     * <em>Annotatable</em>}'.
     * <!-- begin-user-doc -->
@@ -385,6 +416,23 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    public Adapter createAnnotatableAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.XAnnotatable
+    * <em>XAnnotatable</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.modeling.common.XAnnotatable
+    * @generated
+    */
+   public Adapter createXAnnotatableAdapter()
    {
       return null;
    }

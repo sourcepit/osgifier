@@ -356,9 +356,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
-      bundleCandidateEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
-      bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getExtendable());
+      osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      bundleCandidateEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
 
       // Initialize classes and features; add operations and parameters
       initEClass(osgifyContextEClass, OsgifyContext.class, "OsgifyContext", !IS_ABSTRACT, !IS_INTERFACE,

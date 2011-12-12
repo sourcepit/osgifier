@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.java;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modeling.common.Annotatable;
+import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +27,7 @@ import org.sourcepit.modeling.common.Annotatable;
  * @model
  * @generated
  */
-public interface JavaType extends Annotatable, FullyQualified
+public interface JavaType extends XAnnotatable, FullyQualified
 {
    /**
     * Returns the value of the '<em><b>Inner Types</b></em>' containment reference list.

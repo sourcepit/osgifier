@@ -599,18 +599,18 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      javaTypeEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
+      javaTypeEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
       javaTypeEClass.getESuperTypes().add(this.getFullyQualified());
       javaCompilationUnitEClass.getESuperTypes().add(this.getJavaTypeRoot());
-      importDeclarationEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
-      javaTypeRootEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
+      importDeclarationEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      javaTypeRootEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
       javaClassEClass.getESuperTypes().add(this.getJavaTypeRoot());
-      javaPackageEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
+      javaPackageEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
       javaPackageEClass.getESuperTypes().add(this.getFullyQualified());
-      javaPackageBundleEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
+      javaPackageBundleEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
       javaArchiveEClass.getESuperTypes().add(this.getJavaPackageBundle());
       javaProjectEClass.getESuperTypes().add(this.getJavaPackageBundle());
-      javaPackageRootEClass.getESuperTypes().add(theCommonModelPackage.getAnnotatable());
+      javaPackageRootEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
 
       // Initialize classes and features; add operations and parameters
       initEClass(javaTypeEClass, JavaType.class, "JavaType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

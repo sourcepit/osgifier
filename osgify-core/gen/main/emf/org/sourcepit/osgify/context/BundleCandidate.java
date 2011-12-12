@@ -8,7 +8,7 @@ package org.sourcepit.osgify.context;
 
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.modeling.common.Extendable;
+import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.java.JavaPackageBundle;
 
 /**
@@ -30,7 +30,7 @@ import org.sourcepit.osgify.java.JavaPackageBundle;
  * @model
  * @generated
  */
-public interface BundleCandidate extends Extendable
+public interface BundleCandidate extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Content</b></em>' containment reference.

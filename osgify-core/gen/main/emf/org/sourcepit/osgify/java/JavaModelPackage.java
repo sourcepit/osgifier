@@ -78,6 +78,16 @@ public interface JavaModelPackage extends EPackage
    int JAVA_TYPE = 0;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_TYPE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -85,7 +95,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int JAVA_TYPE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Inner Types</b></em>' containment reference list.
@@ -95,7 +105,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE__INNER_TYPES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int JAVA_TYPE__INNER_TYPES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Outer Type</b></em>' container reference.
@@ -105,7 +115,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE__OUTER_TYPE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_TYPE__OUTER_TYPE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Simple Name</b></em>' attribute.
@@ -115,7 +125,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE__SIMPLE_NAME = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+   int JAVA_TYPE__SIMPLE_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The number of structural features of the '<em>Java Type</em>' class.
@@ -125,7 +135,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 3;
+   int JAVA_TYPE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.JavaTypeRoot <em>Java Type Root</em>}' class.
@@ -139,6 +149,16 @@ public interface JavaModelPackage extends EPackage
    int JAVA_TYPE_ROOT = 3;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_TYPE_ROOT__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -146,7 +166,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE_ROOT__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int JAVA_TYPE_ROOT__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -156,7 +176,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE_ROOT__TYPE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int JAVA_TYPE_ROOT__TYPE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Parent Package</b></em>' container reference.
@@ -166,7 +186,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE_ROOT__PARENT_PACKAGE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_TYPE_ROOT__PARENT_PACKAGE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The number of structural features of the '<em>Java Type Root</em>' class.
@@ -176,7 +196,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_TYPE_ROOT_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+   int JAVA_TYPE_ROOT_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.impl.JavaCompilationUnitImpl
@@ -189,6 +209,16 @@ public interface JavaModelPackage extends EPackage
     * @generated
     */
    int JAVA_COMPILATION_UNIT = 1;
+
+   /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_COMPILATION_UNIT__EXTENSIONS = JAVA_TYPE_ROOT__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -253,6 +283,16 @@ public interface JavaModelPackage extends EPackage
    int IMPORT_DECLARATION = 2;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int IMPORT_DECLARATION__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -260,7 +300,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int IMPORT_DECLARATION__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int IMPORT_DECLARATION__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Compilation Unit</b></em>' container reference.
@@ -270,7 +310,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int IMPORT_DECLARATION__COMPILATION_UNIT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int IMPORT_DECLARATION__COMPILATION_UNIT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The number of structural features of the '<em>Import Declaration</em>' class.
@@ -280,7 +320,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int IMPORT_DECLARATION_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int IMPORT_DECLARATION_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.impl.JavaClassImpl <em>Java Class</em>}' class.
@@ -292,6 +332,16 @@ public interface JavaModelPackage extends EPackage
     * @generated
     */
    int JAVA_CLASS = 4;
+
+   /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_CLASS__EXTENSIONS = JAVA_TYPE_ROOT__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -345,6 +395,16 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE = 5;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -352,7 +412,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int JAVA_PACKAGE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Type Roots</b></em>' containment reference list.
@@ -362,7 +422,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE__TYPE_ROOTS = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int JAVA_PACKAGE__TYPE_ROOTS = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Simple Name</b></em>' attribute.
@@ -372,7 +432,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE__SIMPLE_NAME = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_PACKAGE__SIMPLE_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Packages</b></em>' containment reference list.
@@ -382,7 +442,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE__PACKAGES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+   int JAVA_PACKAGE__PACKAGES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Parent Package</b></em>' container reference.
@@ -392,7 +452,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE__PARENT_PACKAGE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 3;
+   int JAVA_PACKAGE__PARENT_PACKAGE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
     * The number of structural features of the '<em>Java Package</em>' class.
@@ -402,7 +462,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 4;
+   int JAVA_PACKAGE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.impl.JavaPackageBundleImpl
@@ -417,6 +477,16 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE_BUNDLE = 6;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_BUNDLE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -424,7 +494,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_BUNDLE__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int JAVA_PACKAGE_BUNDLE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Package Roots</b></em>' containment reference list.
@@ -434,7 +504,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The number of structural features of the '<em>Java Package Bundle</em>' class.
@@ -444,7 +514,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_BUNDLE_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_PACKAGE_BUNDLE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.java.impl.JavaArchiveImpl <em>Java Archive</em>}' class.
@@ -456,6 +526,16 @@ public interface JavaModelPackage extends EPackage
     * @generated
     */
    int JAVA_ARCHIVE = 7;
+
+   /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_ARCHIVE__EXTENSIONS = JAVA_PACKAGE_BUNDLE__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -497,6 +577,16 @@ public interface JavaModelPackage extends EPackage
     * @generated
     */
    int JAVA_PROJECT = 8;
+
+   /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PROJECT__EXTENSIONS = JAVA_PACKAGE_BUNDLE__EXTENSIONS;
 
    /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -562,6 +652,16 @@ public interface JavaModelPackage extends EPackage
    int JAVA_PACKAGE_ROOT = 10;
 
    /**
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_PACKAGE_ROOT__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -569,7 +669,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_ROOT__ANNOTATIONS = CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+   int JAVA_PACKAGE_ROOT__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Path</b></em>' attribute.
@@ -579,7 +679,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_ROOT__PATH = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 0;
+   int JAVA_PACKAGE_ROOT__PATH = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Root Packages</b></em>' containment reference list.
@@ -589,7 +689,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_ROOT__ROOT_PACKAGES = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 1;
+   int JAVA_PACKAGE_ROOT__ROOT_PACKAGES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Package Bundle</b></em>' container reference.
@@ -599,7 +699,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 2;
+   int JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The number of structural features of the '<em>Java Package Root</em>' class.
@@ -609,7 +709,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_PACKAGE_ROOT_FEATURE_COUNT = CommonModelPackage.ANNOTATABLE_FEATURE_COUNT + 3;
+   int JAVA_PACKAGE_ROOT_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
 
    /**

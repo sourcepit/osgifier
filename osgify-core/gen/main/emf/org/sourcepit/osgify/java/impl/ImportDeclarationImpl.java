@@ -6,20 +6,13 @@
 
 package org.sourcepit.osgify.java.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.java.ImportDeclaration;
 import org.sourcepit.osgify.java.JavaCompilationUnit;
 import org.sourcepit.osgify.java.JavaModelPackage;
@@ -31,26 +24,14 @@ import org.sourcepit.osgify.java.JavaModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.java.impl.ImportDeclarationImpl#getAnnotations <em>Annotations</em>}</li>
  * <li>{@link org.sourcepit.osgify.java.impl.ImportDeclarationImpl#getCompilationUnit <em>Compilation Unit</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclaration
+public class ImportDeclarationImpl extends XAnnotatableImpl implements ImportDeclaration
 {
-   /**
-    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @see #getAnnotations()
-    * @generated
-    * @ordered
-    */
-   protected EList<Annotation> annotations;
-
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -72,22 +53,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    protected EClass eStaticClass()
    {
       return JavaModelPackage.Literals.IMPORT_DECLARATION;
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
-      }
-      return annotations;
    }
 
    /**
@@ -150,53 +115,12 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getAnnotationData(String source, String key)
-   {
-      // TODO: implement this method
-      // Ensure that you remove @generated or mark it @generated NOT
-      throw new UnsupportedOperationException();
-   }
-
-   /**
-    * <!-- begin-user-doc -->
-    * <!-- end-user-doc -->
-    * 
-    * @generated
-    */
    @SuppressWarnings("unchecked")
    @Override
    public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
@@ -216,8 +140,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return basicSetCompilationUnit(null, msgs);
       }
@@ -253,8 +175,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            return getAnnotations();
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return getCompilationUnit();
       }
@@ -273,10 +193,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
-            return;
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             setCompilationUnit((JavaCompilationUnit) newValue);
             return;
@@ -295,9 +211,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            getAnnotations().clear();
-            return;
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             setCompilationUnit((JavaCompilationUnit) null);
             return;
@@ -316,8 +229,6 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
-            return annotations != null && !annotations.isEmpty();
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return getCompilationUnit() != null;
       }

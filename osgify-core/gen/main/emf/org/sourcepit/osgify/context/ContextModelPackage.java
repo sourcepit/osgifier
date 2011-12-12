@@ -86,7 +86,17 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OSGIFY_CONTEXT__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
+   int OSGIFY_CONTEXT__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int OSGIFY_CONTEXT__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Bundles</b></em>' containment reference list.
@@ -96,7 +106,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OSGIFY_CONTEXT__BUNDLES = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
+   int OSGIFY_CONTEXT__BUNDLES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The number of structural features of the '<em>Osgify Context</em>' class.
@@ -106,7 +116,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int OSGIFY_CONTEXT_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
+   int OSGIFY_CONTEXT_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.BundleCandidateImpl
@@ -128,7 +138,17 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
+   int BUNDLE_CANDIDATE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Content</b></em>' containment reference.
@@ -138,7 +158,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__CONTENT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
+   int BUNDLE_CANDIDATE__CONTENT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
@@ -148,7 +168,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__DEPENDENCIES = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
+   int BUNDLE_CANDIDATE__DEPENDENCIES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -158,7 +178,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__VERSION = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 2;
+   int BUNDLE_CANDIDATE__VERSION = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
@@ -168,7 +188,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 3;
+   int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
     * The number of structural features of the '<em>Bundle Candidate</em>' class.
@@ -178,7 +198,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 4;
+   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.context.impl.BundleReferenceImpl
@@ -200,7 +220,17 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__EXTENSIONS = CommonModelPackage.EXTENDABLE__EXTENSIONS;
+   int BUNDLE_REFERENCE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
+
+   /**
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_REFERENCE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
     * The feature id for the '<em><b>Version Range</b></em>' attribute.
@@ -210,7 +240,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__VERSION_RANGE = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 0;
+   int BUNDLE_REFERENCE__VERSION_RANGE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
     * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -220,7 +250,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__OPTIONAL = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 1;
+   int BUNDLE_REFERENCE__OPTIONAL = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Target</b></em>' reference.
@@ -230,7 +260,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__TARGET = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 2;
+   int BUNDLE_REFERENCE__TARGET = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Provided</b></em>' attribute.
@@ -240,7 +270,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE__PROVIDED = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 3;
+   int BUNDLE_REFERENCE__PROVIDED = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
     * The number of structural features of the '<em>Bundle Reference</em>' class.
@@ -250,7 +280,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelPackage.EXTENDABLE_FEATURE_COUNT + 4;
+   int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
 
 
    /**
