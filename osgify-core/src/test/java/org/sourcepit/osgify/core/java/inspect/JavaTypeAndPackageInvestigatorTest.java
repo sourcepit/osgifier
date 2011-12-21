@@ -13,7 +13,6 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,7 +46,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaPackageBundleScanner().scan((JavaArchive) null, (InputStream) null, null);
+         new JavaPackageBundleScanner().scan((JavaArchive) null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -57,7 +56,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       try
       {
-         new JavaPackageBundleScanner().scan(javaArchive, (InputStream) null, null);
+         new JavaPackageBundleScanner().scan(javaArchive, null, null);
          fail();
       }
       catch (ConstraintViolationException e)

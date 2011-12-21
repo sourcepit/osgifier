@@ -11,8 +11,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.sourcepit.common.utils.io.UnclosableInputStreamDelegate;
+import org.sourcepit.common.utils.io.UnclosableInputStream;
+import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.common.utils.path.PathUtils;
+import org.sourcepit.osgify.core.inspect.ResourceVisitor;
 
 public class RelativeDirectoryTraverser implements IResourceTraverser
 {
@@ -23,41 +25,37 @@ public class RelativeDirectoryTraverser implements IResourceTraverser
       this.directory = directory;
    }
 
-   public void travers(IResourceVisitor visitor)
+   public void travers(ResourceVisitor visitor)
    {
       travers(directory, visitor);
    }
 
-   private void travers(File directory, IResourceVisitor visitor)
+   private void travers(File directory, ResourceVisitor visitor)
    {
       accept(directory, directory.listFiles(), visitor);
    }
 
-   private void accept(File rootDirectory, File[] filesToVisit, IResourceVisitor visitor)
+   private void accept(File rootDirectory, File[] filesToVisit, ResourceVisitor visitor)
    {
       if (filesToVisit == null)
       {
          return;
       }
-      
+
       for (final File file : filesToVisit)
       {
          final boolean isDirectory = file.isDirectory();
 
-         String path = PathUtils.getRelativePath(file, rootDirectory, "/");
-         if (isDirectory && !path.endsWith("/"))
-         {
-            path = path + "/";
-         }
+         final Path path = new Path(PathUtils.getRelativePath(file, rootDirectory, Path.SEPARATOR));
 
-         final UnclosableInputStreamDelegate streamDelegate;
+         final UnclosableInputStream streamDelegate;
          if (isDirectory)
          {
             streamDelegate = null;
          }
          else
          {
-            streamDelegate = new UnclosableInputStreamDelegate()
+            streamDelegate = new UnclosableInputStream()
             {
                @Override
                protected InputStream openInputStream() throws IOException
@@ -67,10 +65,9 @@ public class RelativeDirectoryTraverser implements IResourceTraverser
             };
          }
 
-         final boolean visitChildren;
          try
          {
-            visitChildren = visitor.visit(path, isDirectory, streamDelegate);
+            visitor.visit(path, isDirectory, streamDelegate);
          }
          finally
          {
@@ -80,7 +77,7 @@ public class RelativeDirectoryTraverser implements IResourceTraverser
             }
          }
 
-         if (visitChildren && isDirectory)
+         if (isDirectory)
          {
             accept(rootDirectory, file.listFiles(), visitor);
          }

@@ -10,13 +10,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.sourcepit.osgify.core.util.IResourceVisitor;
-import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
+import org.sourcepit.osgify.core.inspect.ResourceVisitor;
 
 public class RelativeDirectoryTraverserTest extends AbstractTraverserTest
 {
    @Override
-   protected void travers(IResourceVisitor visitor)
+   protected void travers(ResourceVisitor visitor)
    {
       File testResources = new File("target/testResources");
       assertTrue(testResources.exists());

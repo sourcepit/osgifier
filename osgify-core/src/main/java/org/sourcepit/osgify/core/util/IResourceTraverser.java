@@ -6,7 +6,9 @@
 
 package org.sourcepit.osgify.core.util;
 
+import org.sourcepit.osgify.core.inspect.ResourceVisitor;
+
 public interface IResourceTraverser
 {
-   public void travers(IResourceVisitor resourceVisitor);
+   public void travers(ResourceVisitor resourceVisitor);
 }

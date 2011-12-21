@@ -7,9 +7,17 @@
 package org.sourcepit.osgify.maven.context;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -53,6 +61,29 @@ public class OsgifyContextBuilder
 
    private java.util.List<ArtifactRepository> remoteRepositories;
 
+   private class Scan implements Runnable
+   {
+      private BundleCandidate bundleCandidate;
+      private MavenArtifact mavenArtifact;
+
+
+      public void run()
+      {
+         System.out.println("run START");
+
+         final JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
+         scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
+         bundleCandidate.setContent(scanner.scan(mavenArtifact.getFile()));
+
+         final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundleCandidate);
+         bundleCandidate.setSymbolicName(symbolicName);
+
+         System.out.println("run END");
+      }
+   }
+
+   private List<Scan> scans = new ArrayList<Scan>();
+
    public OsgifyContext build(MavenProject project, Goal goal, ArtifactRepository localRepository)
    {
       this.remoteRepositories = project.getRemoteArtifactRepositories();
@@ -67,6 +98,44 @@ public class OsgifyContextBuilder
       // we must re-resolve the artifacts... if we use the already resolved artifacts from the project, we lose version
       // ranges
       addBundleReferences(bundleNode, resolveDependencies(artifact, project.getDependencyArtifacts()));
+
+      Collections.sort(scans, new Comparator<Scan>()
+      {
+         public int compare(Scan s1, Scan s2)
+         {
+            File f1 = s1.mavenArtifact.getFile();
+            File f2 = s2.mavenArtifact.getFile();
+            return (int) -(f1.length() - f2.length());
+         }
+      });
+
+      ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+      for (Scan scan : scans)
+      {
+         executor.execute(scan);
+      }
+
+      executor.shutdown();
+
+      BlockingQueue<Runnable> queue = executor.getQueue();
+
+      Runnable poll = queue.poll();
+      while (poll != null)
+      {
+         poll.run();
+         poll = queue.poll();
+      }
+
+      try
+      {
+         System.out.println("wait");
+         executor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+         System.out.println("wait");
+      }
+      catch (InterruptedException e)
+      {
+      }
+
 
       OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().addAll(mvnIdToBundleNode.values());
@@ -138,16 +207,17 @@ public class OsgifyContextBuilder
    {
       final MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
 
-      JavaArchive jArchive = scanArtifact(mArtifact);
+      // JavaArchive jArchive = scanArtifact(mArtifact);
 
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.addExtension(mArtifact);
 
-      bundleCandidate.setContent(jArchive);
+      // bundleCandidate.setContent(jArchive);
 
-
-      final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundleCandidate);
-      bundleCandidate.setSymbolicName(symbolicName);
+      Scan s = new Scan();
+      s.bundleCandidate = bundleCandidate;
+      s.mavenArtifact = mArtifact;
+      scans.add(s);
 
       bundleCandidate.setVersion(null);
 

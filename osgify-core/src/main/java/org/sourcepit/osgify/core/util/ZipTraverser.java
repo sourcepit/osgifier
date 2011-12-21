@@ -7,161 +7,35 @@
 package org.sourcepit.osgify.core.util;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
-import org.apache.commons.io.IOUtils;
-import org.sourcepit.common.utils.io.UnclosableInputStreamDelegate;
+import org.sourcepit.common.utils.zip.FileZipInputStreamFactory;
+import org.sourcepit.common.utils.zip.ZipProcessingRequest;
+import org.sourcepit.common.utils.zip.ZipProcessor;
+import org.sourcepit.osgify.core.inspect.ResourceVisitor;
+import org.sourcepit.osgify.core.inspect.ZipEntryHandlerAdapter;
 
 public class ZipTraverser implements IResourceTraverser
 {
-   private final File zipFile;
-
-   private final InputStream zipStream;
+   private File zipFile;
 
    public ZipTraverser(File zipFile)
    {
       this.zipFile = zipFile;
-      this.zipStream = null;
    }
 
-   public ZipTraverser(InputStream zipStream)
+   public void travers(ResourceVisitor visitor)
    {
-      this.zipStream = zipStream;
-      this.zipFile = null;
-   }
-
-   public void travers(IResourceVisitor visitor)
-   {
-      if (zipFile != null)
-      {
-         travers(zipFile, visitor);
-      }
-      else
-      {
-         travers(zipStream, visitor);
-      }
-   }
-
-   private void travers(File zipFile, IResourceVisitor visitor)
-   {
-      final FileInputStream fileInputStream;
+      final ZipProcessingRequest request = new ZipProcessingRequest();
+      request.setStreamFactory(new FileZipInputStreamFactory(zipFile));
+      request.setEntryHandler(new ZipEntryHandlerAdapter(visitor));
       try
       {
-         fileInputStream = new FileInputStream(zipFile);
-      }
-      catch (FileNotFoundException e)
-      {
-         throw new IllegalArgumentException(e);
-      }
-
-      try
-      {
-         travers(new InputStream()
-         {
-            @Override
-            public int read() throws IOException
-            {
-               return fileInputStream.read();
-            }
-         }, visitor);
-      }
-      finally
-      {
-         IOUtils.closeQuietly(fileInputStream);
-      }
-   }
-
-   private void travers(InputStream zipStream, IResourceVisitor visitor)
-   {
-      final ZipInputStream zipIn = new ZipInputStream(zipStream);
-      try
-      {
-         travers(zipIn, visitor);
+         new ZipProcessor().process(request);
       }
       catch (IOException e)
       {
          throw new IllegalStateException(e);
       }
-      finally
-      {
-         IOUtils.closeQuietly(zipIn);
-      }
-   }
-
-   private void travers(ZipInputStream zipIn, IResourceVisitor visitor) throws IOException
-   {
-      final Set<String> skipped = new HashSet<String>();
-      ZipEntry entry = zipIn.getNextEntry();
-      while (entry != null)
-      {
-         final String path = entry.getName();
-         if (!isSkipped(skipped, path))
-         {
-            final boolean isDirectory = entry.isDirectory();
-            final boolean visitChildren = travers(zipIn, path, isDirectory, visitor);
-            if (!visitChildren && isDirectory)
-            {
-               skipped.add(path);
-            }
-         }
-         zipIn.closeEntry();
-         entry = zipIn.getNextEntry();
-      }
-   }
-
-   private boolean isSkipped(Set<String> skipped, String path)
-   {
-      for (String skippedPath : skipped)
-      {
-         if (path.startsWith(skippedPath))
-         {
-            return true;
-         }
-      }
-      return false;
-   }
-
-   private boolean travers(final ZipInputStream zipIn, String path, boolean isDirectory, IResourceVisitor visitor)
-   {
-      final UnclosableInputStreamDelegate streamDelegate;
-
-      if (isDirectory)
-      {
-         streamDelegate = null;
-      }
-      else
-      {
-         streamDelegate = new UnclosableInputStreamDelegate()
-         {
-            @Override
-            protected InputStream openInputStream() throws IOException
-            {
-               return zipIn;
-            }
-         };
-      }
-
-      final boolean visitChildren;
-      try
-      {
-         visitChildren = visitor.visit(path, isDirectory, streamDelegate);
-      }
-      finally
-      {
-         // zip input stream will closed by caller
-         // if (streamDelegate != null)
-         // {
-         // streamDelegate.closeDelegate();
-         // }
-      }
-
-      return visitChildren;
    }
 }

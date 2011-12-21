@@ -16,6 +16,8 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.OS;
 import org.junit.Rule;
 import org.junit.Test;
+import org.sourcepit.osgify.core.Environment;
+import org.sourcepit.osgify.core.Workspace;
 
 public class OsgifyIT
 {

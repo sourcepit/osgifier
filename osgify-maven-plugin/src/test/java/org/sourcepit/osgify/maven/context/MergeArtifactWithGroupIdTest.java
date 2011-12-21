@@ -45,6 +45,12 @@ public class MergeArtifactWithGroupIdTest
 
       name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
       assertThat(name, IsNull.nullValue());
+      
+      mavenArtifact.setGroupId("org.osgi");
+      mavenArtifact.setArtifactId("org.osgi.core");
+
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      assertThat(name, IsEqual.equalTo("org.osgi.core"));
 
       mavenArtifact.setGroupId("org.aspectj");
       mavenArtifact.setArtifactId("aspectjrt");

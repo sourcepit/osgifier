@@ -34,7 +34,7 @@ public class SymbolicNameResolver
 
    private List<AbstractSymbolicNameResolutionStrategy> ambiguousStartegies;
 
-   private List<AbstractSymbolicNameResolutionStrategy> getUnambiguousStartegies()
+   private synchronized List<AbstractSymbolicNameResolutionStrategy> getUnambiguousStartegies()
    {
       if (unambiguousStartegies == null)
       {
@@ -51,7 +51,7 @@ public class SymbolicNameResolver
       return unambiguousStartegies;
    }
 
-   private List<AbstractSymbolicNameResolutionStrategy> getAmbiguousStartegies()
+   private synchronized List<AbstractSymbolicNameResolutionStrategy> getAmbiguousStartegies()
    {
       if (ambiguousStartegies == null)
       {

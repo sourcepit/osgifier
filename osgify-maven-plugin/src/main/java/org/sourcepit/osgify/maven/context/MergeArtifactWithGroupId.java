@@ -73,10 +73,15 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
          final StringBuilder sb = new StringBuilder();
          sb.append(groupId);
 
-         final String lastSegment = segments[segments.length - 1];
-         if (artifactId.startsWith(lastSegment))
+         String idPrefix = groupId;
+         if (!artifactId.startsWith(idPrefix))
          {
-            final String appendix = artifactId.substring(lastSegment.length());
+            idPrefix = segments[segments.length - 1];
+         }
+         
+         if (artifactId.startsWith(idPrefix))
+         {
+            final String appendix = artifactId.substring(idPrefix.length());
             boolean trim = true;
             for (char c : appendix.toCharArray())
             {

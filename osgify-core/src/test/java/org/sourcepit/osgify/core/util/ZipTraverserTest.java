@@ -10,13 +10,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.sourcepit.osgify.core.util.IResourceVisitor;
-import org.sourcepit.osgify.core.util.ZipTraverser;
+import org.sourcepit.osgify.core.inspect.ResourceVisitor;
 
 public class ZipTraverserTest extends AbstractTraverserTest
 {
    @Override
-   protected void travers(IResourceVisitor visitor)
+   protected void travers(ResourceVisitor visitor)
    {
       File jarFile = new File("target/testResources/osgify-core.jar");
       assertTrue(jarFile.exists());

@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
+import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 
 public class JavaLangUtilsTest
@@ -44,7 +45,7 @@ public class JavaLangUtilsTest
    {
       try
       {
-         JavaLangUtils.toPackageName(null);
+         JavaLangUtils.toPackageName((Path)null);
       }
       catch (ConstraintViolationException e)
       {

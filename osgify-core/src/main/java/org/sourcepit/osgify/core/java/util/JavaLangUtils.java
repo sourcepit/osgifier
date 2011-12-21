@@ -10,6 +10,8 @@ import java.util.StringTokenizer;
 
 import javax.validation.constraints.NotNull;
 
+import org.sourcepit.common.utils.path.Path;
+
 public final class JavaLangUtils
 {
    private JavaLangUtils()
@@ -17,7 +19,12 @@ public final class JavaLangUtils
       super();
    }
 
-   public static boolean isFullyQiallifiedPackageName(@NotNull String fullyQuallifiedName)
+   public static boolean isFullyQuallifiedPackageName(@NotNull Path path)
+   {
+      return isFullyQuallifiedPackageName(path.toString(), Path.SEPARATOR);
+   }
+
+   public static boolean isFullyQuallifiedPackageName(@NotNull String fullyQuallifiedName)
    {
       return isFullyQuallifiedPackageName(fullyQuallifiedName, ".");
    }
@@ -54,6 +61,12 @@ public final class JavaLangUtils
          }
       }
       return true;
+   }
+   
+   @NotNull
+   public static String toPackageName(@NotNull Path path)
+   {
+      return toPackageName(path.toString());
    }
 
    @NotNull

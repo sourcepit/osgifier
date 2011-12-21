@@ -11,6 +11,7 @@ import java.io.InputStream;
 
 import javax.validation.constraints.NotNull;
 
+import org.sourcepit.osgify.core.inspect.JavaResourceVisitor;
 import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
 import org.sourcepit.osgify.core.util.ZipTraverser;
 import org.sourcepit.osgify.java.JavaArchive;
@@ -48,51 +49,31 @@ public class JavaPackageBundleScanner
       new ZipTraverser(jarFile).travers(newJavaResourceVisitor(javaArchive, typeAnalyzer));
    }
 
-   public JavaArchive scan(@NotNull InputStream jarFile)
-   {
-      JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      scan(javaArchive, jarFile, typeAnalyzer);
-      return javaArchive;
-   }
-
-   public JavaArchive scan(@NotNull InputStream jarFile, final IJavaTypeAnalyzer typeAnalyzer)
-   {
-      JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      scan(javaArchive, jarFile, typeAnalyzer);
-      return javaArchive;
-   }
-
-   public void scan(@NotNull final JavaArchive javaArchive, @NotNull InputStream jarFile,
-      final IJavaTypeAnalyzer typeAnalyzer)
-   {
-      new ZipTraverser(jarFile).travers(newJavaResourceVisitor(javaArchive, typeAnalyzer));
-   }
-
    protected JavaResourceVisitor newJavaResourceVisitor(final JavaArchive javaArchive,
       final IJavaTypeAnalyzer typeAnalyzer)
    {
       return new JavaResourceVisitor()
       {
          @Override
-         protected JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         protected synchronized JavaPackageRoot getPackageRoot(boolean createOnDemand)
          {
             return javaArchive.getPackageRoot("", createOnDemand);
          }
 
          @Override
-         protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
+         protected synchronized JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
          {
             return javaArchive.getPackage(fullyQualifiedName, createOnDemand);
          }
 
          @Override
-         protected JavaType getType(String packageName, String typeName, boolean createOnDemand)
+         protected synchronized JavaType getType(String packageName, String typeName, boolean createOnDemand)
          {
             return javaArchive.getType(packageName, typeName, createOnDemand);
          }
 
          @Override
-         protected void visitType(JavaType javaType, InputStream content)
+         protected void visitJType(JavaType javaType, InputStream content)
          {
             if (typeAnalyzer != null)
             {
@@ -145,25 +126,25 @@ public class JavaPackageBundleScanner
       return new JavaResourceVisitor()
       {
          @Override
-         protected JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         protected synchronized JavaPackageRoot getPackageRoot(boolean createOnDemand)
          {
             return javaProject.getPackageRoot(binDirPath, createOnDemand);
          }
 
          @Override
-         protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
+         protected synchronized JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
          {
             return javaProject.getPackage(binDirPath, fullyQualifiedName, createOnDemand);
          }
 
          @Override
-         protected JavaType getType(String packageName, String typeName, boolean createOnDemand)
+         protected synchronized JavaType getType(String packageName, String typeName, boolean createOnDemand)
          {
             return javaProject.getType(binDirPath, packageName, typeName, createOnDemand);
          }
 
          @Override
-         protected void visitType(JavaType javaType, InputStream content)
+         protected void visitJType(JavaType javaType, InputStream content)
          {
             if (typeAnalyzer != null)
             {
