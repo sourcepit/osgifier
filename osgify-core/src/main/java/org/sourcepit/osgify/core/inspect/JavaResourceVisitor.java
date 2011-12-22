@@ -8,9 +8,8 @@ package org.sourcepit.osgify.core.inspect;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 import java.util.Map.Entry;
-import java.util.concurrent.SynchronousQueue;
+import java.util.Properties;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.sourcepit.common.manifest.Manifest;

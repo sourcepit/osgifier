@@ -13,7 +13,6 @@ import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 
 public class JavaLangUtilsTest
 {
