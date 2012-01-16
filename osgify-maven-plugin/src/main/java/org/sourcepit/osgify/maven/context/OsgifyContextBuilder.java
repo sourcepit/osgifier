@@ -89,7 +89,7 @@ public class OsgifyContextBuilder
       this.remoteRepositories = project.getRemoteArtifactRepositories();
       this.localRepository = localRepository;
 
-      final BundleCandidate bundleNode = newNode(goal, project);
+      final BundleCandidate bundleNode = newProjectBundleCandidate(goal, project);
 
       Artifact artifact = project.getArtifact();
       String id = artifact.getId();
@@ -190,14 +190,15 @@ public class OsgifyContextBuilder
       return reference;
    }
 
-   private BundleCandidate newNode(Goal goal, MavenProject project)
+   private BundleCandidate newProjectBundleCandidate(Goal goal, MavenProject project)
    {
       JavaProject jProject = scanProject(goal, project);
 
       BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       node.setContent(jProject);
       // TODO converter
-      node.setSymbolicName(null);
+      final String symbolicName = symbolicNameResolver.resolveSymbolicName(node);
+      node.setSymbolicName(symbolicName);
       node.setVersion(null);
 
       return node;
