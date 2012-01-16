@@ -258,11 +258,4 @@ public class OsgifyContextBuilder
       }
       return paths;
    }
-
-   private JavaArchive scanArtifact(MavenArtifact artifact)
-   {
-      final JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
-      scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
-      return scanner.scan(artifact.getFile());
-   }
 }
