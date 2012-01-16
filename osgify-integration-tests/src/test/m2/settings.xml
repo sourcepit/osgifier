@@ -102,6 +102,7 @@ under the License.
       <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
     </proxy>
     -->
+${proxy.settingsXml}
   </proxies>
 
   <!-- servers

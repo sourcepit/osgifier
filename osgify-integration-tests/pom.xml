@@ -12,6 +12,7 @@
 		<test.user.home>${project.build.directory}/test-user.home</test.user.home>
 		<test.localRepository>${test.user.home}/.m2/repository</test.localRepository>
 		<it.localRepositoryXml />
+		<proxy.settingsXml />
 	</properties>
 
 	<dependencies>
@@ -108,4 +109,36 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>proxy-property</id>
+			<activation>
+				<property>
+					<name>http.proxyHost</name>
+				</property>
+			</activation>
+			<properties>
+				<proxy.settingsXml>&lt;proxy&gt;
+					&lt;active&gt;true&lt;/active&gt;
+					&lt;protocol&gt;http&lt;/protocol&gt;
+					&lt;host&gt;${http.proxyHost}&lt;/host&gt;
+					&lt;port&gt;${http.proxyPort}&lt;/port&gt;
+					&lt;nonProxyHosts&gt;${http.nonProxyHosts}&lt;/nonProxyHosts&gt;
+					&lt;/proxy&gt;</proxy.settingsXml>
+			</properties>
+		</profile>
+		<profile>
+			<id>it.localRepositoryXml-property</id>
+			<activation>
+				<property>
+					<name>it.localRepository</name>
+				</property>
+			</activation>
+			<properties>
+				<it.localRepositoryXml>&lt;localRepository&gt;${it.localRepository}&lt;/localRepository&gt;</it.localRepositoryXml>
+			</properties>
+		</profile>
+	</profiles>
+
 </project>
