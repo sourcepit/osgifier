@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import org.codehaus.plexus.component.annotations.Component;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.common.maven.model.MavenArtifact;
+import org.sourcepit.common.maven.model.VersionedIdentifiable;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractVersionResolutionStrategy;
@@ -28,7 +28,7 @@ public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStr
     */
    private static final Pattern FUZZY_VERSION = Pattern.compile("(\\d+)(\\.(\\d+)(\\.(\\d+))?)?([^a-zA-Z0-9](.*))?",
       Pattern.DOTALL);
-   
+
    public Priority getPriority()
    {
       return Priority.NORMAL;
@@ -37,7 +37,7 @@ public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStr
    @Override
    public Version resolveVersion(BundleCandidate bundleCandidate)
    {
-      final MavenArtifact mavenArtifact = bundleCandidate.getExtension(MavenArtifact.class);
+      final VersionedIdentifiable mavenArtifact = bundleCandidate.getExtension(VersionedIdentifiable.class);
       if (mavenArtifact != null)
       {
          final String mvnVersion = mavenArtifact.getVersion();

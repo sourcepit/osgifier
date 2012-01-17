@@ -197,6 +197,7 @@ public class OsgifyContextBuilder
       final JavaProject jProject = scanProject(goal, project);
 
       final BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      bundleCandidate.addExtension(MavenModelUtils.toMavenProject(project));
       bundleCandidate.setContent(jProject);
       bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate));
       bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate));
