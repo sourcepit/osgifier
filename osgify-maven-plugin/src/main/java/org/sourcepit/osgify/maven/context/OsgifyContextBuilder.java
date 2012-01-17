@@ -39,7 +39,7 @@ import org.sourcepit.osgify.context.OsgifyContext;
 import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
-import org.sourcepit.osgify.java.JavaArchive;
+import org.sourcepit.osgify.core.resolve.VersionResolver;
 import org.sourcepit.osgify.java.JavaProject;
 import org.sourcepit.osgify.maven.Goal;
 
@@ -53,6 +53,9 @@ public class OsgifyContextBuilder
 
    @Requirement
    private SymbolicNameResolver symbolicNameResolver;
+   
+   @Requirement
+   private VersionResolver versionResolver;
 
    @Requirement
    private RepositorySystem repositorySystem;
@@ -74,9 +77,8 @@ public class OsgifyContextBuilder
          final JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
          scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
          bundleCandidate.setContent(scanner.scan(mavenArtifact.getFile()));
-
-         final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundleCandidate);
-         bundleCandidate.setSymbolicName(symbolicName);
+         bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate));
+         bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate));
 
          System.out.println("run END");
       }
@@ -192,16 +194,13 @@ public class OsgifyContextBuilder
 
    private BundleCandidate newProjectBundleCandidate(Goal goal, MavenProject project)
    {
-      JavaProject jProject = scanProject(goal, project);
+      final JavaProject jProject = scanProject(goal, project);
 
-      BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      node.setContent(jProject);
-      // TODO converter
-      final String symbolicName = symbolicNameResolver.resolveSymbolicName(node);
-      node.setSymbolicName(symbolicName);
-      node.setVersion(null);
-
-      return node;
+      final BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      bundleCandidate.setContent(jProject);
+      bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate));
+      bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate));
+      return bundleCandidate;
    }
 
    private BundleCandidate newNode(Artifact artifact)
