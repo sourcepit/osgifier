@@ -26,6 +26,8 @@ import org.sourcepit.osgify.java.JavaType;
  */
 public abstract class JavaResourceVisitor implements ResourceVisitor
 {
+   private static final Path PATH_MANIFEST = new Path("META-INF/MANIFEST.MF");
+
    public void visit(Path path, boolean isDirectory, InputStream content)
    {
       final boolean isJPackage = isDirectory && JavaLangUtils.isFullyQuallifiedPackageName(path);
@@ -43,6 +45,10 @@ public abstract class JavaResourceVisitor implements ResourceVisitor
          {
             visitJResource(path, isDirectory, content);
          }
+      }
+      else
+      {
+         visitResource(path, isDirectory, content);
       }
    }
 
@@ -98,8 +104,11 @@ public abstract class JavaResourceVisitor implements ResourceVisitor
          { // TODO log warning
          }
       }
+   }
 
-      if (!isDirectory && path.equals("META-INF/MANIFEST.MF"))
+   private void visitResource(Path path, boolean isDirectory, InputStream content)
+   {
+      if (!isDirectory && PATH_MANIFEST.equals(path))
       {
          Resource resource = new GenericManifestResourceImpl();
          try
