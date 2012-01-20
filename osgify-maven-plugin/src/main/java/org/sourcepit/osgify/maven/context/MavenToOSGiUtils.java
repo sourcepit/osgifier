@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
 import org.apache.maven.artifact.versioning.Restriction;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -64,17 +65,30 @@ public final class MavenToOSGiUtils
       {
          final Restriction restriction = restrictions.get(restrictions.size() - 1);
 
-         final ArtifactVersion lowerBound = restriction.getLowerBound();
-         final ArtifactVersion upperBound = restriction.getUpperBound();
+         final ArtifactVersion lowerBound = trimQualifier(restriction.getLowerBound());
+         final ArtifactVersion upperBound = trimQualifier(restriction.getUpperBound());
 
          final Version lowVersion = lowerBound == null ? null : MavenToOSGiUtils.toVersion(lowerBound.toString(), true);
          final Version highVersion = upperBound == null ? null : MavenToOSGiUtils
             .toVersion(upperBound.toString(), true);
 
-         return new VersionRange(lowVersion, restriction.isLowerBoundInclusive(), highVersion,
-            restriction.isUpperBoundInclusive());
+         // Mvn (,1.0] -> OSGi [,1.0] // see tests
+         final boolean lowerBoundInclusive = lowerBound == null || restriction.isLowerBoundInclusive();
+
+         return new VersionRange(lowVersion, lowerBoundInclusive, highVersion, restriction.isUpperBoundInclusive());
       }
       throw new IllegalStateException();
+   }
+
+   private static ArtifactVersion trimQualifier(ArtifactVersion version)
+   {
+      if (version != null && version.getQualifier() != null)
+      {
+         final String versionString = version.toString();
+         final int idx = versionString.lastIndexOf('-');
+         return new DefaultArtifactVersion(versionString.substring(0, idx));
+      }
+      return version;
    }
 
    private static org.apache.maven.artifact.versioning.VersionRange getMavenVersionRange(String mvnVersionRange)
