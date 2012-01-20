@@ -155,11 +155,8 @@ public class MavenToOSGiUtilsTest
 
       // Version (Maven Syntax) :: Maven : Enforcer : OSGi :: Osgify (OSGi Syntax)
       // 1.0 :: * : x >= 1.0 : x >= 1.0 :: 1.0
-      // (,1.0] :: x <= 1.0 : x <= 1.0 : x <= 1.0 :: (0,1.0] vs. (,1.0]
-
-      // assertThat(VersionRange.parse("(,1.0]").includes(Version.parse("0")), Is.is(true));
-
-
+      // (,1.0] :: x <= 1.0 : 0 < x <= 1.0 : 0 < x <= 1.0 :: [,1.0]
+      
       // Mvn (,1] -> OSGi [,1]
       osgi_assertIsNotIncluded("(,1]", "0"); // !!!
       osgi_assertIsIncluded("[,1]", "0");
