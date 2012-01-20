@@ -45,7 +45,8 @@ public class JavaTypeReferencesCollectorTest
       final File jarFile = new File("target/testResources/osgify-core.jar");
       assertTrue(jarFile.exists());
 
-      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(new URL[] {jarFile.toURL()}));
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(
+         new URL[] { jarFile.toURL() }));
 
       JavaClass jClass = classRepo.loadClass(TypeA.class.getName());
 

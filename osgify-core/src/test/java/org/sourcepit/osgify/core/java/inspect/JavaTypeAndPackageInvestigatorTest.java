@@ -27,12 +27,12 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.util.AbstractTraverserTest;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaProject;
-import org.sourcepit.osgify.java.JavaType;
 import org.sourcepit.osgify.test.resources.TypeA;
 
 /**

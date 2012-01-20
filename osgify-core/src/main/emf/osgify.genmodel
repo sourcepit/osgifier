@@ -8,18 +8,16 @@
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
     copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/common.genmodel#//common ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
   <foreignModel>Tree.ecore</foreignModel>
-  <genPackages prefix="ContextModel" basePackage="org.sourcepit.osgify" disposableProviderFactory="true"
-      ecorePackage="Tree.ecore#/">
+  <genPackages prefix="ContextModel" basePackage="org.sourcepit.osgify.core.model"
+      disposableProviderFactory="true" ecorePackage="Tree.ecore#/">
     <genClasses ecoreClass="Tree.ecore#//OsgifyContext">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//OsgifyContext/bundles"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Tree.ecore#//AbstractBundleCoordinate">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//AbstractBundleCoordinate/version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//AbstractBundleCoordinate/symbolicName"/>
-    </genClasses>
-    <genClasses ecoreClass="Tree.ecore#//BundleNode">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleNode/content"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleNode/dependencies"/>
+    <genClasses ecoreClass="Tree.ecore#//BundleCandidate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleCandidate/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleCandidate/dependencies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleCandidate/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleCandidate/symbolicName"/>
     </genClasses>
     <genClasses ecoreClass="Tree.ecore#//BundleReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/versionRange"/>
@@ -28,7 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/provided"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="JavaModel" basePackage="org.sourcepit.osgify" disposableProviderFactory="true"
+  <genPackages prefix="JavaModel" basePackage="org.sourcepit.osgify.core.model" disposableProviderFactory="true"
       ecorePackage="Java.ecore#/">
     <genClasses ecoreClass="Java.ecore#//JavaType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaType/innerTypes"/>

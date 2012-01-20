@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaPackageBundle;
-import org.sourcepit.osgify.java.JavaPackageRoot;
-import org.sourcepit.osgify.java.JavaType;
-import org.sourcepit.osgify.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 
 public final class PackageBundleOperations
 {

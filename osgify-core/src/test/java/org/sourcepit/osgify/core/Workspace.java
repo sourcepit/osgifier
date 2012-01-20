@@ -132,8 +132,7 @@ public class Workspace extends ExternalResource
    }
 
    /**
-    * Returns a new fresh directory with a random name under the workspace
-    * directory.
+    * Returns a new fresh directory with a random name under the workspace directory.
     */
    public File newDir() throws IOException
    {

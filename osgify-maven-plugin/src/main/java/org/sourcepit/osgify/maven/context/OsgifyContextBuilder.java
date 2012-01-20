@@ -32,10 +32,10 @@ import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
 import org.sourcepit.common.utils.path.PathUtils;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.context.BundleReference;
-import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.context.OsgifyContext;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.maven.Goal;
 

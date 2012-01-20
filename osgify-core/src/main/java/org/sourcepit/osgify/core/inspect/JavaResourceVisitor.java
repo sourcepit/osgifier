@@ -17,9 +17,9 @@ import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaPackageRoot;
-import org.sourcepit.osgify.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
  * @author Bernd

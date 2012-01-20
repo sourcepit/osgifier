@@ -11,6 +11,13 @@ import org.sourcepit.osgify.core.java.internal.impl.FullyQualifiedOperations;
 import org.sourcepit.osgify.core.java.internal.impl.PackageBundleOperations;
 import org.sourcepit.osgify.core.java.internal.impl.PackageOperations;
 import org.sourcepit.osgify.core.java.internal.impl.TypeOperations;
+import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 
 public aspect JavaModelOperations
 {

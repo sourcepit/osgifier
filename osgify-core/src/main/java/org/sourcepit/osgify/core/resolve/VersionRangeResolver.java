@@ -14,7 +14,7 @@ import java.util.Map;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgify.context.BundleReference;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 
 /**
  * @author Bernd

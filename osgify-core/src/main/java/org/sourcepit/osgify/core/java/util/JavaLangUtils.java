@@ -62,7 +62,7 @@ public final class JavaLangUtils
       }
       return true;
    }
-   
+
    @NotNull
    public static String toPackageName(@NotNull Path path)
    {
@@ -90,7 +90,7 @@ public final class JavaLangUtils
       {
          typeName = typeName.substring(0, typeName.length() - 6);
       }
-      return new String[] {packageName, typeName};
+      return new String[] { packageName, typeName };
    }
 
    @NotNull
@@ -109,6 +109,6 @@ public final class JavaLangUtils
          parentPath = resourcePath.substring(0, idx);
          fileName = resourcePath.substring(idx + 1);
       }
-      return new String[] {parentPath, fileName};
+      return new String[] { parentPath, fileName };
    }
 }

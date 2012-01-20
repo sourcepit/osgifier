@@ -10,7 +10,7 @@ import org.codehaus.plexus.component.annotations.Component;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.context.BundleReference;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.resolve.AbstractVersionRangeResolutionStrategy;
 
 @Component(role = AbstractVersionRangeResolutionStrategy.class, hint = "MavenVersionRangeResolutionStrategy")

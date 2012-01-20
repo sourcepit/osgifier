@@ -6,8 +6,8 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
-import org.sourcepit.osgify.java.JavaType;
-import org.sourcepit.osgify.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 
 public final class TypeOperations
 {

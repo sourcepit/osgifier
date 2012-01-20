@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
 public class MavenVersionResolutionStrategyTest
 {
@@ -30,30 +30,30 @@ public class MavenVersionResolutionStrategyTest
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
       bundleCandidate.addExtension(mavenArtifact);
-      
+
       Version version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version, IsNull.nullValue());
 
       mavenArtifact.setVersion("1");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("1.0.0"));
-      
+
       mavenArtifact.setVersion("1.1");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("1.1.0"));
-      
+
       mavenArtifact.setVersion("murks");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("0.0.0.murks"));
-      
+
       mavenArtifact.setVersion("1.v200192827");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("1.0.0.v200192827"));
-      
+
       mavenArtifact.setVersion("1-SNAPSHOT");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("1.0.0.SNAPSHOT"));
-      
+
       mavenArtifact.setVersion("1.0.SNAPSHOT");
       version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
       assertThat(version.toString(), IsEqual.equalTo("1.0.0.SNAPSHOT"));

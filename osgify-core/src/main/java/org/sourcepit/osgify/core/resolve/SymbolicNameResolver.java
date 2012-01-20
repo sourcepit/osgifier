@@ -13,7 +13,7 @@ import java.util.Map;
 
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
-import org.sourcepit.osgify.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd

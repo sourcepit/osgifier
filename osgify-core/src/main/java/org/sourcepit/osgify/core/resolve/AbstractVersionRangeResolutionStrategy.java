@@ -8,7 +8,7 @@ package org.sourcepit.osgify.core.resolve;
 
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.utils.priority.AbstractPriorized;
-import org.sourcepit.osgify.context.BundleReference;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 
 public abstract class AbstractVersionRangeResolutionStrategy extends AbstractPriorized
 {

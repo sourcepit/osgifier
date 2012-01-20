@@ -12,7 +12,7 @@ import java.util.Map;
 import org.codehaus.plexus.component.annotations.Component;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
 @Component(role = AbstractSymbolicNameResolutionStrategy.class, hint = "MavenGavToSymbolicNameMappingStrategy")

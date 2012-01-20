@@ -9,7 +9,7 @@ package org.sourcepit.osgify.maven.context;
 import org.codehaus.plexus.component.annotations.Component;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
 /**
@@ -78,7 +78,7 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
          {
             idPrefix = segments[segments.length - 1];
          }
-         
+
          if (artifactId.startsWith(idPrefix))
          {
             final String appendix = artifactId.substring(idPrefix.length());

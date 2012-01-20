@@ -6,11 +6,11 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
-import org.sourcepit.osgify.java.FullyQualified;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaType;
-import org.sourcepit.osgify.java.JavaTypeRoot;
-import org.sourcepit.osgify.java.util.JavaModelSwitch;
+import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.util.JavaModelSwitch;
 
 public final class FullyQualifiedOperations
 {

@@ -13,10 +13,10 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
 /**
  * @author Bernd
@@ -45,7 +45,7 @@ public class MergeArtifactWithGroupIdTest
 
       name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
       assertThat(name, IsNull.nullValue());
-      
+
       mavenArtifact.setGroupId("org.osgi");
       mavenArtifact.setArtifactId("org.osgi.core");
 

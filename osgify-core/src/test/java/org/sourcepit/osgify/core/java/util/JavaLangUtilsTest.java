@@ -44,7 +44,7 @@ public class JavaLangUtilsTest
    {
       try
       {
-         JavaLangUtils.toPackageName((Path)null);
+         JavaLangUtils.toPackageName((Path) null);
       }
       catch (ConstraintViolationException e)
       {

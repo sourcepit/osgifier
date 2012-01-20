@@ -12,14 +12,14 @@ import java.io.InputStream;
 import javax.validation.constraints.NotNull;
 
 import org.sourcepit.osgify.core.inspect.JavaResourceVisitor;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
 import org.sourcepit.osgify.core.util.ZipTraverser;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaPackageRoot;
-import org.sourcepit.osgify.java.JavaProject;
-import org.sourcepit.osgify.java.JavaType;
 
 public class JavaPackageBundleScanner
 {

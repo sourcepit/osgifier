@@ -11,10 +11,10 @@ import static org.junit.Assert.assertThat;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
 /**
  * @author Bernd
@@ -33,15 +33,15 @@ public class InspectJavaPackageNamesTest
       assertThat(name, IsNull.nullValue());
 
       jArchive.getType("org.sourcepit.foo.internal", "BarImpl", true);
-      
+
       name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
       assertThat(name, IsEqual.equalTo("org.sourcepit.foo.internal"));
-      
+
       jArchive.getType("org.sourcepit.foo", "Bar", true);
-      
+
       name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
       assertThat(name, IsEqual.equalTo("org.sourcepit.foo"));
-      
+
       jArchive.getType("org.lulu", "Util", true);
 
       name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);

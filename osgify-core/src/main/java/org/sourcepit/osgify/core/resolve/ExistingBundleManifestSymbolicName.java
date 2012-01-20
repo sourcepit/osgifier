@@ -10,9 +10,9 @@ import org.codehaus.plexus.component.annotations.Component;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.java.JavaPackageBundle;
-import org.sourcepit.osgify.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 
 /**
  * @author Bernd

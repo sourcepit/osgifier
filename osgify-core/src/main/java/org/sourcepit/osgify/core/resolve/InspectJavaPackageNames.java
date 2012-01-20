@@ -12,11 +12,11 @@ import java.util.List;
 import org.codehaus.plexus.component.annotations.Component;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaPackageBundle;
-import org.sourcepit.osgify.java.JavaPackageRoot;
-import org.sourcepit.osgify.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 
 /**
  * @author Bernd

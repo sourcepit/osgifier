@@ -20,11 +20,11 @@ import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.manifest.resource.ManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.osgify.java.JavaModelFactory;
-import org.sourcepit.osgify.java.JavaPackage;
-import org.sourcepit.osgify.java.JavaPackageRoot;
-import org.sourcepit.osgify.java.JavaProject;
-import org.sourcepit.osgify.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaType;
 
 public class JavaResourceVisitorTest
 {

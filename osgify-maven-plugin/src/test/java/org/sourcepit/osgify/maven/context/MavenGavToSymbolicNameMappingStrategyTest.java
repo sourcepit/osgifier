@@ -13,10 +13,10 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
-import org.sourcepit.osgify.context.BundleCandidate;
-import org.sourcepit.osgify.context.ContextModelFactory;
-import org.sourcepit.osgify.java.JavaArchive;
-import org.sourcepit.osgify.java.JavaModelFactory;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
 public class MavenGavToSymbolicNameMappingStrategyTest
 {
@@ -24,18 +24,18 @@ public class MavenGavToSymbolicNameMappingStrategyTest
    public void testResolveSymbolicName()
    {
       MavenArtifact mavenArtifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
-      
+
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
       bundleCandidate.addExtension(mavenArtifact);
-      
+
       mavenArtifact.setGroupId("commons-io");
       mavenArtifact.setArtifactId("commons-io");
 
       String name = new MavenGavToSymbolicNameMappingStrategy().resolveSymbolicName(bundleCandidate);
       assertThat(name, IsNull.nullValue());
-      
+
       mavenArtifact.setGroupId("stax");
       mavenArtifact.setArtifactId("stax-api");
 

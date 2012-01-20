@@ -16,7 +16,7 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.sourcepit.osgify.context.OsgifyContext;
+import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
 
 public abstract class AbstractOsgifyMojo extends AbstractMojo

@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.core.resolve;
 
 import org.sourcepit.common.utils.priority.AbstractPriorized;
-import org.sourcepit.osgify.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd
