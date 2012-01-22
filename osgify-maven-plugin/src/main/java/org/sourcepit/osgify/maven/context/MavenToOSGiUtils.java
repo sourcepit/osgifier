@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.apache.maven.artifact.versioning.InvalidVersionSpecificationException;
@@ -46,16 +45,7 @@ public final class MavenToOSGiUtils
          else
          {
             final Version version;
-            if (ArtifactUtils.isSnapshot(mvnVersionString))
-            {
-               // trim snapshot qualifier
-               int idx = mvnVersionString.lastIndexOf('-');
-               version = MavenToOSGiUtils.toVersion(mvnVersionString.substring(0, idx), true);
-            }
-            else
-            {
-               version = MavenToOSGiUtils.toVersion(mvnVersionString.toString(), true);
-            }
+            version = MavenToOSGiUtils.toVersion(trimQualifier(recommendedVersion).toString(), true);
             return new VersionRange(version, true, null, false);
          }
       }
