@@ -30,7 +30,7 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 public class OsgifyIT
 {
-   private final static boolean DEBUG = false;
+   private final static boolean DEBUG = true;
 
    protected Environment environment = Environment.getInstance();
 

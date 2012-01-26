@@ -18,11 +18,9 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
@@ -37,7 +35,7 @@ import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
 
-public abstract class AbstractOsgifyMojo extends AbstractMojo
+public abstract class AbstractOsgifyMojo extends AbstractInjectedMojo
 {
    private final static ValueLookup<JavaPackageRoot, BundleManifest> BUNDLE_MANIFEST_LOOKUP = new ValueLookup<JavaPackageRoot, BundleManifest>()
    {
@@ -58,7 +56,7 @@ public abstract class AbstractOsgifyMojo extends AbstractMojo
 
    /** @parameter default-value="${project}" */
    private MavenProject project;
-
+   
    protected void doExecute(Goal goal)
    {
       final OsgifyContext context = builder.build(project, goal, localRepository);
@@ -105,7 +103,7 @@ public abstract class AbstractOsgifyMojo extends AbstractMojo
          // filter / align packages
 
          bundleMF = BundleManifestFactory.eINSTANCE.createBundleManifest();
-         bundleMF.setHeader(BundleHeaderName.BUNDLE_SYMBOLICNAME, bundleCandidate.getSymbolicName());
+         bundleMF.setBundleSymbolicName(bundleCandidate.getSymbolicName());
          bundleMF.setBundleVersion(bundleCandidate.getVersion());
 
          final Map<String, List<JavaPackage>> nameToJPackagesMap = new HashMap<String, List<JavaPackage>>();
@@ -117,7 +115,7 @@ public abstract class AbstractOsgifyMojo extends AbstractMojo
          for (Entry<String, Version> entry : nameToVersionMap.entrySet())
          {
             final String packageName = entry.getKey();
-            
+
             Version version = entry.getValue();
             if (version == null)
             {
@@ -130,9 +128,8 @@ public abstract class AbstractOsgifyMojo extends AbstractMojo
             {
                packageExport.setVersion(version);
             }
-            
+
             bundleMF.getExportPackage(true).add(packageExport);
-            
          }
 
 

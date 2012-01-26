@@ -17,7 +17,8 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public class OsgifyTestsMojo extends AbstractOsgifyMojo
 {
-   public void execute() throws MojoExecutionException, MojoFailureException
+   @Override
+   protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       doExecute(Goal.OSGIFY_TESTS);
    }
