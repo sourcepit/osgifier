@@ -21,47 +21,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.pyx4j</groupId>
-			<artifactId>maven-plugin-log4j</artifactId>
-			<version>1.0.1</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>maven-plugin-api</artifactId>
-					<groupId>org.apache.maven</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>maven-artifact</artifactId>
-					<groupId>org.apache.maven</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.4</version>
+			<groupId>org.sourcepit</groupId>
+			<artifactId>guice-plexus-bridge</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sonatype.sisu</groupId>
 			<artifactId>sisu-inject-plexus</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>ch.qos.logback</groupId> -->
-		<!-- <artifactId>logback-core</artifactId> -->
-		<!-- <version>0.9.30</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>ch.qos.logback</groupId> -->
-		<!-- <artifactId>logback-classic</artifactId> -->
-		<!-- <version>0.9.30</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>slf4j-api</artifactId> -->
-		<!-- <version>1.6.2</version> -->
-		<!-- </dependency> -->
-
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
 			<artifactId>common-utils</artifactId>

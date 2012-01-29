@@ -18,6 +18,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
 import org.apache.maven.artifact.Artifact;
@@ -26,8 +28,6 @@ import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
@@ -42,18 +42,18 @@ import org.sourcepit.osgify.maven.Goal;
 /**
  * @author Bernd
  */
-@Component(role = OsgifyContextBuilder.class, instantiationStrategy = "per-lookup")
+@Named
 public class OsgifyContextBuilder
 {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
 
-   @Requirement
+   @Inject
    private BundleCandidateScanner bundleCandidateScanner;
 
-   @Requirement
+   @Inject
    private VersionRangeResolver versionRangeResolver;
 
-   @Requirement
+   @Inject
    private RepositorySystem repositorySystem;
 
    private ArtifactRepository localRepository;

@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Inject;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.project.MavenProject;
@@ -27,6 +29,7 @@ import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.collections.CollectionUtils;
 import org.sourcepit.common.utils.collections.ValueLookup;
+import org.sourcepit.guplex.maven.AbstractGuplexedMojo;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
@@ -35,7 +38,7 @@ import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
 
-public abstract class AbstractOsgifyMojo extends AbstractInjectedMojo
+public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
 {
    private final static ValueLookup<JavaPackageRoot, BundleManifest> BUNDLE_MANIFEST_LOOKUP = new ValueLookup<JavaPackageRoot, BundleManifest>()
    {
@@ -45,7 +48,7 @@ public abstract class AbstractOsgifyMojo extends AbstractInjectedMojo
       }
    };
 
-   /** @component */
+   @Inject
    private OsgifyContextBuilder builder;
 
    /** @parameter default-value="${localRepository}" */
@@ -56,7 +59,7 @@ public abstract class AbstractOsgifyMojo extends AbstractInjectedMojo
 
    /** @parameter default-value="${project}" */
    private MavenProject project;
-   
+
    protected void doExecute(Goal goal)
    {
       final OsgifyContext context = builder.build(project, goal, localRepository);
