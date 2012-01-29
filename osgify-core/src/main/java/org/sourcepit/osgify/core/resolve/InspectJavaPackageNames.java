@@ -9,7 +9,8 @@ package org.sourcepit.osgify.core.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -21,7 +22,7 @@ import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 /**
  * @author Bernd
  */
-@Component(role = AbstractSymbolicNameResolutionStrategy.class, hint = "InspectJavaPackageNames")
+@Named("InspectJavaPackageNames")
 public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrategy
 {
    public Priority getPriority()

@@ -11,14 +11,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd
  */
-@Component(role = SymbolicNameResolver.class)
+@Named
 public class SymbolicNameResolver
 {
    // existing manifest
@@ -27,7 +28,7 @@ public class SymbolicNameResolver
    // project folder name
    // derived from packages
 
-   @Requirement
+   @Inject
    private Map<String, AbstractSymbolicNameResolutionStrategy> strategiesMap;
 
    private List<AbstractSymbolicNameResolutionStrategy> unambiguousStartegies;

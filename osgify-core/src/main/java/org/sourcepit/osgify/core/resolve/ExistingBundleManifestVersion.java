@@ -6,7 +6,8 @@
 
 package org.sourcepit.osgify.core.resolve;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.priority.Priority;
@@ -14,7 +15,7 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
 import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 
-@Component(role = AbstractVersionResolutionStrategy.class, hint = "ExistingBundleManifestVersion")
+@Named("ExistingBundleManifestVersion")
 public class ExistingBundleManifestVersion extends AbstractVersionResolutionStrategy
 {
    public Priority getPriority()

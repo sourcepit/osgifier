@@ -9,13 +9,14 @@ package org.sourcepit.osgify.maven.context;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
-@Component(role = AbstractSymbolicNameResolutionStrategy.class, hint = "MavenGavToSymbolicNameMappingStrategy")
+@Named("MavenGavToSymbolicNameMappingStrategy")
 public class MavenGavToSymbolicNameMappingStrategy extends AbstractSymbolicNameResolutionStrategy
 {
    private final static Map<String, String> MAPPINGS = new HashMap<String, String>();

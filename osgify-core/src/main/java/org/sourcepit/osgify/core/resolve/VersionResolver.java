@@ -11,18 +11,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd
  */
-@Component(role = VersionResolver.class)
+@Named
 public class VersionResolver
 {
-   @Requirement
+   @Inject
    private Map<String, AbstractVersionResolutionStrategy> strategiesMap;
 
    private List<AbstractVersionResolutionStrategy> strategies;

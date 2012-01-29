@@ -29,7 +29,6 @@ import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.collections.CollectionUtils;
 import org.sourcepit.common.utils.collections.ValueLookup;
-import org.sourcepit.guplex.maven.AbstractGuplexedMojo;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.model.java.JavaPackage;

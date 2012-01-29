@@ -6,14 +6,15 @@
 
 package org.sourcepit.osgify.maven.context;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.VersionedIdentifiable;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractVersionResolutionStrategy;
 
-@Component(role = AbstractVersionResolutionStrategy.class, hint = "MavenVersionResolutionStrategy")
+@Named("MavenVersionResolutionStrategy")
 public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStrategy
 {
    public Priority getPriority()

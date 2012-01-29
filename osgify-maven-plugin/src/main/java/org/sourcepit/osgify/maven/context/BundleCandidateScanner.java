@@ -8,21 +8,22 @@ package org.sourcepit.osgify.maven.context;
 
 import java.io.File;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
 
-@Component(role = BundleCandidateScanner.class)
+@Named
 public class BundleCandidateScanner
 {
-   @Requirement
+   @Inject
    private SymbolicNameResolver symbolicNameResolver;
 
-   @Requirement
+   @Inject
    private VersionResolver versionResolver;
 
    public void scanProject(BundleCandidate bundleCandidate, File projectDir, String... binDirPaths)

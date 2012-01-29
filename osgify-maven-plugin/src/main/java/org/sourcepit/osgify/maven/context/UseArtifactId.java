@@ -6,7 +6,8 @@
 
 package org.sourcepit.osgify.maven.context;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -15,7 +16,7 @@ import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 /**
  * @author Bernd
  */
-@Component(role = AbstractSymbolicNameResolutionStrategy.class, hint = "UseArtifactId")
+@Named("UseArtifactId")
 public class UseArtifactId extends AbstractSymbolicNameResolutionStrategy
 {
    public Priority getPriority()

@@ -6,7 +6,8 @@
 
 package org.sourcepit.osgify.core.resolve;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.priority.Priority;
@@ -17,7 +18,7 @@ import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 /**
  * @author Bernd
  */
-@Component(role = AbstractSymbolicNameResolutionStrategy.class, hint = "ExistingBundleManifestSymbolicName")
+@Named("ExistingBundleManifestSymbolicName")
 public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameResolutionStrategy
 {
    public Priority getPriority()

@@ -11,18 +11,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 
 /**
  * @author Bernd
  */
-@Component(role = VersionRangeResolver.class)
+@Named
 public class VersionRangeResolver
 {
-   @Requirement
+   @Inject
    private Map<String, AbstractVersionRangeResolutionStrategy> strategiesMap;
 
    private List<AbstractVersionRangeResolutionStrategy> strategies;
