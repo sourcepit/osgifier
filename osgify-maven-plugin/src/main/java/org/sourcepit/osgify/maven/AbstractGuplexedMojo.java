@@ -9,8 +9,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.sourcepit.guplex.Guplex;
 
-import com.pyx4j.log4j.MavenLogAppender;
-
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -22,16 +20,8 @@ public abstract class AbstractGuplexedMojo extends AbstractMojo
 
    public final void execute() throws MojoExecutionException, MojoFailureException
    {
-      MavenLogAppender.startPluginLog(this);
-      try
-      {
-         guplex.inject(this);
-         doExecute();
-      }
-      finally
-      {
-         MavenLogAppender.endPluginLog(this);
-      }
+      guplex.inject(this);
+      doExecute();
    }
 
    protected abstract void doExecute() throws MojoExecutionException, MojoFailureException;
