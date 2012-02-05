@@ -14,79 +14,83 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
-import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Java Package Bundle</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Directory</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageBundleImpl#getPackageRoots <em>Package Roots</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements JavaPackageBundle
+public class DirectoryImpl extends ResourceImpl implements Directory
 {
    /**
-    * The cached value of the '{@link #getPackageRoots() <em>Package Roots</em>}' containment reference list. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
-    * @see #getPackageRoots()
+    * @see #getResources()
     * @generated
     * @ordered
     */
-   protected EList<JavaPackageRoot> packageRoots;
+   protected EList<Resource> resources;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   protected JavaPackageBundleImpl()
+   protected DirectoryImpl()
    {
       super();
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    @Override
    protected EClass eStaticClass()
    {
-      return JavaModelPackage.Literals.JAVA_PACKAGE_BUNDLE;
+      return JavaModelPackage.Literals.DIRECTORY;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EList<JavaPackageRoot> getPackageRoots()
+   public EList<Resource> getResources()
    {
-      if (packageRoots == null)
+      if (resources == null)
       {
-         packageRoots = new EObjectContainmentWithInverseEList<JavaPackageRoot>(JavaPackageRoot.class, this,
-            JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS, JavaModelPackage.JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE);
+         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
+            JavaModelPackage.DIRECTORY__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
-      return packageRoots;
+      return resources;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EList<JavaPackage> getRootPackages(String path)
+   public EList<Directory> getDirectories()
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -94,11 +98,12 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackage getPackage(String path, String fullyQualifiedName, boolean createOnDemand)
+   public Directory getDirectory(String name)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -106,11 +111,12 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaType getType(String path, String packageName, String typeName, boolean createOnDemand)
+   public Directory getDirectory(String name, boolean createOnDemand)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -118,11 +124,12 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageRoot getPackageRoot(String path)
+   public File getFile(String name)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -130,11 +137,12 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageRoot getPackageRoot(String path, boolean createOnDemand)
+   public File getFile(String name, boolean createOnDemand)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -142,7 +150,21 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<File> getFiles()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -152,14 +174,15 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getPackageRoots()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -168,14 +191,15 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            return ((InternalEList<?>) getPackageRoots()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -184,14 +208,15 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            return getPackageRoots();
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return getResources();
       }
       return super.eGet(featureID, resolve, coreType);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -201,16 +226,17 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            getPackageRoots().clear();
-            getPackageRoots().addAll((Collection<? extends JavaPackageRoot>) newValue);
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            getResources().clear();
+            getResources().addAll((Collection<? extends Resource>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -219,15 +245,16 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            getPackageRoots().clear();
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            getResources().clear();
             return;
       }
       super.eUnset(featureID);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -236,10 +263,10 @@ public abstract class JavaPackageBundleImpl extends XAnnotatableImpl implements 
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS :
-            return packageRoots != null && !packageRoots.isEmpty();
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return resources != null && !resources.isEmpty();
       }
       return super.eIsSet(featureID);
    }
 
-} // JavaPackageBundleImpl
+} // DirectoryImpl

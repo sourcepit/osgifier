@@ -10,7 +10,9 @@ import org.eclipse.emf.common.util.EList;
 import org.sourcepit.modeling.common.XAnnotatable;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Osgify Context</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Osgify Context</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -26,8 +28,9 @@ import org.sourcepit.modeling.common.XAnnotatable;
 public interface OsgifyContext extends XAnnotatable
 {
    /**
-    * Returns the value of the '<em><b>Bundles</b></em>' containment reference list. The list contents are of type
-    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate}. <!-- begin-user-doc -->
+    * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
+    * The list contents are of type {@link org.sourcepit.osgify.core.model.context.BundleCandidate}.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Bundles</em>' containment reference list isn't clear, there really should be more of a
     * description here...

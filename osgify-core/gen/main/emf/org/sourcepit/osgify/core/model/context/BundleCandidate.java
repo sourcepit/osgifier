@@ -9,11 +9,12 @@ package org.sourcepit.osgify.core.model.context;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.modeling.common.XAnnotatable;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Bundle Candidate</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Bundle Candidate</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -32,7 +33,8 @@ import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
 public interface BundleCandidate extends XAnnotatable
 {
    /**
-    * Returns the value of the '<em><b>Content</b></em>' containment reference. <!-- begin-user-doc -->
+    * Returns the value of the '<em><b>Content</b></em>' containment reference.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Content</em>' containment reference isn't clear, there really should be more of a
     * description here...
@@ -40,26 +42,29 @@ public interface BundleCandidate extends XAnnotatable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Content</em>' containment reference.
-    * @see #setContent(JavaPackageBundle)
+    * @see #setContent(JavaResourceBundle)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Content()
     * @model containment="true" required="true"
     * @generated
     */
-   JavaPackageBundle getContent();
+   JavaResourceBundle getContent();
 
    /**
     * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}
-    * ' containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * ' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @param value the new value of the '<em>Content</em>' containment reference.
     * @see #getContent()
     * @generated
     */
-   void setContent(JavaPackageBundle value);
+   void setContent(JavaResourceBundle value);
 
    /**
-    * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list. The list contents are of type
-    * {@link org.sourcepit.osgify.core.model.context.BundleReference}. <!-- begin-user-doc -->
+    * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.
+    * The list contents are of type {@link org.sourcepit.osgify.core.model.context.BundleReference}.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Dependencies</em>' containment reference list isn't clear, there really should be more
     * of a description here...
@@ -74,7 +79,8 @@ public interface BundleCandidate extends XAnnotatable
    EList<BundleReference> getDependencies();
 
    /**
-    * Returns the value of the '<em><b>Version</b></em>' attribute. <!-- begin-user-doc -->
+    * Returns the value of the '<em><b>Version</b></em>' attribute.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Version</em>' attribute isn't clear, there really should be more of a description
     * here...
@@ -91,7 +97,9 @@ public interface BundleCandidate extends XAnnotatable
 
    /**
     * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}
-    * ' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * ' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @param value the new value of the '<em>Version</em>' attribute.
     * @see #getVersion()
@@ -100,7 +108,8 @@ public interface BundleCandidate extends XAnnotatable
    void setVersion(Version value);
 
    /**
-    * Returns the value of the '<em><b>Symbolic Name</b></em>' attribute. <!-- begin-user-doc -->
+    * Returns the value of the '<em><b>Symbolic Name</b></em>' attribute.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Symbolic Name</em>' attribute isn't clear, there really should be more of a description
     * here...
@@ -117,7 +126,9 @@ public interface BundleCandidate extends XAnnotatable
 
    /**
     * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName
-    * <em>Symbolic Name</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Symbolic Name</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @param value the new value of the '<em>Symbolic Name</em>' attribute.
     * @see #getSymbolicName()

@@ -8,80 +8,52 @@ package org.sourcepit.osgify.core.model.java.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesType;
+import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.QualifiedJavaElement;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Java Package</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Java Package</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getTypeRoots <em>Type Roots</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getSimpleName <em>Simple Name</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getPackages <em>Packages</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getParentPackage <em>Parent Package</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
  * 
  * @generated
  */
-public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
+public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
 {
    /**
-    * The cached value of the '{@link #getTypeRoots() <em>Type Roots</em>}' containment reference list. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
-    * @see #getTypeRoots()
+    * @see #getResources()
     * @generated
     * @ordered
     */
-   protected EList<JavaTypeRoot> typeRoots;
+   protected EList<Resource> resources;
 
    /**
-    * The default value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
-    * 
-    * @see #getSimpleName()
-    * @generated
-    * @ordered
-    */
-   protected static final String SIMPLE_NAME_EDEFAULT = "";
-
-   /**
-    * The cached value of the '{@link #getSimpleName() <em>Simple Name</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
-    * 
-    * @see #getSimpleName()
-    * @generated
-    * @ordered
-    */
-   protected String simpleName = SIMPLE_NAME_EDEFAULT;
-
-   /**
-    * The cached value of the '{@link #getPackages() <em>Packages</em>}' containment reference list. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
-    * 
-    * @see #getPackages()
-    * @generated
-    * @ordered
-    */
-   protected EList<JavaPackage> packages;
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -91,7 +63,8 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -102,115 +75,41 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EList<JavaTypeRoot> getTypeRoots()
+   public EList<Resource> getResources()
    {
-      if (typeRoots == null)
+      if (resources == null)
       {
-         typeRoots = new EObjectContainmentWithInverseEList<JavaTypeRoot>(JavaTypeRoot.class, this,
-            JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS, JavaModelPackage.JAVA_TYPE_ROOT__PARENT_PACKAGE);
+         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
+            JavaModelPackage.JAVA_PACKAGE__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
-      return typeRoots;
+      return resources;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public String getSimpleName()
-   {
-      return simpleName;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public void setSimpleName(String newSimpleName)
-   {
-      String oldSimpleName = simpleName;
-      simpleName = newSimpleName;
-      if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME,
-            oldSimpleName, simpleName));
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    public EList<JavaPackage> getPackages()
    {
-      if (packages == null)
-      {
-         packages = new EObjectContainmentWithInverseEList<JavaPackage>(JavaPackage.class, this,
-            JavaModelPackage.JAVA_PACKAGE__PACKAGES, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE);
-      }
-      return packages;
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackage getParentPackage()
-   {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE)
-         return null;
-      return (JavaPackage) eContainer();
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public NotificationChain basicSetParentPackage(JavaPackage newParentPackage, NotificationChain msgs)
-   {
-      msgs = eBasicSetContainer((InternalEObject) newParentPackage, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE, msgs);
-      return msgs;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public void setParentPackage(JavaPackage newParentPackage)
-   {
-      if (newParentPackage != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE && newParentPackage != null))
-      {
-         if (EcoreUtil.isAncestor(this, newParentPackage))
-            throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-         NotificationChain msgs = null;
-         if (eInternalContainer() != null)
-            msgs = eBasicRemoveFromContainer(msgs);
-         if (newParentPackage != null)
-            msgs = ((InternalEObject) newParentPackage).eInverseAdd(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES,
-               JavaPackage.class, msgs);
-         msgs = basicSetParentPackage(newParentPackage, msgs);
-         if (msgs != null)
-            msgs.dispatch();
-      }
-      else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE,
-            newParentPackage, newParentPackage));
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public JavaPackage getSubPackage(String name, boolean createOnDemand)
+   public EList<JavaFile> getJavaFiles()
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -218,11 +117,12 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageBundle getPackageBundle()
+   public JavaPackage getPackage(String name)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -230,11 +130,12 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageRoot getPackageRoot()
+   public JavaPackage getPackage(String name, boolean createOnDemand)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -242,11 +143,12 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public String getFullyQualifiedName()
+   public JavaFile getJavaFile(String name)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -254,7 +156,151 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaFile getJavaFile(String name, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaType getType(String name)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaType getType(String name, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaResourcesType getResourcesType()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<Directory> getDirectories()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public Directory getDirectory(String name)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public Directory getDirectory(String name, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public File getFile(String name)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public File getFile(String name, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EList<File> getFiles()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String getQualifiedName()
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -264,20 +310,15 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getTypeRoots()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getPackages()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            if (eInternalContainer() != null)
-               msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetParentPackage((JavaPackage) otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -286,35 +327,15 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return ((InternalEList<?>) getTypeRoots()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return ((InternalEList<?>) getPackages()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            return basicSetParentPackage(null, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   @Override
-   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-   {
-      switch (eContainerFeatureID())
-      {
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_PACKAGE__PACKAGES,
-               JavaPackage.class, msgs);
-      }
-      return super.eBasicRemoveFromContainerFeature(msgs);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -323,20 +344,15 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return getTypeRoots();
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
-            return getSimpleName();
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return getPackages();
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            return getParentPackage();
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            return getResources();
       }
       return super.eGet(featureID, resolve, coreType);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -346,26 +362,17 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            getTypeRoots().clear();
-            getTypeRoots().addAll((Collection<? extends JavaTypeRoot>) newValue);
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
-            setSimpleName((String) newValue);
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            getPackages().clear();
-            getPackages().addAll((Collection<? extends JavaPackage>) newValue);
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) newValue);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            getResources().clear();
+            getResources().addAll((Collection<? extends Resource>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -374,24 +381,16 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            getTypeRoots().clear();
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
-            setSimpleName(SIMPLE_NAME_EDEFAULT);
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            getPackages().clear();
-            return;
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            setParentPackage((JavaPackage) null);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            getResources().clear();
             return;
       }
       super.eUnset(featureID);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -400,34 +399,86 @@ public class JavaPackageImpl extends XAnnotatableImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__TYPE_ROOTS :
-            return typeRoots != null && !typeRoots.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE__SIMPLE_NAME :
-            return SIMPLE_NAME_EDEFAULT == null ? simpleName != null : !SIMPLE_NAME_EDEFAULT.equals(simpleName);
-         case JavaModelPackage.JAVA_PACKAGE__PACKAGES :
-            return packages != null && !packages.isEmpty();
-         case JavaModelPackage.JAVA_PACKAGE__PARENT_PACKAGE :
-            return getParentPackage() != null;
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+            return resources != null && !resources.isEmpty();
       }
       return super.eIsSet(featureID);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    @Override
-   public String toString()
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
    {
-      if (eIsProxy())
-         return super.toString();
+      if (baseClass == QualifiedJavaElement.class)
+      {
+         switch (derivedFeatureID)
+         {
+            default :
+               return -1;
+         }
+      }
+      if (baseClass == Directory.class)
+      {
+         switch (derivedFeatureID)
+         {
+            case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+               return JavaModelPackage.DIRECTORY__RESOURCES;
+            default :
+               return -1;
+         }
+      }
+      if (baseClass == JavaResourceDirectory.class)
+      {
+         switch (derivedFeatureID)
+         {
+            default :
+               return -1;
+         }
+      }
+      return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+   }
 
-      StringBuffer result = new StringBuffer(super.toString());
-      result.append(" (simpleName: ");
-      result.append(simpleName);
-      result.append(')');
-      return result.toString();
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+   {
+      if (baseClass == QualifiedJavaElement.class)
+      {
+         switch (baseFeatureID)
+         {
+            default :
+               return -1;
+         }
+      }
+      if (baseClass == Directory.class)
+      {
+         switch (baseFeatureID)
+         {
+            case JavaModelPackage.DIRECTORY__RESOURCES :
+               return JavaModelPackage.JAVA_PACKAGE__RESOURCES;
+            default :
+               return -1;
+         }
+      }
+      if (baseClass == JavaResourceDirectory.class)
+      {
+         switch (baseFeatureID)
+         {
+            default :
+               return -1;
+         }
+      }
+      return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
    }
 
 } // JavaPackageImpl

@@ -11,16 +11,19 @@ import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaProject;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Java Project</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Java Project</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class JavaProjectImpl extends JavaPackageBundleImpl implements JavaProject
+public class JavaProjectImpl extends JavaResourceBundleImpl implements JavaProject
 {
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -30,7 +33,8 @@ public class JavaProjectImpl extends JavaPackageBundleImpl implements JavaProjec
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */

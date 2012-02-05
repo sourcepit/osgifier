@@ -7,10 +7,13 @@
 package org.sourcepit.osgify.core.model.java.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.ImportDeclaration;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaClass;
@@ -18,19 +21,24 @@ import org.sourcepit.osgify.core.model.java.JavaCompilationUnit;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourcesType;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFactory
 {
    /**
-    * Creates the default factory implementation. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates the default factory implementation.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -53,7 +61,9 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    }
 
    /**
-    * Creates an instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an instance of the factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -63,7 +73,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -72,95 +83,94 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       switch (eClass.getClassifierID())
       {
-         case JavaModelPackage.JAVA_TYPE :
-            return createJavaType();
+         case JavaModelPackage.DIRECTORY :
+            return createDirectory();
+         case JavaModelPackage.FILE :
+            return createFile();
+         case JavaModelPackage.JAVA_PROJECT :
+            return createJavaProject();
+         case JavaModelPackage.JAVA_ARCHIVE :
+            return createJavaArchive();
+         case JavaModelPackage.JAVA_RESOURCES_ROOT :
+            return createJavaResourcesRoot();
+         case JavaModelPackage.JAVA_PACKAGE :
+            return createJavaPackage();
+         case JavaModelPackage.JAVA_CLASS :
+            return createJavaClass();
          case JavaModelPackage.JAVA_COMPILATION_UNIT :
             return createJavaCompilationUnit();
          case JavaModelPackage.IMPORT_DECLARATION :
             return createImportDeclaration();
-         case JavaModelPackage.JAVA_CLASS :
-            return createJavaClass();
-         case JavaModelPackage.JAVA_PACKAGE :
-            return createJavaPackage();
-         case JavaModelPackage.JAVA_ARCHIVE :
-            return createJavaArchive();
-         case JavaModelPackage.JAVA_PROJECT :
-            return createJavaProject();
-         case JavaModelPackage.JAVA_PACKAGE_ROOT :
-            return createJavaPackageRoot();
+         case JavaModelPackage.JAVA_TYPE :
+            return createJavaType();
          default :
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaType createJavaType()
+   @Override
+   public Object createFromString(EDataType eDataType, String initialValue)
    {
-      JavaTypeImpl javaType = new JavaTypeImpl();
-      return javaType;
+      switch (eDataType.getClassifierID())
+      {
+         case JavaModelPackage.JAVA_RESOURCES_TYPE :
+            return createJavaResourcesTypeFromString(eDataType, initialValue);
+         default :
+            throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+      }
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaCompilationUnit createJavaCompilationUnit()
+   @Override
+   public String convertToString(EDataType eDataType, Object instanceValue)
    {
-      JavaCompilationUnitImpl javaCompilationUnit = new JavaCompilationUnitImpl();
-      return javaCompilationUnit;
+      switch (eDataType.getClassifierID())
+      {
+         case JavaModelPackage.JAVA_RESOURCES_TYPE :
+            return convertJavaResourcesTypeToString(eDataType, instanceValue);
+         default :
+            throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+      }
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public ImportDeclaration createImportDeclaration()
+   public Directory createDirectory()
    {
-      ImportDeclarationImpl importDeclaration = new ImportDeclarationImpl();
-      return importDeclaration;
+      DirectoryImpl directory = new DirectoryImpl();
+      return directory;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaClass createJavaClass()
+   public File createFile()
    {
-      JavaClassImpl javaClass = new JavaClassImpl();
-      return javaClass;
+      FileImpl file = new FileImpl();
+      return file;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public JavaPackage createJavaPackage()
-   {
-      JavaPackageImpl javaPackage = new JavaPackageImpl();
-      return javaPackage;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public JavaArchive createJavaArchive()
-   {
-      JavaArchiveImpl javaArchive = new JavaArchiveImpl();
-      return javaArchive;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -171,18 +181,118 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageRoot createJavaPackageRoot()
+   public JavaArchive createJavaArchive()
    {
-      JavaPackageRootImpl javaPackageRoot = new JavaPackageRootImpl();
-      return javaPackageRoot;
+      JavaArchiveImpl javaArchive = new JavaArchiveImpl();
+      return javaArchive;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaResourcesRoot createJavaResourcesRoot()
+   {
+      JavaResourcesRootImpl javaResourcesRoot = new JavaResourcesRootImpl();
+      return javaResourcesRoot;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaPackage createJavaPackage()
+   {
+      JavaPackageImpl javaPackage = new JavaPackageImpl();
+      return javaPackage;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaClass createJavaClass()
+   {
+      JavaClassImpl javaClass = new JavaClassImpl();
+      return javaClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaCompilationUnit createJavaCompilationUnit()
+   {
+      JavaCompilationUnitImpl javaCompilationUnit = new JavaCompilationUnitImpl();
+      return javaCompilationUnit;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public ImportDeclaration createImportDeclaration()
+   {
+      ImportDeclarationImpl importDeclaration = new ImportDeclarationImpl();
+      return importDeclaration;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaType createJavaType()
+   {
+      JavaTypeImpl javaType = new JavaTypeImpl();
+      return javaType;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public JavaResourcesType createJavaResourcesTypeFromString(EDataType eDataType, String initialValue)
+   {
+      JavaResourcesType result = JavaResourcesType.get(initialValue);
+      if (result == null)
+         throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
+            + eDataType.getName() + "'");
+      return result;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String convertJavaResourcesTypeToString(EDataType eDataType, Object instanceValue)
+   {
+      return instanceValue == null ? null : instanceValue.toString();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -192,7 +302,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @deprecated
     * @generated

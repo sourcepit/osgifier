@@ -14,10 +14,10 @@ import javax.inject.Named;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 
 /**
  * @author Bernd
@@ -33,20 +33,20 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
    @Override
    public String resolveSymbolicName(BundleCandidate bundleCandidate)
    {
-      JavaPackageBundle jContent = bundleCandidate.getContent();
-      if (jContent != null)
+      JavaResourceBundle jBundle = bundleCandidate.getContent();
+      if (jBundle != null)
       {
-         return resolveSymbolicName(jContent);
+         return resolveSymbolicName(jBundle);
       }
       return null;
    }
 
-   private String resolveSymbolicName(JavaPackageBundle jContent)
+   private String resolveSymbolicName(JavaResourceBundle jBundle)
    {
       List<JavaPackage> entryPackages = new ArrayList<JavaPackage>();
-      for (JavaPackageRoot jPackageRoot : jContent.getPackageRoots())
+      for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
       {
-         collectFirstPackagesWithTypes(entryPackages, jPackageRoot.getRootPackages());
+         collectFirstPackagesWithTypes(entryPackages, jRoot.getPackages());
       }
 
       if (entryPackages.isEmpty())
@@ -56,7 +56,7 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
 
       if (entryPackages.size() == 1)
       {
-         return entryPackages.get(0).getFullyQualifiedName();
+         return entryPackages.get(0).getQualifiedName();
       }
       int rate = -1;
       JavaPackage winnerPackage = null;
@@ -69,22 +69,22 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
             winnerPackage = entryPackage;
          }
       }
-      return winnerPackage == null ? null : winnerPackage.getFullyQualifiedName();
+      return winnerPackage == null ? null : winnerPackage.getQualifiedName();
    }
 
    private int ratePackage(JavaPackage entryPackage)
    {
       List<JavaPackage> subPackages = new ArrayList<JavaPackage>();
-      List<JavaTypeRoot> types = new ArrayList<JavaTypeRoot>();
+      List<JavaFile> types = new ArrayList<JavaFile>();
       collect(subPackages, types, entryPackage);
       return subPackages.size() + types.size();
    }
 
-   private void collect(List<JavaPackage> subPackages, List<JavaTypeRoot> types, JavaPackage javaPackage)
+   private void collect(List<JavaPackage> subPackages, List<JavaFile> types, JavaPackage javaPackage)
    {
-      if (!"internal".equals(javaPackage.getSimpleName()))
+      if (!"internal".equals(javaPackage.getName()))
       {
-         types.addAll(javaPackage.getTypeRoots());
+         types.addAll(javaPackage.getJavaFiles());
          for (JavaPackage subPackage : javaPackage.getPackages())
          {
             subPackages.add(subPackage);
@@ -97,7 +97,7 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
    {
       for (JavaPackage javaPackage : javaPackages)
       {
-         if (javaPackage.getTypeRoots().isEmpty())
+         if (javaPackage.getJavaFiles().isEmpty())
          {
             collectFirstPackagesWithTypes(resultBag, javaPackage.getPackages());
          }

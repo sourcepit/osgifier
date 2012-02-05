@@ -13,22 +13,31 @@ import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Annotatable;
 import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.modeling.common.XAnnotatable;
-import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.ImportDeclaration;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaCompilationUnit;
+import org.sourcepit.osgify.core.model.java.JavaElement;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResource;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.Named;
+import org.sourcepit.osgify.core.model.java.QualifiedJavaElement;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
- * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
- * method for each class of the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Adapter Factory</b> for the model.
+ * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * <!-- end-user-doc -->
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage
  * @generated
@@ -36,14 +45,18 @@ import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 public class JavaModelAdapterFactory extends AdapterFactoryImpl
 {
    /**
-    * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The cached model package.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    protected static JavaModelPackage modelPackage;
 
    /**
-    * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an instance of the adapter factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -56,9 +69,11 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Returns whether this factory is applicable for the type of the object. <!-- begin-user-doc --> This implementation
-    * returns <code>true</code> if the object is either the model's package or is an instance object of the model. <!--
-    * end-user-doc -->
+    * Returns whether this factory is applicable for the type of the object.
+    * <!-- begin-user-doc -->
+    * This implementation returns <code>true</code> if the object is either the model's package or is an instance object
+    * of the model.
+    * <!-- end-user-doc -->
     * 
     * @return whether this factory is applicable for the type of the object.
     * @generated
@@ -78,16 +93,96 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * The switch that delegates to the <code>createXXX</code> methods. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The switch that delegates to the <code>createXXX</code> methods.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    protected JavaModelSwitch<Adapter> modelSwitch = new JavaModelSwitch<Adapter>()
    {
       @Override
-      public Adapter caseJavaType(JavaType object)
+      public Adapter caseNamed(Named object)
       {
-         return createJavaTypeAdapter();
+         return createNamedAdapter();
+      }
+
+      @Override
+      public Adapter caseResource(Resource object)
+      {
+         return createResourceAdapter();
+      }
+
+      @Override
+      public Adapter caseDirectory(Directory object)
+      {
+         return createDirectoryAdapter();
+      }
+
+      @Override
+      public Adapter caseFile(File object)
+      {
+         return createFileAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaElement(JavaElement object)
+      {
+         return createJavaElementAdapter();
+      }
+
+      @Override
+      public Adapter caseQualifiedJavaElement(QualifiedJavaElement object)
+      {
+         return createQualifiedJavaElementAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaResourceBundle(JavaResourceBundle object)
+      {
+         return createJavaResourceBundleAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaProject(JavaProject object)
+      {
+         return createJavaProjectAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaArchive(JavaArchive object)
+      {
+         return createJavaArchiveAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaResourceDirectory(JavaResourceDirectory object)
+      {
+         return createJavaResourceDirectoryAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaResourcesRoot(JavaResourcesRoot object)
+      {
+         return createJavaResourcesRootAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaPackage(JavaPackage object)
+      {
+         return createJavaPackageAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaFile(JavaFile object)
+      {
+         return createJavaFileAdapter();
+      }
+
+      @Override
+      public Adapter caseJavaClass(JavaClass object)
+      {
+         return createJavaClassAdapter();
       }
 
       @Override
@@ -103,51 +198,15 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
       }
 
       @Override
-      public Adapter caseJavaTypeRoot(JavaTypeRoot object)
+      public Adapter caseJavaType(JavaType object)
       {
-         return createJavaTypeRootAdapter();
+         return createJavaTypeAdapter();
       }
 
       @Override
-      public Adapter caseJavaClass(JavaClass object)
+      public Adapter caseJavaResource(JavaResource object)
       {
-         return createJavaClassAdapter();
-      }
-
-      @Override
-      public Adapter caseJavaPackage(JavaPackage object)
-      {
-         return createJavaPackageAdapter();
-      }
-
-      @Override
-      public Adapter caseJavaPackageBundle(JavaPackageBundle object)
-      {
-         return createJavaPackageBundleAdapter();
-      }
-
-      @Override
-      public Adapter caseJavaArchive(JavaArchive object)
-      {
-         return createJavaArchiveAdapter();
-      }
-
-      @Override
-      public Adapter caseJavaProject(JavaProject object)
-      {
-         return createJavaProjectAdapter();
-      }
-
-      @Override
-      public Adapter caseFullyQualified(FullyQualified object)
-      {
-         return createFullyQualifiedAdapter();
-      }
-
-      @Override
-      public Adapter caseJavaPackageRoot(JavaPackageRoot object)
-      {
-         return createJavaPackageRootAdapter();
+         return createJavaResourceAdapter();
       }
 
       @Override
@@ -176,7 +235,9 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    };
 
    /**
-    * Creates an adapter for the <code>target</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an adapter for the <code>target</code>.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @param target the object to adapt.
     * @return the adapter for the <code>target</code>.
@@ -190,24 +251,248 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
 
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaType
-    * <em>Java Type</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.Named <em>Named</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaType
+    * @see org.sourcepit.osgify.core.model.java.Named
     * @generated
     */
-   public Adapter createJavaTypeAdapter()
+   public Adapter createNamedAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.Resource
+    * <em>Resource</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.Resource
+    * @generated
+    */
+   public Adapter createResourceAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.Directory
+    * <em>Directory</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.Directory
+    * @generated
+    */
+   public Adapter createDirectoryAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.File <em>File</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.File
+    * @generated
+    */
+   public Adapter createFileAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaElement
+    * <em>Java Element</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaElement
+    * @generated
+    */
+   public Adapter createJavaElementAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement
+    * <em>Qualified Java Element</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.QualifiedJavaElement
+    * @generated
+    */
+   public Adapter createQualifiedJavaElementAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle
+    * <em>Java Resource Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaResourceBundle
+    * @generated
+    */
+   public Adapter createJavaResourceBundleAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaProject
+    * <em>Java Project</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaProject
+    * @generated
+    */
+   public Adapter createJavaProjectAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaArchive
+    * <em>Java Archive</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaArchive
+    * @generated
+    */
+   public Adapter createJavaArchiveAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory
+    * <em>Java Resource Directory</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaResourceDirectory
+    * @generated
+    */
+   public Adapter createJavaResourceDirectoryAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot
+    * <em>Java Resources Root</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaResourcesRoot
+    * @generated
+    */
+   public Adapter createJavaResourcesRootAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaPackage
+    * <em>Java Package</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaPackage
+    * @generated
+    */
+   public Adapter createJavaPackageAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaFile
+    * <em>Java File</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaFile
+    * @generated
+    */
+   public Adapter createJavaFileAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaClass
+    * <em>Java Class</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgify.core.model.java.JavaClass
+    * @generated
+    */
+   public Adapter createJavaClassAdapter()
    {
       return null;
    }
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit
-    * <em>Java Compilation Unit</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
+    * <em>Java Compilation Unit</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.osgify.core.model.java.JavaCompilationUnit
@@ -220,9 +505,11 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration
-    * <em>Import Declaration</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
+    * <em>Import Declaration</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.osgify.core.model.java.ImportDeclaration
@@ -234,123 +521,46 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaTypeRoot
-    * <em>Java Type Root</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaType
+    * <em>Java Type</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaTypeRoot
+    * @see org.sourcepit.osgify.core.model.java.JavaType
     * @generated
     */
-   public Adapter createJavaTypeRootAdapter()
+   public Adapter createJavaTypeAdapter()
    {
       return null;
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaClass
-    * <em>Java Class</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaResource
+    * <em>Java Resource</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaClass
+    * @see org.sourcepit.osgify.core.model.java.JavaResource
     * @generated
     */
-   public Adapter createJavaClassAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaPackage
-    * <em>Java Package</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaPackage
-    * @generated
-    */
-   public Adapter createJavaPackageAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaPackageBundle
-    * <em>Java Package Bundle</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaPackageBundle
-    * @generated
-    */
-   public Adapter createJavaPackageBundleAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaArchive
-    * <em>Java Archive</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaArchive
-    * @generated
-    */
-   public Adapter createJavaArchiveAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaProject
-    * <em>Java Project</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaProject
-    * @generated
-    */
-   public Adapter createJavaProjectAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.FullyQualified
-    * <em>Fully Qualified</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.FullyQualified
-    * @generated
-    */
-   public Adapter createFullyQualifiedAdapter()
-   {
-      return null;
-   }
-
-   /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.java.JavaPackageRoot
-    * <em>Java Package Root</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
-    * 
-    * @return the new adapter.
-    * @see org.sourcepit.osgify.core.model.java.JavaPackageRoot
-    * @generated
-    */
-   public Adapter createJavaPackageRootAdapter()
+   public Adapter createJavaResourceAdapter()
    {
       return null;
    }
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
-    * '. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's
-    * useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * '.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.Extendable
@@ -363,8 +573,11 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Annotatable
-    * <em>Annotatable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * <em>Annotatable</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.Annotatable
@@ -377,8 +590,11 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.XAnnotatable
-    * <em>XAnnotatable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * <em>XAnnotatable</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.XAnnotatable
@@ -390,8 +606,10 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for the default case. <!-- begin-user-doc --> This default implementation returns null. <!--
-    * end-user-doc -->
+    * Creates a new adapter for the default case.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @generated

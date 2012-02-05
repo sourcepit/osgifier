@@ -30,7 +30,7 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 public class OsgifyIT
 {
-   private final static boolean DEBUG = true;
+   private final static boolean DEBUG = false;
 
    protected Environment environment = Environment.getInstance();
 
@@ -51,7 +51,7 @@ public class OsgifyIT
       final Map<String, String> envVars = environment.newEnvironmentVariables();
       final File projectDir = getProjectDir(projectName);
       externalProcess.execute(envVars, projectDir, newMavenCmd("-B", "-e", "clean", "package"));
-      
+
       File file = new File(projectDir, "target/osgify-context.xml");
       OsgifyContext ctx = loadModel(file);
       assertThat(ctx, IsNull.notNullValue());
@@ -63,7 +63,7 @@ public class OsgifyIT
       ContextModelPackage.eINSTANCE.eClass();
       Resource resource = new XMLResourceImpl(URI.createFileURI(file.getAbsolutePath()));
       resource.load(null);
-      
+
       OsgifyContext ctx = (OsgifyContext) resource.getContents().get(0);
       return ctx;
    }

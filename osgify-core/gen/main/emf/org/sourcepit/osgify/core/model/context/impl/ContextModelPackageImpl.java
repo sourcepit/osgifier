@@ -23,28 +23,33 @@ import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class ContextModelPackageImpl extends EPackageImpl implements ContextModelPackage
 {
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private EClass osgifyContextEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private EClass bundleCandidateEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -52,7 +57,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
    /**
     * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
-    * EPackage.Registry} by the package package URI value.
+    * EPackage.Registry} by the package
+    * package URI value.
     * <p>
     * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
     * performs initialization of the package, or returns the registered package, if one already exists. <!--
@@ -69,7 +75,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -128,7 +135,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -138,7 +146,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -148,7 +157,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -158,7 +168,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -168,7 +179,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -178,7 +190,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -188,7 +201,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -198,7 +212,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -208,7 +223,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -218,7 +234,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -228,7 +245,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -238,7 +256,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -248,7 +267,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -258,15 +278,18 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private boolean isCreated = false;
 
    /**
-    * Creates the meta-model objects for the package. This method is guarded to have no affect on any invocation but its
-    * first. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates the meta-model objects for the package. This method is
+    * guarded to have no affect on any invocation but its first.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -294,15 +317,18 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private boolean isInitialized = false;
 
    /**
-    * Complete the initialization of the package and its meta-model. This method is guarded to have no affect on any
-    * invocation but its first. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Complete the initialization of the package and its meta-model. This
+    * method is guarded to have no affect on any invocation but its first.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -343,7 +369,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaPackageBundle(), null, "content", null,
+      initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaResourceBundle(), null, "content", null,
          1, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEReference(getBundleCandidate_Dependencies(), this.getBundleReference(), null, "dependencies", null, 0, -1,

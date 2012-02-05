@@ -21,11 +21,12 @@ import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Bundle Candidate</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Bundle Candidate</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -41,18 +42,20 @@ import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
 public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate
 {
    /**
-    * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference. <!-- begin-user-doc -->
+    * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference.
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @see #getContent()
     * @generated
     * @ordered
     */
-   protected JavaPackageBundle content;
+   protected JavaResourceBundle content;
 
    /**
-    * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #getDependencies()
     * @generated
@@ -61,8 +64,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected EList<BundleReference> dependencies;
 
    /**
-    * The default value of the '{@link #getVersion() <em>Version</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #getVersion()
     * @generated
@@ -71,8 +75,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected static final Version VERSION_EDEFAULT = null;
 
    /**
-    * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #getVersion()
     * @generated
@@ -81,7 +86,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected Version version = VERSION_EDEFAULT;
 
    /**
-    * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute. <!-- begin-user-doc -->
+    * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @see #getSymbolicName()
@@ -91,7 +97,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected static final String SYMBOLIC_NAME_EDEFAULT = null;
 
    /**
-    * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute. <!-- begin-user-doc -->
+    * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @see #getSymbolicName()
@@ -101,7 +108,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected String symbolicName = SYMBOLIC_NAME_EDEFAULT;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -111,7 +119,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -122,23 +131,25 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public JavaPackageBundle getContent()
+   public JavaResourceBundle getContent()
    {
       return content;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public NotificationChain basicSetContent(JavaPackageBundle newContent, NotificationChain msgs)
+   public NotificationChain basicSetContent(JavaResourceBundle newContent, NotificationChain msgs)
    {
-      JavaPackageBundle oldContent = content;
+      JavaResourceBundle oldContent = content;
       content = newContent;
       if (eNotificationRequired())
       {
@@ -153,11 +164,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public void setContent(JavaPackageBundle newContent)
+   public void setContent(JavaResourceBundle newContent)
    {
       if (newContent != content)
       {
@@ -178,7 +190,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -193,7 +206,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -203,7 +217,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -217,7 +232,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -227,7 +243,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -241,7 +258,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -259,7 +277,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -281,7 +300,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -292,7 +312,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       switch (featureID)
       {
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaPackageBundle) newValue);
+            setContent((JavaResourceBundle) newValue);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();
@@ -309,7 +329,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -319,7 +340,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       switch (featureID)
       {
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaPackageBundle) null);
+            setContent((JavaResourceBundle) null);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();
@@ -335,7 +356,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -357,7 +379,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */

@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.sourcepit.modeling.common.CommonModelPackage;
 
 /**
- * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
  * <ul>
  * <li>each class,</li>
  * <li>each feature of each class,</li>
@@ -29,28 +31,36 @@ import org.sourcepit.modeling.common.CommonModelPackage;
 public interface ContextModelPackage extends EPackage
 {
    /**
-    * The package name. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The package name.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    String eNAME = "context";
 
    /**
-    * The package namespace URI. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The package namespace URI.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    String eNS_URI = "http://www.sourcepit.org/osgify/context/0.1";
 
    /**
-    * The package namespace name. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The package namespace name.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    String eNS_PREFIX = "ctx";
 
    /**
-    * The singleton instance of the package. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The singleton instance of the package.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -58,7 +68,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl
-    * <em>Osgify Context</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Osgify Context</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl
     * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getOsgifyContext()
@@ -67,8 +79,9 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT = 0;
 
    /**
-    * The feature id for the '<em><b>Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -76,8 +89,9 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
 
    /**
-    * The feature id for the '<em><b>Annotations</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -85,8 +99,9 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Bundles</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Bundles</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -94,8 +109,9 @@ public interface ContextModelPackage extends EPackage
    int OSGIFY_CONTEXT__BUNDLES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
-    * The number of structural features of the '<em>Osgify Context</em>' class. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The number of structural features of the '<em>Osgify Context</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -104,7 +120,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl
-    * <em>Bundle Candidate</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Bundle Candidate</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl
     * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getBundleCandidate()
@@ -113,8 +131,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE = 1;
 
    /**
-    * The feature id for the '<em><b>Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -122,8 +141,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
 
    /**
-    * The feature id for the '<em><b>Annotations</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -131,8 +151,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Content</b></em>' containment reference. <!-- begin-user-doc --> <!-- end-user-doc
-    * -->
+    * The feature id for the '<em><b>Content</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -140,8 +161,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__CONTENT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
-    * The feature id for the '<em><b>Dependencies</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -149,7 +171,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__DEPENDENCIES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
-    * The feature id for the '<em><b>Version</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Version</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -157,7 +181,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__VERSION = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
-    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -165,8 +191,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
-    * The number of structural features of the '<em>Bundle Candidate</em>' class. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The number of structural features of the '<em>Bundle Candidate</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -175,7 +202,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
-    * <em>Bundle Reference</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Bundle Reference</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
     * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getBundleReference()
@@ -184,8 +213,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE = 2;
 
    /**
-    * The feature id for the '<em><b>Extensions</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -193,8 +223,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__EXTENSIONS = CommonModelPackage.XANNOTATABLE__EXTENSIONS;
 
    /**
-    * The feature id for the '<em><b>Annotations</b></em>' containment reference list. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -202,7 +233,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
-    * The feature id for the '<em><b>Version Range</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Version Range</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -210,7 +243,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__VERSION_RANGE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
 
    /**
-    * The feature id for the '<em><b>Optional</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Optional</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -218,7 +253,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__OPTIONAL = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
-    * The feature id for the '<em><b>Target</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Target</b></em>' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -226,7 +263,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__TARGET = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
-    * The feature id for the '<em><b>Provided</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The feature id for the '<em><b>Provided</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -234,8 +273,9 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__PROVIDED = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
-    * The number of structural features of the '<em>Bundle Reference</em>' class. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The number of structural features of the '<em>Bundle Reference</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     * @ordered
@@ -245,7 +285,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.context.OsgifyContext
-    * <em>Osgify Context</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Osgify Context</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for class '<em>Osgify Context</em>'.
     * @see org.sourcepit.osgify.core.model.context.OsgifyContext
@@ -255,8 +297,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.context.OsgifyContext#getBundles <em>Bundles</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.OsgifyContext#getBundles <em>Bundles</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the containment reference list '<em>Bundles</em>'.
     * @see org.sourcepit.osgify.core.model.context.OsgifyContext#getBundles()
@@ -267,7 +310,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.context.BundleCandidate
-    * <em>Bundle Candidate</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Bundle Candidate</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for class '<em>Bundle Candidate</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate
@@ -277,8 +322,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the containment reference '
-    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the containment reference '<em>Content</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getContent()
@@ -289,8 +335,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}'. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the containment reference list '<em>Dependencies</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies()
@@ -301,8 +348,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Version</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion()
@@ -313,8 +361,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}'. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Symbolic Name</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName()
@@ -325,7 +374,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.context.BundleReference
-    * <em>Bundle Reference</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <em>Bundle Reference</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for class '<em>Bundle Reference</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleReference
@@ -335,8 +386,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange <em>Version Range</em>}'. <!--
-    * begin-user-doc --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange <em>Version Range</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Version Range</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange()
@@ -347,8 +399,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Optional</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleReference#isOptional()
@@ -359,8 +412,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the reference '
-    * {@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the reference '<em>Target</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleReference#getTarget()
@@ -371,8 +425,9 @@ public interface ContextModelPackage extends EPackage
 
    /**
     * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}'. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * {@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the meta object for the attribute '<em>Provided</em>'.
     * @see org.sourcepit.osgify.core.model.context.BundleReference#isProvided()
@@ -382,7 +437,9 @@ public interface ContextModelPackage extends EPackage
    EAttribute getBundleReference_Provided();
 
    /**
-    * Returns the factory that creates the instances of the model. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns the factory that creates the instances of the model.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the factory that creates the instances of the model.
     * @generated
@@ -390,7 +447,8 @@ public interface ContextModelPackage extends EPackage
    ContextModelFactory getContextModelFactory();
 
    /**
-    * <!-- begin-user-doc --> Defines literals for the meta objects that represent
+    * <!-- begin-user-doc -->
+    * Defines literals for the meta objects that represent
     * <ul>
     * <li>each class,</li>
     * <li>each feature of each class,</li>
@@ -405,7 +463,9 @@ public interface ContextModelPackage extends EPackage
    {
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl
-       * <em>Osgify Context</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+       * <em>Osgify Context</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @see org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl
        * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getOsgifyContext()
@@ -414,8 +474,9 @@ public interface ContextModelPackage extends EPackage
       EClass OSGIFY_CONTEXT = eINSTANCE.getOsgifyContext();
 
       /**
-       * The meta object literal for the '<em><b>Bundles</b></em>' containment reference list feature. <!--
-       * begin-user-doc --> <!-- end-user-doc -->
+       * The meta object literal for the '<em><b>Bundles</b></em>' containment reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
@@ -423,7 +484,9 @@ public interface ContextModelPackage extends EPackage
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl
-       * <em>Bundle Candidate</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+       * <em>Bundle Candidate</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @see org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl
        * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getBundleCandidate()
@@ -432,32 +495,36 @@ public interface ContextModelPackage extends EPackage
       EClass BUNDLE_CANDIDATE = eINSTANCE.getBundleCandidate();
 
       /**
-       * The meta object literal for the '<em><b>Content</b></em>' containment reference feature. <!-- begin-user-doc
-       * --> <!-- end-user-doc -->
+       * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EReference BUNDLE_CANDIDATE__CONTENT = eINSTANCE.getBundleCandidate_Content();
 
       /**
-       * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature. <!--
-       * begin-user-doc --> <!-- end-user-doc -->
+       * The meta object literal for the '<em><b>Dependencies</b></em>' containment reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EReference BUNDLE_CANDIDATE__DEPENDENCIES = eINSTANCE.getBundleCandidate_Dependencies();
 
       /**
-       * The meta object literal for the '<em><b>Version</b></em>' attribute feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EAttribute BUNDLE_CANDIDATE__VERSION = eINSTANCE.getBundleCandidate_Version();
 
       /**
-       * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Symbolic Name</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
@@ -465,7 +532,9 @@ public interface ContextModelPackage extends EPackage
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
-       * <em>Bundle Reference</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+       * <em>Bundle Reference</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @see org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
        * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getBundleReference()
@@ -474,32 +543,36 @@ public interface ContextModelPackage extends EPackage
       EClass BUNDLE_REFERENCE = eINSTANCE.getBundleReference();
 
       /**
-       * The meta object literal for the '<em><b>Version Range</b></em>' attribute feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Version Range</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EAttribute BUNDLE_REFERENCE__VERSION_RANGE = eINSTANCE.getBundleReference_VersionRange();
 
       /**
-       * The meta object literal for the '<em><b>Optional</b></em>' attribute feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Optional</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EAttribute BUNDLE_REFERENCE__OPTIONAL = eINSTANCE.getBundleReference_Optional();
 
       /**
-       * The meta object literal for the '<em><b>Target</b></em>' reference feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */
       EReference BUNDLE_REFERENCE__TARGET = eINSTANCE.getBundleReference_Target();
 
       /**
-       * The meta object literal for the '<em><b>Provided</b></em>' attribute feature. <!-- begin-user-doc --> <!--
-       * end-user-doc -->
+       * The meta object literal for the '<em><b>Provided</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
        * 
        * @generated
        */

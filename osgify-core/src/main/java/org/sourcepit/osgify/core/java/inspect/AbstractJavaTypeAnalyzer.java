@@ -22,7 +22,7 @@ public abstract class AbstractJavaTypeAnalyzer implements IJavaTypeAnalyzer
       final JavaClass javaClass;
       try
       {
-         javaClass = new ClassParser(content, javaType.getFullyQualifiedName()).parse();
+         javaClass = new ClassParser(content, javaType.getQualifiedName()).parse();
       }
       catch (ClassFormatException e)
       {

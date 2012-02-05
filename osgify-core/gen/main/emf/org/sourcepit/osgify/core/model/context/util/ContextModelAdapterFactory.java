@@ -19,8 +19,10 @@ import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 /**
- * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides an adapter <code>createXXX</code>
- * method for each class of the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Adapter Factory</b> for the model.
+ * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * <!-- end-user-doc -->
  * 
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage
  * @generated
@@ -28,14 +30,18 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 public class ContextModelAdapterFactory extends AdapterFactoryImpl
 {
    /**
-    * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The cached model package.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    protected static ContextModelPackage modelPackage;
 
    /**
-    * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an instance of the adapter factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -48,9 +54,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Returns whether this factory is applicable for the type of the object. <!-- begin-user-doc --> This implementation
-    * returns <code>true</code> if the object is either the model's package or is an instance object of the model. <!--
-    * end-user-doc -->
+    * Returns whether this factory is applicable for the type of the object.
+    * <!-- begin-user-doc -->
+    * This implementation returns <code>true</code> if the object is either the model's package or is an instance object
+    * of the model.
+    * <!-- end-user-doc -->
     * 
     * @return whether this factory is applicable for the type of the object.
     * @generated
@@ -70,7 +78,9 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * The switch that delegates to the <code>createXXX</code> methods. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The switch that delegates to the <code>createXXX</code> methods.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -120,7 +130,9 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    };
 
    /**
-    * Creates an adapter for the <code>target</code>. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an adapter for the <code>target</code>.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @param target the object to adapt.
     * @return the adapter for the <code>target</code>.
@@ -135,8 +147,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.context.OsgifyContext
-    * <em>Osgify Context</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * <em>Osgify Context</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.osgify.core.model.context.OsgifyContext
@@ -149,9 +164,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.context.BundleCandidate
-    * <em>Bundle Candidate</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
+    * <em>Bundle Candidate</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.osgify.core.model.context.BundleCandidate
@@ -164,9 +181,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.osgify.core.model.context.BundleReference
-    * <em>Bundle Reference</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
-    * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
-    * end-user-doc -->
+    * <em>Bundle Reference</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.osgify.core.model.context.BundleReference
@@ -179,8 +198,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
-    * '. <!-- begin-user-doc --> This default implementation returns null so that we can easily ignore cases; it's
-    * useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * '.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.Extendable
@@ -193,8 +215,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Annotatable
-    * <em>Annotatable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * <em>Annotatable</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.Annotatable
@@ -207,8 +232,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
    /**
     * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.XAnnotatable
-    * <em>XAnnotatable</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
-    * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+    * <em>XAnnotatable</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @see org.sourcepit.modeling.common.XAnnotatable
@@ -220,8 +248,10 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for the default case. <!-- begin-user-doc --> This default implementation returns null. <!--
-    * end-user-doc -->
+    * Creates a new adapter for the default case.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null.
+    * <!-- end-user-doc -->
     * 
     * @return the new adapter.
     * @generated

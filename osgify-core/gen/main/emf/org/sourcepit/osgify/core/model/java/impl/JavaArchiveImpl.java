@@ -13,16 +13,19 @@ import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Java Archive</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Java Archive</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * </p>
  * 
  * @generated
  */
-public class JavaArchiveImpl extends JavaPackageBundleImpl implements JavaArchive
+public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchive
 {
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -32,7 +35,8 @@ public class JavaArchiveImpl extends JavaPackageBundleImpl implements JavaArchiv
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -43,7 +47,8 @@ public class JavaArchiveImpl extends JavaPackageBundleImpl implements JavaArchiv
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -55,7 +60,8 @@ public class JavaArchiveImpl extends JavaPackageBundleImpl implements JavaArchiv
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */

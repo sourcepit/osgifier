@@ -8,13 +8,15 @@ package org.sourcepit.osgify.core.model.java;
 
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Java Class</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Java Class</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaClass()
  * @model
  * @generated
  */
-public interface JavaClass extends JavaTypeRoot
+public interface JavaClass extends JavaFile
 {
 } // JavaClass

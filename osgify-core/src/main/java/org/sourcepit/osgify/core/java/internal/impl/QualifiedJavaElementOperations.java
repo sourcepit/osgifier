@@ -6,55 +6,64 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
-import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.QualifiedJavaElement;
 import org.sourcepit.osgify.core.model.java.util.JavaModelSwitch;
 
-public final class FullyQualifiedOperations
+public final class QualifiedJavaElementOperations
 {
-   private FullyQualifiedOperations()
+   private QualifiedJavaElementOperations()
    {
       super();
    }
 
-   public static String getFullyQualifiedName(FullyQualified pkg)
+   public static String getQualifiedName(QualifiedJavaElement qualified)
    {
       final StringBuilder sb = new StringBuilder();
-      buildFullyQualifiedName(sb, pkg);
+      buildQualifiedName(sb, qualified);
+      if (sb.length() == 0)
+      {
+         return null;
+      }
       sb.deleteCharAt(sb.length() - 1);
       return sb.toString();
    }
 
-   private static void buildFullyQualifiedName(StringBuilder sb, FullyQualified fullyQualified)
+   private static void buildQualifiedName(StringBuilder sb, QualifiedJavaElement qualified)
    {
-      if (fullyQualified == null)
+      if (qualified == null)
       {
          return;
       }
-      buildFullyQualifiedName(sb, getParent(fullyQualified));
-      sb.append(fullyQualified.getSimpleName());
+      buildQualifiedName(sb, getParent(qualified));
+      String name = qualified.getName();
+      if (name == null)
+      {
+         return;
+      }
+      sb.append(name);
       sb.append('.');
    }
 
-   private static FullyQualified getParent(FullyQualified fullyQualified)
+   private static QualifiedJavaElement getParent(QualifiedJavaElement fullyQualified)
    {
-      return new JavaModelSwitch<FullyQualified>()
+      return new JavaModelSwitch<QualifiedJavaElement>()
       {
-         public FullyQualified caseJavaPackage(JavaPackage pgk)
+         public QualifiedJavaElement caseJavaPackage(JavaPackage pgk)
          {
             return pgk.getParentPackage();
          };
 
-         public FullyQualified caseJavaType(JavaType type)
+         public QualifiedJavaElement caseJavaType(JavaType type)
          {
             final JavaType outerType = type.getOuterType();
             if (outerType != null)
             {
                return outerType;
             }
-            final JavaTypeRoot typeRoot = type.getTypeRoot();
+            final JavaFile typeRoot = type.getFile();
             return typeRoot == null ? null : typeRoot.getParentPackage();
          };
 

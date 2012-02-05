@@ -9,8 +9,9 @@ package org.sourcepit.osgify.core.model.java;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Java Compilation Unit</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Java Compilation Unit</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * <p>
  * The following features are supported:
@@ -24,13 +25,14 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface JavaCompilationUnit extends JavaTypeRoot
+public interface JavaCompilationUnit extends JavaFile
 {
    /**
-    * Returns the value of the '<em><b>Import Declarations</b></em>' containment reference list. The list contents are
-    * of type {@link org.sourcepit.osgify.core.model.java.ImportDeclaration}. It is bidirectional and its opposite is '
-    * {@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}'. <!--
-    * begin-user-doc -->
+    * Returns the value of the '<em><b>Import Declarations</b></em>' containment reference list.
+    * The list contents are of type {@link org.sourcepit.osgify.core.model.java.ImportDeclaration}.
+    * It is bidirectional and its opposite is '
+    * {@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}'.
+    * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Import Declarations</em>' containment reference list isn't clear, there really should
     * be more of a description here...

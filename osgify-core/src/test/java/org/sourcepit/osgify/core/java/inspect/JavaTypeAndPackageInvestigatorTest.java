@@ -83,7 +83,7 @@ public class JavaTypeAndPackageInvestigatorTest
       assertThat(innerTypes.size(), Is.is(1));
 
       JavaType innerType = innerTypes.get(0);
-      assertThat(innerType.getSimpleName(), IsEqual.equalTo(TypeA.Hans.class.getSimpleName()));
+      assertThat(innerType.getName(), IsEqual.equalTo(TypeA.Hans.class.getSimpleName()));
       assertThat(innerType.getOuterType(), IsEqual.equalTo(type));
 
       JavaType innerType2 = javaArchive.getType(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
@@ -136,7 +136,7 @@ public class JavaTypeAndPackageInvestigatorTest
       assertThat(innerTypes.size(), Is.is(1));
 
       JavaType innerType = innerTypes.get(0);
-      assertThat(innerType.getSimpleName(), IsEqual.equalTo(TypeA.Hans.class.getSimpleName()));
+      assertThat(innerType.getName(), IsEqual.equalTo(TypeA.Hans.class.getSimpleName()));
       assertThat(innerType.getOuterType(), IsEqual.equalTo(type));
 
       JavaType innerType2 = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,

@@ -9,8 +9,10 @@ package org.sourcepit.osgify.core.model.context;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
- * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a create method for each non-abstract class of
- * the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Factory</b> for the model.
+ * It provides a create method for each non-abstract class of the model.
+ * <!-- end-user-doc -->
  * 
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage
  * @generated
@@ -18,14 +20,18 @@ import org.eclipse.emf.ecore.EFactory;
 public interface ContextModelFactory extends EFactory
 {
    /**
-    * The singleton instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The singleton instance of the factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    ContextModelFactory eINSTANCE = org.sourcepit.osgify.core.model.context.impl.ContextModelFactoryImpl.init();
 
    /**
-    * Returns a new object of class '<em>Osgify Context</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Osgify Context</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return a new object of class '<em>Osgify Context</em>'.
     * @generated
@@ -33,7 +39,9 @@ public interface ContextModelFactory extends EFactory
    OsgifyContext createOsgifyContext();
 
    /**
-    * Returns a new object of class '<em>Bundle Candidate</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Bundle Candidate</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return a new object of class '<em>Bundle Candidate</em>'.
     * @generated
@@ -41,7 +49,9 @@ public interface ContextModelFactory extends EFactory
    BundleCandidate createBundleCandidate();
 
    /**
-    * Returns a new object of class '<em>Bundle Reference</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Bundle Reference</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return a new object of class '<em>Bundle Reference</em>'.
     * @generated
@@ -49,7 +59,9 @@ public interface ContextModelFactory extends EFactory
    BundleReference createBundleReference();
 
    /**
-    * Returns the package supported by this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns the package supported by this factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the package supported by this factory.
     * @generated

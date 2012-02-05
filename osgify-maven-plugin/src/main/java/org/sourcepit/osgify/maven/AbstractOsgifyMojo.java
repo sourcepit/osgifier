@@ -32,16 +32,16 @@ import org.sourcepit.common.utils.collections.ValueLookup;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
 
 public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
 {
-   private final static ValueLookup<JavaPackageRoot, BundleManifest> BUNDLE_MANIFEST_LOOKUP = new ValueLookup<JavaPackageRoot, BundleManifest>()
+   private final static ValueLookup<JavaResourcesRoot, BundleManifest> BUNDLE_MANIFEST_LOOKUP = new ValueLookup<JavaResourcesRoot, BundleManifest>()
    {
-      public BundleManifest lookup(JavaPackageRoot javaPackageRoot)
+      public BundleManifest lookup(JavaResourcesRoot javaPackageRoot)
       {
          return javaPackageRoot.getExtension(BundleManifest.class);
       }
@@ -95,8 +95,8 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
 
    private BundleManifest deriveBundleManifest(BundleCandidate bundleCandidate)
    {
-      final JavaPackageBundle jContents = bundleCandidate.getContent();
-      BundleManifest bundleMF = CollectionUtils.getValue(jContents.getPackageRoots(), BUNDLE_MANIFEST_LOOKUP);
+      final JavaResourceBundle jContents = bundleCandidate.getContent();
+      BundleManifest bundleMF = CollectionUtils.getValue(jContents.getResourcesRoots(), BUNDLE_MANIFEST_LOOKUP);
       if (bundleMF == null)
       {
          // [package export]
@@ -171,13 +171,13 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
       }
    }
 
-   private static void collectPackagesToExport(final JavaPackageBundle jContents,
+   private static void collectPackagesToExport(final JavaResourceBundle jContents,
       Map<String, List<JavaPackage>> nameToJPackagesMap)
    {
-      EList<JavaPackageRoot> packageRoots = jContents.getPackageRoots();
-      for (JavaPackageRoot packageRoot : packageRoots)
+      EList<JavaResourcesRoot> packageRoots = jContents.getResourcesRoots();
+      for (JavaResourcesRoot packageRoot : packageRoots)
       {
-         EList<JavaPackage> packages = packageRoot.getRootPackages();
+         EList<JavaPackage> packages = packageRoot.getPackages();
          for (JavaPackage jPackage : packages)
          {
             collectPackagesToExport(nameToJPackagesMap, jPackage);
@@ -187,9 +187,9 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
 
    private static void collectPackagesToExport(Map<String, List<JavaPackage>> nameToJPackagesMap, JavaPackage jPackage)
    {
-      if (!jPackage.getTypeRoots().isEmpty()) // TODO consider resources besides type roots to0!
+      if (!jPackage.getJavaFiles().isEmpty()) // TODO consider resources besides type roots to0!
       {
-         final String fully = jPackage.getFullyQualifiedName();
+         final String fully = jPackage.getQualifiedName();
 
          List<JavaPackage> jPackages = nameToJPackagesMap.get(fully);
          if (jPackages == null)

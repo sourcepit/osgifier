@@ -8,17 +8,20 @@ package org.sourcepit.osgify.core.model.java;
 
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Java Archive</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Java Archive</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaArchive()
  * @model
  * @generated
  */
-public interface JavaArchive extends JavaPackageBundle
+public interface JavaArchive extends JavaResourceBundle
 {
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @model
     * @generated
@@ -26,7 +29,8 @@ public interface JavaArchive extends JavaPackageBundle
    JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand);
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @model
     * @generated

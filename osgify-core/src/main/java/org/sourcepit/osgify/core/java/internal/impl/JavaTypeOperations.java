@@ -6,23 +6,23 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 
-public final class TypeOperations
+public final class JavaTypeOperations
 {
-   private TypeOperations()
+   private JavaTypeOperations()
    {
       super();
    }
 
-   public static JavaTypeRoot getTypeRoot(JavaType type)
+   public static JavaFile getFile(JavaType type)
    {
       JavaType current = type;
       while (current.getOuterType() != null)
       {
          current = current.getOuterType();
       }
-      return (JavaTypeRoot) current.eContainer();
+      return (JavaFile) current.eContainer();
    }
 }

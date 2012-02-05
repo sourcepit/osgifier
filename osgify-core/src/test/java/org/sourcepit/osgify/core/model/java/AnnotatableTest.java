@@ -4,13 +4,12 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java;
+package org.sourcepit.osgify.core.model.java;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.sourcepit.modeling.common.AbstractAnnotatableTest;
-import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 
 public class AnnotatableTest extends AbstractAnnotatableTest
 {

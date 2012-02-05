@@ -17,8 +17,9 @@ import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Bundle Reference</b></em>'. <!-- end-user-doc
- * -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Bundle Reference</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -34,7 +35,8 @@ import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 public class BundleReferenceImpl extends XAnnotatableImpl implements BundleReference
 {
    /**
-    * The default value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute. <!-- begin-user-doc -->
+    * The default value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute.
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @see #getVersionRange()
@@ -44,7 +46,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected static final VersionRange VERSION_RANGE_EDEFAULT = null;
 
    /**
-    * The cached value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute. <!-- begin-user-doc -->
+    * The cached value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute.
+    * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @see #getVersionRange()
@@ -54,8 +57,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected VersionRange versionRange = VERSION_RANGE_EDEFAULT;
 
    /**
-    * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The default value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #isOptional()
     * @generated
@@ -64,8 +68,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected static final boolean OPTIONAL_EDEFAULT = false;
 
    /**
-    * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The cached value of the '{@link #isOptional() <em>Optional</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #isOptional()
     * @generated
@@ -74,8 +79,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected boolean optional = OPTIONAL_EDEFAULT;
 
    /**
-    * The cached value of the '{@link #getTarget() <em>Target</em>}' reference. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #getTarget()
     * @generated
@@ -84,8 +90,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected BundleCandidate target;
 
    /**
-    * The default value of the '{@link #isProvided() <em>Provided</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The default value of the '{@link #isProvided() <em>Provided</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #isProvided()
     * @generated
@@ -94,8 +101,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected static final boolean PROVIDED_EDEFAULT = false;
 
    /**
-    * The cached value of the '{@link #isProvided() <em>Provided</em>}' attribute. <!-- begin-user-doc --> <!--
-    * end-user-doc -->
+    * The cached value of the '{@link #isProvided() <em>Provided</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #isProvided()
     * @generated
@@ -104,7 +112,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    protected boolean provided = PROVIDED_EDEFAULT;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -114,7 +123,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -125,7 +135,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -135,7 +146,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -149,7 +161,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -159,7 +172,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -173,7 +187,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -194,7 +209,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -204,7 +220,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -218,7 +235,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -228,7 +246,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -242,7 +261,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -266,7 +286,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -292,7 +313,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -318,7 +340,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -340,7 +363,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */

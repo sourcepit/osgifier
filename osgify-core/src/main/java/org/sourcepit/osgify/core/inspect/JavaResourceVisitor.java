@@ -18,7 +18,7 @@ import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
@@ -123,7 +123,7 @@ public abstract class JavaResourceVisitor implements ResourceVisitor
       }
    }
 
-   protected abstract JavaPackageRoot getPackageRoot(boolean createOnDemand);
+   protected abstract JavaResourcesRoot getPackageRoot(boolean createOnDemand);
 
    protected abstract JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand);
 

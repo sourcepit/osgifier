@@ -15,8 +15,8 @@ import org.sourcepit.osgify.core.inspect.JavaResourceVisitor;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.util.RelativeDirectoryTraverser;
 import org.sourcepit.osgify.core.util.ZipTraverser;
@@ -55,9 +55,9 @@ public class JavaPackageBundleScanner
       return new JavaResourceVisitor()
       {
          @Override
-         protected synchronized JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         protected synchronized JavaResourcesRoot getPackageRoot(boolean createOnDemand)
          {
-            return javaArchive.getPackageRoot("", createOnDemand);
+            return javaArchive.getResourcesRoot("", createOnDemand);
          }
 
          @Override
@@ -126,9 +126,9 @@ public class JavaPackageBundleScanner
       return new JavaResourceVisitor()
       {
          @Override
-         protected synchronized JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         protected synchronized JavaResourcesRoot getPackageRoot(boolean createOnDemand)
          {
-            return javaProject.getPackageRoot(binDirPath, createOnDemand);
+            return javaProject.getResourcesRoot(binDirPath, createOnDemand);
          }
 
          @Override

@@ -8,13 +8,15 @@ package org.sourcepit.osgify.core.model.java;
 
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Java Project</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Java Project</b></em>'.
+ * <!-- end-user-doc -->
  * 
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaProject()
  * @model
  * @generated
  */
-public interface JavaProject extends JavaPackageBundle
+public interface JavaProject extends JavaResourceBundle
 {
 } // JavaProject

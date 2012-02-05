@@ -6,8 +6,11 @@
 
 package org.sourcepit.osgify.core.model.java.impl;
 
+import static org.sourcepit.osgify.core.model.java.JavaModelPackage.RESOURCE;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -16,107 +19,193 @@ import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.modeling.common.CommonModelPackage;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl;
-import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.ImportDeclaration;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaCompilationUnit;
+import org.sourcepit.osgify.core.model.java.JavaElement;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResource;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourcesType;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.Named;
+import org.sourcepit.osgify.core.model.java.QualifiedJavaElement;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Package</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Package</b>.
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPackage
 {
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaTypeEClass = null;
+   private EClass namedEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaCompilationUnitEClass = null;
+   private EClass resourceEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass importDeclarationEClass = null;
+   private EClass directoryEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaTypeRootEClass = null;
+   private EClass fileEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaClassEClass = null;
+   private EClass javaElementEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaPackageEClass = null;
+   private EClass qualifiedJavaElementEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaPackageBundleEClass = null;
+   private EClass javaResourceBundleEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   private EClass javaArchiveEClass = null;
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private EClass javaProjectEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass fullyQualifiedEClass = null;
+   private EClass javaArchiveEClass = null;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   private EClass javaPackageRootEClass = null;
+   private EClass javaResourceDirectoryEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaResourcesRootEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaPackageEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaFileEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaClassEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaCompilationUnitEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass importDeclarationEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaTypeEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass javaResourceEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EEnum javaResourcesTypeEEnum = null;
 
    /**
     * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
-    * EPackage.Registry} by the package package URI value.
+    * EPackage.Registry} by the package
+    * package URI value.
     * <p>
     * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
     * performs initialization of the package, or returns the registered package, if one already exists. <!--
@@ -133,7 +222,8 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -191,207 +281,129 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getJavaType()
+   public EClass getNamed()
    {
-      return javaTypeEClass;
+      return namedEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaType_InnerTypes()
+   public EAttribute getNamed_Name()
    {
-      return (EReference) javaTypeEClass.getEStructuralFeatures().get(0);
+      return (EAttribute) namedEClass.getEStructuralFeatures().get(0);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaType_OuterType()
+   public EClass getResource()
    {
-      return (EReference) javaTypeEClass.getEStructuralFeatures().get(1);
+      return resourceEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EAttribute getJavaType_SimpleName()
+   public EReference getResource_ParentDirectory()
    {
-      return (EAttribute) javaTypeEClass.getEStructuralFeatures().get(2);
+      return (EReference) resourceEClass.getEStructuralFeatures().get(0);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getJavaCompilationUnit()
+   public EClass getDirectory()
    {
-      return javaCompilationUnitEClass;
+      return directoryEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaCompilationUnit_ImportDeclarations()
+   public EReference getDirectory_Resources()
    {
-      return (EReference) javaCompilationUnitEClass.getEStructuralFeatures().get(0);
+      return (EReference) directoryEClass.getEStructuralFeatures().get(0);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getImportDeclaration()
+   public EClass getFile()
    {
-      return importDeclarationEClass;
+      return fileEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getImportDeclaration_CompilationUnit()
+   public EClass getJavaElement()
    {
-      return (EReference) importDeclarationEClass.getEStructuralFeatures().get(0);
+      return javaElementEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getJavaTypeRoot()
+   public EClass getQualifiedJavaElement()
    {
-      return javaTypeRootEClass;
+      return qualifiedJavaElementEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaTypeRoot_Type()
+   public EClass getJavaResourceBundle()
    {
-      return (EReference) javaTypeRootEClass.getEStructuralFeatures().get(0);
+      return javaResourceBundleEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaTypeRoot_ParentPackage()
+   public EReference getJavaResourceBundle_ResourcesRoots()
    {
-      return (EReference) javaTypeRootEClass.getEStructuralFeatures().get(1);
+      return (EReference) javaResourceBundleEClass.getEStructuralFeatures().get(0);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EClass getJavaClass()
-   {
-      return javaClassEClass;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EClass getJavaPackage()
-   {
-      return javaPackageEClass;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EReference getJavaPackage_TypeRoots()
-   {
-      return (EReference) javaPackageEClass.getEStructuralFeatures().get(0);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EAttribute getJavaPackage_SimpleName()
-   {
-      return (EAttribute) javaPackageEClass.getEStructuralFeatures().get(1);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EReference getJavaPackage_Packages()
-   {
-      return (EReference) javaPackageEClass.getEStructuralFeatures().get(2);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EReference getJavaPackage_ParentPackage()
-   {
-      return (EReference) javaPackageEClass.getEStructuralFeatures().get(3);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EClass getJavaPackageBundle()
-   {
-      return javaPackageBundleEClass;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EReference getJavaPackageBundle_PackageRoots()
-   {
-      return (EReference) javaPackageBundleEClass.getEStructuralFeatures().get(0);
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @generated
-    */
-   public EClass getJavaArchive()
-   {
-      return javaArchiveEClass;
-   }
-
-   /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -401,57 +413,206 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getFullyQualified()
+   public EClass getJavaArchive()
    {
-      return fullyQualifiedEClass;
+      return javaArchiveEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EClass getJavaPackageRoot()
+   public EClass getJavaResourceDirectory()
    {
-      return javaPackageRootEClass;
+      return javaResourceDirectoryEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EAttribute getJavaPackageRoot_Path()
+   public EClass getJavaResourcesRoot()
    {
-      return (EAttribute) javaPackageRootEClass.getEStructuralFeatures().get(0);
+      return javaResourcesRootEClass;
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaPackageRoot_RootPackages()
+   public EReference getJavaResourcesRoot_PackageBundle()
    {
-      return (EReference) javaPackageRootEClass.getEStructuralFeatures().get(1);
+      return (EReference) javaResourcesRootEClass.getEStructuralFeatures().get(0);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
-   public EReference getJavaPackageRoot_PackageBundle()
+   public EAttribute getJavaResourcesRoot_ResourcesType()
    {
-      return (EReference) javaPackageRootEClass.getEStructuralFeatures().get(2);
+      return (EAttribute) javaResourcesRootEClass.getEStructuralFeatures().get(1);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaPackage()
+   {
+      return javaPackageEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaFile()
+   {
+      return javaFileEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getJavaFile_Type()
+   {
+      return (EReference) javaFileEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaClass()
+   {
+      return javaClassEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaCompilationUnit()
+   {
+      return javaCompilationUnitEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getJavaCompilationUnit_ImportDeclarations()
+   {
+      return (EReference) javaCompilationUnitEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getImportDeclaration()
+   {
+      return importDeclarationEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getImportDeclaration_CompilationUnit()
+   {
+      return (EReference) importDeclarationEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaType()
+   {
+      return javaTypeEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getJavaType_InnerTypes()
+   {
+      return (EReference) javaTypeEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getJavaType_OuterType()
+   {
+      return (EReference) javaTypeEClass.getEStructuralFeatures().get(1);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getJavaResource()
+   {
+      return javaResourceEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EEnum getJavaResourcesType()
+   {
+      return javaResourcesTypeEEnum;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -461,15 +622,18 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private boolean isCreated = false;
 
    /**
-    * Creates the meta-model objects for the package. This method is guarded to have no affect on any invocation but its
-    * first. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates the meta-model objects for the package. This method is
+    * guarded to have no affect on any invocation but its first.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -480,10 +644,40 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       isCreated = true;
 
       // Create classes and their features
-      javaTypeEClass = createEClass(JAVA_TYPE);
-      createEReference(javaTypeEClass, JAVA_TYPE__INNER_TYPES);
-      createEReference(javaTypeEClass, JAVA_TYPE__OUTER_TYPE);
-      createEAttribute(javaTypeEClass, JAVA_TYPE__SIMPLE_NAME);
+      namedEClass = createEClass(NAMED);
+      createEAttribute(namedEClass, NAMED__NAME);
+
+      resourceEClass = createEClass(RESOURCE);
+      createEReference(resourceEClass, RESOURCE__PARENT_DIRECTORY);
+
+      directoryEClass = createEClass(DIRECTORY);
+      createEReference(directoryEClass, DIRECTORY__RESOURCES);
+
+      fileEClass = createEClass(FILE);
+
+      javaElementEClass = createEClass(JAVA_ELEMENT);
+
+      qualifiedJavaElementEClass = createEClass(QUALIFIED_JAVA_ELEMENT);
+
+      javaResourceBundleEClass = createEClass(JAVA_RESOURCE_BUNDLE);
+      createEReference(javaResourceBundleEClass, JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS);
+
+      javaProjectEClass = createEClass(JAVA_PROJECT);
+
+      javaArchiveEClass = createEClass(JAVA_ARCHIVE);
+
+      javaResourceDirectoryEClass = createEClass(JAVA_RESOURCE_DIRECTORY);
+
+      javaResourcesRootEClass = createEClass(JAVA_RESOURCES_ROOT);
+      createEReference(javaResourcesRootEClass, JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE);
+      createEAttribute(javaResourcesRootEClass, JAVA_RESOURCES_ROOT__RESOURCES_TYPE);
+
+      javaPackageEClass = createEClass(JAVA_PACKAGE);
+
+      javaFileEClass = createEClass(JAVA_FILE);
+      createEReference(javaFileEClass, JAVA_FILE__TYPE);
+
+      javaClassEClass = createEClass(JAVA_CLASS);
 
       javaCompilationUnitEClass = createEClass(JAVA_COMPILATION_UNIT);
       createEReference(javaCompilationUnitEClass, JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS);
@@ -491,43 +685,29 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       importDeclarationEClass = createEClass(IMPORT_DECLARATION);
       createEReference(importDeclarationEClass, IMPORT_DECLARATION__COMPILATION_UNIT);
 
-      javaTypeRootEClass = createEClass(JAVA_TYPE_ROOT);
-      createEReference(javaTypeRootEClass, JAVA_TYPE_ROOT__TYPE);
-      createEReference(javaTypeRootEClass, JAVA_TYPE_ROOT__PARENT_PACKAGE);
+      javaTypeEClass = createEClass(JAVA_TYPE);
+      createEReference(javaTypeEClass, JAVA_TYPE__INNER_TYPES);
+      createEReference(javaTypeEClass, JAVA_TYPE__OUTER_TYPE);
 
-      javaClassEClass = createEClass(JAVA_CLASS);
+      javaResourceEClass = createEClass(JAVA_RESOURCE);
 
-      javaPackageEClass = createEClass(JAVA_PACKAGE);
-      createEReference(javaPackageEClass, JAVA_PACKAGE__TYPE_ROOTS);
-      createEAttribute(javaPackageEClass, JAVA_PACKAGE__SIMPLE_NAME);
-      createEReference(javaPackageEClass, JAVA_PACKAGE__PACKAGES);
-      createEReference(javaPackageEClass, JAVA_PACKAGE__PARENT_PACKAGE);
-
-      javaPackageBundleEClass = createEClass(JAVA_PACKAGE_BUNDLE);
-      createEReference(javaPackageBundleEClass, JAVA_PACKAGE_BUNDLE__PACKAGE_ROOTS);
-
-      javaArchiveEClass = createEClass(JAVA_ARCHIVE);
-
-      javaProjectEClass = createEClass(JAVA_PROJECT);
-
-      fullyQualifiedEClass = createEClass(FULLY_QUALIFIED);
-
-      javaPackageRootEClass = createEClass(JAVA_PACKAGE_ROOT);
-      createEAttribute(javaPackageRootEClass, JAVA_PACKAGE_ROOT__PATH);
-      createEReference(javaPackageRootEClass, JAVA_PACKAGE_ROOT__ROOT_PACKAGES);
-      createEReference(javaPackageRootEClass, JAVA_PACKAGE_ROOT__PACKAGE_BUNDLE);
+      // Create enums
+      javaResourcesTypeEEnum = createEEnum(JAVA_RESOURCES_TYPE);
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    private boolean isInitialized = false;
 
    /**
-    * Complete the initialization of the package and its meta-model. This method is guarded to have no affect on any
-    * invocation but its first. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Complete the initialization of the package and its meta-model. This
+    * method is guarded to have no affect on any invocation but its first.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -551,31 +731,174 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      javaTypeEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      javaTypeEClass.getESuperTypes().add(this.getFullyQualified());
-      javaCompilationUnitEClass.getESuperTypes().add(this.getJavaTypeRoot());
-      importDeclarationEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      javaTypeRootEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      javaClassEClass.getESuperTypes().add(this.getJavaTypeRoot());
-      javaPackageEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      javaPackageEClass.getESuperTypes().add(this.getFullyQualified());
-      javaPackageBundleEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      javaArchiveEClass.getESuperTypes().add(this.getJavaPackageBundle());
-      javaProjectEClass.getESuperTypes().add(this.getJavaPackageBundle());
-      javaPackageRootEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      resourceEClass.getESuperTypes().add(this.getNamed());
+      resourceEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      directoryEClass.getESuperTypes().add(this.getResource());
+      fileEClass.getESuperTypes().add(this.getResource());
+      javaElementEClass.getESuperTypes().add(this.getNamed());
+      javaElementEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      qualifiedJavaElementEClass.getESuperTypes().add(this.getJavaElement());
+      javaResourceBundleEClass.getESuperTypes().add(this.getJavaElement());
+      javaProjectEClass.getESuperTypes().add(this.getJavaResourceBundle());
+      javaArchiveEClass.getESuperTypes().add(this.getJavaResourceBundle());
+      javaResourceDirectoryEClass.getESuperTypes().add(this.getJavaElement());
+      javaResourceDirectoryEClass.getESuperTypes().add(this.getDirectory());
+      javaResourcesRootEClass.getESuperTypes().add(this.getJavaResourceDirectory());
+      javaPackageEClass.getESuperTypes().add(this.getJavaResource());
+      javaPackageEClass.getESuperTypes().add(this.getQualifiedJavaElement());
+      javaPackageEClass.getESuperTypes().add(this.getJavaResourceDirectory());
+      javaPackageEClass.getESuperTypes().add(this.getDirectory());
+      javaFileEClass.getESuperTypes().add(this.getJavaResource());
+      javaFileEClass.getESuperTypes().add(this.getFile());
+      javaClassEClass.getESuperTypes().add(this.getJavaFile());
+      javaCompilationUnitEClass.getESuperTypes().add(this.getJavaFile());
+      importDeclarationEClass.getESuperTypes().add(this.getJavaElement());
+      javaTypeEClass.getESuperTypes().add(this.getQualifiedJavaElement());
+      javaResourceEClass.getESuperTypes().add(this.getResource());
+      javaResourceEClass.getESuperTypes().add(this.getJavaElement());
 
       // Initialize classes and features; add operations and parameters
-      initEClass(javaTypeEClass, JavaType.class, "JavaType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getJavaType_InnerTypes(), this.getJavaType(), this.getJavaType_OuterType(), "innerTypes", null, 0,
-         -1, JavaType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaType_OuterType(), this.getJavaType(), this.getJavaType_InnerTypes(), "outerType", null, 0,
-         1, JavaType.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getJavaType_SimpleName(), ecorePackage.getEString(), "simpleName", null, 1, 1, JavaType.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEClass(namedEClass, Named.class, "Named", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getNamed_Name(), ecorePackage.getEString(), "name", null, 1, 1, Named.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-      addEOperation(javaTypeEClass, this.getJavaTypeRoot(), "getTypeRoot", 1, 1, IS_UNIQUE, IS_ORDERED);
+      initEClass(resourceEClass, Resource.class, "Resource", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getResource_ParentDirectory(), this.getDirectory(), this.getDirectory_Resources(),
+         "parentDirectory", null, 0, 1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+         !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+      initEClass(directoryEClass, Directory.class, "Directory", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getDirectory_Resources(), this.getResource(), this.getResource_ParentDirectory(), "resources",
+         null, 0, -1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+      addEOperation(directoryEClass, this.getDirectory(), "getDirectories", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+      EOperation op = addEOperation(directoryEClass, this.getDirectory(), "getDirectory", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(directoryEClass, this.getDirectory(), "getDirectory", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(directoryEClass, this.getFile(), "getFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(directoryEClass, this.getFile(), "getFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      addEOperation(directoryEClass, this.getFile(), "getFiles", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(fileEClass, File.class, "File", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+      initEClass(javaElementEClass, JavaElement.class, "JavaElement", IS_ABSTRACT, IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+
+      addEOperation(javaElementEClass, this.getJavaResourceBundle(), "getResourceBundle", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(qualifiedJavaElementEClass, QualifiedJavaElement.class, "QualifiedJavaElement", IS_ABSTRACT,
+         IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+      addEOperation(qualifiedJavaElementEClass, ecorePackage.getEString(), "getQualifiedName", 1, 1, IS_UNIQUE,
+         IS_ORDERED);
+
+      initEClass(javaResourceBundleEClass, JavaResourceBundle.class, "JavaResourceBundle", IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getJavaResourceBundle_ResourcesRoots(), this.getJavaResourcesRoot(),
+         this.getJavaResourcesRoot_PackageBundle(), "resourcesRoots", null, 0, -1, JavaResourceBundle.class,
+         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+
+      op = addEOperation(javaResourceBundleEClass, this.getJavaResourcesRoot(), "getResourcesRoot", 0, 1, IS_UNIQUE,
+         IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceBundleEClass, this.getJavaResourcesRoot(), "getResourcesRoot", 0, 1, IS_UNIQUE,
+         IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceBundleEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "rootName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "qualifiedPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceBundleEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "rootName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "qualifiedPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(javaProjectEClass, JavaProject.class, "JavaProject", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+
+      initEClass(javaArchiveEClass, JavaArchive.class, "JavaArchive", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+
+      op = addEOperation(javaArchiveEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "fullyQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(javaResourceDirectoryEClass, JavaResourceDirectory.class, "JavaResourceDirectory", IS_ABSTRACT,
+         IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+      addEOperation(javaResourceDirectoryEClass, this.getJavaPackage(), "getPackages", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+      addEOperation(javaResourceDirectoryEClass, this.getJavaFile(), "getJavaFiles", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+      addEOperation(javaResourceDirectoryEClass, this.getResource(), "getResources", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaFile(), "getJavaFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaFile(), "getJavaFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaResourceDirectoryEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      addEOperation(javaResourceDirectoryEClass, this.getJavaResourcesType(), "getResourcesType", 1, 1, IS_UNIQUE,
+         IS_ORDERED);
+
+      initEClass(javaResourcesRootEClass, JavaResourcesRoot.class, "JavaResourcesRoot", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getJavaResourcesRoot_PackageBundle(), this.getJavaResourceBundle(),
+         this.getJavaResourceBundle_ResourcesRoots(), "packageBundle", null, 1, 1, JavaResourcesRoot.class,
+         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getJavaResourcesRoot_ResourcesType(), this.getJavaResourcesType(), "resourcesType", "BIN", 1, 1,
+         JavaResourcesRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+
+      initEClass(javaPackageEClass, JavaPackage.class, "JavaPackage", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+
+      initEClass(javaFileEClass, JavaFile.class, "JavaFile", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getJavaFile_Type(), this.getJavaType(), null, "type", null, 1, 1, JavaFile.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+         IS_ORDERED);
+
+      initEClass(javaClassEClass, JavaClass.class, "JavaClass", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
 
       initEClass(javaCompilationUnitEClass, JavaCompilationUnit.class, "JavaCompilationUnit", !IS_ABSTRACT,
          !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -591,106 +914,30 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
          IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
 
-      initEClass(javaTypeRootEClass, JavaTypeRoot.class, "JavaTypeRoot", IS_ABSTRACT, IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getJavaTypeRoot_Type(), this.getJavaType(), null, "type", null, 1, 1, JavaTypeRoot.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE,
-         !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaTypeRoot_ParentPackage(), this.getJavaPackage(), this.getJavaPackage_TypeRoots(),
-         "parentPackage", null, 1, 1, JavaTypeRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-         !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-      initEClass(javaClassEClass, JavaClass.class, "JavaClass", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-
-      initEClass(javaPackageEClass, JavaPackage.class, "JavaPackage", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getJavaPackage_TypeRoots(), this.getJavaTypeRoot(), this.getJavaTypeRoot_ParentPackage(),
-         "typeRoots", null, 0, -1, JavaPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-         !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEAttribute(getJavaPackage_SimpleName(), ecorePackage.getEString(), "simpleName", "", 1, 1, JavaPackage.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaPackage_Packages(), this.getJavaPackage(), this.getJavaPackage_ParentPackage(), "packages",
-         null, 0, -1, JavaPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+      initEClass(javaTypeEClass, JavaType.class, "JavaType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getJavaType_InnerTypes(), this.getJavaType(), this.getJavaType_OuterType(), "innerTypes", null, 0,
+         -1, JavaType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaPackage_ParentPackage(), this.getJavaPackage(), this.getJavaPackage_Packages(),
-         "parentPackage", null, 0, 1, JavaPackage.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-         !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-      EOperation op = addEOperation(javaPackageEClass, this.getJavaPackage(), "getSubPackage", 0, 1, IS_UNIQUE,
-         IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      addEOperation(javaPackageEClass, this.getJavaPackageBundle(), "getPackageBundle", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-      addEOperation(javaPackageEClass, this.getJavaPackageRoot(), "getPackageRoot", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-      initEClass(javaPackageBundleEClass, JavaPackageBundle.class, "JavaPackageBundle", IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getJavaPackageBundle_PackageRoots(), this.getJavaPackageRoot(),
-         this.getJavaPackageRoot_PackageBundle(), "packageRoots", null, 0, -1, JavaPackageBundle.class, !IS_TRANSIENT,
-         !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-         IS_ORDERED);
-
-      op = addEOperation(javaPackageBundleEClass, this.getJavaPackage(), "getRootPackages", 1, -1, IS_UNIQUE,
-         IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      op = addEOperation(javaPackageBundleEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "fullyQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      op = addEOperation(javaPackageBundleEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      op = addEOperation(javaPackageBundleEClass, this.getJavaPackageRoot(), "getPackageRoot", 0, 1, IS_UNIQUE,
-         IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      op = addEOperation(javaPackageBundleEClass, this.getJavaPackageRoot(), "getPackageRoot", 0, 1, IS_UNIQUE,
-         IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "path", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      initEClass(javaArchiveEClass, JavaArchive.class, "JavaArchive", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-
-      op = addEOperation(javaArchiveEClass, this.getJavaPackage(), "getPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "fullyQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      op = addEOperation(javaArchiveEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
-      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-      initEClass(javaProjectEClass, JavaProject.class, "JavaProject", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-
-      initEClass(fullyQualifiedEClass, FullyQualified.class, "FullyQualified", IS_ABSTRACT, IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-
-      addEOperation(fullyQualifiedEClass, ecorePackage.getEString(), "getFullyQualifiedName", 1, 1, IS_UNIQUE,
-         IS_ORDERED);
-
-      addEOperation(fullyQualifiedEClass, ecorePackage.getEString(), "getSimpleName", 1, 1, IS_UNIQUE, IS_ORDERED);
-
-      initEClass(javaPackageRootEClass, JavaPackageRoot.class, "JavaPackageRoot", !IS_ABSTRACT, !IS_INTERFACE,
-         IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getJavaPackageRoot_Path(), ecorePackage.getEString(), "path", null, 1, 1, JavaPackageRoot.class,
-         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaPackageRoot_RootPackages(), this.getJavaPackage(), null, "rootPackages", null, 0, -1,
-         JavaPackageRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+      initEReference(getJavaType_OuterType(), this.getJavaType(), this.getJavaType_InnerTypes(), "outerType", null, 0,
+         1, JavaType.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-      initEReference(getJavaPackageRoot_PackageBundle(), this.getJavaPackageBundle(),
-         this.getJavaPackageBundle_PackageRoots(), "packageBundle", null, 1, 1, JavaPackageRoot.class, !IS_TRANSIENT,
-         !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+
+      addEOperation(javaTypeEClass, this.getJavaFile(), "getFile", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(javaResourceEClass, JavaResource.class, "JavaResource", IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+
+      addEOperation(javaResourceEClass, this.getJavaResourcesRoot(), "getResourcesRoot", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      addEOperation(javaResourceEClass, this.getJavaResourceDirectory(), "getParentDirectory", 0, 1, IS_UNIQUE,
          IS_ORDERED);
+
+      addEOperation(javaResourceEClass, this.getJavaPackage(), "getParentPackage", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      // Initialize enums and add enum literals
+      initEEnum(javaResourcesTypeEEnum, JavaResourcesType.class, "JavaResourcesType");
+      addEEnumLiteral(javaResourcesTypeEEnum, JavaResourcesType.BIN);
+      addEEnumLiteral(javaResourcesTypeEEnum, JavaResourcesType.SRC);
 
       // Create resource
       createResource(eNS_URI);

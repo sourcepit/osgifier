@@ -20,7 +20,9 @@ import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Osgify Context</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Osgify Context</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -33,8 +35,9 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
 {
    /**
-    * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list. <!-- begin-user-doc
-    * --> <!-- end-user-doc -->
+    * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @see #getBundles()
     * @generated
@@ -43,7 +46,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    protected EList<BundleCandidate> bundles;
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -53,7 +57,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -64,7 +69,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -79,7 +85,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -95,7 +102,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -111,7 +119,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -130,7 +139,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -147,7 +157,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */

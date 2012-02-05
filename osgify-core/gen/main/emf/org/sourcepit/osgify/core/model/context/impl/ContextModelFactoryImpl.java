@@ -18,14 +18,18 @@ import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model <b>Factory</b>.
+ * <!-- end-user-doc -->
  * 
  * @generated
  */
 public class ContextModelFactoryImpl extends EFactoryImpl implements ContextModelFactory
 {
    /**
-    * Creates the default factory implementation. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates the default factory implementation.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -48,7 +52,9 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * Creates an instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an instance of the factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -58,7 +64,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -79,7 +86,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -90,7 +98,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -101,7 +110,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -112,7 +122,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -122,7 +133,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    }
 
    /**
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @deprecated
     * @generated

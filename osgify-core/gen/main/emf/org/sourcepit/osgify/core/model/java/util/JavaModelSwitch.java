@@ -13,24 +13,36 @@ import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.modeling.common.Annotatable;
 import org.sourcepit.modeling.common.Extendable;
 import org.sourcepit.modeling.common.XAnnotatable;
-import org.sourcepit.osgify.core.model.java.FullyQualified;
+import org.sourcepit.osgify.core.model.java.Directory;
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.ImportDeclaration;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaCompilationUnit;
+import org.sourcepit.osgify.core.model.java.JavaElement;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResource;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
+import org.sourcepit.osgify.core.model.java.Named;
+import org.sourcepit.osgify.core.model.java.QualifiedJavaElement;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
- * <!-- begin-user-doc --> The <b>Switch</b> for the model's inheritance hierarchy. It supports the call
- * {@link #doSwitch(EObject) doSwitch(object)} to invoke the <code>caseXXX</code> method for each class of the model,
- * starting with the actual class of the object and proceeding up the inheritance hierarchy until a non-null result is
- * returned, which is the result of the switch. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Switch</b> for the model's inheritance hierarchy.
+ * It supports the call {@link #doSwitch(EObject) doSwitch(object)} to invoke the <code>caseXXX</code> method for each
+ * class of the model,
+ * starting with the actual class of the object
+ * and proceeding up the inheritance hierarchy
+ * until a non-null result is returned,
+ * which is the result of the switch.
+ * <!-- end-user-doc -->
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage
  * @generated
@@ -38,14 +50,18 @@ import org.sourcepit.osgify.core.model.java.JavaTypeRoot;
 public class JavaModelSwitch<T>
 {
    /**
-    * The cached model package <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The cached model package
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    protected static JavaModelPackage modelPackage;
 
    /**
-    * Creates an instance of the switch. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Creates an instance of the switch.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
@@ -59,7 +75,8 @@ public class JavaModelSwitch<T>
 
    /**
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
@@ -71,7 +88,8 @@ public class JavaModelSwitch<T>
 
    /**
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
@@ -91,7 +109,8 @@ public class JavaModelSwitch<T>
 
    /**
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-    * <!-- begin-user-doc --> <!-- end-user-doc -->
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
@@ -100,18 +119,278 @@ public class JavaModelSwitch<T>
    {
       switch (classifierID)
       {
-         case JavaModelPackage.JAVA_TYPE :
+         case JavaModelPackage.NAMED :
          {
-            JavaType javaType = (JavaType) theEObject;
-            T result = caseJavaType(javaType);
+            Named named = (Named) theEObject;
+            T result = caseNamed(named);
             if (result == null)
-               result = caseXAnnotatable(javaType);
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.RESOURCE :
+         {
+            Resource resource = (Resource) theEObject;
+            T result = caseResource(resource);
             if (result == null)
-               result = caseFullyQualified(javaType);
+               result = caseNamed(resource);
             if (result == null)
-               result = caseExtendable(javaType);
+               result = caseXAnnotatable(resource);
             if (result == null)
-               result = caseAnnotatable(javaType);
+               result = caseExtendable(resource);
+            if (result == null)
+               result = caseAnnotatable(resource);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.DIRECTORY :
+         {
+            Directory directory = (Directory) theEObject;
+            T result = caseDirectory(directory);
+            if (result == null)
+               result = caseResource(directory);
+            if (result == null)
+               result = caseNamed(directory);
+            if (result == null)
+               result = caseXAnnotatable(directory);
+            if (result == null)
+               result = caseExtendable(directory);
+            if (result == null)
+               result = caseAnnotatable(directory);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.FILE :
+         {
+            File file = (File) theEObject;
+            T result = caseFile(file);
+            if (result == null)
+               result = caseResource(file);
+            if (result == null)
+               result = caseNamed(file);
+            if (result == null)
+               result = caseXAnnotatable(file);
+            if (result == null)
+               result = caseExtendable(file);
+            if (result == null)
+               result = caseAnnotatable(file);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_ELEMENT :
+         {
+            JavaElement javaElement = (JavaElement) theEObject;
+            T result = caseJavaElement(javaElement);
+            if (result == null)
+               result = caseNamed(javaElement);
+            if (result == null)
+               result = caseXAnnotatable(javaElement);
+            if (result == null)
+               result = caseExtendable(javaElement);
+            if (result == null)
+               result = caseAnnotatable(javaElement);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.QUALIFIED_JAVA_ELEMENT :
+         {
+            QualifiedJavaElement qualifiedJavaElement = (QualifiedJavaElement) theEObject;
+            T result = caseQualifiedJavaElement(qualifiedJavaElement);
+            if (result == null)
+               result = caseJavaElement(qualifiedJavaElement);
+            if (result == null)
+               result = caseNamed(qualifiedJavaElement);
+            if (result == null)
+               result = caseXAnnotatable(qualifiedJavaElement);
+            if (result == null)
+               result = caseExtendable(qualifiedJavaElement);
+            if (result == null)
+               result = caseAnnotatable(qualifiedJavaElement);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE :
+         {
+            JavaResourceBundle javaResourceBundle = (JavaResourceBundle) theEObject;
+            T result = caseJavaResourceBundle(javaResourceBundle);
+            if (result == null)
+               result = caseJavaElement(javaResourceBundle);
+            if (result == null)
+               result = caseNamed(javaResourceBundle);
+            if (result == null)
+               result = caseXAnnotatable(javaResourceBundle);
+            if (result == null)
+               result = caseExtendable(javaResourceBundle);
+            if (result == null)
+               result = caseAnnotatable(javaResourceBundle);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_PROJECT :
+         {
+            JavaProject javaProject = (JavaProject) theEObject;
+            T result = caseJavaProject(javaProject);
+            if (result == null)
+               result = caseJavaResourceBundle(javaProject);
+            if (result == null)
+               result = caseJavaElement(javaProject);
+            if (result == null)
+               result = caseNamed(javaProject);
+            if (result == null)
+               result = caseXAnnotatable(javaProject);
+            if (result == null)
+               result = caseExtendable(javaProject);
+            if (result == null)
+               result = caseAnnotatable(javaProject);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_ARCHIVE :
+         {
+            JavaArchive javaArchive = (JavaArchive) theEObject;
+            T result = caseJavaArchive(javaArchive);
+            if (result == null)
+               result = caseJavaResourceBundle(javaArchive);
+            if (result == null)
+               result = caseJavaElement(javaArchive);
+            if (result == null)
+               result = caseNamed(javaArchive);
+            if (result == null)
+               result = caseXAnnotatable(javaArchive);
+            if (result == null)
+               result = caseExtendable(javaArchive);
+            if (result == null)
+               result = caseAnnotatable(javaArchive);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_RESOURCE_DIRECTORY :
+         {
+            JavaResourceDirectory javaResourceDirectory = (JavaResourceDirectory) theEObject;
+            T result = caseJavaResourceDirectory(javaResourceDirectory);
+            if (result == null)
+               result = caseJavaElement(javaResourceDirectory);
+            if (result == null)
+               result = caseDirectory(javaResourceDirectory);
+            if (result == null)
+               result = caseResource(javaResourceDirectory);
+            if (result == null)
+               result = caseNamed(javaResourceDirectory);
+            if (result == null)
+               result = caseXAnnotatable(javaResourceDirectory);
+            if (result == null)
+               result = caseExtendable(javaResourceDirectory);
+            if (result == null)
+               result = caseAnnotatable(javaResourceDirectory);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_RESOURCES_ROOT :
+         {
+            JavaResourcesRoot javaResourcesRoot = (JavaResourcesRoot) theEObject;
+            T result = caseJavaResourcesRoot(javaResourcesRoot);
+            if (result == null)
+               result = caseJavaResourceDirectory(javaResourcesRoot);
+            if (result == null)
+               result = caseJavaElement(javaResourcesRoot);
+            if (result == null)
+               result = caseDirectory(javaResourcesRoot);
+            if (result == null)
+               result = caseResource(javaResourcesRoot);
+            if (result == null)
+               result = caseNamed(javaResourcesRoot);
+            if (result == null)
+               result = caseXAnnotatable(javaResourcesRoot);
+            if (result == null)
+               result = caseExtendable(javaResourcesRoot);
+            if (result == null)
+               result = caseAnnotatable(javaResourcesRoot);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_PACKAGE :
+         {
+            JavaPackage javaPackage = (JavaPackage) theEObject;
+            T result = caseJavaPackage(javaPackage);
+            if (result == null)
+               result = caseJavaResource(javaPackage);
+            if (result == null)
+               result = caseQualifiedJavaElement(javaPackage);
+            if (result == null)
+               result = caseJavaResourceDirectory(javaPackage);
+            if (result == null)
+               result = caseJavaElement(javaPackage);
+            if (result == null)
+               result = caseDirectory(javaPackage);
+            if (result == null)
+               result = caseResource(javaPackage);
+            if (result == null)
+               result = caseNamed(javaPackage);
+            if (result == null)
+               result = caseXAnnotatable(javaPackage);
+            if (result == null)
+               result = caseExtendable(javaPackage);
+            if (result == null)
+               result = caseAnnotatable(javaPackage);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_FILE :
+         {
+            JavaFile javaFile = (JavaFile) theEObject;
+            T result = caseJavaFile(javaFile);
+            if (result == null)
+               result = caseJavaResource(javaFile);
+            if (result == null)
+               result = caseFile(javaFile);
+            if (result == null)
+               result = caseResource(javaFile);
+            if (result == null)
+               result = caseJavaElement(javaFile);
+            if (result == null)
+               result = caseNamed(javaFile);
+            if (result == null)
+               result = caseXAnnotatable(javaFile);
+            if (result == null)
+               result = caseExtendable(javaFile);
+            if (result == null)
+               result = caseAnnotatable(javaFile);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case JavaModelPackage.JAVA_CLASS :
+         {
+            JavaClass javaClass = (JavaClass) theEObject;
+            T result = caseJavaClass(javaClass);
+            if (result == null)
+               result = caseJavaFile(javaClass);
+            if (result == null)
+               result = caseJavaResource(javaClass);
+            if (result == null)
+               result = caseFile(javaClass);
+            if (result == null)
+               result = caseResource(javaClass);
+            if (result == null)
+               result = caseJavaElement(javaClass);
+            if (result == null)
+               result = caseNamed(javaClass);
+            if (result == null)
+               result = caseXAnnotatable(javaClass);
+            if (result == null)
+               result = caseExtendable(javaClass);
+            if (result == null)
+               result = caseAnnotatable(javaClass);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -121,7 +400,17 @@ public class JavaModelSwitch<T>
             JavaCompilationUnit javaCompilationUnit = (JavaCompilationUnit) theEObject;
             T result = caseJavaCompilationUnit(javaCompilationUnit);
             if (result == null)
-               result = caseJavaTypeRoot(javaCompilationUnit);
+               result = caseJavaFile(javaCompilationUnit);
+            if (result == null)
+               result = caseJavaResource(javaCompilationUnit);
+            if (result == null)
+               result = caseFile(javaCompilationUnit);
+            if (result == null)
+               result = caseResource(javaCompilationUnit);
+            if (result == null)
+               result = caseJavaElement(javaCompilationUnit);
+            if (result == null)
+               result = caseNamed(javaCompilationUnit);
             if (result == null)
                result = caseXAnnotatable(javaCompilationUnit);
             if (result == null)
@@ -137,6 +426,10 @@ public class JavaModelSwitch<T>
             ImportDeclaration importDeclaration = (ImportDeclaration) theEObject;
             T result = caseImportDeclaration(importDeclaration);
             if (result == null)
+               result = caseJavaElement(importDeclaration);
+            if (result == null)
+               result = caseNamed(importDeclaration);
+            if (result == null)
                result = caseXAnnotatable(importDeclaration);
             if (result == null)
                result = caseExtendable(importDeclaration);
@@ -146,116 +439,42 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_TYPE_ROOT :
+         case JavaModelPackage.JAVA_TYPE :
          {
-            JavaTypeRoot javaTypeRoot = (JavaTypeRoot) theEObject;
-            T result = caseJavaTypeRoot(javaTypeRoot);
+            JavaType javaType = (JavaType) theEObject;
+            T result = caseJavaType(javaType);
             if (result == null)
-               result = caseXAnnotatable(javaTypeRoot);
+               result = caseQualifiedJavaElement(javaType);
             if (result == null)
-               result = caseExtendable(javaTypeRoot);
+               result = caseJavaElement(javaType);
             if (result == null)
-               result = caseAnnotatable(javaTypeRoot);
+               result = caseNamed(javaType);
+            if (result == null)
+               result = caseXAnnotatable(javaType);
+            if (result == null)
+               result = caseExtendable(javaType);
+            if (result == null)
+               result = caseAnnotatable(javaType);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_CLASS :
+         case JavaModelPackage.JAVA_RESOURCE :
          {
-            JavaClass javaClass = (JavaClass) theEObject;
-            T result = caseJavaClass(javaClass);
+            JavaResource javaResource = (JavaResource) theEObject;
+            T result = caseJavaResource(javaResource);
             if (result == null)
-               result = caseJavaTypeRoot(javaClass);
+               result = caseResource(javaResource);
             if (result == null)
-               result = caseXAnnotatable(javaClass);
+               result = caseJavaElement(javaResource);
             if (result == null)
-               result = caseExtendable(javaClass);
+               result = caseNamed(javaResource);
             if (result == null)
-               result = caseAnnotatable(javaClass);
+               result = caseXAnnotatable(javaResource);
             if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.JAVA_PACKAGE :
-         {
-            JavaPackage javaPackage = (JavaPackage) theEObject;
-            T result = caseJavaPackage(javaPackage);
+               result = caseExtendable(javaResource);
             if (result == null)
-               result = caseXAnnotatable(javaPackage);
-            if (result == null)
-               result = caseFullyQualified(javaPackage);
-            if (result == null)
-               result = caseExtendable(javaPackage);
-            if (result == null)
-               result = caseAnnotatable(javaPackage);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.JAVA_PACKAGE_BUNDLE :
-         {
-            JavaPackageBundle javaPackageBundle = (JavaPackageBundle) theEObject;
-            T result = caseJavaPackageBundle(javaPackageBundle);
-            if (result == null)
-               result = caseXAnnotatable(javaPackageBundle);
-            if (result == null)
-               result = caseExtendable(javaPackageBundle);
-            if (result == null)
-               result = caseAnnotatable(javaPackageBundle);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.JAVA_ARCHIVE :
-         {
-            JavaArchive javaArchive = (JavaArchive) theEObject;
-            T result = caseJavaArchive(javaArchive);
-            if (result == null)
-               result = caseJavaPackageBundle(javaArchive);
-            if (result == null)
-               result = caseXAnnotatable(javaArchive);
-            if (result == null)
-               result = caseExtendable(javaArchive);
-            if (result == null)
-               result = caseAnnotatable(javaArchive);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.JAVA_PROJECT :
-         {
-            JavaProject javaProject = (JavaProject) theEObject;
-            T result = caseJavaProject(javaProject);
-            if (result == null)
-               result = caseJavaPackageBundle(javaProject);
-            if (result == null)
-               result = caseXAnnotatable(javaProject);
-            if (result == null)
-               result = caseExtendable(javaProject);
-            if (result == null)
-               result = caseAnnotatable(javaProject);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.FULLY_QUALIFIED :
-         {
-            FullyQualified fullyQualified = (FullyQualified) theEObject;
-            T result = caseFullyQualified(fullyQualified);
-            if (result == null)
-               result = defaultCase(theEObject);
-            return result;
-         }
-         case JavaModelPackage.JAVA_PACKAGE_ROOT :
-         {
-            JavaPackageRoot javaPackageRoot = (JavaPackageRoot) theEObject;
-            T result = caseJavaPackageRoot(javaPackageRoot);
-            if (result == null)
-               result = caseXAnnotatable(javaPackageRoot);
-            if (result == null)
-               result = caseExtendable(javaPackageRoot);
-            if (result == null)
-               result = caseAnnotatable(javaPackageRoot);
+               result = caseAnnotatable(javaResource);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -266,122 +485,130 @@ public class JavaModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Type</em>'. <!-- begin-user-doc --> This
-    * implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Named</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Type</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Named</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaType(JavaType object)
+   public T caseNamed(Named object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Compilation Unit</em>'. <!--
-    * begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch. <!--
-    * end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Resource</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Compilation Unit</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Resource</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaCompilationUnit(JavaCompilationUnit object)
+   public T caseResource(Resource object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Import Declaration</em>'. <!-- begin-user-doc
-    * --> This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Directory</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Directory</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseImportDeclaration(ImportDeclaration object)
+   public T caseDirectory(Directory object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Type Root</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>File</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Type Root</em>'.
+    * @return the result of interpreting the object as an instance of '<em>File</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaTypeRoot(JavaTypeRoot object)
+   public T caseFile(File object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Class</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Element</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Class</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Java Element</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaClass(JavaClass object)
+   public T caseJavaElement(JavaElement object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Package</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Qualified Java Element</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Package</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Qualified Java Element</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaPackage(JavaPackage object)
+   public T caseQualifiedJavaElement(QualifiedJavaElement object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Package Bundle</em>'. <!--
-    * begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch. <!--
-    * end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Resource Bundle</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Package Bundle</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Java Resource Bundle</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaPackageBundle(JavaPackageBundle object)
+   public T caseJavaResourceBundle(JavaResourceBundle object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Archive</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
-    * 
-    * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Archive</em>'.
-    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-    * @generated
-    */
-   public T caseJavaArchive(JavaArchive object)
-   {
-      return null;
-   }
-
-   /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Project</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Project</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Java Project</em>'.
@@ -394,36 +621,181 @@ public class JavaModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Fully Qualified</em>'. <!-- begin-user-doc
-    * --> This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Archive</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Fully Qualified</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Java Archive</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseFullyQualified(FullyQualified object)
+   public T caseJavaArchive(JavaArchive object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Java Package Root</em>'. <!-- begin-user-doc
-    * --> This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Resource Directory</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Java Package Root</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Java Resource Directory</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaPackageRoot(JavaPackageRoot object)
+   public T caseJavaResourceDirectory(JavaResourceDirectory object)
    {
       return null;
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Extendable</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Java Resources Root</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Resources Root</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaResourcesRoot(JavaResourcesRoot object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Package</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Package</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaPackage(JavaPackage object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java File</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java File</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaFile(JavaFile object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Class</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Class</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaClass(JavaClass object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Compilation Unit</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Compilation Unit</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaCompilationUnit(JavaCompilationUnit object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseImportDeclaration(ImportDeclaration object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Type</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Type</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaType(JavaType object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Java Resource</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Java Resource</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseJavaResource(JavaResource object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Extendable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Extendable</em>'.
@@ -436,8 +808,11 @@ public class JavaModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Annotatable</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>Annotatable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Annotatable</em>'.
@@ -450,8 +825,11 @@ public class JavaModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>XAnnotatable</em>'. <!-- begin-user-doc -->
-    * This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
@@ -464,9 +842,11 @@ public class JavaModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>EObject</em>'. <!-- begin-user-doc --> This
-    * implementation returns null; returning a non-null result will terminate the switch, but this is the last case
-    * anyway. <!-- end-user-doc -->
+    * Returns the result of interpreting the object as an instance of '<em>EObject</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch, but this is the last case anyway.
+    * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>EObject</em>'.

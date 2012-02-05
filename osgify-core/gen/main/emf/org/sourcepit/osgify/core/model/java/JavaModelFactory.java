@@ -9,8 +9,10 @@ package org.sourcepit.osgify.core.model.java;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
- * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a create method for each non-abstract class of
- * the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Factory</b> for the model.
+ * It provides a create method for each non-abstract class of the model.
+ * <!-- end-user-doc -->
  * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage
  * @generated
@@ -18,62 +20,38 @@ import org.eclipse.emf.ecore.EFactory;
 public interface JavaModelFactory extends EFactory
 {
    /**
-    * The singleton instance of the factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * The singleton instance of the factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @generated
     */
    JavaModelFactory eINSTANCE = org.sourcepit.osgify.core.model.java.impl.JavaModelFactoryImpl.init();
 
    /**
-    * Returns a new object of class '<em>Java Type</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Directory</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Java Type</em>'.
+    * @return a new object of class '<em>Directory</em>'.
     * @generated
     */
-   JavaType createJavaType();
+   Directory createDirectory();
 
    /**
-    * Returns a new object of class '<em>Java Compilation Unit</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>File</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Java Compilation Unit</em>'.
+    * @return a new object of class '<em>File</em>'.
     * @generated
     */
-   JavaCompilationUnit createJavaCompilationUnit();
+   File createFile();
 
    /**
-    * Returns a new object of class '<em>Import Declaration</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @return a new object of class '<em>Import Declaration</em>'.
-    * @generated
-    */
-   ImportDeclaration createImportDeclaration();
-
-   /**
-    * Returns a new object of class '<em>Java Class</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @return a new object of class '<em>Java Class</em>'.
-    * @generated
-    */
-   JavaClass createJavaClass();
-
-   /**
-    * Returns a new object of class '<em>Java Package</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @return a new object of class '<em>Java Package</em>'.
-    * @generated
-    */
-   JavaPackage createJavaPackage();
-
-   /**
-    * Returns a new object of class '<em>Java Archive</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
-    * 
-    * @return a new object of class '<em>Java Archive</em>'.
-    * @generated
-    */
-   JavaArchive createJavaArchive();
-
-   /**
-    * Returns a new object of class '<em>Java Project</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Java Project</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return a new object of class '<em>Java Project</em>'.
     * @generated
@@ -81,15 +59,79 @@ public interface JavaModelFactory extends EFactory
    JavaProject createJavaProject();
 
    /**
-    * Returns a new object of class '<em>Java Package Root</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Java Archive</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Java Package Root</em>'.
+    * @return a new object of class '<em>Java Archive</em>'.
     * @generated
     */
-   JavaPackageRoot createJavaPackageRoot();
+   JavaArchive createJavaArchive();
 
    /**
-    * Returns the package supported by this factory. <!-- begin-user-doc --> <!-- end-user-doc -->
+    * Returns a new object of class '<em>Java Resources Root</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Resources Root</em>'.
+    * @generated
+    */
+   JavaResourcesRoot createJavaResourcesRoot();
+
+   /**
+    * Returns a new object of class '<em>Java Package</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Package</em>'.
+    * @generated
+    */
+   JavaPackage createJavaPackage();
+
+   /**
+    * Returns a new object of class '<em>Java Class</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Class</em>'.
+    * @generated
+    */
+   JavaClass createJavaClass();
+
+   /**
+    * Returns a new object of class '<em>Java Compilation Unit</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Compilation Unit</em>'.
+    * @generated
+    */
+   JavaCompilationUnit createJavaCompilationUnit();
+
+   /**
+    * Returns a new object of class '<em>Import Declaration</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Import Declaration</em>'.
+    * @generated
+    */
+   ImportDeclaration createImportDeclaration();
+
+   /**
+    * Returns a new object of class '<em>Java Type</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Java Type</em>'.
+    * @generated
+    */
+   JavaType createJavaType();
+
+   /**
+    * Returns the package supported by this factory.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * 
     * @return the package supported by this factory.
     * @generated

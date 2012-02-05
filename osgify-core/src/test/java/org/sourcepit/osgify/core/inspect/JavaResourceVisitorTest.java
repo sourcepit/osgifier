@@ -22,8 +22,8 @@ import org.sourcepit.common.manifest.resource.ManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
 import org.sourcepit.osgify.core.model.java.JavaProject;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 public class JavaResourceVisitorTest
@@ -42,9 +42,9 @@ public class JavaResourceVisitorTest
          }
 
          @Override
-         protected JavaPackageRoot getPackageRoot(boolean createOnDemand)
+         protected JavaResourcesRoot getPackageRoot(boolean createOnDemand)
          {
-            return jProject.getPackageRoot("", createOnDemand);
+            return jProject.getResourcesRoot("", createOnDemand);
          }
 
          @Override
@@ -72,7 +72,7 @@ public class JavaResourceVisitorTest
 
       visitor.visit(new Path("META-INF/MANIFEST.MF"), false, new ByteArrayInputStream(baos.toByteArray()));
 
-      Manifest actualMF = jProject.getPackageRoot("", true).getExtension(Manifest.class);
+      Manifest actualMF = jProject.getResourcesRoot("", true).getExtension(Manifest.class);
       assertNotNull(actualMF);
       assertThat("bar", IsEqual.equalTo(actualMF.getHeaderValue("foo")));
    }

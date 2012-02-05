@@ -9,7 +9,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleCandidate" eSuperTypes="../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="content" lowerBound="1"
-        eType="ecore:EClass Java.ecore#//JavaPackageBundle" containment="true"/>
+        eType="ecore:EClass Java.ecore#//JavaResourceBundle" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
         eType="#//BundleReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType ../../../../common-manifest/src/main/emf/manifest.ecore#//osgi/Version"/>

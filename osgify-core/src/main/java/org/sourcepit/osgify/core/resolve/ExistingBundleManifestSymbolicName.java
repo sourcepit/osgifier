@@ -12,8 +12,8 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.java.JavaPackageBundle;
-import org.sourcepit.osgify.core.model.java.JavaPackageRoot;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 
 /**
  * @author Bernd
@@ -35,12 +35,12 @@ public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameReso
    @Override
    public String resolveSymbolicName(BundleCandidate bundleCandidate)
    {
-      final JavaPackageBundle jContent = bundleCandidate.getContent();
-      if (jContent != null)
+      final JavaResourceBundle jBundle = bundleCandidate.getContent();
+      if (jBundle != null)
       {
-         for (JavaPackageRoot jPackageRoot : jContent.getPackageRoots())
+         for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
          {
-            final BundleManifest bundleManifest = jPackageRoot.getExtension(BundleManifest.class);
+            final BundleManifest bundleManifest = jRoot.getExtension(BundleManifest.class);
             if (bundleManifest != null)
             {
                final BundleSymbolicName bundleSymbolicName = bundleManifest.getBundleSymbolicName();
