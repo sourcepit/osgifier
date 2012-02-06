@@ -83,7 +83,6 @@ public class ExternalProcess extends ExternalResource
    public int execute(Map<String, String> environment, File workingDir, CommandLine command) throws IOException
    {
       final DefaultExecutor executor = newExecutor(workingDir);
-      System.out.println(command);
       return executor.execute(command, environment);
    }
 

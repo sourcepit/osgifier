@@ -9,10 +9,7 @@ package org.sourcepit.osgify.core.java.util;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javax.validation.ConstraintViolationException;
-
 import org.junit.Test;
-import org.sourcepit.common.utils.path.Path;
 
 public class JavaLangUtilsTest
 {
@@ -38,20 +35,4 @@ public class JavaLangUtilsTest
       assertFalse(JavaLangUtils.isFullyQuallifiedPackageName("com\\bo-sch", "\\"));
       assertFalse(JavaLangUtils.isFullyQuallifiedPackageName("com\\1bosch", "\\"));
    }
-
-   @Test
-   public void testToPackageName() throws Exception
-   {
-      try
-      {
-         JavaLangUtils.toPackageName((Path) null);
-      }
-      catch (ConstraintViolationException e)
-      {
-         System.out.println(e.getMessage());
-      }
-
-      JavaLangUtils.toPackageName("");
-   }
-
 }

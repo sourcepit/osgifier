@@ -102,8 +102,6 @@ public class Environment
          environment.put("MAVEN_OPTS", mvnOpts);
       }
 
-      System.out.println(userHome);
-
       final String javaDir = getProperty("java-dir");
       if (javaDir != null)
       {
