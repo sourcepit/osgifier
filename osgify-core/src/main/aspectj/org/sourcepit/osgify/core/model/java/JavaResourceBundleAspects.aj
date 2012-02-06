@@ -24,11 +24,11 @@ public aspect JavaResourceBundleAspects
       boolean createOnDemand): target(bundle) && args(rootName, qualifiedPackageName, typeName, createOnDemand) && execution(JavaType getType(String, String, String, boolean));
 
    JavaResourcesRoot around(JavaResourceBundle bundle, String name) : getResourcesRoot(bundle, name){
-      return JavaResourceBundleOperations.getPackageRoot(bundle, name);
+      return JavaResourceBundleOperations.getResourcesRoot(bundle, name, false);
    }
 
    JavaResourcesRoot around(JavaResourceBundle bundle, String name, boolean createOnDeamnd) : getResourcesRoot2(bundle, name, createOnDeamnd){
-      return JavaResourceBundleOperations.getPackageRoot(bundle, name, createOnDeamnd);
+      return JavaResourceBundleOperations.getResourcesRoot(bundle, name, createOnDeamnd);
    }
 
    JavaPackage around(JavaResourceBundle bundle, String rootName, String qualifiedPackageName, boolean createOnDemand) : getPackage(bundle, rootName, qualifiedPackageName, createOnDemand){

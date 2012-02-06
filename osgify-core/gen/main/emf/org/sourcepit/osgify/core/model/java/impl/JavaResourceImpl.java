@@ -20,7 +20,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class JavaResourceImpl extends ResourceImpl implements JavaResource
@@ -28,7 +28,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaResourceImpl()
@@ -39,7 +38,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -51,7 +49,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourcesRoot getResourcesRoot()
@@ -64,7 +61,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourceDirectory getParentDirectory()
@@ -77,7 +73,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getParentPackage()
@@ -90,7 +85,6 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourceBundle getResourceBundle()

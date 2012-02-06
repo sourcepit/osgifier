@@ -11,8 +11,8 @@ package org.sourcepit.osgify.core.model.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getFile()
  * @model
  * @generated

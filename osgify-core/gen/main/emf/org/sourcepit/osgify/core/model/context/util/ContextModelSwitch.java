@@ -28,7 +28,6 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * 
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage
  * @generated
  */
@@ -38,7 +37,6 @@ public class ContextModelSwitch<T>
     * The cached model package
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected static ContextModelPackage modelPackage;
@@ -47,7 +45,6 @@ public class ContextModelSwitch<T>
     * Creates an instance of the switch.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public ContextModelSwitch()
@@ -62,7 +59,6 @@ public class ContextModelSwitch<T>
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
@@ -75,7 +71,6 @@ public class ContextModelSwitch<T>
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
@@ -88,7 +83,10 @@ public class ContextModelSwitch<T>
       else
       {
          List<EClass> eSuperTypes = theEClass.getESuperTypes();
-         return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0), theEObject);
+         return
+            eSuperTypes.isEmpty() ?
+               defaultCase(theEObject) :
+               doSwitch(eSuperTypes.get(0), theEObject);
       }
    }
 
@@ -96,7 +94,6 @@ public class ContextModelSwitch<T>
     * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
@@ -104,50 +101,37 @@ public class ContextModelSwitch<T>
    {
       switch (classifierID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT :
+         case ContextModelPackage.OSGIFY_CONTEXT:
          {
-            OsgifyContext osgifyContext = (OsgifyContext) theEObject;
+            OsgifyContext osgifyContext = (OsgifyContext)theEObject;
             T result = caseOsgifyContext(osgifyContext);
-            if (result == null)
-               result = caseXAnnotatable(osgifyContext);
-            if (result == null)
-               result = caseExtendable(osgifyContext);
-            if (result == null)
-               result = caseAnnotatable(osgifyContext);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseXAnnotatable(osgifyContext);
+            if (result == null) result = caseExtendable(osgifyContext);
+            if (result == null) result = caseAnnotatable(osgifyContext);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_CANDIDATE :
+         case ContextModelPackage.BUNDLE_CANDIDATE:
          {
-            BundleCandidate bundleCandidate = (BundleCandidate) theEObject;
+            BundleCandidate bundleCandidate = (BundleCandidate)theEObject;
             T result = caseBundleCandidate(bundleCandidate);
-            if (result == null)
-               result = caseXAnnotatable(bundleCandidate);
-            if (result == null)
-               result = caseExtendable(bundleCandidate);
-            if (result == null)
-               result = caseAnnotatable(bundleCandidate);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseXAnnotatable(bundleCandidate);
+            if (result == null) result = caseExtendable(bundleCandidate);
+            if (result == null) result = caseAnnotatable(bundleCandidate);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_REFERENCE :
+         case ContextModelPackage.BUNDLE_REFERENCE:
          {
-            BundleReference bundleReference = (BundleReference) theEObject;
+            BundleReference bundleReference = (BundleReference)theEObject;
             T result = caseBundleReference(bundleReference);
-            if (result == null)
-               result = caseXAnnotatable(bundleReference);
-            if (result == null)
-               result = caseExtendable(bundleReference);
-            if (result == null)
-               result = caseAnnotatable(bundleReference);
-            if (result == null)
-               result = defaultCase(theEObject);
+            if (result == null) result = caseXAnnotatable(bundleReference);
+            if (result == null) result = caseExtendable(bundleReference);
+            if (result == null) result = caseAnnotatable(bundleReference);
+            if (result == null) result = defaultCase(theEObject);
             return result;
          }
-         default :
-            return defaultCase(theEObject);
+         default: return defaultCase(theEObject);
       }
    }
 
@@ -157,7 +141,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Osgify Context</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -174,7 +157,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Bundle Candidate</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -191,7 +173,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Bundle Reference</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -208,7 +189,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Extendable</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -225,7 +205,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>Annotatable</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -242,7 +221,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>XAnnotatable</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
@@ -259,7 +237,6 @@ public class ContextModelSwitch<T>
     * This implementation returns null;
     * returning a non-null result will terminate the switch, but this is the last case anyway.
     * <!-- end-user-doc -->
-    * 
     * @param object the target of the switch.
     * @return the result of interpreting the object as an instance of '<em>EObject</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject)

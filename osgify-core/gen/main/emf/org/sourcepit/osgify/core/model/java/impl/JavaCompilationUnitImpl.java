@@ -25,21 +25,18 @@ import org.sourcepit.osgify.core.model.java.JavaModelPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl#getImportDeclarations <em>Import
- * Declarations</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl#getImportDeclarations <em>Import Declarations</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompilationUnit
 {
    /**
-    * The cached value of the '{@link #getImportDeclarations() <em>Import Declarations</em>}' containment reference
-    * list.
+    * The cached value of the '{@link #getImportDeclarations() <em>Import Declarations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getImportDeclarations()
     * @generated
     * @ordered
@@ -49,7 +46,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaCompilationUnitImpl()
@@ -60,7 +56,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -72,16 +67,13 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<ImportDeclaration> getImportDeclarations()
    {
       if (importDeclarations == null)
       {
-         importDeclarations = new EObjectContainmentWithInverseEList<ImportDeclaration>(ImportDeclaration.class, this,
-            JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS,
-            JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT);
+         importDeclarations = new EObjectContainmentWithInverseEList<ImportDeclaration>(ImportDeclaration.class, this, JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT);
       }
       return importDeclarations;
    }
@@ -89,7 +81,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -98,9 +89,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getImportDeclarations()).basicAdd(otherEnd,
-               msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getImportDeclarations()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -108,7 +98,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -116,8 +105,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
-            return ((InternalEList<?>) getImportDeclarations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
+            return ((InternalEList<?>)getImportDeclarations()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -125,7 +114,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -133,7 +121,7 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             return getImportDeclarations();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -142,7 +130,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -151,9 +138,9 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             getImportDeclarations().clear();
-            getImportDeclarations().addAll((Collection<? extends ImportDeclaration>) newValue);
+            getImportDeclarations().addAll((Collection<? extends ImportDeclaration>)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -162,7 +149,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -170,7 +156,7 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             getImportDeclarations().clear();
             return;
       }
@@ -180,7 +166,6 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -188,7 +173,7 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
+         case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS:
             return importDeclarations != null && !importDeclarations.isEmpty();
       }
       return super.eIsSet(featureID);

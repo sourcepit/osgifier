@@ -46,7 +46,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaPackageBundleScanner().scan((JavaArchive) null, null, null);
+         new JavaResourcesBundleScanner().scan((JavaArchive) null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -56,7 +56,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       try
       {
-         new JavaPackageBundleScanner().scan(javaArchive, null, null);
+         new JavaResourcesBundleScanner().scan(javaArchive, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -67,12 +67,15 @@ public class JavaTypeAndPackageInvestigatorTest
       assertTrue(jarFile.exists());
 
       javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      new JavaPackageBundleScanner().scan(javaArchive, jarFile, null);
+      new JavaResourcesBundleScanner().scan(javaArchive, jarFile, null);
 
       JavaPackage pgk = javaArchive.getPackage(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
-
-      String version = pgk.getAnnotationData("packageinfo", "version");
+      
+      org.sourcepit.osgify.core.model.java.File pkgInfo = pgk.getFile("packageinfo");
+      assertThat(pkgInfo, IsNull.notNullValue());
+      
+      String version = pkgInfo.getAnnotationData("content", "version");
       assertThat(version, IsEqual.equalTo("1.0"));
 
       JavaType type = javaArchive.getType(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
@@ -98,7 +101,7 @@ public class JavaTypeAndPackageInvestigatorTest
    {
       try
       {
-         new JavaPackageBundleScanner().scan((JavaProject) null, null, null);
+         new JavaResourcesBundleScanner().scan((JavaProject) null, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -108,7 +111,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
       try
       {
-         new JavaPackageBundleScanner().scan(javaProject, null, null);
+         new JavaResourcesBundleScanner().scan(javaProject, null, null);
          fail();
       }
       catch (ConstraintViolationException e)
@@ -120,12 +123,15 @@ public class JavaTypeAndPackageInvestigatorTest
 
       javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaPackageBundleScanner().scan(javaProject, projectDir, null);
+      new JavaResourcesBundleScanner().scan(javaProject, projectDir, null);
 
       JavaPackage pgk = javaProject.getPackage("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
 
-      String version = pgk.getAnnotationData("packageinfo", "version");
+      org.sourcepit.osgify.core.model.java.File pkgInfo = pgk.getFile("packageinfo");
+      assertThat(pkgInfo, IsNull.notNullValue());
+      
+      String version = pkgInfo.getAnnotationData("content", "version");
       assertThat(version, IsEqual.equalTo("1.0"));
 
       JavaType type = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
@@ -163,7 +169,7 @@ public class JavaTypeAndPackageInvestigatorTest
 
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaPackageBundleScanner().scan(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
+      new JavaResourcesBundleScanner().scan(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
 
       JavaType jType = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName(), false);

@@ -16,7 +16,7 @@ import org.sourcepit.osgify.core.model.java.JavaModelPackage;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- * 
+ *
  * @generated
  */
 public class FileImpl extends ResourceImpl implements File
@@ -24,7 +24,6 @@ public class FileImpl extends ResourceImpl implements File
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected FileImpl()
@@ -35,7 +34,6 @@ public class FileImpl extends ResourceImpl implements File
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override

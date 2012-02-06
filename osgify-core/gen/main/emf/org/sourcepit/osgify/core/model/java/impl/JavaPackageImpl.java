@@ -32,10 +32,10 @@ import org.sourcepit.osgify.core.model.java.Resource;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getResources <em>Resources</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
@@ -44,7 +44,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getResources()
     * @generated
     * @ordered
@@ -54,7 +53,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaPackageImpl()
@@ -65,7 +63,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -77,15 +74,13 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Resource> getResources()
    {
       if (resources == null)
       {
-         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
-            JavaModelPackage.JAVA_PACKAGE__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
+         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this, JavaModelPackage.JAVA_PACKAGE__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
       return resources;
    }
@@ -93,7 +88,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaPackage> getPackages()
@@ -106,7 +100,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaFile> getJavaFiles()
@@ -119,7 +112,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getPackage(String name)
@@ -132,7 +124,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getPackage(String name, boolean createOnDemand)
@@ -145,7 +136,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaFile getJavaFile(String name)
@@ -158,7 +148,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaFile getJavaFile(String name, boolean createOnDemand)
@@ -171,7 +160,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType(String name)
@@ -184,7 +172,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType(String name, boolean createOnDemand)
@@ -197,7 +184,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourcesType getResourcesType()
@@ -210,7 +196,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Directory> getDirectories()
@@ -223,7 +208,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory getDirectory(String name)
@@ -236,7 +220,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory getDirectory(String name, boolean createOnDemand)
@@ -249,7 +232,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public File getFile(String name)
@@ -262,7 +244,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public File getFile(String name, boolean createOnDemand)
@@ -275,7 +256,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<File> getFiles()
@@ -288,7 +268,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getQualifiedName()
@@ -301,7 +280,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -310,8 +288,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getResources()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -319,7 +297,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -327,8 +304,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
-            return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
+            return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -336,7 +313,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -344,7 +320,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
             return getResources();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -353,7 +329,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -362,9 +337,9 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
             getResources().clear();
-            getResources().addAll((Collection<? extends Resource>) newValue);
+            getResources().addAll((Collection<? extends Resource>)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -373,7 +348,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -381,7 +355,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
             getResources().clear();
             return;
       }
@@ -391,7 +365,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -399,7 +372,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
+         case JavaModelPackage.JAVA_PACKAGE__RESOURCES:
             return resources != null && !resources.isEmpty();
       }
       return super.eIsSet(featureID);
@@ -408,7 +381,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -418,26 +390,22 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
       {
          switch (derivedFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       if (baseClass == Directory.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
-               return JavaModelPackage.DIRECTORY__RESOURCES;
-            default :
-               return -1;
+            case JavaModelPackage.JAVA_PACKAGE__RESOURCES: return JavaModelPackage.DIRECTORY__RESOURCES;
+            default: return -1;
          }
       }
       if (baseClass == JavaResourceDirectory.class)
       {
          switch (derivedFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -446,7 +414,6 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -456,26 +423,22 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
       {
          switch (baseFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       if (baseClass == Directory.class)
       {
          switch (baseFeatureID)
          {
-            case JavaModelPackage.DIRECTORY__RESOURCES :
-               return JavaModelPackage.JAVA_PACKAGE__RESOURCES;
-            default :
-               return -1;
+            case JavaModelPackage.DIRECTORY__RESOURCES: return JavaModelPackage.JAVA_PACKAGE__RESOURCES;
+            default: return -1;
          }
       }
       if (baseClass == JavaResourceDirectory.class)
       {
          switch (baseFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);

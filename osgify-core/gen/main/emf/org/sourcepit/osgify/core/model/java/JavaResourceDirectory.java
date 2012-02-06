@@ -12,8 +12,8 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Resource Directory</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourceDirectory()
  * @model interface="true" abstract="true"
  * @generated
@@ -23,7 +23,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -32,7 +31,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -41,7 +39,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -50,7 +47,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -59,7 +55,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -68,7 +63,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -77,7 +71,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -86,7 +79,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -95,7 +87,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -104,7 +95,6 @@ public interface JavaResourceDirectory extends JavaElement, Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation" required="true"
     * @generated
     */

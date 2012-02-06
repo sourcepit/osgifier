@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EReference;
  * <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelFactory
  * @model kind="package"
  * @generated
@@ -34,7 +33,6 @@ public interface JavaModelPackage extends EPackage
     * The package name.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    String eNAME = "java";
@@ -43,7 +41,6 @@ public interface JavaModelPackage extends EPackage
     * The package namespace URI.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    String eNS_URI = "http://www.sourcepit.org/osgify/java/0.1";
@@ -52,7 +49,6 @@ public interface JavaModelPackage extends EPackage
     * The package namespace name.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    String eNS_PREFIX = "java";
@@ -61,7 +57,6 @@ public interface JavaModelPackage extends EPackage
     * The singleton instance of the package.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    JavaModelPackage eINSTANCE = org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl.init();
@@ -70,7 +65,6 @@ public interface JavaModelPackage extends EPackage
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.Named <em>Named</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.Named
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getNamed()
     * @generated
@@ -81,7 +75,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -91,18 +84,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Named</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int NAMED_FEATURE_COUNT = 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl <em>Resource</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl <em>Resource</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.ResourceImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getResource()
     * @generated
@@ -113,7 +103,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -123,7 +112,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -133,7 +121,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -143,7 +130,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -153,18 +139,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Resource</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int RESOURCE_FEATURE_COUNT = NAMED_FEATURE_COUNT + 3;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl <em>Directory</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl <em>Directory</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.DirectoryImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getDirectory()
     * @generated
@@ -175,7 +158,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -185,7 +167,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -195,7 +176,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -205,7 +185,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -215,7 +194,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -225,7 +203,6 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Directory</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -235,7 +212,6 @@ public interface JavaModelPackage extends EPackage
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.FileImpl <em>File</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.FileImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getFile()
     * @generated
@@ -246,7 +222,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -256,7 +231,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -266,7 +240,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -276,7 +249,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -286,7 +258,6 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>File</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -296,7 +267,6 @@ public interface JavaModelPackage extends EPackage
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.JavaElement <em>Java Element</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.JavaElement
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaElement()
     * @generated
@@ -307,7 +277,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -317,7 +286,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -327,7 +295,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -337,18 +304,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Element</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_ELEMENT_FEATURE_COUNT = NAMED_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement
-    * <em>Qualified Java Element</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement <em>Qualified Java Element</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.QualifiedJavaElement
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getQualifiedJavaElement()
     * @generated
@@ -359,7 +323,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -369,7 +332,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -379,7 +341,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -389,18 +350,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Qualified Java Element</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int QUALIFIED_JAVA_ELEMENT_FEATURE_COUNT = JAVA_ELEMENT_FEATURE_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl
-    * <em>Java Resource Bundle</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl <em>Java Resource Bundle</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourceBundle()
     * @generated
@@ -411,7 +369,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -421,7 +378,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -431,7 +387,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -441,7 +396,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources Roots</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -451,18 +405,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Resource Bundle</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_RESOURCE_BUNDLE_FEATURE_COUNT = JAVA_ELEMENT_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl
-    * <em>Java Project</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl <em>Java Project</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaProject()
     * @generated
@@ -473,7 +424,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -483,7 +433,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -493,7 +442,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -503,7 +451,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources Roots</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -513,18 +460,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Project</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_PROJECT_FEATURE_COUNT = JAVA_RESOURCE_BUNDLE_FEATURE_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl
-    * <em>Java Archive</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl <em>Java Archive</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaArchive()
     * @generated
@@ -535,7 +479,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -545,7 +488,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -555,7 +497,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -565,7 +506,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources Roots</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -575,18 +515,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Archive</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_ARCHIVE_FEATURE_COUNT = JAVA_RESOURCE_BUNDLE_FEATURE_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory
-    * <em>Java Resource Directory</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory <em>Java Resource Directory</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.JavaResourceDirectory
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourceDirectory()
     * @generated
@@ -597,7 +534,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -607,7 +543,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -617,7 +552,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -627,7 +561,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -637,7 +570,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -647,18 +579,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Resource Directory</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_RESOURCE_DIRECTORY_FEATURE_COUNT = JAVA_ELEMENT_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl
-    * <em>Java Resources Root</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl <em>Java Resources Root</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourcesRoot()
     * @generated
@@ -669,7 +598,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -679,7 +607,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -689,7 +616,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -699,7 +625,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -709,7 +634,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -719,7 +643,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Package Bundle</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -729,7 +652,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources Type</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -739,18 +661,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Resources Root</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_RESOURCES_ROOT_FEATURE_COUNT = JAVA_RESOURCE_DIRECTORY_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl
-    * <em>Java Resource</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl <em>Java Resource</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResource()
     * @generated
@@ -761,7 +680,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -771,7 +689,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -781,7 +698,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -791,7 +707,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -801,18 +716,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Resource</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_RESOURCE_FEATURE_COUNT = RESOURCE_FEATURE_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl
-    * <em>Java Package</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl <em>Java Package</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaPackage()
     * @generated
@@ -823,7 +735,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -833,7 +744,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -843,7 +753,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -853,7 +762,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -863,7 +771,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Resources</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -873,18 +780,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Package</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_PACKAGE_FEATURE_COUNT = JAVA_RESOURCE_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl <em>Java File</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl <em>Java File</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaFileImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaFile()
     * @generated
@@ -895,7 +799,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -905,7 +808,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -915,7 +817,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -925,7 +826,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -935,7 +835,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Type</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -945,18 +844,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java File</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_FILE_FEATURE_COUNT = JAVA_RESOURCE_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaClassImpl <em>Java Class</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaClassImpl <em>Java Class</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaClassImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaClass()
     * @generated
@@ -967,7 +863,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -977,7 +872,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -987,7 +881,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -997,7 +890,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1007,7 +899,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Type</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1017,18 +908,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Class</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_CLASS_FEATURE_COUNT = JAVA_FILE_FEATURE_COUNT + 0;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl
-    * <em>Java Compilation Unit</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl <em>Java Compilation Unit</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaCompilationUnit()
     * @generated
@@ -1039,7 +927,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1049,7 +936,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1059,7 +945,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1069,7 +954,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Parent Directory</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1079,7 +963,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Type</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1089,7 +972,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Import Declarations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1099,18 +981,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Compilation Unit</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_COMPILATION_UNIT_FEATURE_COUNT = JAVA_FILE_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl
-    * <em>Import Declaration</em>}' class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl <em>Import Declaration</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getImportDeclaration()
     * @generated
@@ -1121,7 +1000,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1131,7 +1009,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1141,7 +1018,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1151,7 +1027,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Compilation Unit</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1161,18 +1036,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Import Declaration</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int IMPORT_DECLARATION_FEATURE_COUNT = JAVA_ELEMENT_FEATURE_COUNT + 1;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl <em>Java Type</em>}'
-    * class.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl <em>Java Type</em>}' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaType()
     * @generated
@@ -1183,7 +1055,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Name</b></em>' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1193,7 +1064,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Extensions</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1203,7 +1073,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1213,7 +1082,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Inner Types</b></em>' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1223,7 +1091,6 @@ public interface JavaModelPackage extends EPackage
     * The feature id for the '<em><b>Outer Type</b></em>' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
@@ -1233,18 +1100,15 @@ public interface JavaModelPackage extends EPackage
     * The number of structural features of the '<em>Java Type</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     * @ordered
     */
    int JAVA_TYPE_FEATURE_COUNT = QUALIFIED_JAVA_ELEMENT_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType
-    * <em>Java Resources Type</em>}' enum.
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType <em>Java Resources Type</em>}' enum.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesType
     * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourcesType()
     * @generated
@@ -1256,7 +1120,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.Named <em>Named</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Named</em>'.
     * @see org.sourcepit.osgify.core.model.java.Named
     * @generated
@@ -1264,11 +1127,9 @@ public interface JavaModelPackage extends EPackage
    EClass getNamed();
 
    /**
-    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.core.model.java.Named#getName
-    * <em>Name</em>}'.
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.core.model.java.Named#getName <em>Name</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the attribute '<em>Name</em>'.
     * @see org.sourcepit.osgify.core.model.java.Named#getName()
     * @see #getNamed()
@@ -1280,7 +1141,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.Resource <em>Resource</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Resource</em>'.
     * @see org.sourcepit.osgify.core.model.java.Resource
     * @generated
@@ -1288,11 +1148,9 @@ public interface JavaModelPackage extends EPackage
    EClass getResource();
 
    /**
-    * Returns the meta object for the container reference '
-    * {@link org.sourcepit.osgify.core.model.java.Resource#getParentDirectory <em>Parent Directory</em>}'.
+    * Returns the meta object for the container reference '{@link org.sourcepit.osgify.core.model.java.Resource#getParentDirectory <em>Parent Directory</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the container reference '<em>Parent Directory</em>'.
     * @see org.sourcepit.osgify.core.model.java.Resource#getParentDirectory()
     * @see #getResource()
@@ -1304,7 +1162,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.Directory <em>Directory</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Directory</em>'.
     * @see org.sourcepit.osgify.core.model.java.Directory
     * @generated
@@ -1312,11 +1169,9 @@ public interface JavaModelPackage extends EPackage
    EClass getDirectory();
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.java.Directory#getResources <em>Resources</em>}'.
+    * Returns the meta object for the containment reference list '{@link org.sourcepit.osgify.core.model.java.Directory#getResources <em>Resources</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the containment reference list '<em>Resources</em>'.
     * @see org.sourcepit.osgify.core.model.java.Directory#getResources()
     * @see #getDirectory()
@@ -1328,7 +1183,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.File <em>File</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>File</em>'.
     * @see org.sourcepit.osgify.core.model.java.File
     * @generated
@@ -1336,11 +1190,9 @@ public interface JavaModelPackage extends EPackage
    EClass getFile();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaElement <em>Java Element</em>}
-    * '.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaElement <em>Java Element</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Element</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaElement
     * @generated
@@ -1348,11 +1200,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaElement();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement
-    * <em>Qualified Java Element</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement <em>Qualified Java Element</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Qualified Java Element</em>'.
     * @see org.sourcepit.osgify.core.model.java.QualifiedJavaElement
     * @generated
@@ -1360,11 +1210,9 @@ public interface JavaModelPackage extends EPackage
    EClass getQualifiedJavaElement();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle
-    * <em>Java Resource Bundle</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle <em>Java Resource Bundle</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Resource Bundle</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourceBundle
     * @generated
@@ -1372,11 +1220,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaResourceBundle();
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}'.
+    * Returns the meta object for the containment reference list '{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the containment reference list '<em>Resources Roots</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots()
     * @see #getJavaResourceBundle()
@@ -1385,11 +1231,9 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaResourceBundle_ResourcesRoots();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaProject <em>Java Project</em>}
-    * '.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaProject <em>Java Project</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Project</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaProject
     * @generated
@@ -1397,11 +1241,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaProject();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaArchive <em>Java Archive</em>}
-    * '.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaArchive <em>Java Archive</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Archive</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaArchive
     * @generated
@@ -1409,11 +1251,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaArchive();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory
-    * <em>Java Resource Directory</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory <em>Java Resource Directory</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Resource Directory</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourceDirectory
     * @generated
@@ -1421,11 +1261,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaResourceDirectory();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot
-    * <em>Java Resources Root</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot <em>Java Resources Root</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Resources Root</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesRoot
     * @generated
@@ -1433,11 +1271,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaResourcesRoot();
 
    /**
-    * Returns the meta object for the container reference '
-    * {@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}'.
+    * Returns the meta object for the container reference '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the container reference '<em>Package Bundle</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle()
     * @see #getJavaResourcesRoot()
@@ -1446,11 +1282,9 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaResourcesRoot_PackageBundle();
 
    /**
-    * Returns the meta object for the attribute '
-    * {@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType <em>Resources Type</em>}'.
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType <em>Resources Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the attribute '<em>Resources Type</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType()
     * @see #getJavaResourcesRoot()
@@ -1459,11 +1293,9 @@ public interface JavaModelPackage extends EPackage
    EAttribute getJavaResourcesRoot_ResourcesType();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaPackage <em>Java Package</em>}
-    * '.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaPackage <em>Java Package</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Package</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaPackage
     * @generated
@@ -1474,7 +1306,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaFile <em>Java File</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java File</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaFile
     * @generated
@@ -1482,11 +1313,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaFile();
 
    /**
-    * Returns the meta object for the containment reference '
-    * {@link org.sourcepit.osgify.core.model.java.JavaFile#getType <em>Type</em>}'.
+    * Returns the meta object for the containment reference '{@link org.sourcepit.osgify.core.model.java.JavaFile#getType <em>Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the containment reference '<em>Type</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaFile#getType()
     * @see #getJavaFile()
@@ -1498,7 +1327,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaClass <em>Java Class</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Class</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaClass
     * @generated
@@ -1506,11 +1334,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaClass();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit
-    * <em>Java Compilation Unit</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit <em>Java Compilation Unit</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Compilation Unit</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaCompilationUnit
     * @generated
@@ -1518,12 +1344,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaCompilationUnit();
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit#getImportDeclarations
-    * <em>Import Declarations</em>}'.
+    * Returns the meta object for the containment reference list '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit#getImportDeclarations <em>Import Declarations</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the containment reference list '<em>Import Declarations</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaCompilationUnit#getImportDeclarations()
     * @see #getJavaCompilationUnit()
@@ -1532,11 +1355,9 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaCompilationUnit_ImportDeclarations();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration
-    * <em>Import Declaration</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration <em>Import Declaration</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Import Declaration</em>'.
     * @see org.sourcepit.osgify.core.model.java.ImportDeclaration
     * @generated
@@ -1544,11 +1365,9 @@ public interface JavaModelPackage extends EPackage
    EClass getImportDeclaration();
 
    /**
-    * Returns the meta object for the container reference '
-    * {@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}'.
+    * Returns the meta object for the container reference '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the container reference '<em>Compilation Unit</em>'.
     * @see org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit()
     * @see #getImportDeclaration()
@@ -1560,7 +1379,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaType <em>Java Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Type</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaType
     * @generated
@@ -1568,11 +1386,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaType();
 
    /**
-    * Returns the meta object for the containment reference list '
-    * {@link org.sourcepit.osgify.core.model.java.JavaType#getInnerTypes <em>Inner Types</em>}'.
+    * Returns the meta object for the containment reference list '{@link org.sourcepit.osgify.core.model.java.JavaType#getInnerTypes <em>Inner Types</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the containment reference list '<em>Inner Types</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaType#getInnerTypes()
     * @see #getJavaType()
@@ -1581,11 +1397,9 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaType_InnerTypes();
 
    /**
-    * Returns the meta object for the container reference '
-    * {@link org.sourcepit.osgify.core.model.java.JavaType#getOuterType <em>Outer Type</em>}'.
+    * Returns the meta object for the container reference '{@link org.sourcepit.osgify.core.model.java.JavaType#getOuterType <em>Outer Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for the container reference '<em>Outer Type</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaType#getOuterType()
     * @see #getJavaType()
@@ -1594,11 +1408,9 @@ public interface JavaModelPackage extends EPackage
    EReference getJavaType_OuterType();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResource
-    * <em>Java Resource</em>}'.
+    * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaResource <em>Java Resource</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for class '<em>Java Resource</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResource
     * @generated
@@ -1606,11 +1418,9 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaResource();
 
    /**
-    * Returns the meta object for enum '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType
-    * <em>Java Resources Type</em>}'.
+    * Returns the meta object for enum '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType <em>Java Resources Type</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the meta object for enum '<em>Java Resources Type</em>'.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesType
     * @generated
@@ -1621,7 +1431,6 @@ public interface JavaModelPackage extends EPackage
     * Returns the factory that creates the instances of the model.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the factory that creates the instances of the model.
     * @generated
     */
@@ -1637,7 +1446,6 @@ public interface JavaModelPackage extends EPackage
     * <li>and each data type</li>
     * </ul>
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    interface Literals
@@ -1646,7 +1454,6 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.Named <em>Named</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.Named
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getNamed()
        * @generated
@@ -1657,17 +1464,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EAttribute NAMED__NAME = eINSTANCE.getNamed_Name();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl
-       * <em>Resource</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl <em>Resource</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.ResourceImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getResource()
        * @generated
@@ -1678,17 +1482,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Parent Directory</b></em>' container reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference RESOURCE__PARENT_DIRECTORY = eINSTANCE.getResource_ParentDirectory();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl
-       * <em>Directory</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl <em>Directory</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.DirectoryImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getDirectory()
        * @generated
@@ -1699,17 +1500,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Resources</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference DIRECTORY__RESOURCES = eINSTANCE.getDirectory_Resources();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.FileImpl <em>File</em>}'
-       * class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.FileImpl <em>File</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.FileImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getFile()
        * @generated
@@ -1717,11 +1515,9 @@ public interface JavaModelPackage extends EPackage
       EClass FILE = eINSTANCE.getFile();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaElement <em>Java Element</em>}
-       * ' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaElement <em>Java Element</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.JavaElement
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaElement()
        * @generated
@@ -1729,11 +1525,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_ELEMENT = eINSTANCE.getJavaElement();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement
-       * <em>Qualified Java Element</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.QualifiedJavaElement <em>Qualified Java Element</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.QualifiedJavaElement
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getQualifiedJavaElement()
        * @generated
@@ -1741,11 +1535,9 @@ public interface JavaModelPackage extends EPackage
       EClass QUALIFIED_JAVA_ELEMENT = eINSTANCE.getQualifiedJavaElement();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl
-       * <em>Java Resource Bundle</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl <em>Java Resource Bundle</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourceBundle()
        * @generated
@@ -1756,17 +1548,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Resources Roots</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS = eINSTANCE.getJavaResourceBundle_ResourcesRoots();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl
-       * <em>Java Project</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl <em>Java Project</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaProjectImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaProject()
        * @generated
@@ -1774,11 +1563,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_PROJECT = eINSTANCE.getJavaProject();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl
-       * <em>Java Archive</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl <em>Java Archive</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaArchiveImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaArchive()
        * @generated
@@ -1786,11 +1573,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_ARCHIVE = eINSTANCE.getJavaArchive();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory
-       * <em>Java Resource Directory</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaResourceDirectory <em>Java Resource Directory</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.JavaResourceDirectory
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourceDirectory()
        * @generated
@@ -1798,11 +1583,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_RESOURCE_DIRECTORY = eINSTANCE.getJavaResourceDirectory();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl
-       * <em>Java Resources Root</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl <em>Java Resources Root</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourcesRoot()
        * @generated
@@ -1813,7 +1596,6 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Package Bundle</b></em>' container reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE = eINSTANCE.getJavaResourcesRoot_PackageBundle();
@@ -1822,17 +1604,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Resources Type</b></em>' attribute feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EAttribute JAVA_RESOURCES_ROOT__RESOURCES_TYPE = eINSTANCE.getJavaResourcesRoot_ResourcesType();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl
-       * <em>Java Package</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl <em>Java Package</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaPackageImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaPackage()
        * @generated
@@ -1840,11 +1619,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_PACKAGE = eINSTANCE.getJavaPackage();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl
-       * <em>Java File</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl <em>Java File</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaFileImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaFile()
        * @generated
@@ -1855,17 +1632,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_FILE__TYPE = eINSTANCE.getJavaFile_Type();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaClassImpl
-       * <em>Java Class</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaClassImpl <em>Java Class</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaClassImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaClass()
        * @generated
@@ -1873,11 +1647,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_CLASS = eINSTANCE.getJavaClass();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl
-       * <em>Java Compilation Unit</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl <em>Java Compilation Unit</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaCompilationUnit()
        * @generated
@@ -1888,17 +1660,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Import Declarations</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS = eINSTANCE.getJavaCompilationUnit_ImportDeclarations();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl
-       * <em>Import Declaration</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl <em>Import Declaration</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getImportDeclaration()
        * @generated
@@ -1909,17 +1678,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Compilation Unit</b></em>' container reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference IMPORT_DECLARATION__COMPILATION_UNIT = eINSTANCE.getImportDeclaration_CompilationUnit();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl
-       * <em>Java Type</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl <em>Java Type</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaTypeImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaType()
        * @generated
@@ -1930,7 +1696,6 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Inner Types</b></em>' containment reference list feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_TYPE__INNER_TYPES = eINSTANCE.getJavaType_InnerTypes();
@@ -1939,17 +1704,14 @@ public interface JavaModelPackage extends EPackage
        * The meta object literal for the '<em><b>Outer Type</b></em>' container reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @generated
        */
       EReference JAVA_TYPE__OUTER_TYPE = eINSTANCE.getJavaType_OuterType();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl
-       * <em>Java Resource</em>}' class.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl <em>Java Resource</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.impl.JavaResourceImpl
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResource()
        * @generated
@@ -1957,11 +1719,9 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_RESOURCE = eINSTANCE.getJavaResource();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType
-       * <em>Java Resources Type</em>}' enum.
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesType <em>Java Resources Type</em>}' enum.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
-       * 
        * @see org.sourcepit.osgify.core.model.java.JavaResourcesType
        * @see org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl#getJavaResourcesType()
        * @generated

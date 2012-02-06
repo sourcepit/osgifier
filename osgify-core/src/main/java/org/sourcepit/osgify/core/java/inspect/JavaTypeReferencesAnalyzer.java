@@ -12,10 +12,9 @@ import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
-public class JavaTypeReferencesAnalyzer extends AbstractJavaTypeAnalyzer
+public class JavaTypeReferencesAnalyzer implements IJavaTypeAnalyzer
 {
-   @Override
-   protected void analyze(JavaType javaType, JavaClass javaClass)
+   public void analyze(JavaType javaType, JavaClass javaClass)
    {
       final Set<String> refs = JavaTypeReferencesCollector.collect(javaClass);
       if (!refs.isEmpty())
@@ -27,5 +26,4 @@ public class JavaTypeReferencesAnalyzer extends AbstractJavaTypeAnalyzer
          }
       }
    }
-
 }

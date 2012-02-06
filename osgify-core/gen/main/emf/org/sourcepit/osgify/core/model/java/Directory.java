@@ -12,14 +12,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Directory</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.Directory#getResources <em>Resources</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.Directory#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getDirectory()
  * @model
  * @generated
@@ -29,15 +29,13 @@ public interface Directory extends Resource
    /**
     * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgify.core.model.java.Resource}.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.core.model.java.Resource#getParentDirectory
-    * <em>Parent Directory</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.core.model.java.Resource#getParentDirectory <em>Parent Directory</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Resources</em>' containment reference list isn't clear, there really should be more of
     * a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Resources</em>' containment reference list.
     * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getDirectory_Resources()
     * @see org.sourcepit.osgify.core.model.java.Resource#getParentDirectory
@@ -49,7 +47,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -58,7 +55,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -67,7 +63,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -76,7 +71,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -85,7 +79,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -94,7 +87,6 @@ public interface Directory extends Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */

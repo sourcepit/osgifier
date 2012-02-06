@@ -43,17 +43,16 @@ import org.sourcepit.osgify.core.model.java.Resource;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getName <em>Name</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getExtensions <em>Extensions</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getAnnotations <em>Annotations</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getParentDirectory <em>Parent Directory
- * </em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getResources <em>Resources</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getPackageBundle <em>Package Bundle</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getResourcesType <em>Resources Type</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getExtensions <em>Extensions</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getParentDirectory <em>Parent Directory</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getResources <em>Resources</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getPackageBundle <em>Package Bundle</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourcesRootImpl#getResourcesType <em>Resources Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesRoot
@@ -62,7 +61,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -73,7 +71,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -84,7 +81,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getExtensions()
     * @generated
     * @ordered
@@ -95,7 +91,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -106,7 +101,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getResources()
     * @generated
     * @ordered
@@ -117,7 +111,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The default value of the '{@link #getResourcesType() <em>Resources Type</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getResourcesType()
     * @generated
     * @ordered
@@ -128,7 +121,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * The cached value of the '{@link #getResourcesType() <em>Resources Type</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getResourcesType()
     * @generated
     * @ordered
@@ -138,7 +130,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaResourcesRootImpl()
@@ -149,7 +140,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -161,7 +151,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getName()
@@ -172,7 +161,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setName(String newName)
@@ -180,22 +168,19 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
       String oldName = name;
       name = newName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__NAME, oldName,
-            name));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__NAME, oldName, name));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<EObject> getExtensions()
    {
       if (extensions == null)
       {
-         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
-            JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS);
+         extensions = new EObjectContainmentEList<EObject>(EObject.class, this, JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS);
       }
       return extensions;
    }
@@ -203,15 +188,13 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -219,39 +202,33 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory getParentDirectory()
    {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY)
-         return null;
-      return (Directory) eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY) return null;
+      return (Directory)eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetParentDirectory(Directory newParentDirectory, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject) newParentDirectory,
-         JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY, msgs);
+      msgs = eBasicSetContainer((InternalEObject)newParentDirectory, JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setParentDirectory(Directory newParentDirectory)
    {
-      if (newParentDirectory != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY && newParentDirectory != null))
+      if (newParentDirectory != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY && newParentDirectory != null))
       {
          if (EcoreUtil.isAncestor(this, newParentDirectory))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -259,29 +236,24 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newParentDirectory != null)
-            msgs = ((InternalEObject) newParentDirectory).eInverseAdd(this, JavaModelPackage.DIRECTORY__RESOURCES,
-               Directory.class, msgs);
+            msgs = ((InternalEObject)newParentDirectory).eInverseAdd(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class, msgs);
          msgs = basicSetParentDirectory(newParentDirectory, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY,
-            newParentDirectory, newParentDirectory));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY, newParentDirectory, newParentDirectory));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Resource> getResources()
    {
       if (resources == null)
       {
-         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
-            JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
+         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this, JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
       return resources;
    }
@@ -289,39 +261,33 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourceBundle getPackageBundle()
    {
-      if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE)
-         return null;
-      return (JavaResourceBundle) eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE) return null;
+      return (JavaResourceBundle)eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetPackageBundle(JavaResourceBundle newPackageBundle, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject) newPackageBundle,
-         JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE, msgs);
+      msgs = eBasicSetContainer((InternalEObject)newPackageBundle, JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setPackageBundle(JavaResourceBundle newPackageBundle)
    {
-      if (newPackageBundle != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE && newPackageBundle != null))
+      if (newPackageBundle != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE && newPackageBundle != null))
       {
          if (EcoreUtil.isAncestor(this, newPackageBundle))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -329,21 +295,17 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newPackageBundle != null)
-            msgs = ((InternalEObject) newPackageBundle).eInverseAdd(this,
-               JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS, JavaResourceBundle.class, msgs);
+            msgs = ((InternalEObject)newPackageBundle).eInverseAdd(this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS, JavaResourceBundle.class, msgs);
          msgs = basicSetPackageBundle(newPackageBundle, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE,
-            newPackageBundle, newPackageBundle));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE, newPackageBundle, newPackageBundle));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourcesType getResourcesType()
@@ -354,7 +316,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setResourcesType(JavaResourcesType newResourcesType)
@@ -362,14 +323,24 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
       JavaResourcesType oldResourcesType = resourcesType;
       resourcesType = newResourcesType == null ? RESOURCES_TYPE_EDEFAULT : newResourcesType;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE,
-            oldResourcesType, resourcesType));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE, oldResourcesType, resourcesType));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
+    * @generated
+    */
+   public JavaType getType(String qualifiedPackageName, String typeName, boolean createOnDemand)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
     * @generated
     */
    public EList<JavaPackage> getPackages()
@@ -382,7 +353,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<JavaFile> getJavaFiles()
@@ -395,7 +365,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getPackage(String name)
@@ -408,7 +377,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage getPackage(String name, boolean createOnDemand)
@@ -421,7 +389,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaFile getJavaFile(String name)
@@ -434,7 +401,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaFile getJavaFile(String name, boolean createOnDemand)
@@ -447,7 +413,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType(String name)
@@ -460,7 +425,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType(String name, boolean createOnDemand)
@@ -473,7 +437,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<Directory> getDirectories()
@@ -486,7 +449,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory getDirectory(String name)
@@ -499,7 +461,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory getDirectory(String name, boolean createOnDemand)
@@ -512,7 +473,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public File getFile(String name)
@@ -525,7 +485,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public File getFile(String name, boolean createOnDemand)
@@ -538,7 +497,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<File> getFiles()
@@ -551,7 +509,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourceBundle getResourceBundle()
@@ -564,7 +521,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -577,7 +533,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -590,7 +545,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -603,7 +557,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public <T extends EObject> T getExtension(Class<T> extensionType)
@@ -616,7 +569,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
@@ -629,7 +581,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public <T extends EObject> void addExtension(T extension)
@@ -642,7 +593,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public <T extends EObject> void removeExtension(T extension)
@@ -655,7 +605,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public <T extends EObject> void removeExtensions(Class<T> extentionType)
@@ -668,7 +617,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -677,18 +625,18 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetParentDirectory((Directory) otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
-            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
+            return basicSetParentDirectory((Directory)otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
+            return ((InternalEList<InternalEObject>)(InternalEList<?>)getResources()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetPackageBundle((JavaResourceBundle) otherEnd, msgs);
+            return basicSetPackageBundle((JavaResourceBundle)otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -696,7 +644,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -704,15 +651,15 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
-            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
-            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS:
+            return ((InternalEList<?>)getExtensions()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
+            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
             return basicSetParentDirectory(null, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
-            return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
+            return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
             return basicSetPackageBundle(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -721,7 +668,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -729,12 +675,10 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class,
-               msgs);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS,
-               JavaResourceBundle.class, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class, msgs);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS, JavaResourceBundle.class, msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -742,7 +686,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -750,19 +693,19 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME:
             return getName();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS:
             return getExtensions();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
             return getAnnotations();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
             return getParentDirectory();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
             return getResources();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
             return getPackageBundle();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE:
             return getResourcesType();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -771,7 +714,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -780,29 +722,29 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
-            setName((String) newValue);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME:
+            setName((String)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS:
             getExtensions().clear();
-            getExtensions().addAll((Collection<? extends EObject>) newValue);
+            getExtensions().addAll((Collection<? extends EObject>)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
-            setParentDirectory((Directory) newValue);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
+            setParentDirectory((Directory)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
             getResources().clear();
-            getResources().addAll((Collection<? extends Resource>) newValue);
+            getResources().addAll((Collection<? extends Resource>)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
-            setPackageBundle((JavaResourceBundle) newValue);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
+            setPackageBundle((JavaResourceBundle)newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE :
-            setResourcesType((JavaResourcesType) newValue);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE:
+            setResourcesType((JavaResourcesType)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -811,7 +753,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -819,25 +760,25 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME:
             setName(NAME_EDEFAULT);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS:
             getExtensions().clear();
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
-            setParentDirectory((Directory) null);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
+            setParentDirectory((Directory)null);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
             getResources().clear();
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
-            setPackageBundle((JavaResourceBundle) null);
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
+            setPackageBundle((JavaResourceBundle)null);
             return;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE:
             setResourcesType(RESOURCES_TYPE_EDEFAULT);
             return;
       }
@@ -847,7 +788,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -855,19 +795,19 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME:
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS:
             return extensions != null && !extensions.isEmpty();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS:
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY:
             return getParentDirectory() != null;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES:
             return resources != null && !resources.isEmpty();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE:
             return getPackageBundle() != null;
-         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE :
+         case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES_TYPE:
             return resourcesType != RESOURCES_TYPE_EDEFAULT;
       }
       return super.eIsSet(featureID);
@@ -876,7 +816,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -886,48 +825,39 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
-               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default :
-               return -1;
+            case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS: return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default: return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
-               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
-            default :
-               return -1;
+            case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS: return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+            default: return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (derivedFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       if (baseClass == Resource.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
-               return JavaModelPackage.RESOURCE__PARENT_DIRECTORY;
-            default :
-               return -1;
+            case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY: return JavaModelPackage.RESOURCE__PARENT_DIRECTORY;
+            default: return -1;
          }
       }
       if (baseClass == Directory.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
-               return JavaModelPackage.DIRECTORY__RESOURCES;
-            default :
-               return -1;
+            case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES: return JavaModelPackage.DIRECTORY__RESOURCES;
+            default: return -1;
          }
       }
       return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -936,7 +866,6 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -946,48 +875,39 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
-               return JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS;
-            default :
-               return -1;
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS: return JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS;
+            default: return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
-               return JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS;
-            default :
-               return -1;
+            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS: return JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS;
+            default: return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (baseFeatureID)
          {
-            default :
-               return -1;
+            default: return -1;
          }
       }
       if (baseClass == Resource.class)
       {
          switch (baseFeatureID)
          {
-            case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
-               return JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY;
-            default :
-               return -1;
+            case JavaModelPackage.RESOURCE__PARENT_DIRECTORY: return JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY;
+            default: return -1;
          }
       }
       if (baseClass == Directory.class)
       {
          switch (baseFeatureID)
          {
-            case JavaModelPackage.DIRECTORY__RESOURCES :
-               return JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES;
-            default :
-               return -1;
+            case JavaModelPackage.DIRECTORY__RESOURCES: return JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES;
+            default: return -1;
          }
       }
       return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -996,14 +916,12 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy())
-         return super.toString();
+      if (eIsProxy()) return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (name: ");

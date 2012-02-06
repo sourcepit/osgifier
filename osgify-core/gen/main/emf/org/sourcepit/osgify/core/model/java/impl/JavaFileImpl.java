@@ -22,10 +22,10 @@ import org.sourcepit.osgify.core.model.java.JavaType;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaFileImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
@@ -34,7 +34,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getType()
     * @generated
     * @ordered
@@ -44,7 +43,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected JavaFileImpl()
@@ -55,7 +53,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -67,7 +64,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType getType()
@@ -78,7 +74,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetType(JavaType newType, NotificationChain msgs)
@@ -87,12 +82,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
       type = newType;
       if (eNotificationRequired())
       {
-         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-            JavaModelPackage.JAVA_FILE__TYPE, oldType, newType);
-         if (msgs == null)
-            msgs = notification;
-         else
-            msgs.add(notification);
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_FILE__TYPE, oldType, newType);
+         if (msgs == null) msgs = notification; else msgs.add(notification);
       }
       return msgs;
    }
@@ -100,7 +91,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setType(JavaType newType)
@@ -109,14 +99,11 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
       {
          NotificationChain msgs = null;
          if (type != null)
-            msgs = ((InternalEObject) type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-               - JavaModelPackage.JAVA_FILE__TYPE, null, msgs);
+            msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - JavaModelPackage.JAVA_FILE__TYPE, null, msgs);
          if (newType != null)
-            msgs = ((InternalEObject) newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-               - JavaModelPackage.JAVA_FILE__TYPE, null, msgs);
+            msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - JavaModelPackage.JAVA_FILE__TYPE, null, msgs);
          msgs = basicSetType(newType, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
          eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_FILE__TYPE, newType, newType));
@@ -125,7 +112,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -133,7 +119,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_FILE__TYPE :
+         case JavaModelPackage.JAVA_FILE__TYPE:
             return basicSetType(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -142,7 +128,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -150,7 +135,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_FILE__TYPE :
+         case JavaModelPackage.JAVA_FILE__TYPE:
             return getType();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -159,7 +144,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -167,8 +151,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_FILE__TYPE :
-            setType((JavaType) newValue);
+         case JavaModelPackage.JAVA_FILE__TYPE:
+            setType((JavaType)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -177,7 +161,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -185,8 +168,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_FILE__TYPE :
-            setType((JavaType) null);
+         case JavaModelPackage.JAVA_FILE__TYPE:
+            setType((JavaType)null);
             return;
       }
       super.eUnset(featureID);
@@ -195,7 +178,6 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -203,7 +185,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_FILE__TYPE :
+         case JavaModelPackage.JAVA_FILE__TYPE:
             return type != null;
       }
       return super.eIsSet(featureID);

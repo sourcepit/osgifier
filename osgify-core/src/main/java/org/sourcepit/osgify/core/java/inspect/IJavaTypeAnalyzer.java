@@ -6,11 +6,10 @@
 
 package org.sourcepit.osgify.core.java.inspect;
 
-import java.io.InputStream;
-
+import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 public interface IJavaTypeAnalyzer
 {
-   void analyze(JavaType javaType, InputStream content);
+   void analyze(JavaType javaType, JavaClass javaClass);
 }

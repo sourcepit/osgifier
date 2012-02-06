@@ -13,14 +13,14 @@ import org.sourcepit.modeling.common.XAnnotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Osgify Context</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.context.OsgifyContext#getBundles <em>Bundles</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.OsgifyContext#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getOsgifyContext()
  * @model
  * @generated
@@ -36,7 +36,6 @@ public interface OsgifyContext extends XAnnotatable
     * description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Bundles</em>' containment reference list.
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getOsgifyContext_Bundles()
     * @model containment="true"

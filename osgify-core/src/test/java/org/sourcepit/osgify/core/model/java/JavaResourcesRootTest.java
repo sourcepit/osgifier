@@ -7,9 +7,15 @@
 package org.sourcepit.osgify.core.model.java;
 
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
+
+import javax.validation.ConstraintViolationException;
 
 import org.hamcrest.core.Is;
+import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsInstanceOf;
+import org.hamcrest.core.IsNull;
+import org.hamcrest.core.IsSame;
 import org.junit.Test;
 
 /**
@@ -36,6 +42,40 @@ public class JavaResourcesRootTest
       jResources.setResourcesType(JavaResourcesType.SRC);
       assertThat(jResources.getJavaFile("Foo", true), IsInstanceOf.instanceOf(JavaCompilationUnit.class));
       assertThat(jResources.getType("Bar", true).getFile(), IsInstanceOf.instanceOf(JavaCompilationUnit.class));
+   }
+
+   @Test
+   public void testGetType()
+   {
+      JavaResourcesRoot jRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
+      try
+      {
+         jRoot.getType(null, null, false);
+         fail();
+      }
+      catch (ConstraintViolationException e)
+      {
+      }
+
+      try
+      {
+         jRoot.getType("foo", null, false);
+         fail();
+      }
+      catch (ConstraintViolationException e)
+      {
+      }
+
+      assertThat(jRoot.getType(null, "Foo", false), IsNull.nullValue());
+
+      JavaType jType = jRoot.getType(null, "Foo", true);
+      assertThat(jType, IsNull.notNullValue());
+
+      JavaFile typeRoot = jType.getFile();
+      assertThat(typeRoot, IsNull.notNullValue());
+      assertThat(typeRoot.getName(), IsEqual.equalTo("Foo"));
+
+      assertThat((JavaResourcesRoot) typeRoot.getParentDirectory(), IsSame.sameInstance(jRoot));
    }
 
 }

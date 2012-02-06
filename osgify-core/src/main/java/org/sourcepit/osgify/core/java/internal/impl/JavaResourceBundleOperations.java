@@ -8,15 +8,12 @@ package org.sourcepit.osgify.core.java.internal.impl;
 
 import javax.validation.constraints.NotNull;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
-import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -28,27 +25,31 @@ public final class JavaResourceBundleOperations
       super();
    }
 
-   public static JavaType getType(@NotNull JavaResourceBundle jBundle, @NotNull String jRootName, String packageName,
+   public static JavaType getType(@NotNull JavaResourceBundle bundle, @NotNull String rootName, String packageName,
       @NotNull String typeName, boolean createOnDemand)
    {
-      final JavaResourceDirectory jResourcesRoot;
-      if (packageName == null)
-      {
-         jResourcesRoot = jBundle.getResourcesRoot(jRootName, createOnDemand);
-      }
-      else
-      {
-         jResourcesRoot = getPackage(jBundle, jRootName, packageName, createOnDemand);
-      }
-
-      if (jResourcesRoot == null)
+      final JavaResourcesRoot resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
+      if (resourcesRoot == null)
       {
          return null;
       }
-      return jResourcesRoot.getType(typeName, createOnDemand);
+      return resourcesRoot.getType(packageName, typeName, createOnDemand);
    }
 
-   public static JavaResourcesRoot getPackageRoot(@NotNull JavaResourceBundle bundle, @NotNull String path)
+   public static JavaResourcesRoot getResourcesRoot(@NotNull JavaResourceBundle bundle, @NotNull String rootName,
+      boolean createOnDemand)
+   {
+      JavaResourcesRoot packageRoot = getResourcesRoot(bundle, rootName);
+      if (packageRoot == null && createOnDemand)
+      {
+         packageRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
+         packageRoot.setName(rootName);
+         bundle.getResourcesRoots().add(packageRoot);
+      }
+      return packageRoot;
+   }
+
+   private static JavaResourcesRoot getResourcesRoot(JavaResourceBundle bundle, String path)
    {
       for (JavaResourcesRoot packageRoot : bundle.getResourcesRoots())
       {
@@ -60,47 +61,14 @@ public final class JavaResourceBundleOperations
       return null;
    }
 
-   public static EList<JavaPackage> getRootPackages(JavaResourceBundle bundle, String path)
-   {
-      final JavaResourcesRoot packageRoot = bundle.getResourcesRoot(path);
-      if (packageRoot != null)
-      {
-         return new BasicEList<JavaPackage>(packageRoot.getPackages());
-      }
-      return new BasicEList<JavaPackage>();
-   }
-
-   public static JavaResourcesRoot getPackageRoot(JavaResourceBundle bundle, String path, boolean createOnDeamnd)
-   {
-      JavaResourcesRoot packageRoot = getPackageRoot(bundle, path);
-      if (packageRoot == null && createOnDeamnd)
-      {
-         packageRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
-         packageRoot.setName(path);
-         bundle.getResourcesRoots().add(packageRoot);
-      }
-      return packageRoot;
-   }
-
-   public static JavaPackage getPackage(@NotNull JavaResourceBundle bundle, @NotNull String path,
+   public static JavaPackage getPackage(@NotNull JavaResourceBundle bundle, @NotNull String rootName,
       @NotNull String qualifiedName, boolean createOnDemand)
    {
-      final JavaResourceDirectory packageRoot = getPackageRoot(bundle, path, createOnDemand);
-      if (packageRoot == null)
+      final JavaResourceDirectory resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
+      if (resourcesRoot == null)
       {
          return null;
       }
-      return packageRoot.getPackage(qualifiedName, createOnDemand);
+      return resourcesRoot.getPackage(qualifiedName, createOnDemand);
    }
-
-   public static EList<Resource> getResources(@NotNull JavaResourceBundle bundle, @NotNull String rootName)
-   {
-      final JavaResourcesRoot jResources = bundle.getResourcesRoot(rootName);
-      if (jResources != null)
-      {
-         return jResources.getResources();
-      }
-      return null;
-   }
-
 }

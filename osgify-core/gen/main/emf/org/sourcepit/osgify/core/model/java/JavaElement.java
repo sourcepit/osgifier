@@ -12,8 +12,8 @@ import org.sourcepit.modeling.common.XAnnotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Element</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaElement()
  * @model interface="true" abstract="true"
  * @generated
@@ -23,7 +23,6 @@ public interface JavaElement extends Named, XAnnotatable
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */

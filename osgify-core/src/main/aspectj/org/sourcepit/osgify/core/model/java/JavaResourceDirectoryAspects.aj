@@ -18,17 +18,17 @@ public aspect JavaResourceDirectoryAspects
 
    pointcut getJavaFiles(JavaResourceDirectory jDir): target(jDir) && execution(EList<JavaFile> JavaResourceDirectory.getJavaFiles());
 
-   pointcut getPackage(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaPackage getPackage(String));
+   pointcut getPackage(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaPackage JavaResourceDirectory.getPackage(String));
 
-   pointcut getPackage2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaPackage getPackage(String, boolean));
+   pointcut getPackage2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaPackage JavaResourceDirectory.getPackage(String, boolean));
 
-   pointcut getJavaFile(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaFile getJavaFile(String));
+   pointcut getJavaFile(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaFile JavaResourceDirectory.getJavaFile(String));
 
-   pointcut getJavaFile2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaFile getJavaFile(String, boolean));
+   pointcut getJavaFile2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaFile JavaResourceDirectory.getJavaFile(String, boolean));
 
-   pointcut getType(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaType getType(String));
+   pointcut getType(JavaResourceDirectory jDir, String name): target(jDir) && args(name) && execution(JavaType JavaResourceDirectory.getType(String));
 
-   pointcut getType2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaType getType(String, boolean));
+   pointcut getType2(JavaResourceDirectory jDir, String name, boolean createOnDemand): target(jDir) && args(name, createOnDemand) && execution(JavaType JavaResourceDirectory.getType(String, boolean));
 
 
    EList<JavaPackage> around(JavaResourceDirectory jDir) : getPackages(jDir){

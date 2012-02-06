@@ -11,14 +11,14 @@ package org.sourcepit.osgify.core.model.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Import Declaration</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getImportDeclaration()
  * @model
  * @generated
@@ -27,16 +27,13 @@ public interface ImportDeclaration extends JavaElement
 {
    /**
     * Returns the value of the '<em><b>Compilation Unit</b></em>' container reference.
-    * It is bidirectional and its opposite is '
-    * {@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit#getImportDeclarations
-    * <em>Import Declarations</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit#getImportDeclarations <em>Import Declarations</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Compilation Unit</em>' container reference isn't clear, there really should be more of
     * a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Compilation Unit</em>' container reference.
     * @see #setCompilationUnit(JavaCompilationUnit)
     * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getImportDeclaration_CompilationUnit()
@@ -47,11 +44,9 @@ public interface ImportDeclaration extends JavaElement
    JavaCompilationUnit getCompilationUnit();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit
-    * <em>Compilation Unit</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.ImportDeclaration#getCompilationUnit <em>Compilation Unit</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Compilation Unit</em>' container reference.
     * @see #getCompilationUnit()
     * @generated

@@ -11,8 +11,8 @@ package org.sourcepit.osgify.core.model.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Qualified Java Element</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getQualifiedJavaElement()
  * @model interface="true" abstract="true"
  * @generated
@@ -22,7 +22,6 @@ public interface QualifiedJavaElement extends JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation" required="true"
     * @generated
     */

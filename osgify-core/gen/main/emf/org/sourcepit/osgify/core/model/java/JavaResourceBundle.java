@@ -12,14 +12,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Resource Bundle</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourceBundle()
  * @model abstract="true"
  * @generated
@@ -29,15 +29,13 @@ public interface JavaResourceBundle extends JavaElement
    /**
     * Returns the value of the '<em><b>Resources Roots</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot}.
-    * It is bidirectional and its opposite is '
-    * {@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}'.
+    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Resources Roots</em>' containment reference list isn't clear, there really should be
     * more of a description here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Resources Roots</em>' containment reference list.
     * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourceBundle_ResourcesRoots()
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle
@@ -49,7 +47,6 @@ public interface JavaResourceBundle extends JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -58,7 +55,6 @@ public interface JavaResourceBundle extends JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -67,7 +63,6 @@ public interface JavaResourceBundle extends JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */
@@ -76,7 +71,6 @@ public interface JavaResourceBundle extends JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model
     * @generated
     */

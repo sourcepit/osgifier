@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage
  * @generated
  */
@@ -23,7 +22,6 @@ public interface JavaModelFactory extends EFactory
     * The singleton instance of the factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    JavaModelFactory eINSTANCE = org.sourcepit.osgify.core.model.java.impl.JavaModelFactoryImpl.init();
@@ -32,7 +30,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Directory</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Directory</em>'.
     * @generated
     */
@@ -42,7 +39,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>File</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>File</em>'.
     * @generated
     */
@@ -52,7 +48,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Project</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Project</em>'.
     * @generated
     */
@@ -62,7 +57,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Archive</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Archive</em>'.
     * @generated
     */
@@ -72,7 +66,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Resources Root</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Resources Root</em>'.
     * @generated
     */
@@ -82,7 +75,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Package</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Package</em>'.
     * @generated
     */
@@ -92,7 +84,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Class</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Class</em>'.
     * @generated
     */
@@ -102,7 +93,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Compilation Unit</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Compilation Unit</em>'.
     * @generated
     */
@@ -112,7 +102,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Import Declaration</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Import Declaration</em>'.
     * @generated
     */
@@ -122,7 +111,6 @@ public interface JavaModelFactory extends EFactory
     * Returns a new object of class '<em>Java Type</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return a new object of class '<em>Java Type</em>'.
     * @generated
     */
@@ -132,7 +120,6 @@ public interface JavaModelFactory extends EFactory
     * Returns the package supported by this factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @return the package supported by this factory.
     * @generated
     */

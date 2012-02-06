@@ -21,7 +21,6 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class ContextModelFactoryImpl extends EFactoryImpl implements ContextModelFactory
@@ -30,15 +29,13 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * Creates the default factory implementation.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public static ContextModelFactory init()
    {
       try
       {
-         ContextModelFactory theContextModelFactory = (ContextModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory("http://www.sourcepit.org/osgify/context/0.1");
+         ContextModelFactory theContextModelFactory = (ContextModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.sourcepit.org/osgify/context/0.1"); 
          if (theContextModelFactory != null)
          {
             return theContextModelFactory;
@@ -55,7 +52,6 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * Creates an instance of the factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public ContextModelFactoryImpl()
@@ -66,7 +62,6 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -74,13 +69,10 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    {
       switch (eClass.getClassifierID())
       {
-         case ContextModelPackage.OSGIFY_CONTEXT :
-            return createOsgifyContext();
-         case ContextModelPackage.BUNDLE_CANDIDATE :
-            return createBundleCandidate();
-         case ContextModelPackage.BUNDLE_REFERENCE :
-            return createBundleReference();
-         default :
+         case ContextModelPackage.OSGIFY_CONTEXT: return createOsgifyContext();
+         case ContextModelPackage.BUNDLE_CANDIDATE: return createBundleCandidate();
+         case ContextModelPackage.BUNDLE_REFERENCE: return createBundleReference();
+         default:
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
    }
@@ -88,7 +80,6 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public OsgifyContext createOsgifyContext()
@@ -100,7 +91,6 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public BundleCandidate createBundleCandidate()
@@ -112,7 +102,6 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public BundleReference createBundleReference()
@@ -124,18 +113,16 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public ContextModelPackage getContextModelPackage()
    {
-      return (ContextModelPackage) getEPackage();
+      return (ContextModelPackage)getEPackage();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @deprecated
     * @generated
     */

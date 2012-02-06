@@ -30,7 +30,6 @@ import org.sourcepit.osgify.core.model.java.JavaType;
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFactory
@@ -39,15 +38,13 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * Creates the default factory implementation.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public static JavaModelFactory init()
    {
       try
       {
-         JavaModelFactory theJavaModelFactory = (JavaModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory("http://www.sourcepit.org/osgify/java/0.1");
+         JavaModelFactory theJavaModelFactory = (JavaModelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.sourcepit.org/osgify/java/0.1"); 
          if (theJavaModelFactory != null)
          {
             return theJavaModelFactory;
@@ -64,7 +61,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * Creates an instance of the factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModelFactoryImpl()
@@ -75,7 +71,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -83,27 +78,17 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       switch (eClass.getClassifierID())
       {
-         case JavaModelPackage.DIRECTORY :
-            return createDirectory();
-         case JavaModelPackage.FILE :
-            return createFile();
-         case JavaModelPackage.JAVA_PROJECT :
-            return createJavaProject();
-         case JavaModelPackage.JAVA_ARCHIVE :
-            return createJavaArchive();
-         case JavaModelPackage.JAVA_RESOURCES_ROOT :
-            return createJavaResourcesRoot();
-         case JavaModelPackage.JAVA_PACKAGE :
-            return createJavaPackage();
-         case JavaModelPackage.JAVA_CLASS :
-            return createJavaClass();
-         case JavaModelPackage.JAVA_COMPILATION_UNIT :
-            return createJavaCompilationUnit();
-         case JavaModelPackage.IMPORT_DECLARATION :
-            return createImportDeclaration();
-         case JavaModelPackage.JAVA_TYPE :
-            return createJavaType();
-         default :
+         case JavaModelPackage.DIRECTORY: return createDirectory();
+         case JavaModelPackage.FILE: return createFile();
+         case JavaModelPackage.JAVA_PROJECT: return createJavaProject();
+         case JavaModelPackage.JAVA_ARCHIVE: return createJavaArchive();
+         case JavaModelPackage.JAVA_RESOURCES_ROOT: return createJavaResourcesRoot();
+         case JavaModelPackage.JAVA_PACKAGE: return createJavaPackage();
+         case JavaModelPackage.JAVA_CLASS: return createJavaClass();
+         case JavaModelPackage.JAVA_COMPILATION_UNIT: return createJavaCompilationUnit();
+         case JavaModelPackage.IMPORT_DECLARATION: return createImportDeclaration();
+         case JavaModelPackage.JAVA_TYPE: return createJavaType();
+         default:
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
    }
@@ -111,7 +96,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -119,9 +103,9 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       switch (eDataType.getClassifierID())
       {
-         case JavaModelPackage.JAVA_RESOURCES_TYPE :
+         case JavaModelPackage.JAVA_RESOURCES_TYPE:
             return createJavaResourcesTypeFromString(eDataType, initialValue);
-         default :
+         default:
             throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
       }
    }
@@ -129,7 +113,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -137,9 +120,9 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    {
       switch (eDataType.getClassifierID())
       {
-         case JavaModelPackage.JAVA_RESOURCES_TYPE :
+         case JavaModelPackage.JAVA_RESOURCES_TYPE:
             return convertJavaResourcesTypeToString(eDataType, instanceValue);
-         default :
+         default:
             throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
       }
    }
@@ -147,7 +130,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Directory createDirectory()
@@ -159,7 +141,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public File createFile()
@@ -171,7 +152,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaProject createJavaProject()
@@ -183,7 +163,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaArchive createJavaArchive()
@@ -195,7 +174,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourcesRoot createJavaResourcesRoot()
@@ -207,7 +185,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaPackage createJavaPackage()
@@ -219,7 +196,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaClass createJavaClass()
@@ -231,7 +207,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaCompilationUnit createJavaCompilationUnit()
@@ -243,7 +218,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public ImportDeclaration createImportDeclaration()
@@ -255,7 +229,6 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaType createJavaType()
@@ -267,22 +240,18 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourcesType createJavaResourcesTypeFromString(EDataType eDataType, String initialValue)
    {
       JavaResourcesType result = JavaResourcesType.get(initialValue);
-      if (result == null)
-         throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
-            + eDataType.getName() + "'");
+      if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
       return result;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String convertJavaResourcesTypeToString(EDataType eDataType, Object instanceValue)
@@ -293,18 +262,16 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaModelPackage getJavaModelPackage()
    {
-      return (JavaModelPackage) getEPackage();
+      return (JavaModelPackage)getEPackage();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @deprecated
     * @generated
     */

@@ -6,49 +6,113 @@
 
 package org.sourcepit.osgify.core.inspect;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map.Entry;
-import java.util.Properties;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.CLASS_FILE;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.DIRECTORY_IN_PACKAGE;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.DIRECTORY_OUTSIDE_PACKAGE;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.FILE_IN_PACKAGE;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.FILE_OUTSIDE_PACKAGE;
+import static org.sourcepit.osgify.core.inspect.JavaResourceType.PACKAGE;
 
-import org.eclipse.emf.ecore.resource.Resource;
-import org.sourcepit.common.manifest.Manifest;
-import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
  * @author Bernd
  */
-public abstract class JavaResourceVisitor implements ResourceVisitor
+public class JavaResourceVisitor implements ResourceVisitor
 {
-   private static final Path PATH_MANIFEST = new Path("META-INF/MANIFEST.MF");
+   private final List<JavaResourceHandler> resourceHandlers = new ArrayList<JavaResourceHandler>();
+
+   private final JavaResourceBundle jBundle;
+   private final ReadWriteLock modelLock;
+   private final String rootName;
+
+   private JavaResourcesRoot jRoot;
+
+   public JavaResourceVisitor(JavaResourceBundle jResources, String rootName, ReadWriteLock modelLock)
+   {
+      this.jBundle = jResources;
+      this.rootName = rootName;
+      this.modelLock = modelLock;
+   }
+
+   public List<JavaResourceHandler> getResourceHandlers()
+   {
+      return resourceHandlers;
+   }
+
+   protected JavaResourcesRoot getPackageRoot(boolean createOnDemand)
+   {
+      if (jRoot == null)
+      {
+         modelLock.writeLock().lock();
+         try
+         {
+            jRoot = jBundle.getResourcesRoot(rootName, createOnDemand);
+         }
+         finally
+         {
+            modelLock.writeLock().unlock();
+         }
+      }
+      return jRoot;
+   }
+
+   protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
+   {
+      final JavaResourcesRoot root = getPackageRoot(createOnDemand);
+      return root == null ? null : root.getPackage(fullyQualifiedName, createOnDemand);
+   }
+
+   protected JavaType getType(String packageName, String typeName, boolean createOnDemand)
+   {
+      final JavaPackage pkg = getPackage(packageName, createOnDemand);
+      return pkg == null ? null : pkg.getType(typeName, createOnDemand);
+   }
 
    public void visit(Path path, boolean isDirectory, InputStream content)
    {
+      final JavaResourceType type;
       final boolean isJPackage = isDirectory && JavaLangUtils.isFullyQuallifiedPackageName(path);
       if (isJPackage)
       {
-         visitJPackage(path);
+         type = PACKAGE;
       }
       else if (isInJPackage(path))
       {
          if (!isDirectory && isJClass(path))
          {
-            visitJClass(path, content);
+            type = CLASS_FILE;
          }
          else
          {
-            visitJResource(path, isDirectory, content);
+            type = isDirectory ? DIRECTORY_IN_PACKAGE : FILE_IN_PACKAGE;
          }
       }
       else
       {
-         visitResource(path, isDirectory, content);
+         type = isDirectory ? DIRECTORY_OUTSIDE_PACKAGE : FILE_OUTSIDE_PACKAGE;
+      }
+      handleResource(type, path, content);
+   }
+
+   private void handleResource(JavaResourceType type, Path path, InputStream content)
+   {
+      for (JavaResourceHandler resourceHandler : getResourceHandlers())
+      {
+         if (resourceHandler.handle(getPackageRoot(true), type, modelLock, path, content))
+         {
+            break;
+         }
       }
    }
 
@@ -61,71 +125,4 @@ public abstract class JavaResourceVisitor implements ResourceVisitor
    {
       return "class".equals(path.getFileExtension());
    }
-
-   private void visitJPackage(Path path)
-   {
-      getPackage(getJPackageName(path), true);
-   }
-
-   private void visitJClass(Path path, InputStream content)
-   {
-      final String jPackageName = getJPackageName(path.getParent());
-      final String jTypeName = path.getFileName();
-      final JavaType jType = getType(jPackageName, jTypeName, true);
-      visitJType(jType, content);
-   }
-
-   private String getJPackageName(Path path)
-   {
-      return path == null ? "" : JavaLangUtils.toPackageName(path);
-   }
-
-   protected abstract void visitJType(JavaType javaType, InputStream content);
-
-   private void visitJResource(Path path, boolean isDirectory, InputStream content)
-   {
-      if (!isDirectory && path.getLastSegment().equals("packageinfo") && isInJPackage(path))
-      {
-         try
-         {
-            final Properties props = new Properties();
-            props.load(content);
-            if (!props.isEmpty())
-            {
-               final JavaPackage pgk = getPackage(getJPackageName(path.getParent()), true);
-               final Annotation annotation = pgk.getAnnotation("packageinfo", true);
-               for (Entry<Object, Object> entry : props.entrySet())
-               {
-                  annotation.setData((String) entry.getKey(), (String) entry.getValue());
-               }
-            }
-         }
-         catch (IOException e)
-         { // TODO log warning
-         }
-      }
-   }
-
-   private void visitResource(Path path, boolean isDirectory, InputStream content)
-   {
-      if (!isDirectory && PATH_MANIFEST.equals(path))
-      {
-         Resource resource = new GenericManifestResourceImpl();
-         try
-         {
-            resource.load(content, null);
-            Manifest manifest = (Manifest) resource.getContents().get(0);
-            getPackageRoot(true).addExtension(manifest);
-         }
-         catch (IOException e)
-         {// TODO log warning
-         }
-      }
-   }
-
-   protected abstract JavaResourcesRoot getPackageRoot(boolean createOnDemand);
-
-   protected abstract JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand);
-
-   protected abstract JavaType getType(String packageName, String typeName, boolean createOnDemand);
 }

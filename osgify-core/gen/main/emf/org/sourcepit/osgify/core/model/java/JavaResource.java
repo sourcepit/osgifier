@@ -11,8 +11,8 @@ package org.sourcepit.osgify.core.model.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Resource</b></em>'.
  * <!-- end-user-doc -->
- * 
- * 
+ *
+ *
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResource()
  * @model abstract="true"
  * @generated
@@ -22,7 +22,6 @@ public interface JavaResource extends Resource, JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -31,7 +30,6 @@ public interface JavaResource extends Resource, JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */
@@ -40,7 +38,6 @@ public interface JavaResource extends Resource, JavaElement
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @model kind="operation"
     * @generated
     */

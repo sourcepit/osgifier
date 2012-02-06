@@ -30,13 +30,13 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getContent <em>Content</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getDependencies <em>Dependencies</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getVersion <em>Version</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getSymbolicName <em>Symbolic Name</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getDependencies <em>Dependencies</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getVersion <em>Version</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate
@@ -45,7 +45,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getContent()
     * @generated
     * @ordered
@@ -56,7 +55,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getDependencies()
     * @generated
     * @ordered
@@ -67,7 +65,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getVersion()
     * @generated
     * @ordered
@@ -78,7 +75,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The cached value of the '{@link #getVersion() <em>Version</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getVersion()
     * @generated
     * @ordered
@@ -89,7 +85,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The default value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSymbolicName()
     * @generated
     * @ordered
@@ -100,7 +95,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * The cached value of the '{@link #getSymbolicName() <em>Symbolic Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @see #getSymbolicName()
     * @generated
     * @ordered
@@ -110,7 +104,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    protected BundleCandidateImpl()
@@ -121,7 +114,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -133,7 +125,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public JavaResourceBundle getContent()
@@ -144,7 +135,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public NotificationChain basicSetContent(JavaResourceBundle newContent, NotificationChain msgs)
@@ -153,12 +143,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       content = newContent;
       if (eNotificationRequired())
       {
-         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-            ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, oldContent, newContent);
-         if (msgs == null)
-            msgs = notification;
-         else
-            msgs.add(notification);
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, oldContent, newContent);
+         if (msgs == null) msgs = notification; else msgs.add(notification);
       }
       return msgs;
    }
@@ -166,7 +152,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setContent(JavaResourceBundle newContent)
@@ -175,32 +160,26 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       {
          NotificationChain msgs = null;
          if (content != null)
-            msgs = ((InternalEObject) content).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-               - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
+            msgs = ((InternalEObject)content).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
          if (newContent != null)
-            msgs = ((InternalEObject) newContent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-               - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
+            msgs = ((InternalEObject)newContent).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, null, msgs);
          msgs = basicSetContent(newContent, msgs);
-         if (msgs != null)
-            msgs.dispatch();
+         if (msgs != null) msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__CONTENT,
-            newContent, newContent));
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, newContent, newContent));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public EList<BundleReference> getDependencies()
    {
       if (dependencies == null)
       {
-         dependencies = new EObjectContainmentEList<BundleReference>(BundleReference.class, this,
-            ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES);
+         dependencies = new EObjectContainmentEList<BundleReference>(BundleReference.class, this, ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES);
       }
       return dependencies;
    }
@@ -208,7 +187,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public Version getVersion()
@@ -219,7 +197,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setVersion(Version newVersion)
@@ -227,14 +204,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       Version oldVersion = version;
       version = newVersion;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__VERSION,
-            oldVersion, version));
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__VERSION, oldVersion, version));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public String getSymbolicName()
@@ -245,7 +220,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    public void setSymbolicName(String newSymbolicName)
@@ -253,14 +227,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       String oldSymbolicName = symbolicName;
       symbolicName = newSymbolicName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME,
-            oldSymbolicName, symbolicName));
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME, oldSymbolicName, symbolicName));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -268,10 +240,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT:
             return basicSetContent(null, msgs);
-         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
-            return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES:
+            return ((InternalEList<?>)getDependencies()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -279,7 +251,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -287,13 +258,13 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT:
             return getContent();
-         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES:
             return getDependencies();
-         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION:
             return getVersion();
-         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME:
             return getSymbolicName();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -302,7 +273,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -311,18 +281,18 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaResourceBundle) newValue);
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT:
+            setContent((JavaResourceBundle)newValue);
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES:
             getDependencies().clear();
-            getDependencies().addAll((Collection<? extends BundleReference>) newValue);
+            getDependencies().addAll((Collection<? extends BundleReference>)newValue);
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
-            setVersion((Version) newValue);
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION:
+            setVersion((Version)newValue);
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
-            setSymbolicName((String) newValue);
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME:
+            setSymbolicName((String)newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -331,7 +301,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -339,16 +308,16 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaResourceBundle) null);
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT:
+            setContent((JavaResourceBundle)null);
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES:
             getDependencies().clear();
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION:
             setVersion(VERSION_EDEFAULT);
             return;
-         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME:
             setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
             return;
       }
@@ -358,7 +327,6 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
@@ -366,13 +334,13 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
-         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
+         case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT:
             return content != null;
-         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
+         case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES:
             return dependencies != null && !dependencies.isEmpty();
-         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION :
+         case ContextModelPackage.BUNDLE_CANDIDATE__VERSION:
             return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
+         case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME:
             return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
       }
       return super.eIsSet(featureID);
@@ -381,14 +349,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy())
-         return super.toString();
+      if (eIsProxy()) return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (version: ");

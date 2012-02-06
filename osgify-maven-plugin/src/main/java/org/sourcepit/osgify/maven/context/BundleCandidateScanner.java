@@ -11,7 +11,7 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.sourcepit.osgify.core.java.inspect.JavaPackageBundleScanner;
+import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
@@ -29,7 +29,7 @@ public class BundleCandidateScanner
    public void scanProject(BundleCandidate bundleCandidate, File projectDir, String... binDirPaths)
    {
       // scan jar contents
-      final JavaPackageBundleScanner scanner = newScanner();
+      final JavaResourcesBundleScanner scanner = newScanner();
       bundleCandidate.setContent(scanner.scan(projectDir, binDirPaths));
 
       // resolve OSGi attributes
@@ -39,7 +39,7 @@ public class BundleCandidateScanner
    public void scanJar(BundleCandidate bundleCandidate, File jarFile)
    {
       // scan jar contents
-      final JavaPackageBundleScanner scanner = newScanner();
+      final JavaResourcesBundleScanner scanner = newScanner();
       bundleCandidate.setContent(scanner.scan(jarFile));
 
       // resolve OSGi attributes
@@ -52,9 +52,9 @@ public class BundleCandidateScanner
       bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate));
    }
 
-   private JavaPackageBundleScanner newScanner()
+   private JavaResourcesBundleScanner newScanner()
    {
-      final JavaPackageBundleScanner scanner = new JavaPackageBundleScanner();
+      final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
       scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
       return scanner;
    }

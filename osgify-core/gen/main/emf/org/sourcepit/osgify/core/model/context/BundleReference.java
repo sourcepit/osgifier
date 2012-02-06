@@ -13,17 +13,17 @@ import org.sourcepit.modeling.common.XAnnotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Bundle Reference</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange <em>Version Range</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}</li>
- * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange <em>Version Range</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference()
  * @model
  * @generated
@@ -38,7 +38,6 @@ public interface BundleReference extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Version Range</em>' attribute.
     * @see #setVersionRange(VersionRange)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference_VersionRange()
@@ -48,11 +47,9 @@ public interface BundleReference extends XAnnotatable
    VersionRange getVersionRange();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange
-    * <em>Version Range</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#getVersionRange <em>Version Range</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Version Range</em>' attribute.
     * @see #getVersionRange()
     * @generated
@@ -67,7 +64,6 @@ public interface BundleReference extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Optional</em>' attribute.
     * @see #setOptional(boolean)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference_Optional()
@@ -77,11 +73,9 @@ public interface BundleReference extends XAnnotatable
    boolean isOptional();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional
-    * <em>Optional</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Optional</em>' attribute.
     * @see #isOptional()
     * @generated
@@ -96,7 +90,6 @@ public interface BundleReference extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Target</em>' reference.
     * @see #setTarget(BundleCandidate)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference_Target()
@@ -106,11 +99,9 @@ public interface BundleReference extends XAnnotatable
    BundleCandidate getTarget();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}'
-    * reference.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Target</em>' reference.
     * @see #getTarget()
     * @generated
@@ -125,7 +116,6 @@ public interface BundleReference extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
-    * 
     * @return the value of the '<em>Provided</em>' attribute.
     * @see #setProvided(boolean)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference_Provided()
@@ -135,11 +125,9 @@ public interface BundleReference extends XAnnotatable
    boolean isProvided();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided
-    * <em>Provided</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
-    * 
     * @param value the new value of the '<em>Provided</em>' attribute.
     * @see #isProvided()
     * @generated

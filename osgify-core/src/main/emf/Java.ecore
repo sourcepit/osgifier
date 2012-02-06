@@ -11,11 +11,13 @@
         eOpposite="#//Directory/resources"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//Resource">
-    <eOperations name="getDirectories" upperBound="-1" eType="#//Directory"/><eOperations name="getDirectory" eType="#//Directory">
-      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
-    </eOperations><eOperations name="getDirectory" eType="#//Directory">
-      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
-      <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" />
+    <eOperations name="getDirectories" upperBound="-1" eType="#//Directory"/>
+    <eOperations name="getDirectory" eType="#//Directory">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getDirectory" eType="#//Directory">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getFile" eType="#//File">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -25,8 +27,6 @@
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getFiles" upperBound="-1" eType="#//File"/>
-    
-    
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true" eOpposite="#//Resource/parentDirectory"/>
   </eClassifiers>
@@ -103,6 +103,11 @@
     <eOperations name="getResourcesType" lowerBound="1" eType="#//JavaResourcesType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaResourcesRoot" eSuperTypes="#//JavaResourceDirectory">
+    <eOperations name="getType" eType="#//JavaType">
+      <eParameters name="qualifiedPackageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageBundle" lowerBound="1"
         eType="#//JavaResourceBundle" eOpposite="#//JavaResourceBundle/resourcesRoots"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcesType" lowerBound="1"
