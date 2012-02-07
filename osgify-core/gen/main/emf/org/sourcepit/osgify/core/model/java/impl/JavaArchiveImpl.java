@@ -18,7 +18,7 @@ import org.sourcepit.osgify.core.model.java.JavaType;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchive
@@ -26,6 +26,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected JavaArchiveImpl()
@@ -36,6 +37,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -47,6 +49,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
@@ -59,6 +62,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaType getType(String packageName, String typeName, boolean createOnDemand)

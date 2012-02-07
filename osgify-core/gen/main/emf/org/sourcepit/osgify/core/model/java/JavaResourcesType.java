@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Java Resources Type</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourcesType()
  * @model
  * @generated
@@ -27,6 +28,7 @@ public enum JavaResourcesType implements Enumerator
     * The '<em><b>BIN</b></em>' literal object.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #BIN_VALUE
     * @generated
     * @ordered
@@ -37,6 +39,7 @@ public enum JavaResourcesType implements Enumerator
     * The '<em><b>SRC</b></em>' literal object.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #SRC_VALUE
     * @generated
     * @ordered
@@ -51,6 +54,7 @@ public enum JavaResourcesType implements Enumerator
     * here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @see #BIN
     * @model
     * @generated
@@ -66,6 +70,7 @@ public enum JavaResourcesType implements Enumerator
     * here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @see #SRC
     * @model
     * @generated
@@ -77,18 +82,16 @@ public enum JavaResourcesType implements Enumerator
     * An array of all the '<em><b>Java Resources Type</b></em>' enumerators.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
-   private static final JavaResourcesType[] VALUES_ARRAY = new JavaResourcesType[]
-      {
-         BIN,
-         SRC,
-      };
+   private static final JavaResourcesType[] VALUES_ARRAY = new JavaResourcesType[] { BIN, SRC, };
 
    /**
     * A public read-only list of all the '<em><b>Java Resources Type</b></em>' enumerators.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public static final List<JavaResourcesType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
@@ -97,6 +100,7 @@ public enum JavaResourcesType implements Enumerator
     * Returns the '<em><b>Java Resources Type</b></em>' literal with the specified literal value.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public static JavaResourcesType get(String literal)
@@ -116,6 +120,7 @@ public enum JavaResourcesType implements Enumerator
     * Returns the '<em><b>Java Resources Type</b></em>' literal with the specified name.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public static JavaResourcesType getByName(String name)
@@ -135,14 +140,17 @@ public enum JavaResourcesType implements Enumerator
     * Returns the '<em><b>Java Resources Type</b></em>' literal with the specified integer value.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public static JavaResourcesType get(int value)
    {
       switch (value)
       {
-         case BIN_VALUE: return BIN;
-         case SRC_VALUE: return SRC;
+         case BIN_VALUE :
+            return BIN;
+         case SRC_VALUE :
+            return SRC;
       }
       return null;
    }
@@ -150,6 +158,7 @@ public enum JavaResourcesType implements Enumerator
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    private final int value;
@@ -157,6 +166,7 @@ public enum JavaResourcesType implements Enumerator
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    private final String name;
@@ -164,6 +174,7 @@ public enum JavaResourcesType implements Enumerator
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    private final String literal;
@@ -172,6 +183,7 @@ public enum JavaResourcesType implements Enumerator
     * Only this class can construct instances.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    private JavaResourcesType(int value, String name, String literal)
@@ -184,37 +196,41 @@ public enum JavaResourcesType implements Enumerator
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public int getValue()
    {
-     return value;
+      return value;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getName()
    {
-     return name;
+      return name;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getLiteral()
    {
-     return literal;
+      return literal;
    }
 
    /**
     * Returns the literal value of the enumerator, which is its string representation.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override

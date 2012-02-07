@@ -26,10 +26,10 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
@@ -38,6 +38,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getBundles()
     * @generated
     * @ordered
@@ -47,6 +48,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected OsgifyContextImpl()
@@ -57,6 +59,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -68,13 +71,15 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<BundleCandidate> getBundles()
    {
       if (bundles == null)
       {
-         bundles = new EObjectContainmentEList<BundleCandidate>(BundleCandidate.class, this, ContextModelPackage.OSGIFY_CONTEXT__BUNDLES);
+         bundles = new EObjectContainmentEList<BundleCandidate>(BundleCandidate.class, this,
+            ContextModelPackage.OSGIFY_CONTEXT__BUNDLES);
       }
       return bundles;
    }
@@ -82,6 +87,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -89,8 +95,8 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES:
-            return ((InternalEList<?>)getBundles()).basicRemove(otherEnd, msgs);
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+            return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -98,6 +104,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -105,7 +112,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES:
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return getBundles();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -114,6 +121,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -122,9 +130,9 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES:
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
-            getBundles().addAll((Collection<? extends BundleCandidate>)newValue);
+            getBundles().addAll((Collection<? extends BundleCandidate>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -133,6 +141,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -140,7 +149,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES:
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
       }
@@ -150,6 +159,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -157,7 +167,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES:
+         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }
       return super.eIsSet(featureID);

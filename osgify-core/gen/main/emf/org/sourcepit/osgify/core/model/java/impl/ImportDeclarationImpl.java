@@ -37,13 +37,14 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getCompilationUnit <em>Compilation Unit</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getExtensions <em>Extensions</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getAnnotations <em>Annotations</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ImportDeclarationImpl#getCompilationUnit <em>Compilation Unit
+ * </em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclaration
@@ -52,6 +53,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -62,6 +64,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -72,6 +75,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getExtensions()
     * @generated
     * @ordered
@@ -82,6 +86,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -91,6 +96,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected ImportDeclarationImpl()
@@ -101,6 +107,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -112,6 +119,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getName()
@@ -122,6 +130,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public void setName(String newName)
@@ -135,13 +144,15 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<EObject> getExtensions()
    {
       if (extensions == null)
       {
-         extensions = new EObjectContainmentEList<EObject>(EObject.class, this, JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS);
+         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
+            JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS);
       }
       return extensions;
    }
@@ -149,13 +160,15 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
+            JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -163,33 +176,39 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaCompilationUnit getCompilationUnit()
    {
-      if (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT) return null;
-      return (JavaCompilationUnit)eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT)
+         return null;
+      return (JavaCompilationUnit) eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public NotificationChain basicSetCompilationUnit(JavaCompilationUnit newCompilationUnit, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject)newCompilationUnit, JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT, msgs);
+      msgs = eBasicSetContainer((InternalEObject) newCompilationUnit,
+         JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public void setCompilationUnit(JavaCompilationUnit newCompilationUnit)
    {
-      if (newCompilationUnit != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT && newCompilationUnit != null))
+      if (newCompilationUnit != eInternalContainer()
+         || (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT && newCompilationUnit != null))
       {
          if (EcoreUtil.isAncestor(this, newCompilationUnit))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -197,17 +216,21 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newCompilationUnit != null)
-            msgs = ((InternalEObject)newCompilationUnit).eInverseAdd(this, JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaCompilationUnit.class, msgs);
+            msgs = ((InternalEObject) newCompilationUnit).eInverseAdd(this,
+               JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaCompilationUnit.class, msgs);
          msgs = basicSetCompilationUnit(newCompilationUnit, msgs);
-         if (msgs != null) msgs.dispatch();
+         if (msgs != null)
+            msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT, newCompilationUnit, newCompilationUnit));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT,
+            newCompilationUnit, newCompilationUnit));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaResourceBundle getResourceBundle()
@@ -220,6 +243,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -232,6 +256,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -244,6 +269,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -256,6 +282,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> T getExtension(Class<T> extensionType)
@@ -268,6 +295,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
@@ -280,6 +308,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void addExtension(T extension)
@@ -292,6 +321,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtension(T extension)
@@ -304,6 +334,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtensions(Class<T> extentionType)
@@ -316,6 +347,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -324,12 +356,12 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
-            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetCompilationUnit((JavaCompilationUnit)otherEnd, msgs);
+            return basicSetCompilationUnit((JavaCompilationUnit) otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -337,6 +369,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -344,11 +377,11 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS:
-            return ((InternalEList<?>)getExtensions()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
-            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
+         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
+            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
+            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return basicSetCompilationUnit(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -357,6 +390,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -364,8 +398,9 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaCompilationUnit.class, msgs);
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
+            return eInternalContainer().eInverseRemove(this,
+               JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaCompilationUnit.class, msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -373,6 +408,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -380,13 +416,13 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__NAME:
+         case JavaModelPackage.IMPORT_DECLARATION__NAME :
             return getName();
-         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
             return getExtensions();
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
             return getAnnotations();
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return getCompilationUnit();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -395,6 +431,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -403,19 +440,19 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__NAME:
-            setName((String)newValue);
+         case JavaModelPackage.IMPORT_DECLARATION__NAME :
+            setName((String) newValue);
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
             getExtensions().clear();
-            getExtensions().addAll((Collection<? extends EObject>)newValue);
+            getExtensions().addAll((Collection<? extends EObject>) newValue);
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
-            setCompilationUnit((JavaCompilationUnit)newValue);
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
+            setCompilationUnit((JavaCompilationUnit) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -424,6 +461,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -431,17 +469,17 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__NAME:
+         case JavaModelPackage.IMPORT_DECLARATION__NAME :
             setName(NAME_EDEFAULT);
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
             getExtensions().clear();
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
             getAnnotations().clear();
             return;
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
-            setCompilationUnit((JavaCompilationUnit)null);
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
+            setCompilationUnit((JavaCompilationUnit) null);
             return;
       }
       super.eUnset(featureID);
@@ -450,6 +488,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -457,13 +496,13 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       switch (featureID)
       {
-         case JavaModelPackage.IMPORT_DECLARATION__NAME:
+         case JavaModelPackage.IMPORT_DECLARATION__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
             return extensions != null && !extensions.isEmpty();
-         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS:
+         case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT:
+         case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return getCompilationUnit() != null;
       }
       return super.eIsSet(featureID);
@@ -472,6 +511,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -481,23 +521,28 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS: return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default: return -1;
+            case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
+               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS: return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
-            default: return -1;
+            case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
+               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (derivedFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -506,6 +551,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -515,23 +561,28 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS: return JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS;
-            default: return -1;
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+               return JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS: return JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS;
-            default: return -1;
+            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
+               return JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (baseFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -540,12 +591,14 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy()) return super.toString();
+      if (eIsProxy())
+         return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (name: ");

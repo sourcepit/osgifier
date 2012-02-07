@@ -16,7 +16,7 @@ import org.sourcepit.osgify.core.model.java.JavaModelPackage;
  * <!-- end-user-doc -->
  * <p>
  * </p>
- *
+ * 
  * @generated
  */
 public class JavaClassImpl extends JavaFileImpl implements JavaClass
@@ -24,6 +24,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected JavaClassImpl()
@@ -34,6 +35,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override

@@ -15,17 +15,17 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Bundle Candidate</b></em>'.
  * <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate()
  * @model
  * @generated
@@ -40,6 +40,7 @@ public interface BundleCandidate extends XAnnotatable
     * description here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Content</em>' containment reference.
     * @see #setContent(JavaResourceBundle)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Content()
@@ -49,9 +50,11 @@ public interface BundleCandidate extends XAnnotatable
    JavaResourceBundle getContent();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}' containment reference.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}
+    * ' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @param value the new value of the '<em>Content</em>' containment reference.
     * @see #getContent()
     * @generated
@@ -67,6 +70,7 @@ public interface BundleCandidate extends XAnnotatable
     * of a description here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Dependencies</em>' containment reference list.
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Dependencies()
     * @model containment="true"
@@ -82,6 +86,7 @@ public interface BundleCandidate extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Version</em>' attribute.
     * @see #setVersion(Version)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Version()
@@ -91,9 +96,11 @@ public interface BundleCandidate extends XAnnotatable
    Version getVersion();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}
+    * ' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @param value the new value of the '<em>Version</em>' attribute.
     * @see #getVersion()
     * @generated
@@ -108,6 +115,7 @@ public interface BundleCandidate extends XAnnotatable
     * here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Symbolic Name</em>' attribute.
     * @see #setSymbolicName(String)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_SymbolicName()
@@ -117,9 +125,11 @@ public interface BundleCandidate extends XAnnotatable
    String getSymbolicName();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName
+    * <em>Symbolic Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @param value the new value of the '<em>Symbolic Name</em>' attribute.
     * @see #getSymbolicName()
     * @generated

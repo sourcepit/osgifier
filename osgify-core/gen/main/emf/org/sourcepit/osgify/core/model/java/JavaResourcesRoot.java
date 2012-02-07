@@ -11,15 +11,15 @@ package org.sourcepit.osgify.core.model.java;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Java Resources Root</b></em>'.
  * <!-- end-user-doc -->
- *
+ * 
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType <em>Resources Type</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType <em>Resources Type</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourcesRoot()
  * @model
  * @generated
@@ -28,13 +28,15 @@ public interface JavaResourcesRoot extends JavaResourceDirectory
 {
    /**
     * Returns the value of the '<em><b>Package Bundle</b></em>' container reference.
-    * It is bidirectional and its opposite is '{@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}'.
+    * It is bidirectional and its opposite is '
+    * {@link org.sourcepit.osgify.core.model.java.JavaResourceBundle#getResourcesRoots <em>Resources Roots</em>}'.
     * <!-- begin-user-doc -->
     * <p>
     * If the meaning of the '<em>Package Bundle</em>' container reference isn't clear, there really should be more of a
     * description here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Package Bundle</em>' container reference.
     * @see #setPackageBundle(JavaResourceBundle)
     * @see org.sourcepit.osgify.core.model.java.JavaModelPackage#getJavaResourcesRoot_PackageBundle()
@@ -45,9 +47,11 @@ public interface JavaResourcesRoot extends JavaResourceDirectory
    JavaResourceBundle getPackageBundle();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle <em>Package Bundle</em>}' container reference.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getPackageBundle
+    * <em>Package Bundle</em>}' container reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @param value the new value of the '<em>Package Bundle</em>' container reference.
     * @see #getPackageBundle()
     * @generated
@@ -64,6 +68,7 @@ public interface JavaResourcesRoot extends JavaResourceDirectory
     * description here...
     * </p>
     * <!-- end-user-doc -->
+    * 
     * @return the value of the '<em>Resources Type</em>' attribute.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesType
     * @see #setResourcesType(JavaResourcesType)
@@ -74,9 +79,11 @@ public interface JavaResourcesRoot extends JavaResourceDirectory
    JavaResourcesType getResourcesType();
 
    /**
-    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType <em>Resources Type</em>}' attribute.
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.java.JavaResourcesRoot#getResourcesType
+    * <em>Resources Type</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @param value the new value of the '<em>Resources Type</em>' attribute.
     * @see org.sourcepit.osgify.core.model.java.JavaResourcesType
     * @see #getResourcesType()
@@ -87,6 +94,7 @@ public interface JavaResourcesRoot extends JavaResourceDirectory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @model
     * @generated
     */

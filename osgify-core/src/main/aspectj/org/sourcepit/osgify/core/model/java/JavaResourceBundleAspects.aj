@@ -22,6 +22,8 @@ public aspect JavaResourceBundleAspects
 
    pointcut getType(JavaResourceBundle bundle, String rootName, String qualifiedPackageName, String typeName,
       boolean createOnDemand): target(bundle) && args(rootName, qualifiedPackageName, typeName, createOnDemand) && execution(JavaType getType(String, String, String, boolean));
+   
+   pointcut accept(JavaResourceBundle bundle, ResourceVisitor visitor): target(bundle) && args(visitor) && execution(void JavaResourceBundle.accept(ResourceVisitor));
 
    JavaResourcesRoot around(JavaResourceBundle bundle, String name) : getResourcesRoot(bundle, name){
       return JavaResourceBundleOperations.getResourcesRoot(bundle, name, false);
@@ -38,5 +40,9 @@ public aspect JavaResourceBundleAspects
    JavaType around(JavaResourceBundle bundle, String rootName, String qualifiedPackageName, String typeName,
       boolean createOnDemand) : getType(bundle, rootName, qualifiedPackageName, typeName, createOnDemand){
       return JavaResourceBundleOperations.getType(bundle, rootName, qualifiedPackageName, typeName, createOnDemand);
+   }
+
+   void around(JavaResourceBundle bundle, ResourceVisitor visitor) : accept(bundle, visitor){
+      JavaResourceBundleOperations.accept(bundle, visitor);
    }
 }

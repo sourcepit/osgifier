@@ -29,6 +29,7 @@ import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,13 +38,14 @@ import org.sourcepit.osgify.core.model.java.JavaType;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getResourcesRoots <em>Resources Roots</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getExtensions <em>Extensions</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getAnnotations <em>Annotations</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.JavaResourceBundleImpl#getResourcesRoots <em>Resources Roots
+ * </em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class JavaResourceBundleImpl extends EObjectImpl implements JavaResourceBundle
@@ -52,6 +54,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -62,6 +65,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -72,6 +76,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getExtensions()
     * @generated
     * @ordered
@@ -82,6 +87,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -92,6 +98,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * The cached value of the '{@link #getResourcesRoots() <em>Resources Roots</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getResourcesRoots()
     * @generated
     * @ordered
@@ -101,6 +108,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected JavaResourceBundleImpl()
@@ -111,6 +119,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -122,6 +131,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getName()
@@ -132,6 +142,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public void setName(String newName)
@@ -139,19 +150,22 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       String oldName = name;
       name = newName;
       if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME, oldName, name));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME, oldName,
+            name));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<EObject> getExtensions()
    {
       if (extensions == null)
       {
-         extensions = new EObjectContainmentEList<EObject>(EObject.class, this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS);
+         extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
+            JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS);
       }
       return extensions;
    }
@@ -159,13 +173,15 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
+            JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -173,13 +189,16 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<JavaResourcesRoot> getResourcesRoots()
    {
       if (resourcesRoots == null)
       {
-         resourcesRoots = new EObjectContainmentWithInverseEList<JavaResourcesRoot>(JavaResourcesRoot.class, this, JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS, JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE);
+         resourcesRoots = new EObjectContainmentWithInverseEList<JavaResourcesRoot>(JavaResourcesRoot.class, this,
+            JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS,
+            JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE);
       }
       return resourcesRoots;
    }
@@ -187,6 +206,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaResourcesRoot getResourcesRoot(String name)
@@ -199,6 +219,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaResourcesRoot getResourcesRoot(String name, boolean createOnDemand)
@@ -211,6 +232,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaPackage getPackage(String rootName, String qualifiedPackageName, boolean createOnDemand)
@@ -223,6 +245,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaType getType(String rootName, String qualifiedPackageName, String typeName, boolean createOnDemand)
@@ -235,6 +258,20 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void accept(ResourceVisitor visitor)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public JavaResourceBundle getResourceBundle()
@@ -247,6 +284,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -259,6 +297,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -271,6 +310,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -283,6 +323,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> T getExtension(Class<T> extensionType)
@@ -295,6 +336,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
@@ -307,6 +349,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void addExtension(T extension)
@@ -319,6 +362,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtension(T extension)
@@ -331,6 +375,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtensions(Class<T> extentionType)
@@ -343,6 +388,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -351,10 +397,10 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
-            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
-            return ((InternalEList<InternalEObject>)(InternalEList<?>)getResourcesRoots()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResourcesRoots()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -362,6 +408,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -369,12 +416,12 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS:
-            return ((InternalEList<?>)getExtensions()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
-            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
-            return ((InternalEList<?>)getResourcesRoots()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
+            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
+            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
+            return ((InternalEList<?>) getResourcesRoots()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -382,6 +429,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -389,13 +437,13 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME :
             return getName();
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
             return getExtensions();
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
             return getAnnotations();
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
             return getResourcesRoots();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -404,6 +452,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -412,20 +461,20 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME:
-            setName((String)newValue);
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME :
+            setName((String) newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
             getExtensions().clear();
-            getExtensions().addAll((Collection<? extends EObject>)newValue);
+            getExtensions().addAll((Collection<? extends EObject>) newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
             getResourcesRoots().clear();
-            getResourcesRoots().addAll((Collection<? extends JavaResourcesRoot>)newValue);
+            getResourcesRoots().addAll((Collection<? extends JavaResourcesRoot>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -434,6 +483,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -441,16 +491,16 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME :
             setName(NAME_EDEFAULT);
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
             getExtensions().clear();
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
             getAnnotations().clear();
             return;
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
             getResourcesRoots().clear();
             return;
       }
@@ -460,6 +510,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -467,13 +518,13 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    {
       switch (featureID)
       {
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
             return extensions != null && !extensions.isEmpty();
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS:
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE__RESOURCES_ROOTS :
             return resourcesRoots != null && !resourcesRoots.isEmpty();
       }
       return super.eIsSet(featureID);
@@ -482,6 +533,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -491,23 +543,28 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS: return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default: return -1;
+            case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
+               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS: return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
-            default: return -1;
+            case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
+               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (derivedFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -516,6 +573,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -525,23 +583,28 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS: return JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS;
-            default: return -1;
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+               return JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS: return JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS;
-            default: return -1;
+            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
+               return JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (baseFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -550,12 +613,14 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy()) return super.toString();
+      if (eIsProxy())
+         return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (name: ");

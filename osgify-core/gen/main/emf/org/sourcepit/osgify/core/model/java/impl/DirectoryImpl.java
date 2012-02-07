@@ -26,10 +26,10 @@ import org.sourcepit.osgify.core.model.java.Resource;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl#getResources <em>Resources</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.DirectoryImpl#getResources <em>Resources</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class DirectoryImpl extends ResourceImpl implements Directory
@@ -38,6 +38,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getResources()
     * @generated
     * @ordered
@@ -47,6 +48,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected DirectoryImpl()
@@ -57,6 +59,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -68,13 +71,15 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<Resource> getResources()
    {
       if (resources == null)
       {
-         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this, JavaModelPackage.DIRECTORY__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
+         resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
+            JavaModelPackage.DIRECTORY__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
       return resources;
    }
@@ -82,6 +87,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<Directory> getDirectories()
@@ -94,6 +100,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Directory getDirectory(String name)
@@ -106,6 +113,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Directory getDirectory(String name, boolean createOnDemand)
@@ -118,6 +126,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public File getFile(String name)
@@ -130,6 +139,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public File getFile(String name, boolean createOnDemand)
@@ -142,6 +152,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<File> getFiles()
@@ -154,6 +165,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -162,8 +174,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
-            return ((InternalEList<InternalEObject>)(InternalEList<?>)getResources()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -171,6 +183,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -178,8 +191,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
-            return ((InternalEList<?>)getResources()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.DIRECTORY__RESOURCES :
+            return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -187,6 +200,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -194,7 +208,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
+         case JavaModelPackage.DIRECTORY__RESOURCES :
             return getResources();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -203,6 +217,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -211,9 +226,9 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
+         case JavaModelPackage.DIRECTORY__RESOURCES :
             getResources().clear();
-            getResources().addAll((Collection<? extends Resource>)newValue);
+            getResources().addAll((Collection<? extends Resource>) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -222,6 +237,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -229,7 +245,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
+         case JavaModelPackage.DIRECTORY__RESOURCES :
             getResources().clear();
             return;
       }
@@ -239,6 +255,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -246,7 +263,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
    {
       switch (featureID)
       {
-         case JavaModelPackage.DIRECTORY__RESOURCES:
+         case JavaModelPackage.DIRECTORY__RESOURCES :
             return resources != null && !resources.isEmpty();
       }
       return super.eIsSet(featureID);

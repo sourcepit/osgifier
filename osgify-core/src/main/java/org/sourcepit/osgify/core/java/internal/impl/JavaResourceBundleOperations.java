@@ -14,6 +14,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -70,5 +71,13 @@ public final class JavaResourceBundleOperations
          return null;
       }
       return resourcesRoot.getPackage(qualifiedName, createOnDemand);
+   }
+
+   public static void accept(@NotNull JavaResourceBundle bundle, @NotNull ResourceVisitor visitor)
+   {
+      for (JavaResourcesRoot resourcesRoot : bundle.getResourcesRoots())
+      {
+         resourcesRoot.accept(visitor);
+      }
    }
 }

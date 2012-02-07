@@ -28,6 +28,7 @@ import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.Directory;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.Resource;
+import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,13 +37,13 @@ import org.sourcepit.osgify.core.model.java.Resource;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getExtensions <em>Extensions</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getParentDirectory <em>Parent Directory</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getName <em>Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getExtensions <em>Extensions</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getAnnotations <em>Annotations</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.java.impl.ResourceImpl#getParentDirectory <em>Parent Directory</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public abstract class ResourceImpl extends EObjectImpl implements Resource
@@ -51,6 +52,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -61,6 +63,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getName()
     * @generated
     * @ordered
@@ -71,6 +74,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
     * The cached value of the '{@link #getExtensions() <em>Extensions</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getExtensions()
     * @generated
     * @ordered
@@ -81,6 +85,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
     * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @see #getAnnotations()
     * @generated
     * @ordered
@@ -90,6 +95,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    protected ResourceImpl()
@@ -100,6 +106,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -111,6 +118,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getName()
@@ -121,6 +129,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public void setName(String newName)
@@ -134,6 +143,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<EObject> getExtensions()
@@ -148,13 +158,15 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public EList<Annotation> getAnnotations()
    {
       if (annotations == null)
       {
-         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this, JavaModelPackage.RESOURCE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+         annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
+            JavaModelPackage.RESOURCE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -162,33 +174,38 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Directory getParentDirectory()
    {
-      if (eContainerFeatureID() != JavaModelPackage.RESOURCE__PARENT_DIRECTORY) return null;
-      return (Directory)eContainer();
+      if (eContainerFeatureID() != JavaModelPackage.RESOURCE__PARENT_DIRECTORY)
+         return null;
+      return (Directory) eContainer();
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public NotificationChain basicSetParentDirectory(Directory newParentDirectory, NotificationChain msgs)
    {
-      msgs = eBasicSetContainer((InternalEObject)newParentDirectory, JavaModelPackage.RESOURCE__PARENT_DIRECTORY, msgs);
+      msgs = eBasicSetContainer((InternalEObject) newParentDirectory, JavaModelPackage.RESOURCE__PARENT_DIRECTORY, msgs);
       return msgs;
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public void setParentDirectory(Directory newParentDirectory)
    {
-      if (newParentDirectory != eInternalContainer() || (eContainerFeatureID() != JavaModelPackage.RESOURCE__PARENT_DIRECTORY && newParentDirectory != null))
+      if (newParentDirectory != eInternalContainer()
+         || (eContainerFeatureID() != JavaModelPackage.RESOURCE__PARENT_DIRECTORY && newParentDirectory != null))
       {
          if (EcoreUtil.isAncestor(this, newParentDirectory))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -196,17 +213,34 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
          if (eInternalContainer() != null)
             msgs = eBasicRemoveFromContainer(msgs);
          if (newParentDirectory != null)
-            msgs = ((InternalEObject)newParentDirectory).eInverseAdd(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class, msgs);
+            msgs = ((InternalEObject) newParentDirectory).eInverseAdd(this, JavaModelPackage.DIRECTORY__RESOURCES,
+               Directory.class, msgs);
          msgs = basicSetParentDirectory(newParentDirectory, msgs);
-         if (msgs != null) msgs.dispatch();
+         if (msgs != null)
+            msgs.dispatch();
       }
       else if (eNotificationRequired())
-         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.RESOURCE__PARENT_DIRECTORY, newParentDirectory, newParentDirectory));
+         eNotify(new ENotificationImpl(this, Notification.SET, JavaModelPackage.RESOURCE__PARENT_DIRECTORY,
+            newParentDirectory, newParentDirectory));
    }
 
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void accept(ResourceVisitor visitor)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source)
@@ -219,6 +253,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public Annotation getAnnotation(String source, boolean createOnDemand)
@@ -231,6 +266,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public String getAnnotationData(String source, String key)
@@ -243,6 +279,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> T getExtension(Class<T> extensionType)
@@ -255,6 +292,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
@@ -267,6 +305,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void addExtension(T extension)
@@ -279,6 +318,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtension(T extension)
@@ -291,6 +331,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    public <T extends EObject> void removeExtensions(Class<T> extentionType)
@@ -303,6 +344,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -311,12 +353,12 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
-            return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
+            return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
             if (eInternalContainer() != null)
                msgs = eBasicRemoveFromContainer(msgs);
-            return basicSetParentDirectory((Directory)otherEnd, msgs);
+            return basicSetParentDirectory((Directory) otherEnd, msgs);
       }
       return super.eInverseAdd(otherEnd, featureID, msgs);
    }
@@ -324,6 +366,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -331,11 +374,11 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__EXTENSIONS:
-            return ((InternalEList<?>)getExtensions()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
-            return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
+         case JavaModelPackage.RESOURCE__EXTENSIONS :
+            return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
+            return ((InternalEList<?>) getAnnotations()).basicRemove(otherEnd, msgs);
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
             return basicSetParentDirectory(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -344,6 +387,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -351,8 +395,9 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (eContainerFeatureID())
       {
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
-            return eInternalContainer().eInverseRemove(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class, msgs);
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
+            return eInternalContainer().eInverseRemove(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class,
+               msgs);
       }
       return super.eBasicRemoveFromContainerFeature(msgs);
    }
@@ -360,6 +405,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -367,13 +413,13 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__NAME:
+         case JavaModelPackage.RESOURCE__NAME :
             return getName();
-         case JavaModelPackage.RESOURCE__EXTENSIONS:
+         case JavaModelPackage.RESOURCE__EXTENSIONS :
             return getExtensions();
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
             return getAnnotations();
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
             return getParentDirectory();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -382,6 +428,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @SuppressWarnings("unchecked")
@@ -390,19 +437,19 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__NAME:
-            setName((String)newValue);
+         case JavaModelPackage.RESOURCE__NAME :
+            setName((String) newValue);
             return;
-         case JavaModelPackage.RESOURCE__EXTENSIONS:
+         case JavaModelPackage.RESOURCE__EXTENSIONS :
             getExtensions().clear();
-            getExtensions().addAll((Collection<? extends EObject>)newValue);
+            getExtensions().addAll((Collection<? extends EObject>) newValue);
             return;
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
             getAnnotations().clear();
-            getAnnotations().addAll((Collection<? extends Annotation>)newValue);
+            getAnnotations().addAll((Collection<? extends Annotation>) newValue);
             return;
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
-            setParentDirectory((Directory)newValue);
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
+            setParentDirectory((Directory) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -411,6 +458,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -418,17 +466,17 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__NAME:
+         case JavaModelPackage.RESOURCE__NAME :
             setName(NAME_EDEFAULT);
             return;
-         case JavaModelPackage.RESOURCE__EXTENSIONS:
+         case JavaModelPackage.RESOURCE__EXTENSIONS :
             getExtensions().clear();
             return;
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
             getAnnotations().clear();
             return;
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
-            setParentDirectory((Directory)null);
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
+            setParentDirectory((Directory) null);
             return;
       }
       super.eUnset(featureID);
@@ -437,6 +485,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -444,13 +493,13 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       switch (featureID)
       {
-         case JavaModelPackage.RESOURCE__NAME:
+         case JavaModelPackage.RESOURCE__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-         case JavaModelPackage.RESOURCE__EXTENSIONS:
+         case JavaModelPackage.RESOURCE__EXTENSIONS :
             return extensions != null && !extensions.isEmpty();
-         case JavaModelPackage.RESOURCE__ANNOTATIONS:
+         case JavaModelPackage.RESOURCE__ANNOTATIONS :
             return annotations != null && !annotations.isEmpty();
-         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY:
+         case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
             return getParentDirectory() != null;
       }
       return super.eIsSet(featureID);
@@ -459,6 +508,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -468,23 +518,28 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.RESOURCE__EXTENSIONS: return CommonModelPackage.EXTENDABLE__EXTENSIONS;
-            default: return -1;
+            case JavaModelPackage.RESOURCE__EXTENSIONS :
+               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (derivedFeatureID)
          {
-            case JavaModelPackage.RESOURCE__ANNOTATIONS: return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
-            default: return -1;
+            case JavaModelPackage.RESOURCE__ANNOTATIONS :
+               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (derivedFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -493,6 +548,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
@@ -502,23 +558,28 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS: return JavaModelPackage.RESOURCE__EXTENSIONS;
-            default: return -1;
+            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+               return JavaModelPackage.RESOURCE__EXTENSIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == Annotatable.class)
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS: return JavaModelPackage.RESOURCE__ANNOTATIONS;
-            default: return -1;
+            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
+               return JavaModelPackage.RESOURCE__ANNOTATIONS;
+            default :
+               return -1;
          }
       }
       if (baseClass == XAnnotatable.class)
       {
          switch (baseFeatureID)
          {
-            default: return -1;
+            default :
+               return -1;
          }
       }
       return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -527,12 +588,14 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
+    * 
     * @generated
     */
    @Override
    public String toString()
    {
-      if (eIsProxy()) return super.toString();
+      if (eIsProxy())
+         return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
       result.append(" (name: ");

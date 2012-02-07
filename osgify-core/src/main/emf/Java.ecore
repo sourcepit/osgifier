@@ -7,6 +7,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource" abstract="true" eSuperTypes="#//Named ../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
+    <eOperations name="accept">
+      <eParameters name="visitor" lowerBound="1" eType="#//ResourceVisitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentDirectory" eType="#//Directory"
         eOpposite="#//Directory/resources"/>
   </eClassifiers>
@@ -58,6 +61,9 @@
       <eParameters name="qualifiedPackageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="accept">
+      <eParameters name="visitor" lowerBound="1" eType="#//ResourceVisitor"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resourcesRoots" upperBound="-1"
         eType="#//JavaResourcesRoot" containment="true" eOpposite="#//JavaResourcesRoot/packageBundle"/>
@@ -143,4 +149,6 @@
     <eLiterals name="BIN"/>
     <eLiterals name="SRC" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceVisitor" instanceClassName="org.sourcepit.osgify.core.model.java.ResourceVisitor"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

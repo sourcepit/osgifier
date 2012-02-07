@@ -9,6 +9,9 @@ package org.sourcepit.osgify.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.ConstraintViolationException;
 
 import org.eclipse.emf.ecore.EObject;
@@ -213,5 +216,60 @@ public class JavaResourceBundleTest
       assertThat(jBundle.getType("src", "foo", "Bar", true).getFile(),
          IsInstanceOf.instanceOf(JavaCompilationUnit.class));
       assertThat(jBundle.getType("bin", "foo", "Bar", true).getFile(), IsInstanceOf.instanceOf(JavaClass.class));
+   }
+
+   @Test
+   public void testAccept()
+   {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
+      {
+         public void run(EObject eObject)
+         {
+            testAccept((JavaResourceBundle) eObject);
+         }
+      });
+   }
+
+   private void testAccept(JavaResourceBundle jBundle)
+   {
+      try
+      {
+         jBundle.accept(null);
+         fail();
+      }
+      catch (ConstraintViolationException e)
+      {
+      }
+
+      JavaResourcesRoot root1 = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
+      JavaResourcesRoot root2 = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
+
+      final List<Resource> visited = new ArrayList<Resource>();
+      jBundle.accept(new ResourceVisitor()
+      {
+         public boolean visit(Resource resource)
+         {
+            visited.add(resource);
+            return true;
+         }
+      });
+      assertThat(visited.isEmpty(), Is.is(true));
+
+      jBundle.getResourcesRoots().add(root1);
+      jBundle.getResourcesRoots().add(root2);
+
+      visited.clear();
+      jBundle.accept(new ResourceVisitor()
+      {
+         public boolean visit(Resource resource)
+         {
+            visited.add(resource);
+            return true;
+         }
+      });
+
+      assertThat(visited.size(), Is.is(2));
+      assertThat(visited.get(0), IsEqual.equalTo((Resource) root1));
+      assertThat(visited.get(1), IsEqual.equalTo((Resource) root2));
    }
 }
