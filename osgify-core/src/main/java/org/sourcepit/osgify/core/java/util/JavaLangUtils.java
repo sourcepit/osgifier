@@ -6,6 +6,9 @@
 
 package org.sourcepit.osgify.core.java.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.validation.constraints.NotNull;
@@ -110,5 +113,62 @@ public final class JavaLangUtils
          fileName = resourcePath.substring(idx + 1);
       }
       return new String[] { parentPath, fileName };
+   }
+
+   @NotNull
+   public static List<String> extractTypeNamesFromSignature(@NotNull String signature)
+   {
+      final List<String> typesNames = new ArrayList<String>();
+      extractTypeNamesFromSignature(typesNames, signature);
+      return typesNames;
+   }
+
+   // CSOFF
+   private static void extractTypeNamesFromSignature(Collection<String> typesNames, String signature)
+   // CSON
+   {
+      final char[] chars = signature.toCharArray();
+      StringBuilder sb = null;
+      for (int i = 0; i < chars.length; i++)
+      {
+         char c = chars[i];
+         switch (c)
+         {
+            case ':' :
+               sb = null;
+               break;
+            case ';' :
+            case '<' :
+               if (sb != null)
+               {
+                  typesNames.add(normalizedTypeName(sb.toString()));
+                  sb = null;
+               }
+               break;
+            case 'L' :
+               if (sb == null)
+               {
+                  sb = new StringBuilder();
+                  break;
+               }
+            case 'T' :
+               if (sb == null)
+               {
+                  i++;
+                  break;
+               }
+            default :
+               if (sb != null)
+               {
+                  sb.append(c);
+               }
+               break;
+         }
+      }
+   }
+
+   private static String normalizedTypeName(String typeName)
+   {
+      return typeName.replace('/', '.');
    }
 }

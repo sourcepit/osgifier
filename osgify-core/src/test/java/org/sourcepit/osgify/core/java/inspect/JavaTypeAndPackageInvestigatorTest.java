@@ -170,8 +170,16 @@ public class JavaTypeAndPackageInvestigatorTest
       typeRefs = jType.getAnnotation("referencedTypes");
 
       expectedRefs = new HashSet<String>();
+      expectedRefs.add("java.util.Map");
+      expectedRefs.add("java.lang.Short");
+      expectedRefs.add("java.lang.Boolean");
+      expectedRefs.add("org.hamcrest.Matcher");
+      expectedRefs.add("org.junit.internal.matchers.CombinableMatcher");
       expectedRefs.add("java.lang.Object");
+      expectedRefs.add("java.lang.Long");
+      expectedRefs.add("java.util.HashMap");
       expectedRefs.add("java.lang.Runnable");
+      expectedRefs.add("java.lang.Integer");
 
       assertThat(typeRefs.getReferences().keySet(), IsEqual.equalTo(expectedRefs));
    }

@@ -6,7 +6,13 @@
 
 package org.sourcepit.osgify.test.resources;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.hamcrest.Matcher;
+import org.junit.internal.matchers.CombinableMatcher;
 
 public class TypeA
 {
@@ -24,24 +30,38 @@ public class TypeA
       return o;
    }
 
-   public static class Hans
+   public static class Hans<E>
    {
+      private Long[][] i = new Long[1][8];
+
+      private Map<Short[], Boolean[][][]> map = new HashMap<Short[], Boolean[][][]>();
+
       private Runnable r = new Runnable()
       {
          public void run()
          {
+            Collection<Boolean[][][]> values = map.values();
+            values.clear();
+            Long.valueOf(i[0][0]);
          }
       };
+
+      public CombinableMatcher<E> and(Matcher<? extends E> matcher)
+      {
+         return null;
+      }
 
       public Hans()
       {
          r.run();
 
+         final Integer[] i = new Integer[1];
+
          new Comparator<String>()
          {
             public int compare(String o1, String o2)
             {
-               return 0;
+               return i[0];
             }
          }.compare(null, null);
       }
