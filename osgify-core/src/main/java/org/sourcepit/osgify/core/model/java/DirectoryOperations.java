@@ -6,10 +6,13 @@
 
 package org.sourcepit.osgify.core.model.java;
 
+import javax.validation.constraints.NotNull;
+
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.collections.CollectionUtils;
+import org.sourcepit.common.utils.path.Path;
 
 
 /**
@@ -29,7 +32,27 @@ public final class DirectoryOperations
       return ECollections.unmodifiableEList(result);
    }
 
-   public static Directory getDirectory(Directory dir, String name, boolean createOnDemand)
+   public static Directory getDirectory(Directory dir, @NotNull String name, boolean createOnDemand)
+   {
+      return getDirectory(dir, new Path(name), createOnDemand);
+   }
+
+   private static Directory getDirectory(Directory dir, Path path, boolean createOnDemand)
+   {
+      Directory currentDir = dir;
+      for (String segment : path.getSegments())
+      {
+         currentDir = getChildDirectory(currentDir, segment, createOnDemand);
+         if (currentDir == null)
+         {
+            break;
+         }
+      }
+      return currentDir;
+   }
+
+
+   public static Directory getChildDirectory(Directory dir, String name, boolean createOnDemand)
    {
       for (Resource resource : dir.getResources())
       {
@@ -48,6 +71,7 @@ public final class DirectoryOperations
       return null;
    }
 
+
    public static EList<File> getFiles(Directory dir)
    {
       final EList<File> result = new BasicEList<File>();
@@ -55,21 +79,34 @@ public final class DirectoryOperations
       return ECollections.unmodifiableEList(result);
    }
 
-   public static File getFile(Directory dir, String name, boolean createOnDemand)
+   public static File getFile(@NotNull Directory dir, @NotNull String name, boolean createOnDemand)
+   {
+      final Path path = new Path(name);
+      final Path parentPath = path.getParent();
+      final Directory parentDir = parentPath == null ? dir : getDirectory(dir, parentPath, createOnDemand);
+      if (parentDir != null)
+      {
+         final String fileName = path.getLastSegment();
+         File file = (File) findResource(parentDir, fileName);
+         if (file == null && createOnDemand)
+         {
+            file = JavaModelFactory.eINSTANCE.createFile();
+            file.setName(fileName);
+            parentDir.getResources().add(file);
+         }
+         return file;
+      }
+      return null;
+   }
+
+   private static Resource findResource(Directory dir, String name)
    {
       for (Resource resource : dir.getResources())
       {
          if (resource instanceof File && name.equals(resource.getName()))
          {
-            return (File) resource;
+            return resource;
          }
-      }
-      if (createOnDemand)
-      {
-         final File file = JavaModelFactory.eINSTANCE.createFile();
-         file.setName(name);
-         dir.getResources().add(file);
-         return file;
       }
       return null;
    }

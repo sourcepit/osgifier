@@ -9,6 +9,8 @@ package org.sourcepit.osgify.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import javax.validation.ConstraintViolationException;
+
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -87,6 +89,15 @@ public class DirectoryTest
    public void testGetFile()
    {
       Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
+      try
+      {
+         dir.getFile(null);
+         fail();
+      }
+      catch (ConstraintViolationException e)
+      {
+      }
+
       assertThat(dir.getFile("a", false), IsNull.nullValue());
 
       File a = dir.getFile("a", true);
@@ -99,5 +110,8 @@ public class DirectoryTest
       assertThat(dir.getFile("a", false), IsNull.notNullValue());
       assertThat(dir.getFile("b", false), IsNull.notNullValue());
 
+      File file = dir.getFile("foo/Bar.txt", true);
+      assertThat(file.getName(), IsEqual.equalTo("Bar.txt"));
+      assertThat(file.getParentDirectory().getParentDirectory(), Is.is(dir));
    }
 }
