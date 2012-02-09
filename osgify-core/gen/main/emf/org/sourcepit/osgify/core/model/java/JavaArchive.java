@@ -37,4 +37,49 @@ public interface JavaArchive extends JavaResourceBundle
     */
    JavaType getType(String packageName, String typeName, boolean createOnDemand);
 
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   Resource getResource(String name);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   Directory getDirectory(String name);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   Directory getDirectory(String name, boolean createOnDemand);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   File getFile(String name);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @model
+    * @generated
+    */
+   File getFile(String name, boolean createOnDemand);
+
 } // JavaArchive

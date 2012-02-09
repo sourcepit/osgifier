@@ -490,6 +490,19 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
+   public Resource getResource(String name)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EList<Directory> getDirectories()
    {
       // TODO: implement this method

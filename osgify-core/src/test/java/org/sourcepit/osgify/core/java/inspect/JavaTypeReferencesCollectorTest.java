@@ -66,7 +66,7 @@ public class JavaTypeReferencesCollectorTest
       assertThat(typeRefs.size(), Is.is(10));
 
       expectedRefs = new HashSet<String>();
-      
+
       expectedRefs.add("java.util.Map");
       expectedRefs.add("java.lang.Short");
       expectedRefs.add("java.lang.Boolean");

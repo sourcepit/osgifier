@@ -50,6 +50,15 @@ public interface Directory extends Resource
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
+    * @model
+    * @generated
+    */
+   Resource getResource(String name);
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
     * @model kind="operation"
     * @generated
     */

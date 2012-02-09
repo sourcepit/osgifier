@@ -798,6 +798,9 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
          null, 0, -1, Directory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+      op = addEOperation(directoryEClass, this.getResource(), "getResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
       addEOperation(directoryEClass, this.getDirectory(), "getDirectories", 0, -1, IS_UNIQUE, IS_ORDERED);
 
       op = addEOperation(directoryEClass, this.getDirectory(), "getDirectory", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -872,6 +875,23 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       op = addEOperation(javaArchiveEClass, this.getJavaType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEString(), "packageName", 0, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEString(), "typeName", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getResource(), "getResource", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getDirectory(), "getDirectory", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getDirectory(), "getDirectory", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getFile(), "getFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(javaArchiveEClass, this.getFile(), "getFile", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
       addEParameter(op, ecorePackage.getEBoolean(), "createOnDemand", 0, 1, IS_UNIQUE, IS_ORDERED);
 
       initEClass(javaResourceDirectoryEClass, JavaResourceDirectory.class, "JavaResourceDirectory", IS_ABSTRACT,

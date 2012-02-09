@@ -13,9 +13,15 @@ import org.sourcepit.osgify.core.java.internal.impl.JavaArchiveOperations;
  */
 public aspect JavaArchiveAspects
 {
+   pointcut getResource(JavaArchive bundle, String name): target(bundle) && args(name) && execution(Resource JavaArchive.getResource(String));
+
    pointcut getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand): target(bundle) && args(fullyQualified, createOnDemand) && execution(JavaPackage JavaArchive.getPackage(String, boolean));
 
    pointcut getType(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand): target(bundle) && args(packageName, typeName, createOnDemand) && execution(JavaType JavaArchive.getType(String, String, boolean));
+
+   Resource around(JavaArchive bundle, String name) : getResource(bundle, name){
+      return JavaArchiveOperations.getResource(bundle, name);
+   }
 
    JavaPackage around(JavaArchive bundle, String fullyQualified, boolean createOnDemand) : getPackage(bundle, fullyQualified, createOnDemand){
       return JavaArchiveOperations.getPackage(bundle, fullyQualified, createOnDemand);

@@ -114,4 +114,37 @@ public class DirectoryTest
       assertThat(file.getName(), IsEqual.equalTo("Bar.txt"));
       assertThat(file.getParentDirectory().getParentDirectory(), Is.is(dir));
    }
+
+   @Test
+   public void testGetResource()
+   {
+      Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
+      try
+      {
+         dir.getResource(null);
+         fail();
+      }
+      catch (ConstraintViolationException e)
+      {
+      }
+
+      assertThat(dir.getResource("a"), IsNull.nullValue());
+
+      File a = dir.getFile("a", true);
+      assertThat(a.getName(), IsEqual.equalTo("a"));
+      assertThat(dir.getResource("a"), IsNull.notNullValue());
+      assertThat(dir.getResource("b"), IsNull.nullValue());
+
+      File b = dir.getFile("b", true);
+      assertThat(b.getName(), IsEqual.equalTo("b"));
+      assertThat(dir.getResource("a"), IsNull.notNullValue());
+      assertThat(dir.getResource("b"), IsNull.notNullValue());
+
+      File file = dir.getFile("foo/Bar.txt", true);
+      assertThat(file.getName(), IsEqual.equalTo("Bar.txt"));
+      assertThat(file.getParentDirectory().getParentDirectory(), Is.is(dir));
+
+      Resource resource = dir.getResource("foo/Bar.txt");
+      assertThat(resource, IsEqual.equalTo((Resource) file));
+   }
 }

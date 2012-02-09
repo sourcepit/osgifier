@@ -25,6 +25,19 @@ public final class DirectoryOperations
       super();
    }
 
+   public static Resource getResource(Directory dir, @NotNull String name)
+   {
+      final Path path = new Path(name);
+      final Path parentPath = path.getParent();
+      final Directory parentDir = parentPath == null ? dir : getDirectory(dir, parentPath, false);
+      if (parentDir != null)
+      {
+         final String fileName = path.getLastSegment();
+         return findResource(parentDir, fileName);
+      }
+      return null;
+   }
+
    public static EList<Directory> getDirectories(Directory dir)
    {
       final EList<Directory> result = new BasicEList<Directory>();

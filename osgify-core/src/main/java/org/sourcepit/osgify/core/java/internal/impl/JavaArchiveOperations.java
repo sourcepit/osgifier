@@ -8,7 +8,9 @@ package org.sourcepit.osgify.core.java.internal.impl;
 
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 public final class JavaArchiveOperations
 {
@@ -25,5 +27,18 @@ public final class JavaArchiveOperations
    public static JavaPackage getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand)
    {
       return JavaResourceBundleOperations.getPackage(bundle, "", fullyQualified, createOnDemand);
+   }
+
+   public static Resource getResource(JavaArchive bundle, String name)
+   {
+      for (JavaResourcesRoot jRoot : bundle.getResourcesRoots())
+      {
+         final Resource resource = jRoot.getResource(name);
+         if (resource != null)
+         {
+            return resource;
+         }
+      }
+      return null;
    }
 }

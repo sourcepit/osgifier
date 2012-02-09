@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.EList;
  */
 public aspect DirectoryAspects
 {
+   pointcut getResource(Directory dir, String name): target(dir) && args(name) && execution(Resource Directory.getResource(String));
+
    pointcut getDirectories(Directory dir): target(dir) && execution(EList<Directory> getDirectories());
 
    pointcut getDirectory(Directory dir, String name): target(dir) && args(name) && execution(Directory getDirectory(String));
@@ -21,15 +23,19 @@ public aspect DirectoryAspects
    pointcut getDirectory2(Directory dir, String name, boolean createOnDemand): target(dir) && args(name, createOnDemand) && execution(Directory getDirectory(String, boolean));
 
    pointcut getFiles(Directory dir): target(dir) && execution(EList<File> getFiles());
-   
+
    pointcut getFile(Directory dir, String name): target(dir) && args(name) && execution(File getFile(String));
 
    pointcut getFile2(Directory dir, String name, boolean createOnDemand): target(dir) && args(name, createOnDemand) && execution(File getFile(String, boolean));
 
+   Resource around(Directory dir, String name) : getResource(dir, name){
+      return DirectoryOperations.getResource(dir, name);
+   }
+
    EList<Directory> around(Directory dir) : getDirectories(dir){
       return DirectoryOperations.getDirectories(dir);
    }
-   
+
    Directory around(Directory dir, String name) : getDirectory(dir, name){
       return DirectoryOperations.getDirectory(dir, name, false);
    }
@@ -37,7 +43,7 @@ public aspect DirectoryAspects
    Directory around(Directory dir, String name, boolean createOnDemand) : getDirectory2(dir, name, createOnDemand){
       return DirectoryOperations.getDirectory(dir, name, createOnDemand);
    }
-   
+
    EList<File> around(Directory dir) : getFiles(dir){
       return DirectoryOperations.getFiles(dir);
    }
