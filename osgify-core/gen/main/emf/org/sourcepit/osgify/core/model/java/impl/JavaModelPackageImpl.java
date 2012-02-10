@@ -526,6 +526,28 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
+   public EAttribute getJavaClass_Major()
+   {
+      return (EAttribute) javaClassEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EAttribute getJavaClass_Minor()
+   {
+      return (EAttribute) javaClassEClass.getEStructuralFeatures().get(1);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EClass getJavaCompilationUnit()
    {
       return javaCompilationUnitEClass;
@@ -698,6 +720,8 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       createEReference(javaFileEClass, JAVA_FILE__TYPE);
 
       javaClassEClass = createEClass(JAVA_CLASS);
+      createEAttribute(javaClassEClass, JAVA_CLASS__MAJOR);
+      createEAttribute(javaClassEClass, JAVA_CLASS__MINOR);
 
       javaCompilationUnitEClass = createEClass(JAVA_COMPILATION_UNIT);
       createEReference(javaCompilationUnitEClass, JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS);
@@ -952,6 +976,10 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
 
       initEClass(javaClassEClass, JavaClass.class, "JavaClass", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getJavaClass_Major(), ecorePackage.getEInt(), "major", null, 0, 1, JavaClass.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getJavaClass_Minor(), ecorePackage.getEInt(), "minor", null, 0, 1, JavaClass.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(javaCompilationUnitEClass, JavaCompilationUnit.class, "JavaCompilationUnit", !IS_ABSTRACT,
          !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

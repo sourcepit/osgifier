@@ -15,8 +15,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Directory" eSuperTypes="#//Resource">
     <eOperations name="getResource" eType="#//Resource">
-      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
-    </eOperations><eOperations name="getDirectories" upperBound="-1" eType="#//Directory"/>
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getDirectories" upperBound="-1" eType="#//Directory"/>
     <eOperations name="getDirectory" eType="#//Directory">
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -32,7 +33,6 @@
       <eParameters name="createOnDemand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="getFiles" upperBound="-1" eType="#//File"/>
-    
     <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
         eType="#//Resource" containment="true" eOpposite="#//Resource/parentDirectory"/>
   </eClassifiers>
@@ -144,7 +144,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//JavaType"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//JavaFile"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaClass" eSuperTypes="#//JavaFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="major" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JavaCompilationUnit" eSuperTypes="#//JavaFile">
     <eStructuralFeatures xsi:type="ecore:EReference" name="importDeclarations" upperBound="-1"
         eType="#//ImportDeclaration" containment="true" eOpposite="#//ImportDeclaration/compilationUnit"/>

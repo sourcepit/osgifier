@@ -49,9 +49,15 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
 
    private void analyzeType(final JavaType javaType, InputStream content)
    {
+      final JavaClass javaClass = parseClass(javaType, content);
+
+      org.sourcepit.osgify.core.model.java.JavaClass jClass = (org.sourcepit.osgify.core.model.java.JavaClass) javaType
+         .getFile();
+      jClass.setMajor(javaClass.getMajor());
+      jClass.setMinor(javaClass.getMinor());
+
       if (!typeAnalyzers.isEmpty())
       {
-         final JavaClass javaClass = parseClass(javaType, content);
          for (IJavaTypeAnalyzer analyzer : typeAnalyzers)
          {
             analyzer.analyze(javaType, javaClass);

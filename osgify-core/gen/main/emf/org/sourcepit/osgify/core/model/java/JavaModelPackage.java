@@ -1014,6 +1014,26 @@ public interface JavaModelPackage extends EPackage
    int JAVA_CLASS__TYPE = JAVA_FILE__TYPE;
 
    /**
+    * The feature id for the '<em><b>Major</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_CLASS__MAJOR = JAVA_FILE_FEATURE_COUNT + 0;
+
+   /**
+    * The feature id for the '<em><b>Minor</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int JAVA_CLASS__MINOR = JAVA_FILE_FEATURE_COUNT + 1;
+
+   /**
     * The number of structural features of the '<em>Java Class</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -1021,7 +1041,7 @@ public interface JavaModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int JAVA_CLASS_FEATURE_COUNT = JAVA_FILE_FEATURE_COUNT + 0;
+   int JAVA_CLASS_FEATURE_COUNT = JAVA_FILE_FEATURE_COUNT + 2;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl
@@ -1528,6 +1548,32 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaClass();
 
    /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.core.model.java.JavaClass#getMajor
+    * <em>Major</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Major</em>'.
+    * @see org.sourcepit.osgify.core.model.java.JavaClass#getMajor()
+    * @see #getJavaClass()
+    * @generated
+    */
+   EAttribute getJavaClass_Major();
+
+   /**
+    * Returns the meta object for the attribute '{@link org.sourcepit.osgify.core.model.java.JavaClass#getMinor
+    * <em>Minor</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Minor</em>'.
+    * @see org.sourcepit.osgify.core.model.java.JavaClass#getMinor()
+    * @see #getJavaClass()
+    * @generated
+    */
+   EAttribute getJavaClass_Minor();
+
+   /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.java.JavaCompilationUnit
     * <em>Java Compilation Unit</em>}'.
     * <!-- begin-user-doc -->
@@ -1906,6 +1952,24 @@ public interface JavaModelPackage extends EPackage
        * @generated
        */
       EClass JAVA_CLASS = eINSTANCE.getJavaClass();
+
+      /**
+       * The meta object literal for the '<em><b>Major</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute JAVA_CLASS__MAJOR = eINSTANCE.getJavaClass_Major();
+
+      /**
+       * The meta object literal for the '<em><b>Minor</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute JAVA_CLASS__MINOR = eINSTANCE.getJavaClass_Minor();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.java.impl.JavaCompilationUnitImpl

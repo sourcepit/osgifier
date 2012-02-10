@@ -23,6 +23,7 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.modeling.common.Annotation;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaProject;
@@ -77,6 +78,11 @@ public class JavaTypeAndPackageInvestigatorTest
          TypeA.class.getSimpleName(), false);
       assertThat(type, IsNull.notNullValue());
 
+      JavaClass jClass = (JavaClass) type.getFile();
+      assertThat(jClass, IsNull.notNullValue());
+      assertThat(jClass.getMajor() >= 49, Is.is(true));
+      assertThat(jClass.getMinor() > -1, Is.is(true));
+
       EList<JavaType> innerTypes = type.getInnerTypes();
       assertThat(innerTypes.size(), Is.is(1));
 
@@ -130,6 +136,11 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaType type = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName(), false);
       assertThat(type, IsNull.notNullValue());
+
+      JavaClass jClass = (JavaClass) type.getFile();
+      assertThat(jClass, IsNull.notNullValue());
+      assertThat(jClass.getMajor() >= 49, Is.is(true));
+      assertThat(jClass.getMinor() > -1, Is.is(true));
 
       EList<JavaType> innerTypes = type.getInnerTypes();
       assertThat(innerTypes.size(), Is.is(1));
