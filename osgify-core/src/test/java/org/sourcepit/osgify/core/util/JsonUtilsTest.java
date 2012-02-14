@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java.util;
+package org.sourcepit.osgify.core.util;
 
 import static org.junit.Assert.assertThat;
 
@@ -23,11 +23,11 @@ import com.google.gson.stream.JsonWriter;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JvmInfoReaderTest
+public class JsonUtilsTest
 {
 
    @Test
-   public void test() throws IOException
+   public void testParse() throws IOException
    {
       StringWriter writer = new StringWriter();
 
@@ -48,7 +48,7 @@ public class JvmInfoReaderTest
       json.endObject();
       json.endArray();
 
-      JsonArray jvms = new JvmInfoReader().read(new StringReader(writer.toString()));
+      JsonArray jvms = JsonUtils.parse(new StringReader(writer.toString())).getAsJsonArray();
       assertThat(jvms.size(), Is.is(1));
 
       JsonObject jvm = (JsonObject) jvms.get(0);

@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java.util;
+package org.sourcepit.osgify.core.tools;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -33,7 +33,7 @@ import com.google.gson.JsonStreamParser;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JvmInfoWriterTest
+public class ExecutionEnvironmentAnalyzerTest
 {
    private Properties readProxyProperties() throws IOException
    {
@@ -77,8 +77,8 @@ public class JvmInfoWriterTest
 
       StringWriter writer = new StringWriter();
 
-      JvmInfoWriter jvmWriter = new JvmInfoWriter();
-      jvmWriter.write(javaHomes, writer);
+      ExecutionEnvironmentAnalyzer jvmWriter = new ExecutionEnvironmentAnalyzer();
+      jvmWriter.analyze(javaHomes, writer);
 
       JsonArray jvms = parse(writer.toString());
       assertThat(jvms, IsNull.notNullValue());
@@ -90,7 +90,7 @@ public class JvmInfoWriterTest
 
       javaHomes.add(javaHome);
       writer = new StringWriter();
-      jvmWriter.write(javaHomes, writer);
+      jvmWriter.analyze(javaHomes, writer);
 
       jvms = parse(writer.toString());
       assertThat(jvms, IsNull.notNullValue());

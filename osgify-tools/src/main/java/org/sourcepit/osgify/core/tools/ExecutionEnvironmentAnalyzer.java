@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java.util;
+package org.sourcepit.osgify.core.tools;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -31,7 +31,9 @@ import org.sourcepit.common.utils.file.FileVisitor;
 import org.sourcepit.common.utils.path.PathUtils;
 import org.sourcepit.common.utils.xml.XmlUtils;
 import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
+import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
+import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
@@ -48,19 +50,40 @@ import com.google.gson.stream.JsonWriter;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class JvmInfoWriter
+public class ExecutionEnvironmentAnalyzer
 {
-   private static final Logger LOGGER = LoggerFactory.getLogger(JvmInfoWriter.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(ExecutionEnvironmentAnalyzer.class);
 
    public static final String UTF_8 = "UTF-8";
 
    public static void main(String[] args) throws IOException
    {
-      new JvmInfoWriter().doMain(args);
+      new ExecutionEnvironmentAnalyzer().doMain(args);
    }
 
    public void doMain(String[] args) throws IOException
    {
+      if (args.length > 0 && "--jdoc".equals(args[0]))
+      {
+         final JsonWriter jsonWriter = new JsonWriter(new OutputStreamWriter(System.out, UTF_8));
+         jsonWriter.setIndent("  ");
+         jsonWriter.beginArray();
+
+         List<String> platformPackages = parseJavaPlatformJDoc(args[1]);
+
+         write(jsonWriter, null, null, -1, platformPackages, Collections.EMPTY_LIST);
+
+         jsonWriter.endArray();
+
+         return;
+      }
+
+      if (args.length > 0 && "--jar".equals(args[0]))
+      {
+         analyzeJar(args[2], args[3], args[4], new File(args[1]), new OutputStreamWriter(System.out, UTF_8));
+         return;
+      }
+
       final List<File> javaHomes = new ArrayList<File>();
       final File out = parseArgs(args, javaHomes);
       OutputStream outputStream = null;
@@ -74,12 +97,32 @@ public class JvmInfoWriter
          {
             outputStream = new BufferedOutputStream(new FileOutputStream(out));
          }
-         write(javaHomes, outputStream);
+         analyze(javaHomes, outputStream);
       }
       finally
       {
          IOUtils.closeQuietly(outputStream);
       }
+   }
+
+   private void analyzeJar(String type, String version, String vendor, File jar, Writer writer) throws IOException
+   {
+      final JsonWriter jsonWriter = new JsonWriter(writer);
+      jsonWriter.setIndent("  ");
+      jsonWriter.beginArray();
+
+      final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
+      JavaArchive javaArchive = scanner.scan(jar);
+      javaArchive.setName(jar.getName());
+
+      List<String> packages = new ArrayList<String>();
+      int major = collectPackagesAndMaxMajor(javaArchive, packages);
+      Collections.sort(packages);
+
+      write(jsonWriter, vendor, version, major, packages, Collections.<String> emptyList());
+
+      jsonWriter.endArray();
+      jsonWriter.flush();
    }
 
    private File parseArgs(String[] args, List<File> javaHomes)
@@ -142,12 +185,12 @@ public class JvmInfoWriter
       return null;
    }
 
-   public void write(Iterable<File> javaHomes, OutputStream outputStream) throws IOException
+   public void analyze(Iterable<File> javaHomes, OutputStream outputStream) throws IOException
    {
-      write(javaHomes, new OutputStreamWriter(outputStream, UTF_8));
+      analyze(javaHomes, new OutputStreamWriter(outputStream, UTF_8));
    }
 
-   public void write(Iterable<File> javaHomes, Writer writer) throws IOException
+   public void analyze(Iterable<File> javaHomes, Writer writer) throws IOException
    {
       final JsonWriter jsonWriter = new JsonWriter(writer);
       jsonWriter.setIndent("  ");
@@ -179,6 +222,7 @@ public class JvmInfoWriter
       String vendor = null;
       String version = null;
 
+      int major = 0;
       final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
       for (JavaArchive jar : jars)
       {
@@ -187,25 +231,7 @@ public class JvmInfoWriter
          LOGGER.info("Scanning Java archive " + jarName);
          scanner.scan(jar, new File(javaHome, jarName), null);
 
-         for (JavaResourcesRoot jRoot : jar.getResourcesRoots())
-         {
-            jRoot.accept(new ResourceVisitor()
-            {
-               public boolean visit(Resource resource)
-               {
-                  if (resource instanceof JavaPackage)
-                  {
-                     final JavaPackage jPackage = (JavaPackage) resource;
-                     final String qualifiedName = jPackage.getQualifiedName();
-                     if (!jPackage.getJavaFiles().isEmpty() && !vendorPackages.contains(qualifiedName))
-                     {
-                        vendorPackages.add(qualifiedName);
-                     }
-                  }
-                  return resource instanceof JavaResourceDirectory;
-               }
-            });
-         }
+         major = Math.max(major, collectPackagesAndMaxMajor(jar, vendorPackages));
 
          if (jarName.endsWith("/rt.jar") || jarName.equals("rt.jar"))
          {
@@ -222,11 +248,40 @@ public class JvmInfoWriter
       vendorPackages.removeAll(platformPackages);
 
       Collections.sort(vendorPackages);
-      write(jsonWriter, vendor, version, platformPackages, vendorPackages);
+      write(jsonWriter, vendor, version, major, platformPackages, vendorPackages);
    }
 
-   private void write(JsonWriter jsonWriter, String vendor, String version, final List<String> platformPackages,
-      List<String> vendorPackages) throws IOException
+   private int collectPackagesAndMaxMajor(JavaArchive jar, final List<String> packages)
+   {
+      final int[] major = new int[1];
+      for (JavaResourcesRoot jRoot : jar.getResourcesRoots())
+      {
+         jRoot.accept(new ResourceVisitor()
+         {
+            public boolean visit(Resource resource)
+            {
+               if (resource instanceof JavaPackage)
+               {
+                  final JavaPackage jPackage = (JavaPackage) resource;
+                  final String qualifiedName = jPackage.getQualifiedName();
+                  if (!jPackage.getJavaFiles().isEmpty() && !packages.contains(qualifiedName))
+                  {
+                     packages.add(qualifiedName);
+                  }
+               }
+               else if (resource instanceof JavaClass)
+               {
+                  major[0] = Math.max(major[0], ((JavaClass) resource).getMajor());
+               }
+               return resource instanceof JavaResourceDirectory;
+            }
+         });
+      }
+      return major[0];
+   }
+
+   private void write(JsonWriter jsonWriter, String vendor, String version, int major,
+      final List<String> platformPackages, List<String> vendorPackages) throws IOException
    {
       jsonWriter.beginObject();
       jsonWriter.name("type");
@@ -235,20 +290,28 @@ public class JvmInfoWriter
       jsonWriter.value(vendor);
       jsonWriter.name("version");
       jsonWriter.value(version);
+      jsonWriter.name("classVersion");
+      jsonWriter.value(major);
       jsonWriter.name("platformPackages");
       jsonWriter.beginArray();
-      for (String packageName : platformPackages)
+      if (!platformPackages.isEmpty())
       {
-         jsonWriter.value(packageName);
+         for (String packageName : platformPackages)
+         {
+            jsonWriter.value(packageName);
+         }
       }
       jsonWriter.endArray();
-      jsonWriter.name("vendorPackages");
-      jsonWriter.beginArray();
-      for (String packageName : vendorPackages)
+      if (!vendorPackages.isEmpty())
       {
-         jsonWriter.value(packageName);
+         jsonWriter.name("vendorPackages");
+         jsonWriter.beginArray();
+         for (String packageName : vendorPackages)
+         {
+            jsonWriter.value(packageName);
+         }
+         jsonWriter.endArray();
       }
-      jsonWriter.endArray();
       jsonWriter.endObject();
       jsonWriter.flush();
    }
@@ -259,7 +322,7 @@ public class JvmInfoWriter
       {
          public boolean visit(File file)
          {
-            if (file.getName().endsWith(".jar"))
+            if (file.getName().endsWith(".jar") || file.getName().endsWith("zip"))
             {
                libFiles.add(file);
             }
@@ -280,11 +343,16 @@ public class JvmInfoWriter
       {
          apiVersion = version;
       }
+      String url = "http://docs.oracle.com/javase/" + apiVersion + "/docs/api/overview-frame.html";
+      return parseJavaPlatformJDoc(url);
+   }
 
+   private List<String> parseJavaPlatformJDoc(String urlString)
+   {
       InputStream openStream = null;
       try
       {
-         final URL url = new URL("http://docs.oracle.com/javase/" + apiVersion + "/docs/api/overview-frame.html");
+         final URL url = new URL(urlString);
          LOGGER.info("Fetching Java platform packages from " + url.toString());
 
          final HttpURLConnection connection = (HttpURLConnection) url.openConnection();

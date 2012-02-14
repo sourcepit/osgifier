@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * @author Bernd
  */
-public class Environment
+public final class Environment
 {
    private static final class Holder
    {

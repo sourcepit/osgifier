@@ -49,7 +49,7 @@ public class Workspace extends ExternalResource
    }
 
    @Override
-   protected void before() throws Throwable
+   protected void before() throws Exception
    {
       if (baseDir == null)
       {
