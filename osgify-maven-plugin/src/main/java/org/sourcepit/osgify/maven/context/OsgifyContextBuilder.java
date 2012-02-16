@@ -26,6 +26,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
+import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.eclipse.emf.common.util.EList;
@@ -69,18 +70,24 @@ public class OsgifyContextBuilder
 
    public OsgifyContext build(MavenProject project, Goal goal, ArtifactRepository localRepository)
    {
+      if (goal == Goal.OSGIFY_TESTS)
+      {
+         throw new UnsupportedOperationException("Bundling test artifacts is currently not supported.");
+      }
+
       this.remoteRepositories = project.getRemoteArtifactRepositories();
       this.localRepository = localRepository;
 
-      final BundleCandidate bundleNode = newProjectBundleCandidate(goal, project);
+      final String scope = getMavenScope(goal);
 
-      Artifact artifact = project.getArtifact();
-      String id = artifact.getId();
-      mvnIdToBundleNode.put(id, bundleNode);
+      final BundleCandidate bundleNode = newProjectBundleCandidate(goal, project);
+      mvnIdToBundleNode.put(getProjectId(project, goal), bundleNode);
 
       // we must re-resolve the artifacts... if we use the already resolved artifacts from the project, we'll lose
       // version ranges
-      addBundleReferences(bundleNode, resolveDependencies(artifact, project.getDependencyArtifacts()));
+      final Set<Artifact> dependencies = resolveDependencies(project.getArtifact(), scope,
+         project.getDependencyArtifacts());
+      addBundleReferences(bundleNode, scope, dependencies);
 
       executeBundleScannerTasks();
 
@@ -90,6 +97,34 @@ public class OsgifyContextBuilder
       postprocessContext(context);
 
       return context;
+   }
+
+   private String getMavenScope(Goal goal)
+   {
+      final String scope;
+      switch (goal)
+      {
+         case OSGIFY :
+            scope = Artifact.SCOPE_COMPILE;
+            break;
+         case OSGIFY_TESTS :
+            scope = Artifact.SCOPE_TEST;
+            break;
+         default :
+            throw new IllegalStateException();
+      }
+      return scope;
+   }
+
+   private String getProjectId(MavenProject project, Goal goal)
+   {
+      Artifact artifact = project.getArtifact();
+      String id = artifact.getId();
+      if (goal == Goal.OSGIFY_TESTS)
+      {
+         return id + ":tests";
+      }
+      return id;
    }
 
    private void postprocessContext(OsgifyContext context)
@@ -149,7 +184,7 @@ public class OsgifyContextBuilder
       }
    }
 
-   private void addBundleReferences(final BundleCandidate parentNode, Set<Artifact> artifacts)
+   private void addBundleReferences(final BundleCandidate parentNode, String scope, Set<Artifact> artifacts)
    {
       for (Artifact artifact : artifacts)
       {
@@ -159,13 +194,13 @@ public class OsgifyContextBuilder
          {
             bundleNode = newJarBundleCandidate(artifact);
             mvnIdToBundleNode.put(id, bundleNode);
-            addBundleReferences(bundleNode, resolveDependencies(artifact, null));
+            addBundleReferences(bundleNode, scope, resolveDependencies(artifact, scope, null));
          }
          parentNode.getDependencies().add(newBundleReference(bundleNode, artifact));
       }
    }
 
-   private Set<Artifact> resolveDependencies(Artifact artifact, Set<Artifact> dependencyArtifacts)
+   private Set<Artifact> resolveDependencies(Artifact artifact, String scope, Set<Artifact> dependencyArtifacts)
    {
       final ArtifactResolutionRequest request = new ArtifactResolutionRequest();
       request.setArtifact(artifact);
@@ -174,6 +209,10 @@ public class OsgifyContextBuilder
       request.setResolveTransitively(true);
       request.setRemoteRepositories(remoteRepositories);
       request.setLocalRepository(localRepository);
+
+      ScopeArtifactFilter scopeFilter = new ScopeArtifactFilter(scope);
+      request.setCollectionFilter(scopeFilter);
+      request.setResolutionFilter(scopeFilter);
 
       ArtifactResolutionResult result = repositorySystem.resolve(request);
       return result.getArtifacts();
@@ -193,8 +232,15 @@ public class OsgifyContextBuilder
 
    private BundleCandidate newProjectBundleCandidate(Goal goal, MavenProject project)
    {
+      org.sourcepit.common.maven.model.MavenProject mProject = MavenModelUtils.toMavenProject(project);
+
+      if (goal == Goal.OSGIFY_TESTS)
+      {
+         mProject.setArtifactId(mProject.getArtifactId() + ".tests");
+      }
+
       final BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      bundleCandidate.addExtension(MavenModelUtils.toMavenProject(project));
+      bundleCandidate.addExtension(mProject);
 
       bundleScannerTasks
          .add(new BundleScannerTask(bundleCandidate, project.getBasedir(), getPathsToScan(goal, project)));
@@ -204,6 +250,7 @@ public class OsgifyContextBuilder
 
    private BundleCandidate newJarBundleCandidate(Artifact artifact)
    {
+      // TODO lookup for related project in reactor
       final MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
 
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
@@ -230,9 +277,9 @@ public class OsgifyContextBuilder
             break;
          case OSGIFY_TESTS :
             testOutputDir = MavenProjectUtils.getTestOutputDir(project);
-            paths = new String[2];
-            paths[0] = PathUtils.getRelativePath(outputDir, projectDir, "/");
-            paths[1] = PathUtils.getRelativePath(testOutputDir, projectDir, "/");
+            paths = new String[1];
+            // paths[0] = PathUtils.getRelativePath(outputDir, projectDir, "/");
+            paths[0] = PathUtils.getRelativePath(testOutputDir, projectDir, "/");
             break;
          default :
             throw new IllegalStateException();
