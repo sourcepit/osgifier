@@ -22,7 +22,7 @@ public final class ExecutionEnvironmentImplementation
    private final String eeId;
    private final String vendor;
    private final PropertiesMap properties;
-   private final List<String> packages;
+   private final List<String> vendorPackages;
 
    public ExecutionEnvironmentImplementation(@NotNull String eeId, @NotNull String vendor,
       @NotNull PropertiesMap properties, @NotNull List<String> vendorPackages)
@@ -30,7 +30,7 @@ public final class ExecutionEnvironmentImplementation
       this.eeId = eeId;
       this.vendor = vendor;
       this.properties = PropertiesUtils.unmodifiablePropertiesMap(properties);
-      this.packages = Collections.unmodifiableList(vendorPackages);
+      this.vendorPackages = Collections.unmodifiableList(vendorPackages);
    }
 
    public String getExecutionEnvironmentId()
@@ -43,9 +43,9 @@ public final class ExecutionEnvironmentImplementation
       return vendor;
    }
 
-   public List<String> getPackages()
+   public List<String> getVendorPackages()
    {
-      return packages;
+      return vendorPackages;
    }
 
    public PropertiesMap getProperties()
@@ -57,7 +57,7 @@ public final class ExecutionEnvironmentImplementation
    public String toString()
    {
       return "ExecutionEnvironmentImplementation [executionEnvironmentId=" + eeId + ", vendor=" + vendor
-         + ", properties=" + properties + ", packages=" + packages + "]";
+         + ", properties=" + properties + ", vendorPackages=" + vendorPackages + "]";
    }
 
 }

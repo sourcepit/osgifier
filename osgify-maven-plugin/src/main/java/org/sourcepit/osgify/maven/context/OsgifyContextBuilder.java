@@ -28,6 +28,9 @@ import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
@@ -36,6 +39,8 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.maven.Goal;
 
@@ -82,15 +87,31 @@ public class OsgifyContextBuilder
       OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().addAll(mvnIdToBundleNode.values());
 
-      alignBundlereferencesVersionRanges(context);
+      postprocessContext(context);
 
       return context;
    }
 
-   private void alignBundlereferencesVersionRanges(OsgifyContext context)
+   private void postprocessContext(OsgifyContext context)
    {
       for (BundleCandidate bundleCandidate : context.getBundles())
       {
+         JavaResourceBundle content = bundleCandidate.getContent();
+         EList<JavaResourcesRoot> jRoots = content.getResourcesRoots();
+         for (JavaResourcesRoot jRoot : jRoots)
+         {
+            org.sourcepit.osgify.core.model.java.File manifestFile = jRoot.getFile("META-INF/MANIFEST.MF");
+            if (manifestFile != null)
+            {
+               final BundleManifest manifest = manifestFile.getExtension(BundleManifest.class);
+               if (manifest != null)
+               {
+                  bundleCandidate.setNativeBundle(true);
+                  bundleCandidate.setManifest(EcoreUtil.copy(manifest));
+                  break;
+               }
+            }
+         }
          for (BundleReference bundleReference : bundleCandidate.getDependencies())
          {
             bundleReference.setVersionRange(versionRangeResolver.resolveVersionRange(bundleReference));

@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -162,7 +163,8 @@ public class JavaTypeAndPackageInvestigatorTest
 
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
-      new JavaResourcesBundleScanner().scan(javaProject, projectDir, new JavaTypeReferencesAnalyzer());
+      new JavaResourcesBundleScanner().scan(javaProject, projectDir,
+         Collections.singleton(new JavaTypeReferencesAnalyzer()));
 
       JavaType jType = javaProject.getType("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH,
          TypeA.class.getSimpleName(), false);
@@ -194,5 +196,4 @@ public class JavaTypeAndPackageInvestigatorTest
 
       assertThat(typeRefs.getReferences().keySet(), IsEqual.equalTo(expectedRefs));
    }
-
 }

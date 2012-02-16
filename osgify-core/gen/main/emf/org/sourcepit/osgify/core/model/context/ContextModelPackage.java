@@ -191,6 +191,26 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
+    * The feature id for the '<em><b>Native Bundle</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__NATIVE_BUNDLE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
+
+   /**
+    * The feature id for the '<em><b>Manifest</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__MANIFEST = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 5;
+
+   /**
     * The number of structural features of the '<em>Bundle Candidate</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -198,7 +218,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
+   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 6;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
@@ -373,6 +393,32 @@ public interface ContextModelPackage extends EPackage
    EAttribute getBundleCandidate_SymbolicName();
 
    /**
+    * Returns the meta object for the attribute '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#isNativeBundle <em>Native Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Native Bundle</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#isNativeBundle()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EAttribute getBundleCandidate_NativeBundle();
+
+   /**
+    * Returns the meta object for the containment reference '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getManifest <em>Manifest</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the containment reference '<em>Manifest</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getManifest()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EReference getBundleCandidate_Manifest();
+
+   /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.context.BundleReference
     * <em>Bundle Reference</em>}'.
     * <!-- begin-user-doc -->
@@ -529,6 +575,24 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EAttribute BUNDLE_CANDIDATE__SYMBOLIC_NAME = eINSTANCE.getBundleCandidate_SymbolicName();
+
+      /**
+       * The meta object literal for the '<em><b>Native Bundle</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_CANDIDATE__NATIVE_BUNDLE = eINSTANCE.getBundleCandidate_NativeBundle();
+
+      /**
+       * The meta object literal for the '<em><b>Manifest</b></em>' containment reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_CANDIDATE__MANIFEST = eINSTANCE.getBundleCandidate_Manifest();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl

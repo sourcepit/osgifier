@@ -217,6 +217,28 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
+   public EAttribute getBundleCandidate_NativeBundle()
+   {
+      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(4);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getBundleCandidate_Manifest()
+   {
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(5);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EClass getBundleReference()
    {
       return bundleReferenceEClass;
@@ -308,6 +330,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__DEPENDENCIES);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__VERSION);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__SYMBOLIC_NAME);
+      createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__NATIVE_BUNDLE);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__MANIFEST);
 
       bundleReferenceEClass = createEClass(BUNDLE_REFERENCE);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__VERSION_RANGE);
@@ -381,6 +405,12 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEAttribute(getBundleCandidate_SymbolicName(), ecorePackage.getEString(), "symbolicName", null, 0, 1,
          BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleCandidate_NativeBundle(), ecorePackage.getEBoolean(), "nativeBundle", null, 0, 1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+      initEReference(getBundleCandidate_Manifest(), theBundleManifestPackage.getBundleManifest(), null, "manifest",
+         null, 0, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+         !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(bundleReferenceEClass, BundleReference.class, "BundleReference", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);

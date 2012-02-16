@@ -2,7 +2,7 @@
   {
     "executionEnvironmentId": "CDC-1.1/Foundation-1.1",
     "vendor": "Sun Microsystems Inc.",
-    "version": 1.6.0_24,
+    "version": "1.6.0_24",
     "vendorPackages": [
       "COM.rsa.Intel",
       "COM.rsa.asn1",
@@ -147,7 +147,6 @@
     "executionEnvironmentId": "JavaSE-1.7",
     "vendor": "Oracle Corporation",
     "version": "1.7.0",
-    "classVersion": 51,
     "vendorPackages": [
       "com.oracle.net",
       "com.sun.accessibility.internal.resources",

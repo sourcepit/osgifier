@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.core.model.context;
 
 import org.eclipse.emf.common.util.EList;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.modeling.common.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -23,6 +24,8 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#isNativeBundle <em>Native Bundle</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getManifest <em>Manifest</em>}</li>
  * </ul>
  * </p>
  * 
@@ -135,5 +138,63 @@ public interface BundleCandidate extends XAnnotatable
     * @generated
     */
    void setSymbolicName(String value);
+
+   /**
+    * Returns the value of the '<em><b>Native Bundle</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Native Bundle</em>' attribute isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Native Bundle</em>' attribute.
+    * @see #setNativeBundle(boolean)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_NativeBundle()
+    * @model
+    * @generated
+    */
+   boolean isNativeBundle();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#isNativeBundle
+    * <em>Native Bundle</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Native Bundle</em>' attribute.
+    * @see #isNativeBundle()
+    * @generated
+    */
+   void setNativeBundle(boolean value);
+
+   /**
+    * Returns the value of the '<em><b>Manifest</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Manifest</em>' containment reference isn't clear, there really should be more of a
+    * description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Manifest</em>' containment reference.
+    * @see #setManifest(BundleManifest)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Manifest()
+    * @model containment="true"
+    * @generated
+    */
+   BundleManifest getManifest();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getManifest
+    * <em>Manifest</em>}' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Manifest</em>' containment reference.
+    * @see #getManifest()
+    * @generated
+    */
+   void setManifest(BundleManifest value);
 
 } // BundleCandidate

@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.core.java.inspect;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -27,79 +28,81 @@ import org.sourcepit.osgify.core.util.ZipTraverser;
 
 public class JavaResourcesBundleScanner
 {
-   private IJavaTypeAnalyzer typeAnalyzer;
+   private Collection<? extends IJavaTypeAnalyzer> typeAnalyzers;
 
-   public void setJavaTypeAnalyzer(IJavaTypeAnalyzer typeAnalyzer)
+   public void setJavaTypeAnalyzer(Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
-      this.typeAnalyzer = typeAnalyzer;
+      this.typeAnalyzers = typeAnalyzers;
    }
 
    public JavaArchive scan(@NotNull File jarFile)
    {
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      scan(javaArchive, jarFile, typeAnalyzer);
+      scan(javaArchive, jarFile, typeAnalyzers);
       return javaArchive;
    }
 
-   public JavaArchive scan(@NotNull File jarFile, final IJavaTypeAnalyzer typeAnalyzer)
+   public JavaArchive scan(@NotNull File jarFile, final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      scan(javaArchive, jarFile, typeAnalyzer);
+      scan(javaArchive, jarFile, typeAnalyzers);
       return javaArchive;
    }
 
-   public void scan(@NotNull final JavaArchive javaArchive, @NotNull File jarFile, final IJavaTypeAnalyzer typeAnalyzer)
+   public void scan(@NotNull final JavaArchive javaArchive, @NotNull File jarFile,
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
-      new ZipTraverser(jarFile).travers(newJavaResourceVisitor(javaArchive, "", typeAnalyzer));
+      new ZipTraverser(jarFile).travers(newJavaResourceVisitor(javaArchive, "", typeAnalyzers));
    }
 
    public JavaProject scan(@NotNull File projectDir, String... binDirPaths)
    {
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
-      scan(javaProject, projectDir, typeAnalyzer, binDirPaths);
+      scan(javaProject, projectDir, typeAnalyzers, binDirPaths);
       return javaProject;
    }
 
-   public JavaProject scan(@NotNull File projectDir, final IJavaTypeAnalyzer typeAnalyzer, String... binDirPaths)
+   public JavaProject scan(@NotNull File projectDir, final Collection<IJavaTypeAnalyzer> typeAnalyzers,
+      String... binDirPaths)
    {
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
-      scan(javaProject, projectDir, typeAnalyzer, binDirPaths);
+      scan(javaProject, projectDir, typeAnalyzers, binDirPaths);
       return javaProject;
    }
 
    public void scan(@NotNull final JavaProject javaProject, @NotNull File projectDir,
-      final IJavaTypeAnalyzer typeAnalyzer, String... binDirPaths)
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers, String... binDirPaths)
    {
       if (binDirPaths == null || binDirPaths.length == 0)
       {
-         investigateBinDirectory(javaProject, "", projectDir, typeAnalyzer);
+         investigateBinDirectory(javaProject, "", projectDir, typeAnalyzers);
       }
       else
       {
          for (final String binDirPath : binDirPaths)
          {
             final File binDir = new File(projectDir, binDirPath);
-            investigateBinDirectory(javaProject, binDirPath, binDir, typeAnalyzer);
+            investigateBinDirectory(javaProject, binDirPath, binDir, typeAnalyzers);
          }
       }
    }
 
    private void investigateBinDirectory(final JavaProject javaProject, final String binDirPath, final File binDir,
-      final IJavaTypeAnalyzer typeAnalyzer)
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
-      new RelativeDirectoryTraverser(binDir).travers(newJavaResourceVisitor(javaProject, binDirPath, typeAnalyzer));
+      new RelativeDirectoryTraverser(binDir).travers(newJavaResourceVisitor(javaProject, binDirPath, typeAnalyzers));
    }
 
    protected JavaResourceVisitor newJavaResourceVisitor(final JavaResourceBundle javaBundle, String rootName,
-      final IJavaTypeAnalyzer typeAnalyzer)
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
       final ReadWriteLock rwLock = new ReentrantReadWriteLock(false);
 
       final JavaResourceVisitor visitor = new JavaResourceVisitor(javaBundle, rootName, rwLock);
       final JavaClassFileHandler classFileHandler = new JavaClassFileHandler();
-      if (typeAnalyzer != null)
+      if (typeAnalyzers != null)
       {
-         classFileHandler.getTypeAnalyzers().add(typeAnalyzer);
+         classFileHandler.getTypeAnalyzers().addAll(typeAnalyzers);
       }
       visitor.getResourceHandlers().add(classFileHandler);
       visitor.getResourceHandlers().add(new JavaPackageHandler());

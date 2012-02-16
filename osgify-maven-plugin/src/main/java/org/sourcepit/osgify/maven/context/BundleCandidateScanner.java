@@ -7,10 +7,14 @@
 package org.sourcepit.osgify.maven.context;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
+import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
 import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -55,7 +59,10 @@ public class BundleCandidateScanner
    private JavaResourcesBundleScanner newScanner()
    {
       final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
-      scanner.setJavaTypeAnalyzer(new JavaTypeReferencesAnalyzer());
+      final List<IJavaTypeAnalyzer> typeAnalyzers = new ArrayList<IJavaTypeAnalyzer>();
+      typeAnalyzers.add(new JavaTypeReferencesAnalyzer());
+      typeAnalyzers.add(new ClassForNameDetector());
+      scanner.setJavaTypeAnalyzer(typeAnalyzers);
       return scanner;
    }
 }

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -34,6 +35,8 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getDependencies <em>Dependencies</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getVersion <em>Version</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getSymbolicName <em>Symbolic Name</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#isNativeBundle <em>Native Bundle</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getManifest <em>Manifest</em>}</li>
  * </ul>
  * </p>
  * 
@@ -106,6 +109,39 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @ordered
     */
    protected String symbolicName = SYMBOLIC_NAME_EDEFAULT;
+
+   /**
+    * The default value of the '{@link #isNativeBundle() <em>Native Bundle</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #isNativeBundle()
+    * @generated
+    * @ordered
+    */
+   protected static final boolean NATIVE_BUNDLE_EDEFAULT = false;
+
+   /**
+    * The cached value of the '{@link #isNativeBundle() <em>Native Bundle</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #isNativeBundle()
+    * @generated
+    * @ordered
+    */
+   protected boolean nativeBundle = NATIVE_BUNDLE_EDEFAULT;
+
+   /**
+    * The cached value of the '{@link #getManifest() <em>Manifest</em>}' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getManifest()
+    * @generated
+    * @ordered
+    */
+   protected BundleManifest manifest;
 
    /**
     * <!-- begin-user-doc -->
@@ -263,6 +299,91 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
+   public boolean isNativeBundle()
+   {
+      return nativeBundle;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setNativeBundle(boolean newNativeBundle)
+   {
+      boolean oldNativeBundle = nativeBundle;
+      nativeBundle = newNativeBundle;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__NATIVE_BUNDLE,
+            oldNativeBundle, nativeBundle));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public BundleManifest getManifest()
+   {
+      return manifest;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public NotificationChain basicSetManifest(BundleManifest newManifest, NotificationChain msgs)
+   {
+      BundleManifest oldManifest = manifest;
+      manifest = newManifest;
+      if (eNotificationRequired())
+      {
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+            ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST, oldManifest, newManifest);
+         if (msgs == null)
+            msgs = notification;
+         else
+            msgs.add(notification);
+      }
+      return msgs;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setManifest(BundleManifest newManifest)
+   {
+      if (newManifest != manifest)
+      {
+         NotificationChain msgs = null;
+         if (manifest != null)
+            msgs = ((InternalEObject) manifest).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+               - ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST, null, msgs);
+         if (newManifest != null)
+            msgs = ((InternalEObject) newManifest).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+               - ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST, null, msgs);
+         msgs = basicSetManifest(newManifest, msgs);
+         if (msgs != null)
+            msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST,
+            newManifest, newManifest));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
@@ -272,6 +393,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return basicSetContent(null, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
+            return basicSetManifest(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -295,6 +418,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return getVersion();
          case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             return getSymbolicName();
+         case ContextModelPackage.BUNDLE_CANDIDATE__NATIVE_BUNDLE :
+            return isNativeBundle();
+         case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
+            return getManifest();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -324,6 +451,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             setSymbolicName((String) newValue);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__NATIVE_BUNDLE :
+            setNativeBundle((Boolean) newValue);
+            return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
+            setManifest((BundleManifest) newValue);
+            return;
       }
       super.eSet(featureID, newValue);
    }
@@ -351,6 +484,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             setSymbolicName(SYMBOLIC_NAME_EDEFAULT);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__NATIVE_BUNDLE :
+            setNativeBundle(NATIVE_BUNDLE_EDEFAULT);
+            return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
+            setManifest((BundleManifest) null);
+            return;
       }
       super.eUnset(featureID);
    }
@@ -374,6 +513,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
          case ContextModelPackage.BUNDLE_CANDIDATE__SYMBOLIC_NAME :
             return SYMBOLIC_NAME_EDEFAULT == null ? symbolicName != null : !SYMBOLIC_NAME_EDEFAULT.equals(symbolicName);
+         case ContextModelPackage.BUNDLE_CANDIDATE__NATIVE_BUNDLE :
+            return nativeBundle != NATIVE_BUNDLE_EDEFAULT;
+         case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
+            return manifest != null;
       }
       return super.eIsSet(featureID);
    }
@@ -395,6 +538,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
       result.append(version);
       result.append(", symbolicName: ");
       result.append(symbolicName);
+      result.append(", nativeBundle: ");
+      result.append(nativeBundle);
       result.append(')');
       return result.toString();
    }

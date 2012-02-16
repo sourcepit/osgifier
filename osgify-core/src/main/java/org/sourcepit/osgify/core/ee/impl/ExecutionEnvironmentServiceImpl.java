@@ -249,7 +249,8 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
             executionEnvironment, true);
          for (ExecutionEnvironmentImplementation implementation : implementations)
          {
-            discouraged.addAll(implementation.getPackages());
+            discouraged.addAll(getExecutionEnvironment(implementation.getExecutionEnvironmentId()).getPackages());
+            discouraged.addAll(implementation.getVendorPackages());
          }
       }
       discouraged.removeAll(accessible);
