@@ -9,11 +9,14 @@
 	<artifactId>osgify-integration-tests</artifactId>
 
 	<properties>
-		<test.user.home>${project.build.directory}/test-user.home</test.user.home>
-		<test.localRepository>${test.user.home}/.m2/repository</test.localRepository>
+		<it.maven.version>${maven.version}</it.maven.version>
+		<it.dir>${project.build.directory}/it</it.dir>
+		<it.bin.dir>${it.dir}/bin</it.bin.dir>
+		<it.user.home>${it.dir}/user.home</it.user.home>
+		<it.localRepository>${it.dir}/user.home/.m2/repository</it.localRepository>
 		<it.localRepositoryXml />
 		<proxy.settingsXml />
-		<it.maven.version>${maven.version}</it.maven.version>
+		<b2.examples.finalName>b2-examples-${project.version}</b2.examples.finalName>
 	</properties>
 
 	<dependencies>
@@ -70,7 +73,7 @@
 			</testResource>
 			<testResource>
 				<directory>src/test/m2</directory>
-				<targetPath>${test.user.home}/.m2</targetPath>
+				<targetPath>${it.user.home}/.m2</targetPath>
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
@@ -97,7 +100,7 @@
 						</goals>
 						<configuration>
 							<includeArtifactIds>apache-maven</includeArtifactIds>
-							<outputDirectory>${project.build.directory}</outputDirectory>
+							<outputDirectory>${it.bin.dir}</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>

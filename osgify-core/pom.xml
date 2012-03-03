@@ -39,6 +39,10 @@
 			<artifactId>common-modeling</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.sourcepit.common</groupId>
+			<artifactId>common-testing</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
 		</dependency>

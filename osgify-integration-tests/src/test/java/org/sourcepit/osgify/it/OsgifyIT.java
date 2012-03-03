@@ -23,8 +23,9 @@ import org.hamcrest.core.IsNull;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sourcepit.common.maven.model.MavenModelPackage;
-import org.sourcepit.osgify.core.Environment;
-import org.sourcepit.osgify.core.Workspace;
+import org.sourcepit.common.testing.Environment;
+import org.sourcepit.common.testing.ExternalProcess;
+import org.sourcepit.common.testing.Workspace;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
@@ -32,13 +33,13 @@ public class OsgifyIT
 {
    private final static boolean DEBUG = false;
 
-   protected Environment environment = Environment.getInstance();
+   protected Environment environment = Environment.get("osgiy-its.properties");
 
    @Rule
    public ExternalProcess externalProcess = new ExternalProcess();
 
    @Rule
-   public Workspace workspace = new Workspace(environment.getOutputDir(), false);
+   public Workspace workspace = new Workspace(new File(environment.getBuildDir(), "ws"), false);
 
    @Test
    public void testOsgify() throws Exception
@@ -48,7 +49,7 @@ public class OsgifyIT
 
    protected void executeBuild(String projectName) throws IOException
    {
-      final Map<String, String> envVars = environment.newEnvironmentVariables();
+      final Map<String, String> envVars = environment.newEnvs();
       final File projectDir = getProjectDir(projectName);
       externalProcess.execute(envVars, projectDir, newMavenCmd("-B", "-e", "clean", "package"));
 
@@ -73,7 +74,7 @@ public class OsgifyIT
       final String mvnExec = isDebug() ? "mvnDebug" : "mvn";
 
       final CommandLine cmd;
-      final File mavenBinDir = new File(environment.getMavenDir(), "/bin");
+      final File mavenBinDir = new File(environment.getMavenHome(), "/bin");
       if (OS.isFamilyWindows() || OS.isFamilyWin9x())
       {
          cmd = externalProcess.newCommandLine(new File(mavenBinDir, mvnExec + ".bat"));
@@ -97,7 +98,7 @@ public class OsgifyIT
 
    protected File getProjectDir(String projectName) throws IOException
    {
-      File projects = environment.getPropertyAsFile("projects-dir", true);
+      File projects = environment.getPropertyAsFile("it.resources", true);
       File src = new File(projects, projectName).getCanonicalFile();
       return workspace.importDir(src);
    }
