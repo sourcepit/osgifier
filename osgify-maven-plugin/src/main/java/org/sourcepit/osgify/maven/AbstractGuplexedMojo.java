@@ -20,7 +20,7 @@ public abstract class AbstractGuplexedMojo extends AbstractMojo
 
    public final void execute() throws MojoExecutionException, MojoFailureException
    {
-      guplex.inject(this);
+      guplex.inject(this, true);
       doExecute();
    }
 
