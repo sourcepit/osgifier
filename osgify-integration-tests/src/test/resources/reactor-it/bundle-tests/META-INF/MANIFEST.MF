@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: foo.tests
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: foo.tests;version=1.0.0.SNAPSHOT
+Import-Package: foo;version="1.0.0.SNAPSHOT",foo.tests;version="[1.0.0
+ .SNAPSHOT,1.0.0.SNAPSHOT]",org.hamcrest.core;version="[4.10,5)",org.j
+ unit;version="[4.10,5)"
+

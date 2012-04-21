@@ -8,7 +8,7 @@ package org.sourcepit.osgify.maven.context;
 
 import javax.inject.Named;
 
-import org.sourcepit.common.maven.model.MavenArtifact;
+import org.sourcepit.common.maven.model.Identifiable;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
@@ -27,7 +27,7 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
    @Override
    public String resolveSymbolicName(BundleCandidate bundleCandidate)
    {
-      final MavenArtifact mavenArtifact = bundleCandidate.getExtension(MavenArtifact.class);
+      final Identifiable mavenArtifact = bundleCandidate.getExtension(Identifiable.class);
       if (mavenArtifact != null)
       {
          final String groupId = mavenArtifact.getGroupId();

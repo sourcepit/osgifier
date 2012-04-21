@@ -84,6 +84,11 @@
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
+				<groupId>org.sourcepit.tools</groupId>
+				<artifactId>osgify-maven-plugin</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
 				<version>2.1</version>
@@ -185,8 +190,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<!-- <ignore></ignore> -->
-										<execute />
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>

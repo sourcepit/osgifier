@@ -45,7 +45,7 @@ public final class MavenToOSGiUtils
          else
          {
             final Version version;
-            version = MavenToOSGiUtils.toVersion(trimQualifier(recommendedVersion).toString(), true);
+            version = MavenToOSGiUtils.toVersion(recommendedVersion.toString(), true);
             return new VersionRange(version, true, null, false);
          }
       }

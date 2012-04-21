@@ -71,7 +71,7 @@ public class ExecutionEnvironmentAnalyzer
 
          List<String> platformPackages = parseJavaPlatformJDoc(args[1]);
 
-         write(jsonWriter, null, null, -1, platformPackages, Collections.EMPTY_LIST);
+         write(jsonWriter, null, null, -1, platformPackages, Collections.<String> emptyList());
 
          jsonWriter.endArray();
 

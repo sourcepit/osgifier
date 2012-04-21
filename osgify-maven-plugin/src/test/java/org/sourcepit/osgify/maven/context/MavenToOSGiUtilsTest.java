@@ -96,7 +96,7 @@ public class MavenToOSGiUtilsTest
 
       mVersionRange = "1.0-RC1";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0.0.RC1"));
 
       mVersionRange = "[1.5,)";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
@@ -339,20 +339,23 @@ public class MavenToOSGiUtilsTest
       // assertEquals("[1.5.2,1.6)", JavaUtil.createVersionRange(null, "1.5.2-SNAPSHOT"));
       // assertEquals("[1.0.0,1.1)", JavaUtil.createVersionRange("1.0.0.v2011", null));
 
+      mavn_assertIsIncluded("1.0-SNAPSHOT", "1.0-SNAPSHOT");
+      osgi_assertIsIncluded("1.0.0.SNAPSHOT", "1.0.0.SNAPSHOT");
+
       mVersionRange = "1.0-SNAPSHOT";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
       // assertThat(oVersionRange.toString(), IsEqual.equalTo("[1.0,2)"));
       // or
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0.0.SNAPSHOT"));
       // ?
 
       mVersionRange = "1.0-SnApShOt";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0.0.SnApShOt"));
 
       mVersionRange = "1.0-ABC-SNAPSHOT";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0.0.ABC"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("1.0.0.ABC-SNAPSHOT"));
    }
 
    private static void mavn_assertIsIncluded(String versionRange, String version)

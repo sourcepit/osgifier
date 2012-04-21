@@ -6,6 +6,8 @@
 
 package org.sourcepit.osgify.maven;
 
+import java.io.File;
+
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -17,9 +19,23 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public class OsgifyTestsMojo extends AbstractOsgifyMojo
 {
+   /**
+    * @parameter default-value="${project.build.testOutputDirectory}/META-INF/MANIFEST.MF"
+    */
+   private File manifestFile;
+
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       doExecute(Goal.OSGIFY_TESTS);
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   protected File getManifestFile()
+   {
+      return manifestFile;
    }
 }

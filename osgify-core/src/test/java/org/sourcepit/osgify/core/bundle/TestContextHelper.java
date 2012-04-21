@@ -49,7 +49,8 @@ public final class TestContextHelper
       return bundle;
    }
 
-   public static JavaType appendTypeWithReferences(JavaArchive jArchive, String qualifiedName, int major, String... typeReferences)
+   public static JavaType appendTypeWithReferences(JavaArchive jArchive, String qualifiedName, int major,
+      String... typeReferences)
    {
       JavaType jType = appendType(jArchive, qualifiedName, major);
       if (typeReferences != null)

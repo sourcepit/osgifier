@@ -22,11 +22,19 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.sourcepit.tools</groupId>
+			<artifactId>osgify-maven-plugin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sourcepit.tools</groupId>
 			<artifactId>osgify-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
 			<artifactId>common-maven</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sourcepit</groupId>
+			<artifactId>guice-plexus-bridge</artifactId>
 		</dependency>
 
 		<dependency>
@@ -59,17 +67,7 @@
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
-				<filtering>false</filtering>
-				<excludes>
-					<exclude>**/*.properties</exclude>
-				</excludes>
-			</testResource>
-			<testResource>
-				<directory>src/test/resources</directory>
 				<filtering>true</filtering>
-				<includes>
-					<include>**/*.properties</include>
-				</includes>
 			</testResource>
 			<testResource>
 				<directory>src/test/m2</directory>

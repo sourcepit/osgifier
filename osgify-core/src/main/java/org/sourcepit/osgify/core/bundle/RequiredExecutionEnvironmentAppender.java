@@ -79,7 +79,7 @@ public class RequiredExecutionEnvironmentAppender
    {
       final List<ExecutionEnvironment> winners = new ArrayList<ExecutionEnvironment>();
 
-      final List<String> packageNames = packagesService.getNamesOfReferencedPackages(jBundle);
+      final List<String> packageNames = new ArrayList<String>(packagesService.getNamesOfReferencedPackages(jBundle));
       jBundle.accept(new ResourceVisitor()
       {
          public boolean visit(Resource resource)
@@ -91,7 +91,6 @@ public class RequiredExecutionEnvironmentAppender
             return resource instanceof JavaResourceDirectory;
          }
       });
-
 
       long bestClassVersionRating = Long.MIN_VALUE;
       int bestPackageRating = Integer.MIN_VALUE;

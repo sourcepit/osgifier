@@ -11,6 +11,7 @@ import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,13 +59,15 @@ public class ReferencedPackagesService
       List<String> referencedPackages = cache.get(jBundle);
       if (referencedPackages != null)
       {
-         return new ArrayList<String>(referencedPackages);
+         return referencedPackages;
       }
 
       referencedPackages = new ArrayList<String>();
-      cache.put(jBundle, referencedPackages);
       collectPackageReferences(referencedPackages, jBundle);
-      return referencedPackages;
+
+      final List<String> unmodifiableList = Collections.unmodifiableList(referencedPackages);
+      cache.put(jBundle, unmodifiableList);
+      return unmodifiableList;
    }
 
    private void collectPackageReferences(final List<String> referencedPackages, JavaResourceBundle jBundle)

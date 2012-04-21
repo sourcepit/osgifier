@@ -35,7 +35,7 @@ public class BundleManifestAppender
 
    @Inject
    private DynamicPackageImportAppender dynamicImports;
-   
+
    @Inject
    private PackageImportAppender packageImports;
 

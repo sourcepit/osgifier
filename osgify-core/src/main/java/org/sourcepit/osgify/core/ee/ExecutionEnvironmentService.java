@@ -25,7 +25,7 @@ public interface ExecutionEnvironmentService
    boolean isCompatible(ExecutionEnvironment executionEnvironment1, ExecutionEnvironment executionEnvironment2);
 
    AccessRule getAccessRuleById(String executionEnvironmentId, String packageName);
-   
+
    AccessRule getAccessRuleById(Collection<String> executionEnvironmentIds, String packageName);
 
    AccessRule getAccessRule(ExecutionEnvironment executionEnvironment, String packageName);

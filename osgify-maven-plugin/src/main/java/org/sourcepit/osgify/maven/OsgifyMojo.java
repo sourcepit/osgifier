@@ -6,6 +6,10 @@
 
 package org.sourcepit.osgify.maven;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -17,9 +21,35 @@ import org.apache.maven.plugin.MojoFailureException;
  */
 public class OsgifyMojo extends AbstractOsgifyMojo
 {
+   /** @parameter default-value="${project.build.outputDirectory}/META-INF/MANIFEST.MF" */
+   private File manifestFile;
+
+   /** @parameter default-value="false" */
+   private boolean enablePDEWorkaround;
+
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       doExecute(Goal.OSGIFY);
+      if (enablePDEWorkaround)
+      {
+         try
+         {
+            FileUtils.copyFile(manifestFile, new File(project.getBasedir(), "META-INF/MANIFEST.MF"));
+         }
+         catch (IOException e)
+         {
+            throw new IllegalStateException(e);
+         }
+      }
+   }
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override
+   protected File getManifestFile()
+   {
+      return manifestFile;
    }
 }

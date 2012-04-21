@@ -44,10 +44,10 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
 
       BundleManifest manifest = bundle.getManifest();
       String dynamicImportPackage = manifest.getHeaderValue(DYNAMICIMPORT_PACKAGE);
-      
+
       assertThat(dynamicImportPackage, IsEqual.equalTo("*"));
    }
-   
+
    @Test
    public void testAlreadySet()
    {
@@ -62,10 +62,10 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
       dynamicImportAppender.append(bundle);
 
       String dynamicImportPackage = manifest.getHeaderValue(DYNAMICIMPORT_PACKAGE);
-      
+
       assertThat(dynamicImportPackage, IsEqual.equalTo("*"));
    }
-   
+
    @Test
    public void testIsAlreadySettoSthElse()
    {
@@ -80,10 +80,10 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
       dynamicImportAppender.append(bundle);
 
       String dynamicImportPackage = manifest.getHeaderValue(DYNAMICIMPORT_PACKAGE);
-      
+
       assertThat(dynamicImportPackage, IsEqual.equalTo("*"));
    }
-   
+
    @Test
    public void testNegative()
    {
@@ -97,7 +97,7 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
 
       BundleManifest manifest = bundle.getManifest();
       String dynamicImportPackage = manifest.getHeaderValue(DYNAMICIMPORT_PACKAGE);
-      
+
       assertThat(dynamicImportPackage, IsNull.nullValue());
    }
 
