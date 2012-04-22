@@ -24,7 +24,6 @@ import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.path.PathUtils;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -66,13 +65,12 @@ public class OsgifyContextBuilder
             .getExtension(org.sourcepit.common.maven.model.MavenProject.class);
          if (mProject == null)
          {
-            final MavenArtifact mArtifact = candidate.getExtension(MavenArtifact.class);
-            bundleScannerTasks.add(new BundleScannerTask(candidate, mArtifact.getFile()));
+            bundleScannerTasks.add(new BundleScannerTask(candidate));
          }
          else
          {
             final String[] binDirPaths = getPathsToScan(goal, mProject);
-            bundleScannerTasks.add(new BundleScannerTask(candidate, project.getBasedir(), binDirPaths));
+            bundleScannerTasks.add(new BundleScannerTask(candidate, binDirPaths));
          }
       }
 
@@ -112,19 +110,22 @@ public class OsgifyContextBuilder
    {
       for (BundleCandidate bundleCandidate : context.getBundles())
       {
-         JavaResourceBundle content = bundleCandidate.getContent();
-         EList<JavaResourcesRoot> jRoots = content.getResourcesRoots();
-         for (JavaResourcesRoot jRoot : jRoots)
+         if (!bundleCandidate.isNativeBundle())
          {
-            org.sourcepit.osgify.core.model.java.File manifestFile = jRoot.getFile("META-INF/MANIFEST.MF");
-            if (manifestFile != null)
+            JavaResourceBundle content = bundleCandidate.getContent();
+            EList<JavaResourcesRoot> jRoots = content.getResourcesRoots();
+            for (JavaResourcesRoot jRoot : jRoots)
             {
-               final BundleManifest manifest = manifestFile.getExtension(BundleManifest.class);
-               if (manifest != null)
+               org.sourcepit.osgify.core.model.java.File manifestFile = jRoot.getFile("META-INF/MANIFEST.MF");
+               if (manifestFile != null)
                {
-                  bundleCandidate.setNativeBundle(true);
-                  bundleCandidate.setManifest(EcoreUtil.copy(manifest));
-                  break;
+                  final BundleManifest manifest = manifestFile.getExtension(BundleManifest.class);
+                  if (manifest != null)
+                  {
+                     bundleCandidate.setNativeBundle(true);
+                     bundleCandidate.setManifest(EcoreUtil.copy(manifest));
+                     break;
+                  }
                }
             }
          }
@@ -169,26 +170,23 @@ public class OsgifyContextBuilder
    class BundleScannerTask implements Runnable, Comparable<BundleScannerTask>
    {
       private final BundleCandidate bundleCandidate;
-      private final File jarFileOrProjectDir;
       private final String[] binDirPaths;
 
-      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File projectDir,
-         @NotNull String... binDirPaths)
+      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull String... binDirPaths)
       {
          this.bundleCandidate = bundleCandidate;
-         this.jarFileOrProjectDir = projectDir;
          this.binDirPaths = binDirPaths;
       }
 
-      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File jarFile)
+      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate)
       {
          this.bundleCandidate = bundleCandidate;
-         this.jarFileOrProjectDir = jarFile;
          this.binDirPaths = null;
       }
 
       public void run()
       {
+         File jarFileOrProjectDir = bundleCandidate.getLocation();
          if (jarFileOrProjectDir.isDirectory())
          {
             // TODO try to re-load already build contexts from reactor projects
@@ -202,8 +200,8 @@ public class OsgifyContextBuilder
 
       public int compareTo(BundleScannerTask other)
       {
-         final File f1 = jarFileOrProjectDir;
-         final File f2 = other.jarFileOrProjectDir;
+         final File f1 = bundleCandidate.getLocation();
+         final File f2 = other.bundleCandidate.getLocation();
          if (f1.isDirectory())
          {
             return f2.isDirectory() ? 0 : -1;

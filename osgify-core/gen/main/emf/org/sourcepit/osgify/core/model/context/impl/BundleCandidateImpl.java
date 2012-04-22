@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.model.context.impl;
 
+import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -31,6 +32,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <p>
  * The following features are implemented:
  * <ul>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getLocation <em>Location</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getContent <em>Content</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getDependencies <em>Dependencies</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getVersion <em>Version</em>}</li>
@@ -44,6 +46,28 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  */
 public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate
 {
+   /**
+    * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getLocation()
+    * @generated
+    * @ordered
+    */
+   protected static final File LOCATION_EDEFAULT = null;
+
+   /**
+    * The cached value of the '{@link #getLocation() <em>Location</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getLocation()
+    * @generated
+    * @ordered
+    */
+   protected File location = LOCATION_EDEFAULT;
+
    /**
     * The cached value of the '{@link #getContent() <em>Content</em>}' containment reference.
     * <!-- begin-user-doc -->
@@ -164,6 +188,32 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    protected EClass eStaticClass()
    {
       return ContextModelPackage.Literals.BUNDLE_CANDIDATE;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public File getLocation()
+   {
+      return location;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setLocation(File newLocation)
+   {
+      File oldLocation = location;
+      location = newLocation;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__LOCATION,
+            oldLocation, location));
    }
 
    /**
@@ -410,6 +460,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
+            return getLocation();
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return getContent();
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
@@ -438,6 +490,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
+            setLocation((File) newValue);
+            return;
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             setContent((JavaResourceBundle) newValue);
             return;
@@ -472,6 +527,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
+            setLocation(LOCATION_EDEFAULT);
+            return;
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             setContent((JavaResourceBundle) null);
             return;
@@ -505,6 +563,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
    {
       switch (featureID)
       {
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
+            return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return content != null;
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
@@ -534,7 +594,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          return super.toString();
 
       StringBuffer result = new StringBuffer(super.toString());
-      result.append(" (version: ");
+      result.append(" (location: ");
+      result.append(location);
+      result.append(", version: ");
       result.append(version);
       result.append(", symbolicName: ");
       result.append(symbolicName);

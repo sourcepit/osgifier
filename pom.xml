@@ -14,7 +14,7 @@
 	<modules>
 		<module>osgify-core</module>
 		<module>osgify-maven-plugin</module>
-		<module>osgify-tools</module>
+		<!-- <module>osgify-tools</module> -->
 	</modules>
 
 	<repositories>

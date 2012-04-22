@@ -13,6 +13,10 @@ import java.util.Map;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.project.MavenProject;
+import org.sourcepit.common.manifest.Manifest;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.util.ManifestUtils;
+import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -35,7 +39,18 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       final String id = artifact.getId();
       if (!mvnIdToBundleNode.containsKey(id))
       {
-         mvnIdToBundleNode.put(id, newBundleCandidate(artifact, project));
+         BundleCandidate bundleCandidate = newBundleCandidate(artifact, project);
+         mvnIdToBundleNode.put(id, bundleCandidate);
+
+         // no need to visit dependencies of native bundles
+         BundleManifest manifest = lookupBundleManifest(artifact, project);
+         if (manifest != null)
+         {
+            bundleCandidate.setNativeBundle(true);
+            bundleCandidate.setManifest(manifest);
+            return false;
+         }
+
          return true;
       }
       return false;
@@ -46,24 +61,41 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       final BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       if (project == null)
       {
-         node.addExtension(MavenModelUtils.toMavenArtifact(artifact));
+         MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
+         node.setLocation(mArtifact.getFile());
+         node.addExtension(mArtifact);
       }
       else
       {
-         node.addExtension(MavenModelUtils.toMavenProject(project));
+         org.sourcepit.common.maven.model.MavenProject mProject = MavenModelUtils.toMavenProject(project);
+         node.setLocation(mProject.getProjectDirectory());
+         node.addExtension(mProject);
       }
       return node;
    }
 
+   private BundleManifest lookupBundleManifest(Artifact artifact, MavenProject project)
+   {
+      if (project == null)
+      {
+         Manifest manifest = null;
+         try
+         {
+            manifest = ManifestUtils.readJarManifest(artifact.getFile());
+         }
+         catch (Exception e)
+         {
+         }
+         return (BundleManifest) (manifest instanceof BundleManifest ? manifest : null);
+      }
+      else
+      {
+         return null;
+      }
+   }
+
    public void handleDependency(Artifact fromArtifact, Artifact toArtifact)
    {
-      String filename = toArtifact.getFile().getName();
-      if (filename.contains("xml-apis") || filename.contains("ant-") || filename.contains("cglib-")
-         || filename.contains("testng-"))
-      {
-         System.out.println("----> " + fromArtifact + " to " + toArtifact);
-      }
-
       BundleCandidate fromNode = mvnIdToBundleNode.get(fromArtifact.getId());
       BundleCandidate toNode = mvnIdToBundleNode.get(toArtifact.getId());
       fromNode.getDependencies().add(newBundleReference(toNode, toArtifact));

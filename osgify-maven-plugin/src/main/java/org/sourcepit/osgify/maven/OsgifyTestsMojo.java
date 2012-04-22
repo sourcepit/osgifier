@@ -17,7 +17,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @phase test-compile
  * @author bernd
  */
-public class OsgifyTestsMojo extends AbstractOsgifyMojo
+public class OsgifyTestsMojo extends AbstractOsgifyManifestMojo
 {
    /**
     * @parameter default-value="${project.build.testOutputDirectory}/META-INF/MANIFEST.MF"

@@ -74,21 +74,9 @@ public class OsgifyHierarchyResolver
 
    private ArtifactFilter newResolutionFilter(String scope)
    {
-      final List<ArtifactFilter> artifactFilters = new ArrayList<ArtifactFilter>(3);
+      final List<ArtifactFilter> artifactFilters = new ArrayList<ArtifactFilter>(2);
       artifactFilters.add(new ScopeArtifactFilter(scope));
       artifactFilters.add(new TypeArtifactFilter("jar"));
-      artifactFilters.add(new ArtifactFilter()
-      {
-         public boolean include(Artifact artifact)
-         {
-            boolean include = !"ant".equals(artifact.getArtifactId());
-            if (!include)
-            {
-               System.out.println("excluded: " + artifact);
-            }
-            return include;
-         }
-      });
       return new AndArtifactFilter(artifactFilters);
    }
 }

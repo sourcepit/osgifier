@@ -6,6 +6,8 @@
 
 package org.sourcepit.osgify.core.model.context;
 
+import java.io.File;
+
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -20,6 +22,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <p>
  * The following features are supported:
  * <ul>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getLocation <em>Location</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getContent <em>Content</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getDependencies <em>Dependencies</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getVersion <em>Version</em>}</li>
@@ -35,6 +38,35 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  */
 public interface BundleCandidate extends XAnnotatable
 {
+   /**
+    * Returns the value of the '<em><b>Location</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Location</em>' attribute isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Location</em>' attribute.
+    * @see #setLocation(File)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Location()
+    * @model dataType="org.sourcepit.modeling.common.EJavaFile" required="true"
+    * @generated
+    */
+   File getLocation();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getLocation
+    * <em>Location</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Location</em>' attribute.
+    * @see #getLocation()
+    * @generated
+    */
+   void setLocation(File value);
+
    /**
     * Returns the value of the '<em><b>Content</b></em>' containment reference.
     * <!-- begin-user-doc -->

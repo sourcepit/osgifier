@@ -151,6 +151,16 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__ANNOTATIONS = CommonModelPackage.XANNOTATABLE__ANNOTATIONS;
 
    /**
+    * The feature id for the '<em><b>Location</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__LOCATION = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
+
+   /**
     * The feature id for the '<em><b>Content</b></em>' containment reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -158,7 +168,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__CONTENT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 0;
+   int BUNDLE_CANDIDATE__CONTENT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
 
    /**
     * The feature id for the '<em><b>Dependencies</b></em>' containment reference list.
@@ -168,7 +178,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__DEPENDENCIES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 1;
+   int BUNDLE_CANDIDATE__DEPENDENCIES = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
 
    /**
     * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -178,7 +188,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__VERSION = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 2;
+   int BUNDLE_CANDIDATE__VERSION = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
     * The feature id for the '<em><b>Symbolic Name</b></em>' attribute.
@@ -188,7 +198,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 3;
+   int BUNDLE_CANDIDATE__SYMBOLIC_NAME = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
 
    /**
     * The feature id for the '<em><b>Native Bundle</b></em>' attribute.
@@ -198,7 +208,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__NATIVE_BUNDLE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 4;
+   int BUNDLE_CANDIDATE__NATIVE_BUNDLE = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 5;
 
    /**
     * The feature id for the '<em><b>Manifest</b></em>' containment reference.
@@ -208,7 +218,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__MANIFEST = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 5;
+   int BUNDLE_CANDIDATE__MANIFEST = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 6;
 
    /**
     * The number of structural features of the '<em>Bundle Candidate</em>' class.
@@ -218,7 +228,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 6;
+   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelPackage.XANNOTATABLE_FEATURE_COUNT + 7;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
@@ -339,6 +349,19 @@ public interface ContextModelPackage extends EPackage
     * @generated
     */
    EClass getBundleCandidate();
+
+   /**
+    * Returns the meta object for the attribute '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getLocation <em>Location</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Location</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getLocation()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EAttribute getBundleCandidate_Location();
 
    /**
     * Returns the meta object for the containment reference '
@@ -539,6 +562,15 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EClass BUNDLE_CANDIDATE = eINSTANCE.getBundleCandidate();
+
+      /**
+       * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_CANDIDATE__LOCATION = eINSTANCE.getBundleCandidate_Location();
 
       /**
        * The meta object literal for the '<em><b>Content</b></em>' containment reference feature.

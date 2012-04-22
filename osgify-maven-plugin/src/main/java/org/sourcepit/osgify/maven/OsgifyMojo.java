@@ -19,7 +19,7 @@ import org.apache.maven.plugin.MojoFailureException;
  * @phase compile
  * @author bernd
  */
-public class OsgifyMojo extends AbstractOsgifyMojo
+public class OsgifyMojo extends AbstractOsgifyManifestMojo
 {
    /** @parameter default-value="${project.build.outputDirectory}/META-INF/MANIFEST.MF" */
    private File manifestFile;

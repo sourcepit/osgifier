@@ -173,9 +173,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Content()
+   public EAttribute getBundleCandidate_Location()
    {
-      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(0);
+      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -184,7 +184,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Dependencies()
+   public EReference getBundleCandidate_Content()
    {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(1);
    }
@@ -195,9 +195,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_Version()
+   public EReference getBundleCandidate_Dependencies()
    {
-      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(2);
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(2);
    }
 
    /**
@@ -206,7 +206,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_SymbolicName()
+   public EAttribute getBundleCandidate_Version()
    {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(3);
    }
@@ -217,7 +217,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_NativeBundle()
+   public EAttribute getBundleCandidate_SymbolicName()
    {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(4);
    }
@@ -228,9 +228,20 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
+   public EAttribute getBundleCandidate_NativeBundle()
+   {
+      return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(5);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EReference getBundleCandidate_Manifest()
    {
-      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(5);
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(6);
    }
 
    /**
@@ -326,6 +337,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEReference(osgifyContextEClass, OSGIFY_CONTEXT__BUNDLES);
 
       bundleCandidateEClass = createEClass(BUNDLE_CANDIDATE);
+      createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__LOCATION);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__CONTENT);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__DEPENDENCIES);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__VERSION);
@@ -393,6 +405,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getBundleCandidate_Location(), theCommonModelPackage.getEJavaFile(), "location", null, 1, 1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
       initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaResourceBundle(), null, "content", null,
          1, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

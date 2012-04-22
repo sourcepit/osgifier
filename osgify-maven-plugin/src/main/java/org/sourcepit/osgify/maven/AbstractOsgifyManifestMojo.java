@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.maven;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,9 +28,9 @@ import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
 
-public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
+public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
 {
-   private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyMojo.class);
+   private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 
    @Inject
    private OsgifyContextBuilder builder;
@@ -48,6 +49,24 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
 
    protected void doExecute(Goal goal)
    {
+      // TODO
+      // Typo "Unambiguous referende"
+
+      // ignore dependencies of native bundles !!! e.g.
+
+      // Check if contents of unambiguous package references differs
+
+      // make "main exporter" configurable for unambiguous package references. Solution for:
+      // "[WARNING] Unambiguous reference to package org.hamcrest. Exporters: org.junit_4.9, org.hamcrest.core_1.1"
+
+      // EE is strongest. Solution for:
+      // "[WARNING] Unambiguous reference to package javax.annotation. Exporters: javax.annotation.jsr250.api_1.0, Execution Environment or Vendor (J2SE-1.5)"
+
+      // support wrapping of multi jars into one bundle to solve:
+      // "[WARNING] Unambiguous references to package org.sonatype.inject. Exporters: org.sonatype.sisu.inject.guice.bean.locators_2.3.0, org.sonatype.sisu.inject.guice.bean.binders_2.3.0 "
+      // or
+      // support merge of unambiguous references in a separate bundle (may cause cyclic imports)
+
       LOGGER.info("Building osgifier context");
       final OsgifyContext context = builder.build(project, goal, localRepository);
       manifestAppender.append(context);
@@ -57,12 +76,13 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
       writeContext(contextFile, context);
 
       final BundleManifest manifest = context.getBundles().get(0).getManifest();
-      
+
       project.getProperties().setProperty("jar.useDefaultManifestFile", String.valueOf(true));
       File manifestFile = getManifestFile();
       LOGGER.info("Writing projects MANIFEST.MF to " + manifestFile.getAbsolutePath());
       writeManifest(manifest, manifestFile);
    }
+
 
    private void writeContext(File file, final OsgifyContext context)
    {
@@ -92,15 +112,8 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
       OutputStream out = null;
       try
       {
-         if (!manifestFile.exists())
-         {
-            manifestFile.getParentFile().mkdirs();
-            manifestFile.createNewFile();
-         }
-         out = new FileOutputStream(manifestFile);
-         Resource manifestResource = new GenericManifestResourceImpl();
-         manifestResource.getContents().add(EcoreUtil.copy(manifest));
-         manifestResource.save(out, null);
+         out = newOutStream(manifestFile);
+         writeManifest(manifest, out);
       }
       catch (IOException e)
       {
@@ -112,8 +125,15 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
       }
    }
 
+   private void writeManifest(BundleManifest manifest, OutputStream out) throws IOException
+   {
+      Resource manifestResource = new GenericManifestResourceImpl();
+      manifestResource.getContents().add(EcoreUtil.copy(manifest));
+      manifestResource.save(out, null);
+   }
 
-   private OutputStream newOutStream(File file) throws IOException
+
+   private BufferedOutputStream newOutStream(File file) throws IOException
    {
       if (file.exists())
       {
@@ -121,12 +141,11 @@ public abstract class AbstractOsgifyMojo extends AbstractGuplexedMojo
       }
       file.getParentFile().mkdirs();
       file.createNewFile();
-      return new FileOutputStream(file);
+      return new BufferedOutputStream(new FileOutputStream(file));
    }
 
    private File getContextFile(Goal goal)
    {
-      File file = new File(targetDir, goal == Goal.OSGIFY ? "osgify-context.xml" : "osgify-tests-context.xml");
-      return file;
+      return new File(targetDir, goal == Goal.OSGIFY ? "osgify-context.xml" : "osgify-tests-context.xml");
    }
 }
