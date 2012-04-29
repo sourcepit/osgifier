@@ -82,6 +82,16 @@
 			<artifactId>sisu-inject-bean</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.sourcepit</groupId>
+			<artifactId>guice-plexus-bridge</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.sisu</groupId>
+			<artifactId>sisu-inject-plexus</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -98,17 +108,29 @@
 			<testResource>
 				<directory>src/test/resources</directory>
 				<excludes>
-					<exclude>META-INF/proxy.properties</exclude>
+					<exclude>*.properties</exclude>
 				</excludes>
+				<filtering>false</filtering>
 			</testResource>
 			<testResource>
 				<directory>src/test/resources</directory>
 				<includes>
-					<include>META-INF/proxy.properties</include>
+					<include>*.properties</include>
 				</includes>
 				<filtering>true</filtering>
 			</testResource>
 		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<configuration>
+						<escapeString>\</escapeString>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

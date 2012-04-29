@@ -28,7 +28,7 @@ import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.packaging.OsgifyDependenciesPackager;
+import org.sourcepit.osgify.core.packaging.Repackager;
 
 /**
  * @requiresDependencyResolution compile
@@ -39,7 +39,7 @@ import org.sourcepit.osgify.core.packaging.OsgifyDependenciesPackager;
 public class OsgifyPackageMojo extends AbstractGuplexedMojo
 {
    @Inject
-   private OsgifyDependenciesPackager dependenciesPackager;
+   private Repackager repackager;
 
    @Inject
    private RepositorySystem repositorySystem;
@@ -70,7 +70,7 @@ public class OsgifyPackageMojo extends AbstractGuplexedMojo
             final BundleCandidate candidate = context.getBundles().get(0);
             final BundleManifest manifest = createEclipseSourceBundleManifest(candidate);
 
-            dependenciesPackager.injectManifest(sourcesJarFile, manifest);
+            repackager.injectManifest(sourcesJarFile, manifest);
          }
       }
 
@@ -92,7 +92,7 @@ public class OsgifyPackageMojo extends AbstractGuplexedMojo
                   + ".jar";
                final File destJarFile = new File(outDir, bundleFileName);
                final BundleManifest manifest = candidate.getManifest();
-               dependenciesPackager.copyJarAndInjectManifest(srcJarFile, destJarFile, manifest);
+               repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, manifest);
             }
          }
       }
@@ -133,7 +133,7 @@ public class OsgifyPackageMojo extends AbstractGuplexedMojo
       final File destJarFile = new File(outDir, manifest.getBundleSymbolicName().getSymbolicName() + "_"
          + manifest.getBundleVersion().toFullString() + ".jar");
 
-      dependenciesPackager.copyJarAndInjectManifest(sourceJarFile, destJarFile, manifest);
+      repackager.copyJarAndInjectManifest(sourceJarFile, destJarFile, manifest);
 
       return destJarFile;
    }
