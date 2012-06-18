@@ -26,6 +26,16 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.sourcepit</groupId>
+				<artifactId>guice-plexus-bridge</artifactId>
+				<version>0.1.0-alpha-3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sourcepit</groupId>
+				<artifactId>slf4j-plexus</artifactId>
+				<version>0.1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-utils</artifactId>
 				<version>0.1.0-SNAPSHOT</version>
@@ -134,8 +144,8 @@
 					<artifactId>plexus-component-metadata</artifactId>
 					<version>1.5.5</version>
 				</plugin>
-				<!-- To assure that all artifact will be installed with its base version 
-					we use our own install mojo (org.sourcepit.tools:maven-install-mojo). See 
+				<!-- To assure that all artifact will be installed with its base version
+					we use our own install mojo (org.sourcepit.tools:maven-install-mojo). See
 					<plugins /> secion. -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -147,7 +157,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
@@ -246,8 +256,8 @@
 						<executions>
 							<execution>
 								<id>gather-artifacts</id>
-								<!-- As far we use our own install mojo that assures that each artifact 
-									will be deployed with its base version, we can call the deploy goal before 
+								<!-- As far we use our own install mojo that assures that each artifact
+									will be deployed with its base version, we can call the deploy goal before
 									the phase install, otherwise not! -->
 								<phase>pre-integration-test</phase>
 								<goals>
