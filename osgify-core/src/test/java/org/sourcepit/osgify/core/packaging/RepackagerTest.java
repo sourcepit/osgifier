@@ -52,7 +52,7 @@ public class RepackagerTest extends GuplexTest
 
       assertEquals("bar", jar.getManifest().getMainAttributes().getValue("Foo"));
    }
-   
+
    @Test
    public void testCopyJarAndInjectManifest() throws Exception
    {
@@ -61,7 +61,7 @@ public class RepackagerTest extends GuplexTest
 
       Manifest manifest = ManifestFactory.eINSTANCE.createManifest();
       manifest.setHeader("Foo", "bar");
-      
+
       File destJarFile = ws.newFile();
       FileUtils.forceDelete(destJarFile);
 

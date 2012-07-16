@@ -50,7 +50,7 @@ public interface BundleCandidate extends XAnnotatable
     * @return the value of the '<em>Location</em>' attribute.
     * @see #setLocation(File)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Location()
-    * @model dataType="org.sourcepit.modeling.common.EJavaFile" required="true"
+    * @model dataType="org.sourcepit.modeling.common.EFile" required="true"
     * @generated
     */
    File getLocation();

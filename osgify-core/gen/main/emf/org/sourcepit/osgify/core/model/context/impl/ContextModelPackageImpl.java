@@ -405,7 +405,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getBundleCandidate_Location(), theCommonModelPackage.getEJavaFile(), "location", null, 1, 1,
+      initEAttribute(getBundleCandidate_Location(), theCommonModelPackage.getEFile(), "location", null, 1, 1,
          BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
       initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaResourceBundle(), null, "content", null,
