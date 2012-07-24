@@ -125,11 +125,22 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
 
    public int compareTo(ExecutionEnvironment other)
    {
-      final int max1 = getMaxClassVersion();
+      final int delta1 = computeDelta(this, other);
+      final int delta2 = computeDelta(other, this);
+      if (delta1 == delta2)
+      {
+         return 0;
+      }
+      return delta1 > delta2 ? 1 : -1;
+   }
+
+   private static int computeDelta(ExecutionEnvironment _this, ExecutionEnvironment other)
+   {
+      final int max1 = _this.getMaxClassVersion();
       final int max2 = other.getMaxClassVersion();
       if (max1 >= max2)
       {
-         final List<String> p1 = getPackages();
+         final List<String> p1 = _this.getPackages();
          final List<String> p2 = other.getPackages();
 
          final int pDiff = p1.size() - p2.size();
@@ -138,7 +149,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
             return pDiff;
          }
 
-         final String r1 = getReleaseDate();
+         final String r1 = _this.getReleaseDate();
          final String r2 = other.getReleaseDate();
          return r1.compareTo(r2);
       }
