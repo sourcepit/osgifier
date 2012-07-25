@@ -22,14 +22,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
-import java.util.zip.ZipEntry;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.slf4j.Logger;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.io.IOOperation;
@@ -44,6 +45,9 @@ import org.sourcepit.common.utils.path.PathMatcher;
 public class Repackager
 {
    private final static PathMatcher JAR_CONTENT_MATCHER = createJarContentMatcher();
+
+   @Inject
+   private Logger logger;
 
    public void injectManifest(final File jarFile, final Manifest manifest) throws PipedIOException
    {
@@ -151,17 +155,27 @@ public class Repackager
 
    private void copyJarContents(JarInputStream srcJarIn, final JarOutputStream destJarOut) throws IOException
    {
-      ZipEntry srcEntry = srcJarIn.getNextEntry();
+      final Set<String> processedEntires = new HashSet<String>();
+
+      JarEntry srcEntry = srcJarIn.getNextJarEntry();
       while (srcEntry != null)
       {
-         if (JAR_CONTENT_MATCHER.isMatch(srcEntry.getName()))
+         final String entryName = srcEntry.getName();
+         if (JAR_CONTENT_MATCHER.isMatch(entryName))
          {
-            destJarOut.putNextEntry(srcEntry);
-            IOUtils.copy(srcJarIn, destJarOut);
-            destJarOut.closeEntry();
+            if (processedEntires.add(entryName))
+            {
+               destJarOut.putNextEntry(srcEntry);
+               IOUtils.copy(srcJarIn, destJarOut);
+               destJarOut.closeEntry();
+            }
+            else
+            {
+               logger.warn("Ignored duplicate jar entry: " + entryName);
+            }
          }
          srcJarIn.closeEntry();
-         srcEntry = srcJarIn.getNextEntry();
+         srcEntry = srcJarIn.getNextJarEntry();
       }
    }
 
