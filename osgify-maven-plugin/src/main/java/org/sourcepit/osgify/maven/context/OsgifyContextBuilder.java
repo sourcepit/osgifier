@@ -46,7 +46,7 @@ public class OsgifyContextBuilder
    private VersionRangeResolver versionRangeResolver;
 
    @Inject
-   private OsgifyHierarchyResolver hierarchyResolver;
+   private ContextHierarchyBuilder hierarchyResolver;
 
    private List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();
 
@@ -57,7 +57,14 @@ public class OsgifyContextBuilder
          throw new UnsupportedOperationException("Bundling test artifacts is currently not supported.");
       }
 
-      final OsgifyContext context = hierarchyResolver.resolve(project, goal, localRepository);
+      ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+      request.setArtifact(project.getArtifact());
+      request.setResolveRoot(true);
+      request.setFatBundle(false);
+      request.setLocalRepository(localRepository);
+      request.getRemoteRepositories().addAll(project.getRemoteArtifactRepositories());
+      
+      final OsgifyContext context = hierarchyResolver.build(request);
 
       for (BundleCandidate candidate : context.getBundles())
       {

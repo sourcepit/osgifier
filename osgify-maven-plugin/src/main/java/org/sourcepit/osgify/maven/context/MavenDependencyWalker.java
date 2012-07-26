@@ -6,10 +6,13 @@
 
 package org.sourcepit.osgify.maven.context;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +22,7 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
+import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
@@ -32,70 +36,108 @@ public class MavenDependencyWalker
    private RepositorySystem repositorySystem;
 
    @Inject
-   public MavenDependencyWalker(RepositorySystem repositorySystem)
+   public MavenDependencyWalker(RepositorySystem repositorySystem, LegacySupport legacySupport)
    {
       this.repositorySystem = repositorySystem;
    }
 
    public void walk(Request request)
    {
-      final MavenProject project = request.getProject();
-      final Artifact artifact = project.getArtifact();
+      final Map<String, MavenProject> reactorProjects = new LinkedHashMap<String, MavenProject>();
+      if (request.getReactorProjects() != null)
+      {
+         for (MavenProject project : request.getReactorProjects())
+         {
+            final String projectId = MavenProjectUtils.getProjectReferenceId(project);
+            reactorProjects.put(projectId, project);
+         }
+      }
+      final Stack<MavenProject> currentResolutionContext = new Stack<MavenProject>();
+
+      final Artifact artifact = request.getArtifact();
+      final MavenProject project = findOriginatingProject(reactorProjects, artifact);
       if (request.getHandler().visitNode(artifact, project))
       {
-         final Set<MavenProject> context = new LinkedHashSet<MavenProject>();
-         context.add(project);
-
          final Set<String> resolvedIds = new HashSet<String>();
-         resolveAndWalk(request, context, artifact, resolvedIds);
+         resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
       }
    }
 
-   private void resolveAndWalk(Request request, Set<MavenProject> context, final Artifact parentArtifact,
+   private void resolveAndWalk(Request request, Map<String, MavenProject> reactorProjects,
+      Stack<MavenProject> resolutionContext, final Artifact parentArtifact, MavenProject project,
       Set<String> resolvedIds)
    {
       if (resolvedIds.add(parentArtifact.getId()))
       {
-         for (Artifact dependencyArtifact : resolveDependencies(parentArtifact, request))
+         if (project != null)
          {
-            walk(request, context, parentArtifact, dependencyArtifact, resolvedIds);
+            resolutionContext.push(project);
+         }
+
+         final MavenProject currentProject = resolutionContext.isEmpty() ? null : resolutionContext.peek();
+
+         for (Artifact dependencyArtifact : resolveDependencies(parentArtifact, request, currentProject))
+         {
+            walk(request, reactorProjects, resolutionContext, parentArtifact, dependencyArtifact, resolvedIds);
+         }
+
+         if (project != null)
+         {
+            resolutionContext.pop();
          }
       }
    }
 
-   private void walk(Request request, Set<MavenProject> context, Artifact parentArtifact, Artifact artifact,
-      Set<String> resolvedIds)
+   private void walk(Request request, Map<String, MavenProject> reactorProjects, Stack<MavenProject> resolutionContext,
+      Artifact parentArtifact, Artifact artifact, Set<String> resolvedIds)
    {
-      final MavenProject project = findOriginatingProject(context, artifact);
+      final MavenProject project = findOriginatingProject(reactorProjects, artifact);
       if (request.getHandler().visitNode(artifact, project))
       {
-         resolveAndWalk(request, context, artifact, resolvedIds);
+         resolveAndWalk(request, reactorProjects, resolutionContext, artifact, project, resolvedIds);
       }
       request.getHandler().handleDependency(parentArtifact, artifact);
    }
 
-   private MavenProject findOriginatingProject(Set<MavenProject> context, Artifact artifact)
+   private MavenProject findOriginatingProject(Map<String, MavenProject> context, Artifact artifact)
    {
-      for (MavenProject ctxProject : context)
-      {
-         final MavenProject project = MavenProjectUtils.findReferencedProject(ctxProject, artifact);
-         if (project != null)
-         {
-            context.add(project);
-            return project;
-         }
-      }
-      return null;
+      final String projectId = MavenProjectUtils.getProjectReferenceId(artifact);
+      return context.get(projectId);
    }
 
-   private Set<Artifact> resolveDependencies(Artifact artifact, Request walkerRequest)
+   private Set<Artifact> resolveDependencies(Artifact artifact, Request walkerRequest, MavenProject resolutionContext)
    {
       final ArtifactResolutionRequest request = new ArtifactResolutionRequest();
       request.setArtifact(artifact);
       request.setResolveRoot(false);
       request.setResolveTransitively(true);
-      request.setRemoteRepositories(walkerRequest.getRemoteRepositories());
       request.setLocalRepository(walkerRequest.getLocalRepository());
+
+      final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
+      final Set<String> repoIds = new HashSet<String>();
+      final List<ArtifactRepository> requestRepos = walkerRequest.getRemoteRepositories();
+      if (requestRepos != null)
+      {
+         for (ArtifactRepository artifactRepository : requestRepos)
+         {
+            repoIds.add(artifactRepository.getId());
+            remoteRepositories.add(artifactRepository);
+         }
+      }
+
+      if (resolutionContext != null)
+      {
+         for (ArtifactRepository artifactRepository : resolutionContext.getRemoteArtifactRepositories())
+         {
+            if (repoIds.add(artifactRepository.getId()))
+            {
+               remoteRepositories.add(artifactRepository);
+            }
+         }
+         request.setManagedVersionMap(resolutionContext.getManagedVersionMap());
+      }
+
+      request.setRemoteRepositories(remoteRepositories);
 
       final ArtifactFilter artifactFilter = walkerRequest.getArtifactFilter();
 
@@ -145,7 +187,50 @@ public class MavenDependencyWalker
       private List<ArtifactRepository> remoteRepositories;
       private ArtifactRepository localRepository;
       private ArtifactFilter artifactFilter;
-      private MavenProject project;
+      private Artifact artifact;
+      private boolean resolveRoot = true;
+      private List<Artifact> dependencies;
+      private List<MavenProject> reactorProjects;
+
+      public void setArtifact(Artifact artifact)
+      {
+         this.artifact = artifact;
+      }
+
+      public Artifact getArtifact()
+      {
+         return artifact;
+      }
+
+      public List<MavenProject> getReactorProjects()
+      {
+         return reactorProjects;
+      }
+
+      public void setReactorProjects(List<MavenProject> reactorProjects)
+      {
+         this.reactorProjects = reactorProjects;
+      }
+
+      public boolean isResolveRoot()
+      {
+         return resolveRoot;
+      }
+
+      public void setResolveRoot(boolean resolveRoot)
+      {
+         this.resolveRoot = resolveRoot;
+      }
+
+      public List<Artifact> getDependencies()
+      {
+         return dependencies;
+      }
+
+      public void setDependencies(List<Artifact> dependencies)
+      {
+         this.dependencies = dependencies;
+      }
 
       private Handler handler;
 
@@ -177,16 +262,6 @@ public class MavenDependencyWalker
       public void setArtifactFilter(ArtifactFilter artifactFilter)
       {
          this.artifactFilter = artifactFilter;
-      }
-
-      public MavenProject getProject()
-      {
-         return project;
-      }
-
-      public void setProject(MavenProject project)
-      {
-         this.project = project;
       }
 
       public Handler getHandler()

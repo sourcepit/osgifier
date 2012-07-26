@@ -64,7 +64,8 @@ public class MavenDependencyWalkerIT extends EmbeddedMavenEnvironmentTest
       final MavenProject project = getProject(result.getTopologicallySortedProjects(), "module-a");
 
       final MavenDependencyWalker.Request request = new MavenDependencyWalker.Request();
-      request.setProject(project);
+      request.setArtifact(project.getArtifact());
+      request.setReactorProjects(session.getProjects());
       request.setLocalRepository(session.getLocalRepository());
       request.setRemoteRepositories(project.getRemoteArtifactRepositories());
 

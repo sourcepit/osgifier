@@ -28,15 +28,11 @@ import org.sourcepit.common.testing.Environment;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.Goal;
 
-/**
- * @author Bernd Vogt <bernd.vogt@sourcepit.org>
- */
-public class OsgifyHierarchyResolverTest extends EmbeddedMavenEnvironmentTest
+public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
 {
    @Inject
-   private OsgifyHierarchyResolver builder;
+   private ContextHierarchyBuilder builder;
 
    @Inject
    private LegacySupport legacySupport;
@@ -95,6 +91,7 @@ public class OsgifyHierarchyResolverTest extends EmbeddedMavenEnvironmentTest
       }
    }
 
+
    private void assertTestBundleProject(OsgifyContext context)
    {
       assertThat(context, notNullValue());
@@ -104,7 +101,7 @@ public class OsgifyHierarchyResolverTest extends EmbeddedMavenEnvironmentTest
 
       BundleCandidate candidate = candidates.get(0);
       assertTestBundleCandidate(candidate);
-      
+
       candidate = candidates.get(1);
       assertBundleCandidate(candidate);
    }
@@ -178,8 +175,11 @@ public class OsgifyHierarchyResolverTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository)
    {
       session.setCurrentProject(project);
-      OsgifyContext context = builder.resolve(project, Goal.OSGIFY, localRepository);
-      return context;
-   }
 
+      ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+      request.setArtifact(project.getArtifact());
+      request.setLocalRepository(localRepository);
+
+      return builder.build(request);
+   }
 }
