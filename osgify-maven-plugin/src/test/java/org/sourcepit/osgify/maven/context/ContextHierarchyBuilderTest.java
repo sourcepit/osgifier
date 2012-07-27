@@ -440,7 +440,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
-         request.setResolveRoot(false);
+         request.setVirtualArtifact(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -459,13 +459,13 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());
@@ -533,7 +533,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
-         request.setResolveRoot(false);
+         request.setVirtualArtifact(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -552,13 +552,13 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());
@@ -628,7 +628,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
-         request.setResolveRoot(false);
+         request.setVirtualArtifact(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -647,13 +647,13 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getDependencies().add(dep);
+         request.getVirtualDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());

@@ -39,7 +39,7 @@ public class OsgifyContextBuilder
    public OsgifyContext build(MavenProject project, ArtifactRepository localRepository)
    {
       final ContextHierarchyBuilder.Request request = hierarchyBuilder.createRequest(project.getArtifact());
-      request.setResolveRoot(true);
+      request.setVirtualArtifact(false);
       request.setFatBundle(false);
       request.setLocalRepository(localRepository);
       request.setScope(Artifact.SCOPE_COMPILE);

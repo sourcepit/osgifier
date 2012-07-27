@@ -37,9 +37,9 @@ public class ContextHierarchyBuilder
 
       private boolean resolveDependenciesOfNativeBundles = false;
 
-      private boolean resolveRoot = true;
+      private boolean virtualArtifact = false;
 
-      private final List<Dependency> dependencies = new ArrayList<Dependency>();
+      private final List<Dependency> virtualDependencies = new ArrayList<Dependency>();
 
       private String scope;
 
@@ -68,20 +68,20 @@ public class ContextHierarchyBuilder
       {
          this.fatBundle = fatBundle;
       }
-
-      public boolean isResolveRoot()
+      
+      public boolean isVirtualArtifact()
       {
-         return resolveRoot;
+         return virtualArtifact;
+      }
+      
+      public void setVirtualArtifact(boolean virtualArtifact)
+      {
+         this.virtualArtifact = virtualArtifact;
       }
 
-      public void setResolveRoot(boolean resolveRoot)
+      public List<Dependency> getVirtualDependencies()
       {
-         this.resolveRoot = resolveRoot;
-      }
-
-      public List<Dependency> getDependencies()
-      {
-         return dependencies;
+         return virtualDependencies;
       }
 
       public String getScope()
@@ -163,8 +163,8 @@ public class ContextHierarchyBuilder
       walkerRequest.setArtifactFilter(newResolutionFilter(request.getScope()));
 
       walkerRequest.setArtifact(request.getArtifact());
-      walkerRequest.setResolveRoot(request.isResolveRoot());
-      walkerRequest.setDependencies(request.getDependencies());
+      walkerRequest.setResolveRoot(!request.isVirtualArtifact());
+      walkerRequest.setDependencies(request.getVirtualDependencies());
       walkerRequest.setRemoteRepositories(request.getRemoteRepositories());
       walkerRequest.setLocalRepository(request.getLocalRepository());
 
