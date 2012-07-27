@@ -12,15 +12,12 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
-import org.apache.maven.artifact.resolver.ArtifactResolutionException;
-import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
@@ -37,7 +34,6 @@ import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.context.ContextHierarchyBuilder.Request;
 
 public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
 {

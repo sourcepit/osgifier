@@ -26,15 +26,6 @@ import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
-/*
- * - Artifact as root
- * - Project as root
- * - Resolve against "workspace" (know projects)
- * - resolve against remote repositories
- * - resolve against local repository
- * - support fat bundle and single bundles
- */
-
 @Named
 public class ContextHierarchyBuilder
 {
@@ -49,6 +40,8 @@ public class ContextHierarchyBuilder
       private boolean resolveRoot = true;
 
       private final List<Dependency> dependencies = new ArrayList<Dependency>();
+
+      private String scope;
 
       private final List<MavenProject> reactorProjects = new ArrayList<MavenProject>();
 
@@ -89,6 +82,20 @@ public class ContextHierarchyBuilder
       public List<Dependency> getDependencies()
       {
          return dependencies;
+      }
+
+      public String getScope()
+      {
+         if (scope == null)
+         {
+            return Artifact.SCOPE_COMPILE;
+         }
+         return scope;
+      }
+
+      public void setScope(String scope)
+      {
+         this.scope = scope;
       }
 
       public List<MavenProject> getReactorProjects()
@@ -153,7 +160,7 @@ public class ContextHierarchyBuilder
       {
          walkerRequest.setReactorProjects(currentSession.getProjects());
       }
-      walkerRequest.setArtifactFilter(newResolutionFilter(Artifact.SCOPE_COMPILE));
+      walkerRequest.setArtifactFilter(newResolutionFilter(request.getScope()));
 
       walkerRequest.setArtifact(request.getArtifact());
       walkerRequest.setResolveRoot(request.isResolveRoot());

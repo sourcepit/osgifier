@@ -49,6 +49,10 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
 
    protected void doExecute(Goal goal)
    {
+      if (goal == Goal.OSGIFY_TESTS)
+      {
+         throw new UnsupportedOperationException("Bundling test artifacts is currently not supported.");
+      }
       // TODO
       // Typo "Unambiguous referende"
 
@@ -68,7 +72,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
       // support merge of unambiguous references in a separate bundle (may cause cyclic imports)
 
       LOGGER.info("Building osgifier context");
-      final OsgifyContext context = builder.build(project, goal, localRepository);
+      final OsgifyContext context = builder.build(project, localRepository);
       manifestAppender.append(context);
 
       final File contextFile = getContextFile(goal);

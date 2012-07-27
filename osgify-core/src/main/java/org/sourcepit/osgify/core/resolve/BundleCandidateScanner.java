@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.context;
+package org.sourcepit.osgify.core.resolve;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,8 +18,6 @@ import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
 import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
-import org.sourcepit.osgify.core.resolve.VersionResolver;
 
 @Named
 public class BundleCandidateScanner
