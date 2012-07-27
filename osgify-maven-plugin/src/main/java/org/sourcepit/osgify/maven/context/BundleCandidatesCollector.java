@@ -28,6 +28,18 @@ import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
 {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
+   
+   private final boolean resolveDependenciesOfNativeBundles;
+   
+   public BundleCandidatesCollector()
+   {
+      this(false);
+   }
+   
+   public BundleCandidatesCollector(boolean resolveDependenciesOfNativeBundles)
+   {
+      this.resolveDependenciesOfNativeBundles = resolveDependenciesOfNativeBundles;
+   }
 
    public List<BundleCandidate> getBundleCandidates()
    {
@@ -48,7 +60,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
          {
             bundleCandidate.setNativeBundle(true);
             bundleCandidate.setManifest(manifest);
-            return false;
+            return resolveDependenciesOfNativeBundles;
          }
 
          return true;

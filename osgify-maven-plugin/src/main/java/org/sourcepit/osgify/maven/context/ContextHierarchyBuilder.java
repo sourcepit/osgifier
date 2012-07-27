@@ -19,6 +19,7 @@ import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.TypeArtifactFilter;
 import org.apache.maven.execution.MavenSession;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
@@ -43,9 +44,11 @@ public class ContextHierarchyBuilder
 
       private boolean fatBundle = false;
 
+      private boolean resolveDependenciesOfNativeBundles = false;
+
       private boolean resolveRoot = true;
 
-      private final List<Artifact> dependencies = new ArrayList<Artifact>();
+      private final List<Dependency> dependencies = new ArrayList<Dependency>();
 
       private final List<MavenProject> reactorProjects = new ArrayList<MavenProject>();
 
@@ -83,7 +86,7 @@ public class ContextHierarchyBuilder
          this.resolveRoot = resolveRoot;
       }
 
-      public List<Artifact> getDependencies()
+      public List<Dependency> getDependencies()
       {
          return dependencies;
       }
@@ -106,6 +109,16 @@ public class ContextHierarchyBuilder
       public List<ArtifactRepository> getRemoteRepositories()
       {
          return remoteRepositories;
+      }
+
+      public void setResolveDependenciesOfNativeBundles(boolean resolveDependenciesOfNativeBundles)
+      {
+         this.resolveDependenciesOfNativeBundles = resolveDependenciesOfNativeBundles;
+      }
+
+      public boolean isResolveDependenciesOfNativeBundles()
+      {
+         return resolveDependenciesOfNativeBundles;
       }
    }
 
@@ -148,17 +161,18 @@ public class ContextHierarchyBuilder
       walkerRequest.setRemoteRepositories(request.getRemoteRepositories());
       walkerRequest.setLocalRepository(request.getLocalRepository());
 
-      BundleCandidatesCollector bundleCollector = new BundleCandidatesCollector()
+      final BundleCandidatesCollector bundleCollector = new BundleCandidatesCollector(request.isFatBundle()
+         || request.isResolveDependenciesOfNativeBundles())
       {
          private int calls = 0;
 
          public boolean visitNode(Artifact artifact, MavenProject project)
          {
             calls++;
-            boolean visit = !request.isFatBundle() || calls < 2;
+            boolean visit = super.visitNode(artifact, project);
             if (visit)
             {
-               return super.visitNode(artifact, project);
+               visit = !request.isFatBundle() || calls < 2;
             }
             return visit;
          };
@@ -171,7 +185,7 @@ public class ContextHierarchyBuilder
       context.getBundles().addAll(bundleCollector.getBundleCandidates());
       return context;
    }
-   
+
    private ArtifactFilter newResolutionFilter(String scope)
    {
       final List<ArtifactFilter> artifactFilters = new ArrayList<ArtifactFilter>(2);

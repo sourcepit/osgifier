@@ -55,7 +55,7 @@ public class MavenDependencyWalkerIT extends EmbeddedMavenEnvironmentTest
    {
       File projectDir = getResource("reactor-project");
 
-      final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"));
+      final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"), true);
 
       final MavenSession session = result.getSession();
 
@@ -95,6 +95,8 @@ public class MavenDependencyWalkerIT extends EmbeddedMavenEnvironmentTest
             artifactToDependenciesMap.get(fromArtifact.getArtifactId()).add(toArtifact.getArtifactId());
          }
       });
+      
+      session.setCurrentProject(project);
       dependencyWalker.walk(request);
 
       assertThat(artifactToProjectMap.size(), Is.is(3));

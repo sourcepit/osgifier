@@ -9,6 +9,7 @@ package org.sourcepit.osgify.maven.context;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,13 +20,16 @@ import javax.inject.Named;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
+import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
+import org.sourcepit.common.utils.lang.Exceptions;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -56,10 +60,37 @@ public class MavenDependencyWalker
 
       final Artifact artifact = request.getArtifact();
       final MavenProject project = findOriginatingProject(reactorProjects, artifact);
+
+      final boolean resolveRoot = !artifact.isResolved() && request.isResolveRoot();
+      if (resolveRoot)
+      {
+         resolve(request, artifact, project, resolveRoot, null);
+      }
+
       if (request.getHandler().visitNode(artifact, project))
       {
          final Set<String> resolvedIds = new HashSet<String>();
-         resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
+         if (!request.isResolveRoot())
+         {
+            if (project != null)
+            {
+               currentResolutionContext.push(project);
+            }
+            
+            for (Artifact dependencyArtifact : resolve(request, artifact, project, false, request.getDependencies()))
+            {
+               walk(request, reactorProjects, currentResolutionContext, artifact, dependencyArtifact, resolvedIds);
+            }
+            
+            if (project != null)
+            {
+               currentResolutionContext.pop();
+            }
+         }
+         else
+         {
+            resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
+         }
       }
    }
 
@@ -107,10 +138,28 @@ public class MavenDependencyWalker
 
    private Set<Artifact> resolveDependencies(Artifact artifact, Request walkerRequest, MavenProject resolutionContext)
    {
+      return resolve(walkerRequest, artifact, resolutionContext, false, null);
+   }
+
+   private Set<Artifact> resolve(Request walkerRequest, Artifact artifact, MavenProject resolutionContext,
+      boolean resolveRoot, List<Dependency> dependencies)
+   {
       final ArtifactResolutionRequest request = new ArtifactResolutionRequest();
       request.setArtifact(artifact);
-      request.setResolveRoot(false);
-      request.setResolveTransitively(true);
+      request.setResolveRoot(resolveRoot);
+      request.setResolveTransitively(!resolveRoot);
+
+      if (dependencies != null)
+      {
+         final Set<Artifact> artifactDependencies = new LinkedHashSet<Artifact>();
+         for (Dependency dependency : dependencies)
+         {
+            artifactDependencies.add(repositorySystem.createArtifactWithClassifier(dependency.getGroupId(),
+               dependency.getArtifactId(), dependency.getVersion(), dependency.getType(), dependency.getClassifier()));
+         }
+         request.setArtifactDependencies(artifactDependencies);
+      }
+
       request.setLocalRepository(walkerRequest.getLocalRepository());
 
       final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
@@ -172,6 +221,11 @@ public class MavenDependencyWalker
          throw new IllegalStateException(ex);
       }
 
+      for (Artifact missingArtifact : result.getMissingArtifacts())
+      {
+         throw Exceptions.pipe(new ArtifactNotFoundException("Unable to resolve artifact", missingArtifact));
+      }
+
       return result.getArtifacts();
    }
 
@@ -189,7 +243,7 @@ public class MavenDependencyWalker
       private ArtifactFilter artifactFilter;
       private Artifact artifact;
       private boolean resolveRoot = true;
-      private List<Artifact> dependencies;
+      private List<Dependency> dependencies;
       private List<MavenProject> reactorProjects;
 
       public void setArtifact(Artifact artifact)
@@ -222,12 +276,12 @@ public class MavenDependencyWalker
          this.resolveRoot = resolveRoot;
       }
 
-      public List<Artifact> getDependencies()
+      public List<Dependency> getDependencies()
       {
          return dependencies;
       }
 
-      public void setDependencies(List<Artifact> dependencies)
+      public void setDependencies(List<Dependency> dependencies)
       {
          this.dependencies = dependencies;
       }
