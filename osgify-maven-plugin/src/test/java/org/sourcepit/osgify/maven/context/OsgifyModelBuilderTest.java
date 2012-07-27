@@ -35,10 +35,10 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
-public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
+public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 {
    @Inject
-   private ContextHierarchyBuilder builder;
+   private OsgifyModelBuilder builder;
 
    @Inject
    private LegacySupport legacySupport;
@@ -75,7 +75,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
 
@@ -133,7 +133,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setResolveDependenciesOfNativeBundles(true);
@@ -208,7 +208,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          final MavenProject project = projects.get(0);
          assertThat(project.getArtifactId(), equalTo("project-with-dependencies"));
 
-         ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setFatBundle(true);
@@ -271,7 +271,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
+         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
          request.setLocalRepository(localRepository);
 
          assertThat(request.getArtifact(), notNullValue());
@@ -318,7 +318,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
+         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
          assertThat(request.getArtifact(), notNullValue());
 
          request.setLocalRepository(localRepository);
@@ -371,7 +371,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
+         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
          assertThat(request.getArtifact(), notNullValue());
 
          request.setLocalRepository(localRepository);
@@ -424,7 +424,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
+         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
             "1.2.3", null);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -516,7 +516,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
+         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
             "1.2.3", null);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -609,7 +609,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         ContextHierarchyBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
+         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
             "1.2.3", null);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -809,7 +809,7 @@ public class ContextHierarchyBuilderTest extends EmbeddedMavenEnvironmentTest
    {
       session.setCurrentProject(project);
 
-      ContextHierarchyBuilder.Request request = new ContextHierarchyBuilder.Request();
+      OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
       request.setArtifact(project.getArtifact());
       request.setLocalRepository(localRepository);
       request.setResolveDependenciesOfNativeBundles(true);

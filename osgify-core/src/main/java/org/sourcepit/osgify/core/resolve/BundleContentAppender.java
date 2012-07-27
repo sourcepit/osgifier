@@ -48,7 +48,8 @@ public class BundleContentAppender
 
       for (BundleCandidate candidate : context.getBundles())
       {
-         final String[] binDirPaths = classDirectoryResolver.getClassDirectoryPaths(candidate);
+         final String[] binDirPaths = classDirectoryResolver == null ? null : classDirectoryResolver
+            .getClassDirectoryPaths(candidate);
          bundleScannerTasks.add(new BundleScannerTask(candidate, binDirPaths));
       }
 

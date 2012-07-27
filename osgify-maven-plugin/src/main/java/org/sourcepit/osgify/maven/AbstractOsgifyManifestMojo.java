@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,14 +27,15 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.context.OsgifyContextBuilder;
+import org.sourcepit.osgify.maven.context.MavenBundleProjectClassDirectoryResolver;
+import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
 {
    private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 
    @Inject
-   private OsgifyContextBuilder builder;
+   private OsgifyModelBuilder modelBuilder;
 
    @Inject
    private BundleManifestAppender manifestAppender;
@@ -72,7 +74,18 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
       // support merge of unambiguous references in a separate bundle (may cause cyclic imports)
 
       LOGGER.info("Building osgifier context");
-      final OsgifyContext context = builder.build(project, localRepository);
+      
+      final OsgifyModelBuilder.Request request = modelBuilder.createRequest(project.getArtifact());
+      request.setVirtualArtifact(false);
+      request.setFatBundle(false);
+      request.setLocalRepository(localRepository);
+      request.setScope(Artifact.SCOPE_COMPILE);
+      request.getRemoteRepositories().addAll(project.getRemoteArtifactRepositories());
+      request.setAppendBundleContents(true);
+      request.setBundleProjectClassDirectoryResolver(new MavenBundleProjectClassDirectoryResolver(
+         Artifact.SCOPE_COMPILE));
+      final OsgifyContext context = modelBuilder.build(request);
+      
       manifestAppender.append(context);
 
       final File contextFile = getContextFile(goal);

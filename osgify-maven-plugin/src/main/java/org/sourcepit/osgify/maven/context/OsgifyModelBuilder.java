@@ -25,9 +25,20 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.resolve.BundleContentAppender;
+import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
+
+/*
+ * - Artifact as root
+ * - Project as root
+ * - Resolve against "workspace" (know projects)
+ * - resolve against remote repositories
+ * - resolve against local repository
+ * - support fat bundle and single bundles
+ */
 
 @Named
-public class ContextHierarchyBuilder
+public class OsgifyModelBuilder
 {
    public static class Request
    {
@@ -49,6 +60,10 @@ public class ContextHierarchyBuilder
 
       private final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
 
+      private boolean appendBundleContents = false;
+
+      private BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver;
+
       public Artifact getArtifact()
       {
          return artifact;
@@ -68,12 +83,12 @@ public class ContextHierarchyBuilder
       {
          this.fatBundle = fatBundle;
       }
-      
+
       public boolean isVirtualArtifact()
       {
          return virtualArtifact;
       }
-      
+
       public void setVirtualArtifact(boolean virtualArtifact)
       {
          this.virtualArtifact = virtualArtifact;
@@ -127,6 +142,27 @@ public class ContextHierarchyBuilder
       {
          return resolveDependenciesOfNativeBundles;
       }
+
+      public boolean isAppendBundleContents()
+      {
+         return appendBundleContents;
+      }
+
+      public void setAppendBundleContents(boolean appendBundleContents)
+      {
+         this.appendBundleContents = appendBundleContents;
+      }
+
+      public void setBundleProjectClassDirectoryResolver(
+         BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver)
+      {
+         this.bundleProjectClassDirectoryResolver = bundleProjectClassDirectoryResolver;
+      }
+
+      public BundleProjectClassDirectoryResolver getBundleProjectClassDirectoryResolver()
+      {
+         return bundleProjectClassDirectoryResolver;
+      }
    }
 
    @Inject
@@ -137,6 +173,9 @@ public class ContextHierarchyBuilder
 
    @Inject
    private MavenDependencyWalker dependencyWalker;
+
+   @Inject
+   private BundleContentAppender bundleContentAppender;
 
    public Request createRequest(String groupId, String artifactId, String version, String classifier)
    {
@@ -190,6 +229,12 @@ public class ContextHierarchyBuilder
 
       final OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().addAll(bundleCollector.getBundleCandidates());
+
+      if (request.isAppendBundleContents())
+      {
+         bundleContentAppender.appendContents(context, request.getBundleProjectClassDirectoryResolver());
+      }
+
       return context;
    }
 
