@@ -9,6 +9,7 @@ package org.sourcepit.osgify.maven.context;
 import java.io.File;
 
 import org.apache.maven.artifact.Artifact;
+import org.sourcepit.common.maven.model.MavenProject;
 import org.sourcepit.common.utils.path.PathUtils;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
@@ -20,6 +21,12 @@ public class MavenBundleProjectClassDirectoryResolver implements BundleProjectCl
    public MavenBundleProjectClassDirectoryResolver(String scope)
    {
       this.scope = scope;
+   }
+
+   public File getProjectDirectory(BundleCandidate bundleCandidate)
+   {
+      final MavenProject mavenProject = bundleCandidate.getExtension(MavenProject.class);
+      return mavenProject == null ? null : mavenProject.getProjectDirectory();
    }
 
    public String[] getClassDirectoryPaths(BundleCandidate bundleCandidate)

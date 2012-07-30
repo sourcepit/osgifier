@@ -80,7 +80,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       else
       {
          org.sourcepit.common.maven.model.MavenProject mProject = MavenModelUtils.toMavenProject(project);
-         node.setLocation(mProject.getProjectDirectory());
+         node.setLocation(artifact.getFile());
          node.addExtension(mProject);
       }
       return node;

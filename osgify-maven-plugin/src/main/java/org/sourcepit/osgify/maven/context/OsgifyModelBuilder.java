@@ -54,8 +54,6 @@ public class OsgifyModelBuilder
 
       private String scope;
 
-      private final List<MavenProject> reactorProjects = new ArrayList<MavenProject>();
-
       private ArtifactRepository localRepository;
 
       private final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
@@ -111,11 +109,6 @@ public class OsgifyModelBuilder
       public void setScope(String scope)
       {
          this.scope = scope;
-      }
-
-      public List<MavenProject> getReactorProjects()
-      {
-         return reactorProjects;
       }
 
       public ArtifactRepository getLocalRepository()

@@ -86,7 +86,7 @@ public class OsgifyPackageMojo extends AbstractGuplexedMojo
          if (!candidate.isNativeBundle())
          {
             final File srcJarFile = candidate.getLocation();
-            if (srcJarFile.isFile())
+            if (srcJarFile.isFile() && srcJarFile.exists())
             {
                final String bundleFileName = candidate.getSymbolicName() + "_" + candidate.getVersion().toFullString()
                   + ".jar";
