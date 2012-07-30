@@ -72,6 +72,7 @@
 					<execution>
 						<goals>
 							<goal>osgify</goal>
+							<goal>generate-p2-update-site</goal>
 							<!-- Currently not supported -->
 							<!-- <goal>osgify-tests</goal> -->
 						</goals>
