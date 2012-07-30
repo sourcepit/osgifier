@@ -26,6 +26,8 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.component.repository.exception.ComponentLookupException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.sisu.equinox.launching.internal.P2ApplicationLauncher;
 import org.sourcepit.common.utils.io.IOOperation;
@@ -97,9 +99,6 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
    private boolean compressRepository;
 
    @Inject
-   private P2ApplicationLauncher launcher;
-
-   @Inject
    private OsgifyModelBuilder modelBuilder;
 
    @Inject
@@ -107,6 +106,9 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
 
    @Inject
    private Repackager repackager;
+
+   @Inject
+   private PlexusContainer plexus;
 
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
@@ -132,12 +134,27 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
       writeSiteXml(siteDir);
 
       generateMetadata(siteDir);
+
+      generateCategory(siteDir);
+   }
+
+   private final <T> T gLookup(Class<T> clazz)
+   {
+      try
+      {
+         return plexus.lookup(clazz);
+      }
+      catch (ComponentLookupException e)
+      {
+         throw Exceptions.pipe(e);
+      }
    }
 
    private void generateMetadata(File siteDir)
    {
+      final P2ApplicationLauncher launcher = gLookup(P2ApplicationLauncher.class);
       launcher.setWorkingDirectory(project.getBasedir());
-      launcher.setApplicationName("org.eclipse.equinox.p2.publisher.UpdateSitePublisher");
+      launcher.setApplicationName("org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher");
 
       try
       {
@@ -165,14 +182,58 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
       }
    }
 
+   private void generateCategory(File siteDir)
+   {
+      final P2ApplicationLauncher launcher = gLookup(P2ApplicationLauncher.class);
+      launcher.setWorkingDirectory(project.getBasedir());
+      launcher.setApplicationName("org.eclipse.equinox.p2.publisher.CategoryPublisher");
+
+      try
+      {
+
+         // -console -consolelog -application org.eclipse.equinox.p2.publisher.CategoryPublisher
+         // -metadataRepository file:/<repo location>/repository
+         // -categoryDefinition file:/home/irbull/workspaces/p2/mail/category.xml
+         // -categoryQualifier
+         // -compress
+         launcher.addArguments("-metadataRepository", siteDir.toURL().toExternalForm(), //
+            "-categoryDefinition", siteDir.toURL().toExternalForm() + "/site.xml", //
+            "-categoryQualifier");
+         if (compressRepository)
+         {
+            launcher.addArguments(new String[] { "-compress" });
+         }
+      }
+      catch (MalformedURLException e)
+      {
+         throw Exceptions.pipe(e);
+      }
+      catch (IOException e)
+      {
+         throw Exceptions.pipe(e);
+      }
+
+      if (argLine != null && argLine.trim().length() > 0)
+      {
+         // TODO does this really do anything???
+         launcher.addArguments("-vmargs", argLine);
+      }
+
+      int result = launcher.execute(forkedProcessTimeoutInSeconds);
+      if (result != 0)
+      {
+         throw Exceptions.pipe(new MojoFailureException("P2 publisher return code was " + result));
+      }
+   }
+
+
    protected void addArguments(P2ApplicationLauncher launcher, File siteDir) throws IOException, MalformedURLException
    {
       launcher.addArguments("-source", siteDir.getCanonicalPath(), //
          "-metadataRepository", siteDir.toURL().toExternalForm(), //
          "-metadataRepositoryName", metadataRepositoryName, //
          "-artifactRepository", siteDir.toURL().toExternalForm(), //
-         "-artifactRepositoryName", artifactRepositoryName, //
-         "-noDefaultIUs");
+         "-artifactRepositoryName", artifactRepositoryName, "-publishArtifacts");
       if (compressRepository)
       {
          launcher.addArguments(new String[] { "-compress" });
