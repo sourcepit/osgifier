@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.sourcepit</groupId>
 		<artifactId>srcpit-parent</artifactId>
-		<version>6</version>
+		<version>7-SNAPSHOT</version>
 	</parent>
 	<groupId>org.sourcepit.tools</groupId>
 	<artifactId>osgify</artifactId>
