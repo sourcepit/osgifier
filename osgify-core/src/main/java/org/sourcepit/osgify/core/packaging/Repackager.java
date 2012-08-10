@@ -23,7 +23,6 @@ import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.FileUtils;
@@ -31,6 +30,7 @@ import org.apache.commons.io.IOUtils;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.io.IOOperation;
@@ -46,8 +46,7 @@ public class Repackager
 {
    private final static PathMatcher JAR_CONTENT_MATCHER = createJarContentMatcher();
 
-   @Inject
-   private Logger logger;
+   private final Logger logger = LoggerFactory.getLogger(Repackager.class);
 
    public void injectManifest(final File jarFile, final Manifest manifest) throws PipedIOException
    {
