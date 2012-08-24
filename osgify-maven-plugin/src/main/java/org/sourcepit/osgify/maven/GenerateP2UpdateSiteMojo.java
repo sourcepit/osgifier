@@ -14,6 +14,8 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.maven.p2.P2UpdateSiteGenerator;
 
 /**
@@ -59,7 +61,10 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
+      final PropertiesMap options = new LinkedPropertiesMap();
+      options.setBoolean(P2UpdateSiteGenerator.OPTION_COMPRESS_REPOSITORY, compressRepository);
+      options.setInt(P2UpdateSiteGenerator.OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS, forkedProcessTimeoutInSeconds);
       siteGenerator.generateUpdateSite(siteDir, project, project.getRemoteArtifactRepositories(), localRepository,
-         repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+         repositoryName, options);
    }
 }

@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,16 +30,23 @@ import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.io.IOOperation;
 import org.sourcepit.common.utils.lang.Exceptions;
 import org.sourcepit.common.utils.path.PathMatcher;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
+import org.sourcepit.osgify.maven.context.OsgifyModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgify.p2.P2Publisher;
 
 @Named
 public class P2UpdateSiteGenerator
 {
+   public static final String OPTION_FORCE_MANIFEST_GENERATION = "forceManifestGeneration";
+   public static final String OPTION_COMPRESS_REPOSITORY = "compressRepository";
+   public static final String OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS = "forkedProcessTimeoutInSeconds";
+
    @Inject
    private OsgifyModelBuilder modelBuilder;
 
@@ -55,48 +61,54 @@ public class P2UpdateSiteGenerator
 
    public OsgifyContext generateUpdateSite(File siteDir, MavenProject project,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      boolean compressRepository, int forkedProcessTimeoutInSeconds)
+      PropertiesMap options)
    {
       return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
-         repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+         repositoryName, options);
    }
 
    public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      boolean compressRepository, int forkedProcessTimeoutInSeconds)
+      PropertiesMap options)
    {
       final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact, Artifact.SCOPE_COMPILE,
          false, remoteArtifactRepositories, localRepository);
 
+      return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
+   }
+
+   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
+      PropertiesMap options)
+   {
+      final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
+         Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
+      return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
+   }
+
+   private OsgifyContext generateUpdateSite(final OsgifyModelBuilder.Request request, File siteDir,
+      String repositoryName, PropertiesMap options)
+   {
+      request.setNativeBundleStrategy(getNativeBundleStrategy(options));
+
       final OsgifyContext model = modelBuilder.build(request);
       manifestAppender.append(model);
 
+      final boolean compressRepository = options.getBoolean(OPTION_COMPRESS_REPOSITORY, true);
+      final int forkedProcessTimeoutInSeconds = options.getInt(OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS, 0);
       generateUpdateSite(model, siteDir, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
 
       return model;
    }
 
-   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
-      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      Map<String, String> options)
+   private NativeBundleStrategy getNativeBundleStrategy(PropertiesMap options)
    {
-      return generateUpdateSite(siteDir, dependencies, remoteArtifactRepositories, localRepository, repositoryName,
-         true, 0, options);
-   }
-
-   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
-      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      boolean compressRepository, int forkedProcessTimeoutInSeconds, Map<String, String> options)
-   {
-      final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
-         Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
-
-      final String forceMfPatterns = options == null ? null : options.get("forceGeneratedManifest");
+      final String forceMfPatterns = options.get(OPTION_FORCE_MANIFEST_GENERATION);
       if (forceMfPatterns != null)
       {
          final PathMatcher matcher = PathMatcher.parse(forceMfPatterns, ".", ",");
 
-         final OsgifyModelBuilder.NativeBundleStrategy nativeBundleStrategy = new OsgifyModelBuilder.NativeBundleStrategy()
+         return new OsgifyModelBuilder.NativeBundleStrategy()
          {
             public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
             {
@@ -123,16 +135,9 @@ public class P2UpdateSiteGenerator
                return null;
             }
          };
-
-         request.setNativeBundleStrategy(nativeBundleStrategy);
       }
 
-      final OsgifyContext model = modelBuilder.build(request);
-      manifestAppender.append(model);
-
-      generateUpdateSite(model, siteDir, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
-
-      return model;
+      return OsgifyModelBuilder.NativeBundleStrategy.DEFAULT;
    }
 
    private void generateUpdateSite(OsgifyContext model, File siteDir, String repositoryName,
