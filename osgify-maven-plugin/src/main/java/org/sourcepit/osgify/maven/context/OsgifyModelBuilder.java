@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.maven.context;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,9 +24,12 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender;
+import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
 
 /*
@@ -50,7 +54,7 @@ public class OsgifyModelBuilder
 
       private boolean virtualArtifact = false;
 
-      private final List<Dependency> virtualDependencies = new ArrayList<Dependency>();
+      private final List<Dependency> dependencies = new ArrayList<Dependency>();
 
       private String scope;
 
@@ -58,9 +62,11 @@ public class OsgifyModelBuilder
 
       private final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
 
-      private boolean appendBundleContents = false;
+      private boolean scanBundleContents = false;
 
       private BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver;
+
+      private NativeBundleStrategy nativeBundleStrategy;
 
       public Artifact getArtifact()
       {
@@ -92,9 +98,9 @@ public class OsgifyModelBuilder
          this.virtualArtifact = virtualArtifact;
       }
 
-      public List<Dependency> getVirtualDependencies()
+      public List<Dependency> getDependencies()
       {
-         return virtualDependencies;
+         return dependencies;
       }
 
       public String getScope()
@@ -136,14 +142,14 @@ public class OsgifyModelBuilder
          return resolveDependenciesOfNativeBundles;
       }
 
-      public boolean isAppendBundleContents()
+      public boolean isScanBundleContents()
       {
-         return appendBundleContents;
+         return scanBundleContents;
       }
 
-      public void setAppendBundleContents(boolean appendBundleContents)
+      public void setScanBundleContents(boolean scanBundleContents)
       {
-         this.appendBundleContents = appendBundleContents;
+         this.scanBundleContents = scanBundleContents;
       }
 
       public void setBundleProjectClassDirectoryResolver(
@@ -156,6 +162,29 @@ public class OsgifyModelBuilder
       {
          return bundleProjectClassDirectoryResolver;
       }
+
+      public void setNativeBundleStrategy(NativeBundleStrategy nativeBundleStrategy)
+      {
+         this.nativeBundleStrategy = nativeBundleStrategy;
+      }
+
+      public NativeBundleStrategy getNativeBundleStrategy()
+      {
+         return nativeBundleStrategy;
+      }
+   }
+
+   public interface NativeBundleStrategy
+   {
+      NativeBundleStrategy DEFAULT = new NativeBundleStrategy()
+      {
+         public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
+         {
+            return bundleCandidate.getManifest() != null;
+         }
+      };
+
+      boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate);
    }
 
    @Inject
@@ -170,17 +199,70 @@ public class OsgifyModelBuilder
    @Inject
    private BundleContentAppender bundleContentAppender;
 
-   public Request createRequest(String groupId, String artifactId, String version, String classifier)
+   @Inject
+   private VersionRangeResolver versionRangeResolver;
+
+   public Request createVirtualBundleRequest(String groupId, String artifactId, String version, String classifier,
+      Collection<Dependency> dependencies, String scope, boolean isFatBundle,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository)
    {
       final Artifact artifact = repositorySystem.createArtifactWithClassifier(groupId, artifactId, version, "jar",
          classifier);
-      return createRequest(artifact);
+
+      final Request request = createDependenciesRequest(dependencies, scope, remoteArtifactRepositories,
+         localRepository);
+      request.setArtifact(artifact);
+      request.setVirtualArtifact(true);
+      request.setFatBundle(isFatBundle);
+      return request;
    }
 
-   public Request createRequest(final Artifact artifact)
+   public Request createBundleRequest(String groupId, String artifactId, String version, String classifier,
+      String scope, boolean isFatBundle, List<ArtifactRepository> remoteArtifactRepositories,
+      ArtifactRepository localRepository)
+   {
+      final Artifact artifact = repositorySystem.createArtifactWithClassifier(groupId, artifactId, version, "jar",
+         classifier);
+
+      return createBundleRequest(artifact, scope, isFatBundle, remoteArtifactRepositories, localRepository);
+   }
+
+   public Request createBundleRequest(final Artifact artifact, String scope, boolean isFatBundle,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository)
+   {
+      final Request request = createDefaultRequest(scope, remoteArtifactRepositories, localRepository);
+      request.setArtifact(artifact);
+      request.setFatBundle(isFatBundle);
+      return request;
+   }
+
+   public Request createDependenciesRequest(Collection<Dependency> dependencies, String scope,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository)
+   {
+      final Request request = createDefaultRequest(scope, remoteArtifactRepositories, localRepository);
+      request.setArtifact(null);
+      if (dependencies != null)
+      {
+         request.getDependencies().addAll(dependencies);
+      }
+      return request;
+   }
+
+   private Request createDefaultRequest(String scope, List<ArtifactRepository> remoteArtifactRepositories,
+      ArtifactRepository localRepository)
    {
       final Request request = new Request();
-      request.setArtifact(artifact);
+      request.setVirtualArtifact(false);
+      request.setFatBundle(false);
+      request.setResolveDependenciesOfNativeBundles(true);
+      request.setScope(scope);
+      request.setBundleProjectClassDirectoryResolver(new MavenBundleProjectClassDirectoryResolver(scope));
+      request.setScanBundleContents(true);
+      request.setLocalRepository(localRepository);
+      if (remoteArtifactRepositories != null)
+      {
+         request.getRemoteRepositories().addAll(remoteArtifactRepositories);
+      }
       return request;
    }
 
@@ -196,9 +278,13 @@ public class OsgifyModelBuilder
 
       walkerRequest.setArtifact(request.getArtifact());
       walkerRequest.setResolveRoot(!request.isVirtualArtifact());
-      walkerRequest.setDependencies(request.getVirtualDependencies());
+      walkerRequest.setDependencies(request.getDependencies());
       walkerRequest.setRemoteRepositories(request.getRemoteRepositories());
       walkerRequest.setLocalRepository(request.getLocalRepository());
+
+      final NativeBundleStrategy nativeBundleStrategy = request.getNativeBundleStrategy() == null
+         ? NativeBundleStrategy.DEFAULT
+         : request.getNativeBundleStrategy();
 
       final BundleCandidatesCollector bundleCollector = new BundleCandidatesCollector(request.isFatBundle()
          || request.isResolveDependenciesOfNativeBundles())
@@ -215,6 +301,23 @@ public class OsgifyModelBuilder
             }
             return visit;
          };
+
+         @Override
+         protected BundleCandidate newBundleCandidate(Artifact artifact, MavenProject project)
+         {
+            final BundleCandidate bundle = super.newBundleCandidate(artifact, project);
+            if (request.isVirtualArtifact() && artifact.equals(request.getArtifact()))
+            {
+               bundle.setLocation(null); // erase falsely resolved local file path
+            }
+            return bundle;
+         }
+
+         @Override
+         protected boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
+         {
+            return nativeBundleStrategy.isNativeBundle(artifact, project, bundleCandidate);
+         }
       };
       walkerRequest.setHandler(bundleCollector);
 
@@ -223,9 +326,17 @@ public class OsgifyModelBuilder
       final OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().addAll(bundleCollector.getBundleCandidates());
 
-      if (request.isAppendBundleContents())
+      if (request.isScanBundleContents())
       {
          bundleContentAppender.appendContents(context, request.getBundleProjectClassDirectoryResolver());
+      }
+
+      for (BundleCandidate bundleCandidate : context.getBundles())
+      {
+         for (BundleReference bundleReference : bundleCandidate.getDependencies())
+         {
+            bundleReference.setVersionRange(versionRangeResolver.resolveVersionRange(bundleReference));
+         }
       }
 
       return context;

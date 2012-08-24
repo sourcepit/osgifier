@@ -28,14 +28,14 @@ import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
 {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
-   
+
    private final boolean resolveDependenciesOfNativeBundles;
-   
+
    public BundleCandidatesCollector()
    {
       this(false);
    }
-   
+
    public BundleCandidatesCollector(boolean resolveDependenciesOfNativeBundles)
    {
       this.resolveDependenciesOfNativeBundles = resolveDependenciesOfNativeBundles;
@@ -55,17 +55,23 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
          mvnIdToBundleNode.put(id, bundleCandidate);
 
          // no need to visit dependencies of native bundles
-         BundleManifest manifest = lookupBundleManifest(artifact, project);
-         if (manifest != null)
+         final BundleManifest manifest = lookupBundleManifest(artifact, project);
+         bundleCandidate.setManifest(manifest);
+
+         if (isNativeBundle(artifact, project, bundleCandidate))
          {
             bundleCandidate.setNativeBundle(true);
-            bundleCandidate.setManifest(manifest);
             return resolveDependenciesOfNativeBundles;
          }
 
          return true;
       }
       return false;
+   }
+
+   protected boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
+   {
+      return bundleCandidate.getManifest() != null;
    }
 
    protected BundleCandidate newBundleCandidate(Artifact artifact, MavenProject project)

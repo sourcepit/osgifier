@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,13 +24,17 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.project.MavenProject;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.io.IOOperation;
 import org.sourcepit.common.utils.lang.Exceptions;
+import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
-import org.sourcepit.osgify.maven.context.MavenBundleProjectClassDirectoryResolver;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 import org.sourcepit.osgify.p2.P2Publisher;
 
@@ -48,34 +53,101 @@ public class P2UpdateSiteGenerator
    @Inject
    private P2Publisher p2Publisher;
 
-   public void generateUpdateSite(File workDir, Artifact artifact, List<ArtifactRepository> remoteArtifactRepositories,
-      ArtifactRepository localRepository, String repositoryName, boolean compressRepository,
-      int forkedProcessTimeoutInSeconds)
+   public OsgifyContext generateUpdateSite(File siteDir, MavenProject project,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
+      boolean compressRepository, int forkedProcessTimeoutInSeconds)
    {
-      OsgifyModelBuilder.Request request = modelBuilder.createRequest(artifact);
-      request.setResolveDependenciesOfNativeBundles(true);
-      request.setVirtualArtifact(false);
-      request.setFatBundle(false);
-      request.setLocalRepository(localRepository);
-      request.setScope(Artifact.SCOPE_COMPILE);
-      request.getRemoteRepositories().addAll(remoteArtifactRepositories);
-      request.setAppendBundleContents(true);
-      request.setBundleProjectClassDirectoryResolver(new MavenBundleProjectClassDirectoryResolver(
-         Artifact.SCOPE_COMPILE));
+      return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
+         repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+   }
 
-      OsgifyContext model = modelBuilder.build(request);
+   public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
+      boolean compressRepository, int forkedProcessTimeoutInSeconds)
+   {
+      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact, Artifact.SCOPE_COMPILE,
+         false, remoteArtifactRepositories, localRepository);
+
+      final OsgifyContext model = modelBuilder.build(request);
       manifestAppender.append(model);
 
-      final List<File> bundles = copyJarsAndInjectManifests(model, getCleanDir(workDir, "bundles"));
+      generateUpdateSite(model, siteDir, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
 
-      final File repoDir = getCleanDir(workDir, "p2-udate-site");
+      return model;
+   }
 
-      p2Publisher.publishBundles(repoDir, repositoryName, bundles, compressRepository, forkedProcessTimeoutInSeconds);
+   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
+      Map<String, String> options)
+   {
+      return generateUpdateSite(siteDir, dependencies, remoteArtifactRepositories, localRepository, repositoryName,
+         true, 0, options);
+   }
+
+   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
+      List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
+      boolean compressRepository, int forkedProcessTimeoutInSeconds, Map<String, String> options)
+   {
+      final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
+         Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
+
+      final String forceMfPatterns = options == null ? null : options.get("forceGeneratedManifest");
+      if (forceMfPatterns != null)
+      {
+         final PathMatcher matcher = PathMatcher.parse(forceMfPatterns, ".", ",");
+
+         final OsgifyModelBuilder.NativeBundleStrategy nativeBundleStrategy = new OsgifyModelBuilder.NativeBundleStrategy()
+         {
+            public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
+            {
+               final String symbolicName = getBundleSymbolicName(bundleCandidate);
+               if (symbolicName != null && matcher.isMatch(symbolicName))
+               {
+                  return false;
+               }
+               return OsgifyModelBuilder.NativeBundleStrategy.DEFAULT
+                  .isNativeBundle(artifact, project, bundleCandidate);
+            }
+
+            private String getBundleSymbolicName(BundleCandidate bundleCandidate)
+            {
+               BundleManifest manifest = bundleCandidate.getManifest();
+               if (manifest != null)
+               {
+                  BundleSymbolicName bundleSymbolicName = manifest.getBundleSymbolicName();
+                  if (bundleSymbolicName != null)
+                  {
+                     return bundleSymbolicName.getSymbolicName();
+                  }
+               }
+               return null;
+            }
+         };
+
+         request.setNativeBundleStrategy(nativeBundleStrategy);
+      }
+
+      final OsgifyContext model = modelBuilder.build(request);
+      manifestAppender.append(model);
+
+      generateUpdateSite(model, siteDir, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+
+      return model;
+   }
+
+   private void generateUpdateSite(OsgifyContext model, File siteDir, String repositoryName,
+      boolean compressRepository, int forkedProcessTimeoutInSeconds)
+   {
+      final File workDir = getCleanDir(siteDir, ".osgify");
+
+      final List<File> bundles = copyJarsAndInjectManifests(model, workDir);
+
+      p2Publisher.publishBundles(siteDir, repositoryName, bundles, compressRepository, forkedProcessTimeoutInSeconds);
 
       final File categoryFile = new File(workDir, "category.xml");
       writeCategoryXml(categoryFile);
 
-      p2Publisher.publishCategories(repoDir, categoryFile, compressRepository, forkedProcessTimeoutInSeconds);
+      p2Publisher.publishCategories(siteDir, categoryFile, compressRepository, forkedProcessTimeoutInSeconds);
    }
 
    private static void writeCategoryXml(File categoryFile)
@@ -116,6 +188,7 @@ public class P2UpdateSiteGenerator
             final File bundleJar = new File(workDir, bundle.getSymbolicName() + "_"
                + bundle.getVersion().toFullString() + ".jar");
             repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest());
+            bundle.setLocation(bundleJar);
             bundleJars.add(bundleJar);
          }
       }

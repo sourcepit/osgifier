@@ -23,13 +23,20 @@ public class PlexusP2ApplicationLauncherFactory implements P2ApplicationLauncher
 
    public P2ApplicationLauncher createP2ApplicationLauncher()
    {
+      final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
       try
       {
+         Thread.currentThread().setContextClassLoader(P2ApplicationLauncher.class.getClassLoader());
+
          return plexus.lookup(P2ApplicationLauncher.class);
       }
       catch (ComponentLookupException e)
       {
          throw Exceptions.pipe(e);
+      }
+      finally
+      {
+         Thread.currentThread().setContextClassLoader(ccl);
       }
    }
 

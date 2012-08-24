@@ -28,8 +28,8 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
    /** @parameter default-value="${localRepository}" */
    protected ArtifactRepository localRepository;
 
-   /** @parameter default-value="${project.build.directory}" */
-   private File targetDir;
+   /** @parameter default-value="${project.build.directory}/p2-update-site" */
+   private File siteDir;
 
    /** @parameter default-value="${project}" */
    protected MavenProject project;
@@ -59,7 +59,7 @@ public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
-      siteGenerator.generateUpdateSite(targetDir, project.getArtifact(), project.getRemoteArtifactRepositories(),
-         localRepository, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+      siteGenerator.generateUpdateSite(siteDir, project, project.getRemoteArtifactRepositories(), localRepository,
+         repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
    }
 }

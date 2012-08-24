@@ -56,15 +56,25 @@ public class P2Publisher
          launcherArgs.add("-compress");
       }
 
-      final P2ApplicationLauncher launcher = launcherFactory.createP2ApplicationLauncher();
-      launcher.setWorkingDirectory(repoDir);
-      launcher.setApplicationName("org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher");
-      launcher.addArguments(launcherArgs.toArray(new String[launcherArgs.size()]));
-
-      int result = launcher.execute(forkedProcessTimeoutInSeconds);
-      if (result != 0)
+      final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+      try
       {
-         throw Exceptions.pipe(new MojoFailureException("P2 publisher return code was " + result));
+         Thread.currentThread().setContextClassLoader(P2ApplicationLauncher.class.getClassLoader());
+
+         final P2ApplicationLauncher launcher = launcherFactory.createP2ApplicationLauncher();
+         launcher.setWorkingDirectory(repoDir);
+         launcher.setApplicationName("org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher");
+         launcher.addArguments(launcherArgs.toArray(new String[launcherArgs.size()]));
+
+         int result = launcher.execute(forkedProcessTimeoutInSeconds);
+         if (result != 0)
+         {
+            throw Exceptions.pipe(new MojoFailureException("P2 publisher return code was " + result));
+         }
+      }
+      finally
+      {
+         Thread.currentThread().setContextClassLoader(ccl);
       }
    }
 
@@ -82,15 +92,25 @@ public class P2Publisher
          launcherArgs.add("-compress");
       }
 
-      final P2ApplicationLauncher launcher = launcherFactory.createP2ApplicationLauncher();
-      launcher.setWorkingDirectory(repoDir);
-      launcher.setApplicationName("org.eclipse.equinox.p2.publisher.CategoryPublisher");
-      launcher.addArguments(launcherArgs.toArray(new String[launcherArgs.size()]));
-
-      int result = launcher.execute(forkedProcessTimeoutInSeconds);
-      if (result != 0)
+      final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+      try
       {
-         throw Exceptions.pipe(new MojoFailureException("P2 publisher return code was " + result));
+         Thread.currentThread().setContextClassLoader(P2ApplicationLauncher.class.getClassLoader());
+
+         final P2ApplicationLauncher launcher = launcherFactory.createP2ApplicationLauncher();
+         launcher.setWorkingDirectory(repoDir);
+         launcher.setApplicationName("org.eclipse.equinox.p2.publisher.CategoryPublisher");
+         launcher.addArguments(launcherArgs.toArray(new String[launcherArgs.size()]));
+
+         int result = launcher.execute(forkedProcessTimeoutInSeconds);
+         if (result != 0)
+         {
+            throw Exceptions.pipe(new MojoFailureException("P2 publisher return code was " + result));
+         }
+      }
+      finally
+      {
+         Thread.currentThread().setContextClassLoader(ccl);
       }
    }
 }

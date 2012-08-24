@@ -271,8 +271,9 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
-         request.setLocalRepository(localRepository);
+         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
+            false, null, localRepository);
+         request.setResolveDependenciesOfNativeBundles(false);
 
          assertThat(request.getArtifact(), notNullValue());
 
@@ -318,11 +319,9 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
+         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
+            false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
-
-         request.setLocalRepository(localRepository);
-         request.setResolveDependenciesOfNativeBundles(true);
 
          OsgifyContext context = builder.build(request);
 
@@ -371,11 +370,9 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("javax.mail", "mail", "1.4.5", null);
+         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
+            true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
-
-         request.setLocalRepository(localRepository);
-         request.setFatBundle(true);
 
          OsgifyContext context = builder.build(request);
 
@@ -424,12 +421,13 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
-            "1.2.3", null);
+         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+            "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
-         request.setLocalRepository(localRepository);
-
+         request.setVirtualArtifact(false);
+         request.setResolveDependenciesOfNativeBundles(false);
+         
          try
          {
             builder.build(request);
@@ -459,13 +457,13 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());
@@ -516,13 +514,12 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
-            "1.2.3", null);
+         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+            "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
-         request.setResolveDependenciesOfNativeBundles(true);
-         request.setLocalRepository(localRepository);
-
+         request.setVirtualArtifact(false);
+         
          try
          {
             builder.build(request);
@@ -552,13 +549,13 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());
@@ -609,15 +606,15 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createRequest("virtual-artifact", "virtual-artifact",
-            "1.2.3", null);
+         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+            "virtual-artifact", "1.2.3", null, null, null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
          request.setResolveDependenciesOfNativeBundles(true); // assure that resolution of dependencies of dependencies
                                                               // is suppressed by the 'fat bundle' flag
-         request.setFatBundle(true);
-         request.setLocalRepository(localRepository);
 
+         request.setVirtualArtifact(false);
+         
          try
          {
             builder.build(request);
@@ -647,13 +644,13 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          dep.setGroupId("javax.mail");
          dep.setArtifactId("mail");
          dep.setVersion("1.4.5");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          dep = new Dependency();
          dep.setGroupId("org.osgi");
          dep.setArtifactId("org.osgi.core");
          dep.setVersion("4.3.0");
-         request.getVirtualDependencies().add(dep);
+         request.getDependencies().add(dep);
 
          context = builder.build(request);
          assertThat(context, notNullValue());

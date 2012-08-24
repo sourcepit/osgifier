@@ -58,38 +58,56 @@ public class MavenDependencyWalker
       }
       final Stack<MavenProject> currentResolutionContext = new Stack<MavenProject>();
 
-      final Artifact artifact = request.getArtifact();
-      final MavenProject project = findOriginatingProject(reactorProjects, artifact);
-
-      final boolean resolveRoot = !artifact.isResolved() && request.isResolveRoot();
-      if (resolveRoot)
+      final List<Artifact> artifacts = new ArrayList<Artifact>();
+      if (request.getArtifact() == null)
       {
-         resolve(request, artifact, project, resolveRoot, null);
+         for (Dependency dependency : request.getDependencies())
+         {
+            final Artifact artifact = repositorySystem.createDependencyArtifact(dependency);
+            final MavenProject project = findOriginatingProject(reactorProjects, artifact);
+            resolve(request, artifact, project, true, null);
+            artifacts.add(artifact);
+         }
+      }
+      else
+      {
+         final Artifact artifact = request.getArtifact();
+         final MavenProject project = findOriginatingProject(reactorProjects, artifact);
+         final boolean resolveRoot = !artifact.isResolved() && request.isResolveRoot();
+         if (resolveRoot)
+         {
+            resolve(request, artifact, project, resolveRoot, null);
+         }
+         artifacts.add(artifact);
       }
 
-      if (request.getHandler().visitNode(artifact, project))
+      for (Artifact artifact : artifacts)
       {
-         final Set<String> resolvedIds = new HashSet<String>();
-         if (!request.isResolveRoot())
+         final MavenProject project = findOriginatingProject(reactorProjects, artifact);
+         if (request.getHandler().visitNode(artifact, project))
          {
-            if (project != null)
+            final Set<String> resolvedIds = new HashSet<String>();
+            if (!request.isResolveRoot())
             {
-               currentResolutionContext.push(project);
+               if (project != null)
+               {
+                  currentResolutionContext.push(project);
+               }
+
+               for (Artifact dependencyArtifact : resolve(request, artifact, project, false, request.getDependencies()))
+               {
+                  walk(request, reactorProjects, currentResolutionContext, artifact, dependencyArtifact, resolvedIds);
+               }
+
+               if (project != null)
+               {
+                  currentResolutionContext.pop();
+               }
             }
-            
-            for (Artifact dependencyArtifact : resolve(request, artifact, project, false, request.getDependencies()))
+            else
             {
-               walk(request, reactorProjects, currentResolutionContext, artifact, dependencyArtifact, resolvedIds);
+               resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
             }
-            
-            if (project != null)
-            {
-               currentResolutionContext.pop();
-            }
-         }
-         else
-         {
-            resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
          }
       }
    }
