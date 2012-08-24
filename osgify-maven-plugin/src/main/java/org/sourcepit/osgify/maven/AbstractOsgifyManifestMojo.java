@@ -27,7 +27,6 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.context.MavenBundleProjectClassDirectoryResolver;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
@@ -74,18 +73,12 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
       // support merge of unambiguous references in a separate bundle (may cause cyclic imports)
 
       LOGGER.info("Building osgifier context");
-      
-      final OsgifyModelBuilder.Request request = modelBuilder.createRequest(project.getArtifact());
-      request.setVirtualArtifact(false);
-      request.setFatBundle(false);
-      request.setLocalRepository(localRepository);
-      request.setScope(Artifact.SCOPE_COMPILE);
-      request.getRemoteRepositories().addAll(project.getRemoteArtifactRepositories());
-      request.setAppendBundleContents(true);
-      request.setBundleProjectClassDirectoryResolver(new MavenBundleProjectClassDirectoryResolver(
-         Artifact.SCOPE_COMPILE));
+
+      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(project.getArtifact(),
+         Artifact.SCOPE_COMPILE, false, project.getRemoteArtifactRepositories(), localRepository);
+
       final OsgifyContext context = modelBuilder.build(request);
-      
+
       manifestAppender.append(context);
 
       final File contextFile = getContextFile(goal);

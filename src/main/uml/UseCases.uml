@@ -73,7 +73,7 @@
   <packagedElement xmi:type="uml:UseCase" xmi:id="_tTEvINZREeGOm8D_wqCD_g" name="create UpdateSite from Project">
     <generalization xmi:id="_0HS08NZREeGOm8D_wqCD_g" general="_ppNFcNZREeGOm8D_wqCD_g"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:UseCase" xmi:id="_vcU6oNZREeGOm8D_wqCD_g" name="create UpdateSite from Artifact">
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_vcU6oNZREeGOm8D_wqCD_g" name="create UpdateSite from Artifacts">
     <generalization xmi:id="_0iI94NZREeGOm8D_wqCD_g" general="_ppNFcNZREeGOm8D_wqCD_g"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_1fk2gNZREeGOm8D_wqCD_g" name="" memberEnd="_1fk2gdZREeGOm8D_wqCD_g _1fk2hNZREeGOm8D_wqCD_g">

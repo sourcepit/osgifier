@@ -19,28 +19,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
-import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 
 @Named
 public class BundleContentAppender
 {
    public static interface BundleProjectClassDirectoryResolver
    {
+      File getProjectDirectory(BundleCandidate bundleCandidate);
+
       String[] getClassDirectoryPaths(BundleCandidate bundleCandidate);
    }
 
    @Inject
    private BundleCandidateScanner bundleCandidateScanner;
-
-   @Inject
-   private VersionRangeResolver versionRangeResolver;
 
    public OsgifyContext appendContents(OsgifyContext context, BundleProjectClassDirectoryResolver classDirectoryResolver)
    {
@@ -48,46 +41,23 @@ public class BundleContentAppender
 
       for (BundleCandidate candidate : context.getBundles())
       {
-         final String[] binDirPaths = classDirectoryResolver == null ? null : classDirectoryResolver
-            .getClassDirectoryPaths(candidate);
-         bundleScannerTasks.add(new BundleScannerTask(candidate, binDirPaths));
+         final File projectDir = classDirectoryResolver == null ? null : classDirectoryResolver
+            .getProjectDirectory(candidate);
+         if (projectDir != null)
+         {
+            final String[] binDirPaths = classDirectoryResolver == null ? null : classDirectoryResolver
+               .getClassDirectoryPaths(candidate);
+            bundleScannerTasks.add(new BundleScannerTask(candidate, projectDir, binDirPaths));
+         }
+         else if (candidate.getLocation() != null)
+         {
+            bundleScannerTasks.add(new BundleScannerTask(candidate, candidate.getLocation()));
+         }
       }
 
       executeBundleScannerTasks(bundleScannerTasks);
 
-      postprocessContext(context);
-
       return context;
-   }
-
-   private void postprocessContext(OsgifyContext context)
-   {
-      for (BundleCandidate bundleCandidate : context.getBundles())
-      {
-         if (!bundleCandidate.isNativeBundle())
-         {
-            JavaResourceBundle content = bundleCandidate.getContent();
-            EList<JavaResourcesRoot> jRoots = content.getResourcesRoots();
-            for (JavaResourcesRoot jRoot : jRoots)
-            {
-               org.sourcepit.osgify.core.model.java.File manifestFile = jRoot.getFile("META-INF/MANIFEST.MF");
-               if (manifestFile != null)
-               {
-                  final BundleManifest manifest = manifestFile.getExtension(BundleManifest.class);
-                  if (manifest != null)
-                  {
-                     bundleCandidate.setNativeBundle(true);
-                     bundleCandidate.setManifest(EcoreUtil.copy(manifest));
-                     break;
-                  }
-               }
-            }
-         }
-         for (BundleReference bundleReference : bundleCandidate.getDependencies())
-         {
-            bundleReference.setVersionRange(versionRangeResolver.resolveVersionRange(bundleReference));
-         }
-      }
    }
 
    private void executeBundleScannerTasks(List<BundleScannerTask> bundleScannerTasks)
@@ -124,23 +94,26 @@ public class BundleContentAppender
    class BundleScannerTask implements Runnable, Comparable<BundleScannerTask>
    {
       private final BundleCandidate bundleCandidate;
+      private final File jarFileOrProjectDir;
       private final String[] binDirPaths;
 
-      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull String... binDirPaths)
+      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File projectDir,
+         String... binDirPaths)
       {
          this.bundleCandidate = bundleCandidate;
-         this.binDirPaths = binDirPaths;
+         this.jarFileOrProjectDir = projectDir;
+         this.binDirPaths = binDirPaths == null ? new String[0] : binDirPaths;
       }
 
-      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate)
+      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File jarFile)
       {
          this.bundleCandidate = bundleCandidate;
-         this.binDirPaths = null;
+         this.jarFileOrProjectDir = jarFile;
+         this.binDirPaths = new String[0];
       }
 
       public void run()
       {
-         File jarFileOrProjectDir = bundleCandidate.getLocation();
          if (jarFileOrProjectDir.isDirectory())
          {
             // TODO try to re-load already build contexts from reactor projects

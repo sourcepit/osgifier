@@ -14,6 +14,7 @@ import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 /**
  * @author Bernd
@@ -40,13 +41,17 @@ public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameReso
       {
          for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
          {
-            final BundleManifest bundleManifest = jRoot.getExtension(BundleManifest.class);
-            if (bundleManifest != null)
+            Resource resource = jRoot.getResource("META-INF/MANIFEST.MF");
+            if (resource != null)
             {
-               final BundleSymbolicName bundleSymbolicName = bundleManifest.getBundleSymbolicName();
-               if (bundleSymbolicName != null)
+               final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
+               if (bundleManifest != null)
                {
-                  return bundleSymbolicName.getSymbolicName();
+                  final BundleSymbolicName bundleSymbolicName = bundleManifest.getBundleSymbolicName();
+                  if (bundleSymbolicName != null)
+                  {
+                     return bundleSymbolicName.getSymbolicName();
+                  }
                }
             }
          }

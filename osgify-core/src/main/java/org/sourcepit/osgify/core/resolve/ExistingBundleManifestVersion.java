@@ -14,6 +14,7 @@ import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
+import org.sourcepit.osgify.core.model.java.Resource;
 
 @Named("ExistingBundleManifestVersion")
 public class ExistingBundleManifestVersion extends AbstractVersionResolutionStrategy
@@ -31,10 +32,14 @@ public class ExistingBundleManifestVersion extends AbstractVersionResolutionStra
       {
          for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
          {
-            final BundleManifest bundleManifest = jRoot.getExtension(BundleManifest.class);
-            if (bundleManifest != null)
+            final Resource resource = jRoot.getResource("META-INF/MANIFEST.MF");
+            if (resource != null)
             {
-               return bundleManifest.getBundleVersion();
+               final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
+               if (bundleManifest != null)
+               {
+                  return bundleManifest.getBundleVersion();
+               }
             }
          }
       }
