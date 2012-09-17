@@ -31,7 +31,7 @@ import org.sourcepit.common.utils.io.IOOperation;
 import org.sourcepit.common.utils.lang.Exceptions;
 import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
-import org.sourcepit.common.utils.props.PropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
@@ -61,7 +61,7 @@ public class P2UpdateSiteGenerator
 
    public OsgifyContext generateUpdateSite(File siteDir, MavenProject project,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesMap options)
+      PropertiesSource options)
    {
       return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
          repositoryName, options);
@@ -69,7 +69,7 @@ public class P2UpdateSiteGenerator
 
    public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesMap options)
+      PropertiesSource options)
    {
       final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact, Artifact.SCOPE_COMPILE,
          false, remoteArtifactRepositories, localRepository);
@@ -79,7 +79,7 @@ public class P2UpdateSiteGenerator
 
    public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesMap options)
+      PropertiesSource options)
    {
       final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
          Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
@@ -87,7 +87,7 @@ public class P2UpdateSiteGenerator
    }
 
    private OsgifyContext generateUpdateSite(final OsgifyModelBuilder.Request request, File siteDir,
-      String repositoryName, PropertiesMap options)
+      String repositoryName, PropertiesSource options)
    {
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
 
@@ -101,7 +101,7 @@ public class P2UpdateSiteGenerator
       return model;
    }
 
-   private NativeBundleStrategy getNativeBundleStrategy(PropertiesMap options)
+   private NativeBundleStrategy getNativeBundleStrategy(PropertiesSource options)
    {
       final String forceMfPatterns = options.get(OPTION_FORCE_MANIFEST_GENERATION);
       if (forceMfPatterns != null)
