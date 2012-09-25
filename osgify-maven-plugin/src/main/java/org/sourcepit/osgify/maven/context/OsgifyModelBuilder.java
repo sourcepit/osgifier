@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.maven.context;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +25,10 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
+import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -50,6 +55,8 @@ public class OsgifyModelBuilder
 
       private boolean fatBundle = false;
 
+      private boolean includeSource;
+
       private boolean resolveDependenciesOfNativeBundles = false;
 
       private boolean virtualArtifact = false;
@@ -67,6 +74,8 @@ public class OsgifyModelBuilder
       private BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver;
 
       private NativeBundleStrategy nativeBundleStrategy;
+
+      private boolean skipManifestDerivation;
 
       public Artifact getArtifact()
       {
@@ -96,6 +105,26 @@ public class OsgifyModelBuilder
       public void setVirtualArtifact(boolean virtualArtifact)
       {
          this.virtualArtifact = virtualArtifact;
+      }
+
+      public void setSkipManifestDerivation(boolean skipManifestDerivation)
+      {
+         this.skipManifestDerivation = skipManifestDerivation;
+      }
+
+      public boolean isSkipManifestDerivation()
+      {
+         return skipManifestDerivation;
+      }
+
+      public void setIncludeSource(boolean resolveSource)
+      {
+         this.includeSource = resolveSource;
+      }
+
+      public boolean isIncludeSource()
+      {
+         return includeSource;
       }
 
       public List<Dependency> getDependencies()
@@ -202,6 +231,9 @@ public class OsgifyModelBuilder
    @Inject
    private VersionRangeResolver versionRangeResolver;
 
+   @Inject
+   private BundleManifestAppender manifestAppender;
+
    public Request createVirtualBundleRequest(String groupId, String artifactId, String version, String classifier,
       Collection<Dependency> dependencies, String scope, boolean isFatBundle,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository)
@@ -275,6 +307,7 @@ public class OsgifyModelBuilder
          walkerRequest.setReactorProjects(currentSession.getProjects());
       }
       walkerRequest.setArtifactFilter(newResolutionFilter(request.getScope()));
+      walkerRequest.setResolveSource(request.isIncludeSource());
 
       walkerRequest.setArtifact(request.getArtifact());
       walkerRequest.setResolveRoot(!request.isVirtualArtifact());
@@ -337,6 +370,44 @@ public class OsgifyModelBuilder
          {
             bundleReference.setVersionRange(versionRangeResolver.resolveVersionRange(bundleReference));
          }
+      }
+
+      if (!request.isSkipManifestDerivation())
+      {
+         manifestAppender.append(context);
+      }
+
+      if (request.isIncludeSource())
+      {
+         final List<BundleCandidate> sourceCandidates = new ArrayList<BundleCandidate>();
+         for (BundleCandidate bundleCandidate : context.getBundles())
+         {
+            final File sourceJar = bundleCollector.getBundleNodeToSourceJarMap().get(bundleCandidate);
+            final Version version = bundleCandidate.getVersion();
+
+            final String symbolicName = bundleCandidate.getSymbolicName() + ".source";
+
+            BundleCandidate sourceCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
+            sourceCandidate.setLocation(sourceJar);
+            sourceCandidate.setSymbolicName(symbolicName);
+            sourceCandidate.setVersion(version);
+
+            if (!request.isSkipManifestDerivation())
+            {
+               BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
+               manifest.setBundleSymbolicName(symbolicName);
+               manifest.setBundleVersion(version);
+
+               // Eclipse-SourceBundle: com.ibm.icu;version="4.4.2.v20110823";roots:="."
+               manifest.setHeader("Eclipse-SourceBundle", bundleCandidate.getSymbolicName() + ";version=\"" + version
+                  + "\";roots:=\".\"");
+               sourceCandidate.setManifest(manifest);
+            }
+
+            sourceCandidates.add(sourceCandidate);
+         }
+
+         context.getBundles().addAll(sourceCandidates);
       }
 
       return context;

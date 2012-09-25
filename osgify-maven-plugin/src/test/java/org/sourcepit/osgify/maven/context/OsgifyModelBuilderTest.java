@@ -78,6 +78,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
+         request.setSkipManifestDerivation(true);
 
          OsgifyContext context = builder.build(request);
 
@@ -137,7 +138,8 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setResolveDependenciesOfNativeBundles(true);
-
+         request.setSkipManifestDerivation(true);
+         
          OsgifyContext context = builder.build(request);
 
          assertThat(context, notNullValue());
@@ -212,6 +214,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setFatBundle(true);
+         request.setSkipManifestDerivation(true);
          request.setResolveDependenciesOfNativeBundles(true); // assure that resolution of dependencies of dependencies
                                                               // is suppressed by the 'fat bundle' flag
 
@@ -439,6 +442,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          }
 
          request.setVirtualArtifact(true);
+         request.setSkipManifestDerivation(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -531,6 +535,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          }
 
          request.setVirtualArtifact(true);
+         request.setSkipManifestDerivation(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -626,6 +631,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          }
 
          request.setVirtualArtifact(true);
+         request.setSkipManifestDerivation(true);
 
          OsgifyContext context = builder.build(request);
          assertThat(context, notNullValue());
@@ -810,7 +816,8 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
       request.setArtifact(project.getArtifact());
       request.setLocalRepository(localRepository);
       request.setResolveDependenciesOfNativeBundles(true);
-
+      request.setSkipManifestDerivation(true);
+      
       return builder.build(request);
    }
 }

@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
-import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 
@@ -35,9 +34,6 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
 
    @Inject
    private OsgifyModelBuilder modelBuilder;
-
-   @Inject
-   private BundleManifestAppender manifestAppender;
 
    /** @parameter default-value="${localRepository}" */
    protected ArtifactRepository localRepository;
@@ -78,8 +74,6 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
          Artifact.SCOPE_COMPILE, false, project.getRemoteArtifactRepositories(), localRepository);
 
       final OsgifyContext context = modelBuilder.build(request);
-
-      manifestAppender.append(context);
 
       final File contextFile = getContextFile(goal);
       LOGGER.info("Writing osgifier context to " + contextFile.getAbsolutePath());

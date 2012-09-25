@@ -51,9 +51,6 @@ public class P2UpdateSiteGenerator
    private OsgifyModelBuilder modelBuilder;
 
    @Inject
-   private BundleManifestAppender manifestAppender;
-
-   @Inject
    private Repackager repackager;
 
    @Inject
@@ -77,12 +74,13 @@ public class P2UpdateSiteGenerator
       return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
    }
 
-   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies,
+   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
       final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
          Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
+      request.setIncludeSource(includeSources);
       return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
    }
 
@@ -92,7 +90,6 @@ public class P2UpdateSiteGenerator
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
 
       final OsgifyContext model = modelBuilder.build(request);
-      manifestAppender.append(model);
 
       final boolean compressRepository = options.getBoolean(OPTION_COMPRESS_REPOSITORY, true);
       final int forkedProcessTimeoutInSeconds = options.getInt(OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS, 0);

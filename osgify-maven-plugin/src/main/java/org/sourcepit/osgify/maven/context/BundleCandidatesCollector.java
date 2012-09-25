@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.maven.context;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
 {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
+   private final Map<BundleCandidate, File> bundleNodeToSourceJar = new LinkedHashMap<BundleCandidate, File>();
 
    private final boolean resolveDependenciesOfNativeBundles;
 
@@ -44,6 +46,11 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
    public List<BundleCandidate> getBundleCandidates()
    {
       return new ArrayList<BundleCandidate>(mvnIdToBundleNode.values());
+   }
+
+   public Map<BundleCandidate, File> getBundleNodeToSourceJarMap()
+   {
+      return bundleNodeToSourceJar;
    }
 
    public boolean visitNode(Artifact artifact, MavenProject project)
@@ -67,6 +74,12 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
          return true;
       }
       return false;
+   }
+
+   public void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact)
+   {
+      final BundleCandidate bundleCandidate = mvnIdToBundleNode.get(artifact.getId());
+      bundleNodeToSourceJar.put(bundleCandidate, sourceArtifact.getFile());
    }
 
    protected boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)

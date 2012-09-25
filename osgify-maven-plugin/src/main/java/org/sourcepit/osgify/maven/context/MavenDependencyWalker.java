@@ -30,6 +30,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.common.maven.util.MavenProjectUtils;
 import org.sourcepit.common.utils.lang.Exceptions;
+import org.sourcepit.common.utils.lang.PipedException;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -84,7 +85,7 @@ public class MavenDependencyWalker
       for (Artifact artifact : artifacts)
       {
          final MavenProject project = findOriginatingProject(reactorProjects, artifact);
-         if (request.getHandler().visitNode(artifact, project))
+         if (visitNode(request, artifact, project, currentResolutionContext))
          {
             final Set<String> resolvedIds = new HashSet<String>();
             if (!request.isResolveRoot())
@@ -108,6 +109,50 @@ public class MavenDependencyWalker
             {
                resolveAndWalk(request, reactorProjects, currentResolutionContext, artifact, project, resolvedIds);
             }
+         }
+      }
+   }
+
+   private boolean visitNode(Request request, Artifact artifact, final MavenProject project,
+      Stack<MavenProject> resolutionContext)
+   {
+      final boolean visit = request.getHandler().visitNode(artifact, project);
+      if (visit && request.isResolveSource() && "jar".equals(artifact.getType()))
+      {
+         resolveSource(request, artifact, project, resolutionContext);
+      }
+      return visit;
+   }
+
+   private void resolveSource(Request request, Artifact artifact, final MavenProject project,
+      Stack<MavenProject> resolutionContext)
+   {
+      final Artifact sourceArtifact = repositorySystem.createArtifactWithClassifier(artifact.getGroupId(),
+         artifact.getArtifactId(), artifact.getVersion(), artifact.getType(), "sources");
+
+      if (project != null)
+      {
+         resolutionContext.push(project);
+      }
+
+      final MavenProject currentProject = resolutionContext.isEmpty() ? null : resolutionContext.peek();
+      try
+      {
+         resolve(request, sourceArtifact, currentProject, true, null);
+         request.getHandler().visitSourceNode(artifact, project, sourceArtifact);
+      }
+      catch (PipedException e)
+      {
+         if (e.adapt(ArtifactNotFoundException.class) == null)
+         {
+            throw e;
+         }
+      }
+      finally
+      {
+         if (project != null)
+         {
+            resolutionContext.pop();
          }
       }
    }
@@ -141,7 +186,7 @@ public class MavenDependencyWalker
       Artifact parentArtifact, Artifact artifact, Set<String> resolvedIds)
    {
       final MavenProject project = findOriginatingProject(reactorProjects, artifact);
-      if (request.getHandler().visitNode(artifact, project))
+      if (visitNode(request, artifact, project, resolutionContext))
       {
          resolveAndWalk(request, reactorProjects, resolutionContext, artifact, project, resolvedIds);
       }
@@ -251,6 +296,8 @@ public class MavenDependencyWalker
    {
       boolean visitNode(Artifact artifact, MavenProject project);
 
+      void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact);
+
       void handleDependency(Artifact fromArtifact, Artifact toArtifact);
    }
 
@@ -261,6 +308,7 @@ public class MavenDependencyWalker
       private ArtifactFilter artifactFilter;
       private Artifact artifact;
       private boolean resolveRoot = true;
+      private boolean resolveSource;
       private List<Dependency> dependencies;
       private List<MavenProject> reactorProjects;
 
@@ -274,6 +322,16 @@ public class MavenDependencyWalker
          return artifact;
       }
 
+      public void setResolveSource(boolean resolveSource)
+      {
+         this.resolveSource = resolveSource;
+      }
+      
+      public boolean isResolveSource()
+      {
+         return resolveSource;
+      }
+      
       public List<MavenProject> getReactorProjects()
       {
          return reactorProjects;

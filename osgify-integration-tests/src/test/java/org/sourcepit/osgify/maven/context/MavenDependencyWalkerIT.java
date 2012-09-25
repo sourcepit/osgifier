@@ -94,8 +94,12 @@ public class MavenDependencyWalkerIT extends EmbeddedMavenEnvironmentTest
          {
             artifactToDependenciesMap.get(fromArtifact.getArtifactId()).add(toArtifact.getArtifactId());
          }
+
+         public void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact)
+         {
+         }
       });
-      
+
       session.setCurrentProject(project);
       dependencyWalker.walk(request);
 
@@ -161,6 +165,10 @@ public class MavenDependencyWalkerIT extends EmbeddedMavenEnvironmentTest
          public void handleDependency(Artifact fromArtifact, Artifact toArtifact)
          {
             artifactToDependenciesMap.get(fromArtifact.getArtifactId()).add(toArtifact.getArtifactId());
+         }
+
+         public void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact)
+         {
          }
       });
       dependencyWalker.walk(request);
