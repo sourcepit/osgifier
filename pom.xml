@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.sourcepit</groupId>
 		<artifactId>srcpit-parent</artifactId>
-		<version>7-SNAPSHOT</version>
+		<version>7</version>
 	</parent>
 	<groupId>org.sourcepit.tools</groupId>
 	<artifactId>osgify</artifactId>
@@ -29,7 +29,7 @@
 			<dependency>
 				<groupId>org.sourcepit</groupId>
 				<artifactId>guice-plexus-bridge</artifactId>
-				<version>0.1.0-alpha-4</version>
+				<version>0.1.0-alpha-5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit</groupId>
@@ -39,38 +39,38 @@
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-utils</artifactId>
-				<version>0.1.0-SNAPSHOT</version>
+				<version>0.1.0-alpha-4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-constraints</artifactId>
-				<version>0.1.0-SNAPSHOT</version>
+				<version>0.1.0-alpha-2</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-manifest</artifactId>
-				<version>0.1.0-alpha-5</version>
+				<version>0.1.0-alpha-7</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-modeling</artifactId>
-				<version>0.1.0-alpha-2</version>
+				<version>0.1.0-alpha-3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-modeling</artifactId>
-				<version>0.1.0-alpha-2</version>
+				<version>0.1.0-alpha-3</version>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-testing</artifactId>
-				<version>0.1.0-alpha-5</version>
+				<version>0.1.0-alpha-6</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-maven</artifactId>
-				<version>0.1.0-SNAPSHOT</version>
+				<version>0.1.0-alpha-6</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.tools</groupId>
