@@ -12,12 +12,12 @@
 		<dependency>
 			<groupId>org.sourcepit.test</groupId>
 			<artifactId>org.sourcepit.test.bundle</artifactId>
-			<version>${project.version}</version>
+			<version>\${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.test</groupId>
 			<artifactId>org.sourcepit.test.bundle</artifactId>
-			<version>${project.version}</version>
+			<version>\${project.version}</version>
 			<classifier>license</classifier>
 			<type>txt</type>
 		</dependency>
