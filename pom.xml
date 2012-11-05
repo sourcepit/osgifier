@@ -142,7 +142,7 @@
 				<plugin>
 					<groupId>org.sourcepit.tools</groupId>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>0.1.0-SNAPSHOT</version>
+					<version>0.1.0-alpha-3</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
