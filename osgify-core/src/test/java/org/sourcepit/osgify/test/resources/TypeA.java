@@ -11,8 +11,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hamcrest.BaseMatcher;
 import org.hamcrest.Matcher;
-import org.junit.internal.matchers.CombinableMatcher;
 
 public class TypeA
 {
@@ -46,7 +46,7 @@ public class TypeA
          }
       };
 
-      public CombinableMatcher<E> and(Matcher<? extends E> matcher)
+      public BaseMatcher<E> and(Matcher<? extends E> matcher)
       {
          return null;
       }

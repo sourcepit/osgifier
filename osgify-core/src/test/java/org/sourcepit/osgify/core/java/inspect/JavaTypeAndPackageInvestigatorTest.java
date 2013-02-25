@@ -187,7 +187,7 @@ public class JavaTypeAndPackageInvestigatorTest
       expectedRefs.add("java.lang.Short");
       expectedRefs.add("java.lang.Boolean");
       expectedRefs.add("org.hamcrest.Matcher");
-      expectedRefs.add("org.junit.internal.matchers.CombinableMatcher");
+      expectedRefs.add("org.hamcrest.BaseMatcher");
       expectedRefs.add("java.lang.Object");
       expectedRefs.add("java.lang.Long");
       expectedRefs.add("java.util.HashMap");
