@@ -38,6 +38,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @ordered
     */
    protected static final int MAJOR_EDEFAULT = 0;
+
    /**
     * The cached value of the '{@link #getMajor() <em>Major</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -48,6 +49,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @ordered
     */
    protected int major = MAJOR_EDEFAULT;
+
    /**
     * The default value of the '{@link #getMinor() <em>Minor</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -58,6 +60,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @ordered
     */
    protected static final int MINOR_EDEFAULT = 0;
+
    /**
     * The cached value of the '{@link #getMinor() <em>Minor</em>}' attribute.
     * <!-- begin-user-doc -->

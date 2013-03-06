@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.model.java;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.sourcepit.modeling.common.AbstractAnnotatableTest;
+import org.sourcepit.common.modeling.AbstractAnnotatableTest;
 
 public class AnnotatableTest extends AbstractAnnotatableTest
 {

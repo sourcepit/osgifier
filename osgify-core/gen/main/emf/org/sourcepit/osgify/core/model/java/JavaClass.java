@@ -26,7 +26,6 @@ package org.sourcepit.osgify.core.model.java;
  */
 public interface JavaClass extends JavaFile
 {
-
    /**
     * Returns the value of the '<em><b>Major</b></em>' attribute.
     * <!-- begin-user-doc -->
@@ -80,4 +79,5 @@ public interface JavaClass extends JavaFile
     * @generated
     */
    void setMinor(int value);
+
 } // JavaClass

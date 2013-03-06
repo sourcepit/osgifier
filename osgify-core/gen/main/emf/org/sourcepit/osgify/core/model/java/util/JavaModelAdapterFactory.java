@@ -10,9 +10,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.modeling.common.Annotatable;
-import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.Annotatable;
+import org.sourcepit.common.modeling.Extendable;
+import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.Directory;
 import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.ImportDeclaration;
@@ -579,7 +579,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.Extendable <em>Extendable</em>}
     * '.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -587,7 +587,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.Extendable
+    * @see org.sourcepit.common.modeling.Extendable
     * @generated
     */
    public Adapter createExtendableAdapter()
@@ -596,7 +596,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Annotatable
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.Annotatable
     * <em>Annotatable</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -604,7 +604,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.Annotatable
+    * @see org.sourcepit.common.modeling.Annotatable
     * @generated
     */
    public Adapter createAnnotatableAdapter()
@@ -613,7 +613,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.XAnnotatable
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.XAnnotatable
     * <em>XAnnotatable</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -621,7 +621,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.XAnnotatable
+    * @see org.sourcepit.common.modeling.XAnnotatable
     * @generated
     */
    public Adapter createXAnnotatableAdapter()

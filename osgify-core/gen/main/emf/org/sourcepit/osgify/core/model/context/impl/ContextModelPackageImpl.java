@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.common.manifest.osgi.BundleManifestPackage;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.common.modeling.CommonModelingPackage;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -109,7 +109,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       isInited = true;
 
       // Initialize simple dependencies
-      CommonModelPackage.eINSTANCE.eClass();
+      CommonModelingPackage.eINSTANCE.eClass();
       ManifestPackage.eINSTANCE.eClass();
 
       // Obtain or create and register interdependencies
@@ -380,8 +380,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
-      CommonModelPackage theCommonModelPackage = (CommonModelPackage) EPackage.Registry.INSTANCE
-         .getEPackage(CommonModelPackage.eNS_URI);
+      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE
+         .getEPackage(CommonModelingPackage.eNS_URI);
       JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
          .getEPackage(JavaModelPackage.eNS_URI);
       BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
@@ -392,9 +392,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      osgifyContextEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      bundleCandidateEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
-      bundleReferenceEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      osgifyContextEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
+      bundleCandidateEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
+      bundleReferenceEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
 
       // Initialize classes and features; add operations and parameters
       initEClass(osgifyContextEClass, OsgifyContext.class, "OsgifyContext", !IS_ABSTRACT, !IS_INTERFACE,
@@ -405,7 +405,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
 
       initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEAttribute(getBundleCandidate_Location(), theCommonModelPackage.getEFile(), "location", null, 1, 1,
+      initEAttribute(getBundleCandidate_Location(), theCommonModelingPackage.getEFile(), "location", null, 1, 1,
          BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
       initEReference(getBundleCandidate_Content(), theJavaModelPackage.getJavaResourceBundle(), null, "content", null,

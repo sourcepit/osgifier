@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.java.inspect;
 import java.util.Set;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.sourcepit.modeling.common.Annotation;
+import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 public class JavaTypeReferencesAnalyzer implements IJavaTypeAnalyzer

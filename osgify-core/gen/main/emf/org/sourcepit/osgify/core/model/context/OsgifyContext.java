@@ -7,7 +7,7 @@
 package org.sourcepit.osgify.core.model.context;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->

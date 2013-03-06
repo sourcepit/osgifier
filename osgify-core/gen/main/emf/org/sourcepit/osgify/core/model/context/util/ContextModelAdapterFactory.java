@@ -10,9 +10,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.modeling.common.Annotatable;
-import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.Annotatable;
+import org.sourcepit.common.modeling.Extendable;
+import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
@@ -197,7 +197,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Extendable <em>Extendable</em>}
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.Extendable <em>Extendable</em>}
     * '.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -205,7 +205,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.Extendable
+    * @see org.sourcepit.common.modeling.Extendable
     * @generated
     */
    public Adapter createExtendableAdapter()
@@ -214,7 +214,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.Annotatable
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.Annotatable
     * <em>Annotatable</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -222,7 +222,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.Annotatable
+    * @see org.sourcepit.common.modeling.Annotatable
     * @generated
     */
    public Adapter createAnnotatableAdapter()
@@ -231,7 +231,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modeling.common.XAnnotatable
+    * Creates a new adapter for an object of class '{@link org.sourcepit.common.modeling.XAnnotatable
     * <em>XAnnotatable</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -239,7 +239,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modeling.common.XAnnotatable
+    * @see org.sourcepit.common.modeling.XAnnotatable
     * @generated
     */
    public Adapter createXAnnotatableAdapter()

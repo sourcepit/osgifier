@@ -11,7 +11,7 @@ import java.io.File;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 
 /**
@@ -50,7 +50,7 @@ public interface BundleCandidate extends XAnnotatable
     * @return the value of the '<em>Location</em>' attribute.
     * @see #setLocation(File)
     * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_Location()
-    * @model dataType="org.sourcepit.modeling.common.EFile" required="true"
+    * @model dataType="org.sourcepit.common.modeling.EFile" required="true"
     * @generated
     */
    File getLocation();

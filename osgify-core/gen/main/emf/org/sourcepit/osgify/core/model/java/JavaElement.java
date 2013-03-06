@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.core.model.java;
 
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->

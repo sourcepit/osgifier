@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.modeling.common.utils.EcoreUtils;
-import org.sourcepit.modeling.common.utils.EcoreUtils.RunnableWithEObject;
+import org.sourcepit.common.modeling.utils.EcoreUtils;
+import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

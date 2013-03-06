@@ -46,7 +46,7 @@ public class JavaTypeReferencesCollectorTest
       assertTrue(jarFile.exists());
 
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(
-         new URL[] { jarFile.toURL() }));
+         new URL[] { jarFile.toURI().toURL() }));
 
       JavaClass jClass = classRepo.loadClass(TypeA.class.getName());
 

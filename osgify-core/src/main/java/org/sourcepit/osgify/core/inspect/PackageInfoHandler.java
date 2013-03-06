@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.concurrent.locks.ReadWriteLock;
 
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modeling.common.Annotation;
+import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;

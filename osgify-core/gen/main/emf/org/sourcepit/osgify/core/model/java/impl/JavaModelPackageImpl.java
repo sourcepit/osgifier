@@ -6,7 +6,6 @@
 
 package org.sourcepit.osgify.core.model.java.impl;
 
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -15,7 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.sourcepit.common.manifest.ManifestPackage;
-import org.sourcepit.modeling.common.CommonModelPackage;
+import org.sourcepit.common.modeling.CommonModelingPackage;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
 import org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl;
 import org.sourcepit.osgify.core.model.java.Directory;
@@ -263,7 +262,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       isInited = true;
 
       // Initialize simple dependencies
-      CommonModelPackage.eINSTANCE.eClass();
+      CommonModelingPackage.eINSTANCE.eClass();
       ManifestPackage.eINSTANCE.eClass();
 
       // Obtain or create and register interdependencies
@@ -768,8 +767,8 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
-      CommonModelPackage theCommonModelPackage = (CommonModelPackage) EPackage.Registry.INSTANCE
-         .getEPackage(CommonModelPackage.eNS_URI);
+      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE
+         .getEPackage(CommonModelingPackage.eNS_URI);
 
       // Create type parameters
 
@@ -777,11 +776,11 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
 
       // Add supertypes to classes
       resourceEClass.getESuperTypes().add(this.getNamed());
-      resourceEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      resourceEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
       directoryEClass.getESuperTypes().add(this.getResource());
       fileEClass.getESuperTypes().add(this.getResource());
       javaElementEClass.getESuperTypes().add(this.getNamed());
-      javaElementEClass.getESuperTypes().add(theCommonModelPackage.getXAnnotatable());
+      javaElementEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
       qualifiedJavaElementEClass.getESuperTypes().add(this.getJavaElement());
       javaResourceBundleEClass.getESuperTypes().add(this.getJavaElement());
       javaProjectEClass.getESuperTypes().add(this.getJavaResourceBundle());

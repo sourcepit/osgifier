@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotatable;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.Annotatable;
+import org.sourcepit.common.modeling.Annotation;
+import org.sourcepit.common.modeling.CommonModelingPackage;
+import org.sourcepit.common.modeling.Extendable;
+import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -178,7 +178,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
       if (annotations == null)
       {
          annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+            JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelingPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -324,6 +324,19 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    public String getAnnotationData(String source, String key)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String setAnnotationData(String source, String key, String value)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -588,7 +601,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
          switch (derivedFeatureID)
          {
             case JavaModelPackage.JAVA_TYPE__EXTENSIONS :
-               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+               return CommonModelingPackage.EXTENDABLE__EXTENSIONS;
             default :
                return -1;
          }
@@ -598,7 +611,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
          switch (derivedFeatureID)
          {
             case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
-               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+               return CommonModelingPackage.ANNOTATABLE__ANNOTATIONS;
             default :
                return -1;
          }
@@ -627,7 +640,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+            case CommonModelingPackage.EXTENDABLE__EXTENSIONS :
                return JavaModelPackage.JAVA_TYPE__EXTENSIONS;
             default :
                return -1;
@@ -637,7 +650,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
+            case CommonModelingPackage.ANNOTATABLE__ANNOTATIONS :
                return JavaModelPackage.JAVA_TYPE__ANNOTATIONS;
             default :
                return -1;

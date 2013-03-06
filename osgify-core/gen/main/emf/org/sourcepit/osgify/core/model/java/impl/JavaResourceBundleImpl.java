@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.sourcepit.modeling.common.Annotatable;
-import org.sourcepit.modeling.common.Annotation;
-import org.sourcepit.modeling.common.CommonModelPackage;
-import org.sourcepit.modeling.common.Extendable;
-import org.sourcepit.modeling.common.XAnnotatable;
+import org.sourcepit.common.modeling.Annotatable;
+import org.sourcepit.common.modeling.Annotation;
+import org.sourcepit.common.modeling.CommonModelingPackage;
+import org.sourcepit.common.modeling.Extendable;
+import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -181,7 +181,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       if (annotations == null)
       {
          annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
-            JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS, CommonModelPackage.ANNOTATION__TARGET);
+            JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS, CommonModelingPackage.ANNOTATION__TARGET);
       }
       return annotations;
    }
@@ -314,6 +314,19 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
     * @generated
     */
    public String getAnnotationData(String source, String key)
+   {
+      // TODO: implement this method
+      // Ensure that you remove @generated or mark it @generated NOT
+      throw new UnsupportedOperationException();
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String setAnnotationData(String source, String key, String value)
    {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
@@ -544,7 +557,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
          switch (derivedFeatureID)
          {
             case JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS :
-               return CommonModelPackage.EXTENDABLE__EXTENSIONS;
+               return CommonModelingPackage.EXTENDABLE__EXTENSIONS;
             default :
                return -1;
          }
@@ -554,7 +567,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
          switch (derivedFeatureID)
          {
             case JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS :
-               return CommonModelPackage.ANNOTATABLE__ANNOTATIONS;
+               return CommonModelingPackage.ANNOTATABLE__ANNOTATIONS;
             default :
                return -1;
          }
@@ -583,7 +596,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.EXTENDABLE__EXTENSIONS :
+            case CommonModelingPackage.EXTENDABLE__EXTENSIONS :
                return JavaModelPackage.JAVA_RESOURCE_BUNDLE__EXTENSIONS;
             default :
                return -1;
@@ -593,7 +606,7 @@ public abstract class JavaResourceBundleImpl extends EObjectImpl implements Java
       {
          switch (baseFeatureID)
          {
-            case CommonModelPackage.ANNOTATABLE__ANNOTATIONS :
+            case CommonModelingPackage.ANNOTATABLE__ANNOTATIONS :
                return JavaModelPackage.JAVA_RESOURCE_BUNDLE__ANNOTATIONS;
             default :
                return -1;

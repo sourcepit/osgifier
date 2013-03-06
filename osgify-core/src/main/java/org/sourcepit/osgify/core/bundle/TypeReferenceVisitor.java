@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.bundle;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.modeling.common.Annotation;
+import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 

@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modeling.common.impl.XAnnotatableImpl;
+import org.sourcepit.common.modeling.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
