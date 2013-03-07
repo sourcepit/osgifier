@@ -4,7 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Named" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Resource" abstract="true" eSuperTypes="#//Named ../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" abstract="true" eSuperTypes="#//Named ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
     <eOperations name="accept">
       <eParameters name="visitor" lowerBound="1" eType="#//ResourceVisitor"/>
     </eOperations>
@@ -36,7 +36,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="File" eSuperTypes="#//Resource"/>
   <eClassifiers xsi:type="ecore:EClass" name="JavaElement" abstract="true" interface="true"
-      eSuperTypes="#//Named ../../../../common-modeling/src/main/emf/common.ecore#//XAnnotatable">
+      eSuperTypes="#//Named ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
     <eOperations name="getResourceBundle" eType="#//JavaResourceBundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QualifiedJavaElement" abstract="true"

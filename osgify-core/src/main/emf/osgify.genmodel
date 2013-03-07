@@ -6,7 +6,7 @@
     editorDirectory="/osgifyme-core.editor/gen/main/emf" modelPluginID="" modelName="Osgify"
     modelPluginClass="" updateClasspath="false" testsDirectory="/osgify-core.tests/gen/test/emf"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
-    copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/common.genmodel#//common ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
+    copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/CommonModeling.genmodel#//modeling ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
   <foreignModel>Tree.ecore</foreignModel>
   <genPackages prefix="ContextModel" basePackage="org.sourcepit.osgify.core.model"
       disposableProviderFactory="true" ecorePackage="Tree.ecore#/">
