@@ -383,6 +383,11 @@ public class OsgifyModelBuilder
          for (BundleCandidate bundleCandidate : context.getBundles())
          {
             final File sourceJar = bundleCollector.getBundleNodeToSourceJarMap().get(bundleCandidate);
+            if (sourceJar == null || !sourceJar.exists())
+            {
+               continue;
+            }
+
             final Version version = bundleCandidate.getVersion();
 
             final String symbolicName = bundleCandidate.getSymbolicName() + ".source";
