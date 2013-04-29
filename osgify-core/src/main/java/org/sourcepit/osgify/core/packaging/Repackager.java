@@ -164,7 +164,7 @@ public class Repackager
          {
             if (processedEntires.add(entryName))
             {
-               destJarOut.putNextEntry(srcEntry);
+               destJarOut.putNextEntry(new JarEntry(srcEntry.getName()));
                IOUtils.copy(srcJarIn, destJarOut);
                destJarOut.closeEntry();
             }
