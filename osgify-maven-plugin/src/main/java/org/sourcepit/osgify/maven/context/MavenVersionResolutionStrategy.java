@@ -9,7 +9,7 @@ package org.sourcepit.osgify.maven.context;
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.common.maven.model.VersionedIdentifiable;
+import org.sourcepit.common.maven.model.MavenProjectCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractVersionResolutionStrategy;
@@ -25,7 +25,7 @@ public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStr
    @Override
    public Version resolveVersion(BundleCandidate bundleCandidate)
    {
-      final VersionedIdentifiable mavenArtifact = bundleCandidate.getExtension(VersionedIdentifiable.class);
+      final MavenProjectCoordinates mavenArtifact = bundleCandidate.getExtension(MavenProjectCoordinates.class);
       if (mavenArtifact != null)
       {
          final String mvnVersion = mavenArtifact.getVersion();

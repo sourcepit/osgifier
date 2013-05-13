@@ -39,7 +39,7 @@ public class MavenVersionRangeResolutionStrategy extends AbstractVersionRangeRes
       final MavenDependency mavenDependency = bundleReference.getExtension(MavenDependency.class);
       if (mavenDependency != null)
       {
-         return mavenDependency.getVersionRange();
+         return mavenDependency.getVersionConstraint();
       }
       return null;
    }

@@ -6,8 +6,8 @@
 
 package org.sourcepit.osgify.maven.p2;
 
-import static org.sourcepit.common.utils.io.IOResources.buffOut;
-import static org.sourcepit.common.utils.io.IOResources.fileOut;
+import static org.sourcepit.common.utils.io.IO.buffOut;
+import static org.sourcepit.common.utils.io.IO.fileOut;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
