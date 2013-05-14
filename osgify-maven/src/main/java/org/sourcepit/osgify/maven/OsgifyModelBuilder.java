@@ -16,8 +16,10 @@ import javax.inject.Named;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.project.DependencyResolutionException;
 import org.apache.maven.project.ProjectBuildingException;
+import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyModelResolver;
+import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.impl.OsgifyStubModelCreator;
 
@@ -26,7 +28,7 @@ public class OsgifyModelBuilder
 {
    @Inject
    private DependencyModelResolver dependencyModelResolver;
-   
+
    @Inject
    private OsgifyStubModelCreator stubModelCreator;
 
@@ -34,9 +36,13 @@ public class OsgifyModelBuilder
    {
       final DependencyModel dependencyModel;
 
+      final boolean includeSource = true;
+
+      final ArtifactAttachmentFactory attachmentFactory = includeSource ? new JavaSourceAttachmentFactory() : null;
+
       try
       {
-         dependencyModel = dependencyModelResolver.resolve(dependencies);
+         dependencyModel = dependencyModelResolver.resolve(dependencies, attachmentFactory);
       }
       catch (ProjectBuildingException e)
       {
