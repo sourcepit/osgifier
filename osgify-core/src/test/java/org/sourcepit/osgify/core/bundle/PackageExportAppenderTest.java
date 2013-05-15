@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -25,6 +26,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
@@ -230,5 +232,36 @@ public class PackageExportAppenderTest extends InjectedTest
       exportAppender.append(bundle);
       assertThat(manifest.getHeaderValue(EXPORT_PACKAGE),
          IsEqual.equalTo("a;version=1.0.1,a2;version=1.0.1,d;version=1.0.1,z;version=1.0.1"));
+   }
+
+   @Test
+   public void testDoNotExportPackagesAlreadyExportedByDependency()
+   {
+      JavaArchive jArchivB = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendType(jArchivB, "org.sourcepit.bundleB.Foo", 47);
+
+      BundleCandidate bundleB = newBundleCandidate(jArchivB);
+      BundleManifest manifestB = bundleB.getManifest();
+      manifestB.setBundleVersion("2");
+
+      JavaArchive jArchiveA = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendType(jArchiveA, "org.sourcepit.bundleA.Foo", 47);
+      appendType(jArchiveA, "org.sourcepit.bundleB.Foo", 47);
+
+      BundleCandidate bundleA = newBundleCandidate(jArchiveA);
+      BundleManifest manifestA = bundleA.getManifest();
+      manifestA.setBundleVersion("1");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setTarget(bundleB);
+      bundleA.getDependencies().add(reference);
+
+      exportAppender.append(bundleB);
+      exportAppender.append(bundleA);
+
+      EList<PackageExport> exportPackage = manifestA.getExportPackage();
+      assertEquals(1, exportPackage.size());
+      assertEquals(1, exportPackage.get(0).getPackageNames().size());
+      assertEquals("org.sourcepit.bundleA", exportPackage.get(0).getPackageNames().get(0));
    }
 }

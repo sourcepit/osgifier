@@ -71,9 +71,17 @@ public final class OsgifyContextUtils
       final StringBuilder sb = new StringBuilder();
       for (BundleCandidate bundleCandidate : dependencyTrail)
       {
-         sb.append(bundleCandidate.getSymbolicName());
-         sb.append(":");
-         sb.append(bundleCandidate.getVersion().toMinimalString());
+         final String symbolicName = bundleCandidate.getSymbolicName();
+         if (symbolicName == null)
+         {
+            sb.append(bundleCandidate.getLocation());
+         }
+         else
+         {
+            sb.append(symbolicName);
+            sb.append(":");
+            sb.append(bundleCandidate.getVersion().toMinimalString());
+         }
          sb.append(" -> ");
       }
       sb.delete(sb.length() - 4, sb.length());

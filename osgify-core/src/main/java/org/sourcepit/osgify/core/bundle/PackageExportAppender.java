@@ -29,6 +29,7 @@ import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -63,7 +64,7 @@ public class PackageExportAppender
          throw new IllegalArgumentException("Manifest of bundle " + bundle.getSymbolicName() + " must not be null.");
       }
 
-      final Map<String, List<JavaPackage>> nameToJPackagesMap = determinePackagesToExport(jBundle,
+      final Map<String, List<JavaPackage>> nameToJPackagesMap = determinePackagesToExport(bundle, jBundle,
          manifest.getBundleRequiredExecutionEnvironment());
 
       final List<String> packageNames = new ArrayList<String>(nameToJPackagesMap.keySet());
@@ -86,13 +87,34 @@ public class PackageExportAppender
       manifest.getExportPackage(true).add(packageExport);
    }
 
-   private Map<String, List<JavaPackage>> determinePackagesToExport(JavaResourceBundle jBundle,
+   private Map<String, List<JavaPackage>> determinePackagesToExport(BundleCandidate bundle, JavaResourceBundle jBundle,
       EList<String> executionEnvironments)
    {
       final Map<String, List<JavaPackage>> nameToJPackagesMap = new HashMap<String, List<JavaPackage>>();
       collectPackagesToExport(jBundle, nameToJPackagesMap);
       filterExecutionEnvironmentPackages(nameToJPackagesMap, executionEnvironments);
+      filterPackagesFromReferencedBundles(nameToJPackagesMap, bundle.getDependencies());
       return nameToJPackagesMap;
+   }
+
+   private void filterPackagesFromReferencedBundles(Map<String, List<JavaPackage>> nameToJPackagesMap,
+      EList<BundleReference> dependencies)
+   {
+      for (BundleReference bundleReference : dependencies)
+      {
+         final BundleCandidate referencedBundle = bundleReference.getTarget();
+         final EList<PackageExport> exportPackage = referencedBundle.getManifest().getExportPackage();
+         if (exportPackage != null)
+         {
+            for (PackageExport packageExport : exportPackage)
+            {
+               for (String packageName : packageExport.getPackageNames())
+               {
+                  nameToJPackagesMap.remove(packageName);
+               }
+            }
+         }
+      }
    }
 
    private Version determinePackageVersion(BundleManifest manifest, String packageName, List<JavaPackage> jPackages)

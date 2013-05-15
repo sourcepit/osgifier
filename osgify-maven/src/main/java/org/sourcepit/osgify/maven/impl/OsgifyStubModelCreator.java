@@ -28,18 +28,19 @@ public class OsgifyStubModelCreator
 {
    public OsgifyContext create(DependencyModel dependencyModel)
    {
+      final OsgifyContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifyContext();
+      
       final Map<MavenArtifact, BundleCandidate> artifactToBundle = new HashMap<MavenArtifact, BundleCandidate>();
       for (MavenArtifact artifact : dependencyModel.getArtifacts())
       {
          BundleCandidate bundle = toBundleCandidate(artifact);
+         osgifyModel.getBundles().add(bundle);
          artifactToBundle.put(artifact, bundle);
       }
 
-      final OsgifyContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifyContext();
       for (DependencyTree dependencyTree : dependencyModel.getDependencyTrees())
       {
          final BundleCandidate bundle = artifactToBundle.get(dependencyTree.getArtifact());
-         osgifyModel.getBundles().add(bundle);
          for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
          {
             addBundleReferences(artifactToBundle, bundle, dependencyNode);
