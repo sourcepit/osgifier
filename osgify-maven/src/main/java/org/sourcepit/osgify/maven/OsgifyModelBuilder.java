@@ -27,6 +27,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenArtifact;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyModelResolver;
@@ -65,7 +66,7 @@ public class OsgifyModelBuilder
       public OsgifyContext osgifyModel;
    }
 
-   public Result build(Collection<Dependency> dependencies)
+   public Result build(PropertiesSource properties, Collection<Dependency> dependencies)
    {
       final DependencyModel dependencyModel = resolve(dependencies);
 
@@ -73,7 +74,7 @@ public class OsgifyModelBuilder
       applyBuildOrder(osgifyModel);
       applyJavaContent(osgifyModel);
       applyNativeBundles(osgifyModel);
-      applyManifests(osgifyModel);
+      applyManifests(properties, osgifyModel);
 
       final Result result = new Result();
       result.dependencyModel = dependencyModel;
@@ -136,7 +137,7 @@ public class OsgifyModelBuilder
    @Inject
    private PackageImportAppender packageImports;
 
-   private void applyManifests(OsgifyContext osgifyModel)
+   private void applyManifests(PropertiesSource properties, OsgifyContext osgifyModel)
    {
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
@@ -158,7 +159,7 @@ public class OsgifyModelBuilder
             if (!applySourceBundles(bundle))
             {
                environmentAppender.append(bundle);
-               packageExports.append(bundle);
+               packageExports.append(properties, bundle);
                packageImports.append(bundle);
                dynamicImports.append(bundle);
             }

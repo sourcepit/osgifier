@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
@@ -67,7 +68,7 @@ public class BundleManifestAppender
 
       environmentAppender.append(bundle);
       dynamicImports.append(bundle);
-      packageExports.append(bundle);
+      packageExports.append(new LinkedPropertiesMap(), bundle);
       packageImports.append(bundle);
    }
 }

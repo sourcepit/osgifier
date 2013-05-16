@@ -6,6 +6,8 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static org.sourcepit.common.manifest.osgi.ParameterType.DIRECTIVE;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,9 +24,13 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
+import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.common.manifest.osgi.impl.BundleManifestFactoryImpl;
 import org.sourcepit.common.utils.collections.CollectionUtils;
 import org.sourcepit.common.utils.collections.ValueLookup;
+import org.sourcepit.common.utils.path.PathMatcher;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
@@ -51,7 +57,7 @@ public class PackageExportAppender
       this.execEnvService = execEnvService;
    }
 
-   public void append(@NotNull BundleCandidate bundle)
+   public void append(@NotNull PropertiesSource properties, @NotNull BundleCandidate bundle)
    {
       final JavaResourceBundle jBundle = bundle.getContent();
       if (jBundle == null)
@@ -69,14 +75,19 @@ public class PackageExportAppender
 
       final List<String> packageNames = new ArrayList<String>(nameToJPackagesMap.keySet());
       Collections.sort(packageNames);
+
+      final String filter = properties.get("osgifier.internalPackages");
+      final PathMatcher internalPackages = filter == null ? null : PathMatcher.parsePackagePatterns(filter);
+
       for (String packageName : packageNames)
       {
          final Version version = determinePackageVersion(manifest, packageName, nameToJPackagesMap.get(packageName));
-         appendExport(manifest, packageName, version);
+         appendExport(internalPackages, manifest, packageName, version);
       }
    }
 
-   private void appendExport(final BundleManifest manifest, final String packageName, final Version version)
+   private void appendExport(PathMatcher internalPackages, final BundleManifest manifest, final String packageName,
+      final Version version)
    {
       final PackageExport packageExport = BundleManifestFactory.eINSTANCE.createPackageExport();
       packageExport.getPackageNames().add(packageName);
@@ -84,6 +95,16 @@ public class PackageExportAppender
       {
          packageExport.setVersion(version);
       }
+
+      if (internalPackages != null && internalPackages.isMatch(packageName))
+      {
+         final Parameter parameter = BundleManifestFactoryImpl.eINSTANCE.createParameter();
+         parameter.setName("x-internal");
+         parameter.setValue("true");
+         parameter.setType(DIRECTIVE);
+         packageExport.getParameters().add(parameter);
+      }
+
       manifest.getExportPackage(true).add(packageExport);
    }
 

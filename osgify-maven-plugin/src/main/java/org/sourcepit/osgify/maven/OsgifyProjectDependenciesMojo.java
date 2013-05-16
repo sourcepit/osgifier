@@ -24,6 +24,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
 import org.sourcepit.common.utils.io.Write.ToStream;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.maven.OsgifyModelBuilder.Result;
 
@@ -41,13 +43,19 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
    /** @parameter default-value="${project}" */
    private MavenProject project;
 
+   /** @parameter default-value="**.internal.**, **.internal, **.impl.**, **.impl" */
+   private String internalPackages;
+
    @Inject
    private OsgifyModelBuilder modelBuilder;
 
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
-      final Result result = modelBuilder.build(project.getDependencies());
+      PropertiesMap properties = new LinkedPropertiesMap();
+      properties.put("osgifier.internalPackages", internalPackages);
+
+      final Result result = modelBuilder.build(properties, project.getDependencies());
       writeModel(new File(targetDir, "dependencyModel.xml"), result.dependencyModel);
       writeModel(new File(targetDir, "osgifyModel.xml"), result.osgifyModel);
 
