@@ -11,23 +11,29 @@ import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIRE
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
+import org.eclipse.emf.common.util.EList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
@@ -63,34 +69,26 @@ public class RequiredExecutionEnvironmentAppender
       }
 
       final JavaResourceBundle jBundle = bundle.getContent();
-      append(manifest, jBundle);
+      append(bundle, manifest, jBundle);
    }
 
-   private void append(final BundleManifest manifest, final JavaResourceBundle jBundle)
+   private void append(BundleCandidate bundle, final BundleManifest manifest, final JavaResourceBundle jBundle)
    {
       final int major = resolveMajorClassVersion(jBundle);
 
-      final List<ExecutionEnvironment> winners = determineExecutionEnvironments(jBundle, major);
+      final List<ExecutionEnvironment> winners = determineExecutionEnvironments(bundle, jBundle, major);
 
       append(manifest, major, winners);
    }
 
-   private List<ExecutionEnvironment> determineExecutionEnvironments(final JavaResourceBundle jBundle, final int major)
+   private List<ExecutionEnvironment> determineExecutionEnvironments(BundleCandidate bundle,
+      final JavaResourceBundle jBundle, final int major)
    {
       final List<ExecutionEnvironment> winners = new ArrayList<ExecutionEnvironment>();
 
       final List<String> packageNames = new ArrayList<String>(packagesService.getNamesOfReferencedPackages(jBundle));
-      jBundle.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
-            if (resource instanceof JavaPackage)
-            {
-               packageNames.remove(((JavaPackage) resource).getQualifiedName());
-            }
-            return resource instanceof JavaResourceDirectory;
-         }
-      });
+      removeOwnPackages(jBundle, packageNames);
+      removeEstimatedDependencyExports(bundle, packageNames);
 
       long bestClassVersionRating = Long.MIN_VALUE;
       int bestPackageRating = Integer.MIN_VALUE;
@@ -202,5 +200,70 @@ public class RequiredExecutionEnvironmentAppender
          }
       });
       return major[0];
+   }
+
+   private static void removeOwnPackages(final JavaResourceBundle jBundle, final List<String> packageNames)
+   {
+      jBundle.accept(new ResourceVisitor()
+      {
+         public boolean visit(Resource resource)
+         {
+            if (resource instanceof JavaPackage)
+            {
+               packageNames.remove(((JavaPackage) resource).getQualifiedName());
+            }
+            return resource instanceof JavaResourceDirectory;
+         }
+      });
+   }
+
+   private static void removeEstimatedDependencyExports(BundleCandidate bundle, final List<String> packageNames)
+   {
+      final Set<String> estimatedExports = new HashSet<String>();
+      for (BundleReference reference : bundle.getDependencies())
+      {
+         if (!reference.isProvided())
+         {
+            estimatedExportedPackages(estimatedExports, reference.getTarget());
+         }
+      }
+      packageNames.removeAll(estimatedExports);
+   }
+
+   private static void estimatedExportedPackages(Set<String> packageNames, BundleCandidate bundle)
+   {
+      if (bundle.isNativeBundle()) // TODO is override native manifest?
+      {
+         final EList<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
+         if (exportPackage != null)
+         {
+            for (PackageExport packageExport : exportPackage)
+            {
+               packageNames.addAll(packageExport.getPackageNames());
+            }
+         }
+      }
+      else
+      {
+         for (JavaResourcesRoot resourcesRoot : bundle.getContent().getResourcesRoots())
+         {
+            for (JavaPackage jPackage : resourcesRoot.getPackages())
+            {
+               collectPackageNames(packageNames, jPackage);
+            }
+         }
+      }
+   }
+
+   private static void collectPackageNames(Set<String> packageNames, JavaPackage jPackage)
+   {
+      if (!jPackage.getFiles().isEmpty())
+      {
+         packageNames.add(jPackage.getQualifiedName());
+      }
+      for (JavaPackage javaPackage : jPackage.getPackages())
+      {
+         collectPackageNames(packageNames, javaPackage);
+      }
    }
 }

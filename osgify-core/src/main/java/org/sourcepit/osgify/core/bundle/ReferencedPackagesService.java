@@ -70,7 +70,7 @@ public class ReferencedPackagesService
       return unmodifiableList;
    }
 
-   private void collectPackageReferences(final List<String> referencedPackages, JavaResourceBundle jBundle)
+   private static void collectPackageReferences(final List<String> referencedPackages, JavaResourceBundle jBundle)
    {
       jBundle.accept(new TypeReferenceVisitor()
       {
