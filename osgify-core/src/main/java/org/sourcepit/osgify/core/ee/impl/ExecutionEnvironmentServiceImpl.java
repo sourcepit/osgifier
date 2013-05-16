@@ -238,6 +238,7 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       return sb.toString();
    }
 
+   // TODO intersect! not accumulate!
    private PackageAccess newPackageAccess(Collection<ExecutionEnvironment> executionEnvironments)
    {
       final Collection<String> accessible = Collections.unmodifiableCollection(intersect(executionEnvironments));
