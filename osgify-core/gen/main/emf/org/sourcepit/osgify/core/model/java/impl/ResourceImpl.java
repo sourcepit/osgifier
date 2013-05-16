@@ -181,7 +181,7 @@ public abstract class ResourceImpl extends EObjectImpl implements Resource
    {
       if (eContainerFeatureID() != JavaModelPackage.RESOURCE__PARENT_DIRECTORY)
          return null;
-      return (Directory) eContainer();
+      return (Directory) eInternalContainer();
    }
 
    /**

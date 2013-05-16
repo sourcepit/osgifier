@@ -39,6 +39,8 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getSymbolicName <em>Symbolic Name</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#isNativeBundle <em>Native Bundle</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getManifest <em>Manifest</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getSourceBundle <em>Source Bundle</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getTargetBundle <em>Target Bundle</em>}</li>
  * </ul>
  * </p>
  * 
@@ -166,6 +168,28 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @ordered
     */
    protected BundleManifest manifest;
+
+   /**
+    * The cached value of the '{@link #getSourceBundle() <em>Source Bundle</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getSourceBundle()
+    * @generated
+    * @ordered
+    */
+   protected BundleCandidate sourceBundle;
+
+   /**
+    * The cached value of the '{@link #getTargetBundle() <em>Target Bundle</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getTargetBundle()
+    * @generated
+    * @ordered
+    */
+   protected BundleCandidate targetBundle;
 
    /**
     * <!-- begin-user-doc -->
@@ -434,6 +458,193 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
+   public BundleCandidate getSourceBundle()
+   {
+      if (sourceBundle != null && sourceBundle.eIsProxy())
+      {
+         InternalEObject oldSourceBundle = (InternalEObject) sourceBundle;
+         sourceBundle = (BundleCandidate) eResolveProxy(oldSourceBundle);
+         if (sourceBundle != oldSourceBundle)
+         {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+                  ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, oldSourceBundle, sourceBundle));
+         }
+      }
+      return sourceBundle;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public BundleCandidate basicGetSourceBundle()
+   {
+      return sourceBundle;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public NotificationChain basicSetSourceBundle(BundleCandidate newSourceBundle, NotificationChain msgs)
+   {
+      BundleCandidate oldSourceBundle = sourceBundle;
+      sourceBundle = newSourceBundle;
+      if (eNotificationRequired())
+      {
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+            ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, oldSourceBundle, newSourceBundle);
+         if (msgs == null)
+            msgs = notification;
+         else
+            msgs.add(notification);
+      }
+      return msgs;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setSourceBundle(BundleCandidate newSourceBundle)
+   {
+      if (newSourceBundle != sourceBundle)
+      {
+         NotificationChain msgs = null;
+         if (sourceBundle != null)
+            msgs = ((InternalEObject) sourceBundle).eInverseRemove(this,
+               ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, BundleCandidate.class, msgs);
+         if (newSourceBundle != null)
+            msgs = ((InternalEObject) newSourceBundle).eInverseAdd(this,
+               ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, BundleCandidate.class, msgs);
+         msgs = basicSetSourceBundle(newSourceBundle, msgs);
+         if (msgs != null)
+            msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE,
+            newSourceBundle, newSourceBundle));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public BundleCandidate getTargetBundle()
+   {
+      if (targetBundle != null && targetBundle.eIsProxy())
+      {
+         InternalEObject oldTargetBundle = (InternalEObject) targetBundle;
+         targetBundle = (BundleCandidate) eResolveProxy(oldTargetBundle);
+         if (targetBundle != oldTargetBundle)
+         {
+            if (eNotificationRequired())
+               eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+                  ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, oldTargetBundle, targetBundle));
+         }
+      }
+      return targetBundle;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public BundleCandidate basicGetTargetBundle()
+   {
+      return targetBundle;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public NotificationChain basicSetTargetBundle(BundleCandidate newTargetBundle, NotificationChain msgs)
+   {
+      BundleCandidate oldTargetBundle = targetBundle;
+      targetBundle = newTargetBundle;
+      if (eNotificationRequired())
+      {
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+            ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, oldTargetBundle, newTargetBundle);
+         if (msgs == null)
+            msgs = notification;
+         else
+            msgs.add(notification);
+      }
+      return msgs;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setTargetBundle(BundleCandidate newTargetBundle)
+   {
+      if (newTargetBundle != targetBundle)
+      {
+         NotificationChain msgs = null;
+         if (targetBundle != null)
+            msgs = ((InternalEObject) targetBundle).eInverseRemove(this,
+               ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, BundleCandidate.class, msgs);
+         if (newTargetBundle != null)
+            msgs = ((InternalEObject) newTargetBundle).eInverseAdd(this,
+               ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, BundleCandidate.class, msgs);
+         msgs = basicSetTargetBundle(newTargetBundle, msgs);
+         if (msgs != null)
+            msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE,
+            newTargetBundle, newTargetBundle));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+   {
+      switch (featureID)
+      {
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            if (sourceBundle != null)
+               msgs = ((InternalEObject) sourceBundle).eInverseRemove(this,
+                  ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, BundleCandidate.class, msgs);
+            return basicSetSourceBundle((BundleCandidate) otherEnd, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            if (targetBundle != null)
+               msgs = ((InternalEObject) targetBundle).eInverseRemove(this,
+                  ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, BundleCandidate.class, msgs);
+            return basicSetTargetBundle((BundleCandidate) otherEnd, msgs);
+      }
+      return super.eInverseAdd(otherEnd, featureID, msgs);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    @Override
    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
    {
@@ -445,6 +656,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return basicSetManifest(null, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            return basicSetSourceBundle(null, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            return basicSetTargetBundle(null, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
    }
@@ -474,6 +689,14 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return isNativeBundle();
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return getManifest();
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            if (resolve)
+               return getSourceBundle();
+            return basicGetSourceBundle();
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            if (resolve)
+               return getTargetBundle();
+            return basicGetTargetBundle();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -512,6 +735,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             setManifest((BundleManifest) newValue);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            setSourceBundle((BundleCandidate) newValue);
+            return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            setTargetBundle((BundleCandidate) newValue);
+            return;
       }
       super.eSet(featureID, newValue);
    }
@@ -548,6 +777,12 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             setManifest((BundleManifest) null);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            setSourceBundle((BundleCandidate) null);
+            return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            setTargetBundle((BundleCandidate) null);
+            return;
       }
       super.eUnset(featureID);
    }
@@ -577,6 +812,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return nativeBundle != NATIVE_BUNDLE_EDEFAULT;
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return manifest != null;
+         case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
+            return sourceBundle != null;
+         case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
+            return targetBundle != null;
       }
       return super.eIsSet(featureID);
    }

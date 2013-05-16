@@ -18,6 +18,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nativeBundle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manifest" eType="ecore:EClass ../../../../common-manifest/src/main/emf/manifest.ecore#//osgi/BundleManifest"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceBundle" eType="#//BundleCandidate"
+        eOpposite="#//BundleCandidate/targetBundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetBundle" eType="#//BundleCandidate"
+        eOpposite="#//BundleCandidate/sourceBundle"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BundleReference" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionRange" eType="ecore:EDataType ../../../../common-manifest/src/main/emf/manifest.ecore#//osgi/VersionRange"/>

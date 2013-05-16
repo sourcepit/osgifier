@@ -209,7 +209,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
    {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE)
          return null;
-      return (JavaType) eContainer();
+      return (JavaType) eInternalContainer();
    }
 
    /**

@@ -183,7 +183,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
    {
       if (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT)
          return null;
-      return (JavaCompilationUnit) eContainer();
+      return (JavaCompilationUnit) eInternalContainer();
    }
 
    /**

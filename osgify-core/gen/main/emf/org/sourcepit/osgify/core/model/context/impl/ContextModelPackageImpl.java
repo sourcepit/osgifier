@@ -250,6 +250,28 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
+   public EReference getBundleCandidate_SourceBundle()
+   {
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(7);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getBundleCandidate_TargetBundle()
+   {
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(8);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EClass getBundleReference()
    {
       return bundleReferenceEClass;
@@ -344,6 +366,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__SYMBOLIC_NAME);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__NATIVE_BUNDLE);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__MANIFEST);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__SOURCE_BUNDLE);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__TARGET_BUNDLE);
 
       bundleReferenceEClass = createEClass(BUNDLE_REFERENCE);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__VERSION_RANGE);
@@ -426,6 +450,14 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEReference(getBundleCandidate_Manifest(), theBundleManifestPackage.getBundleManifest(), null, "manifest",
          null, 0, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
          !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getBundleCandidate_SourceBundle(), this.getBundleCandidate(),
+         this.getBundleCandidate_TargetBundle(), "sourceBundle", null, 0, 1, BundleCandidate.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+         IS_ORDERED);
+      initEReference(getBundleCandidate_TargetBundle(), this.getBundleCandidate(),
+         this.getBundleCandidate_SourceBundle(), "targetBundle", null, 0, 1, BundleCandidate.class, !IS_TRANSIENT,
+         !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+         IS_ORDERED);
 
       initEClass(bundleReferenceEClass, BundleReference.class, "BundleReference", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);

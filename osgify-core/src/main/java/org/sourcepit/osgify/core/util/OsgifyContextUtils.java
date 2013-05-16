@@ -59,7 +59,14 @@ public final class OsgifyContextUtils
             computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
          }
       }
-
+      
+      // handle target bundle of spurce bundle
+      final BundleCandidate target = bundleCandidate.getTargetBundle();
+      if (target != null)
+      {
+         computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
+      }
+      
       if (!buildOrder.contains(bundleCandidate))
       {
          buildOrder.add(bundleCandidate);

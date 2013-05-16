@@ -221,6 +221,26 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__MANIFEST = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 6;
 
    /**
+    * The feature id for the '<em><b>Source Bundle</b></em>' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__SOURCE_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 7;
+
+   /**
+    * The feature id for the '<em><b>Target Bundle</b></em>' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__TARGET_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 8;
+
+   /**
     * The number of structural features of the '<em>Bundle Candidate</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -228,7 +248,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 7;
+   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 9;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl
@@ -442,6 +462,32 @@ public interface ContextModelPackage extends EPackage
    EReference getBundleCandidate_Manifest();
 
    /**
+    * Returns the meta object for the reference '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle <em>Source Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the reference '<em>Source Bundle</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EReference getBundleCandidate_SourceBundle();
+
+   /**
+    * Returns the meta object for the reference '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle <em>Target Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the reference '<em>Target Bundle</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EReference getBundleCandidate_TargetBundle();
+
+   /**
     * Returns the meta object for class '{@link org.sourcepit.osgify.core.model.context.BundleReference
     * <em>Bundle Reference</em>}'.
     * <!-- begin-user-doc -->
@@ -625,6 +671,24 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EReference BUNDLE_CANDIDATE__MANIFEST = eINSTANCE.getBundleCandidate_Manifest();
+
+      /**
+       * The meta object literal for the '<em><b>Source Bundle</b></em>' reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_CANDIDATE__SOURCE_BUNDLE = eINSTANCE.getBundleCandidate_SourceBundle();
+
+      /**
+       * The meta object literal for the '<em><b>Target Bundle</b></em>' reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_CANDIDATE__TARGET_BUNDLE = eINSTANCE.getBundleCandidate_TargetBundle();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl

@@ -38,7 +38,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
       try
       {
          ContextModelFactory theContextModelFactory = (ContextModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory("http://www.sourcepit.org/osgify/context/0.1");
+            .getEFactory(ContextModelPackage.eNS_URI);
          if (theContextModelFactory != null)
          {
             return theContextModelFactory;

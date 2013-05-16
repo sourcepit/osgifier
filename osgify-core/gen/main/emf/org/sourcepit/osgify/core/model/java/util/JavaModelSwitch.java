@@ -480,6 +480,14 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
+         case JavaModelPackage.RESOURCE_VISITOR :
+         {
+            ResourceVisitor resourceVisitor = (ResourceVisitor) theEObject;
+            T result = caseResourceVisitor(resourceVisitor);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
          default :
             return defaultCase(theEObject);
       }

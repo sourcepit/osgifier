@@ -29,6 +29,8 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#isNativeBundle <em>Native Bundle</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getManifest <em>Manifest</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle <em>Source Bundle</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle <em>Target Bundle</em>}</li>
  * </ul>
  * </p>
  * 
@@ -228,5 +230,69 @@ public interface BundleCandidate extends XAnnotatable
     * @generated
     */
    void setManifest(BundleManifest value);
+
+   /**
+    * Returns the value of the '<em><b>Source Bundle</b></em>' reference.
+    * It is bidirectional and its opposite is '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle <em>Target Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Source Bundle</em>' reference isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Source Bundle</em>' reference.
+    * @see #setSourceBundle(BundleCandidate)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_SourceBundle()
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle
+    * @model opposite="targetBundle"
+    * @generated
+    */
+   BundleCandidate getSourceBundle();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle
+    * <em>Source Bundle</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Source Bundle</em>' reference.
+    * @see #getSourceBundle()
+    * @generated
+    */
+   void setSourceBundle(BundleCandidate value);
+
+   /**
+    * Returns the value of the '<em><b>Target Bundle</b></em>' reference.
+    * It is bidirectional and its opposite is '
+    * {@link org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle <em>Source Bundle</em>}'.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Target Bundle</em>' reference isn't clear, there really should be more of a description
+    * here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Target Bundle</em>' reference.
+    * @see #setTargetBundle(BundleCandidate)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate_TargetBundle()
+    * @see org.sourcepit.osgify.core.model.context.BundleCandidate#getSourceBundle
+    * @model opposite="sourceBundle"
+    * @generated
+    */
+   BundleCandidate getTargetBundle();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle
+    * <em>Target Bundle</em>}' reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Target Bundle</em>' reference.
+    * @see #getTargetBundle()
+    * @generated
+    */
+   void setTargetBundle(BundleCandidate value);
 
 } // BundleCandidate

@@ -47,7 +47,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
       try
       {
          JavaModelFactory theJavaModelFactory = (JavaModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory("http://www.sourcepit.org/osgify/java/0.1");
+            .getEFactory(JavaModelPackage.eNS_URI);
          if (theJavaModelFactory != null)
          {
             return theJavaModelFactory;

@@ -227,7 +227,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY)
          return null;
-      return (Directory) eContainer();
+      return (Directory) eInternalContainer();
    }
 
    /**
@@ -297,7 +297,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
    {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE)
          return null;
-      return (JavaResourceBundle) eContainer();
+      return (JavaResourceBundle) eInternalContainer();
    }
 
    /**

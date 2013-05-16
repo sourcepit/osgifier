@@ -155,12 +155,36 @@ public class OsgifyModelBuilder
             manifest.setBundleVersion(version);
             bundle.setVersion(version);
 
-            environmentAppender.append(bundle);
-            packageExports.append(bundle);
-            packageImports.append(bundle);
-            dynamicImports.append(bundle);
+            if (!applySourceBundles(bundle))
+            {
+               environmentAppender.append(bundle);
+               packageExports.append(bundle);
+               packageImports.append(bundle);
+               dynamicImports.append(bundle);
+            }
          }
       }
+   }
+
+   private boolean applySourceBundles(BundleCandidate bundle)
+   {
+      final BundleCandidate targetBundle = bundle.getTargetBundle();
+      if (targetBundle != null)
+      {
+         final String symbolicName = targetBundle.getSymbolicName();
+
+         BundleManifest manifest = bundle.getManifest();
+         manifest.getBundleSymbolicName(true).setSymbolicName(symbolicName + ".source");
+         bundle.setSymbolicName(symbolicName + ".source");
+
+         // Eclipse-SourceBundle: com.ibm.icu;version="4.4.2.v20110823";roots:="."
+         manifest.setHeader("Eclipse-SourceBundle",
+            targetBundle.getSymbolicName() + ";version=\"" + targetBundle.getVersion() + "\";roots:=\".\"");
+
+         return true;
+      }
+
+      return false;
    }
 
    private boolean isOverrideNativeBundle(BundleCandidate bundle)

@@ -9,6 +9,7 @@ package org.sourcepit.osgify.maven.impl;
 import javax.inject.Named;
 
 import org.sourcepit.common.maven.model.MavenArtifactConflictCoordinates;
+import org.sourcepit.common.maven.model.MavenArtifactCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
@@ -37,7 +38,23 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
             final String artifactId = mavenArtifact.getArtifactId();
             if (artifactId != null)
             {
-               return beautify(resolveSymbolicName(groupId, artifactId));
+               String symbolicName = resolveSymbolicName(groupId, artifactId);
+               if (symbolicName != null && mavenArtifact instanceof MavenArtifactCoordinates)
+               {
+                  final MavenArtifactCoordinates gav = (MavenArtifactCoordinates) mavenArtifact;
+
+                  String classifier = gav.getClassifier();
+                  if ("java-source".equals(gav.getType()) && (classifier == null || "sources".equals(classifier)))
+                  {
+                     classifier = "source";
+                  }
+
+                  if (classifier != null)
+                  {
+                     symbolicName = resolveSymbolicName(symbolicName, classifier);
+                  }
+               }
+               return beautify(symbolicName);
             }
          }
       }
