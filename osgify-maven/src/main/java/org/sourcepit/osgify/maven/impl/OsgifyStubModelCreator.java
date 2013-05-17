@@ -52,46 +52,56 @@ public class OsgifyStubModelCreator
 
             final BundleCandidate sourceBundle = artifactToBundle.get(artifact);
             final BundleCandidate bundle = artifactToBundle.get(jarArtifact);
-            bundle.setSourceBundle(sourceBundle);
+            if (bundle == null)
+            {
+               osgifyModel.getBundles().remove(sourceBundle);
+            }
+            else
+            {
+               bundle.setSourceBundle(sourceBundle);
+            }
          }
       }
 
       for (DependencyTree dependencyTree : dependencyModel.getDependencyTrees())
       {
-         final BundleCandidate bundle = artifactToBundle.get(dependencyTree.getArtifact());
-         for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
+         if (dependencyTree.getArtifact() != null && dependencyTree.getArtifact().getFile() != null)
          {
-            addBundleReferences(artifactToBundle, bundle, dependencyNode);
+            final BundleCandidate bundle = artifactToBundle.get(dependencyTree.getArtifact());
+            for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
+            {
+               addBundleReferences(artifactToBundle, bundle, dependencyNode);
+            }
          }
       }
       return osgifyModel;
    }
 
-   private void addBundleReferences(Map<MavenArtifact, BundleCandidate> artifactToBundle, BundleCandidate bundle,
+   private void addBundleReferences(Map<MavenArtifact, BundleCandidate> artifactToBundle, BundleCandidate master,
       DependencyNode dependencyNode)
    {
-      if (dependencyNode.isSelected())
+      if (dependencyNode.isSelected() && dependencyNode.getCycleNode() == null)
       {
-         final BundleReference reference = toBundleReference(artifactToBundle, dependencyNode);
-         bundle.getDependencies().add(reference);
+         final BundleCandidate bundle = artifactToBundle.get(dependencyNode.getArtifact());
+         final BundleReference reference = toBundleReference(bundle, dependencyNode);
+         master.getDependencies().add(reference);
 
          for (DependencyNode childNode : dependencyNode.getChildren())
          {
-            addBundleReferences(artifactToBundle, bundle, childNode);
+            addBundleReferences(artifactToBundle, master, childNode);
          }
       }
    }
 
-   private BundleReference toBundleReference(Map<MavenArtifact, BundleCandidate> artifactToBundle,
-      DependencyNode dependencyNode)
+   private BundleReference toBundleReference(BundleCandidate bundle, DependencyNode dependencyNode)
    {
       final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
-      reference.setTarget(artifactToBundle.get(dependencyNode.getArtifact()));
+      reference.setTarget(bundle);
 
       final MavenDependency dependency = MavenModelFactory.eINSTANCE.createMavenDependency();
       dependency.setGroupId(dependencyNode.getGroupId());
       dependency.setArtifactId(dependencyNode.getArtifactId());
-      dependency.setVersionConstraint(dependencyNode.getEffectiveVersionConstraint());
+      dependency.setVersionConstraint(dependencyNode.getDeclaredDependency().getVersionConstraint());
       dependency.setType(dependencyNode.getType());
       dependency.setClassifier(dependencyNode.getClassifier());
       dependency.setScope(dependencyNode.getEffectiveScope());
