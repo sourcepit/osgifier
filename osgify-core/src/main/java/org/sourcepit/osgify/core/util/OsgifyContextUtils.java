@@ -44,6 +44,7 @@ public final class OsgifyContextUtils
       {
          dependencyTrail.add(bundleCandidate);
          handleCycle(dependencyTrail);
+         return;
       }
       else
       {
@@ -59,14 +60,14 @@ public final class OsgifyContextUtils
             computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
          }
       }
-      
+
       // handle target bundle of spurce bundle
       final BundleCandidate target = bundleCandidate.getTargetBundle();
       if (target != null)
       {
          computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
       }
-      
+
       if (!buildOrder.contains(bundleCandidate))
       {
          buildOrder.add(bundleCandidate);
@@ -92,6 +93,8 @@ public final class OsgifyContextUtils
          sb.append(" -> ");
       }
       sb.delete(sb.length() - 4, sb.length());
-      throw new IllegalStateException("Cycle in dependency graph detected: " + sb.toString());
+      // throw new IllegalStateException("Cycle in dependency graph detected: " + sb.toString());
+      // TODO log
+      System.out.println("WARN " + sb);
    }
 }
