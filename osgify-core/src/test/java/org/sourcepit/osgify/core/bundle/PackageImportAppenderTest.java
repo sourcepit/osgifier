@@ -8,6 +8,10 @@ package org.sourcepit.osgify.core.bundle;
 
 import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
+import static org.sourcepit.osgify.core.bundle.PackageImportAppender.determineImportVersionRange;
+import static org.sourcepit.osgify.core.bundle.PackageImportAppender.DemanderRole.CONSUMER;
+import static org.sourcepit.osgify.core.bundle.PackageImportAppender.DemanderRole.FRIEND;
+import static org.sourcepit.osgify.core.bundle.PackageImportAppender.DemanderRole.PROVIDER;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
@@ -18,6 +22,7 @@ import javax.inject.Inject;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
+import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -71,7 +76,7 @@ public class PackageImportAppenderTest extends InjectedTest
       importAppender.append(bundle);
 
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("foo;version=\"1.2.3\""));
+      assertThat(packageImports, IsEqual.equalTo("foo;version=\"[1.2.3,2)\""));
    }
 
    @Test
@@ -107,7 +112,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testStrictVersionsForSelfImports()
+   public void testCompatibeVersionsForPublicSelfImports()
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "a.Bar", 47, "b.Foo");
@@ -118,7 +123,7 @@ public class PackageImportAppenderTest extends InjectedTest
       importAppender.append(bundle);
 
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("b;version=\"[2,2]\""));
+      assertThat(packageImports, IsEqual.equalTo("b;version=\"[2,3)\""));
    }
 
    @Test
@@ -180,7 +185,7 @@ public class PackageImportAppenderTest extends InjectedTest
 
       importAppender.append(bundle);
       packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("foo;version=\"3\""));
+      assertThat(packageImports, IsEqual.equalTo("foo;version=\"[3,4)\""));
 
       // test package version is default version
       bundle = newBundleCandidate("1.0.1", "CDC-1.0/Foundation-1.0", jArchive);
@@ -216,7 +221,7 @@ public class PackageImportAppenderTest extends InjectedTest
 
       importAppender.append(bundle);
       packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("foo;version=\"1\""));
+      assertThat(packageImports, IsEqual.equalTo("foo;version=\"[1,3)\"")); // versions are merged, see merge ref test
    }
 
    @Test
@@ -237,4 +242,62 @@ public class PackageImportAppenderTest extends InjectedTest
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
       assertThat(packageImports, IsEqual.equalTo("foo;optional:=true"));
    }
+
+   @Test
+   public void testMergeReferenceRangeWithTargetBundleVersion()
+   {
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "a.Bar", 47, "foo.Foo");
+
+      BundleCandidate bundle = newBundleCandidate("999", "CDC-1.0/Foundation-1.0", jArchive);
+
+      BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
+      ref.setVersionRange(VersionRange.parse("1"));
+      appendPackageExport(ref, newPackageExport("foo", "2"));
+      bundle.getDependencies().add(ref);
+
+      importAppender.append(bundle);
+      String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
+      assertThat(packageImports, IsEqual.equalTo("foo;version=\"[1,3)\""));
+   }
+
+   @Test
+   public void testWiden()
+   {
+      VersionRange r;
+      Version v;
+      
+      r = VersionRange.parse("0");
+      v = Version.parse("1");
+      assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[0,2)"));
+      assertThat(determineImportVersionRange(r, v, FRIEND).toString(), IsEqual.equalTo("[0,1.1)"));
+      assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[0,1.1)"));
+
+      // java.xmal jar=1.4.2 package=1.4 (apply equivalent)
+      r = VersionRange.parse("1.4.2");
+      v = Version.parse("1.4");
+      assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[1.4,2)"));
+      assertThat(determineImportVersionRange(r, v, FRIEND).toString(), IsEqual.equalTo("[1.4,1.5)"));
+      assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[1.4,1.5)"));
+
+      r = VersionRange.parse("1.4.2");
+      v = Version.parse("1.3");
+      assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[1.3,2)"));
+      assertThat(determineImportVersionRange(r, v, FRIEND).toString(), IsEqual.equalTo("[1.3,1.4)"));
+      assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[1.3,1.4)"));
+
+      r = VersionRange.parse("[2,4]");
+      v = Version.parse("3");
+      assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[2,4]"));
+      assertThat(determineImportVersionRange(r, v, FRIEND).toString(), IsEqual.equalTo("[2,4]"));
+      assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[2,4]"));
+
+      r = VersionRange.parse("(2,4]");
+      v = Version.parse("2");
+      assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[2,3)"));
+      assertThat(determineImportVersionRange(r, v, FRIEND).toString(), IsEqual.equalTo("[2,2.1)"));
+      assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[2,2.1)"));
+   }
+
+
 }

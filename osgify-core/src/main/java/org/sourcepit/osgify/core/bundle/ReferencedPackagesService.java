@@ -11,10 +11,10 @@ import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 
 import javax.inject.Inject;
@@ -32,8 +32,13 @@ import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
+import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaType;
+
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -46,7 +51,7 @@ public class ReferencedPackagesService
 
    private ExecutionEnvironmentService environmentService;
 
-   private final WeakHashMap<JavaResourceBundle, List<String>> cache = new WeakHashMap<JavaResourceBundle, List<String>>();
+   private final WeakHashMap<JavaResourceBundle, Multimap<String, String>> cache = new WeakHashMap<JavaResourceBundle, Multimap<String, String>>();
 
    @Inject
    public ReferencedPackagesService(ExecutionEnvironmentService environmentService)
@@ -54,23 +59,29 @@ public class ReferencedPackagesService
       this.environmentService = environmentService;
    }
 
-   public synchronized List<String> getNamesOfReferencedPackages(JavaResourceBundle jBundle)
+   public Set<String> getNamesOfReferencedPackages(JavaResourceBundle jBundle)
    {
-      List<String> referencedPackages = cache.get(jBundle);
-      if (referencedPackages != null)
-      {
-         return referencedPackages;
-      }
-
-      referencedPackages = new ArrayList<String>();
-      collectPackageReferences(referencedPackages, jBundle);
-
-      final List<String> unmodifiableList = Collections.unmodifiableList(referencedPackages);
-      cache.put(jBundle, unmodifiableList);
-      return unmodifiableList;
+      return getRequiredToDemandingPackages(jBundle).keySet();
    }
 
-   private static void collectPackageReferences(final List<String> referencedPackages, JavaResourceBundle jBundle)
+   public synchronized Multimap<String, String> getRequiredToDemandingPackages(JavaResourceBundle jBundle)
+   {
+      Multimap<String, String> requiredToConsumers = cache.get(jBundle);
+      if (requiredToConsumers != null)
+      {
+         return requiredToConsumers;
+      }
+
+      requiredToConsumers = LinkedHashMultimap.create();
+      collectPackageReferences(requiredToConsumers, jBundle);
+      requiredToConsumers = Multimaps.unmodifiableMultimap(requiredToConsumers);
+
+      cache.put(jBundle, requiredToConsumers);
+      return requiredToConsumers;
+   }
+
+   private static void collectPackageReferences(final Multimap<String, String> requiredToConsumers,
+      JavaResourceBundle jBundle)
    {
       jBundle.accept(new TypeReferenceVisitor()
       {
@@ -84,10 +95,20 @@ public class ReferencedPackagesService
                LOGGER.warn("Type " + qualifiedTypeReference + " in default package will be ignored (from "
                   + jType.getQualifiedName() + ")");
             }
-            else if (!referencedPackages.contains(packageName))
+            else
             {
-               referencedPackages.add(packageName);
-               LOGGER.debug("Added ref to package " + packageName + " (from " + jType.getQualifiedName() + ")");
+               JavaPackage parentPackage = jType.getFile().getParentPackage();
+               if (parentPackage == null)
+               {
+                  LOGGER.warn("Type " + qualifiedTypeReference + " in default package will be ignored (from "
+                     + jType.getQualifiedName() + ")");
+               }
+               else
+               {
+                  final String consumerPackageName = parentPackage.getQualifiedName();
+                  requiredToConsumers.put(packageName, consumerPackageName);
+                  LOGGER.debug("Added ref to package " + packageName + " (from " + jType.getQualifiedName() + ")");
+               }
             }
          }
       });

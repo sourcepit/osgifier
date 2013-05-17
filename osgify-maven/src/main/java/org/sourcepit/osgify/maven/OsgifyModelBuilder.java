@@ -22,15 +22,21 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.project.DependencyResolutionException;
 import org.apache.maven.project.ProjectBuildingException;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
+import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenArtifact;
+import org.sourcepit.common.maven.model.MavenDependency;
+import org.sourcepit.common.maven.model.Scope;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyModelResolver;
+import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgify.core.bundle.DynamicPackageImportAppender;
@@ -42,11 +48,13 @@ import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
 import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
 import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
+import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.maven.impl.OsgifyStubModelCreator;
@@ -82,6 +90,17 @@ public class OsgifyModelBuilder
       return result;
    }
 
+   private void applyBuildOrder(final OsgifyContext osgifyModel)
+   {
+      final EList<BundleCandidate> bundles = osgifyModel.getBundles();
+      final List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(osgifyModel);
+      for (int i = 0; i < orderedBundles.size(); i++)
+      {
+         bundles.move(i, orderedBundles.get(i));
+      }
+   }
+
+
    private DependencyModel resolve(Collection<Dependency> dependencies)
    {
       final DependencyModel dependencyModel;
@@ -110,7 +129,29 @@ public class OsgifyModelBuilder
          if (mavenArtifact.getFile() == null)
          {
             DependencyTree dependencyTree = dependencyModel.getDependencyTree(mavenArtifact);
-            dependencyModel.getDependencyTrees().remove(dependencyTree);
+            if (dependencyTree != null)
+            {
+               dependencyTree.setArtifact(null);
+            }
+            // dependencyModel.getDependencyTrees().remove(dependencyTree);
+
+            for (DependencyTree tree : dependencyModel.getDependencyTrees())
+            {
+               TreeIterator<EObject> eAllContents = tree.eAllContents();
+               while (eAllContents.hasNext())
+               {
+                  EObject eObject = (EObject) eAllContents.next();
+                  if (eObject instanceof DependencyNode)
+                  {
+                     DependencyNode node = (DependencyNode) eObject;
+                     if (node.getArtifact() == mavenArtifact)
+                     {
+                        node.setArtifact(null);
+                        node.setSelected(false);
+                     }
+                  }
+               }
+            }
 
             it.remove();
             System.out.println("Removed " + mavenArtifact.getArtifactKey());
@@ -124,6 +165,9 @@ public class OsgifyModelBuilder
 
    @Inject
    private VersionResolver versionResolver;
+
+   @Inject
+   private VersionRangeResolver versionRangeResolver;
 
    @Inject
    private RequiredExecutionEnvironmentAppender environmentAppender;
@@ -141,7 +185,7 @@ public class OsgifyModelBuilder
    {
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         if (!bundle.isNativeBundle() || isOverrideNativeBundle(bundle))
+         if (isGenerateManifest(bundle))
          {
             final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
             bundle.setManifest(manifest);
@@ -156,36 +200,76 @@ public class OsgifyModelBuilder
             manifest.setBundleVersion(version);
             bundle.setVersion(version);
 
-            if (!applySourceBundles(bundle))
+            for (BundleReference reference : bundle.getDependencies())
             {
-               environmentAppender.append(bundle);
-               packageExports.append(properties, bundle);
-               packageImports.append(bundle);
-               dynamicImports.append(bundle);
+               reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
+
+               final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
+               if (mavenDependency != null)
+               {
+                  reference.setOptional(mavenDependency.isOptional());
+                  reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
+               }
             }
+         }
+      }
+
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
+         {
+            environmentAppender.append(bundle);
+         }
+      }
+
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
+         {
+            packageExports.append(properties, bundle);
+         }
+      }
+
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
+         {
+            packageImports.append(bundle);
+            dynamicImports.append(bundle);
+         }
+      }
+
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         if (isGenerateManifest(bundle) && isSourceBundle(bundle))
+         {
+            applySourceBundles(bundle);
          }
       }
    }
 
-   private boolean applySourceBundles(BundleCandidate bundle)
+   private boolean isGenerateManifest(BundleCandidate bundle)
+   {
+      return !bundle.isNativeBundle() || isOverrideNativeBundle(bundle);
+   }
+
+   private boolean isSourceBundle(BundleCandidate bundle)
+   {
+      return bundle.getTargetBundle() != null;
+   }
+
+   private void applySourceBundles(BundleCandidate bundle)
    {
       final BundleCandidate targetBundle = bundle.getTargetBundle();
-      if (targetBundle != null)
-      {
-         final String symbolicName = targetBundle.getSymbolicName();
+      final String symbolicName = targetBundle.getSymbolicName();
 
-         BundleManifest manifest = bundle.getManifest();
-         manifest.getBundleSymbolicName(true).setSymbolicName(symbolicName + ".source");
-         bundle.setSymbolicName(symbolicName + ".source");
+      BundleManifest manifest = bundle.getManifest();
+      manifest.getBundleSymbolicName(true).setSymbolicName(symbolicName + ".source");
+      bundle.setSymbolicName(symbolicName + ".source");
 
-         // Eclipse-SourceBundle: com.ibm.icu;version="4.4.2.v20110823";roots:="."
-         manifest.setHeader("Eclipse-SourceBundle",
-            targetBundle.getSymbolicName() + ";version=\"" + targetBundle.getVersion() + "\";roots:=\".\"");
-
-         return true;
-      }
-
-      return false;
+      // Eclipse-SourceBundle: com.ibm.icu;version="4.4.2.v20110823";roots:="."
+      manifest.setHeader("Eclipse-SourceBundle",
+         targetBundle.getSymbolicName() + ";version=\"" + targetBundle.getVersion() + "\";roots:=\".\"");
    }
 
    private boolean isOverrideNativeBundle(BundleCandidate bundle)
@@ -203,24 +287,22 @@ public class OsgifyModelBuilder
             final BundleManifest manifest = getBundleManifest(jBundle);
             if (manifest != null) // native bundle
             {
-               bundle.setNativeBundle(true);
-               bundle.setManifest(EcoreUtil.copy(manifest));
+               BundleSymbolicName bundleSymbolicName = manifest.getBundleSymbolicName();
+               if (bundleSymbolicName != null)
+               {
+                  bundle.setNativeBundle(true);
+                  bundle.setManifest(EcoreUtil.copy(manifest));
 
-               // TODO deprecate! replace with operation
-               bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
-               bundle.setVersion(manifest.getBundleVersion());
+                  // TODO deprecate! replace with operation
+                  bundle.setSymbolicName(bundleSymbolicName.getSymbolicName());
+                  bundle.setVersion(manifest.getBundleVersion());
+               }
+               else
+               {
+                  System.err.println(bundle.getLocation());
+               }
             }
          }
-      }
-   }
-
-   private void applyBuildOrder(final OsgifyContext osgifyModel)
-   {
-      final EList<BundleCandidate> bundles = osgifyModel.getBundles();
-      final List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(osgifyModel);
-      for (int i = 0; i < orderedBundles.size(); i++)
-      {
-         bundles.move(i, orderedBundles.get(i));
       }
    }
 

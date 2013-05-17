@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.bundle;
 import static org.junit.Assert.fail;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -32,7 +32,7 @@ public class ReferencedPackagesServiceTest extends InjectedTest
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "foo.Bar", 47, "java.lang.Object", "hans.Wurst");
 
-      List<String> referencedPackages = packagesService.getNamesOfReferencedPackages(jArchive);
+      Set<String> referencedPackages = packagesService.getNamesOfReferencedPackages(jArchive);
       try
       {
          referencedPackages.add("foo");
