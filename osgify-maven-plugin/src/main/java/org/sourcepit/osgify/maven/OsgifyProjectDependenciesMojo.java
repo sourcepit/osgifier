@@ -63,7 +63,8 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
       EList<BundleCandidate> bundles = result.osgifyModel.getBundles();
       for (BundleCandidate bundle : bundles)
       {
-         final String bundleDir = bundle.getSymbolicName() + "_" + bundle.getVersion();
+         final String bundleDir = (bundle.isNativeBundle() ? "native/" : "osgified/") + bundle.getSymbolicName() + "_"
+            + bundle.getVersion();
          writeModel(new File(targetDir, bundleDir + "/MANIFEST.MF"), bundle.getManifest());
       }
 
