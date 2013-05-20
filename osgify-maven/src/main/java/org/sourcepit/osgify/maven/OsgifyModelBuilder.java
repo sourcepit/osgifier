@@ -7,9 +7,12 @@
 package org.sourcepit.osgify.maven;
 
 import static com.google.common.base.Preconditions.checkState;
+import static org.sourcepit.common.utils.io.IO.osgiIn;
+import static org.sourcepit.common.utils.io.IO.read;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,14 +27,17 @@ import org.apache.maven.project.ProjectBuildingException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
-import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.maven.model.Scope;
+import org.sourcepit.common.utils.io.Read.FromStream;
+import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
 import org.sourcepit.maven.dependency.model.DependencyModel;
@@ -50,9 +56,6 @@ import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
-import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
-import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
@@ -79,9 +82,9 @@ public class OsgifyModelBuilder
       final DependencyModel dependencyModel = resolve(dependencies);
 
       final OsgifyContext osgifyModel = createStubModel(dependencyModel);
+      applyNativeBundles(osgifyModel);
       applyBuildOrder(osgifyModel);
       applyJavaContent(osgifyModel);
-      applyNativeBundles(osgifyModel);
       applyManifests(properties, osgifyModel);
 
       final Result result = new Result();
@@ -202,8 +205,8 @@ public class OsgifyModelBuilder
 
             for (BundleReference reference : bundle.getDependencies())
             {
+               // TODO move elsewhere
                reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
-
                final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
                if (mavenDependency != null)
                {
@@ -211,51 +214,20 @@ public class OsgifyModelBuilder
                   reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
                }
             }
+
+            if (isSourceBundle(bundle))
+            {
+               applySourceBundles(bundle);
+            }
+            else
+            {
+               environmentAppender.append(bundle);
+               packageExports.append(properties, bundle);
+               packageImports.append(bundle);
+               dynamicImports.append(bundle);
+            }
          }
       }
-
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
-         {
-            environmentAppender.append(bundle);
-         }
-      }
-
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
-         {
-            packageExports.append(properties, bundle);
-         }
-      }
-
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         if (isGenerateManifest(bundle) && !isSourceBundle(bundle))
-         {
-            packageImports.append(bundle);
-            dynamicImports.append(bundle);
-         }
-      }
-
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         if (isGenerateManifest(bundle) && isSourceBundle(bundle))
-         {
-            applySourceBundles(bundle);
-         }
-      }
-   }
-
-   private boolean isGenerateManifest(BundleCandidate bundle)
-   {
-      return !bundle.isNativeBundle() || isOverrideNativeBundle(bundle);
-   }
-
-   private boolean isSourceBundle(BundleCandidate bundle)
-   {
-      return bundle.getTargetBundle() != null;
    }
 
    private void applySourceBundles(BundleCandidate bundle)
@@ -272,35 +244,41 @@ public class OsgifyModelBuilder
          targetBundle.getSymbolicName() + ";version=\"" + targetBundle.getVersion() + "\";roots:=\".\"");
    }
 
-   private boolean isOverrideNativeBundle(BundleCandidate bundle)
-   {
-      return false;
-   }
-
    private void applyNativeBundles(final OsgifyContext osgifyModel)
    {
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         final JavaResourceBundle jBundle = bundle.getContent();
-         if (jBundle != null)
+         if (bundle.getLocation() != null)
          {
-            final BundleManifest manifest = getBundleManifest(jBundle);
-            if (manifest != null) // native bundle
+            final FromStream<Manifest> fromStream = new FromStream<Manifest>()
             {
-               BundleSymbolicName bundleSymbolicName = manifest.getBundleSymbolicName();
-               if (bundleSymbolicName != null)
+               @Override
+               public Manifest read(InputStream inputStream) throws Exception
                {
+                  final Resource resource = new GenericManifestResourceImpl();
+                  resource.load(inputStream, null);
+                  return (Manifest) resource.getContents().get(0);
+               }
+            };
+
+            try
+            {
+               final Manifest m = read(fromStream, osgiIn(bundle.getLocation(), "META-INF/MANIFEST.MF"));
+               if (m instanceof BundleManifest)
+               {
+                  BundleManifest manifest = (BundleManifest) m;
                   bundle.setNativeBundle(true);
-                  bundle.setManifest(EcoreUtil.copy(manifest));
+                  bundle.setManifest(manifest);
 
                   // TODO deprecate! replace with operation
-                  bundle.setSymbolicName(bundleSymbolicName.getSymbolicName());
+                  bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
                   bundle.setVersion(manifest.getBundleVersion());
                }
-               else
-               {
-                  System.err.println(bundle.getLocation());
-               }
+            }
+            catch (PipedException e)
+            {
+               // TODO log
+               e.printStackTrace();
             }
          }
       }
@@ -313,33 +291,15 @@ public class OsgifyModelBuilder
 
    private void applyJavaContent(final OsgifyContext osgifyModel)
    {
-      // TODO execute parallel
       // TODO projects?
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
          final File location = bundle.getLocation();
-         if (location != null && location.isFile())
+         if (location != null && location.isFile() && isScanBundle(bundle))
          {
             bundle.setContent(newScanner().scan(location));
          }
       }
-   }
-
-   private BundleManifest getBundleManifest(final JavaResourceBundle jBundle)
-   {
-      for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
-      {
-         final Resource resource = jRoot.getResource("META-INF/MANIFEST.MF");
-         if (resource != null)
-         {
-            final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
-            if (bundleManifest != null)
-            {
-               return bundleManifest;
-            }
-         }
-      }
-      return null;
    }
 
    private JavaResourcesBundleScanner newScanner()
@@ -350,5 +310,25 @@ public class OsgifyModelBuilder
       typeAnalyzers.add(new ClassForNameDetector());
       scanner.setJavaTypeAnalyzer(typeAnalyzers);
       return scanner;
+   }
+
+   private boolean isGenerateManifest(BundleCandidate bundle)
+   {
+      return !bundle.isNativeBundle() || isOverrideNativeBundle(bundle);
+   }
+
+   private boolean isOverrideNativeBundle(BundleCandidate bundle)
+   {
+      return false;
+   }
+
+   private boolean isSourceBundle(BundleCandidate bundle)
+   {
+      return bundle.getTargetBundle() != null;
+   }
+
+   private boolean isScanBundle(BundleCandidate bundle)
+   {
+      return isGenerateManifest(bundle) && !isSourceBundle(bundle);
    }
 }

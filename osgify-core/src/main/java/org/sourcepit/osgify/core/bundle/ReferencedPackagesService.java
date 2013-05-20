@@ -228,7 +228,13 @@ public class ReferencedPackagesService
             {
                final BundleCandidate target = bundleReference.getTarget();
 
-               packageExport = resolvePackage(target.getManifest().getExportPackage(), packageName);
+               final BundleManifest targetManifest = target.getManifest();
+               if (targetManifest == null) // HACK happens when we have cyclic references
+               {
+                  continue;
+               }
+               
+               packageExport = resolvePackage(targetManifest.getExportPackage(), packageName);
                if (packageExport != null)
                {
                   exportDescriptions.add(new ExportDescription(bundle, packageName, bundleReference, target,

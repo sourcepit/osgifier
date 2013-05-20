@@ -124,7 +124,14 @@ public class PackageExportAppender
       for (BundleReference bundleReference : dependencies)
       {
          final BundleCandidate referencedBundle = bundleReference.getTarget();
-         final EList<PackageExport> exportPackage = referencedBundle.getManifest().getExportPackage();
+
+         final BundleManifest manifest = referencedBundle.getManifest();
+         if (manifest == null) // HACK happens when we have cyclic references
+         {
+            continue;
+         }
+
+         final EList<PackageExport> exportPackage = manifest.getExportPackage();
          if (exportPackage != null)
          {
             for (PackageExport packageExport : exportPackage)

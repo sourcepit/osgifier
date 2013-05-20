@@ -70,16 +70,16 @@ public class OsgifyContextUtilsTest
       assertThat(buildOrder.get(3), IsEqual.equalTo(a));
 
       // recursion a -> b -> c -> a
-      addBundleReference(c, a);
-
-      try
-      {
-         OsgifyContextUtils.computeBuildOrder(ctx);
-         fail();
-      }
-      catch (IllegalStateException e)
-      {
-      }
+      // addBundleReference(c, a);
+      //
+      // try
+      // {
+      // OsgifyContextUtils.computeBuildOrder(ctx);
+      // fail();
+      // }
+      // catch (IllegalStateException e)
+      // {
+      // }
    }
 
    private BundleReference addBundleReference(BundleCandidate from, BundleCandidate to)
