@@ -77,15 +77,16 @@ public class OsgifyModelBuilder
       public OsgifyContext osgifyModel;
    }
 
-   public Result build(PropertiesSource properties, Collection<Dependency> dependencies)
+   public Result build(ManifestGeneratorFilter generatorFilter, PropertiesSource properties,
+      Collection<Dependency> dependencies)
    {
       final DependencyModel dependencyModel = resolve(dependencies);
 
       final OsgifyContext osgifyModel = createStubModel(dependencyModel);
       applyNativeBundles(osgifyModel);
       applyBuildOrder(osgifyModel);
-      applyJavaContent(osgifyModel);
-      applyManifests(properties, osgifyModel);
+      applyJavaContent(generatorFilter, osgifyModel);
+      applyManifests(generatorFilter, properties, osgifyModel);
 
       final Result result = new Result();
       result.dependencyModel = dependencyModel;
@@ -184,11 +185,12 @@ public class OsgifyModelBuilder
    @Inject
    private PackageImportAppender packageImports;
 
-   private void applyManifests(PropertiesSource properties, OsgifyContext osgifyModel)
+   private void applyManifests(ManifestGeneratorFilter generatorFilter, PropertiesSource properties,
+      OsgifyContext osgifyModel)
    {
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         if (isGenerateManifest(bundle))
+         if (generatorFilter.isGenerateManifest(bundle))
          {
             final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
             bundle.setManifest(manifest);
@@ -215,7 +217,7 @@ public class OsgifyModelBuilder
                }
             }
 
-            if (isSourceBundle(bundle))
+            if (generatorFilter.isSourceBundle(bundle))
             {
                applySourceBundles(bundle);
             }
@@ -289,13 +291,13 @@ public class OsgifyModelBuilder
       return stubModelCreator.create(dependencyModel);
    }
 
-   private void applyJavaContent(final OsgifyContext osgifyModel)
+   private void applyJavaContent(ManifestGeneratorFilter generatorFilter, OsgifyContext osgifyModel)
    {
       // TODO projects?
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
          final File location = bundle.getLocation();
-         if (location != null && location.isFile() && isScanBundle(bundle))
+         if (location != null && location.isFile() && generatorFilter.isScanBundle(bundle))
          {
             bundle.setContent(newScanner().scan(location));
          }
@@ -310,25 +312,5 @@ public class OsgifyModelBuilder
       typeAnalyzers.add(new ClassForNameDetector());
       scanner.setJavaTypeAnalyzer(typeAnalyzers);
       return scanner;
-   }
-
-   private boolean isGenerateManifest(BundleCandidate bundle)
-   {
-      return !bundle.isNativeBundle() || isOverrideNativeBundle(bundle);
-   }
-
-   private boolean isOverrideNativeBundle(BundleCandidate bundle)
-   {
-      return false;
-   }
-
-   private boolean isSourceBundle(BundleCandidate bundle)
-   {
-      return bundle.getTargetBundle() != null;
-   }
-
-   private boolean isScanBundle(BundleCandidate bundle)
-   {
-      return isGenerateManifest(bundle) && !isSourceBundle(bundle);
    }
 }
