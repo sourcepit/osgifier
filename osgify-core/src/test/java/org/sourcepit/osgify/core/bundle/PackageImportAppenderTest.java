@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
 import static org.sourcepit.osgify.core.bundle.PackageImportAppender.determineImportVersionRange;
@@ -98,7 +99,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testMarkUnresolveablePackageOptional()
+   public void testIgnoreUnresolveablePackages()
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "a.Bar", 47, "b.Foo");
@@ -108,7 +109,7 @@ public class PackageImportAppenderTest extends InjectedTest
       importAppender.append(bundle);
 
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("b;optional:=true"));
+      assertThat(packageImports, nullValue());
    }
 
    @Test

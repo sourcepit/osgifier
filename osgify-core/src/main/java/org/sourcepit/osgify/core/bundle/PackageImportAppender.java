@@ -62,7 +62,7 @@ public class PackageImportAppender
 
    public void append(@NotNull BundleCandidate bundle)
    {
-      BundleManifest manifest = bundle.getManifest();
+      final BundleManifest manifest = bundle.getManifest();
 
       final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(bundle.getContent(),
          manifest);
@@ -72,21 +72,25 @@ public class PackageImportAppender
 
       for (String packageName : importPackages)
       {
-         final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
-         packageImport.getPackageNames().add(packageName);
-         packageImport.setVersion(determineVersionRange(bundle, determinePackagesToImport.get(packageName)));
-
-         final boolean optional = isOptional(bundle, packageName);
-         if (optional)
+         final ExportDescription exportDescription = packagesService.determineExporter(bundle, packageName);
+         if (exportDescription != null)
          {
-            Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
-            parameter.setName("optional");
-            parameter.setType(ParameterType.DIRECTIVE);
-            parameter.setValue(String.valueOf(optional));
-            packageImport.getParameters().add(parameter);
-         }
+            final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
+            packageImport.getPackageNames().add(packageName);
+            packageImport.setVersion(determineVersionRange(bundle, determinePackagesToImport.get(packageName)));
 
-         manifest.getImportPackage(true).add(packageImport);
+            final boolean optional = isOptional(bundle, packageName);
+            if (optional)
+            {
+               Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
+               parameter.setName("optional");
+               parameter.setType(ParameterType.DIRECTIVE);
+               parameter.setValue(String.valueOf(optional));
+               packageImport.getParameters().add(parameter);
+            }
+
+            manifest.getImportPackage(true).add(packageImport);
+         }
       }
    }
 
@@ -158,8 +162,8 @@ public class PackageImportAppender
          {
             Version rl = referenceRange.getLowVersion();
             rl = new Version(rl.getMajor(), rl.getMinor(), -1);
-            if (!new VersionRange(rl, referenceRange.isLowInclusive(), referenceRange.getHighVersion(), referenceRange.isHighInclusive())
-               .includes(packageVersion))
+            if (!new VersionRange(rl, referenceRange.isLowInclusive(), referenceRange.getHighVersion(),
+               referenceRange.isHighInclusive()).includes(packageVersion))
             {
                referenceRange = new VersionRange(packageVersion, true, packageVersion, true);
             }
