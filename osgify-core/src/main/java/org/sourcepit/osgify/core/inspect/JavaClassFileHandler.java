@@ -50,6 +50,10 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
    private void analyzeType(final JavaType javaType, InputStream content)
    {
       final JavaClass javaClass = parseClass(javaType, content);
+      if (javaClass == null)
+      {
+         return;
+      }
 
       org.sourcepit.osgify.core.model.java.JavaClass jClass = (org.sourcepit.osgify.core.model.java.JavaClass) javaType
          .getFile();
@@ -74,7 +78,9 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
       }
       catch (ClassFormatException e)
       {
-         throw new IllegalStateException(e);
+         e.printStackTrace();
+         // throw new IllegalStateException(e);
+         return null;
       }
       catch (IOException e)
       {

@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.java.internal.impl;
 
 import javax.validation.constraints.NotNull;
 
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -24,6 +25,17 @@ public final class JavaResourceBundleOperations
    private JavaResourceBundleOperations()
    {
       super();
+   }
+
+   public static File getFile(@NotNull JavaResourceBundle bundle, @NotNull String rootName, @NotNull String name,
+      boolean createOnDemand)
+   {
+      final JavaResourcesRoot resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
+      if (resourcesRoot == null)
+      {
+         return null;
+      }
+      return resourcesRoot.getFile(name, createOnDemand);
    }
 
    public static JavaType getType(@NotNull JavaResourceBundle bundle, @NotNull String rootName, String packageName,

@@ -22,7 +22,7 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
 {
    public Priority getPriority()
    {
-      return Priority.HIGH;
+      return Priority.NORMAL;
    }
 
    @Override

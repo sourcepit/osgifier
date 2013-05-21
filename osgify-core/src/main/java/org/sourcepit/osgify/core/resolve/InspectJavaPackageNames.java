@@ -6,18 +6,21 @@
 
 package org.sourcepit.osgify.core.resolve;
 
+import static org.sourcepit.osgify.core.resolve.PackageCollector.firstWithTypesOrSubPackages;
+import static org.sourcepit.osgify.core.resolve.PackageCollector.getDepth;
+import static org.sourcepit.osgify.core.resolve.PackageCollector.getDepthOfFirstPackageWithTypes;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Named;
 
-import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
-import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 
 /**
  * @author Bernd
@@ -27,7 +30,7 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
 {
    public Priority getPriority()
    {
-      return Priority.NORMAL;
+      return Priority.HIGH;
    }
 
    @Override
@@ -41,71 +44,145 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
       return null;
    }
 
+
    private String resolveSymbolicName(JavaResourceBundle jBundle)
    {
-      List<JavaPackage> entryPackages = new ArrayList<JavaPackage>();
-      for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
+      final int depth = getDepthOfFirstPackageWithTypes(jBundle, 1, -1);
+
+      final int minDepth = depth - 1;
+      final int maxDepth = depth + 1;
+
+      final List<JavaPackage> roots = firstWithTypesOrSubPackages(jBundle, minDepth, maxDepth);
+      return resolveSymbolicName(roots, depth);
+   }
+
+   private String resolveSymbolicName(final List<JavaPackage> roots, final int depth)
+   {
+      JavaPackage chosen = ratePackages(roots, roots.get(0), true);
+      if (chosen.getJavaFiles().isEmpty())
       {
-         collectFirstPackagesWithTypes(entryPackages, jRoot.getPackages());
+         int newDepth = getDepthOfFirstPackageWithTypes(chosen, getDepth(chosen), -1);
+         if (newDepth > depth)
+         {
+            return resolveSymbolicName(firstWithTypesOrSubPackages(chosen, newDepth - 1, newDepth + 1), newDepth);
+         }
+         return byPackageRoots(Collections.singletonList(chosen));
+      }
+      return byTypeRoots(Collections.singletonList(chosen));
+   }
+
+   private String byTypeRoots(final List<JavaPackage> typeRoots)
+   {
+      final JavaPackage typeRoot = ratePackages(typeRoots, typeRoots.get(0), true);
+
+      int typeCount = typeRoot.getJavaFiles().size();
+      for (JavaPackage javaPackage : typeRoot.getPackages())
+      {
+         typeCount += getTypeCount(javaPackage);
       }
 
-      if (entryPackages.isEmpty())
+      final int typesPerPkg = Math.round(typeCount / (typeRoot.getPackages().size() + 1));
+
+      if (typeRoot.getJavaFiles().size() * 1.8 >= typesPerPkg)
       {
-         return null;
+         return typeRoot.getQualifiedName();
+      }
+      else
+      {
+         final JavaPackage fatSubPackage = getFatSubPackage(typeRoot);
+         return fatSubPackage == null ? typeRoot.getQualifiedName() : fatSubPackage.getQualifiedName();
+      }
+   }
+
+   private String byPackageRoots(final List<JavaPackage> pkgRoots)
+   {
+      final JavaPackage pkgRoot = ratePackages(pkgRoots, pkgRoots.get(0), true);
+      final JavaPackage fatSubPackage = getFatSubPackage(pkgRoot);
+      return fatSubPackage == null ? pkgRoot.getQualifiedName() : fatSubPackage.getQualifiedName();
+   }
+
+   private JavaPackage getFatSubPackage(JavaPackage jPackage)
+   {
+      final int typesPerPkg = Math.round(getTypeCount(jPackage) / jPackage.getPackages().size());
+      final List<JavaPackage> fatSubPackages = new ArrayList<JavaPackage>();
+      for (JavaPackage subPackage : jPackage.getPackages())
+      {
+         if (getTypeCount(subPackage) >= typesPerPkg * 1.2)
+         {
+            fatSubPackages.add(subPackage);
+         }
+      }
+      return fatSubPackages.size() == 1 ? fatSubPackages.get(0) : null;
+   }
+
+   private int getTypeCount(JavaPackage javaPackage)
+   {
+      int typeCount = javaPackage.getJavaFiles().size();
+
+      for (JavaPackage subPackage : javaPackage.getPackages())
+      {
+         typeCount += getTypeCount(subPackage);
       }
 
-      if (entryPackages.size() == 1)
-      {
-         return entryPackages.get(0).getQualifiedName();
-      }
+      return typeCount;
+   }
+
+   private JavaPackage ratePackages(List<JavaPackage> jPackages, JavaPackage fallback, boolean rateTypes)
+   {
+      boolean rateChanged = false;
       int rate = -1;
       JavaPackage winnerPackage = null;
-      for (JavaPackage entryPackage : entryPackages)
+
+      for (JavaPackage entryPackage : jPackages)
       {
-         int current = ratePackage(entryPackage);
+         int current = ratePackage(entryPackage, true, rateTypes);
+         if (rate != -1 && current != rate)
+         {
+            rateChanged = true;
+         }
          if (current > rate)
          {
             rate = current;
             winnerPackage = entryPackage;
          }
       }
-      return winnerPackage == null ? null : winnerPackage.getQualifiedName();
+
+      return !rateChanged || winnerPackage == null ? fallback : winnerPackage;
    }
 
-   private int ratePackage(JavaPackage entryPackage)
+   private int ratePackage(JavaPackage entryPackage, boolean bySubPackages, boolean byTypes)
    {
       List<JavaPackage> subPackages = new ArrayList<JavaPackage>();
       List<JavaFile> types = new ArrayList<JavaFile>();
       collect(subPackages, types, entryPackage);
-      return subPackages.size() + types.size();
+
+      if (bySubPackages && byTypes)
+      {
+         return subPackages.size() + types.size();
+      }
+      else if (bySubPackages)
+      {
+         return subPackages.size();
+      }
+      else if (byTypes)
+      {
+         return types.size();
+      }
+      return -1;
    }
 
    private void collect(List<JavaPackage> subPackages, List<JavaFile> types, JavaPackage javaPackage)
    {
-      if (!"internal".equals(javaPackage.getName()))
+      types.addAll(javaPackage.getJavaFiles());
+
+      for (JavaPackage subPackage : javaPackage.getPackages())
       {
-         types.addAll(javaPackage.getJavaFiles());
-         for (JavaPackage subPackage : javaPackage.getPackages())
+
+         if (!subPackage.getJavaFiles().isEmpty())
          {
             subPackages.add(subPackage);
-            collect(subPackages, types, subPackage);
          }
+         collect(subPackages, types, subPackage);
       }
    }
-
-   private void collectFirstPackagesWithTypes(List<JavaPackage> resultBag, EList<JavaPackage> javaPackages)
-   {
-      for (JavaPackage javaPackage : javaPackages)
-      {
-         if (javaPackage.getJavaFiles().isEmpty())
-         {
-            collectFirstPackagesWithTypes(resultBag, javaPackage.getPackages());
-         }
-         else
-         {
-            resultBag.add(javaPackage);
-         }
-      }
-   }
-
 }

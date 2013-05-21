@@ -18,6 +18,8 @@ public aspect JavaArchiveAspects
    pointcut getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand): target(bundle) && args(fullyQualified, createOnDemand) && execution(JavaPackage JavaArchive.getPackage(String, boolean));
 
    pointcut getType(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand): target(bundle) && args(packageName, typeName, createOnDemand) && execution(JavaType JavaArchive.getType(String, String, boolean));
+   
+   pointcut getFile(JavaArchive bundle, String name, boolean createOnDemand): target(bundle) && args(name, createOnDemand) && execution(File JavaArchive.getFile(String, boolean));
 
    Resource around(JavaArchive bundle, String name) : getResource(bundle, name){
       return JavaArchiveOperations.getResource(bundle, name);
@@ -29,5 +31,9 @@ public aspect JavaArchiveAspects
 
    JavaType around(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand) : getType(bundle, packageName, typeName, createOnDemand){
       return JavaArchiveOperations.getType(bundle, packageName, typeName, createOnDemand);
+   }
+   
+   File around(JavaArchive bundle, String name, boolean createOnDemand) : getFile(bundle, name, createOnDemand){
+      return JavaArchiveOperations.getFile(bundle, name, createOnDemand);
    }
 }

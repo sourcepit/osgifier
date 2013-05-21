@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
+import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
@@ -40,5 +41,10 @@ public final class JavaArchiveOperations
          }
       }
       return null;
+   }
+
+   public static File getFile(JavaArchive bundle, String name, boolean createOnDemand)
+   {
+      return JavaResourceBundleOperations.getFile(bundle, "", name, createOnDemand);
    }
 }
