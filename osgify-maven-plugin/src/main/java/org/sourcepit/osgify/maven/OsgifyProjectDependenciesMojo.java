@@ -157,9 +157,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 
          if (generatorFilter.isGenerateManifest(bundle) && !generatorFilter.isSourceBundle(bundle))
          {
-            final File srcJarFile = bundle.getLocation();
-            final File destJarFile = new File(dir, getBundleId(bundle) + ".jar");
-            repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, bundle.getManifest());
+            final File destJarFile = copyJarAndInjectManifest(bundle);
 
             InstallRequest request = new InstallRequest();
 
@@ -171,10 +169,19 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             BundleCandidate sourceBundle = bundle.getSourceBundle();
             if (sourceBundle != null && sourceBundle.getLocation() != null)
             {
-               ArtifactKey srcKey = getArtifactKey(sourceBundle);
-               final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, srcKey.getClassifier(),
-                  srcKey.getType());
-               request.addArtifact(sourceArtifact.setFile(sourceBundle.getLocation()));
+               final ArtifactKey sourceKey = getArtifactKey(sourceBundle);
+               final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
+                  sourceKey.getType());
+               final File sourceJar;
+               if (generatorFilter.isGenerateManifest(sourceBundle))
+               {
+                  sourceJar = copyJarAndInjectManifest(sourceBundle);
+               }
+               else
+               {
+                  sourceJar = sourceBundle.getLocation();
+               }
+               request.addArtifact(sourceArtifact.setFile(sourceJar));
             }
 
             try
@@ -189,6 +196,14 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
          }
       }
 
+   }
+
+   private File copyJarAndInjectManifest(BundleCandidate bundle)
+   {
+      final File srcJarFile = bundle.getLocation();
+      final File destJarFile = new File(getWorkDir(bundle), getBundleId(bundle) + ".jar");
+      repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, bundle.getManifest());
+      return destJarFile;
    }
 
    private File getWorkDir(BundleCandidate bundle)
