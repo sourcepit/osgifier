@@ -6,8 +6,11 @@
 
 package org.sourcepit.osgify.maven.p2;
 
+import static java.util.Collections.singletonList;
+import static org.apache.commons.io.FileUtils.copyFile;
 import static org.sourcepit.common.utils.io.IO.buffOut;
 import static org.sourcepit.common.utils.io.IO.fileOut;
+import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -35,6 +38,8 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
+import org.sourcepit.osgify.maven.ManifestGeneratorFilter;
+import org.sourcepit.osgify.maven.OsgifyModelBuilder.Result;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgify.p2.P2Publisher;
@@ -73,14 +78,24 @@ public class P2UpdateSiteGenerator
       return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
    }
 
-   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
+   @Inject
+   private org.sourcepit.osgify.maven.OsgifyModelBuilder modelBuilder2;
+
+   public Result generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      final OsgifyModelBuilder.Request request = modelBuilder.createDependenciesRequest(dependencies,
-         Artifact.SCOPE_COMPILE, remoteArtifactRepositories, localRepository);
-      request.setIncludeSource(includeSources);
-      return generateUpdateSite(request, siteDir, repositoryName, options == null ? new LinkedPropertiesMap() : options);
+      final Result result = modelBuilder2.build(new ManifestGeneratorFilter(), options == null
+         ? new LinkedPropertiesMap()
+         : options, dependencies);
+
+      final OsgifyContext model = result.osgifyModel;
+
+      final boolean compressRepository = options.getBoolean(OPTION_COMPRESS_REPOSITORY, true);
+      final int forkedProcessTimeoutInSeconds = options.getInt(OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS, 0);
+      generateUpdateSite(model, siteDir, repositoryName, compressRepository, forkedProcessTimeoutInSeconds);
+
+      return result;
    }
 
    private OsgifyContext generateUpdateSite(final OsgifyModelBuilder.Request request, File siteDir,
@@ -139,13 +154,14 @@ public class P2UpdateSiteGenerator
    private void generateUpdateSite(OsgifyContext model, File siteDir, String repositoryName,
       boolean compressRepository, int forkedProcessTimeoutInSeconds)
    {
-      final File workDir = getCleanDir(siteDir, ".osgify");
+      final File bundlesDir = getCleanDir(siteDir, "plugins");
 
-      final List<File> bundles = copyJarsAndInjectManifests(model, workDir);
+      copyJarsAndInjectManifests(model, bundlesDir);
 
-      p2Publisher.publishBundles(siteDir, repositoryName, bundles, compressRepository, forkedProcessTimeoutInSeconds);
+      p2Publisher.publishBundles(siteDir, repositoryName, singletonList(bundlesDir), compressRepository,
+         forkedProcessTimeoutInSeconds);
 
-      final File categoryFile = new File(workDir, "category.xml");
+      final File categoryFile = new File(siteDir, "category.xml");
       writeCategoryXml(categoryFile);
 
       p2Publisher.publishCategories(siteDir, categoryFile, compressRepository, forkedProcessTimeoutInSeconds);
@@ -180,18 +196,26 @@ public class P2UpdateSiteGenerator
       List<File> bundleJars = new ArrayList<File>();
       for (BundleCandidate bundle : model.getBundles())
       {
+         final File bundleJar = new File(workDir, bundle.getSymbolicName() + "_" + bundle.getVersion().toFullString()
+            + ".jar");
+
          if (bundle.isNativeBundle())
          {
-            bundleJars.add(bundle.getLocation());
+            try
+            {
+               copyFile(bundle.getLocation(), bundleJar);
+            }
+            catch (IOException e)
+            {
+               throw pipe(e);
+            }
          }
          else
          {
-            final File bundleJar = new File(workDir, bundle.getSymbolicName() + "_"
-               + bundle.getVersion().toFullString() + ".jar");
             repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest());
-            bundle.setLocation(bundleJar);
-            bundleJars.add(bundleJar);
          }
+         bundle.setLocation(bundleJar);
+         bundleJars.add(bundleJar);
       }
       return bundleJars;
    }
