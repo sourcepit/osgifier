@@ -6,6 +6,8 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static java.util.Collections.reverse;
+import static java.util.Collections.sort;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
 import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
@@ -241,6 +243,9 @@ public class ReferencedPackagesService
                      packageExport, ACCESSIBLE));
                }
             }
+            
+            sort(exportDescriptions);
+            reverse(exportDescriptions);
          }
          return exportDescriptions;
       }

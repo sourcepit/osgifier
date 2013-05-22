@@ -10,5 +10,5 @@ package org.sourcepit.osgify.core.ee;
  */
 public enum AccessRule
 {
-   ACCESSIBLE, DISCOURAGED, NON_ACCESSIBLE
+   NON_ACCESSIBLE, DISCOURAGED, ACCESSIBLE
 }
