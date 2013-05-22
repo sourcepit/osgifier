@@ -33,6 +33,7 @@ import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.manifest.osgi.ParameterType;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
+import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -75,21 +76,29 @@ public class PackageImportAppender
          final ExportDescription exportDescription = packagesService.determineExporter(bundle, packageName);
          if (exportDescription != null)
          {
-            final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
-            packageImport.getPackageNames().add(packageName);
-            packageImport.setVersion(determineVersionRange(bundle, determinePackagesToImport.get(packageName)));
-
-            final boolean optional = isOptional(bundle, packageName);
-            if (optional)
+            if (exportDescription.isPackageOfExecutionEnvironment()
+               && exportDescription.getAccessRule() == AccessRule.DISCOURAGED)
             {
-               Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
-               parameter.setName("optional");
-               parameter.setType(ParameterType.DIRECTIVE);
-               parameter.setValue(String.valueOf(optional));
-               packageImport.getParameters().add(parameter);
+               LOGGER.warn("Skipping import of Execution Environment specific package {}", exportDescription.getPackageName());
             }
+            else
+            {
+               final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
+               packageImport.getPackageNames().add(packageName);
+               packageImport.setVersion(determineVersionRange(bundle, determinePackagesToImport.get(packageName)));
 
-            manifest.getImportPackage(true).add(packageImport);
+               final boolean optional = isOptional(bundle, packageName);
+               if (optional)
+               {
+                  Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
+                  parameter.setName("optional");
+                  parameter.setType(ParameterType.DIRECTIVE);
+                  parameter.setValue(String.valueOf(optional));
+                  packageImport.getParameters().add(parameter);
+               }
+               
+               manifest.getImportPackage(true).add(packageImport);
+            }
          }
       }
    }
