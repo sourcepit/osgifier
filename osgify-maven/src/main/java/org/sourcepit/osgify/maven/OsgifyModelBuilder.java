@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -56,6 +58,7 @@ import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.resolve.SymbolicNameConflictResolver;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
@@ -185,12 +188,17 @@ public class OsgifyModelBuilder
    @Inject
    private PackageImportAppender packageImports;
 
+   @Inject
+   private SymbolicNameConflictResolver nameConflictResolver;
+
    private void applyManifests(ManifestGeneratorFilter generatorFilter, PropertiesSource properties,
       OsgifyContext osgifyModel)
    {
+      Map<String, BundleCandidate> keyToBundle = new HashMap<String, BundleCandidate>();
+
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         if (generatorFilter.isGenerateManifest(bundle))
+         if (generatorFilter.isGenerateManifest(bundle) && !generatorFilter.isSourceBundle(bundle))
          {
             final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
             bundle.setManifest(manifest);
@@ -205,6 +213,35 @@ public class OsgifyModelBuilder
             manifest.setBundleVersion(version);
             bundle.setVersion(version);
 
+            final String bundleKey = getBundleKey(bundle);
+
+            final BundleCandidate conflictBundle = keyToBundle.get(bundleKey);
+            if (conflictBundle == null)
+            {
+               keyToBundle.put(bundleKey, bundle);
+            }
+            else
+            {
+               final List<String> conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle);
+               final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle);
+               if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names))
+               {
+                  keyToBundle.remove(bundleKey);
+                  keyToBundle.put(getBundleKey(conflictBundle), conflictBundle);
+                  keyToBundle.put(getBundleKey(bundle), bundle);
+               }
+               else
+               {
+                  // TODO panic!
+               }
+            }
+         }
+      }
+
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         if (generatorFilter.isGenerateManifest(bundle))
+         {
             for (BundleReference reference : bundle.getDependencies())
             {
                // TODO move elsewhere
@@ -232,18 +269,29 @@ public class OsgifyModelBuilder
       }
    }
 
+   private static String getBundleKey(BundleCandidate bundle)
+   {
+      return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
+   }
+
    private void applySourceBundles(BundleCandidate bundle)
    {
       final BundleCandidate targetBundle = bundle.getTargetBundle();
       final String symbolicName = targetBundle.getSymbolicName();
+      final Version version = targetBundle.getVersion();
 
-      BundleManifest manifest = bundle.getManifest();
+      final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
+      bundle.setManifest(manifest);
+
       manifest.getBundleSymbolicName(true).setSymbolicName(symbolicName + ".source");
       bundle.setSymbolicName(symbolicName + ".source");
 
+      manifest.setBundleVersion(version);
+      bundle.setVersion(version);
+
       // Eclipse-SourceBundle: com.ibm.icu;version="4.4.2.v20110823";roots:="."
-      manifest.setHeader("Eclipse-SourceBundle",
-         targetBundle.getSymbolicName() + ";version=\"" + targetBundle.getVersion() + "\";roots:=\".\"");
+      manifest.setHeader("Eclipse-SourceBundle", targetBundle.getSymbolicName() + ";version=\"" + version
+         + "\";roots:=\".\"");
    }
 
    private void applyNativeBundles(final OsgifyContext osgifyModel)
