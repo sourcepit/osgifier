@@ -18,6 +18,8 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.bcel.classfile.ClassFormatException;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
@@ -28,6 +30,8 @@ import org.sourcepit.osgify.core.model.java.JavaType;
  */
 public class JavaClassFileHandler extends AbstractJavaResourceHandler
 {
+   private final static Logger LOG = LoggerFactory.getLogger(JavaClassFileHandler.class);
+
    private final List<IJavaTypeAnalyzer> typeAnalyzers = new ArrayList<IJavaTypeAnalyzer>();
 
    public List<IJavaTypeAnalyzer> getTypeAnalyzers()
@@ -78,8 +82,7 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
       }
       catch (ClassFormatException e)
       {
-         e.printStackTrace();
-         // throw new IllegalStateException(e);
+         LOG.warn("Faild to parse class {}.", javaType.getQualifiedName(), e);
          return null;
       }
       catch (IOException e)
