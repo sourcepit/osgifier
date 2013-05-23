@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.resolve;
 
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.priority.AbstractPriorized;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
@@ -15,5 +16,5 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
  */
 public abstract class AbstractVersionResolutionStrategy extends AbstractPriorized
 {
-   public abstract Version resolveVersion(BundleCandidate bundleCandidate);
+   public abstract Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options);
 }

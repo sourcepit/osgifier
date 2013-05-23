@@ -14,6 +14,7 @@ import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,7 +81,9 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 
       final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
 
-      final Result result = modelBuilder.build(generatorFilter, properties, project.getDependencies());
+      final Date startTime = buildContext.getSession().getStartTime();
+
+      final Result result = modelBuilder.build(generatorFilter, properties, project.getDependencies(), startTime);
       final DependencyModel dependencyModel = result.dependencyModel;
       final OsgifyContext bundleModel = result.osgifyModel;
 

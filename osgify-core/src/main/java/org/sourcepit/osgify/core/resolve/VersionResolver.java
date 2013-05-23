@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
@@ -28,11 +29,11 @@ public class VersionResolver
 
    private List<AbstractVersionResolutionStrategy> strategies;
 
-   public Version resolveVersion(BundleCandidate bundleCandidate)
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       for (AbstractVersionResolutionStrategy strategy : getStrategies())
       {
-         final Version version = strategy.resolveVersion(bundleCandidate);
+         final Version version = strategy.resolveVersion(bundleCandidate, options);
          if (version != null)
          {
             return version;

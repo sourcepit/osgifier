@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -83,11 +84,11 @@ public class P2UpdateSiteGenerator
 
    public Result generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesSource options)
+      PropertiesSource options, Date startTime)
    {
       final Result result = modelBuilder2.build(new ManifestGeneratorFilter(), options == null
          ? new LinkedPropertiesMap()
-         : options, dependencies);
+         : options, dependencies, startTime);
 
       final OsgifyContext model = result.osgifyModel;
 

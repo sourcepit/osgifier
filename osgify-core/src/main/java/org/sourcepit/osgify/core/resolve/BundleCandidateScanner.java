@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
 import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
@@ -51,7 +52,7 @@ public class BundleCandidateScanner
    private void resolveOSGiAttributes(BundleCandidate bundleCandidate)
    {
       bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate));
-      bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate));
+      bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate, new LinkedPropertiesMap()));
    }
 
    private JavaResourcesBundleScanner newScanner()

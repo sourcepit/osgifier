@@ -6,11 +6,15 @@
 
 package org.sourcepit.osgify.maven.impl;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static org.sourcepit.osgify.maven.impl.MavenToOSGiUtils.toVersion;
+
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenProjectCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractVersionResolutionStrategy;
 
@@ -23,15 +27,30 @@ public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStr
    }
 
    @Override
-   public Version resolveVersion(BundleCandidate bundleCandidate)
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
    {
+      final String ctxQualifier = options.get("osgifier.forceContextQualifier");
+      final boolean saveMaveQualifier = options.getBoolean("osgifier.saveMavenQualifier", true);
+
       final MavenProjectCoordinates mavenArtifact = bundleCandidate.getExtension(MavenProjectCoordinates.class);
       if (mavenArtifact != null)
       {
          final String mvnVersion = mavenArtifact.getVersion();
          if (mvnVersion != null)
          {
-            return MavenToOSGiUtils.toVersion(mvnVersion, true);
+            Version version = toVersion(mvnVersion, true);
+            if (!isNullOrEmpty(ctxQualifier))
+            {
+               final String oldQualifier = version.getQualifier();
+               String newQualifier = ctxQualifier;
+               if (saveMaveQualifier && !isNullOrEmpty(oldQualifier))
+               {
+                  newQualifier = ctxQualifier + "-" + oldQualifier;
+               }
+               version = new Version(version.getMajor(), version.getMinor(), version.getMicro(), newQualifier);
+            }
+
+            return version;
          }
       }
       return null;

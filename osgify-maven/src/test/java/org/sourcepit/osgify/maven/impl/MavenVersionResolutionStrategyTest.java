@@ -8,12 +8,18 @@ package org.sourcepit.osgify.maven.impl;
 
 import static org.junit.Assert.assertThat;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
@@ -22,7 +28,57 @@ import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 public class MavenVersionResolutionStrategyTest
 {
    @Test
-   public void test()
+   public void testDefault()
+   {
+      Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
+      mavenToOsgiVersion.put(null, null);
+      mavenToOsgiVersion.put("1", "1.0.0");
+      mavenToOsgiVersion.put("1.1", "1.1.0");
+      mavenToOsgiVersion.put("murks", "0.0.0.murks");
+      mavenToOsgiVersion.put("1.v200192827", "1.0.0.v200192827");
+      mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.SNAPSHOT");
+      mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.SNAPSHOT");
+      
+      PropertiesSource options = new LinkedPropertiesMap();
+      assertEquals(mavenToOsgiVersion, options);
+   }
+   
+   @Test
+   public void testForceContextQualifier()
+   {
+      Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
+      mavenToOsgiVersion.put(null, null);
+      mavenToOsgiVersion.put("1", "1.0.0.foo");
+      mavenToOsgiVersion.put("1.1", "1.1.0.foo");
+      mavenToOsgiVersion.put("murks", "0.0.0.foo-murks");
+      mavenToOsgiVersion.put("1.v200192827", "1.0.0.foo-v200192827");
+      mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.foo-SNAPSHOT");
+      mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.foo-SNAPSHOT");
+      
+      PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.forceContextQualifier", "foo");
+      assertEquals(mavenToOsgiVersion, options);
+   }
+
+   @Test
+   public void testForceContextQualifierTrimMavenQualifier()
+   {
+      Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
+      mavenToOsgiVersion.put(null, null);
+      mavenToOsgiVersion.put("1", "1.0.0.foo");
+      mavenToOsgiVersion.put("1.1", "1.1.0.foo");
+      mavenToOsgiVersion.put("murks", "0.0.0.foo");
+      mavenToOsgiVersion.put("1.v200192827", "1.0.0.foo");
+      mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.foo");
+      mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.foo");
+      
+      PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.forceContextQualifier", "foo");
+      options.put("osgifier.saveMavenQualifier", "false");
+      assertEquals(mavenToOsgiVersion, options);
+   }
+   
+   private void assertEquals(Map<String, String> mavenToOsgiVersion, PropertiesSource options)
    {
       MavenArtifact mavenArtifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
 
@@ -31,32 +87,12 @@ public class MavenVersionResolutionStrategyTest
       bundleCandidate.setContent(jArchive);
       bundleCandidate.addExtension(mavenArtifact);
 
-      Version version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version, IsNull.nullValue());
-
-      mavenArtifact.setVersion("1");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("1.0.0"));
-
-      mavenArtifact.setVersion("1.1");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("1.1.0"));
-
-      mavenArtifact.setVersion("murks");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("0.0.0.murks"));
-
-      mavenArtifact.setVersion("1.v200192827");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("1.0.0.v200192827"));
-
-      mavenArtifact.setVersion("1-SNAPSHOT");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("1.0.0.SNAPSHOT"));
-
-      mavenArtifact.setVersion("1.0.SNAPSHOT");
-      version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate);
-      assertThat(version.toString(), IsEqual.equalTo("1.0.0.SNAPSHOT"));
+      for (Entry<String, String> entry : mavenToOsgiVersion.entrySet())
+      {
+         mavenArtifact.setVersion(entry.getKey());
+         Version version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate, options);
+         assertThat(version == null ? null : version.toString(), IsEqual.equalTo(entry.getValue()));
+      }
    }
 
 }

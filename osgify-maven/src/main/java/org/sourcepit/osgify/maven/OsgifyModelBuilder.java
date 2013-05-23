@@ -13,12 +13,15 @@ import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,6 +43,7 @@ import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.maven.model.Scope;
 import org.sourcepit.common.utils.io.Read.FromStream;
 import org.sourcepit.common.utils.lang.PipedException;
+import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
 import org.sourcepit.maven.dependency.model.DependencyModel;
@@ -80,21 +84,42 @@ public class OsgifyModelBuilder
       public OsgifyContext osgifyModel;
    }
 
-   public Result build(ManifestGeneratorFilter generatorFilter, PropertiesSource properties,
-      Collection<Dependency> dependencies)
+   public Result build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+      Collection<Dependency> dependencies, Date timestamp)
    {
+      options = getOptions(options, timestamp);
+
       final DependencyModel dependencyModel = resolve(dependencies);
 
       final OsgifyContext osgifyModel = createStubModel(dependencyModel);
       applyNativeBundles(osgifyModel);
       applyBuildOrder(osgifyModel);
       applyJavaContent(generatorFilter, osgifyModel);
-      applyManifests(generatorFilter, properties, osgifyModel);
+      applyManifests(generatorFilter, options, osgifyModel);
 
       final Result result = new Result();
       result.dependencyModel = dependencyModel;
       result.osgifyModel = osgifyModel;
       return result;
+   }
+
+   private PropertiesSource getOptions(final PropertiesSource options, Date timestamp)
+   {
+      final SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
+      format.setTimeZone(TimeZone.getTimeZone("UTC"));
+      final String ctxQualifier = format.format(timestamp);
+      return new AbstractPropertiesSource()
+      {
+         @Override
+         public String get(String key)
+         {
+            if ("osgifier.forceContextQualifier".equals(key))
+            {
+               return ctxQualifier;
+            }
+            return options == null ? null : options.get(key);
+         }
+      };
    }
 
    private void applyBuildOrder(final OsgifyContext osgifyModel)
@@ -191,7 +216,7 @@ public class OsgifyModelBuilder
    @Inject
    private SymbolicNameConflictResolver nameConflictResolver;
 
-   private void applyManifests(ManifestGeneratorFilter generatorFilter, PropertiesSource properties,
+   private void applyManifests(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
       OsgifyContext osgifyModel)
    {
       Map<String, BundleCandidate> keyToBundle = new HashMap<String, BundleCandidate>();
@@ -208,7 +233,7 @@ public class OsgifyModelBuilder
             manifest.setBundleSymbolicName(symbolicName);
             bundle.setSymbolicName(symbolicName);
 
-            final Version version = versionResolver.resolveVersion(bundle);
+            final Version version = versionResolver.resolveVersion(bundle, options);
             checkState(version != null, "Failed to determine bundle version for %s", bundle.getLocation());
             manifest.setBundleVersion(version);
             bundle.setVersion(version);
@@ -261,7 +286,7 @@ public class OsgifyModelBuilder
             else
             {
                environmentAppender.append(bundle);
-               packageExports.append(properties, bundle);
+               packageExports.append(options, bundle);
                packageImports.append(bundle);
                dynamicImports.append(bundle);
             }

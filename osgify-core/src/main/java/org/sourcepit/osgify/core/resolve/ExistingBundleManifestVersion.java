@@ -6,11 +6,14 @@
 
 package org.sourcepit.osgify.core.resolve;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
@@ -25,7 +28,7 @@ public class ExistingBundleManifestVersion extends AbstractVersionResolutionStra
    }
 
    @Override
-   public Version resolveVersion(BundleCandidate bundleCandidate)
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       final JavaResourceBundle jBundle = bundleCandidate.getContent();
       if (jBundle != null)
@@ -38,7 +41,16 @@ public class ExistingBundleManifestVersion extends AbstractVersionResolutionStra
                final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
                if (bundleManifest != null)
                {
-                  return bundleManifest.getBundleVersion();
+                  Version version = bundleManifest.getBundleVersion();
+                  if (version != null)
+                  {
+                     final String ctxQualifier = options.get("osgifier.forceContextQualifier");
+                     if (!isNullOrEmpty(ctxQualifier))
+                     {
+                        version = new Version(version.getMajor(), version.getMinor(), version.getMicro(), ctxQualifier);
+                     }
+                  }
+                  return version;
                }
             }
          }
