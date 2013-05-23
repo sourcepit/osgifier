@@ -42,7 +42,7 @@ public class BundleManifestAppender
 
    public void append(OsgifyContext context)
    {
-      final List<BundleCandidate> bundleCandidates = OsgifyContextUtils.computeBuildOrder(context);
+      final List<BundleCandidate> bundleCandidates = OsgifyContextUtils.computeBuildOrder(context).getOrderedBundles();
       for (BundleCandidate bundleCandidate : bundleCandidates)
       {
          if (bundleCandidate.isNativeBundle())

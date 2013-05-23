@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,75 +27,76 @@ public final class OsgifyContextUtils
       super();
    }
 
-   public static List<BundleCandidate> computeBuildOrder(@NotNull OsgifyContext context)
+   public static class BuildOrder
    {
-      final List<BundleCandidate> buildOrder = new ArrayList<BundleCandidate>();
-      final EList<BundleCandidate> bundleCandidates = context.getBundles();
-      for (BundleCandidate bundleCandidate : bundleCandidates)
+      private final List<BundleCandidate> orderedBundles = new ArrayList<BundleCandidate>();
+
+      private final List<List<BundleCandidate>> cycles = new ArrayList<List<BundleCandidate>>();
+
+      public List<BundleCandidate> getOrderedBundles()
       {
-         computeBuildOrder(buildOrder, bundleCandidate, new ArrayList<BundleCandidate>());
+         return orderedBundles;
+      }
+
+      public List<List<BundleCandidate>> getCycles()
+      {
+         return cycles;
+      }
+   }
+
+   public static BuildOrder computeBuildOrder(@NotNull OsgifyContext context)
+   {
+      BuildOrder buildOrder = new BuildOrder();
+
+      final EList<BundleCandidate> bundles = context.getBundles();
+      final Stack<BundleCandidate> path = new Stack<BundleCandidate>();
+      for (BundleCandidate bundle : bundles)
+      {
+         computeBuildOrder2(buildOrder, path, bundle);
       }
       return buildOrder;
    }
 
-   private static void computeBuildOrder(final List<BundleCandidate> buildOrder, BundleCandidate bundleCandidate,
-      List<BundleCandidate> dependencyTrail)
+   private static void computeBuildOrder2(BuildOrder buildOrder, Stack<BundleCandidate> path, BundleCandidate bundle)
    {
-      if (dependencyTrail.contains(bundleCandidate))
+      final List<BundleCandidate> orderedBundles = buildOrder.getOrderedBundles();
+      if (!orderedBundles.contains(bundle))
       {
-         dependencyTrail.add(bundleCandidate);
-         handleCycle(dependencyTrail);
-         return;
-      }
-      else
-      {
-         dependencyTrail.add(bundleCandidate);
-      }
-
-      final EList<BundleReference> bundleReferences = bundleCandidate.getDependencies();
-      for (BundleReference bundleReference : bundleReferences)
-      {
-         final BundleCandidate target = bundleReference.getTarget();
-         if (target != null)
+         if (path.contains(bundle)) // cycle
          {
-            computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
+            path.push(bundle);
+            buildOrder.getCycles().add(new ArrayList<BundleCandidate>(path));
+            path.pop();
+            return;
          }
-      }
 
-      // handle target bundle of spurce bundle
-      final BundleCandidate target = bundleCandidate.getTargetBundle();
-      if (target != null)
-      {
-         computeBuildOrder(buildOrder, target, new ArrayList<BundleCandidate>(dependencyTrail));
-      }
-
-      if (!buildOrder.contains(bundleCandidate))
-      {
-         buildOrder.add(bundleCandidate);
+         path.push(bundle);
+         for (BundleCandidate requiredBundle : getRequiredBundles(bundle))
+         {
+            computeBuildOrder2(buildOrder, path, requiredBundle);
+         }
+         orderedBundles.add(bundle);
+         path.pop();
       }
    }
 
-   private static void handleCycle(List<BundleCandidate> dependencyTrail)
+   private static List<BundleCandidate> getRequiredBundles(BundleCandidate bundle)
    {
-      final StringBuilder sb = new StringBuilder();
-      for (BundleCandidate bundleCandidate : dependencyTrail)
+      final EList<BundleReference> dependencies = bundle.getDependencies();
+      final List<BundleCandidate> bundles = new ArrayList<BundleCandidate>(dependencies.size() + 1);
+      for (BundleReference reference : dependencies)
       {
-         final String symbolicName = bundleCandidate.getSymbolicName();
-         if (symbolicName == null)
+         final BundleCandidate referencedBundle = reference.getTarget();
+         if (referencedBundle != null)
          {
-            sb.append(bundleCandidate.getLocation());
+            bundles.add(referencedBundle);
          }
-         else
-         {
-            sb.append(symbolicName);
-            sb.append(":");
-            sb.append(bundleCandidate.getVersion().toMinimalString());
-         }
-         sb.append(" -> ");
       }
-      sb.delete(sb.length() - 4, sb.length());
-      // throw new IllegalStateException("Cycle in dependency graph detected: " + sb.toString());
-      // TODO log
-      System.out.println("WARN " + sb);
+      final BundleCandidate sourceTarget = bundle.getTargetBundle();
+      if (sourceTarget != null)
+      {
+         bundles.add(sourceTarget);
+      }
+      return bundles;
    }
 }

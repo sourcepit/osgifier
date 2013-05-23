@@ -125,7 +125,8 @@ public class OsgifyModelBuilder
    private void applyBuildOrder(final OsgifyContext osgifyModel)
    {
       final EList<BundleCandidate> bundles = osgifyModel.getBundles();
-      final List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(osgifyModel);
+      final List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(osgifyModel)
+         .getOrderedBundles();
       for (int i = 0; i < orderedBundles.size(); i++)
       {
          bundles.move(i, orderedBundles.get(i));

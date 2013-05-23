@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -22,6 +23,7 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.util.OsgifyContextUtils.BuildOrder;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -52,10 +54,10 @@ public class OsgifyContextUtilsTest
       addBundleReference(a, b);
       addBundleReference(b, c);
 
-      List<BundleCandidate> buildOrder = OsgifyContextUtils.computeBuildOrder(ctx);
-      assertThat(buildOrder.get(0), IsEqual.equalTo(c));
-      assertThat(buildOrder.get(1), IsEqual.equalTo(b));
-      assertThat(buildOrder.get(2), IsEqual.equalTo(a));
+      List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(ctx).getOrderedBundles();
+      assertThat(orderedBundles.get(0), IsEqual.equalTo(c));
+      assertThat(orderedBundles.get(1), IsEqual.equalTo(b));
+      assertThat(orderedBundles.get(2), IsEqual.equalTo(a));
 
       // tree a -> b -> c -> d and b -> d
       BundleCandidate d = addBundleCandidate(ctx, "D", "1");
@@ -63,23 +65,30 @@ public class OsgifyContextUtilsTest
       addBundleReference(c, d);
       addBundleReference(b, d);
 
-      buildOrder = OsgifyContextUtils.computeBuildOrder(ctx);
-      assertThat(buildOrder.get(0), IsEqual.equalTo(d));
-      assertThat(buildOrder.get(1), IsEqual.equalTo(c));
-      assertThat(buildOrder.get(2), IsEqual.equalTo(b));
-      assertThat(buildOrder.get(3), IsEqual.equalTo(a));
+      orderedBundles = OsgifyContextUtils.computeBuildOrder(ctx).getOrderedBundles();
+      assertThat(orderedBundles.get(0), IsEqual.equalTo(d));
+      assertThat(orderedBundles.get(1), IsEqual.equalTo(c));
+      assertThat(orderedBundles.get(2), IsEqual.equalTo(b));
+      assertThat(orderedBundles.get(3), IsEqual.equalTo(a));
 
       // recursion a -> b -> c -> a
-      // addBundleReference(c, a);
-      //
-      // try
-      // {
-      // OsgifyContextUtils.computeBuildOrder(ctx);
-      // fail();
-      // }
-      // catch (IllegalStateException e)
-      // {
-      // }
+      addBundleReference(c, a);
+
+      BuildOrder buildOrder = OsgifyContextUtils.computeBuildOrder(ctx);
+      orderedBundles = buildOrder.getOrderedBundles();
+      assertThat(orderedBundles.get(1), IsEqual.equalTo(c));
+      assertThat(orderedBundles.get(2), IsEqual.equalTo(b));
+      assertThat(orderedBundles.get(3), IsEqual.equalTo(a));
+
+      List<List<BundleCandidate>> cycles = buildOrder.getCycles();
+      assertEquals(1, cycles.size());
+      
+      List<BundleCandidate> path = cycles.get(0);
+      assertEquals(4, path.size());
+      assertThat(path.get(0), IsEqual.equalTo(a));
+      assertThat(path.get(1), IsEqual.equalTo(b));
+      assertThat(path.get(2), IsEqual.equalTo(c));
+      assertThat(path.get(3), IsEqual.equalTo(a));
    }
 
    private BundleReference addBundleReference(BundleCandidate from, BundleCandidate to)
