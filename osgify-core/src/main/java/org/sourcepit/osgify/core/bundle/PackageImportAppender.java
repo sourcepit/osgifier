@@ -79,7 +79,8 @@ public class PackageImportAppender
             if (exportDescription.isPackageOfExecutionEnvironment()
                && exportDescription.getAccessRule() == AccessRule.DISCOURAGED)
             {
-               LOGGER.warn("Skipping import of Execution Environment specific package {}", exportDescription.getPackageName());
+               LOGGER.warn("Skipping import of Execution Environment specific package {}",
+                  exportDescription.getPackageName());
             }
             else
             {
@@ -96,7 +97,7 @@ public class PackageImportAppender
                   parameter.setValue(String.valueOf(optional));
                   packageImport.getParameters().add(parameter);
                }
-               
+
                manifest.getImportPackage(true).add(packageImport);
             }
          }
@@ -209,7 +210,29 @@ public class PackageImportAppender
             throw new IllegalStateException();
       }
 
-      return roleRange;
+      return trimQualifiers(roleRange);
+   }
+
+   static VersionRange trimQualifiers(VersionRange range)
+   {
+      if (range != null)
+      {
+         final Version low = trimQualifier(range.getLowVersion());
+         final Version high = trimQualifier(range.getHighVersion());
+         return new VersionRange(low, range.isLowInclusive(), high, range.isHighInclusive());
+      }
+      return null;
+   }
+
+   private static Version trimQualifier(Version version)
+   {
+      if (version != null && version.getQualifier().length() > 0)
+      {
+         final int minor = version.getMinor();
+         final int micro = version.getMicro();
+         return new Version(version.getMajor(), minor == 0 && micro == 0 ? -1 : minor, micro == 0 ? -1 : micro);
+      }
+      return version;
    }
 
    private static VersionRange toProviderRange(Version lv, Version hv)

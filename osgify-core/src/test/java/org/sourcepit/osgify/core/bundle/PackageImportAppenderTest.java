@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -268,7 +269,7 @@ public class PackageImportAppenderTest extends InjectedTest
    {
       VersionRange r;
       Version v;
-      
+
       r = VersionRange.parse("0");
       v = Version.parse("1");
       assertThat(determineImportVersionRange(r, v, CONSUMER).toString(), IsEqual.equalTo("[0,2)"));
@@ -301,5 +302,22 @@ public class PackageImportAppenderTest extends InjectedTest
       assertThat(determineImportVersionRange(r, v, PROVIDER).toString(), IsEqual.equalTo("[2,2.1)"));
    }
 
+   @Test
+   public void testTrimQualifierFromRange() throws Exception
+   {
+      VersionRange range;
+      
+      range = VersionRange.parse("0.0.0");
+      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("0.0.0"));
+      
+      range = VersionRange.parse("[0,1.0.0.rc4)");
+      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
+      
+      range = VersionRange.parse("[0.0.0.murks,1.0.0.rc4)");
+      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
+      
+      range = VersionRange.parse("[0.0.1.murks,0.0.1.rc4)");
+      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0.0.1,0.0.1)"));
+   }
 
 }
