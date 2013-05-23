@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.maven;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static org.sourcepit.common.utils.io.IO.osgiIn;
 import static org.sourcepit.common.utils.io.IO.read;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
@@ -164,11 +165,11 @@ public class OsgifyModelBuilder
       {
          if (cyclicBundles.contains(bundle))
          {
-            log.warn("* {} @ {} (cyclic requirements detected)", getName(bundle), getBundleKey(bundle));
+            log.warn("* {} --- {} (cyclic requirements detected)", getName(bundle), getBundleKey(bundle));
          }
          else
          {
-            log.info("* {} / {}", getName(bundle), getBundleKey(bundle));
+            log.info("* {} --- {}", getName(bundle), getBundleKey(bundle));
          }
       }
    }
@@ -268,7 +269,7 @@ public class OsgifyModelBuilder
       {
          if (generatorFilter.isGenerateManifest(bundle))
          {
-            log.info("Bundeling {} / {}", getName(bundle), getBundleKey(bundle));
+            log.info("Bundeling {} --- {}", getName(bundle), getBundleKey(bundle));
 
             for (BundleReference reference : bundle.getDependencies())
             {
@@ -281,6 +282,8 @@ public class OsgifyModelBuilder
                   reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
                }
             }
+
+            appendMavenHeaders(bundle);
 
             if (generatorFilter.isSourceBundle(bundle))
             {
@@ -303,6 +306,21 @@ public class OsgifyModelBuilder
             log.info("Skipped {} / {}", getName(bundle), getBundleKey(bundle));
          }
       }
+   }
+
+   private void appendMavenHeaders(BundleCandidate bundle)
+   {
+      final MavenArtifact extension = bundle.getExtension(MavenArtifact.class);
+      final BundleManifest manifest = bundle.getManifest();
+      manifest.setHeader("Maven-GroupId", extension.getGroupId());
+      manifest.setHeader("Maven-ArtifactId", extension.getArtifactId());
+      manifest.setHeader("Maven-Type", extension.getType());
+      final String classifier = extension.getClassifier();
+      if (!isNullOrEmpty(classifier))
+      {
+         manifest.setHeader("Maven-Classifier", classifier);
+      }
+      manifest.setHeader("Maven-Version", extension.getVersion());
    }
 
    private void applySymbolicNameAndVersion(ManifestGeneratorFilter generatorFilter, OsgifyContext osgifyModel,
