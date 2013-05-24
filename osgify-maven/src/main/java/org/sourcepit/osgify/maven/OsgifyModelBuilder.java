@@ -115,6 +115,23 @@ public class OsgifyModelBuilder
       log.info("Bundeling order:");
       BuildOrder buildOrder = applyBuildOrder(osgifyModel);
       logBuildOrder(buildOrder);
+
+      // TODO move elsewhere
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         for (BundleReference reference : bundle.getDependencies())
+         {
+            reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
+            final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
+            if (mavenDependency != null)
+            {
+               reference.setOptional(mavenDependency.isOptional());
+               reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
+            }
+         }
+      }
+
+
       applyManifests(generatorFilter, options, osgifyModel);
       log.info("------------------------------------------------------------------------");
       final Result result = new Result();
@@ -270,18 +287,6 @@ public class OsgifyModelBuilder
          if (generatorFilter.isGenerateManifest(bundle))
          {
             log.info("Bundeling {} --- {}", getName(bundle), getBundleKey(bundle));
-
-            for (BundleReference reference : bundle.getDependencies())
-            {
-               // TODO move elsewhere
-               reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
-               final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
-               if (mavenDependency != null)
-               {
-                  reference.setOptional(mavenDependency.isOptional());
-                  reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
-               }
-            }
 
             appendMavenHeaders(bundle);
 
