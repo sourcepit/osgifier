@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,23 +99,25 @@ public class OsgifyModelBuilder
    {
       options = getOptions(options, timestamp);
 
+      log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(dependencies);
-      log.info("------------------------------------------------------------------------");
-
       final OsgifyContext osgifyModel = createStubModel(dependencyModel);
-
-      log.info("Analyzing Java contents...");
-      applyNativeBundles(osgifyModel);
-      applyJavaContent(generatorFilter, osgifyModel);
       log.info("------------------------------------------------------------------------");
 
-      log.info("Generating OSGi metadata...");
       log.info("");
+      log.info("Generating OSGi metadata...");
+      applyNativeBundles(osgifyModel, generatorFilter, options); // required to determine whether do scan java content
+      applyJavaContent(generatorFilter, osgifyModel); // required to determine bundle name
       applySymbolicNameAndVersion(generatorFilter, osgifyModel, options);
-      log.info("Bundeling order:");
-      BuildOrder buildOrder = applyBuildOrder(osgifyModel);
-      logBuildOrder(buildOrder);
+      final BuildOrder buildOrder = applyBuildOrder(osgifyModel);
+      boolean printBuildOrder = false;
+      if (printBuildOrder)
+      {
+         log.info("");
+         log.info("Bundeling order:");
+         logBuildOrder(buildOrder);
+      }
 
       // TODO move elsewhere
       for (BundleCandidate bundle : osgifyModel.getBundles())
@@ -131,9 +134,7 @@ public class OsgifyModelBuilder
          }
       }
 
-
       applyManifests(generatorFilter, options, osgifyModel);
-      log.info("------------------------------------------------------------------------");
       final Result result = new Result();
       result.dependencyModel = dependencyModel;
       result.osgifyModel = osgifyModel;
@@ -284,9 +285,13 @@ public class OsgifyModelBuilder
    {
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         if (generatorFilter.isGenerateManifest(bundle))
+         if (bundle.isNativeBundle())
          {
-            log.info("Bundeling {} --- {}", getName(bundle), getBundleKey(bundle));
+            log.info(">>> {} = {} (skipped native bundle)", getName(bundle), getBundleKey(bundle));
+         }
+         else
+         {
+            log.info(">>> {} -> {}", getName(bundle), getBundleKey(bundle));
 
             appendMavenHeaders(bundle);
 
@@ -305,10 +310,6 @@ public class OsgifyModelBuilder
                packageImports.append(bundle);
                dynamicImports.append(bundle);
             }
-         }
-         else
-         {
-            log.info("Skipped {} / {}", getName(bundle), getBundleKey(bundle));
          }
       }
    }
@@ -333,50 +334,73 @@ public class OsgifyModelBuilder
    {
       final Map<String, BundleCandidate> keyToBundle = new HashMap<String, BundleCandidate>();
       final List<BundleCandidate> sourceBundles = new ArrayList<BundleCandidate>();
+
+      final List<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
+
+      // register native keys we cannot override
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
-         if (generatorFilter.isGenerateManifest(bundle))
+         if (bundle.isNativeBundle())
          {
-            if (generatorFilter.isSourceBundle(bundle))
+            keyToBundle.put(getBundleKey(bundle), bundle);
+         }
+         else
+         {
+            bundles.add(bundle);
+         }
+      }
+
+      // for all non-native bundles
+      for (BundleCandidate bundle : bundles)
+      {
+         if (generatorFilter.isSourceBundle(bundle))
+         {
+            sourceBundles.add(bundle);
+         }
+         else
+         {
+            final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
+            bundle.setManifest(manifest);
+
+            final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundle);
+            checkState(symbolicName != null, "Failed to determine bundle symbolic name for %s", bundle.getLocation());
+            manifest.setBundleSymbolicName(symbolicName);
+            bundle.setSymbolicName(symbolicName);
+
+            final Version version = versionResolver.resolveVersion(bundle, options);
+            checkState(version != null, "Failed to determine bundle version for %s", bundle.getLocation());
+            manifest.setBundleVersion(version);
+            bundle.setVersion(version);
+
+            final String bundleKey = getBundleKey(bundle);
+
+            final BundleCandidate conflictBundle = keyToBundle.get(bundleKey);
+            if (conflictBundle == null)
             {
-               sourceBundles.add(bundle);
+               keyToBundle.put(bundleKey, bundle);
             }
             else
             {
-               final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
-               bundle.setManifest(manifest);
-
-               final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundle);
-               checkState(symbolicName != null, "Failed to determine bundle symbolic name for %s", bundle.getLocation());
-               manifest.setBundleSymbolicName(symbolicName);
-               bundle.setSymbolicName(symbolicName);
-
-               final Version version = versionResolver.resolveVersion(bundle, options);
-               checkState(version != null, "Failed to determine bundle version for %s", bundle.getLocation());
-               manifest.setBundleVersion(version);
-               bundle.setVersion(version);
-
-               final String bundleKey = getBundleKey(bundle);
-
-               final BundleCandidate conflictBundle = keyToBundle.get(bundleKey);
-               if (conflictBundle == null)
+               final List<String> conflictNames;
+               if (conflictBundle.isNativeBundle())
                {
-                  keyToBundle.put(bundleKey, bundle);
+                  conflictNames = Collections.singletonList(conflictBundle.getSymbolicName());
                }
                else
                {
-                  final List<String> conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle);
-                  final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle);
-                  if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names))
-                  {
-                     keyToBundle.remove(bundleKey);
-                     keyToBundle.put(getBundleKey(conflictBundle), conflictBundle);
-                     keyToBundle.put(getBundleKey(bundle), bundle);
-                  }
-                  else
-                  {
-                     // TODO panic!
-                  }
+                  conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle);
+               }
+
+               final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle);
+               if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names))
+               {
+                  keyToBundle.remove(bundleKey);
+                  keyToBundle.put(getBundleKey(conflictBundle), conflictBundle);
+                  keyToBundle.put(getBundleKey(bundle), bundle);
+               }
+               else
+               {
+                  // TODO panic!
                }
             }
          }
@@ -404,9 +428,10 @@ public class OsgifyModelBuilder
       return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
    }
 
-   private List<BundleCandidate> applyNativeBundles(final OsgifyContext osgifyModel)
+   private List<BundleCandidate> applyNativeBundles(final OsgifyContext osgifyModel,
+      ManifestGeneratorFilter generatorFilter, PropertiesSource options)
    {
-      final List<BundleCandidate> nativeBundles = new ArrayList<BundleCandidate>();
+      final List<BundleCandidate> overriddenNativeBundles = new ArrayList<BundleCandidate>();
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
          if (bundle.getLocation() != null)
@@ -428,14 +453,19 @@ public class OsgifyModelBuilder
                if (m instanceof BundleManifest)
                {
                   BundleManifest manifest = (BundleManifest) m;
-                  bundle.setNativeBundle(true);
-                  bundle.setManifest(manifest);
+                  if (generatorFilter.isOverrideNativeBundle(bundle, manifest, options))
+                  {
+                     overriddenNativeBundles.add(bundle);
+                  }
+                  else
+                  {
+                     bundle.setNativeBundle(true);
+                     bundle.setManifest(manifest);
 
-                  // TODO deprecate! replace with operation
-                  bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
-                  bundle.setVersion(manifest.getBundleVersion());
-
-                  nativeBundles.add(bundle);
+                     // TODO deprecate! replace with operation
+                     bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
+                     bundle.setVersion(manifest.getBundleVersion());
+                  }
                }
             }
             catch (PipedException e)
@@ -447,7 +477,8 @@ public class OsgifyModelBuilder
             }
          }
       }
-      return nativeBundles;
+
+      return overriddenNativeBundles;
    }
 
    private OsgifyContext createStubModel(final DependencyModel dependencyModel)

@@ -43,8 +43,10 @@ import org.sourcepit.common.maven.model.ArtifactKeyBuilder;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.utils.io.Write.ToStream;
+import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
@@ -76,14 +78,13 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
-      PropertiesMap properties = new LinkedPropertiesMap();
-      properties.put("osgifier.internalPackages", internalPackages);
+      final PropertiesSource options = createOptions();
 
       final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final Result result = modelBuilder.build(generatorFilter, properties, project.getDependencies(), startTime);
+      final Result result = modelBuilder.build(generatorFilter, options, project.getDependencies(), startTime);
       final DependencyModel dependencyModel = result.dependencyModel;
       final OsgifyContext bundleModel = result.osgifyModel;
 
@@ -105,7 +106,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
          final Model pom = getPom(bundle);
          keyToPom.put(key, pom);
 
-         if (generatorFilter.isGenerateManifest(bundle))
+         if (!bundle.isNativeBundle())
          {
             final ArtifactKeyBuilder newKey = new ArtifactKeyBuilder();
             newKey.setGroupId(pom.getGroupId());
@@ -158,7 +159,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             throw pipe(e);
          }
 
-         if (generatorFilter.isGenerateManifest(bundle) && !generatorFilter.isSourceBundle(bundle))
+         if (!bundle.isNativeBundle() && !generatorFilter.isSourceBundle(bundle))
          {
             final File destJarFile = copyJarAndInjectManifest(bundle);
 
@@ -176,7 +177,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
                final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
                   sourceKey.getType());
                final File sourceJar;
-               if (generatorFilter.isGenerateManifest(sourceBundle))
+               if (!bundle.isNativeBundle())
                {
                   sourceJar = copyJarAndInjectManifest(sourceBundle);
                }
@@ -199,6 +200,28 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
          }
       }
 
+   }
+
+   private PropertiesSource createOptions()
+   {
+      final PropertiesMap properties = new LinkedPropertiesMap();
+      properties.put("osgifier.internalPackages", internalPackages);
+
+      final PropertiesSource options = new AbstractPropertiesSource()
+      {
+         @Override
+         public String get(String key)
+         {
+            String value = properties.get(key);
+            if (value == null)
+            {
+               value = project.getProperties().getProperty(key);
+            }
+            return value;
+
+         }
+      };
+      return options;
    }
 
    private File copyJarAndInjectManifest(BundleCandidate bundle)

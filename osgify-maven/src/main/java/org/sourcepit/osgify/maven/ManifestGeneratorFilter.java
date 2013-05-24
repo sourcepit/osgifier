@@ -6,20 +6,13 @@
 
 package org.sourcepit.osgify.maven;
 
+import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.utils.path.PathMatcher;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 public class ManifestGeneratorFilter
 {
-   public boolean isGenerateManifest(BundleCandidate bundle)
-   {
-      return !bundle.isNativeBundle() || isOverrideNativeBundle(bundle);
-   }
-
-   private boolean isOverrideNativeBundle(BundleCandidate bundle)
-   {
-      return false;
-   }
-
    public boolean isSourceBundle(BundleCandidate bundle)
    {
       return bundle.getTargetBundle() != null;
@@ -27,6 +20,24 @@ public class ManifestGeneratorFilter
 
    public boolean isScanBundle(BundleCandidate bundle)
    {
-      return isGenerateManifest(bundle) && !isSourceBundle(bundle);
+      return !isSourceBundle(bundle);
+   }
+
+   public boolean isOverrideNativeBundle(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
+   {
+      final String pattern = options.get("osgifier.overrideNativeBundles", Boolean.FALSE.toString()).trim();
+      if (Boolean.FALSE.toString().equals(pattern))
+      {
+         return false;
+      }
+      else if (Boolean.TRUE.toString().equals(pattern))
+      {
+         return true;
+      }
+      else
+      {
+         final PathMatcher matcher = PathMatcher.parsePackagePatterns(pattern);
+         return matcher.isMatch(manifest.getBundleSymbolicName().getSymbolicName());
+      }
    }
 }
