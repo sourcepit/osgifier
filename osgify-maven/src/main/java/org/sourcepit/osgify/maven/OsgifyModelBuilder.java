@@ -362,7 +362,7 @@ public class OsgifyModelBuilder
             final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
             bundle.setManifest(manifest);
 
-            final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundle);
+            final String symbolicName = symbolicNameResolver.resolveSymbolicName(bundle, options);
             checkState(symbolicName != null, "Failed to determine bundle symbolic name for %s", bundle.getLocation());
             manifest.setBundleSymbolicName(symbolicName);
             bundle.setSymbolicName(symbolicName);
@@ -388,10 +388,10 @@ public class OsgifyModelBuilder
                }
                else
                {
-                  conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle);
+                  conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle, options);
                }
 
-               final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle);
+               final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle, options);
                if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names))
                {
                   keyToBundle.remove(bundleKey);

@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.core.resolve;
 
 import org.sourcepit.common.utils.priority.AbstractPriorized;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
@@ -19,5 +20,5 @@ public abstract class AbstractSymbolicNameResolutionStrategy extends AbstractPri
       return false;
    }
 
-   public abstract String resolveSymbolicName(BundleCandidate bundleCandidate);
+   public abstract String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options);
 }

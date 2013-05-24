@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
@@ -21,11 +22,11 @@ public class UseArtifactId extends AbstractSymbolicNameResolutionStrategy
 {
    public Priority getPriority()
    {
-      return Priority.LOW;
+      return Priority.MINIMUM;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate)
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       final MavenArtifact mavenArtifact = bundleCandidate.getExtension(MavenArtifact.class);
       if (mavenArtifact != null)

@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
 /**
@@ -69,34 +70,34 @@ public class SymbolicNameResolver
       return ambiguousStartegies;
    }
 
-   public String resolveSymbolicName(BundleCandidate bundleCandidate)
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
    {
-      final List<String> symbolicNames = resolveSymbolicNames(bundleCandidate, true);
+      final List<String> symbolicNames = resolveSymbolicNames(bundleCandidate, true, options);
       return symbolicNames.isEmpty() ? null : symbolicNames.get(0);
    }
 
-   public List<String> resolveSymbolicNames(BundleCandidate bundleCandidate)
+   public List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, PropertiesSource options)
    {
-      return resolveSymbolicNames(bundleCandidate, false);
+      return resolveSymbolicNames(bundleCandidate, false, options);
    }
 
-   private List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, final boolean firstHit)
+   private List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, final boolean firstHit, PropertiesSource options)
    {
       final List<String> symbolicNames = new ArrayList<String>();
-      addResolvedNames(getUnambiguousStartegies(), firstHit, bundleCandidate, symbolicNames);
+      addResolvedNames(getUnambiguousStartegies(), firstHit, bundleCandidate, symbolicNames, options);
       if (symbolicNames.isEmpty() || !firstHit)
       {
-         addResolvedNames(getAmbiguousStartegies(), firstHit, bundleCandidate, symbolicNames);
+         addResolvedNames(getAmbiguousStartegies(), firstHit, bundleCandidate, symbolicNames, options);
       }
       return symbolicNames;
    }
 
    private void addResolvedNames(List<AbstractSymbolicNameResolutionStrategy> strategies, boolean firstHit,
-      BundleCandidate bundleCandidate, List<String> symbolicNames)
+      BundleCandidate bundleCandidate, List<String> symbolicNames, PropertiesSource options)
    {
       for (AbstractSymbolicNameResolutionStrategy strategy : strategies)
       {
-         final String symbolicName = strategy.resolveSymbolicName(bundleCandidate);
+         final String symbolicName = strategy.resolveSymbolicName(bundleCandidate, options);
          if (symbolicName != null && !symbolicNames.contains(symbolicName))
          {
             symbolicNames.add(symbolicName);

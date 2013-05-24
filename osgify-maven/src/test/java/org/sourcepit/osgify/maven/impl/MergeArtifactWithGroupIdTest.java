@@ -37,73 +37,73 @@ public class MergeArtifactWithGroupIdTest
       mavenArtifact.setGroupId("commons-io");
       mavenArtifact.setArtifactId("commons-io");
 
-      String name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      String name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsNull.nullValue());
 
       mavenArtifact.setGroupId("org.junit");
       mavenArtifact.setArtifactId("junit");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsNull.nullValue());
 
       mavenArtifact.setGroupId("org.osgi");
       mavenArtifact.setArtifactId("org.osgi.core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.osgi.core"));
 
       mavenArtifact.setGroupId("org.aspectj");
       mavenArtifact.setArtifactId("aspectjrt");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.aspectj.rt"));
 
       mavenArtifact.setGroupId("org.hamcrest");
       mavenArtifact.setArtifactId("hamcrest-core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.hamcrest.core"));
 
       mavenArtifact.setGroupId("org.hamcrest");
       mavenArtifact.setArtifactId("hamcrest_core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.hamcrest.core"));
 
       mavenArtifact.setGroupId("org.hamcrest");
       mavenArtifact.setArtifactId("hamcrest.core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.hamcrest.core"));
 
       mavenArtifact.setGroupId("org.hamcrest");
       mavenArtifact.setArtifactId("hamcrest._-core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.hamcrest.core"));
 
       mavenArtifact.setGroupId("org.foo");
       mavenArtifact.setArtifactId("bar");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.foo.bar"));
 
       mavenArtifact.setGroupId("org.sourcepit.common");
       mavenArtifact.setArtifactId("common-manifest");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.sourcepit.common.manifest"));
 
       mavenArtifact.setGroupId("org.sourcepit.tools");
       mavenArtifact.setArtifactId("osgify-core");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgify.core"));
 
       mavenArtifact.setGroupId("org.sourcepit-tools");
       mavenArtifact.setArtifactId("osgify_maven-plugin");
 
-      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate);
+      name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgify.maven.plugin"));
    }
 

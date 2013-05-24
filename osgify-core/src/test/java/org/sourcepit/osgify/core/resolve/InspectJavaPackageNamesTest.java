@@ -38,7 +38,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("javax.xml.namespace", "NamespaceContext", true);
       jArchive.getType("javax.xml.namespace", "QName", true);
 
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("javax.xml.bind"));
    }
 
@@ -56,7 +56,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getPackage("junit.swingui.icons", true).getFile("ok.gif", true);
       jArchive.getType("junit.textui", "ResultPrinter", true);
 
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("junit"));
    }
 
@@ -75,7 +75,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("javax.xml.stream.events", "Characters", true);
       jArchive.getType("javax.xml.stream.util", "EventReaderDelegate", true);
 
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("javax.xml.stream"));
    }
 
@@ -102,7 +102,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("org.gjt.xpp.jaxp11", "DefaultValidationErrorHandler", true);
       jArchive.getType("org.gjt.xpp.sax2", "Driver", true);
 
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.gjt.xpp"));
    }
 
@@ -119,7 +119,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("org.dom4j.persistence", "DocumentMarshalling", true);
       jArchive.getType("org.dom4j.persistence.nativ", "XMLDBStrategy", true);
 
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.dom4j"));
    }
    
@@ -146,7 +146,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("org.w3c.dom.html", "HTMLDOMImplementation", true);
       jArchive.getType("org.w3c.dom.ls", "DOMImplementationLS", true);
       
-      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate);
+      String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.apache.xerces"));
    }
 

@@ -17,6 +17,7 @@ import java.util.List;
 import javax.inject.Named;
 
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
@@ -30,11 +31,11 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
 {
    public Priority getPriority()
    {
-      return Priority.HIGH;
+      return Priority.NORMAL;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate)
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       JavaResourceBundle jBundle = bundleCandidate.getContent();
       if (jBundle != null)

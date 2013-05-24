@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleSymbolicName;
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
@@ -24,7 +25,7 @@ public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameReso
 {
    public Priority getPriority()
    {
-      return Priority.MAXIMUM;
+      return Priority.HIGH;
    }
 
    @Override
@@ -34,7 +35,7 @@ public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameReso
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate)
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       final JavaResourceBundle jBundle = bundleCandidate.getContent();
       if (jBundle != null)

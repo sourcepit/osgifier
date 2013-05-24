@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.sourcepit.common.maven.model.MavenArtifactConflictCoordinates;
 import org.sourcepit.common.maven.model.MavenArtifactCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
@@ -22,11 +23,11 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
 {
    public Priority getPriority()
    {
-      return Priority.NORMAL;
+      return Priority.LOW;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate)
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
    {
       final MavenArtifactConflictCoordinates mavenArtifact = bundleCandidate
          .getExtension(MavenArtifactConflictCoordinates.class);
