@@ -92,9 +92,9 @@ public class PackageImportAppender
                if (optional)
                {
                   Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
-                  parameter.setName("optional");
+                  parameter.setName("resolution");
                   parameter.setType(ParameterType.DIRECTIVE);
-                  parameter.setValue(String.valueOf(optional));
+                  parameter.setValue("optional");
                   packageImport.getParameters().add(parameter);
                }
 

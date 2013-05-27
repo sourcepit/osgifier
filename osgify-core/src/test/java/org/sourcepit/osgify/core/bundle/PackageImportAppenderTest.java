@@ -243,7 +243,7 @@ public class PackageImportAppenderTest extends InjectedTest
 
       importAppender.append(bundle);
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("foo;optional:=true"));
+      assertThat(packageImports, IsEqual.equalTo("foo;resolution:=optional"));
    }
 
    @Test
