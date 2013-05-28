@@ -32,6 +32,7 @@ public class OsgifyStubModelCreator
    public OsgifyContext create(DependencyModel dependencyModel)
    {
       final OsgifyContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifyContext();
+      osgifyModel.addExtension(dependencyModel);
 
       final Map<MavenArtifact, BundleCandidate> artifactToBundle = new HashMap<MavenArtifact, BundleCandidate>();
       for (MavenArtifact artifact : dependencyModel.getArtifacts())

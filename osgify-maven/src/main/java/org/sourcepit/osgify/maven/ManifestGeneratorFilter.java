@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.maven;
 
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -36,8 +37,32 @@ public class ManifestGeneratorFilter
       }
       else
       {
-         final PathMatcher matcher = PathMatcher.parsePackagePatterns(pattern);
-         return matcher.isMatch(manifest.getBundleSymbolicName().getSymbolicName());
+         final MavenArtifact artifact = bundle.getExtension(MavenArtifact.class);
+         if (artifact != null && isMatch(pattern, artifact))
+         {
+            return true;
+         }
+         else
+         {
+            final PathMatcher matcher = PathMatcher.parsePackagePatterns(pattern);
+            return matcher.isMatch(manifest.getBundleSymbolicName().getSymbolicName());
+         }
       }
+   }
+
+   private boolean isMatch(String pattern, MavenArtifact artifact)
+   {
+      final String artifactKey = artifact.getArtifactKey().toString();
+      final String versionLessArtifactKey = artifactKey.substring(0, artifactKey.lastIndexOf(":"));
+
+      for (String segment : pattern.split(","))
+      {
+         final String key = segment.trim();
+         if (key.equals(artifactKey) || key.equals(versionLessArtifactKey))
+         {
+            return true;
+         }
+      }
+      return false;
    }
 }

@@ -88,13 +88,7 @@ public class OsgifyModelBuilder
    @Inject
    private OsgifyStubModelCreator stubModelCreator;
 
-   public static class Result
-   {
-      public DependencyModel dependencyModel;
-      public OsgifyContext osgifyModel;
-   }
-
-   public Result build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+   public OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp)
    {
       options = getOptions(options, timestamp);
@@ -135,10 +129,7 @@ public class OsgifyModelBuilder
       }
 
       applyManifests(generatorFilter, options, osgifyModel);
-      final Result result = new Result();
-      result.dependencyModel = dependencyModel;
-      result.osgifyModel = osgifyModel;
-      return result;
+      return osgifyModel;
    }
 
    private PropertiesSource getOptions(final PropertiesSource options, Date timestamp)

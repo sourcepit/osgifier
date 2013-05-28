@@ -53,7 +53,6 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
-import org.sourcepit.osgify.maven.OsgifyModelBuilder.Result;
 
 /**
  * @goal osgify-dependencies
@@ -84,11 +83,12 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final Result result = modelBuilder.build(generatorFilter, options, project.getDependencies(), startTime);
-      final DependencyModel dependencyModel = result.dependencyModel;
-      final OsgifyContext bundleModel = result.osgifyModel;
+      final OsgifyContext bundleModel = modelBuilder.build(
+         generatorFilter,
+         options,
+         project.getDependencies(),
+         startTime);
 
-      writeModel(new File(targetDir, "dependencyModel.xml"), dependencyModel);
       writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
 
 
@@ -122,6 +122,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
          }
       }
 
+      final DependencyModel dependencyModel = bundleModel.getExtension(DependencyModel.class);
       for (BundleCandidate bundle : bundles)
       {
          final ArtifactKey key = getArtifactKey(bundle);
@@ -134,7 +135,8 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             {
                if (dependencyNode.isSelected())
                {
-                  pom.addDependency(toDependency(keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
+                  pom.addDependency(toDependency(
+                     keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
                      dependencyNode));
                }
             }
@@ -174,7 +176,9 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             if (sourceBundle != null && sourceBundle.getLocation() != null)
             {
                final ArtifactKey sourceKey = getArtifactKey(sourceBundle);
-               final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
+               final Artifact sourceArtifact = artifactFactory.createArtifact(
+                  artifact,
+                  sourceKey.getClassifier(),
                   sourceKey.getType());
                final File sourceJar;
                if (!bundle.isNativeBundle())

@@ -49,7 +49,7 @@ public class OsgifyStubModelCreatorTest extends GuplexTest
          stubModelCreator.create(null);
          fail();
       }
-      catch (NullPointerException e)
+      catch (RuntimeException e)
       {
       }
    }
