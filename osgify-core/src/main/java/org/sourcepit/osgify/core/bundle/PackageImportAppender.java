@@ -38,7 +38,6 @@ import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 
 import com.google.common.collect.Multimap;
 
@@ -65,9 +64,7 @@ public class PackageImportAppender
    {
       final BundleManifest manifest = bundle.getManifest();
 
-      final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(
-         bundle.getContent(),
-         manifest);
+      final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(bundle, manifest);
 
       final List<String> importPackages = new ArrayList<String>(determinePackagesToImport.keySet());
       Collections.sort(importPackages);
@@ -341,10 +338,10 @@ public class PackageImportAppender
       return true;
    }
 
-   private Map<String, PackageReference> determinePackagesToImport(JavaResourceBundle jBundle, BundleManifest manifest)
+   private Map<String, PackageReference> determinePackagesToImport(BundleCandidate bundle, BundleManifest manifest)
    {
       final Map<String, PackageReference> refs = new LinkedHashMap<String, PackageImportAppender.PackageReference>();
-      addRequiredPackages(refs, jBundle, manifest);
+      addRequiredPackages(refs, bundle, manifest);
       addOwnPackages(manifest, refs);
       filterExecutionEnvironmentPackages(refs, manifest.getBundleRequiredExecutionEnvironment());
       return refs;
@@ -381,11 +378,11 @@ public class PackageImportAppender
       }
    }
 
-   private void addRequiredPackages(final Map<String, PackageReference> refs, JavaResourceBundle jBundle,
+   private void addRequiredPackages(final Map<String, PackageReference> refs, BundleCandidate bundle,
       BundleManifest manifest)
    {
       final Multimap<String, String> requiredToDemandingPackages = packagesService
-         .getRequiredToDemandingPackages(jBundle);
+         .getRequiredToDemandingPackages(bundle);
 
       final Set<String> internalPackages = new HashSet<String>();
       final Set<String> publicPackages = new HashSet<String>();

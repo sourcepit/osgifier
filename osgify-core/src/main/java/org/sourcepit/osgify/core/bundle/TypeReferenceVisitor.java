@@ -6,9 +6,8 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import java.util.Map.Entry;
+import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
@@ -24,10 +23,8 @@ public abstract class TypeReferenceVisitor extends TypeVisitor implements Resour
       final Annotation annotation = jType.getAnnotation("referencedTypes");
       if (annotation != null)
       {
-         for (Entry<String, EObject> entry : annotation.getReferences())
-         {
-            foundTypeReference(jType, entry.getKey());
-         }
+         final Set<String> qualifiedNames = annotation.getReferences().keySet();
+         foundTypeReference(jType, qualifiedNames);
       }
 
       for (JavaType innerJType : jType.getInnerTypes())
@@ -36,5 +33,5 @@ public abstract class TypeReferenceVisitor extends TypeVisitor implements Resour
       }
    }
 
-   protected abstract void foundTypeReference(JavaType jType, String qualifiedName);
+   protected abstract void foundTypeReference(JavaType jType, Set<String> qualifiedNames);
 }

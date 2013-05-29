@@ -15,6 +15,8 @@ import javax.inject.Inject;
 
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
@@ -29,10 +31,14 @@ public class ReferencedPackagesServiceTest extends InjectedTest
    @Test
    public void testUnmodifiable()
    {
+      BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "foo.Bar", 47, "java.lang.Object", "hans.Wurst");
+      
+      bundle.setContent(jArchive);
 
-      Set<String> referencedPackages = packagesService.getNamesOfReferencedPackages(jArchive);
+      Set<String> referencedPackages = packagesService.getNamesOfReferencedPackages(bundle);
       try
       {
          referencedPackages.add("foo");

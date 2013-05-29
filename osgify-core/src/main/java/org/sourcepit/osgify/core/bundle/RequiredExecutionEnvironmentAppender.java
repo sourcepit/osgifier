@@ -86,7 +86,7 @@ public class RequiredExecutionEnvironmentAppender
    {
       final List<ExecutionEnvironment> winners = new ArrayList<ExecutionEnvironment>();
 
-      final List<String> packageNames = new ArrayList<String>(packagesService.getNamesOfReferencedPackages(jBundle));
+      final List<String> packageNames = new ArrayList<String>(packagesService.getNamesOfReferencedPackages(bundle));
       removeOwnPackages(jBundle, packageNames);
       removeEstimatedDependencyExports(bundle, packageNames);
 

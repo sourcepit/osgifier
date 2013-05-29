@@ -14,6 +14,7 @@ import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,9 +35,14 @@ import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
+import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
+import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.Resource;
+import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -53,7 +59,7 @@ public class ReferencedPackagesService
 
    private ExecutionEnvironmentService environmentService;
 
-   private final WeakHashMap<JavaResourceBundle, Multimap<String, String>> cache = new WeakHashMap<JavaResourceBundle, Multimap<String, String>>();
+   private final WeakHashMap<BundleCandidate, Multimap<String, String>> cache = new WeakHashMap<BundleCandidate, Multimap<String, String>>();
 
    @Inject
    public ReferencedPackagesService(ExecutionEnvironmentService environmentService)
@@ -61,59 +67,165 @@ public class ReferencedPackagesService
       this.environmentService = environmentService;
    }
 
-   public Set<String> getNamesOfReferencedPackages(JavaResourceBundle jBundle)
+   public Set<String> getNamesOfReferencedPackages(BundleCandidate bundle)
    {
-      return getRequiredToDemandingPackages(jBundle).keySet();
+      return getRequiredToDemandingPackages(bundle).keySet();
    }
 
-   public synchronized Multimap<String, String> getRequiredToDemandingPackages(JavaResourceBundle jBundle)
+   public synchronized Multimap<String, String> getRequiredToDemandingPackages(BundleCandidate bundle)
    {
-      Multimap<String, String> requiredToConsumers = cache.get(jBundle);
+      Multimap<String, String> requiredToConsumers = cache.get(bundle);
       if (requiredToConsumers != null)
       {
          return requiredToConsumers;
       }
 
       requiredToConsumers = LinkedHashMultimap.create();
-      collectPackageReferences(requiredToConsumers, jBundle);
+      collectPackageReferences(requiredToConsumers, bundle);
       requiredToConsumers = Multimaps.unmodifiableMultimap(requiredToConsumers);
 
-      cache.put(jBundle, requiredToConsumers);
+      cache.put(bundle, requiredToConsumers);
       return requiredToConsumers;
    }
 
    private static void collectPackageReferences(final Multimap<String, String> requiredToConsumers,
-      JavaResourceBundle jBundle)
+      final BundleCandidate bundle)
    {
-      jBundle.accept(new TypeReferenceVisitor()
+      final JavaResourceBundle jBundle = bundle.getContent();
+
+      jBundle.accept(new ResourceVisitor()
       {
          @Override
-         protected void foundTypeReference(JavaType jType, String qualifiedTypeReference)
+         public boolean visit(Resource resource)
          {
-            final int idx = qualifiedTypeReference.lastIndexOf('.');
-            final String packageName = idx > -1 ? qualifiedTypeReference.substring(0, idx) : null;
-            if (packageName == null)
+            if (resource instanceof JavaFile)
             {
-               LOGGER.warn("Type " + qualifiedTypeReference + " in default package will be ignored (from "
-                  + jType.getQualifiedName() + ")");
+               final JavaFile jFile = (JavaFile) resource;
+               final JavaPackage jPackage = jFile.getParentPackage();
+               if (jPackage != null)
+               {
+                  visit(jPackage, jFile, jFile.getType());
+               }
             }
-            else
+            return resource instanceof JavaResourceDirectory;
+         }
+
+         private void visit(JavaPackage jPackage, JavaFile jFile, JavaType jType)
+         {
+            if (jType.getQualifiedName().equals("org.apache.http.impl.client.DefaultHttpClient"))
             {
-               JavaPackage parentPackage = jType.getFile().getParentPackage();
-               if (parentPackage == null)
+               System.out.println();
+            }
+            final Set<String> qualifiedTypeReferences = new HashSet<String>();
+            collectReferencedTypes(bundle, jFile, qualifiedTypeReferences);
+
+            // HACK must be recursive
+            addSuperTypeAndInterfaces(jType, qualifiedTypeReferences);
+            for (String qualifiedType : new HashSet<String>(qualifiedTypeReferences))
+            {
+               JavaType resolveJavaType = resolveJavaType(bundle, qualifiedType);
+               if (resolveJavaType != null)
+               {
+                  addSuperTypeAndInterfaces(resolveJavaType, qualifiedTypeReferences);
+               }
+            }
+
+            for (String qualifiedTypeReference : qualifiedTypeReferences)
+            {
+               final int idx = qualifiedTypeReference.lastIndexOf('.');
+               final String packageName = idx > -1 ? qualifiedTypeReference.substring(0, idx) : null;
+               if (packageName == null)
                {
                   LOGGER.warn("Type " + qualifiedTypeReference + " in default package will be ignored (from "
                      + jType.getQualifiedName() + ")");
                }
                else
                {
-                  final String consumerPackageName = parentPackage.getQualifiedName();
+                  final String consumerPackageName = jPackage.getQualifiedName();
                   requiredToConsumers.put(packageName, consumerPackageName);
                   LOGGER.debug("Added ref to package " + packageName + " (from " + jType.getQualifiedName() + ")");
                }
             }
          }
+
+         private void addSuperTypeAndInterfaces(JavaType jType, final Set<String> qualifiedTypeReferences)
+         {
+            Annotation annotation = jType.getAnnotation("superclassName");
+            if (annotation != null)
+            {
+               qualifiedTypeReferences.addAll(annotation.getReferences().keySet());
+            }
+
+            annotation = jType.getAnnotation("interfaceNames");
+            if (annotation != null)
+            {
+               qualifiedTypeReferences.addAll(annotation.getReferences().keySet());
+            }
+         }
       });
+   }
+
+   private static void collectReferencedTypes(final BundleCandidate bundle, final JavaFile jFile,
+      final Set<String> qualifiedTypeReferences)
+   {
+      jFile.accept(new TypeReferenceVisitor()
+      {
+         @Override
+         protected void foundTypeReference(JavaType jType, Set<String> qualifiedNames)
+         {
+            qualifiedTypeReferences.addAll(qualifiedNames);
+         }
+      });
+   }
+
+   private static JavaType resolveJavaType(BundleCandidate bundle, String name)
+   {
+      JavaResourceBundle jBundle = bundle.getContent();
+      JavaType jType = resolveJavaType(jBundle, name);
+      if (jType != null)
+      {
+         return jType;
+      }
+      for (BundleReference reference : bundle.getDependencies())
+      {
+         BundleCandidate target = reference.getTarget();
+         if (target != null && target.getContent() != null)
+         {
+            jType = resolveJavaType(target.getContent(), name);
+            if (jType != null)
+            {
+               return jType;
+            }
+         }
+      }
+      return null;
+   }
+
+   private static JavaType resolveJavaType(JavaResourceBundle jBundle, String name)
+   {
+      final String[] segments = name.replace('$', '.').split("\\.");
+      for (JavaResourcesRoot javaResourcesRoot : jBundle.getResourcesRoots())
+      {
+         JavaResourceDirectory jPackage = javaResourcesRoot;
+         JavaType type = null;
+         for (int i = 0; i < segments.length; i++)
+         {
+            final String segment = segments[i];
+            final JavaPackage nextPackage = jPackage.getPackage(segment);
+            if (nextPackage != null)
+            {
+               jPackage = nextPackage;
+               continue;
+            }
+
+            type = jPackage.getType(segment);
+            if (type != null)
+            {
+               return type;
+            }
+         }
+      }
+      return null;
    }
 
    private final WeakHashMap<BundleCandidate, PackageResolver> resolersCache = new WeakHashMap<BundleCandidate, PackageResolver>();
@@ -186,7 +298,9 @@ public class ReferencedPackagesService
          if (exportDescription.isPackageOfExecutionEnvironment())
          {
             msg.append("Execution Environment or Vendor (");
-            msg.append(exportDescription.getImportingBundle().getManifest()
+            msg.append(exportDescription
+               .getImportingBundle()
+               .getManifest()
                .getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
             msg.append(")");
          }
@@ -212,7 +326,12 @@ public class ReferencedPackagesService
             PackageExport packageExport = resolvePackage(manifest.getExportPackage(), packageName);
             if (packageExport != null)
             {
-               exportDescriptions.add(new ExportDescription(bundle, packageName, null, bundle, packageExport,
+               exportDescriptions.add(new ExportDescription(
+                  bundle,
+                  packageName,
+                  null,
+                  bundle,
+                  packageExport,
                   ACCESSIBLE));
             }
 
@@ -235,15 +354,20 @@ public class ReferencedPackagesService
                {
                   continue;
                }
-               
+
                packageExport = resolvePackage(targetManifest.getExportPackage(), packageName);
                if (packageExport != null)
                {
-                  exportDescriptions.add(new ExportDescription(bundle, packageName, bundleReference, target,
-                     packageExport, ACCESSIBLE));
+                  exportDescriptions.add(new ExportDescription(
+                     bundle,
+                     packageName,
+                     bundleReference,
+                     target,
+                     packageExport,
+                     ACCESSIBLE));
                }
             }
-            
+
             sort(exportDescriptions);
             reverse(exportDescriptions);
          }

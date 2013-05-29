@@ -54,7 +54,7 @@ public class JavaResourceDirectoryOperations
    {
       for (Resource pkg : pkgs)
       {
-         if (name.equals(pkg.getName()))
+         if (pkg instanceof JavaPackage && name.equals(pkg.getName()))
          {
             return (JavaPackage) pkg;
          }
