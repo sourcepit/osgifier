@@ -65,7 +65,8 @@ public class PackageImportAppender
    {
       final BundleManifest manifest = bundle.getManifest();
 
-      final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(bundle.getContent(),
+      final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(
+         bundle.getContent(),
          manifest);
 
       final List<String> importPackages = new ArrayList<String>(determinePackagesToImport.keySet());
@@ -79,7 +80,8 @@ public class PackageImportAppender
             if (exportDescription.isPackageOfExecutionEnvironment()
                && exportDescription.getAccessRule() == AccessRule.DISCOURAGED)
             {
-               LOGGER.warn("Skipping import of Execution Environment specific package {}",
+               LOGGER.warn(
+                  "Skipping import of Execution Environment specific package {}",
                   exportDescription.getPackageName());
             }
             else
@@ -106,11 +108,14 @@ public class PackageImportAppender
 
    private VersionRange determineVersionRange(BundleCandidate bundle, PackageReference packageReference)
    {
-      final ExportDescription exportDescription = packagesService.determineExporter(bundle,
+      final ExportDescription exportDescription = packagesService.determineExporter(
+         bundle,
          packageReference.requiredPackage);
       if (exportDescription != null)
       {
-         return determineVersionRange(exportDescription, packageReference.demandedByPublicPackages,
+         return determineVersionRange(
+            exportDescription,
+            packageReference.demandedByPublicPackages,
             packageReference.demandedByInternalPackages);
       }
       return null;
@@ -134,8 +139,11 @@ public class PackageImportAppender
       {
          final boolean isSelfReference = exportDescription.isSelfReference();
 
-         final DemanderRole role = determineRoleOfDemandingBundle(isSelfReference, demandedByPublicPackages,
-            demandedByInternalPackages, exportDescription.getPackageName(),
+         final DemanderRole role = determineRoleOfDemandingBundle(
+            isSelfReference,
+            demandedByPublicPackages,
+            demandedByInternalPackages,
+            exportDescription.getPackageName(),
             isInternalPackage(exportDescription.getPackageExport()));
 
          if (DemanderRole.FRIEND == role)
@@ -149,7 +157,8 @@ public class PackageImportAppender
             return null;
          }
 
-         final VersionRange referenceRange = isSelfReference ? null : exportDescription.getReferenceToExporter()
+         final VersionRange referenceRange = isSelfReference ? null : exportDescription
+            .getReferenceToExporter()
             .getVersionRange();
 
          return determineImportVersionRange(referenceRange, packageVersion, role);
@@ -172,7 +181,10 @@ public class PackageImportAppender
          {
             Version rl = referenceRange.getLowVersion();
             rl = new Version(rl.getMajor(), rl.getMinor(), -1);
-            if (!new VersionRange(rl, referenceRange.isLowInclusive(), referenceRange.getHighVersion(),
+            if (!new VersionRange(
+               rl,
+               referenceRange.isLowInclusive(),
+               referenceRange.getHighVersion(),
                referenceRange.isHighInclusive()).includes(packageVersion))
             {
                referenceRange = new VersionRange(packageVersion, true, packageVersion, true);
@@ -353,6 +365,7 @@ public class PackageImportAppender
                {
                   ref = new PackageReference();
                   ref.requiredPackage = packageName;
+                  refs.put(packageName, ref);
                }
 
                if (internalPackage)

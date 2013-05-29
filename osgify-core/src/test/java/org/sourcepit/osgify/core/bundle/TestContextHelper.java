@@ -45,6 +45,7 @@ public final class TestContextHelper
    {
       final BundleCandidate bundle = newBundleCandidate(jArchive);
       bundle.getManifest().setBundleVersion(bundleVersion);
+      bundle.setVersion(bundle.getManifest().getBundleVersion());
       bundle.getManifest().setBundleRequiredExecutionEnvironment(executionEnvironment);
       return bundle;
    }

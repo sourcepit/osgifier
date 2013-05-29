@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.bundle;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
@@ -22,9 +23,11 @@ import static org.sourcepit.osgify.core.bundle.TestContextHelper.newPackageExpor
 
 import javax.inject.Inject;
 
+import org.eclipse.emf.common.util.EList;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
+import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -306,18 +309,44 @@ public class PackageImportAppenderTest extends InjectedTest
    public void testTrimQualifierFromRange() throws Exception
    {
       VersionRange range;
-      
+
       range = VersionRange.parse("0.0.0");
       assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("0.0.0"));
-      
+
       range = VersionRange.parse("[0,1.0.0.rc4)");
       assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
-      
+
       range = VersionRange.parse("[0.0.0.murks,1.0.0.rc4)");
       assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
-      
+
       range = VersionRange.parse("[0.0.1.murks,0.0.1.rc4)");
       assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0.0.1,0.0.1)"));
+   }
+
+   @Test
+   public void testImportOwnExports() throws Exception
+   {
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "javax.xml.stream.XMLStreamWriter", 47, "javax.xml.namespace.QName");
+
+      BundleCandidate bundle = newBundleCandidate("1.0.1", "OSGi/Minimum-1.0", jArchive);
+      bundle.getManifest().setBundleSymbolicName("stax.api");
+      
+      appendPackageExport(bundle, newPackageExport("javax.xml.namespace", null));
+      appendPackageExport(bundle, newPackageExport("javax.xml.stream", null));
+
+      importAppender.append(bundle);
+      
+      EList<PackageImport> importPackage = bundle.getManifest().getImportPackage();
+      assertEquals(2, importPackage.size());
+      
+      PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals(packageImport.getPackageNames().get(0), "javax.xml.namespace");
+      
+      packageImport = importPackage.get(1);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals(packageImport.getPackageNames().get(0), "javax.xml.stream");
    }
 
 }
