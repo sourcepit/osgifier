@@ -14,7 +14,7 @@ import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 
-public final class ExportDescription implements Comparable<ExportDescription>
+public final class PackageReference implements Comparable<PackageReference>
 {
    private final BundleCandidate importingBundle;
    private final String packageName;
@@ -23,7 +23,7 @@ public final class ExportDescription implements Comparable<ExportDescription>
    private final PackageExport packageExport;
    private final AccessRule accessRule;
 
-   public ExportDescription(@NotNull BundleCandidate importingBundle, @NotNull String packageName,
+   public PackageReference(@NotNull BundleCandidate importingBundle, @NotNull String packageName,
       BundleReference referenceToExporter, BundleCandidate exportingBundle, PackageExport packageExport,
       @NotNull AccessRule accessRule)
    {
@@ -33,16 +33,6 @@ public final class ExportDescription implements Comparable<ExportDescription>
       this.exportingBundle = exportingBundle;
       this.packageExport = packageExport;
       this.accessRule = accessRule;
-   }
-
-   public boolean isPackageOfExecutionEnvironment()
-   {
-      return exportingBundle == null;
-   }
-
-   public boolean isSelfReference()
-   {
-      return importingBundle == exportingBundle;
    }
 
    public BundleCandidate getImportingBundle()
@@ -70,13 +60,23 @@ public final class ExportDescription implements Comparable<ExportDescription>
       return packageExport;
    }
 
+   public boolean isExecutionEnvironmentReference()
+   {
+      return exportingBundle == null;
+   }
+
+   public boolean isSelfReference()
+   {
+      return importingBundle == exportingBundle;
+   }
+
    public AccessRule getAccessRule()
    {
       return accessRule;
    }
 
    @Override
-   public int compareTo(ExportDescription other)
+   public int compareTo(PackageReference other)
    {
       final String thisImporterName = getImporterSymbolicName(this);
       final String otherImporterName = getImporterSymbolicName(other);
@@ -117,11 +117,11 @@ public final class ExportDescription implements Comparable<ExportDescription>
          return result;
       }
 
-      if (this.isPackageOfExecutionEnvironment() && !other.isPackageOfExecutionEnvironment())
+      if (this.isExecutionEnvironmentReference() && !other.isExecutionEnvironmentReference())
       {
          return 1;
       }
-      else if (!this.isPackageOfExecutionEnvironment() && other.isPackageOfExecutionEnvironment())
+      else if (!this.isExecutionEnvironmentReference() && other.isExecutionEnvironmentReference())
       {
          return -11;
       }
@@ -137,17 +137,17 @@ public final class ExportDescription implements Comparable<ExportDescription>
       return 0;
    }
 
-   private static String getImporterSymbolicName(ExportDescription desc)
+   private static String getImporterSymbolicName(PackageReference desc)
    {
       return desc.getImportingBundle().getManifest().getBundleSymbolicName().getSymbolicName();
    }
 
-   private static Version getImporterVersion(ExportDescription desc)
+   private static Version getImporterVersion(PackageReference desc)
    {
       return desc.getImportingBundle().getManifest().getBundleVersion();
    }
 
-   private static Version getExportVersion(ExportDescription desc)
+   private static Version getExportVersion(PackageReference desc)
    {
       PackageExport pkgExport = desc.getPackageExport();
       Version version = pkgExport.getVersion();
@@ -157,4 +157,22 @@ public final class ExportDescription implements Comparable<ExportDescription>
       }
       return version;
    }
+
+   @Override
+   public String toString()
+   {
+      final StringBuilder builder = new StringBuilder();
+      builder.append("PackageReference [importingBundle=");
+      builder.append(importingBundle == null ? null : importingBundle.getSymbolicName());
+      builder.append(", packageName=");
+      builder.append(packageName);
+      builder.append(", exportingBundle=");
+      builder.append(exportingBundle == null ? null : exportingBundle.getSymbolicName());
+      builder.append(", accessRule=");
+      builder.append(accessRule);
+      builder.append("]");
+      return builder.toString();
+   }
+
+
 }

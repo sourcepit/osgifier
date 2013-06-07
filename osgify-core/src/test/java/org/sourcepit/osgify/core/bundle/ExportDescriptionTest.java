@@ -30,10 +30,10 @@ public class ExportDescriptionTest
       BundleCandidate bundleA = newBundle("a", "1");
       BundleCandidate bundleZ = newBundle("z", "1");
 
-      ExportDescription descA = new ExportDescription(bundleA, "foo", null, null, null, null);
-      ExportDescription descZ = new ExportDescription(bundleZ, "foo", null, null, null, null);
+      PackageReference descA = new PackageReference(bundleA, "foo", null, null, null, null);
+      PackageReference descZ = new PackageReference(bundleZ, "foo", null, null, null, null);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descZ);
       descs.add(descA);
 
@@ -49,10 +49,10 @@ public class ExportDescriptionTest
       BundleCandidate bundleA = newBundle("a", "1");
       BundleCandidate bundleZ = newBundle("a", "2");
 
-      ExportDescription descA = new ExportDescription(bundleA, "foo", null, null, null, null);
-      ExportDescription descZ = new ExportDescription(bundleZ, "foo", null, null, null, null);
+      PackageReference descA = new PackageReference(bundleA, "foo", null, null, null, null);
+      PackageReference descZ = new PackageReference(bundleZ, "foo", null, null, null, null);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descZ);
       descs.add(descA);
 
@@ -68,10 +68,10 @@ public class ExportDescriptionTest
       BundleCandidate bundleA = newBundle("a", "1");
       BundleCandidate bundleZ = newBundle("a", "1");
 
-      ExportDescription descA = new ExportDescription(bundleA, "packageA", null, null, null, null);
-      ExportDescription descZ = new ExportDescription(bundleZ, "packageB", null, null, null, null);
+      PackageReference descA = new PackageReference(bundleA, "packageA", null, null, null, null);
+      PackageReference descZ = new PackageReference(bundleZ, "packageB", null, null, null, null);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descZ);
       descs.add(descA);
 
@@ -87,10 +87,10 @@ public class ExportDescriptionTest
       BundleCandidate bundleA = newBundle("a", "1");
       BundleCandidate bundleZ = newBundle("a", "1");
 
-      ExportDescription descA = new ExportDescription(bundleZ, "foo", null, bundleA, null, null);
-      ExportDescription descZ = new ExportDescription(bundleZ, "foo", null, bundleZ, null, null);
+      PackageReference descA = new PackageReference(bundleZ, "foo", null, bundleA, null, null);
+      PackageReference descZ = new PackageReference(bundleZ, "foo", null, bundleZ, null, null);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descZ);
       descs.add(descA);
 
@@ -107,11 +107,11 @@ public class ExportDescriptionTest
 
       BundleCandidate exporter = newBundle("exporter", "1");
 
-      ExportDescription descA = new ExportDescription(importer, "foo", null, exporter, null, AccessRule.NON_ACCESSIBLE);
-      ExportDescription descB = new ExportDescription(importer, "foo", null, exporter, null, AccessRule.DISCOURAGED);
-      ExportDescription descC = new ExportDescription(importer, "foo", null, exporter, null, AccessRule.ACCESSIBLE);
+      PackageReference descA = new PackageReference(importer, "foo", null, exporter, null, AccessRule.NON_ACCESSIBLE);
+      PackageReference descB = new PackageReference(importer, "foo", null, exporter, null, AccessRule.DISCOURAGED);
+      PackageReference descC = new PackageReference(importer, "foo", null, exporter, null, AccessRule.ACCESSIBLE);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descC);
       descs.add(descB);
       descs.add(descA);
@@ -130,10 +130,10 @@ public class ExportDescriptionTest
 
       BundleCandidate exporter = newBundle("exporter", "1");
 
-      ExportDescription descA = new ExportDescription(importer, "foo", null, exporter, null, AccessRule.ACCESSIBLE);
-      ExportDescription descB = new ExportDescription(importer, "foo", null, null, null, AccessRule.ACCESSIBLE);
+      PackageReference descA = new PackageReference(importer, "foo", null, exporter, null, AccessRule.ACCESSIBLE);
+      PackageReference descB = new PackageReference(importer, "foo", null, null, null, AccessRule.ACCESSIBLE);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descB);
       descs.add(descA);
 
@@ -158,10 +158,10 @@ public class ExportDescriptionTest
       BundleCandidate exporterA = newBundle("exporterA", "1");
       BundleCandidate exporterB = newBundle("exporterB", "1");
 
-      ExportDescription descA = new ExportDescription(importer, "foo", null, exporterA, pkgA, AccessRule.ACCESSIBLE);
-      ExportDescription descB = new ExportDescription(importer, "foo", null, exporterB, pkgB, AccessRule.ACCESSIBLE);
+      PackageReference descA = new PackageReference(importer, "foo", null, exporterA, pkgA, AccessRule.ACCESSIBLE);
+      PackageReference descB = new PackageReference(importer, "foo", null, exporterB, pkgB, AccessRule.ACCESSIBLE);
 
-      List<ExportDescription> descs = new ArrayList<ExportDescription>();
+      List<PackageReference> descs = new ArrayList<PackageReference>();
       descs.add(descB);
       descs.add(descA);
 

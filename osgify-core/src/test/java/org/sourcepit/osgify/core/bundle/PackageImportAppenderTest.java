@@ -6,7 +6,6 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -306,31 +305,14 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testTrimQualifierFromRange() throws Exception
-   {
-      VersionRange range;
-
-      range = VersionRange.parse("0.0.0");
-      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("0.0.0"));
-
-      range = VersionRange.parse("[0,1.0.0.rc4)");
-      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
-
-      range = VersionRange.parse("[0.0.0.murks,1.0.0.rc4)");
-      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0,1)"));
-
-      range = VersionRange.parse("[0.0.1.murks,0.0.1.rc4)");
-      assertThat(PackageImportAppender.trimQualifiers(range).toString(), equalTo("[0.0.1,0.0.1)"));
-   }
-
-   @Test
    public void testImportOwnExports() throws Exception
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "javax.xml.stream.XMLStreamWriter", 47, "javax.xml.namespace.QName");
 
-      BundleCandidate bundle = newBundleCandidate("1.0.1", "OSGi/Minimum-1.0", jArchive);
+      BundleCandidate bundle = newBundleCandidate("1.0.1", null, jArchive);
       bundle.getManifest().setBundleSymbolicName("stax.api");
+      bundle.setSymbolicName("stax.api");
       
       appendPackageExport(bundle, newPackageExport("javax.xml.namespace", null));
       appendPackageExport(bundle, newPackageExport("javax.xml.stream", null));

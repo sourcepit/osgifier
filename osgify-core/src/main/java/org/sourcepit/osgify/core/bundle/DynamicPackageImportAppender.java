@@ -26,10 +26,10 @@ public class DynamicPackageImportAppender
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicPackageImportAppender.class);
 
-   private ReferencedPackagesService packagesService;
+   private BundleRequirementsService packagesService;
 
    @Inject
-   public DynamicPackageImportAppender(ReferencedPackagesService packagesService)
+   public DynamicPackageImportAppender(BundleRequirementsService packagesService)
    {
       this.packagesService = packagesService;
    }

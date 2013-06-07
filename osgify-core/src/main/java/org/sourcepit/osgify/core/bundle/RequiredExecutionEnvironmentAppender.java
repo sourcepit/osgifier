@@ -33,7 +33,6 @@ import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
-import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
@@ -47,11 +46,11 @@ public class RequiredExecutionEnvironmentAppender
 
    private ExecutionEnvironmentService execEnvService;
 
-   private ReferencedPackagesService packagesService;
+   private BundleRequirementsService packagesService;
 
    @Inject
    public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService,
-      ReferencedPackagesService packagesService)
+      BundleRequirementsService packagesService)
    {
       this.execEnvService = execEnvService;
       this.packagesService = packagesService;
@@ -86,7 +85,7 @@ public class RequiredExecutionEnvironmentAppender
    {
       final List<ExecutionEnvironment> winners = new ArrayList<ExecutionEnvironment>();
 
-      final List<String> packageNames = new ArrayList<String>(packagesService.getNamesOfReferencedPackages(bundle));
+      final List<String> packageNames = new ArrayList<String>(packagesService.getRequiredPackages(bundle));
       removeOwnPackages(jBundle, packageNames);
       removeEstimatedDependencyExports(bundle, packageNames);
 
@@ -245,25 +244,9 @@ public class RequiredExecutionEnvironmentAppender
       }
       else
       {
-         for (JavaResourcesRoot resourcesRoot : bundle.getContent().getResourcesRoots())
-         {
-            for (JavaPackage jPackage : resourcesRoot.getPackages())
-            {
-               collectPackageNames(packageNames, jPackage);
-            }
-         }
-      }
-   }
-
-   private static void collectPackageNames(Set<String> packageNames, JavaPackage jPackage)
-   {
-      if (!jPackage.getFiles().isEmpty())
-      {
-         packageNames.add(jPackage.getQualifiedName());
-      }
-      for (JavaPackage javaPackage : jPackage.getPackages())
-      {
-         collectPackageNames(packageNames, javaPackage);
+         JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
+         packagesCollector.collect();
+         packageNames.addAll(packagesCollector.getBundlePackages());
       }
    }
 }

@@ -108,7 +108,8 @@ public final class TestContextHelper
       BundleCandidate bundleCandidate = bundleReference.getTarget();
       if (bundleCandidate == null)
       {
-         bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
+         Version pkgVersion = packageExport.getVersion();
+         bundleCandidate = newBundleCandidate(pkgVersion == null ? "1" : pkgVersion.toString(), null, null);
          bundleReference.setTarget(bundleCandidate);
       }
       return appendPackageExport(bundleCandidate, packageExport);

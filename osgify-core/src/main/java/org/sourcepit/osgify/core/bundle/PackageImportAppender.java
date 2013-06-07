@@ -6,23 +6,29 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
+import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
 import static org.sourcepit.common.manifest.osgi.ParameterType.DIRECTIVE;
+import static org.sourcepit.osgify.core.bundle.BundleUtils.isInternalPackage;
+import static org.sourcepit.osgify.core.bundle.BundleUtils.trimQualifiers;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
@@ -49,71 +55,161 @@ public class PackageImportAppender
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(PackageImportAppender.class);
 
-   private ExecutionEnvironmentService execEnvService;
+   private BundleRequirementsService packagesService;
 
-   private ReferencedPackagesService packagesService;
+   private ExecutionEnvironmentService environmentService;
 
    @Inject
-   public PackageImportAppender(ExecutionEnvironmentService execEnvService, ReferencedPackagesService packagesService)
+   public PackageImportAppender(ExecutionEnvironmentService environmentService,
+      BundleRequirementsService packagesService)
    {
-      this.execEnvService = execEnvService;
+      this.environmentService = environmentService;
       this.packagesService = packagesService;
    }
 
    public void append(@NotNull BundleCandidate bundle)
    {
-      final BundleManifest manifest = bundle.getManifest();
-
-      final Map<String, PackageReference> determinePackagesToImport = determinePackagesToImport(bundle, manifest);
-
-      final List<String> importPackages = new ArrayList<String>(determinePackagesToImport.keySet());
-      Collections.sort(importPackages);
-
-      for (String packageName : importPackages)
+      final List<PackageRequirement> packageRequirements = determinePackageRequirements(bundle);
+      for (PackageRequirement requirement : packageRequirements)
       {
-         final ExportDescription exportDescription = packagesService.determineExporter(bundle, packageName);
-         if (exportDescription != null)
+         final List<PackageReference> references = packagesService.getPossiblePackageReferences(bundle,
+            requirement.getRequiredPackage());
+
+         final PackageImport packageImport = determinePackageImport(requirement, references);
+         if (packageImport != null)
          {
-            if (exportDescription.isPackageOfExecutionEnvironment()
-               && exportDescription.getAccessRule() == AccessRule.DISCOURAGED)
-            {
-               LOGGER.warn(
-                  "Skipping import of Execution Environment specific package {}",
-                  exportDescription.getPackageName());
-            }
-            else
-            {
-               final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
-               packageImport.getPackageNames().add(packageName);
-               packageImport.setVersion(determineVersionRange(bundle, determinePackagesToImport.get(packageName)));
-
-               final boolean optional = isOptional(bundle, packageName);
-               if (optional)
-               {
-                  Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
-                  parameter.setName("resolution");
-                  parameter.setType(ParameterType.DIRECTIVE);
-                  parameter.setValue("optional");
-                  packageImport.getParameters().add(parameter);
-               }
-
-               manifest.getImportPackage(true).add(packageImport);
-            }
+            final BundleManifest manifest = bundle.getManifest();
+            manifest.getImportPackage(true).add(packageImport);
          }
       }
    }
 
-   private VersionRange determineVersionRange(BundleCandidate bundle, PackageReference packageReference)
+   private List<PackageRequirement> determinePackageRequirements(BundleCandidate bundle)
    {
-      final ExportDescription exportDescription = packagesService.determineExporter(
-         bundle,
-         packageReference.requiredPackage);
+      final Map<String, PackageRequirementBuilder> nameToRequirementMap = new LinkedHashMap<String, PackageRequirementBuilder>();
+      addRequiredPackages(nameToRequirementMap, bundle);
+      addOwnPackages(nameToRequirementMap, bundle);
+      filterExecutionEnvironmentPackages(nameToRequirementMap, bundle);
+
+      List<PackageRequirement> packageRequirements = new ArrayList<PackageRequirement>(nameToRequirementMap.size());
+      for (String packageName : nameToRequirementMap.keySet())
+      {
+         packageRequirements.add(nameToRequirementMap.get(packageName).toPackageRequirement());
+      }
+      sort(packageRequirements);
+      packageRequirements = unmodifiableList(packageRequirements);
+      return packageRequirements;
+   }
+
+   private PackageImport determinePackageImport(final PackageRequirement requirement,
+      final List<PackageReference> possibleReferences)
+   {
+      final List<PackageImport> packageImports = new ArrayList<PackageImport>()
+      {
+         private static final long serialVersionUID = 1L;
+
+         public boolean add(PackageImport e)
+         {
+            if (contains(e))
+            {
+               return false;
+            }
+            return super.add(e);
+         };
+
+         public boolean contains(Object o)
+         {
+            for (PackageImport packageImport : this)
+            {
+               if (EcoreUtil.equals((EObject) o, packageImport))
+               {
+                  return true;
+               }
+            }
+            return false;
+         }
+      };
+
+      for (PackageReference reference : possibleReferences)
+      {
+         if (reference.isExecutionEnvironmentReference() && reference.getAccessRule() == AccessRule.DISCOURAGED)
+         {
+            // LOGGER.warn("Skipping import of Execution Environment specific package {}", reference.getPackageName());
+            // packageImports.add(null);
+         }
+         else
+         {
+            final PackageImport packageImport = createPackageImport(requirement, reference);
+            packageImports.add(packageImport);
+         }
+      }
+
+      if (packageImports.isEmpty())
+      {
+         LOGGER.warn("Unresolveable referende to package " + requirement.getRequiredPackage());
+         return null;
+      }
+      else
+      {
+         if (packageImports.size() > 1)
+         {
+            final StringBuilder msg = new StringBuilder();
+            msg.append("Unambiguous referende to package ");
+            msg.append(requirement.getRequiredPackage());
+            msg.append(". Exporters: ");
+            for (PackageReference exportDescription : possibleReferences)
+            {
+               appendExporter(msg, exportDescription);
+               msg.append(", ");
+            }
+            msg.deleteCharAt(msg.length() - 2);
+            LOGGER.warn(msg.toString());
+         }
+         return packageImports.get(0);
+      }
+   }
+
+   private void appendExporter(final StringBuilder msg, PackageReference exportDescription)
+   {
+      if (exportDescription.isExecutionEnvironmentReference())
+      {
+         msg.append("Execution Environment or Vendor (");
+         msg.append(exportDescription.getImportingBundle().getManifest()
+            .getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
+         msg.append(")");
+      }
+      else
+      {
+         final BundleCandidate exportingBundle = exportDescription.getExportingBundle();
+         msg.append(exportingBundle.getSymbolicName());
+         msg.append('_');
+         msg.append(exportingBundle.getVersion().toMinimalString());
+      }
+   }
+
+   private PackageImport createPackageImport(PackageRequirement packageReference, PackageReference exportDescription)
+   {
+      final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
+      packageImport.getPackageNames().add(exportDescription.getPackageName());
+      packageImport.setVersion(determineVersionRange(exportDescription, packageReference));
+      final boolean optional = isOptional(exportDescription);
+      if (optional)
+      {
+         Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
+         parameter.setName("resolution");
+         parameter.setType(ParameterType.DIRECTIVE);
+         parameter.setValue("optional");
+         packageImport.getParameters().add(parameter);
+      }
+      return packageImport;
+   }
+
+   private VersionRange determineVersionRange(PackageReference exportDescription, PackageRequirement packageReference)
+   {
       if (exportDescription != null)
       {
-         return determineVersionRange(
-            exportDescription,
-            packageReference.demandedByPublicPackages,
-            packageReference.demandedByInternalPackages);
+         return determineVersionRange(exportDescription, packageReference.isDemandedByPublicPackages(),
+            packageReference.isDemandedByInternalPackages());
       }
       return null;
    }
@@ -123,12 +219,12 @@ public class PackageImportAppender
       PROVIDER, FRIEND, CONSUMER;
    }
 
-   private static VersionRange determineVersionRange(final ExportDescription exportDescription,
+   private static VersionRange determineVersionRange(final PackageReference exportDescription,
       boolean demandedByPublicPackages, boolean demandedByInternalPackages)
    {
       final PackageExport packageExport = exportDescription.getPackageExport();
 
-      if (exportDescription.isPackageOfExecutionEnvironment())
+      if (exportDescription.isExecutionEnvironmentReference())
       {
          return null;
       }
@@ -136,11 +232,8 @@ public class PackageImportAppender
       {
          final boolean isSelfReference = exportDescription.isSelfReference();
 
-         final DemanderRole role = determineRoleOfDemandingBundle(
-            isSelfReference,
-            demandedByPublicPackages,
-            demandedByInternalPackages,
-            exportDescription.getPackageName(),
+         final DemanderRole role = determineRoleOfDemandingBundle(isSelfReference, demandedByPublicPackages,
+            demandedByInternalPackages, exportDescription.getPackageName(),
             isInternalPackage(exportDescription.getPackageExport()));
 
          if (DemanderRole.FRIEND == role)
@@ -154,8 +247,7 @@ public class PackageImportAppender
             return null;
          }
 
-         final VersionRange referenceRange = isSelfReference ? null : exportDescription
-            .getReferenceToExporter()
+         final VersionRange referenceRange = isSelfReference ? null : exportDescription.getReferenceToExporter()
             .getVersionRange();
 
          return determineImportVersionRange(referenceRange, packageVersion, role);
@@ -178,10 +270,7 @@ public class PackageImportAppender
          {
             Version rl = referenceRange.getLowVersion();
             rl = new Version(rl.getMajor(), rl.getMinor(), -1);
-            if (!new VersionRange(
-               rl,
-               referenceRange.isLowInclusive(),
-               referenceRange.getHighVersion(),
+            if (!new VersionRange(rl, referenceRange.isLowInclusive(), referenceRange.getHighVersion(),
                referenceRange.isHighInclusive()).includes(packageVersion))
             {
                referenceRange = new VersionRange(packageVersion, true, packageVersion, true);
@@ -220,28 +309,6 @@ public class PackageImportAppender
       }
 
       return trimQualifiers(roleRange);
-   }
-
-   static VersionRange trimQualifiers(VersionRange range)
-   {
-      if (range != null)
-      {
-         final Version low = trimQualifier(range.getLowVersion());
-         final Version high = trimQualifier(range.getHighVersion());
-         return new VersionRange(low, range.isLowInclusive(), high, range.isHighInclusive());
-      }
-      return null;
-   }
-
-   private static Version trimQualifier(Version version)
-   {
-      if (version != null && version.getQualifier().length() > 0)
-      {
-         final int minor = version.getMinor();
-         final int micro = version.getMicro();
-         return new Version(version.getMajor(), minor == 0 && micro == 0 ? -1 : minor, micro == 0 ? -1 : micro);
-      }
-      return version;
    }
 
    private static VersionRange toProviderRange(Version lv, Version hv)
@@ -316,16 +383,15 @@ public class PackageImportAppender
       }
    }
 
-   private boolean isOptional(BundleCandidate bundle, String packageName)
+   private boolean isOptional(PackageReference exportDescription)
    {
-      final ExportDescription exportDescription = packagesService.determineExporter(bundle, packageName);
       if (exportDescription != null)
       {
          if (exportDescription.isSelfReference())
          {
             return false;
          }
-         else if (exportDescription.isPackageOfExecutionEnvironment())
+         else if (exportDescription.isExecutionEnvironmentReference())
          {
             return false;
          }
@@ -338,18 +404,9 @@ public class PackageImportAppender
       return true;
    }
 
-   private Map<String, PackageReference> determinePackagesToImport(BundleCandidate bundle, BundleManifest manifest)
+   private void addOwnPackages(final Map<String, PackageRequirementBuilder> refs, BundleCandidate bundle)
    {
-      final Map<String, PackageReference> refs = new LinkedHashMap<String, PackageImportAppender.PackageReference>();
-      addRequiredPackages(refs, bundle, manifest);
-      addOwnPackages(manifest, refs);
-      filterExecutionEnvironmentPackages(refs, manifest.getBundleRequiredExecutionEnvironment());
-      return refs;
-   }
-
-   private void addOwnPackages(BundleManifest manifest, final Map<String, PackageReference> refs)
-   {
-      final EList<PackageExport> exportPackage = manifest.getExportPackage();
+      final EList<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
       if (exportPackage != null)
       {
          for (PackageExport packageExport : exportPackage)
@@ -357,53 +414,57 @@ public class PackageImportAppender
             final boolean internalPackage = isInternalPackage(packageExport);
             for (String packageName : packageExport.getPackageNames())
             {
-               PackageReference ref = refs.get(packageName);
+               PackageRequirementBuilder ref = refs.get(packageName);
                if (ref == null)
                {
-                  ref = new PackageReference();
-                  ref.requiredPackage = packageName;
+                  ref = new PackageRequirementBuilder();
+                  ref.setDemandingBundle(bundle);
+                  ref.setRequiredPackage(packageName);
                   refs.put(packageName, ref);
                }
 
                if (internalPackage)
                {
-                  ref.demandedByInternalPackages = true;
+                  ref.setDemandedByInternalPackages(true);
                }
                else
                {
-                  ref.demandedByPublicPackages = true;
+                  ref.setDemandedByPublicPackages(true);
                }
             }
          }
       }
    }
 
-   private void addRequiredPackages(final Map<String, PackageReference> refs, BundleCandidate bundle,
-      BundleManifest manifest)
+   private void addRequiredPackages(final Map<String, PackageRequirementBuilder> refs, BundleCandidate bundle)
    {
       final Multimap<String, String> requiredToDemandingPackages = packagesService
          .getRequiredToDemandingPackages(bundle);
 
       final Set<String> internalPackages = new HashSet<String>();
       final Set<String> publicPackages = new HashSet<String>();
-      collectExportedPackages(manifest, internalPackages, publicPackages);
+      collectExportedPackages(bundle.getManifest(), internalPackages, publicPackages);
 
       for (Entry<String, Collection<String>> entry : requiredToDemandingPackages.asMap().entrySet())
       {
-         final PackageReference ref = new PackageReference();
-         ref.requiredPackage = entry.getKey();
-         for (String demandingPackage : entry.getValue())
+         final String requiredPackage = entry.getKey();
+         final Collection<String> demandingPackages = entry.getValue();
+
+         final PackageRequirementBuilder ref = new PackageRequirementBuilder();
+         ref.setDemandingBundle(bundle);
+         ref.setRequiredPackage(requiredPackage);
+         for (String demandingPackage : demandingPackages)
          {
             if (publicPackages.contains(demandingPackage))
             {
-               ref.demandedByPublicPackages = true;
+               ref.setDemandedByPublicPackages(true);
             }
             else if (internalPackages.contains(demandingPackage))
             {
-               ref.demandedByInternalPackages = true;
+               ref.setDemandedByInternalPackages(true);
             }
          }
-         refs.put(ref.requiredPackage, ref);
+         refs.put(requiredPackage, ref);
       }
    }
 
@@ -427,20 +488,14 @@ public class PackageImportAppender
       }
    }
 
-   private static boolean isInternalPackage(PackageExport packageExport)
+   private void filterExecutionEnvironmentPackages(Map<String, PackageRequirementBuilder> refs, BundleCandidate bundle)
    {
-      final Parameter parameter = packageExport.getParameter("x-internal");
-      return parameter != null && "true".equals(parameter.getValue());
-   }
-
-   private void filterExecutionEnvironmentPackages(Map<String, PackageReference> refs,
-      EList<String> executionEnvironments)
-   {
+      final EList<String> executionEnvironments = bundle.getManifest().getBundleRequiredExecutionEnvironment();
       if (executionEnvironments != null)
       {
          for (String execEnvId : executionEnvironments)
          {
-            final ExecutionEnvironment executionEnvironment = execEnvService.getExecutionEnvironment(execEnvId);
+            final ExecutionEnvironment executionEnvironment = environmentService.getExecutionEnvironment(execEnvId);
             if (executionEnvironment == null)
             {
                LOGGER.warn("Unknow execution environment {}", execEnvId);
@@ -454,12 +509,5 @@ public class PackageImportAppender
             }
          }
       }
-   }
-
-   private static class PackageReference
-   {
-      String requiredPackage;
-
-      boolean demandedByInternalPackages, demandedByPublicPackages;
    }
 }

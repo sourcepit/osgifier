@@ -9,12 +9,13 @@ package org.sourcepit.osgify.core.bundle;
 import static org.junit.Assert.fail;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
+import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
@@ -23,22 +24,23 @@ import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ReferencedPackagesServiceTest extends InjectedTest
+public class BundleRequirementsServiceTest extends InjectedTest
 {
    @Inject
-   private ReferencedPackagesService packagesService;
+   private BundleRequirementsService packagesService;
 
    @Test
    public void testUnmodifiable()
    {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
       
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "foo.Bar", 47, "java.lang.Object", "hans.Wurst");
       
       bundle.setContent(jArchive);
 
-      Set<String> referencedPackages = packagesService.getNamesOfReferencedPackages(bundle);
+      List<String> referencedPackages = packagesService.getRequiredPackages(bundle);
       try
       {
          referencedPackages.add("foo");
