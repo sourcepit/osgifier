@@ -6,7 +6,7 @@
 
 package org.sourcepit.modularizor.core.model.java;
 
-import org.sourcepit.modularizor.core.model.java.Resource;
+import org.sourcepit.modularizor.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

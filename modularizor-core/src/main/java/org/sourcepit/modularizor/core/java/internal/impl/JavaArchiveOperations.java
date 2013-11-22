@@ -6,12 +6,12 @@
 
 package org.sourcepit.modularizor.core.java.internal.impl;
 
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.Resource;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.Resource;
 
 public final class JavaArchiveOperations
 {

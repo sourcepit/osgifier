@@ -9,9 +9,9 @@ package org.sourcepit.modularizor.core.java.internal.impl;
 import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.common.util.EList;
-import org.sourcepit.modularizor.core.model.java.Directory;
-import org.sourcepit.modularizor.core.model.java.Resource;
-import org.sourcepit.modularizor.core.model.java.ResourceVisitor;
+import org.sourcepit.modularizor.java.Directory;
+import org.sourcepit.modularizor.java.Resource;
+import org.sourcepit.modularizor.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

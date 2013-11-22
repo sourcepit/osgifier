@@ -23,7 +23,6 @@ import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.testing.Workspace;
 import org.sourcepit.guplex.test.GuplexTest;
-import org.sourcepit.modularizor.core.packaging.Repackager;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

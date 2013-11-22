@@ -18,9 +18,8 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.modularizor.core.java.inspect.ClassForNameDetector;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

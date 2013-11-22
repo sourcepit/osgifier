@@ -11,7 +11,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.sourcepit.modularizor.core.inspect.ResourceVisitor;
-import org.sourcepit.modularizor.core.util.RelativeDirectoryTraverser;
 
 public class RelativeDirectoryTraverserTest extends AbstractTraverserTest
 {

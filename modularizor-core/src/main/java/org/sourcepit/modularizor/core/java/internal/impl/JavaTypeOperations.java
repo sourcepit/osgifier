@@ -6,8 +6,8 @@
 
 package org.sourcepit.modularizor.core.java.internal.impl;
 
-import org.sourcepit.modularizor.core.model.java.JavaFile;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaFile;
+import org.sourcepit.modularizor.java.JavaType;
 
 public final class JavaTypeOperations
 {

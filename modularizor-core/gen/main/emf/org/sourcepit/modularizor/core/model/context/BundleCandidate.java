@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.modeling.XAnnotatable;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,12 +78,12 @@ public interface BundleCandidate extends XAnnotatable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Content</em>' containment reference.
-    * @see #setContent(JavaResourceBundle)
+    * @see #setContent(org.sourcepit.modularizor.java.JavaResourceBundle)
     * @see org.sourcepit.modularizor.core.model.context.ContextModelPackage#getBundleCandidate_Content()
     * @model containment="true" required="true"
     * @generated
     */
-   JavaResourceBundle getContent();
+   org.sourcepit.modularizor.java.JavaResourceBundle getContent();
 
    /**
     * Sets the value of the '{@link org.sourcepit.modularizor.core.model.context.BundleCandidate#getContent
@@ -96,7 +95,7 @@ public interface BundleCandidate extends XAnnotatable
     * @see #getContent()
     * @generated
     */
-   void setContent(JavaResourceBundle value);
+   void setContent(org.sourcepit.modularizor.java.JavaResourceBundle value);
 
    /**
     * Returns the value of the '<em><b>Dependencies</b></em>' containment reference list.

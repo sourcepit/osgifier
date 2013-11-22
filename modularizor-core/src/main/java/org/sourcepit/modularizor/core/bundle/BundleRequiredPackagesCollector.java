@@ -19,14 +19,14 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
-import org.sourcepit.modularizor.core.model.java.JavaFile;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.Resource;
-import org.sourcepit.modularizor.core.model.java.ResourceVisitor;
+import org.sourcepit.modularizor.java.JavaFile;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.Resource;
+import org.sourcepit.modularizor.java.ResourceVisitor;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
@@ -52,7 +52,7 @@ public class BundleRequiredPackagesCollector
       // calculate required packages
       requiredToDemandingPackagesMap = LinkedHashMultimap.create();
       collectPackageReferences(requiredToDemandingPackagesMap, bundle);
-      
+
       // add self references
       JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
       packagesCollector.collect();
@@ -60,7 +60,7 @@ public class BundleRequiredPackagesCollector
       {
          requiredToDemandingPackagesMap.get(bundlePackage).add(bundlePackage);
       }
-      
+
       requiredToDemandingPackagesMap = Multimaps.unmodifiableMultimap(requiredToDemandingPackagesMap);
 
       requiredPackages = new ArrayList<String>(requiredToDemandingPackagesMap.keySet());

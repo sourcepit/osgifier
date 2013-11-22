@@ -23,15 +23,13 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.modularizor.core.java.inspect.JavaResourcesBundleScanner;
-import org.sourcepit.modularizor.core.java.inspect.JavaTypeReferencesAnalyzer;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaClass;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaProject;
-import org.sourcepit.modularizor.core.model.java.JavaType;
 import org.sourcepit.modularizor.core.util.AbstractTraverserTest;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaClass;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaProject;
+import org.sourcepit.modularizor.java.JavaType;
 import org.sourcepit.modularizor.test.resources.TypeA;
 
 /**
@@ -71,7 +69,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaPackage pgk = javaArchive.getPackage(AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
 
-      org.sourcepit.modularizor.core.model.java.File pkgInfo = pgk.getFile("packageinfo");
+      org.sourcepit.modularizor.java.File pkgInfo = pgk.getFile("packageinfo");
       assertThat(pkgInfo, IsNull.notNullValue());
 
       String version = pkgInfo.getAnnotationData("content", "version");
@@ -130,7 +128,7 @@ public class JavaTypeAndPackageInvestigatorTest
       JavaPackage pgk = javaProject.getPackage("", AbstractTraverserTest.TEST_RESOURCES_PACKAGE_PATH, false);
       assertThat(pgk, IsNull.notNullValue());
 
-      org.sourcepit.modularizor.core.model.java.File pkgInfo = pgk.getFile("packageinfo");
+      org.sourcepit.modularizor.java.File pkgInfo = pgk.getFile("packageinfo");
       assertThat(pkgInfo, IsNull.notNullValue());
 
       String version = pkgInfo.getAnnotationData("content", "version");

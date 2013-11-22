@@ -13,10 +13,10 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.common.utils.collections.CollectionUtils;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modularizor.core.model.java.Directory;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.Resource;
+import org.sourcepit.modularizor.java.Directory;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.Resource;
 
 
 /**

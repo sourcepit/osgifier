@@ -23,7 +23,7 @@ public final class BundleUtils
       final Parameter parameter = packageExport.getParameter("x-internal");
       return parameter != null && "true".equals(parameter.getValue());
    }
-   
+
    public static VersionRange trimQualifiers(VersionRange range)
    {
       if (range != null)

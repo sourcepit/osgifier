@@ -9,10 +9,10 @@ package org.sourcepit.modularizor.core.java.internal.impl;
 import javax.validation.constraints.NotNull;
 
 import org.eclipse.emf.ecore.EObject;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResource;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResource;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

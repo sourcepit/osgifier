@@ -20,10 +20,10 @@ import java.util.concurrent.locks.ReadWriteLock;
 
 import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.modularizor.core.java.util.JavaLangUtils;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
 
 /**
  * @author Bernd

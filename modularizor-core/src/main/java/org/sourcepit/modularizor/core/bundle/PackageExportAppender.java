@@ -36,10 +36,10 @@ import org.sourcepit.modularizor.core.ee.ExecutionEnvironment;
 import org.sourcepit.modularizor.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

@@ -15,7 +15,6 @@ import javax.validation.ConstraintViolationException;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.modularizor.core.util.SymbolicNameUtils;
 
 /**
  * @author Bernd

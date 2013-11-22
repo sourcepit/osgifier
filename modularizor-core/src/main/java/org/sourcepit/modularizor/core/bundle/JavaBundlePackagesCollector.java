@@ -11,9 +11,9 @@ import static java.util.Collections.unmodifiableSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 public class JavaBundlePackagesCollector
 {

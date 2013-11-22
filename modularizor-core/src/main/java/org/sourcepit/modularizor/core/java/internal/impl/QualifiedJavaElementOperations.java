@@ -6,11 +6,11 @@
 
 package org.sourcepit.modularizor.core.java.internal.impl;
 
-import org.sourcepit.modularizor.core.model.java.JavaFile;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.QualifiedJavaElement;
-import org.sourcepit.modularizor.core.model.java.util.JavaModelSwitch;
+import org.sourcepit.modularizor.java.JavaFile;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.QualifiedJavaElement;
+import org.sourcepit.modularizor.java.util.JavaModelSwitch;
 
 public final class QualifiedJavaElementOperations
 {

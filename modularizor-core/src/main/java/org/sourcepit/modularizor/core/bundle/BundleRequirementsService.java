@@ -18,8 +18,8 @@ import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.modularizor.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.modularizor.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaType;
 
 import com.google.common.collect.Multimap;
 

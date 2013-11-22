@@ -7,7 +7,7 @@
 package org.sourcepit.modularizor.core.java.inspect;
 
 import org.apache.bcel.classfile.JavaClass;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaType;
 
 public interface IJavaTypeAnalyzer
 {

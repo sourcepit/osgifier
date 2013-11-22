@@ -8,14 +8,14 @@ package org.sourcepit.modularizor.core.java.internal.impl;
 
 import javax.validation.constraints.NotNull;
 
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.ResourceVisitor;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

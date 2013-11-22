@@ -19,9 +19,9 @@ import javax.inject.Named;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
-import org.sourcepit.modularizor.core.model.java.JavaFile;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaFile;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
 
 /**
  * @author Bernd

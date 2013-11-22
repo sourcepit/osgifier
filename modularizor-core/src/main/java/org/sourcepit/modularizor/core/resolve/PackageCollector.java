@@ -9,9 +9,9 @@ package org.sourcepit.modularizor.core.resolve;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 public abstract class PackageCollector
 {

@@ -22,8 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.modularizor.core.java.inspect.IJavaTypeAnalyzer;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -59,8 +59,7 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
          return;
       }
 
-      org.sourcepit.modularizor.core.model.java.JavaClass jClass = (org.sourcepit.modularizor.core.model.java.JavaClass) javaType
-         .getFile();
+      org.sourcepit.modularizor.java.JavaClass jClass = (org.sourcepit.modularizor.java.JavaClass) javaType.getFile();
       jClass.setMajor(javaClass.getMajor());
       jClass.setMinor(javaClass.getMinor());
 

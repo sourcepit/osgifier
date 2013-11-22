@@ -15,9 +15,9 @@ import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.Resource;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.Resource;
 
 @Named("ExistingBundleManifestVersion")
 public class ExistingBundleManifestVersion extends AbstractVersionResolutionStrategy

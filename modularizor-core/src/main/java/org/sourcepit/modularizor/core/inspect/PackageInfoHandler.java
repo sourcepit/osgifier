@@ -14,11 +14,11 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.locks.ReadWriteLock;
 
-import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.common.utils.path.Path;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

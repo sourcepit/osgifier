@@ -25,10 +25,6 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
-import org.sourcepit.modularizor.core.ee.AccessRule;
-import org.sourcepit.modularizor.core.ee.ExecutionEnvironment;
-import org.sourcepit.modularizor.core.ee.ExecutionEnvironmentImplementation;
-import org.sourcepit.modularizor.core.ee.ExecutionEnvironmentService;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -44,13 +40,13 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
       ExecutionEnvironment cdc10 = environmentService.getExecutionEnvironment("CDC-1.0/Foundation-1.0");
       ExecutionEnvironment cdc11 = environmentService.getExecutionEnvironment("CDC-1.1/Foundation-1.1");
       ExecutionEnvironment j2se13 = environmentService.getExecutionEnvironment("J2SE-1.3");
-      
+
       assertThat(cdc10.compareTo(cdc11), Is.is(-1));
       assertThat(cdc11.compareTo(cdc10), Is.is(1));
-      
+
       assertThat(cdc11.compareTo(j2se13), Is.is(-1));
       assertThat(j2se13.compareTo(cdc11), Is.is(1));
-      
+
       assertThat(cdc10.compareTo(j2se13), Is.is(-1));
       assertThat(j2se13.compareTo(cdc10), Is.is(1));
    }

@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.concurrent.locks.ReadWriteLock;
 
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

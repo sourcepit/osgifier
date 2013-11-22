@@ -23,7 +23,6 @@ import org.apache.bcel.util.ClassLoaderRepository;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.modularizor.core.java.inspect.JavaTypeReferencesCollector;
 import org.sourcepit.modularizor.test.resources.TypeA;
 
 /**
@@ -46,8 +45,8 @@ public class JavaTypeReferencesCollectorTest
       final File jarFile = new File("target/testResources/modularizor-core.jar");
       assertTrue(jarFile.exists());
 
-      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(
-         new URL[] { jarFile.toURI().toURL() }));
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(new URL[] { jarFile.toURI()
+         .toURL() }));
 
       JavaClass jClass = classRepo.loadClass(TypeA.class.getName());
 

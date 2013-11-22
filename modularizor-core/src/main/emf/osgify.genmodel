@@ -6,7 +6,7 @@
     editorDirectory="/modularizorme-core.editor/gen/main/emf" modelPluginID="" modelName="Osgify"
     modelPluginClass="" updateClasspath="false" testsDirectory="/modularizor-core.tests/gen/test/emf"
     importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
-    copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/CommonModeling.genmodel#//modeling ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
+    copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../..//modularizor-java/src/main/emf/Java.genmodel#//java ../../../../common-modeling/src/main/emf/CommonModeling.genmodel#//modeling ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
   <foreignModel>Tree.ecore</foreignModel>
   <genPackages prefix="ContextModel" basePackage="org.sourcepit.modularizor.core.model"
       disposableProviderFactory="true" ecorePackage="Tree.ecore#/">
@@ -26,7 +26,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/provided"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="JavaModel" basePackage="org.sourcepit.modularizor.core.model" disposableProviderFactory="true"
+  <!-- <genPackages prefix="JavaModel" basePackage="org.sourcepit.modularizor.core.model" disposableProviderFactory="true"
       ecorePackage="Java.ecore#/">
     <genClasses ecoreClass="Java.ecore#//JavaType">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaType/innerTypes"/>
@@ -102,5 +102,5 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaPackageRoot/rootPackages"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//JavaPackageRoot/packageBundle"/>
     </genClasses>
-  </genPackages>
+  </genPackages> -->
 </genmodel:GenModel>

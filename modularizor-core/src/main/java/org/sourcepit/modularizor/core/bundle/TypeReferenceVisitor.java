@@ -9,8 +9,8 @@ package org.sourcepit.modularizor.core.bundle;
 import java.util.Set;
 
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.ResourceVisitor;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

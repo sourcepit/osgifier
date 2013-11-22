@@ -8,9 +8,9 @@ package org.sourcepit.modularizor.core.java.internal.impl;
 
 import javax.validation.constraints.NotNull;
 
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

@@ -30,15 +30,14 @@ import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.modularizor.core.bundle.PackageExportAppender;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaProject;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaProject;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

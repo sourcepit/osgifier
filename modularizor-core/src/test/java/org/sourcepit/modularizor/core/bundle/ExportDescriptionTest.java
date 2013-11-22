@@ -6,7 +6,7 @@
 
 package org.sourcepit.modularizor.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,6 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.modularizor.core.bundle.PackageReference;
 import org.sourcepit.modularizor.core.ee.AccessRule;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
@@ -143,7 +142,7 @@ public class ExportDescriptionTest
       assertEquals(descA, descs.get(0));
       assertEquals(descB, descs.get(1));
    }
-   
+
    @Test
    public void testCompareByVersion()
    {
@@ -151,11 +150,11 @@ public class ExportDescriptionTest
 
       PackageExport pkgA = BundleManifestFactory.eINSTANCE.createPackageExport();
       pkgA.getPackageNames().add("foo");
-      
+
       PackageExport pkgB = BundleManifestFactory.eINSTANCE.createPackageExport();
       pkgB.getPackageNames().add("foo");
       pkgB.setVersion(Version.parse("1"));
-      
+
       BundleCandidate exporterA = newBundle("exporterA", "1");
       BundleCandidate exporterB = newBundle("exporterB", "1");
 
@@ -170,9 +169,9 @@ public class ExportDescriptionTest
 
       assertEquals(descA, descs.get(0));
       assertEquals(descB, descs.get(1));
-      
+
       pkgA.setVersion(Version.parse("2"));
-      
+
       Collections.sort(descs);
 
       assertEquals(descB, descs.get(0));

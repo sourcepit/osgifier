@@ -22,8 +22,8 @@ import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 import org.sourcepit.modularizor.maven.impl.MavenVersionResolutionStrategy;
 
 public class MavenVersionResolutionStrategyTest

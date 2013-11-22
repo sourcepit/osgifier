@@ -15,8 +15,8 @@ import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 import org.sourcepit.modularizor.maven.impl.MergeArtifactWithGroupId;
 
 /**

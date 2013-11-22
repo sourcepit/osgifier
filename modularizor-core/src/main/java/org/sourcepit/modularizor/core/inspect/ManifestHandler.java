@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

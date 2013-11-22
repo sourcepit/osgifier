@@ -12,9 +12,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.resolve.InspectJavaPackageNames;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 
 /**
  * @author Bernd
@@ -123,14 +122,14 @@ public class InspectJavaPackageNamesTest
       String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.dom4j"));
    }
-   
+
    @Test
    public void testXercesImpl() throws Exception
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
-      
+
       jArchive.getType("org.apache.html.dom", "CollectionIndex", true);
       jArchive.getType("org.apache.wml", "WMLAccessElement", true);
       jArchive.getType("org.apache.wml.dom", "WMLAccessElementImpl", true);
@@ -146,7 +145,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("org.apache.xml.serialize", "BaseMarkupSerializer", true);
       jArchive.getType("org.w3c.dom.html", "HTMLDOMImplementation", true);
       jArchive.getType("org.w3c.dom.ls", "DOMImplementationLS", true);
-      
+
       String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.apache.xerces"));
    }

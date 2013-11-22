@@ -16,11 +16,10 @@ import javax.inject.Inject;
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
-import org.sourcepit.modularizor.core.bundle.BundleRequirementsService;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -35,10 +34,10 @@ public class BundleRequirementsServiceTest extends InjectedTest
    {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
-      
+
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "foo.Bar", 47, "java.lang.Object", "hans.Wurst");
-      
+
       bundle.setContent(jArchive);
 
       List<String> referencedPackages = packagesService.getRequiredPackages(bundle);

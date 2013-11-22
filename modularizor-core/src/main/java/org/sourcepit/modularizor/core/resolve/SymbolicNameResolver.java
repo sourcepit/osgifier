@@ -81,7 +81,8 @@ public class SymbolicNameResolver
       return resolveSymbolicNames(bundleCandidate, false, options);
    }
 
-   private List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, final boolean firstHit, PropertiesSource options)
+   private List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, final boolean firstHit,
+      PropertiesSource options)
    {
       final List<String> symbolicNames = new ArrayList<String>();
       addResolvedNames(getUnambiguousStartegies(), firstHit, bundleCandidate, symbolicNames, options);

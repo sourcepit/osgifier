@@ -18,11 +18,10 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.modularizor.core.bundle.DynamicPackageImportAppender;
 import org.sourcepit.modularizor.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

@@ -23,15 +23,12 @@ import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.manifest.resource.ManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.modularizor.core.inspect.DefaultFileHandler;
-import org.sourcepit.modularizor.core.inspect.JavaResourceVisitor;
-import org.sourcepit.modularizor.core.inspect.ManifestHandler;
-import org.sourcepit.modularizor.core.model.java.Directory;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaProject;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.Directory;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaProject;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
 
 public class JavaResourceVisitorTest
 {

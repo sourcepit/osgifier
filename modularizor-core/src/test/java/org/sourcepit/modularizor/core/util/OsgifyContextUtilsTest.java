@@ -23,7 +23,6 @@ import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
-import org.sourcepit.modularizor.core.util.OsgifyContextUtils;
 import org.sourcepit.modularizor.core.util.OsgifyContextUtils.BuildOrder;
 
 /**
@@ -83,7 +82,7 @@ public class OsgifyContextUtilsTest
 
       List<List<BundleCandidate>> cycles = buildOrder.getCycles();
       assertEquals(1, cycles.size());
-      
+
       List<BundleCandidate> path = cycles.get(0);
       assertEquals(4, path.size());
       assertThat(path.get(0), IsEqual.equalTo(a));

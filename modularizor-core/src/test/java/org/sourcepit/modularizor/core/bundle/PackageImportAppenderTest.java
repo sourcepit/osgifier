@@ -29,12 +29,11 @@ import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modularizor.core.bundle.PackageImportAppender;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -314,19 +313,19 @@ public class PackageImportAppenderTest extends InjectedTest
       BundleCandidate bundle = newBundleCandidate("1.0.1", null, jArchive);
       bundle.getManifest().setBundleSymbolicName("stax.api");
       bundle.setSymbolicName("stax.api");
-      
+
       appendPackageExport(bundle, newPackageExport("javax.xml.namespace", null));
       appendPackageExport(bundle, newPackageExport("javax.xml.stream", null));
 
       importAppender.append(bundle);
-      
+
       EList<PackageImport> importPackage = bundle.getManifest().getImportPackage();
       assertEquals(2, importPackage.size());
-      
+
       PackageImport packageImport = importPackage.get(0);
       assertEquals(1, packageImport.getPackageNames().size());
       assertEquals(packageImport.getPackageNames().get(0), "javax.xml.namespace");
-      
+
       packageImport = importPackage.get(1);
       assertEquals(1, packageImport.getPackageNames().size());
       assertEquals(packageImport.getPackageNames().get(0), "javax.xml.stream");

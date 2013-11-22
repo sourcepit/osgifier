@@ -7,11 +7,10 @@
 package org.sourcepit.modularizor.core.bundle;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modularizor.core.bundle.BundleUtils;
 
 public class BundleUtilsTest
 {

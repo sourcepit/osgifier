@@ -15,7 +15,6 @@ import java.io.StringWriter;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.modularizor.core.util.JsonUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

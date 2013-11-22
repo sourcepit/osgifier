@@ -6,7 +6,7 @@
 
 package org.sourcepit.modularizor.core.resolve;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.jar.JarFile;
 
@@ -18,10 +18,9 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.model.java.File;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.resolve.ExistingBundleManifestVersion;
+import org.sourcepit.modularizor.java.File;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
 
 public class ExistingBundleManifestVersionTest
 {
@@ -29,12 +28,12 @@ public class ExistingBundleManifestVersionTest
    public void test()
    {
       PropertiesMap options = new LinkedPropertiesMap();
-      
+
       resolveAndAssert("1.1.1.foo", "1.1.1.foo", options);
       resolveAndAssert("1.1.1", "1.1.1", options);
-      
+
       options.put("osgifier.forceContextQualifier", "murks");
-      
+
       resolveAndAssert("1.1.1.foo", "1.1.1.murks", options);
       resolveAndAssert("1.1.1", "1.1.1.murks", options);
    }
@@ -43,17 +42,17 @@ public class ExistingBundleManifestVersionTest
    {
       BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
       manifest.setBundleVersion(origin);
-      
+
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
 
       File file = jArchive.getFile(JarFile.MANIFEST_NAME, true);
       file.addExtension(manifest);
-      
+
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setContent(jArchive);
-      
+
       Version result = new ExistingBundleManifestVersion().resolveVersion(bundle, options);
       assertEquals(Version.parse(expected), result);
    }

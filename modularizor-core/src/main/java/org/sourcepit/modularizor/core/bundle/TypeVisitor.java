@@ -6,11 +6,11 @@
 
 package org.sourcepit.modularizor.core.bundle;
 
-import org.sourcepit.modularizor.core.model.java.JavaFile;
-import org.sourcepit.modularizor.core.model.java.JavaResourceDirectory;
-import org.sourcepit.modularizor.core.model.java.JavaType;
-import org.sourcepit.modularizor.core.model.java.Resource;
-import org.sourcepit.modularizor.core.model.java.ResourceVisitor;
+import org.sourcepit.modularizor.java.JavaFile;
+import org.sourcepit.modularizor.java.JavaResourceDirectory;
+import org.sourcepit.modularizor.java.JavaType;
+import org.sourcepit.modularizor.java.Resource;
+import org.sourcepit.modularizor.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

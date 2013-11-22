@@ -19,8 +19,6 @@ import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
 import org.sourcepit.modularizor.core.model.context.ContextModelPackage;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
-import org.sourcepit.modularizor.core.model.java.JavaModelPackage;
-import org.sourcepit.modularizor.core.model.java.impl.JavaModelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,21 +107,14 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       isInited = true;
 
       // Initialize simple dependencies
-      CommonModelingPackage.eINSTANCE.eClass();
+      org.sourcepit.modularizor.java.JavaModelPackage.eINSTANCE.eClass();
       ManifestPackage.eINSTANCE.eClass();
-
-      // Obtain or create and register interdependencies
-      JavaModelPackageImpl theJavaModelPackage = (JavaModelPackageImpl) (EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI) instanceof JavaModelPackageImpl ? EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI) : JavaModelPackage.eINSTANCE);
 
       // Create package meta-data objects
       theContextModelPackage.createPackageContents();
-      theJavaModelPackage.createPackageContents();
 
       // Initialize created meta-data
       theContextModelPackage.initializePackageContents();
-      theJavaModelPackage.initializePackageContents();
 
       // Mark meta-data to indicate it can't be changed
       theContextModelPackage.freeze();
@@ -406,8 +397,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Obtain other dependent packages
       CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE
          .getEPackage(CommonModelingPackage.eNS_URI);
-      JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI);
+      org.sourcepit.modularizor.java.JavaModelPackage theJavaModelPackage = (org.sourcepit.modularizor.java.JavaModelPackage) EPackage.Registry.INSTANCE
+         .getEPackage(org.sourcepit.modularizor.java.JavaModelPackage.eNS_URI);
       BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
          .getEPackage(BundleManifestPackage.eNS_URI);
 

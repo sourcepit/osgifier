@@ -6,9 +6,9 @@
 
 package org.sourcepit.modularizor.core.model.java;
 
-import org.sourcepit.modularizor.core.model.java.JavaPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesRoot;
-import org.sourcepit.modularizor.core.model.java.JavaResourcesType;
+import org.sourcepit.modularizor.java.JavaPackage;
+import org.sourcepit.modularizor.java.JavaResourcesRoot;
+import org.sourcepit.modularizor.java.JavaResourcesType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

@@ -51,7 +51,8 @@ public class BundleCandidateScanner
 
    private void resolveOSGiAttributes(BundleCandidate bundleCandidate)
    {
-      bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate, new LinkedPropertiesMap()));
+      bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate,
+         new LinkedPropertiesMap()));
       bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate, new LinkedPropertiesMap()));
    }
 

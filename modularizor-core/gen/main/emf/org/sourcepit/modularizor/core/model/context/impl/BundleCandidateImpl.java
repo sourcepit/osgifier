@@ -23,7 +23,6 @@ import org.sourcepit.common.modeling.impl.XAnnotatableImpl;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelPackage;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
 
 /**
  * <!-- begin-user-doc -->
@@ -84,7 +83,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     * @ordered
     */
-   protected JavaResourceBundle content;
+   protected org.sourcepit.modularizor.java.JavaResourceBundle content;
 
    /**
     * The cached value of the '{@link #getDependencies() <em>Dependencies</em>}' containment reference list.
@@ -251,7 +250,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public JavaResourceBundle getContent()
+   public org.sourcepit.modularizor.java.JavaResourceBundle getContent()
    {
       return content;
    }
@@ -262,9 +261,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetContent(JavaResourceBundle newContent, NotificationChain msgs)
+   public NotificationChain basicSetContent(org.sourcepit.modularizor.java.JavaResourceBundle newContent,
+      NotificationChain msgs)
    {
-      JavaResourceBundle oldContent = content;
+      org.sourcepit.modularizor.java.JavaResourceBundle oldContent = content;
       content = newContent;
       if (eNotificationRequired())
       {
@@ -284,7 +284,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setContent(JavaResourceBundle newContent)
+   public void setContent(org.sourcepit.modularizor.java.JavaResourceBundle newContent)
    {
       if (newContent != content)
       {
@@ -722,7 +722,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             setLocation((File) newValue);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaResourceBundle) newValue);
+            setContent((org.sourcepit.modularizor.java.JavaResourceBundle) newValue);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();
@@ -765,7 +765,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             setLocation(LOCATION_EDEFAULT);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
-            setContent((JavaResourceBundle) null);
+            setContent((org.sourcepit.modularizor.java.JavaResourceBundle) null);
             return;
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
             getDependencies().clear();

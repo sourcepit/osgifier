@@ -12,7 +12,7 @@ import java.util.Set;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaType;
 
 public class JavaTypeReferencesAnalyzer implements IJavaTypeAnalyzer
 {

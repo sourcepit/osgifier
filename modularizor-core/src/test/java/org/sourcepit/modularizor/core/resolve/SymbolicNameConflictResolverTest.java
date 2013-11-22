@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.core.resolve.SymbolicNameConflictResolver;
 
 public class SymbolicNameConflictResolverTest
 {
@@ -82,17 +81,17 @@ public class SymbolicNameConflictResolverTest
    {
       List<String> names1 = asList("foo");
       List<String> names2 = asList("foo");
-      
+
       assertFalse(conflictResolver.resolveNameConflict(bundle1, names1, bundle2, names2));
-      
+
       names1 = asList("foo");
       names2 = asList();
-      
+
       assertFalse(conflictResolver.resolveNameConflict(bundle1, names1, bundle2, names2));
-      
+
       names1 = asList("foo", "bar");
       names2 = asList();
-      
+
       assertFalse(conflictResolver.resolveNameConflict(bundle1, names1, bundle2, names2));
    }
 }

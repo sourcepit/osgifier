@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sourcepit</groupId>
@@ -24,6 +25,8 @@
 		<module>modularizor-maven-plugin</module>
 		<!-- <module>modularizor-tools</module> -->
 		<module>modularizor-maven</module>
+		<module>modularizor-java</module>
+		<!-- <module>modularizor-modulerealms</module> -->
 	</modules>
 
 	<repositories>
@@ -160,8 +163,8 @@
 					<artifactId>maven-install-plugin</artifactId>
 					<version>0.1.0-alpha-5</version>
 				</plugin>
-				<!-- To assure that all artifact will be installed with its base version
-					we use our own install mojo (org.sourcepit.tools:maven-install-mojo). See
+				<!-- To assure that all artifact will be installed with its base version 
+					we use our own install mojo (org.sourcepit.tools:maven-install-mojo). See 
 					<plugins /> secion. -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -173,7 +176,7 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

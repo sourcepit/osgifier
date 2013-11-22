@@ -38,10 +38,7 @@ public class PackageRequirementBuilder
 
    public PackageRequirement toPackageRequirement()
    {
-      return new PackageRequirement(
-         demandingBundle,
-         requiredPackage,
-         demandedByPublicPackages,
+      return new PackageRequirement(demandingBundle, requiredPackage, demandedByPublicPackages,
          demandedByInternalPackages);
    }
 }

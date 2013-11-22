@@ -19,12 +19,12 @@ import org.sourcepit.modularizor.core.inspect.JavaPackageHandler;
 import org.sourcepit.modularizor.core.inspect.JavaResourceVisitor;
 import org.sourcepit.modularizor.core.inspect.ManifestHandler;
 import org.sourcepit.modularizor.core.inspect.PackageInfoHandler;
-import org.sourcepit.modularizor.core.model.java.JavaArchive;
-import org.sourcepit.modularizor.core.model.java.JavaModelFactory;
-import org.sourcepit.modularizor.core.model.java.JavaProject;
-import org.sourcepit.modularizor.core.model.java.JavaResourceBundle;
 import org.sourcepit.modularizor.core.util.RelativeDirectoryTraverser;
 import org.sourcepit.modularizor.core.util.ZipTraverser;
+import org.sourcepit.modularizor.java.JavaArchive;
+import org.sourcepit.modularizor.java.JavaModelFactory;
+import org.sourcepit.modularizor.java.JavaProject;
+import org.sourcepit.modularizor.java.JavaResourceBundle;
 
 public class JavaResourcesBundleScanner
 {

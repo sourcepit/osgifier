@@ -11,7 +11,7 @@ import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.DescendingVisitor;
 import org.apache.bcel.classfile.EmptyVisitor;
 import org.apache.bcel.classfile.JavaClass;
-import org.sourcepit.modularizor.core.model.java.JavaType;
+import org.sourcepit.modularizor.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
