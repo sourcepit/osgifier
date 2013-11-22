@@ -26,7 +26,7 @@
 		<!-- <module>modularizor-tools</module> -->
 		<module>modularizor-maven</module>
 		<module>modularizor-java</module>
-		<!-- <module>modularizor-modulerealms</module> -->
+		<module>modularizor-modulerealms</module>
 	</modules>
 
 	<repositories>

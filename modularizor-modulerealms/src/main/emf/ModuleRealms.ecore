@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="modulerelams" nsURI="http://www.sourcepit.org/modularizor/modulerelams/0.1"
+    nsPrefix="modulerelams">
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleRealms" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
+        eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaResourceBundle"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRealms" upperBound="-1"
+        eType="#//ModuleRealm" containment="true" eOpposite="#//ModuleRealm/moduleRealms"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleRealm" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRealms" lowerBound="1"
+        eType="#//ModuleRealms" eOpposite="#//ModuleRealms/moduleRealms"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realmModule" lowerBound="1"
+        eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaResourceBundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleReferences" upperBound="-1"
+        eType="#//ModuleReference" containment="true" eOpposite="#//ModuleReference/moduleRealm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleReference" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRealm" lowerBound="1"
+        eType="#//ModuleRealm" eOpposite="#//ModuleRealm/moduleReferences"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetModule" lowerBound="1"
+        eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaResourceBundle"/>
+  </eClassifiers>
+</ecore:EPackage>
