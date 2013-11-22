@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying&#xD;&#xA;materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,&#xD;&#xA;and is available at http://www.eclipse.org/legal/epl-v10.html"
+    modelDirectory="/modularizor-core/gen/main/emf" editDirectory="/modularizor-core.edit/gen/main/emf"
+    editorDirectory="/modularizorme-core.editor/gen/main/emf" modelPluginID="" modelName="Osgify"
+    modelPluginClass="" updateClasspath="false" testsDirectory="/modularizor-core.tests/gen/test/emf"
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="5.0"
+    copyrightFields="false" editorPluginID="" runtimeVersion="2.6" usedGenPackages="../../../../common-modeling/src/main/emf/CommonModeling.genmodel#//modeling ../../../../common-manifest/src/main/emf/manifest.genmodel#//manifest">
+  <foreignModel>Tree.ecore</foreignModel>
+  <genPackages prefix="ContextModel" basePackage="org.sourcepit.modularizor.core.model"
+      disposableProviderFactory="true" ecorePackage="Tree.ecore#/">
+    <genClasses ecoreClass="Tree.ecore#//OsgifyContext">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//OsgifyContext/bundles"/>
+    </genClasses>
+    <genClasses ecoreClass="Tree.ecore#//BundleCandidate">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleCandidate/content"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleCandidate/dependencies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleCandidate/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleCandidate/symbolicName"/>
+    </genClasses>
+    <genClasses ecoreClass="Tree.ecore#//BundleReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/versionRange"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/optional"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Tree.ecore#//BundleReference/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Tree.ecore#//BundleReference/provided"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="JavaModel" basePackage="org.sourcepit.modularizor.core.model" disposableProviderFactory="true"
+      ecorePackage="Java.ecore#/">
+    <genClasses ecoreClass="Java.ecore#//JavaType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaType/innerTypes"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//JavaType/outerType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Java.ecore#//JavaType/simpleName"/>
+      <genOperations ecoreOperation="Java.ecore#//JavaType/getTypeRoot"/>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//JavaCompilationUnit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaCompilationUnit/importDeclarations"/>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//ImportDeclaration">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//ImportDeclaration/compilationUnit"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Java.ecore#//JavaTypeRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaTypeRoot/type"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//JavaTypeRoot/parentPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//JavaClass"/>
+    <genClasses ecoreClass="Java.ecore#//JavaPackage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaPackage/typeRoots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Java.ecore#//JavaPackage/simpleName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaPackage/packages"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//JavaPackage/parentPackage"/>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackage/getSubPackage">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackage/getSubPackage/name"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackage/getSubPackage/createOnDemand"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackage/getPackageBundle"/>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackage/getPackageRoot"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Java.ecore#//JavaPackageBundle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaPackageBundle/packageRoots"/>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackageBundle/getRootPackages">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getRootPackages/path"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackageBundle/getPackage">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackage/path"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackage/fullyQualifiedName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackage/createOnDemand"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackageBundle/getType">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getType/path"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getType/packageName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getType/typeName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getType/createOnDemand"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackageBundle/getPackageRoot">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackageRoot/path"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaPackageBundle/getPackageRoot.1">
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackageRoot.1/path"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaPackageBundle/getPackageRoot.1/createOnDemand"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//JavaArchive">
+      <genOperations ecoreOperation="Java.ecore#//JavaArchive/getPackage">
+        <genParameters ecoreParameter="Java.ecore#//JavaArchive/getPackage/fullyQualifiedName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaArchive/getPackage/createOnDemand"/>
+      </genOperations>
+      <genOperations ecoreOperation="Java.ecore#//JavaArchive/getType">
+        <genParameters ecoreParameter="Java.ecore#//JavaArchive/getType/packageName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaArchive/getType/typeName"/>
+        <genParameters ecoreParameter="Java.ecore#//JavaArchive/getType/createOnDemand"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//JavaProject"/>
+    <genClasses image="false" ecoreClass="Java.ecore#//FullyQualified">
+      <genOperations ecoreOperation="Java.ecore#//FullyQualified/getFullyQualifiedName"/>
+      <genOperations ecoreOperation="Java.ecore#//FullyQualified/getSimpleName"/>
+    </genClasses>
+    <genClasses ecoreClass="Java.ecore#//JavaPackageRoot">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Java.ecore#//JavaPackageRoot/path"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Java.ecore#//JavaPackageRoot/rootPackages"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Java.ecore#//JavaPackageRoot/packageBundle"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

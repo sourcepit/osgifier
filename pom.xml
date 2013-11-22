@@ -5,13 +5,13 @@
 		<artifactId>srcpit-parent</artifactId>
 		<version>10</version>
 	</parent>
-	<groupId>org.sourcepit.tools</groupId>
-	<artifactId>osgify</artifactId>
+	<groupId>org.sourcepit.modularizor</groupId>
+	<artifactId>modularizor</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<scm>
-		<connection>scm:git:git@github.com:sourcepit/osgify.git</connection>
+		<connection>scm:git:git@github.com:sourcepit/modularizor.git</connection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -20,10 +20,10 @@
 	</properties>
 
 	<modules>
-		<module>osgify-core</module>
-		<module>osgify-maven-plugin</module>
-		<!-- <module>osgify-tools</module> -->
-		<module>osgify-maven</module>
+		<module>modularizor-core</module>
+		<module>modularizor-maven-plugin</module>
+		<!-- <module>modularizor-tools</module> -->
+		<module>modularizor-maven</module>
 	</modules>
 
 	<repositories>
@@ -103,24 +103,24 @@
 				<version>0.1.0-alpha-1</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-core</artifactId>
+				<groupId>org.sourcepit.modularizor</groupId>
+				<artifactId>modularizor-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-maven</artifactId>
+				<groupId>org.sourcepit.modularizor</groupId>
+				<artifactId>modularizor-maven</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-core</artifactId>
+				<groupId>org.sourcepit.modularizor</groupId>
+				<artifactId>modularizor-core</artifactId>
 				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-maven-plugin</artifactId>
+				<groupId>org.sourcepit.modularizor</groupId>
+				<artifactId>modularizor-maven-plugin</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
