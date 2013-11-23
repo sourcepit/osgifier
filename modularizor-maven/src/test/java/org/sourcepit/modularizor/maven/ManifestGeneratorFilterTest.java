@@ -6,7 +6,8 @@
 
 package org.sourcepit.modularizor.maven;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
@@ -17,7 +18,6 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
-import org.sourcepit.modularizor.maven.ManifestGeneratorFilter;
 
 public class ManifestGeneratorFilterTest
 {
@@ -40,22 +40,22 @@ public class ManifestGeneratorFilterTest
       options.put("osgifier.overrideNativeBundles", "foo");
       override = filter.isOverrideNativeBundle(bundle, manifest, options);
       assertTrue(override);
-      
+
       options.put("osgifier.overrideNativeBundles", "false");
       override = filter.isOverrideNativeBundle(bundle, manifest, options);
       assertFalse(override);
-      
+
       options.put("osgifier.overrideNativeBundles", "true");
       override = filter.isOverrideNativeBundle(bundle, manifest, options);
       assertTrue(override);
-      
+
       MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
       artifact.setGroupId("foo");
       artifact.setArtifactId("foo");
       artifact.setVersion("1");
-      
+
       bundle.addExtension(artifact);
-      
+
       options.put("osgifier.overrideNativeBundles", "foo:foo:jar");
       override = filter.isOverrideNativeBundle(bundle, manifest, options);
       assertTrue(override);

@@ -26,7 +26,7 @@ public class CustomSymbolicName extends AbstractSymbolicNameResolutionStrategy
    {
       return Priority.MAXIMUM;
    }
-   
+
    @Override
    public boolean isUnambiguous()
    {

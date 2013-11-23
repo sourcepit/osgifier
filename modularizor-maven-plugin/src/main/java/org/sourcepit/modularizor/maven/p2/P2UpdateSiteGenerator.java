@@ -67,32 +67,19 @@ public class P2UpdateSiteGenerator
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      return generateUpdateSite(
-         siteDir,
-         project.getArtifact(),
-         remoteArtifactRepositories,
-         localRepository,
-         repositoryName,
-         options);
+      return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
+         repositoryName, options);
    }
 
    public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(
-         artifact,
-         Artifact.SCOPE_COMPILE,
-         false,
-         remoteArtifactRepositories,
-         localRepository);
+      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact, Artifact.SCOPE_COMPILE,
+         false, remoteArtifactRepositories, localRepository);
 
-      return generateUpdateSite(
-         request,
-         siteDir,
-         repositoryName,
-         options == null ? new LinkedPropertiesMap() : options,
-         BundleSelector.ALL);
+      return generateUpdateSite(request, siteDir, repositoryName,
+         options == null ? new LinkedPropertiesMap() : options, BundleSelector.ALL);
    }
 
    @Inject
@@ -180,11 +167,7 @@ public class P2UpdateSiteGenerator
 
       copyJarsAndInjectManifests(bundles, bundlesDir);
 
-      p2Publisher.publishBundles(
-         siteDir,
-         repositoryName,
-         singletonList(bundlesDir),
-         compressRepository,
+      p2Publisher.publishBundles(siteDir, repositoryName, singletonList(bundlesDir), compressRepository,
          forkedProcessTimeoutInSeconds);
 
       final File categoryFile = new File(siteDir, "category.xml");
@@ -202,8 +185,7 @@ public class P2UpdateSiteGenerator
       sb.append("   <iu>\n");
       sb.append("      <category name=\"all\"/>\n");
       sb.append("      <query>\n");
-      sb
-         .append("         <expression type=\"match\">providedCapabilities.exists(p | p.namespace == 'osgi.bundle')</expression>\n");
+      sb.append("         <expression type=\"match\">providedCapabilities.exists(p | p.namespace == 'osgi.bundle')</expression>\n");
       sb.append("      </query>\n");
       sb.append("   </iu>\n");
       sb.append("</site>\n");

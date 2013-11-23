@@ -42,7 +42,7 @@ public abstract class AbstractBundleTreeSelector implements BundleSelector
       final BundleCandidate bundle = reference.getTarget();
       return bundle != null && select(bundle);
    }
-   
+
    protected abstract boolean select(BundleCandidate bundle);
 
 }

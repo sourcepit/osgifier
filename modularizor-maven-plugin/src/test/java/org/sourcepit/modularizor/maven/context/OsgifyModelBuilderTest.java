@@ -34,7 +34,6 @@ import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
-import org.sourcepit.modularizor.maven.context.OsgifyModelBuilder;
 
 public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 {
@@ -140,7 +139,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setLocalRepository(localRepository);
          request.setResolveDependenciesOfNativeBundles(true);
          request.setSkipManifestDerivation(true);
-         
+
          OsgifyContext context = builder.build(request);
 
          assertThat(context, notNullValue());
@@ -431,7 +430,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 
          request.setVirtualArtifact(false);
          request.setResolveDependenciesOfNativeBundles(false);
-         
+
          try
          {
             builder.build(request);
@@ -524,7 +523,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(request.getArtifact(), notNullValue());
 
          request.setVirtualArtifact(false);
-         
+
          try
          {
             builder.build(request);
@@ -620,7 +619,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
                                                               // is suppressed by the 'fat bundle' flag
 
          request.setVirtualArtifact(false);
-         
+
          try
          {
             builder.build(request);
@@ -818,7 +817,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
       request.setLocalRepository(localRepository);
       request.setResolveDependenciesOfNativeBundles(true);
       request.setSkipManifestDerivation(true);
-      
+
       return builder.build(request);
    }
 }

@@ -24,7 +24,6 @@ import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
 import org.sourcepit.modularizor.java.JavaArchive;
 import org.sourcepit.modularizor.java.JavaModelFactory;
-import org.sourcepit.modularizor.maven.impl.MavenVersionResolutionStrategy;
 
 public class MavenVersionResolutionStrategyTest
 {
@@ -39,11 +38,11 @@ public class MavenVersionResolutionStrategyTest
       mavenToOsgiVersion.put("1.v200192827", "1.0.0.v200192827");
       mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.SNAPSHOT");
       mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.SNAPSHOT");
-      
+
       PropertiesSource options = new LinkedPropertiesMap();
       assertEquals(mavenToOsgiVersion, options);
    }
-   
+
    @Test
    public void testForceContextQualifier()
    {
@@ -55,7 +54,7 @@ public class MavenVersionResolutionStrategyTest
       mavenToOsgiVersion.put("1.v200192827", "1.0.0.foo-v200192827");
       mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.foo-SNAPSHOT");
       mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.foo-SNAPSHOT");
-      
+
       PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.forceContextQualifier", "foo");
       assertEquals(mavenToOsgiVersion, options);
@@ -72,13 +71,13 @@ public class MavenVersionResolutionStrategyTest
       mavenToOsgiVersion.put("1.v200192827", "1.0.0.foo");
       mavenToOsgiVersion.put("1-SNAPSHOT", "1.0.0.foo");
       mavenToOsgiVersion.put("1.0.SNAPSHOT", "1.0.0.foo");
-      
+
       PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.forceContextQualifier", "foo");
       options.put("osgifier.saveMavenQualifier", "false");
       assertEquals(mavenToOsgiVersion, options);
    }
-   
+
    private void assertEquals(Map<String, String> mavenToOsgiVersion, PropertiesSource options)
    {
       MavenArtifact mavenArtifact = MavenModelFactory.eINSTANCE.createMavenArtifact();

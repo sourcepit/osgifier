@@ -1255,12 +1255,12 @@ public interface JavaModelPackage extends EPackage
    int JAVA_TYPE_FEATURE_COUNT = QUALIFIED_JAVA_ELEMENT_FEATURE_COUNT + 2;
 
    /**
-    * The meta object id for the '{@link org.sourcepit.modularizor.java.ResourceVisitor <em>Resource Visitor</em>}'
+    * The meta object id for the '{@link org.sourcepit.modularizor.java.impl.ResourceVisitor <em>Resource Visitor</em>}'
     * class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @see org.sourcepit.modularizor.java.ResourceVisitor
+    * @see org.sourcepit.modularizor.java.impl.ResourceVisitor
     * @see org.sourcepit.modularizor.java.impl.JavaModelPackageImpl#getResourceVisitor()
     * @generated
     */
@@ -1662,14 +1662,14 @@ public interface JavaModelPackage extends EPackage
    EClass getJavaResource();
 
    /**
-    * Returns the meta object for class '{@link org.sourcepit.modularizor.java.ResourceVisitor
+    * Returns the meta object for class '{@link org.sourcepit.modularizor.java.impl.ResourceVisitor
     * <em>Resource Visitor</em>}'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @return the meta object for class '<em>Resource Visitor</em>'.
-    * @see org.sourcepit.modularizor.java.ResourceVisitor
-    * @model instanceClass="org.sourcepit.modularizor.java.ResourceVisitor"
+    * @see org.sourcepit.modularizor.java.impl.ResourceVisitor
+    * @model instanceClass="org.sourcepit.modularizor.java.impl.ResourceVisitor"
     * @generated
     */
    EClass getResourceVisitor();
@@ -2043,12 +2043,12 @@ public interface JavaModelPackage extends EPackage
       EClass JAVA_RESOURCE = eINSTANCE.getJavaResource();
 
       /**
-       * The meta object literal for the '{@link org.sourcepit.modularizor.java.ResourceVisitor
+       * The meta object literal for the '{@link org.sourcepit.modularizor.java.impl.ResourceVisitor
        * <em>Resource Visitor</em>}' class.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
        * 
-       * @see org.sourcepit.modularizor.java.ResourceVisitor
+       * @see org.sourcepit.modularizor.java.impl.ResourceVisitor
        * @see org.sourcepit.modularizor.java.impl.JavaModelPackageImpl#getResourceVisitor()
        * @generated
        */

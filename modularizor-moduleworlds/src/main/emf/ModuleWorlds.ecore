@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="moduleworlds" nsURI="http://www.sourcepit.org/modularizor/moduleworlds/0.1"
+    nsPrefix="moduleworlds">
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleWorld" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
+        eType="#//AbstractModule" containment="true" eOpposite="#//AbstractModule/moduleWorld"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRealms" upperBound="-1"
+        eType="#//ModuleRealm" containment="true" eOpposite="#//ModuleRealm/moduleWorld"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleRealm" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleWorld" lowerBound="1"
+        eType="#//ModuleWorld" eOpposite="#//ModuleWorld/moduleRealms"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="module" lowerBound="1"
+        eType="#//AbstractModule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedModules" upperBound="-1"
+        eType="#//ModuleReference" containment="true" eOpposite="#//ModuleReference/moduleRealm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleReference" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRealm" lowerBound="1"
+        eType="#//ModuleRealm" eOpposite="#//ModuleRealm/referencedModules"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetModule" lowerBound="1"
+        eType="#//AbstractModule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractModule" abstract="true" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
+    <eOperations name="getJavaResources" lowerBound="1" eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaResourceBundle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleWorld" lowerBound="1"
+        eType="#//ModuleWorld" eOpposite="#//ModuleWorld/modules"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceAttachment" eType="ecore:EDataType ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//EFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssembledModule" eSuperTypes="#//AbstractModule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javaResources" lowerBound="1"
+        eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaArchive"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1" eType="ecore:EDataType ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//EFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExplodedModule" eSuperTypes="#//AbstractModule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="directory" lowerBound="1"
+        eType="ecore:EDataType ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//EFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceDirectories" upperBound="-1"
+        eType="ecore:EDataType ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//EFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="binaryDirectories" upperBound="-1"
+        eType="ecore:EDataType ../../../../common-modeling/src/main/emf/CommonModeling.ecore#//EFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javaResources" lowerBound="1"
+        eType="ecore:EClass ../../../../modularizor-java/src/main/emf/Java.ecore#//JavaProject"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

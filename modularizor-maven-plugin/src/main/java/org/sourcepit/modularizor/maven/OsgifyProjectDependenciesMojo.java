@@ -53,8 +53,6 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
 import org.sourcepit.modularizor.core.packaging.Repackager;
-import org.sourcepit.modularizor.maven.ManifestGeneratorFilter;
-import org.sourcepit.modularizor.maven.OsgifyModelBuilder;
 
 /**
  * @goal osgify-dependencies
@@ -85,10 +83,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext bundleModel = modelBuilder.build(
-         generatorFilter,
-         options,
-         project.getDependencies(),
+      final OsgifyContext bundleModel = modelBuilder.build(generatorFilter, options, project.getDependencies(),
          startTime);
 
       writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
@@ -137,8 +132,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             {
                if (dependencyNode.isSelected())
                {
-                  pom.addDependency(toDependency(
-                     keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
+                  pom.addDependency(toDependency(keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
                      dependencyNode));
                }
             }
@@ -178,9 +172,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             if (sourceBundle != null && sourceBundle.getLocation() != null)
             {
                final ArtifactKey sourceKey = getArtifactKey(sourceBundle);
-               final Artifact sourceArtifact = artifactFactory.createArtifact(
-                  artifact,
-                  sourceKey.getClassifier(),
+               final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
                   sourceKey.getType());
                final File sourceJar;
                if (!bundle.isNativeBundle())

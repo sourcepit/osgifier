@@ -13,6 +13,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import javax.validation.constraints.NotNull;
 
+import org.sourcepit.common.utils.path.PathUtils;
 import org.sourcepit.modularizor.core.inspect.DefaultFileHandler;
 import org.sourcepit.modularizor.core.inspect.JavaClassFileHandler;
 import org.sourcepit.modularizor.core.inspect.JavaPackageHandler;
@@ -42,13 +43,6 @@ public class JavaResourcesBundleScanner
       return javaArchive;
    }
 
-   public JavaArchive scan(@NotNull File jarFile, final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
-      JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      scan(javaArchive, jarFile, typeAnalyzers);
-      return javaArchive;
-   }
-
    public void scan(@NotNull final JavaArchive javaArchive, @NotNull File jarFile,
       final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
    {
@@ -62,11 +56,10 @@ public class JavaResourcesBundleScanner
       return javaProject;
    }
 
-   public JavaProject scan(@NotNull File projectDir, final Collection<IJavaTypeAnalyzer> typeAnalyzers,
-      String... binDirPaths)
+   public JavaProject scan(@NotNull File projectDir, File... binDirs)
    {
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
-      scan(javaProject, projectDir, typeAnalyzers, binDirPaths);
+      scan(javaProject, projectDir, typeAnalyzers, binDirs);
       return javaProject;
    }
 
@@ -83,6 +76,23 @@ public class JavaResourcesBundleScanner
          {
             final File binDir = new File(projectDir, binDirPath);
             investigateBinDirectory(javaProject, binDirPath, binDir, typeAnalyzers);
+         }
+      }
+   }
+
+   private void scan(@NotNull final JavaProject javaProject, @NotNull File projectDir,
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers, @NotNull File... binDirs)
+   {
+      if (binDirs == null || binDirs.length == 0)
+      {
+         investigateBinDirectory(javaProject, "", projectDir, typeAnalyzers);
+      }
+      else
+      {
+         for (final File binDir : binDirs)
+         {
+            final String relPath = PathUtils.getRelativePath(binDir, projectDir, "/");
+            investigateBinDirectory(javaProject, relPath, binDir, typeAnalyzers);
          }
       }
    }

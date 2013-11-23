@@ -10,7 +10,7 @@
       <!-- @generated Example -->
       <package
             uri="http://www.sourcepit.org/modularizor/java/0.1"
-            class="org.sourcepit.modularizor.java.JavaModelPackage"
+            class="org.sourcepit.modularizor.java.impl.JavaModelPackage"
             genModel="META-INF/emf/Java.genmodel"/>
    </extension>
 

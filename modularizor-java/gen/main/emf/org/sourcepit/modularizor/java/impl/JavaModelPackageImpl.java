@@ -6,8 +6,6 @@
 
 package org.sourcepit.modularizor.java.impl;
 
-import static org.sourcepit.modularizor.java.JavaModelPackage.RESOURCE;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;

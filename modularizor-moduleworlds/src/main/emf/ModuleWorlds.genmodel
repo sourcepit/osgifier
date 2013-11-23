@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2013 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying&#xD;&#xA;materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,&#xD;&#xA;and is available at http://www.eclipse.org/legal/epl-v10.html"
+    modelDirectory="/modularizor-moduleworlds/gen/main/emf" modelPluginID="" modelName="ModuleWorlds"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    bundleManifest="false" complianceLevel="6.0" copyrightFields="false" runtimeVersion="2.8"
+    usedGenPackages="../../../../common-modeling/src/main/emf/CommonModeling.genmodel#//modeling ../../../../modularizor-java/src/main/emf/Java.genmodel#//java"
+    importOrganizing="true">
+  <foreignModel>ModuleWorlds.ecore</foreignModel>
+  <genPackages prefix="ModuleWorlds" basePackage="org.sourcepit.modularizor" disposableProviderFactory="true"
+      ecorePackage="ModuleWorlds.ecore#/">
+    <genClasses ecoreClass="ModuleWorlds.ecore#//ModuleWorld">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleWorld/modules"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleWorld/moduleRealms"/>
+    </genClasses>
+    <genClasses ecoreClass="ModuleWorlds.ecore#//ModuleRealm">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleRealm/moduleWorld"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleRealm/module"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleRealm/referencedModules"/>
+    </genClasses>
+    <genClasses ecoreClass="ModuleWorlds.ecore#//ModuleReference">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleReference/moduleRealm"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ModuleReference/targetModule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//ModuleReference/transitive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//ModuleReference/optional"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ModuleWorlds.ecore#//AbstractModule">
+      <genOperations ecoreOperation="ModuleWorlds.ecore#//AbstractModule/getJavaResources"/>
+    </genClasses>
+    <genClasses ecoreClass="ModuleWorlds.ecore#//AssembledModule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//AssembledModule/javaResources"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//AssembledModule/file"/>
+    </genClasses>
+    <genClasses ecoreClass="ModuleWorlds.ecore#//ExplodedModule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//ExplodedModule/directory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//ExplodedModule/sourceDirectories"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ModuleWorlds.ecore#//ExplodedModule/binaryDirectories"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ModuleWorlds.ecore#//ExplodedModule/javaResources"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

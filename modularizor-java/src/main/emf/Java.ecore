@@ -171,6 +171,6 @@
     <eLiterals name="BIN"/>
     <eLiterals name="SRC" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceVisitor" instanceClassName="org.sourcepit.modularizor.java.ResourceVisitor"
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceVisitor" instanceClassName="org.sourcepit.modularizor.java.impl.ResourceVisitor"
       abstract="true" interface="true"/>
 </ecore:EPackage>

@@ -78,7 +78,7 @@ public interface BundleCandidate extends XAnnotatable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Content</em>' containment reference.
-    * @see #setContent(org.sourcepit.modularizor.java.JavaResourceBundle)
+    * @see #setContent(org.sourcepit.modularizor.java.impl.JavaResourceBundle)
     * @see org.sourcepit.modularizor.core.model.context.ContextModelPackage#getBundleCandidate_Content()
     * @model containment="true" required="true"
     * @generated

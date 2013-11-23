@@ -29,7 +29,6 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
-import org.sourcepit.modularizor.maven.impl.OsgifyStubModelCreator;
 
 public class OsgifyStubModelCreatorTest extends GuplexTest
 {
@@ -114,26 +113,26 @@ public class OsgifyStubModelCreatorTest extends GuplexTest
       DependencyNode nodeB = toDependencyNode(artifactB);
       DependencyNode nodeC = toDependencyNode(artifactC);
       DependencyNode nodeD = toDependencyNode(artifactD);
-      
+
       final DependencyTree treeA = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeA.setArtifact(artifactA);
       treeA.getDependencyNodes().add(nodeB);
       nodeB.getChildren().add(nodeC);
       treeA.getDependencyNodes().add(nodeD);
-      
+
       final DependencyTree treeB = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeB.setArtifact(artifactB);
       nodeB = toDependencyNode(artifactB);
       nodeC = toDependencyNode(artifactC);
       treeB.getDependencyNodes().add(nodeB);
       nodeB.getChildren().add(nodeC);
-      
+
       final DependencyTree treeC = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeC.setArtifact(artifactC);
-      
+
       final DependencyTree treeD = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeD.setArtifact(artifactD);
-      
+
       DependencyModel dependencyModel = DependencyModelFactory.eINSTANCE.createDependencyModel();
       dependencyModel.getArtifacts().add(artifactA);
       dependencyModel.getArtifacts().add(artifactB);
@@ -143,7 +142,7 @@ public class OsgifyStubModelCreatorTest extends GuplexTest
       dependencyModel.getDependencyTrees().add(treeB);
       dependencyModel.getDependencyTrees().add(treeC);
       dependencyModel.getDependencyTrees().add(treeD);
-      
+
       OsgifyContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(4, stubModel.getBundles().size());
    }

@@ -326,12 +326,12 @@ public class MavenDependencyWalker
       {
          this.resolveSource = resolveSource;
       }
-      
+
       public boolean isResolveSource()
       {
          return resolveSource;
       }
-      
+
       public List<MavenProject> getReactorProjects()
       {
          return reactorProjects;

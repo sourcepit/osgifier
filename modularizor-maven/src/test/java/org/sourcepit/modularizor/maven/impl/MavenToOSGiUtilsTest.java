@@ -16,7 +16,6 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.modularizor.maven.impl.MavenToOSGiUtils;
 
 public class MavenToOSGiUtilsTest
 {

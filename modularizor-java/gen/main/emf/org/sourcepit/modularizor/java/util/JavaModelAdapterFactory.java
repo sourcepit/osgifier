@@ -559,7 +559,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
    }
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.modularizor.java.ResourceVisitor
+    * Creates a new adapter for an object of class '{@link org.sourcepit.modularizor.java.impl.ResourceVisitor
     * <em>Resource Visitor</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
@@ -567,7 +567,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.modularizor.java.ResourceVisitor
+    * @see org.sourcepit.modularizor.java.impl.ResourceVisitor
     * @generated
     */
    public Adapter createResourceVisitorAdapter()

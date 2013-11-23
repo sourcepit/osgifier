@@ -68,13 +68,16 @@ import org.sourcepit.modularizor.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
+import org.sourcepit.modularizor.core.resolve.JavaResourcesAppender;
 import org.sourcepit.modularizor.core.resolve.SymbolicNameConflictResolver;
 import org.sourcepit.modularizor.core.resolve.SymbolicNameResolver;
 import org.sourcepit.modularizor.core.resolve.VersionRangeResolver;
 import org.sourcepit.modularizor.core.resolve.VersionResolver;
 import org.sourcepit.modularizor.core.util.OsgifyContextUtils;
 import org.sourcepit.modularizor.core.util.OsgifyContextUtils.BuildOrder;
+import org.sourcepit.modularizor.maven.impl.DependencyModelToModuleWorldConverter;
 import org.sourcepit.modularizor.maven.impl.OsgifyStubModelCreator;
+import org.sourcepit.modularizor.moduleworlds.ModuleWorld;
 
 @Named
 public class OsgifyModelBuilder
@@ -88,6 +91,12 @@ public class OsgifyModelBuilder
    @Inject
    private OsgifyStubModelCreator stubModelCreator;
 
+   @Inject
+   private DependencyModelToModuleWorldConverter dependencyModelConverter;
+
+   @Inject
+   private JavaResourcesAppender javaResourcesAppender;
+
    public OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp)
    {
@@ -96,6 +105,10 @@ public class OsgifyModelBuilder
       log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(dependencies);
+
+      final ModuleWorld moduleWorld = dependencyModelConverter.toModuleWorld(dependencyModel);
+      javaResourcesAppender.appendJavaResources(moduleWorld);
+
       final OsgifyContext osgifyModel = createStubModel(dependencyModel);
       log.info("------------------------------------------------------------------------");
 

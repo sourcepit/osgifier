@@ -17,7 +17,6 @@ import org.sourcepit.modularizor.core.model.context.BundleCandidate;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
 import org.sourcepit.modularizor.java.JavaArchive;
 import org.sourcepit.modularizor.java.JavaModelFactory;
-import org.sourcepit.modularizor.maven.impl.MergeArtifactWithGroupId;
 
 /**
  * @author Bernd

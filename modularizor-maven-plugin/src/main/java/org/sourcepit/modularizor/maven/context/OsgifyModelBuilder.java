@@ -34,8 +34,8 @@ import org.sourcepit.modularizor.core.model.context.BundleReference;
 import org.sourcepit.modularizor.core.model.context.ContextModelFactory;
 import org.sourcepit.modularizor.core.model.context.OsgifyContext;
 import org.sourcepit.modularizor.core.resolve.BundleContentAppender;
-import org.sourcepit.modularizor.core.resolve.VersionRangeResolver;
 import org.sourcepit.modularizor.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
+import org.sourcepit.modularizor.core.resolve.VersionRangeResolver;
 
 /*
  * - Artifact as root
