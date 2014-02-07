@@ -19,8 +19,8 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -43,7 +43,6 @@ import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
 
 import com.google.common.collect.Multimap;
 
@@ -134,8 +133,7 @@ public class PackageImportAppender
       {
          if (reference.isExecutionEnvironmentReference() && reference.getAccessRule() == AccessRule.DISCOURAGED)
          {
-            // LOGGER.warn("Skipping import of Execution Environment specific package {}", reference.getPackageName());
-            // packageImports.add(null);
+            packageImports.add(null);
          }
          else
          {
@@ -184,6 +182,10 @@ public class PackageImportAppender
          msg.append(exportingBundle.getSymbolicName());
          msg.append('_');
          msg.append(exportingBundle.getVersion().toMinimalString());
+         if (exportDescription.isOptional())
+         {
+            msg.append(" (optional)");
+         }
       }
    }
 
@@ -192,7 +194,7 @@ public class PackageImportAppender
       final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       packageImport.getPackageNames().add(exportDescription.getPackageName());
       packageImport.setVersion(determineVersionRange(exportDescription, packageReference));
-      final boolean optional = isOptional(exportDescription);
+      final boolean optional = exportDescription.isOptional();
       if (optional)
       {
          Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
@@ -381,27 +383,6 @@ public class PackageImportAppender
       {
          return DemanderRole.CONSUMER;
       }
-   }
-
-   private boolean isOptional(PackageReference exportDescription)
-   {
-      if (exportDescription != null)
-      {
-         if (exportDescription.isSelfReference())
-         {
-            return false;
-         }
-         else if (exportDescription.isExecutionEnvironmentReference())
-         {
-            return false;
-         }
-         else
-         {
-            final BundleReference referenceToExporter = exportDescription.getReferenceToExporter();
-            return referenceToExporter.isOptional();
-         }
-      }
-      return true;
    }
 
    private void addOwnPackages(final Map<String, PackageRequirementBuilder> refs, BundleCandidate bundle)

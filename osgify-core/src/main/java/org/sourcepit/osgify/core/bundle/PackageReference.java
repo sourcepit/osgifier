@@ -9,12 +9,11 @@ package org.sourcepit.osgify.core.bundle;
 import javax.validation.constraints.NotNull;
 
 import org.sourcepit.common.manifest.osgi.PackageExport;
-import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 
-public final class PackageReference implements Comparable<PackageReference>
+public final class PackageReference
 {
    private final BundleCandidate importingBundle;
    private final String packageName;
@@ -75,87 +74,21 @@ public final class PackageReference implements Comparable<PackageReference>
       return accessRule;
    }
 
-   @Override
-   public int compareTo(PackageReference other)
+   public boolean isOptional()
    {
-      final String thisImporterName = getImporterSymbolicName(this);
-      final String otherImporterName = getImporterSymbolicName(other);
-      int result = thisImporterName.compareTo(otherImporterName);
-      if (result != 0)
+      if (isSelfReference())
       {
-         return result;
+         return false;
       }
-
-      final Version thisImporterVersion = getImporterVersion(this);
-      final Version otherImporterVersion = getImporterVersion(other);
-      result = thisImporterVersion.compareTo(otherImporterVersion);
-      if (result != 0)
+      else if (isExecutionEnvironmentReference())
       {
-         return result;
+         return false;
       }
-
-      final String thisPkgName = this.getPackageName();
-      final String otherPkgName = other.getPackageName();
-      result = thisPkgName.compareTo(otherPkgName);
-      if (result != 0)
+      else
       {
-         return result;
+         final BundleReference referenceToExporter = getReferenceToExporter();
+         return referenceToExporter.isOptional();
       }
-
-      if (this.isSelfReference() && !other.isSelfReference())
-      {
-         return 1;
-      }
-      else if (!this.isSelfReference() && other.isSelfReference())
-      {
-         return -1;
-      }
-
-      result = getAccessRule().compareTo(other.getAccessRule());
-      if (result != 0)
-      {
-         return result;
-      }
-
-      if (this.isExecutionEnvironmentReference() && !other.isExecutionEnvironmentReference())
-      {
-         return 1;
-      }
-      else if (!this.isExecutionEnvironmentReference() && other.isExecutionEnvironmentReference())
-      {
-         return -11;
-      }
-
-      final Version thisExportVersion = getExportVersion(this);
-      final Version otherExportVersion = getExportVersion(other);
-      result = thisExportVersion.compareTo(otherExportVersion);
-      if (result != 0)
-      {
-         return result;
-      }
-
-      return 0;
-   }
-
-   private static String getImporterSymbolicName(PackageReference desc)
-   {
-      return desc.getImportingBundle().getManifest().getBundleSymbolicName().getSymbolicName();
-   }
-
-   private static Version getImporterVersion(PackageReference desc)
-   {
-      return desc.getImportingBundle().getManifest().getBundleVersion();
-   }
-
-   private static Version getExportVersion(PackageReference desc)
-   {
-      PackageExport pkgExport = desc.getPackageExport();
-      Version version = pkgExport.getVersion();
-      if (version == null)
-      {
-         version = Version.EMPTY_VERSION;
-      }
-      return version;
    }
 
    @Override

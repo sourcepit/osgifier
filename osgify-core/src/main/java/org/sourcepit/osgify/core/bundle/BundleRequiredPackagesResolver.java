@@ -6,8 +6,6 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static java.util.Collections.reverse;
-import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
@@ -66,12 +64,6 @@ public class BundleRequiredPackagesResolver
 
       BundleManifest manifest = bundle.getManifest();
 
-      PackageExport packageExport = resolvePackage(manifest.getExportPackage(), packageName);
-      if (packageExport != null)
-      {
-         exportDescriptions.add(new PackageReference(bundle, packageName, null, bundle, packageExport, ACCESSIBLE));
-      }
-
       final EList<String> executionEnvironments = bundle.getManifest().getBundleRequiredExecutionEnvironment();
       if (executionEnvironments != null)
       {
@@ -81,7 +73,13 @@ public class BundleRequiredPackagesResolver
             exportDescriptions.add(new PackageReference(bundle, packageName, null, null, null, accessRule));
          }
       }
-
+      
+      PackageExport packageExport = resolvePackage(manifest.getExportPackage(), packageName);
+      if (packageExport != null)
+      {
+         exportDescriptions.add(new PackageReference(bundle, packageName, null, bundle, packageExport, ACCESSIBLE));
+      }
+      
       for (BundleReference bundleReference : bundle.getDependencies())
       {
          final BundleCandidate target = bundleReference.getTarget();
@@ -99,10 +97,7 @@ public class BundleRequiredPackagesResolver
                ACCESSIBLE));
          }
       }
-
-      sort(exportDescriptions);
-      reverse(exportDescriptions);
-
+      
       return exportDescriptions;
    }
 
