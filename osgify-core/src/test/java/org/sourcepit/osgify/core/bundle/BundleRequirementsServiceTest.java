@@ -13,8 +13,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Test;
-import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;

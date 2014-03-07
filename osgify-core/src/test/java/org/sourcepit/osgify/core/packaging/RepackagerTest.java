@@ -16,18 +16,18 @@ import java.util.jar.JarFile;
 import javax.inject.Inject;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.testing.Workspace;
-import org.sourcepit.guplex.test.GuplexTest;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class RepackagerTest extends GuplexTest
+public class RepackagerTest extends InjectedTest
 {
    protected Environment env = Environment.get("env-test.properties");
 

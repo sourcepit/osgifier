@@ -17,12 +17,12 @@ import java.io.File;
 
 import javax.inject.Inject;
 
+import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Test;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.maven.model.MavenModelFactory;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
-import org.sourcepit.guplex.test.GuplexTest;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyModelFactory;
 import org.sourcepit.maven.dependency.model.DependencyNode;
@@ -30,16 +30,10 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
-public class OsgifyStubModelCreatorTest extends GuplexTest
+public class OsgifyStubModelCreatorTest extends InjectedTest
 {
    @Inject
    private OsgifyStubModelCreator stubModelCreator;
-
-   @Override
-   protected boolean isUseIndex()
-   {
-      return true;
-   }
 
    @Test
    public void testNull()

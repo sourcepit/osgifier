@@ -26,15 +26,18 @@ import org.apache.maven.model.io.DefaultModelWriter;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
-import org.sonatype.aether.RepositorySystem;
-import org.sonatype.aether.artifact.Artifact;
-import org.sonatype.aether.installation.InstallRequest;
-import org.sonatype.aether.installation.InstallationException;
+import org.eclipse.aether.RepositorySystem;
+import org.eclipse.aether.artifact.Artifact;
+import org.eclipse.aether.installation.InstallRequest;
+import org.eclipse.aether.installation.InstallationException;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
 import org.sourcepit.common.maven.aether.ArtifactFactory;
@@ -55,20 +58,18 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
 
 /**
- * @goal osgify-dependencies
- * @requiresProject true
- * @requiresDependencyResolution compile
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
+@Mojo(name = "osgify-dependencies", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 {
-   /** @parameter default-value="${project.build.directory}" */
+   @Parameter(defaultValue = "${project.build.directory}")
    private File targetDir;
 
-   /** @parameter default-value="${project}" */
+   @Parameter(defaultValue = "${project}")
    private MavenProject project;
 
-   /** @parameter default-value="**.internal.**, **.internal, **.impl.**, **.impl" */
+   @Parameter(defaultValue = "**.internal.**, **.internal, **.impl.**, **.impl")
    private String internalPackages;
 
    @Inject
@@ -83,10 +84,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext bundleModel = modelBuilder.build(
-         generatorFilter,
-         options,
-         project.getDependencies(),
+      final OsgifyContext bundleModel = modelBuilder.build(generatorFilter, options, project.getDependencies(),
          startTime);
 
       writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
@@ -135,8 +133,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             {
                if (dependencyNode.isSelected())
                {
-                  pom.addDependency(toDependency(
-                     keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
+                  pom.addDependency(toDependency(keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
                      dependencyNode));
                }
             }
@@ -176,9 +173,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
             if (sourceBundle != null && sourceBundle.getLocation() != null)
             {
                final ArtifactKey sourceKey = getArtifactKey(sourceBundle);
-               final Artifact sourceArtifact = artifactFactory.createArtifact(
-                  artifact,
-                  sourceKey.getClassifier(),
+               final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
                   sourceKey.getType());
                final File sourceJar;
                if (!bundle.isNativeBundle())

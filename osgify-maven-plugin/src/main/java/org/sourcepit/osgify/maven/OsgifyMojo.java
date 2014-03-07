@@ -12,19 +12,21 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 /**
- * @requiresDependencyResolution compile
- * @goal osgify
- * @phase compile
  * @author bernd
  */
+@Mojo(name = "osgify", defaultPhase = LifecyclePhase.COMPILE, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class OsgifyMojo extends AbstractOsgifyManifestMojo
 {
-   /** @parameter default-value="${project.build.outputDirectory}/META-INF/MANIFEST.MF" */
+   @Parameter(defaultValue = "${project.build.outputDirectory}/META-INF/MANIFEST.MF")
    private File manifestFile;
 
-   /** @parameter default-value="false" */
+   @Parameter(defaultValue = "false")
    private boolean enablePDEWorkaround;
 
    @Override
@@ -44,9 +46,6 @@ public class OsgifyMojo extends AbstractOsgifyManifestMojo
       }
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    protected File getManifestFile()
    {

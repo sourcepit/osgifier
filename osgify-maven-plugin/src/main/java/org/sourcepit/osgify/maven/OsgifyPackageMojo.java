@@ -16,6 +16,10 @@ import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
 import org.eclipse.emf.common.util.URI;
@@ -31,11 +35,9 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
 
 /**
- * @requiresDependencyResolution compile
- * @goal osgify-package
- * @phase package
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
+@Mojo(name = "osgify-package", defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class OsgifyPackageMojo extends AbstractGuplexedMojo
 {
    @Inject
@@ -44,13 +46,13 @@ public class OsgifyPackageMojo extends AbstractGuplexedMojo
    @Inject
    private RepositorySystem repositorySystem;
 
-   /** @parameter default-value="${project}" */
+   @Parameter(defaultValue = "${project}")
    protected MavenProject project;
 
-   /** @parameter default-value="${project.build.directory}" */
+   @Parameter(defaultValue = "${project.build.directory}")
    private File targetDir;
 
-   /** @parameter default-value="${localRepository}" */
+   @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
 
    @Override

@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -35,13 +36,13 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
    @Inject
    private OsgifyModelBuilder modelBuilder;
 
-   /** @parameter default-value="${localRepository}" */
+   @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
 
-   /** @parameter default-value="${project.build.directory}" */
+   @Parameter(defaultValue = "${project.build.directory}")
    private File targetDir;
 
-   /** @parameter default-value="${project}" */
+   @Parameter(defaultValue = "${project}")
    protected MavenProject project;
 
    protected void doExecute(Goal goal)

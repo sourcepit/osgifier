@@ -13,10 +13,10 @@ import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandid
 
 import javax.inject.Inject;
 
+import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;

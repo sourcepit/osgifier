@@ -20,11 +20,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sonatype.guice.bean.containers.InjectedTest;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

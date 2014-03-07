@@ -10,18 +10,18 @@ import java.io.File;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
 /**
- * @requiresDependencyResolution test
- * @goal osgify-tests
- * @phase test-compile
  * @author bernd
  */
+@Mojo(name = "osgify-tests", defaultPhase = LifecyclePhase.TEST_COMPILE, requiresDependencyResolution = ResolutionScope.TEST)
 public class OsgifyTestsMojo extends AbstractOsgifyManifestMojo
 {
-   /**
-    * @parameter default-value="${project.build.testOutputDirectory}/META-INF/MANIFEST.MF"
-    */
+   @Parameter(defaultValue = "${project.build.testOutputDirectory}/META-INF/MANIFEST.MF")
    private File manifestFile;
 
    @Override
@@ -30,9 +30,6 @@ public class OsgifyTestsMojo extends AbstractOsgifyManifestMojo
       doExecute(Goal.OSGIFY_TESTS);
    }
 
-   /**
-    * {@inheritDoc}
-    */
    @Override
    protected File getManifestFile()
    {

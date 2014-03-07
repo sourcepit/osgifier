@@ -20,10 +20,10 @@ import javax.inject.Inject;
 import javax.validation.ConstraintViolationException;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;

@@ -23,9 +23,9 @@ import static org.sourcepit.osgify.core.bundle.TestContextHelper.newPackageExpor
 import javax.inject.Inject;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sonatype.guice.bean.containers.InjectedTest;
 import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;

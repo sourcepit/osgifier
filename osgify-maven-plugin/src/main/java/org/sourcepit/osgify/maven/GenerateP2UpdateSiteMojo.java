@@ -13,35 +13,34 @@ import javax.inject.Inject;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.maven.p2.P2UpdateSiteGenerator;
 
 /**
- * @phase package
- * @goal generate-p2-update-site
- * @requiresProject true
- * @requiresDependencyResolution compile
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
+@Mojo(name = "generate-p2-update-site", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
 {
-   /** @parameter default-value="${localRepository}" */
+   @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
 
-   /** @parameter default-value="${project.build.directory}/p2-update-site" */
+   @Parameter(defaultValue = "${project.build.directory}/p2-update-site")
    private File siteDir;
 
-   /** @parameter default-value="${project}" */
+   @Parameter(defaultValue = "${project}")
    protected MavenProject project;
 
    /**
     * Metadata repository name
-    * 
-    * @parameter default-value="${project.name}"
-    * @required
     */
+   @Parameter(defaultValue = "${project.name}", required = true)
    protected String repositoryName;
 
    /**
