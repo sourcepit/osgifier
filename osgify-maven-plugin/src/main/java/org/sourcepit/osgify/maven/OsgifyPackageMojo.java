@@ -38,7 +38,7 @@ import org.sourcepit.osgify.core.packaging.Repackager;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "osgify-package", defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class OsgifyPackageMojo extends AbstractGuplexedMojo
+public class OsgifyPackageMojo extends AbstractOsgifyMojo
 {
    @Inject
    private Repackager repackager;

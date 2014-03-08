@@ -29,7 +29,7 @@ import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 
-public abstract class AbstractOsgifyManifestMojo extends AbstractGuplexedMojo
+public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 {
    private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 

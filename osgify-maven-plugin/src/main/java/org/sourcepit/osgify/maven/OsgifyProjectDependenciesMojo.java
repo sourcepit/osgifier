@@ -61,7 +61,7 @@ import org.sourcepit.osgify.core.packaging.Repackager;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "osgify-dependencies", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class OsgifyProjectDependenciesMojo extends AbstractGuplexedMojo
+public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
 {
    @Parameter(defaultValue = "${project.build.directory}")
    private File targetDir;

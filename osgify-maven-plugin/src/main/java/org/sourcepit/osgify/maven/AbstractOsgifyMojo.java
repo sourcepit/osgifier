@@ -12,7 +12,7 @@ import org.apache.maven.plugin.MojoFailureException;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class AbstractGuplexedMojo extends AbstractMojo
+public abstract class AbstractOsgifyMojo extends AbstractMojo
 {
    public final void execute() throws MojoExecutionException, MojoFailureException
    {

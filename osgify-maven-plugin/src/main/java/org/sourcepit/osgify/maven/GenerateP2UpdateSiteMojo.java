@@ -26,7 +26,7 @@ import org.sourcepit.osgify.maven.p2.P2UpdateSiteGenerator;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "generate-p2-update-site", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class GenerateP2UpdateSiteMojo extends AbstractGuplexedMojo
+public class GenerateP2UpdateSiteMojo extends AbstractOsgifyMojo
 {
    @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
