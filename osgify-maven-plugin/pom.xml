@@ -10,12 +10,6 @@
 	<packaging>maven-plugin</packaging>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
 			<artifactId>common-utils</artifactId>
@@ -44,12 +38,6 @@
 		<dependency>
 			<groupId>org.eclipse.tycho</groupId>
 			<artifactId>tycho-p2-facade</artifactId>
-			<exclusions>
-				<exclusion>
-					<artifactId>plexus-archiver</artifactId>
-					<groupId>org.codehaus.plexus</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.tycho</groupId>
@@ -104,8 +92,8 @@
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
-					<artifactId>plexus-archiver</artifactId>
 					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-container-default</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
