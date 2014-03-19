@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.maven.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.sourcepit.common.maven.model.util.MavenModelUtils.toArtifactKey;
 
 import java.util.HashMap;
@@ -69,6 +70,8 @@ public class OsgifyStubModelCreator
          if (dependencyTree.getArtifact() != null && dependencyTree.getArtifact().getFile() != null)
          {
             final BundleCandidate bundle = artifactToBundle.get(dependencyTree.getArtifact());
+            checkNotNull(bundle);
+            
             for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
             {
                addBundleReferences(artifactToBundle, bundle, dependencyNode);
@@ -83,7 +86,12 @@ public class OsgifyStubModelCreator
    {
       if (dependencyNode.isSelected() && dependencyNode.getCycleNode() == null)
       {
-         final BundleCandidate bundle = artifactToBundle.get(dependencyNode.getArtifact());
+         final MavenArtifact artifact = dependencyNode.getArtifact();
+         checkNotNull(artifact);
+         
+         final BundleCandidate bundle = artifactToBundle.get(artifact);
+         checkNotNull(bundle);
+         
          final BundleReference reference = toBundleReference(bundle, dependencyNode);
          master.getDependencies().add(reference);
 
