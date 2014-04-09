@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.core.java.internal.impl;
 
-import javax.validation.constraints.NotNull;
+import org.sourcepit.common.constraints.NotNull;
 
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;

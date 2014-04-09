@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.common.util.EList;
 import org.hamcrest.core.Is;
@@ -46,7 +46,7 @@ public class JavaTypeAndPackageInvestigatorTest
          new JavaResourcesBundleScanner().scan((JavaArchive) null, null, null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 
@@ -56,7 +56,7 @@ public class JavaTypeAndPackageInvestigatorTest
          new JavaResourcesBundleScanner().scan(javaArchive, null, null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 
@@ -104,7 +104,7 @@ public class JavaTypeAndPackageInvestigatorTest
          new JavaResourcesBundleScanner().scan((JavaProject) null, null, null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 
@@ -114,7 +114,7 @@ public class JavaTypeAndPackageInvestigatorTest
          new JavaResourcesBundleScanner().scan(javaProject, null, null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 

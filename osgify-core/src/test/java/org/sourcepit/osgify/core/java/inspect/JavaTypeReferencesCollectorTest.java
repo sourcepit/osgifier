@@ -16,7 +16,7 @@ import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassLoaderRepository;
@@ -38,7 +38,7 @@ public class JavaTypeReferencesCollectorTest
          JavaTypeReferencesCollector.collect(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // expected
       }
 

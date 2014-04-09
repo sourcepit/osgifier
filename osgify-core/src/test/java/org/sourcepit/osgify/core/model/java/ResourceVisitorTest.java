@@ -12,7 +12,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
@@ -46,7 +46,7 @@ public class ResourceVisitorTest
          resource.accept(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
    }

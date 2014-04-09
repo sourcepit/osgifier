@@ -9,10 +9,8 @@ package org.sourcepit.osgify.core.ee;
 import java.util.Collections;
 import java.util.List;
 
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
+import org.sourcepit.common.constraints.NotNull;
+import org.sourcepit.common.constraints.Pattern;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesUtils;
 
@@ -30,7 +28,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    private final List<String> packages;
 
    public ExecutionEnvironment(@NotNull String id, @Pattern(regexp = RELEASE_DATE_FORMAT) String releaseDate,
-      @DecimalMin("45") int maxClassVersion, @NotNull PropertiesMap properties, @NotNull List<String> packages)
+      int maxClassVersion, @NotNull PropertiesMap properties, @NotNull List<String> packages)
    {
       this.id = id;
       this.releaseDate = releaseDate;

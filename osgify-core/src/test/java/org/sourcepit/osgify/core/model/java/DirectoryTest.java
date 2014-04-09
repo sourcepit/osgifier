@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
@@ -94,7 +94,7 @@ public class DirectoryTest
          dir.getFile(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -124,7 +124,7 @@ public class DirectoryTest
          dir.getResource(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 

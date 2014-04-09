@@ -12,7 +12,7 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -38,7 +38,7 @@ public class OsgifyContextUtilsTest
          OsgifyContextUtils.computeBuildOrder(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 

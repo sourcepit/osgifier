@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class SymbolicNameUtilsTest
          SymbolicNameUtils.toValidSymbolicName(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -56,7 +56,7 @@ public class SymbolicNameUtilsTest
          SymbolicNameUtils.toValidSymbolicName("");
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 

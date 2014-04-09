@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.ee;
 import java.util.Collections;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
+import org.sourcepit.common.constraints.NotNull;
 
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesUtils;

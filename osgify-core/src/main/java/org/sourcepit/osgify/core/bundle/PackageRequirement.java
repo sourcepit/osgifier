@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import javax.validation.constraints.NotNull;
+import org.sourcepit.common.constraints.NotNull;
 
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 

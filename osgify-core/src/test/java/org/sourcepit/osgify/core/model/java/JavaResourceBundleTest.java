@@ -12,7 +12,7 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
@@ -63,7 +63,7 @@ public class JavaResourceBundleTest
          jBundle.getResourcesRoot(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 
@@ -72,7 +72,7 @@ public class JavaResourceBundleTest
          jBundle.getResourcesRoot(null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       { // noop
       }
 
@@ -121,7 +121,7 @@ public class JavaResourceBundleTest
          jBundle.getPackage(null, null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -130,7 +130,7 @@ public class JavaResourceBundleTest
          jBundle.getPackage("", null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -161,7 +161,7 @@ public class JavaResourceBundleTest
          jBundle.getType(null, null, null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -170,7 +170,7 @@ public class JavaResourceBundleTest
          jBundle.getType("", null, null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -179,7 +179,7 @@ public class JavaResourceBundleTest
          jBundle.getType("", "foo", null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
@@ -237,7 +237,7 @@ public class JavaResourceBundleTest
          jBundle.accept(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 

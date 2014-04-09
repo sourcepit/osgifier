@@ -13,7 +13,7 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
@@ -52,7 +52,7 @@ public class JavaLangUtilsTest
          JavaLangUtils.extractTypeNamesFromSignature(null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 

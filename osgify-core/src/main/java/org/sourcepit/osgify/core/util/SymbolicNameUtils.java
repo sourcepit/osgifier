@@ -6,8 +6,9 @@
 
 package org.sourcepit.osgify.core.util;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import static com.google.common.base.Preconditions.checkArgument;
+
+import org.sourcepit.common.constraints.NotNull;
 
 
 /**
@@ -47,8 +48,9 @@ public final class SymbolicNameUtils
       return true;
    }
 
-   public static String toValidSymbolicName(@NotNull @Size(min = 1) String symbolicName)
+   public static String toValidSymbolicName(@NotNull String symbolicName)
    {
+      checkArgument(symbolicName.length() > 0);
       final StringBuilder sb = new StringBuilder();
       char[] chars = symbolicName.trim().toCharArray();
       int length = chars.length;

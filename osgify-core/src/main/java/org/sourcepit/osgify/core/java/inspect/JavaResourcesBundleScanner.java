@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javax.validation.constraints.NotNull;
+import org.sourcepit.common.constraints.NotNull;
 
 import org.sourcepit.osgify.core.inspect.DefaultFileHandler;
 import org.sourcepit.osgify.core.inspect.JavaClassFileHandler;

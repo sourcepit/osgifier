@@ -9,7 +9,7 @@ package org.sourcepit.osgify.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
@@ -70,7 +70,7 @@ public class JavaPackageTest
          jPackage.getPackage(null, false);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
    }

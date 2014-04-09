@@ -17,7 +17,7 @@ import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
 
 import javax.inject.Inject;
-import javax.validation.ConstraintViolationException;
+import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.sisu.launch.InjectedTest;
@@ -55,7 +55,7 @@ public class PackageExportAppenderTest extends InjectedTest
          exportAppender.append(new LinkedPropertiesMap(), null);
          fail();
       }
-      catch (ConstraintViolationException e)
+      catch (IllegalArgumentException e)
       {
       }
 
