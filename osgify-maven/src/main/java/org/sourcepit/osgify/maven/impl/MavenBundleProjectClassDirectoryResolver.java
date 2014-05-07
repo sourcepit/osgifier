@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.context;
+package org.sourcepit.osgify.maven.impl;
 
 import java.io.File;
 

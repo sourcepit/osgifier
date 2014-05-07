@@ -36,6 +36,7 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
+import org.sourcepit.osgify.maven.impl.MavenBundleProjectClassDirectoryResolver;
 
 /*
  * - Artifact as root
@@ -47,7 +48,7 @@ import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClas
  */
 
 @Named
-public class OsgifyModelBuilder
+public class LegacyOsgifyModelBuilder
 {
    public static class Request
    {

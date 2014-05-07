@@ -43,8 +43,8 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
 import org.sourcepit.osgify.maven.ManifestGeneratorFilter;
-import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
-import org.sourcepit.osgify.maven.context.OsgifyModelBuilder.NativeBundleStrategy;
+import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder;
+import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgify.p2.P2Publisher;
 
 @Named
@@ -55,7 +55,7 @@ public class P2UpdateSiteGenerator
    public static final String OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS = "forkedProcessTimeoutInSeconds";
 
    @Inject
-   private OsgifyModelBuilder modelBuilder;
+   private LegacyOsgifyModelBuilder modelBuilder;
 
    @Inject
    private Repackager repackager;
@@ -67,32 +67,19 @@ public class P2UpdateSiteGenerator
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      return generateUpdateSite(
-         siteDir,
-         project.getArtifact(),
-         remoteArtifactRepositories,
-         localRepository,
-         repositoryName,
-         options);
+      return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
+         repositoryName, options);
    }
 
    public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(
-         artifact,
-         Artifact.SCOPE_COMPILE,
-         false,
-         remoteArtifactRepositories,
-         localRepository);
+      final LegacyOsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact,
+         Artifact.SCOPE_COMPILE, false, remoteArtifactRepositories, localRepository);
 
-      return generateUpdateSite(
-         request,
-         siteDir,
-         repositoryName,
-         options == null ? new LinkedPropertiesMap() : options,
-         BundleSelector.ALL);
+      return generateUpdateSite(request, siteDir, repositoryName,
+         options == null ? new LinkedPropertiesMap() : options, BundleSelector.ALL);
    }
 
    @Inject
@@ -116,7 +103,7 @@ public class P2UpdateSiteGenerator
       return model;
    }
 
-   private OsgifyContext generateUpdateSite(final OsgifyModelBuilder.Request request, File siteDir,
+   private OsgifyContext generateUpdateSite(final LegacyOsgifyModelBuilder.Request request, File siteDir,
       String repositoryName, PropertiesSource options, BundleSelector bundleSelector)
    {
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
@@ -141,7 +128,7 @@ public class P2UpdateSiteGenerator
       {
          final PathMatcher matcher = PathMatcher.parse(forceMfPatterns, ".", ",");
 
-         return new OsgifyModelBuilder.NativeBundleStrategy()
+         return new LegacyOsgifyModelBuilder.NativeBundleStrategy()
          {
             public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
             {
@@ -150,8 +137,8 @@ public class P2UpdateSiteGenerator
                {
                   return false;
                }
-               return OsgifyModelBuilder.NativeBundleStrategy.DEFAULT
-                  .isNativeBundle(artifact, project, bundleCandidate);
+               return LegacyOsgifyModelBuilder.NativeBundleStrategy.DEFAULT.isNativeBundle(artifact, project,
+                  bundleCandidate);
             }
 
             private String getBundleSymbolicName(BundleCandidate bundleCandidate)
@@ -170,7 +157,7 @@ public class P2UpdateSiteGenerator
          };
       }
 
-      return OsgifyModelBuilder.NativeBundleStrategy.DEFAULT;
+      return LegacyOsgifyModelBuilder.NativeBundleStrategy.DEFAULT;
    }
 
    private void generateUpdateSite(Collection<BundleCandidate> bundles, File siteDir, String repositoryName,
@@ -180,11 +167,7 @@ public class P2UpdateSiteGenerator
 
       copyJarsAndInjectManifests(bundles, bundlesDir);
 
-      p2Publisher.publishBundles(
-         siteDir,
-         repositoryName,
-         singletonList(bundlesDir),
-         compressRepository,
+      p2Publisher.publishBundles(siteDir, repositoryName, singletonList(bundlesDir), compressRepository,
          forkedProcessTimeoutInSeconds);
 
       final File categoryFile = new File(siteDir, "category.xml");
@@ -202,8 +185,7 @@ public class P2UpdateSiteGenerator
       sb.append("   <iu>\n");
       sb.append("      <category name=\"all\"/>\n");
       sb.append("      <query>\n");
-      sb
-         .append("         <expression type=\"match\">providedCapabilities.exists(p | p.namespace == 'osgi.bundle')</expression>\n");
+      sb.append("         <expression type=\"match\">providedCapabilities.exists(p | p.namespace == 'osgi.bundle')</expression>\n");
       sb.append("      </query>\n");
       sb.append("   </iu>\n");
       sb.append("</site>\n");

@@ -12,7 +12,6 @@ import static org.sourcepit.common.utils.io.IO.osgiIn;
 import static org.sourcepit.common.utils.io.IO.read;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -31,8 +30,10 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.project.DependencyResolutionException;
+import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectBuildingException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -61,19 +62,17 @@ import org.sourcepit.osgify.core.bundle.DynamicPackageImportAppender;
 import org.sourcepit.osgify.core.bundle.PackageExportAppender;
 import org.sourcepit.osgify.core.bundle.PackageImportAppender;
 import org.sourcepit.osgify.core.bundle.RequiredExecutionEnvironmentAppender;
-import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
-import org.sourcepit.osgify.core.java.inspect.IJavaTypeAnalyzer;
-import org.sourcepit.osgify.core.java.inspect.JavaResourcesBundleScanner;
-import org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.resolve.BundleContentAppender;
 import org.sourcepit.osgify.core.resolve.SymbolicNameConflictResolver;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils.BuildOrder;
+import org.sourcepit.osgify.maven.impl.MavenBundleProjectClassDirectoryResolver;
 import org.sourcepit.osgify.maven.impl.OsgifyStubModelCreator;
 
 @Named
@@ -100,6 +99,29 @@ public class OsgifyModelBuilder
       log.info("------------------------------------------------------------------------");
 
       log.info("");
+
+      return build(generatorFilter, options, osgifyModel);
+   }
+
+   public OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options, MavenProject project,
+      Date timestamp)
+   {
+      options = getOptions(options, timestamp);
+
+      log.info("");
+      log.info("Resolving bundle candidates...");
+      final DependencyModel dependencyModel = resolve(project);
+      final OsgifyContext osgifyModel = createStubModel(dependencyModel);
+      log.info("------------------------------------------------------------------------");
+
+      log.info("");
+
+      return build(generatorFilter, options, osgifyModel);
+   }
+
+   private OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+      final OsgifyContext osgifyModel)
+   {
       log.info("Generating OSGi metadata...");
       applyNativeBundles(osgifyModel, generatorFilter, options); // required to determine whether do scan java content
       applyJavaContent(generatorFilter, osgifyModel); // required to determine bundle name
@@ -188,6 +210,28 @@ public class OsgifyModelBuilder
       return bundle.getExtension(MavenArtifact.class).getArtifactKey().toString();
    }
 
+   private DependencyModel resolve(MavenProject project)
+   {
+      final DependencyModel dependencyModel;
+
+      final boolean includeSource = true;
+
+      final ArtifactAttachmentFactory attachmentFactory = includeSource ? new JavaSourceAttachmentFactory() : null;
+
+      try
+      {
+         dependencyModel = dependencyModelResolver.resolve(project, attachmentFactory);
+      }
+      catch (DependencyResolutionException e)
+      {
+         throw pipe(e);
+      }
+
+      removeUnresolvedArtifacts(dependencyModel);
+
+      return dependencyModel;
+   }
+
    private DependencyModel resolve(Collection<Dependency> dependencies)
    {
       final DependencyModel dependencyModel;
@@ -209,6 +253,13 @@ public class OsgifyModelBuilder
          throw pipe(e);
       }
 
+      removeUnresolvedArtifacts(dependencyModel);
+
+      return dependencyModel;
+   }
+
+   private static void removeUnresolvedArtifacts(final DependencyModel dependencyModel)
+   {
       final Iterator<MavenArtifact> it = dependencyModel.getArtifacts().iterator();
       while (it.hasNext())
       {
@@ -244,7 +295,6 @@ public class OsgifyModelBuilder
             System.out.println("Removed " + mavenArtifact.getArtifactKey());
          }
       }
-      return dependencyModel;
    }
 
    @Inject
@@ -477,26 +527,12 @@ public class OsgifyModelBuilder
       return stubModelCreator.create(dependencyModel);
    }
 
+   @Inject
+   private BundleContentAppender bundleContentAppender;
+
    private void applyJavaContent(ManifestGeneratorFilter generatorFilter, OsgifyContext osgifyModel)
    {
-      // TODO projects?
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         final File location = bundle.getLocation();
-         if (location != null && location.isFile() && generatorFilter.isScanBundle(bundle))
-         {
-            bundle.setContent(newScanner().scan(location));
-         }
-      }
-   }
-
-   private JavaResourcesBundleScanner newScanner()
-   {
-      final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
-      final List<IJavaTypeAnalyzer> typeAnalyzers = new ArrayList<IJavaTypeAnalyzer>();
-      typeAnalyzers.add(new JavaTypeReferencesAnalyzer());
-      typeAnalyzers.add(new ClassForNameDetector());
-      scanner.setJavaTypeAnalyzer(typeAnalyzers);
-      return scanner;
+      bundleContentAppender.appendContents(osgifyModel, new MavenBundleProjectClassDirectoryResolver(
+         Artifact.SCOPE_COMPILE));
    }
 }

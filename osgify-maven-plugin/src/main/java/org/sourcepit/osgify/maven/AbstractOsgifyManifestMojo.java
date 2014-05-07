@@ -11,12 +11,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
 
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,8 +27,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
+import org.sourcepit.common.utils.props.AbstractPropertiesSource;
+import org.sourcepit.common.utils.props.PropertiesSource;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.context.OsgifyModelBuilder;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 {
@@ -35,6 +38,9 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 
    @Inject
    private OsgifyModelBuilder modelBuilder;
+
+   @Inject
+   private LegacySupport buildContext;
 
    @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
@@ -71,16 +77,20 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 
       LOGGER.info("Building osgifier context");
 
-      final OsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(project.getArtifact(),
-         Artifact.SCOPE_COMPILE, false, project.getRemoteArtifactRepositories(), localRepository);
 
-      final OsgifyContext context = modelBuilder.build(request);
+      final PropertiesSource options = createOptions();
+
+      final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
+
+      final Date startTime = buildContext.getSession().getStartTime();
+
+      final OsgifyContext context = modelBuilder.build(generatorFilter, options, project, startTime);
 
       final File contextFile = getContextFile(goal);
       LOGGER.info("Writing osgifier context to " + contextFile.getAbsolutePath());
       writeContext(contextFile, context);
 
-      final BundleManifest manifest = context.getBundles().get(0).getManifest();
+      final BundleManifest manifest = getProjectBundle(context).getManifest();
 
       project.getProperties().setProperty("jar.useDefaultManifestFile", String.valueOf(true));
       File manifestFile = getManifestFile();
@@ -88,6 +98,31 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
       writeManifest(manifest, manifestFile);
    }
 
+   private BundleCandidate getProjectBundle(final OsgifyContext context)
+   {
+      final String projectPath = project.getBasedir().getAbsolutePath();
+      for (BundleCandidate bundle : context.getBundles())
+      {
+         if (bundle.getLocation().getAbsolutePath().startsWith(projectPath))
+         {
+            return bundle;
+         }
+      }
+      return null;
+   }
+
+   private PropertiesSource createOptions()
+   {
+      final PropertiesSource options = new AbstractPropertiesSource()
+      {
+         @Override
+         public String get(String key)
+         {
+            return project.getProperties().getProperty(key);
+         }
+      };
+      return options;
+   }
 
    private void writeContext(File file, final OsgifyContext context)
    {

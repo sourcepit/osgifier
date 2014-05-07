@@ -35,10 +35,10 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
-public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
+public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 {
    @Inject
-   private OsgifyModelBuilder builder;
+   private LegacyOsgifyModelBuilder builder;
 
    @Inject
    private LegacySupport legacySupport;
@@ -75,7 +75,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
+         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setSkipManifestDerivation(true);
@@ -134,12 +134,12 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
+         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setResolveDependenciesOfNativeBundles(true);
          request.setSkipManifestDerivation(true);
-         
+
          OsgifyContext context = builder.build(request);
 
          assertThat(context, notNullValue());
@@ -210,7 +210,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          final MavenProject project = projects.get(0);
          assertThat(project.getArtifactId(), equalTo("project-with-dependencies"));
 
-         OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
+         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setFatBundle(true);
@@ -274,8 +274,8 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
-            false, null, localRepository);
+         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+            null, false, null, localRepository);
          request.setResolveDependenciesOfNativeBundles(false);
 
          assertThat(request.getArtifact(), notNullValue());
@@ -322,8 +322,8 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
-            false, null, localRepository);
+         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+            null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
          OsgifyContext context = builder.build(request);
@@ -373,8 +373,8 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null, null,
-            true, null, localRepository);
+         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+            null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
          OsgifyContext context = builder.build(request);
@@ -424,13 +424,13 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
          request.setVirtualArtifact(false);
          request.setResolveDependenciesOfNativeBundles(false);
-         
+
          try
          {
             builder.build(request);
@@ -518,12 +518,12 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
          request.setVirtualArtifact(false);
-         
+
          try
          {
             builder.build(request);
@@ -611,7 +611,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         OsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -619,7 +619,7 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
                                                               // is suppressed by the 'fat bundle' flag
 
          request.setVirtualArtifact(false);
-         
+
          try
          {
             builder.build(request);
@@ -812,12 +812,12 @@ public class OsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
    {
       session.setCurrentProject(project);
 
-      OsgifyModelBuilder.Request request = new OsgifyModelBuilder.Request();
+      LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
       request.setArtifact(project.getArtifact());
       request.setLocalRepository(localRepository);
       request.setResolveDependenciesOfNativeBundles(true);
       request.setSkipManifestDerivation(true);
-      
+
       return builder.build(request);
    }
 }
