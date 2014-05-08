@@ -16,6 +16,7 @@ import static org.sourcepit.common.utils.io.IO.jarOut;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
@@ -44,7 +45,7 @@ import org.sourcepit.common.utils.path.PathMatcher;
 @Named
 public class Repackager
 {
-   private final static PathMatcher JAR_CONTENT_MATCHER = createJarContentMatcher();
+   private final static PathMatcher DEFAULT_CONTENT_MATCHER = createJarContentMatcher(null);
 
    private final Logger logger = LoggerFactory.getLogger(Repackager.class);
 
@@ -118,29 +119,39 @@ public class Repackager
    public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest)
       throws PipedIOException
    {
+      copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, null);
+   }
+
+   public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
+      final Collection<String> pathFilters) throws PipedIOException
+   {
       new IOOperation<JarOutputStream>(jarOut(buffOut(fileOut(destJarFile))))
       {
          @Override
          protected void run(JarOutputStream destJarOut) throws IOException
          {
-            rePackageJarFile(srcJarFile, manifest, destJarOut);
+            rePackageJarFile(srcJarFile, manifest, destJarOut, pathFilters);
          }
       }.run();
    }
 
-   private void rePackageJarFile(File srcJarFile, final Manifest manifest, final JarOutputStream destJarOut)
-      throws IOException
+   private void rePackageJarFile(File srcJarFile, final Manifest manifest, final JarOutputStream destJarOut,
+      Collection<String> pathFilters) throws IOException
    {
       destJarOut.putNextEntry(new JarEntry(JarFile.MANIFEST_NAME));
       writeManifest(manifest, destJarOut);
       destJarOut.closeEntry();
+
+      final PathMatcher pathMatcher = pathFilters == null
+         ? DEFAULT_CONTENT_MATCHER
+         : createJarContentMatcher(pathFilters);
 
       new IOOperation<JarInputStream>(jarIn(buffIn(fileIn(srcJarFile))))
       {
          @Override
          protected void run(JarInputStream srcJarIn) throws IOException
          {
-            copyJarContents(srcJarIn, destJarOut);
+            copyJarContents(srcJarIn, destJarOut, pathMatcher);
          }
       }.run();
    }
@@ -152,7 +163,8 @@ public class Repackager
       manifestResource.save(out, null);
    }
 
-   private void copyJarContents(JarInputStream srcJarIn, final JarOutputStream destJarOut) throws IOException
+   private void copyJarContents(JarInputStream srcJarIn, final JarOutputStream destJarOut, PathMatcher contentMatcher)
+      throws IOException
    {
       final Set<String> processedEntires = new HashSet<String>();
 
@@ -160,7 +172,7 @@ public class Repackager
       while (srcEntry != null)
       {
          final String entryName = srcEntry.getName();
-         if (JAR_CONTENT_MATCHER.isMatch(entryName))
+         if (contentMatcher.isMatch(entryName))
          {
             if (processedEntires.add(entryName))
             {
@@ -178,25 +190,29 @@ public class Repackager
       }
    }
 
-   private static PathMatcher createJarContentMatcher()
+   private static PathMatcher createJarContentMatcher(Collection<String> customPathFilters)
    {
-      final Set<String> excludes = new HashSet<String>();
-      excludes.add(JarFile.MANIFEST_NAME); // will be set manually
-      excludes.add("META-INF/*.SF");
-      excludes.add("META-INF/*.DSA");
-      excludes.add("META-INF/*.RSA");
+      final Set<String> pathFilters = new HashSet<String>();
+      pathFilters.add("!" + JarFile.MANIFEST_NAME); // will be set manually
+      pathFilters.add("!META-INF/*.SF");
+      pathFilters.add("!META-INF/*.DSA");
+      pathFilters.add("!META-INF/*.RSA");
 
-      final String matcherPattern = toPathMatcherPattern(excludes);
+      if (customPathFilters != null)
+      {
+         pathFilters.addAll(customPathFilters);
+      }
+
+      final String matcherPattern = toPathMatcherPattern(pathFilters);
 
       return PathMatcher.parse(matcherPattern, "/", ",");
    }
 
-   private static String toPathMatcherPattern(Set<String> excludes)
+   private static String toPathMatcherPattern(Set<String> pathFilters)
    {
       final StringBuilder sb = new StringBuilder();
-      for (String exclude : excludes)
+      for (String exclude : pathFilters)
       {
-         sb.append('!');
          sb.append(exclude);
          sb.append(',');
       }

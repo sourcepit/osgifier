@@ -6,14 +6,10 @@
 
 package org.sourcepit.osgify.maven;
 
-import static org.sourcepit.common.utils.io.IO.buffOut;
-import static org.sourcepit.common.utils.io.IO.fileOut;
-import static org.sourcepit.common.utils.io.IO.write;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,22 +26,17 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.installation.InstallRequest;
 import org.eclipse.aether.installation.InstallationException;
-import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.sourcepit.common.maven.aether.ArtifactFactory;
 import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.ArtifactKeyBuilder;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
-import org.sourcepit.common.utils.io.Write.ToStream;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
@@ -87,7 +78,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
       final OsgifyContext bundleModel = modelBuilder.build(generatorFilter, options, project.getDependencies(),
          startTime);
 
-      writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
+      ModelUtils.writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
 
 
       EList<BundleCandidate> bundles = bundleModel.getBundles();
@@ -146,7 +137,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
 
          final File dir = getWorkDir(bundle);
 
-         writeModel(new File(dir, "MANIFEST.MF"), EcoreUtil.copy(bundle.getManifest()));
+         ModelUtils.writeModel(new File(dir, "MANIFEST.MF"), EcoreUtil.copy(bundle.getManifest()));
 
          final File pomFile = new File(dir, "pom.xml");
          try
@@ -302,35 +293,5 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
       model.setVersion(getArtifactKey(bundle).getVersion());
 
       return model;
-   }
-
-   private void writeModel(File file, BundleManifest model)
-   {
-      final ToStream<EObject> toStream = new ToStream<EObject>()
-      {
-         @Override
-         public void write(OutputStream out, EObject model) throws Exception
-         {
-            final BundleManifestResourceImpl resource = new BundleManifestResourceImpl();
-            resource.getContents().add(model);
-            resource.save(out, null);
-         }
-      };
-      write(toStream, buffOut(fileOut(file, true)), model);
-   }
-
-   private void writeModel(File file, EObject model)
-   {
-      final ToStream<EObject> toStream = new ToStream<EObject>()
-      {
-         @Override
-         public void write(OutputStream out, EObject model) throws Exception
-         {
-            final XMLResourceImpl resource = new XMLResourceImpl();
-            resource.getContents().add(model);
-            resource.save(out, null);
-         }
-      };
-      write(toStream, buffOut(fileOut(file, true)), model);
    }
 }
