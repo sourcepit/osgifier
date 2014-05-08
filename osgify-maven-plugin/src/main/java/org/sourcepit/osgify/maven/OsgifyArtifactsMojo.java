@@ -114,34 +114,44 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
       for (BundleCandidate bundle : bundles)
       {
-         final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
-         final MavenArtifact mavenArtifact = dependencyModel.getArtifact(bundleArtifact.getArtifactKey());
-
-         final BundleManifest manifest = bundle.getManifest();
-         adoptGroupId(bundleArtifact, manifest);
-         adoptArtifactId(bundleArtifact, manifest);
-         adoptVersion(bundleArtifact, manifest);
-
-         mavenArtifact.setGroupId(bundleArtifact.getGroupId());
-         mavenArtifact.setArtifactId(bundleArtifact.getArtifactId());
-         mavenArtifact.setVersion(bundleArtifact.getVersion());
+         adoptMavenCoordinates(dependencyModel, bundle);
+         final BundleCandidate sourceBundle = bundle.getSourceBundle();
+         if (sourceBundle != null)
+         {
+            adoptMavenCoordinates(dependencyModel, sourceBundle);
+         }
       }
-
-      final Collection<Artifact> artifacts = new ArrayList<Artifact>();
 
       for (BundleCandidate bundle : bundles)
       {
-         final String bundleId = bundle.getSymbolicName() + "_" + bundle.getVersion().toFullString();
-         // ModelUtils.writeModel(new File(workDir, bundleId + ".MF"), EcoreUtil.copy(bundle.getManifest()));
+         injectManifest(dependencyModel, bundle);
+         final BundleCandidate sourceBundle = bundle.getSourceBundle();
+         if (sourceBundle != null)
+         {
+            injectManifest(dependencyModel, sourceBundle);
+         }
+      }
+      
+      ModelUtils.writeModel(new File(workDir, "osgify-context.xml"), osgifyContext);
 
-         final Collection<String> pathFilters = Arrays.asList("!META-INF/maven/**");
+      final Collection<Artifact> artifacts = new ArrayList<Artifact>();
+      for (BundleCandidate bundle : bundles)
+      {
+         final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
+         final Artifact artifact = artifactFactory.createArtifact(bundleArtifact.getArtifactKey()).setFile(
+            bundle.getLocation());
+         artifacts.add(artifact);
 
-         final File destJarFile = new File(workDir, bundleId + ".jar");
-         repackager.copyJarAndInjectManifest(bundle.getLocation(), destJarFile, bundle.getManifest(), pathFilters);
-         updateBundleLocation(bundle, dependencyModel, destJarFile);
+         final BundleCandidate sourceBundle = bundle.getSourceBundle();
+         if (sourceBundle != null)
+         {
+            final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, "sources", "jar").setFile(
+               sourceBundle.getLocation());
+            artifacts.add(sourceArtifact);
+         }
 
          final Model model = buildPom(bundle, dependencyModel);
-         final File pomFile = new File(workDir, bundleId + ".xml");
+         final File pomFile = new File(workDir, getBundleId(bundle) + ".xml");
          try
          {
             new DefaultModelWriter().write(pomFile, null, model);
@@ -151,20 +161,43 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
             throw pipe(e);
          }
 
-
-         final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
-
-         final Artifact artifact = artifactFactory.createArtifact(bundleArtifact.getArtifactKey()).setFile(
-            bundle.getLocation());
-         artifacts.add(artifact);
-
          final Artifact pomArtifact = artifactFactory.createArtifact(artifact, null, "pom").setFile(pomFile);
          artifacts.add(pomArtifact);
       }
 
-      ModelUtils.writeModel(new File(workDir, "osgify-context.xml"), osgifyContext);
-
       distribute(artifacts);
+   }
+
+   private String getBundleId(BundleCandidate bundle)
+   {
+      return bundle.getSymbolicName() + "_" + bundle.getVersion().toFullString();
+   }
+
+   private void injectManifest(final DependencyModel dependencyModel, BundleCandidate bundle)
+   {
+      final String bundleId = getBundleId(bundle);
+      // ModelUtils.writeModel(new File(workDir, bundleId + ".MF"), EcoreUtil.copy(bundle.getManifest()));
+
+      final Collection<String> pathFilters = Arrays.asList("!META-INF/maven/**");
+
+      final File destJarFile = new File(workDir, bundleId + ".jar");
+      repackager.copyJarAndInjectManifest(bundle.getLocation(), destJarFile, bundle.getManifest(), pathFilters);
+      updateBundleLocation(bundle, dependencyModel, destJarFile);
+   }
+
+   private void adoptMavenCoordinates(final DependencyModel dependencyModel, BundleCandidate bundle)
+   {
+      final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
+      final MavenArtifact mavenArtifact = dependencyModel.getArtifact(bundleArtifact.getArtifactKey());
+
+      final BundleManifest manifest = bundle.getManifest();
+      adoptGroupId(bundleArtifact, manifest);
+      adoptArtifactId(bundleArtifact, manifest);
+      adoptVersion(bundleArtifact, manifest);
+
+      mavenArtifact.setGroupId(bundleArtifact.getGroupId());
+      mavenArtifact.setArtifactId(bundleArtifact.getArtifactId());
+      mavenArtifact.setVersion(bundleArtifact.getVersion());
    }
 
    private void distribute(Collection<Artifact> artifacts)
