@@ -186,7 +186,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
       final BundleManifest manifest = bundle.getManifest();
       adoptGroupId(bundleArtifact, manifest);
-      adoptArtifactId(bundleArtifact, manifest);
+      adoptArtifactId(bundleArtifact, bundle);
       adoptVersion(bundleArtifact, manifest);
 
       mavenArtifact.setGroupId(bundleArtifact.getGroupId());
@@ -271,11 +271,23 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
       }
    }
 
-   private void adoptArtifactId(final MavenArtifact mavenArtifact, final BundleManifest manifest)
+   private void adoptArtifactId(final MavenArtifact mavenArtifact, final BundleCandidate bundle)
    {
-      final String artifactId = manifest.getBundleSymbolicName().getSymbolicName();
+      final String artifactId;
+
+      final BundleCandidate targetBundle = bundle.getTargetBundle();
+      if (targetBundle == null)
+      {
+         artifactId = bundle.getManifest().getBundleSymbolicName().getSymbolicName();
+      }
+      else
+      {
+         artifactId = targetBundle.getManifest().getBundleSymbolicName().getSymbolicName();
+      }
+
       mavenArtifact.setArtifactId(artifactId);
-      final Header header = manifest.getHeader("Maven-ArtifactId");
+      
+      final Header header = bundle.getManifest().getHeader("Maven-ArtifactId");
       if (header != null)
       {
          header.setValue(artifactId);
