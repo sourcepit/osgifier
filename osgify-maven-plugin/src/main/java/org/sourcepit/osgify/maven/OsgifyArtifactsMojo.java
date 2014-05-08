@@ -22,21 +22,15 @@ import javax.inject.Inject;
 
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
-import org.apache.maven.model.Repository;
 import org.apache.maven.model.io.DefaultModelWriter;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.eclipse.aether.RepositorySystem;
-import org.eclipse.aether.RepositorySystemSession;
+import org.apache.maven.project.MavenProject;
 import org.eclipse.aether.artifact.Artifact;
-import org.eclipse.aether.deployment.DeployRequest;
-import org.eclipse.aether.deployment.DeploymentException;
-import org.eclipse.aether.installation.InstallRequest;
-import org.eclipse.aether.installation.InstallationException;
-import org.eclipse.aether.repository.RemoteRepository;
 import org.sourcepit.common.manifest.Header;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -53,7 +47,7 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
 
-@Mojo(name = "osgify-artifacts")
+@Mojo(name = "osgify-artifacts", defaultPhase = LifecyclePhase.PACKAGE)
 public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 {
    private final LegacySupport buildContext;
@@ -64,8 +58,6 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
    private final ArtifactFactory artifactFactory;
 
-   private final RepositorySystem repositorySystem;
-
    @Parameter(required = true)
    private List<Dependency> artifacts;
 
@@ -75,21 +67,17 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
    @Parameter(required = false)
    private String groupIdPrefix;
 
-   @Parameter(required = false)
-   private Repository repository;
-
    @Parameter(defaultValue = "${project.build.directory}/osgified")
    private File workDir;
 
    @Inject
    public OsgifyArtifactsMojo(LegacySupport buildContext, OsgifyModelBuilder modelBuilder, Repackager repackager,
-      ArtifactFactory artifactFactory, RepositorySystem repositorySystem)
+      ArtifactFactory artifactFactory)
    {
       this.buildContext = buildContext;
       this.modelBuilder = modelBuilder;
       this.repackager = repackager;
       this.artifactFactory = artifactFactory;
-      this.repositorySystem = repositorySystem;
    }
 
    @Override
@@ -131,8 +119,8 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
             injectManifest(dependencyModel, sourceBundle);
          }
       }
-      
-      ModelUtils.writeModel(new File(workDir, "osgify-context.xml"), osgifyContext);
+
+      ModelUtils.writeModel(getOsgifyContextFile(), osgifyContext);
 
       final Collection<Artifact> artifacts = new ArrayList<Artifact>();
       for (BundleCandidate bundle : bundles)
@@ -165,7 +153,13 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
          artifacts.add(pomArtifact);
       }
 
-      distribute(artifacts);
+      MavenProject project = buildContext.getSession().getCurrentProject();
+      project.setContextValue("osgified-artifacts", artifacts);
+   }
+
+   private File getOsgifyContextFile()
+   {
+      return new File(workDir, "osgify-context.xml");
    }
 
    private String getBundleId(BundleCandidate bundle)
@@ -200,59 +194,6 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
       mavenArtifact.setVersion(bundleArtifact.getVersion());
    }
 
-   private void distribute(Collection<Artifact> artifacts)
-   {
-      final RepositorySystemSession session = buildContext.getRepositorySession();
-
-      install(session, artifacts);
-
-      String id = repository.getId();
-      String url = repository.getUrl();
-      String layout = repository.getLayout();
-
-      RemoteRepository repo = newRemoteRepository(session, id, url, layout);
-
-      deploy(session, repo, artifacts);
-   }
-
-   private static RemoteRepository newRemoteRepository(final RepositorySystemSession session, String id, String url,
-      String layout)
-   {
-      final RemoteRepository.Builder repoBuilder = new RemoteRepository.Builder(id, layout, url);
-      RemoteRepository repo = repoBuilder.build();
-      repoBuilder.setAuthentication(session.getAuthenticationSelector().getAuthentication(repo));
-      repoBuilder.setProxy(session.getProxySelector().getProxy(repo));
-      return repoBuilder.build();
-   }
-
-   private void install(RepositorySystemSession session, Collection<Artifact> artifacts)
-   {
-      final InstallRequest installRequest = new InstallRequest();
-      installRequest.setArtifacts(artifacts);
-      try
-      {
-         repositorySystem.install(session, installRequest);
-      }
-      catch (InstallationException e)
-      {
-         throw pipe(e);
-      }
-   }
-
-   private void deploy(RepositorySystemSession session, RemoteRepository repository, Collection<Artifact> artifacts)
-   {
-      final DeployRequest request = new DeployRequest();
-      request.setArtifacts(artifacts);
-      request.setRepository(repository);
-      try
-      {
-         repositorySystem.deploy(session, request);
-      }
-      catch (DeploymentException e)
-      {
-         throw pipe(e);
-      }
-   }
 
    private static void updateBundleLocation(BundleCandidate bundle, final DependencyModel dependencyModel,
       final File destJarFile)
@@ -288,7 +229,6 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
       return model;
    }
-
 
    private static Dependency toDependency(ArtifactKey newKey, DependencyNode dependencyNode)
    {
