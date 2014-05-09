@@ -8,11 +8,7 @@ package org.sourcepit.osgify.maven;
 
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static org.sourcepit.common.utils.io.IO.osgiIn;
-import static org.sourcepit.common.utils.io.IO.read;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,16 +24,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.slf4j.Logger;
-import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.maven.model.MavenArtifact;
-import org.sourcepit.common.utils.io.Read.FromStream;
-import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.bundle.DynamicPackageImportAppender;
@@ -48,6 +39,8 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.JavaContentAppender;
 import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
+import org.sourcepit.osgify.core.resolve.NativeManifestAppender;
+import org.sourcepit.osgify.core.resolve.NativeManifestAppenderFilter;
 import org.sourcepit.osgify.core.resolve.SymbolicNameConflictResolver;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
@@ -84,14 +77,25 @@ public class OsgifyContextInflator
    @Inject
    private SymbolicNameConflictResolver nameConflictResolver;
 
-   public void infalte(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+   @Inject
+   private NativeManifestAppender nativeManifestAppender;
+
+   public void infalte(final ManifestGeneratorFilter generatorFilter, PropertiesSource options,
       final OsgifyContext osgifyModel, Date timestamp)
    {
       options = getOptions(options, timestamp);
-      
-      applyNativeBundles(osgifyModel, generatorFilter, options); // required to determine whether do scan java content
-      
-      javaContentAppender.appendContents(osgifyModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options); // required to determine bundle name
+
+      nativeManifestAppender.appendNativeManifests(osgifyModel, new NativeManifestAppenderFilter()
+      {
+         @Override
+         public boolean isAppendNativeManifest(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
+         {
+            return !generatorFilter.isOverrideNativeBundle(bundle, manifest, options);
+         }
+      }, options);
+
+      // required to determine whether do scan java content
+      javaContentAppender.appendContents(osgifyModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
 
       applySymbolicNameAndVersion(generatorFilter, osgifyModel, options);
       applyBuildOrder(osgifyModel);
@@ -309,54 +313,5 @@ public class OsgifyContextInflator
       return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
    }
 
-   private void applyNativeBundles(final OsgifyContext osgifyModel, ManifestGeneratorFilter generatorFilter,
-      PropertiesSource options)
-   {
-      final List<BundleCandidate> overriddenNativeBundles = new ArrayList<BundleCandidate>();
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         if (bundle.getLocation() != null)
-         {
-            final FromStream<Manifest> fromStream = new FromStream<Manifest>()
-            {
-               @Override
-               public Manifest read(InputStream inputStream) throws Exception
-               {
-                  final Resource resource = new GenericManifestResourceImpl();
-                  resource.load(inputStream, null);
-                  return (Manifest) resource.getContents().get(0);
-               }
-            };
 
-            try
-            {
-               final Manifest m = read(fromStream, osgiIn(bundle.getLocation(), "META-INF/MANIFEST.MF"));
-               if (m instanceof BundleManifest)
-               {
-                  BundleManifest manifest = (BundleManifest) m;
-                  if (generatorFilter.isOverrideNativeBundle(bundle, manifest, options))
-                  {
-                     overriddenNativeBundles.add(bundle);
-                  }
-                  else
-                  {
-                     bundle.setNativeBundle(true);
-                     bundle.setManifest(manifest);
-
-                     // TODO deprecate! replace with operation
-                     bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
-                     bundle.setVersion(manifest.getBundleVersion());
-                  }
-               }
-            }
-            catch (PipedException e)
-            {
-               if (e.adapt(FileNotFoundException.class) == null)
-               {
-                  throw e;
-               }
-            }
-         }
-      }
-   }
 }
