@@ -79,7 +79,26 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       final PropertiesSource options = MojoUtils.getOptions(buildContext.getSession().getCurrentProject()
          .getProperties(), this.options);
 
-      final OsgifyContextInflatorFilter inflatorFilter = new DefaultOsgifyContextInflatorFilter();
+      final OsgifyContextInflatorFilter inflatorFilter = new DefaultOsgifyContextInflatorFilter()
+      {
+         @Override
+         public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options)
+         {
+            return bundle.equals(projectBundle);
+         }
+
+         @Override
+         public boolean isAppendPackageImports(BundleCandidate bundle, PropertiesSource options)
+         {
+            return bundle.equals(projectBundle);
+         }
+
+         @Override
+         public boolean isAppendDynamicImports(BundleCandidate bundle, PropertiesSource options)
+         {
+            return bundle.equals(projectBundle);
+         }
+      };
 
       inflater.infalte(inflatorFilter, options, context, startTime);
 
