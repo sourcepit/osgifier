@@ -28,6 +28,7 @@ import org.apache.maven.repository.RepositorySystem;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -360,7 +361,7 @@ public class LegacyOsgifyModelBuilder
 
       if (!request.isSkipManifestDerivation())
       {
-         manifestAppender.append(context);
+         manifestAppender.append(context, new LinkedPropertiesMap());
       }
 
       if (request.isIncludeSource())

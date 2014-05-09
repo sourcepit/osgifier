@@ -15,10 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
-import org.sourcepit.common.utils.props.LinkedPropertiesMap;
+import org.sourcepit.common.manifest.osgi.Version;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
+import org.sourcepit.osgify.core.util.OsgifyContextUtils.BuildOrder;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -40,9 +42,25 @@ public class BundleManifestAppender
    @Inject
    private PackageImportAppender packageImports;
 
-   public void append(OsgifyContext context)
+   public void append(OsgifyContext context, PropertiesSource options)
    {
-      final List<BundleCandidate> bundleCandidates = OsgifyContextUtils.computeBuildOrder(context).getOrderedBundles();
+      final BuildOrder buildOrder = OsgifyContextUtils.computeBuildOrder(context);
+
+      for (List<BundleCandidate> cycle : buildOrder.getCycles())
+      {
+         final StringBuilder sb = new StringBuilder();
+         for (BundleCandidate cyclicBundle : cycle)
+         {
+            sb.append(getBundleKey(cyclicBundle));
+            sb.append(" - ");
+         }
+         sb.deleteCharAt(sb.length() - 1);
+         sb.deleteCharAt(sb.length() - 1);
+         sb.deleteCharAt(sb.length() - 1);
+         LOGGER.warn("Detected cycle {}", sb.toString());
+      }
+
+      final List<BundleCandidate> bundleCandidates = buildOrder.getOrderedBundles();
       for (BundleCandidate bundleCandidate : bundleCandidates)
       {
          if (bundleCandidate.isNativeBundle())
@@ -54,21 +72,46 @@ public class BundleManifestAppender
          {
             LOGGER.info("Building manifest for bundle candidate " + bundleCandidate.getSymbolicName() + "_"
                + bundleCandidate.getVersion());
-            append(bundleCandidate);
+            append(bundleCandidate, options);
          }
       }
    }
 
-   private void append(BundleCandidate bundle)
+   private void append(BundleCandidate bundle, PropertiesSource options)
    {
-      final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
-      manifest.setBundleSymbolicName(bundle.getSymbolicName());
-      manifest.setBundleVersion(bundle.getVersion());
-      bundle.setManifest(manifest);
+      initManifest(bundle);
 
-      environmentAppender.append(bundle);
-      dynamicImports.append(bundle);
-      packageExports.append(new LinkedPropertiesMap(), bundle);
-      packageImports.append(bundle);
+      if (bundle.getTargetBundle() != null) // source bundle
+      {
+         final BundleCandidate targetBundle = bundle.getTargetBundle();
+         final Version version = targetBundle.getVersion();
+         final BundleManifest manifest = bundle.getManifest();
+         manifest.setHeader("Eclipse-SourceBundle", targetBundle.getSymbolicName() + ";version=\"" + version
+            + "\";roots:=\".\"");
+      }
+      else
+      {
+         environmentAppender.append(bundle);
+         packageExports.append(options, bundle);
+         packageImports.append(bundle);
+         dynamicImports.append(bundle);
+      }
+   }
+
+   private void initManifest(BundleCandidate bundle)
+   {
+      BundleManifest manifest = bundle.getManifest();
+      if (manifest == null)
+      {
+         manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
+         manifest.setBundleSymbolicName(bundle.getSymbolicName());
+         manifest.setBundleVersion(bundle.getVersion());
+         bundle.setManifest(manifest);
+      }
+   }
+
+   private static String getBundleKey(BundleCandidate bundle)
+   {
+      return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
    }
 }
