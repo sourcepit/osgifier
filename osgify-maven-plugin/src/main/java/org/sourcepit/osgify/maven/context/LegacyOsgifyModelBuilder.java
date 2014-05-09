@@ -33,7 +33,8 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.BundleContentAppender;
+import org.sourcepit.osgify.core.resolve.JavaContentAppender;
+import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 
 /*
@@ -212,7 +213,7 @@ public class LegacyOsgifyModelBuilder
    private MavenDependencyWalker dependencyWalker;
 
    @Inject
-   private BundleContentAppender bundleContentAppender;
+   private JavaContentAppender bundleContentAppender;
 
    @Inject
    private VersionRangeResolver versionRangeResolver;
@@ -346,7 +347,7 @@ public class LegacyOsgifyModelBuilder
 
       if (request.isScanBundleContents())
       {
-         bundleContentAppender.appendContents(context);
+         bundleContentAppender.appendContents(context, JavaContentAppenderFilter.APPEND_ALL, null);
       }
 
       for (BundleCandidate bundleCandidate : context.getBundles())

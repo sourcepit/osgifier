@@ -19,11 +19,6 @@ public class ManifestGeneratorFilter
       return bundle.getTargetBundle() != null;
    }
 
-   public boolean isScanBundle(BundleCandidate bundle)
-   {
-      return !isSourceBundle(bundle);
-   }
-
    public boolean isOverrideNativeBundle(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
    {
       final String pattern = options.get("osgifier.overrideNativeBundles", Boolean.FALSE.toString()).trim();

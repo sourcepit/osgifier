@@ -46,7 +46,8 @@ import org.sourcepit.osgify.core.bundle.PackageImportAppender;
 import org.sourcepit.osgify.core.bundle.RequiredExecutionEnvironmentAppender;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.BundleContentAppender;
+import org.sourcepit.osgify.core.resolve.JavaContentAppender;
+import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgify.core.resolve.SymbolicNameConflictResolver;
 import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
@@ -60,7 +61,7 @@ public class OsgifyContextInflator
    private Logger log;
 
    @Inject
-   private BundleContentAppender bundleContentAppender;
+   private JavaContentAppender javaContentAppender;
 
    @Inject
    private SymbolicNameResolver symbolicNameResolver;
@@ -87,8 +88,11 @@ public class OsgifyContextInflator
       final OsgifyContext osgifyModel, Date timestamp)
    {
       options = getOptions(options, timestamp);
+      
       applyNativeBundles(osgifyModel, generatorFilter, options); // required to determine whether do scan java content
-      bundleContentAppender.appendContents(osgifyModel); // required to determine bundle name
+      
+      javaContentAppender.appendContents(osgifyModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options); // required to determine bundle name
+
       applySymbolicNameAndVersion(generatorFilter, osgifyModel, options);
       applyBuildOrder(osgifyModel);
       applyManifests(generatorFilter, options, osgifyModel);

@@ -17,24 +17,26 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.sourcepit.common.constraints.NotNull;
 
+import org.sourcepit.common.constraints.NotNull;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 @Named
-public class BundleContentAppender
+public class JavaContentAppender
 {
    @Inject
    private BundleCandidateScanner bundleCandidateScanner;
 
-   public OsgifyContext appendContents(OsgifyContext context)
+   public OsgifyContext appendContents(OsgifyContext context, JavaContentAppenderFilter filter,
+      PropertiesSource options)
    {
-      List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();
+      final List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();
 
       for (BundleCandidate candidate : context.getBundles())
       {
-         if (candidate.getLocation() != null)
+         if (candidate.getLocation() != null && filter.isAppendContent(candidate, options))
          {
             bundleScannerTasks.add(new BundleScannerTask(candidate, candidate.getLocation()));
          }
