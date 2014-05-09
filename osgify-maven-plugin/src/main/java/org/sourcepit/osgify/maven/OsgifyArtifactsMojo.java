@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.inject.Inject;
 
@@ -38,7 +37,6 @@ import org.sourcepit.common.maven.aether.ArtifactFactory;
 import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
-import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
@@ -84,7 +82,8 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
-      final PropertiesSource options = getOptions();
+      final PropertiesSource options = MojoUtils.getOptions(buildContext.getSession().getCurrentProject()
+         .getProperties(), this.options);
       final Date startTime = buildContext.getSession().getStartTime();
 
       final OsgifyContext osgifyContext = modelBuilder.build(generatorFilter, options, artifacts, startTime);
@@ -286,7 +285,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
       }
 
       mavenArtifact.setArtifactId(artifactId);
-      
+
       final Header header = bundle.getManifest().getHeader("Maven-ArtifactId");
       if (header != null)
       {
@@ -328,28 +327,4 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
       return sb.toString();
    }
-
-   private PropertiesSource getOptions()
-   {
-      final Properties projectProperties = buildContext.getSession().getCurrentProject().getProperties();
-      return new AbstractPropertiesSource()
-      {
-
-         @Override
-         public String get(String key)
-         {
-            String value = projectProperties.getProperty(key);
-            if (value == null)
-            {
-               value = options.get(key);
-            }
-            if (value == null && key.startsWith("osgifier."))
-            {
-               value = options.get(key.substring(9));
-            }
-            return value;
-         }
-      };
-   }
-
 }

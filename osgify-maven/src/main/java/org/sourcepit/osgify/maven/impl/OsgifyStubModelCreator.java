@@ -12,6 +12,7 @@ import static org.sourcepit.common.maven.model.util.MavenModelUtils.toArtifactKe
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,6 +20,7 @@ import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.maven.model.MavenModelFactory;
+import org.sourcepit.common.maven.model.Scope;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
@@ -26,10 +28,14 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 
 @Named
 public class OsgifyStubModelCreator
 {
+   @Inject
+   private VersionRangeResolver versionRangeResolver;
+   
    public OsgifyContext create(DependencyModel dependencyModel)
    {
       final OsgifyContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifyContext();
@@ -78,6 +84,21 @@ public class OsgifyStubModelCreator
             }
          }
       }
+      
+      for (BundleCandidate bundle : osgifyModel.getBundles())
+      {
+         for (BundleReference reference : bundle.getDependencies())
+         {
+            reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
+            final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
+            if (mavenDependency != null)
+            {
+               reference.setOptional(mavenDependency.isOptional());
+               reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
+            }
+         }
+      }
+      
       return osgifyModel;
    }
 
