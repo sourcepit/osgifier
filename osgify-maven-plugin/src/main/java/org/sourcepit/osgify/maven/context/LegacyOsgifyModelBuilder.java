@@ -35,8 +35,6 @@ import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.BundleContentAppender;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
-import org.sourcepit.osgify.core.resolve.BundleContentAppender.BundleProjectClassDirectoryResolver;
-import org.sourcepit.osgify.maven.impl.MavenBundleProjectClassDirectoryResolver;
 
 /*
  * - Artifact as root
@@ -71,8 +69,6 @@ public class LegacyOsgifyModelBuilder
       private final List<ArtifactRepository> remoteRepositories = new ArrayList<ArtifactRepository>();
 
       private boolean scanBundleContents = false;
-
-      private BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver;
 
       private NativeBundleStrategy nativeBundleStrategy;
 
@@ -182,17 +178,6 @@ public class LegacyOsgifyModelBuilder
          this.scanBundleContents = scanBundleContents;
       }
 
-      public void setBundleProjectClassDirectoryResolver(
-         BundleProjectClassDirectoryResolver bundleProjectClassDirectoryResolver)
-      {
-         this.bundleProjectClassDirectoryResolver = bundleProjectClassDirectoryResolver;
-      }
-
-      public BundleProjectClassDirectoryResolver getBundleProjectClassDirectoryResolver()
-      {
-         return bundleProjectClassDirectoryResolver;
-      }
-
       public void setNativeBundleStrategy(NativeBundleStrategy nativeBundleStrategy)
       {
          this.nativeBundleStrategy = nativeBundleStrategy;
@@ -289,7 +274,6 @@ public class LegacyOsgifyModelBuilder
       request.setFatBundle(false);
       request.setResolveDependenciesOfNativeBundles(true);
       request.setScope(scope);
-      request.setBundleProjectClassDirectoryResolver(new MavenBundleProjectClassDirectoryResolver(scope));
       request.setScanBundleContents(true);
       request.setLocalRepository(localRepository);
       if (remoteArtifactRepositories != null)
@@ -362,7 +346,7 @@ public class LegacyOsgifyModelBuilder
 
       if (request.isScanBundleContents())
       {
-         bundleContentAppender.appendContents(context, request.getBundleProjectClassDirectoryResolver());
+         bundleContentAppender.appendContents(context);
       }
 
       for (BundleCandidate bundleCandidate : context.getBundles())

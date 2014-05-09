@@ -25,31 +25,16 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 @Named
 public class BundleContentAppender
 {
-   public static interface BundleProjectClassDirectoryResolver
-   {
-      File getProjectDirectory(BundleCandidate bundleCandidate);
-
-      String[] getClassDirectoryPaths(BundleCandidate bundleCandidate);
-   }
-
    @Inject
    private BundleCandidateScanner bundleCandidateScanner;
 
-   public OsgifyContext appendContents(OsgifyContext context, BundleProjectClassDirectoryResolver classDirectoryResolver)
+   public OsgifyContext appendContents(OsgifyContext context)
    {
       List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();
 
       for (BundleCandidate candidate : context.getBundles())
       {
-         final File projectDir = classDirectoryResolver == null ? null : classDirectoryResolver
-            .getProjectDirectory(candidate);
-         if (projectDir != null)
-         {
-            final String[] binDirPaths = classDirectoryResolver == null ? null : classDirectoryResolver
-               .getClassDirectoryPaths(candidate);
-            bundleScannerTasks.add(new BundleScannerTask(candidate, projectDir, binDirPaths));
-         }
-         else if (candidate.getLocation() != null)
+         if (candidate.getLocation() != null)
          {
             bundleScannerTasks.add(new BundleScannerTask(candidate, candidate.getLocation()));
          }

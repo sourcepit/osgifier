@@ -27,7 +27,6 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.maven.artifact.Artifact;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.slf4j.Logger;
@@ -53,7 +52,6 @@ import org.sourcepit.osgify.core.resolve.SymbolicNameResolver;
 import org.sourcepit.osgify.core.resolve.VersionResolver;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils;
 import org.sourcepit.osgify.core.util.OsgifyContextUtils.BuildOrder;
-import org.sourcepit.osgify.maven.impl.MavenBundleProjectClassDirectoryResolver;
 
 @Named
 public class OsgifyContextInflator
@@ -90,7 +88,7 @@ public class OsgifyContextInflator
    {
       options = getOptions(options, timestamp);
       applyNativeBundles(osgifyModel, generatorFilter, options); // required to determine whether do scan java content
-      applyJavaContent(generatorFilter, osgifyModel); // required to determine bundle name
+      bundleContentAppender.appendContents(osgifyModel); // required to determine bundle name
       applySymbolicNameAndVersion(generatorFilter, osgifyModel, options);
       applyBuildOrder(osgifyModel);
       applyManifests(generatorFilter, options, osgifyModel);
@@ -356,11 +354,5 @@ public class OsgifyContextInflator
             }
          }
       }
-   }
-
-   private void applyJavaContent(ManifestGeneratorFilter generatorFilter, OsgifyContext osgifyModel)
-   {
-      bundleContentAppender.appendContents(osgifyModel, new MavenBundleProjectClassDirectoryResolver(
-         Artifact.SCOPE_COMPILE));
    }
 }

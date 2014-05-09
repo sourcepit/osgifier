@@ -90,18 +90,9 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
    private BundleCandidate newBundleCandidate(MavenProject project)
    {
-      BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
+      final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setLocation(project.getArtifact().getFile());
       bundle.addExtension(MavenModelUtils.toMavenArtifact(project.getArtifact()));
-
-      // MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
-      // artifact.setGroupId(project.getGroupId());
-      // artifact.setArtifactId(project.getArtifactId());
-      // artifact.setVersion(project.getVersion());
-      // artifact.setFile(project.getArtifact().getFile());
-      //
-      // bundle.addExtension(artifact);
-
       return bundle;
    }
 
