@@ -37,6 +37,7 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.JavaContentAppender;
 import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
+import org.sourcepit.osgify.maven.AbstractOsgifyContextInflatorFilter;
 
 /*
  * - Artifact as root
@@ -361,7 +362,9 @@ public class LegacyOsgifyModelBuilder
 
       if (!request.isSkipManifestDerivation())
       {
-         manifestAppender.append(context, new LinkedPropertiesMap());
+         manifestAppender.append(context, new AbstractOsgifyContextInflatorFilter()
+         {
+         }, new LinkedPropertiesMap());
       }
 
       if (request.isIncludeSource())

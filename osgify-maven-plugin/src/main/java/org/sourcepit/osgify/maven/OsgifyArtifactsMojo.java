@@ -81,17 +81,17 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
-      final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
       final PropertiesSource options = MojoUtils.getOptions(buildContext.getSession().getCurrentProject()
          .getProperties(), this.options);
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext osgifyContext = modelBuilder.build(generatorFilter, options, artifacts, startTime);
+      final OsgifyContext osgifyContext = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options,
+         artifacts, startTime);
 
       final Collection<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
       for (BundleCandidate bundle : osgifyContext.getBundles())
       {
-         if (!bundle.isNativeBundle() && !generatorFilter.isSourceBundle(bundle))
+         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null)
          {
             bundles.add(bundle);
          }

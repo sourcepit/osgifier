@@ -18,7 +18,7 @@ import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 
-public class ManifestGeneratorFilterTest
+public class DefaultOsgifyContextInflatorFilterTest
 {
 
    @Test
@@ -31,33 +31,33 @@ public class ManifestGeneratorFilterTest
 
       PropertiesMap options = new LinkedPropertiesMap();
 
-      ManifestGeneratorFilter filter = new ManifestGeneratorFilter();
+      OsgifyContextInflatorFilter filter = new DefaultOsgifyContextInflatorFilter();
 
-      boolean override = filter.isOverrideNativeBundle(bundle, manifest, options);
-      assertFalse(override);
+      boolean override = filter.isAppendNativeManifest(bundle, manifest, options);
+      assertTrue(override);
 
       options.put("osgifier.overrideNativeBundles", "foo");
-      override = filter.isOverrideNativeBundle(bundle, manifest, options);
-      assertTrue(override);
-      
-      options.put("osgifier.overrideNativeBundles", "false");
-      override = filter.isOverrideNativeBundle(bundle, manifest, options);
+      override = filter.isAppendNativeManifest(bundle, manifest, options);
       assertFalse(override);
-      
-      options.put("osgifier.overrideNativeBundles", "true");
-      override = filter.isOverrideNativeBundle(bundle, manifest, options);
+
+      options.put("osgifier.overrideNativeBundles", "false");
+      override = filter.isAppendNativeManifest(bundle, manifest, options);
       assertTrue(override);
-      
+
+      options.put("osgifier.overrideNativeBundles", "true");
+      override = filter.isAppendNativeManifest(bundle, manifest, options);
+      assertFalse(override);
+
       MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
       artifact.setGroupId("foo");
       artifact.setArtifactId("foo");
       artifact.setVersion("1");
-      
+
       bundle.addExtension(artifact);
-      
+
       options.put("osgifier.overrideNativeBundles", "foo:foo:jar");
-      override = filter.isOverrideNativeBundle(bundle, manifest, options);
-      assertTrue(override);
+      override = filter.isAppendNativeManifest(bundle, manifest, options);
+      assertFalse(override);
    }
 
 }

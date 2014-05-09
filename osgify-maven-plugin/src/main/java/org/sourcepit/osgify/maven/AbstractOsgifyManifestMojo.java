@@ -80,11 +80,9 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 
       final PropertiesSource options = createOptions();
 
-      final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
-
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext context = modelBuilder.build(generatorFilter, options, project, startTime);
+      final OsgifyContext context = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options, project, startTime);
 
       final File contextFile = getContextFile(goal);
       LOGGER.info("Writing osgifier context to " + contextFile.getAbsolutePath());

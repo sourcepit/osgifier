@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
+ * Copyright (c) 2014 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
  * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
@@ -12,14 +12,15 @@ import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 
-public class ManifestGeneratorFilter
+public class DefaultOsgifyContextInflatorFilter extends AbstractOsgifyContextInflatorFilter
 {
-   public boolean isSourceBundle(BundleCandidate bundle)
+   @Override
+   public boolean isAppendNativeManifest(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
    {
-      return bundle.getTargetBundle() != null;
+      return !isOverrideNativeBundle(bundle, manifest, options);
    }
 
-   public boolean isOverrideNativeBundle(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
+   private boolean isOverrideNativeBundle(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
    {
       final String pattern = options.get("osgifier.overrideNativeBundles", Boolean.FALSE.toString()).trim();
       if (Boolean.FALSE.toString().equals(pattern))

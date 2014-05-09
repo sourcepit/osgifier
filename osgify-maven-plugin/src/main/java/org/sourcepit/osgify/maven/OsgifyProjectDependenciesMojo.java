@@ -71,12 +71,10 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
    {
       final PropertiesSource options = createOptions();
 
-      final ManifestGeneratorFilter generatorFilter = new ManifestGeneratorFilter();
-
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext bundleModel = modelBuilder.build(generatorFilter, options, project.getDependencies(),
-         startTime);
+      final OsgifyContext bundleModel = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options,
+         project.getDependencies(), startTime);
 
       ModelUtils.writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);
 
@@ -149,7 +147,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifyMojo
             throw pipe(e);
          }
 
-         if (!bundle.isNativeBundle() && !generatorFilter.isSourceBundle(bundle))
+         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null)
          {
             final File destJarFile = copyJarAndInjectManifest(bundle);
 

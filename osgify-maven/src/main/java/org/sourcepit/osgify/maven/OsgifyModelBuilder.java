@@ -48,7 +48,7 @@ public class OsgifyModelBuilder
    @Inject
    private OsgifyContextInflator inflator;
 
-   public OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+   public OsgifyContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp)
    {
       log.info("");
@@ -59,11 +59,11 @@ public class OsgifyModelBuilder
 
       log.info("");
 
-      return build(generatorFilter, options, osgifyModel, timestamp);
+      return build(filter, options, osgifyModel, timestamp);
    }
 
-   public OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options, MavenProject project,
-      Date timestamp)
+   public OsgifyContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
+      MavenProject project, Date timestamp)
    {
       log.info("");
       log.info("Resolving bundle candidates...");
@@ -73,14 +73,14 @@ public class OsgifyModelBuilder
 
       log.info("");
 
-      return build(generatorFilter, options, osgifyModel, timestamp);
+      return build(filter, options, osgifyModel, timestamp);
    }
 
-   private OsgifyContext build(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
+   private OsgifyContext build(final OsgifyContextInflatorFilter filter, PropertiesSource options,
       final OsgifyContext osgifyModel, Date timestamp)
    {
       log.info("Generating OSGi metadata...");
-      inflator.infalte(generatorFilter, options, osgifyModel, timestamp);
+      inflator.infalte(filter, options, osgifyModel, timestamp);
       return osgifyModel;
    }
 

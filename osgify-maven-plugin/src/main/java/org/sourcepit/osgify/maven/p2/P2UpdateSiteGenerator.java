@@ -42,7 +42,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.packaging.Repackager;
-import org.sourcepit.osgify.maven.ManifestGeneratorFilter;
+import org.sourcepit.osgify.maven.DefaultOsgifyContextInflatorFilter;
 import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder;
 import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgify.p2.P2Publisher;
@@ -89,7 +89,7 @@ public class P2UpdateSiteGenerator
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options, Date startTime, BundleSelector bundleSelector)
    {
-      final OsgifyContext model = modelBuilder2.build(new ManifestGeneratorFilter(), options == null
+      final OsgifyContext model = modelBuilder2.build(new DefaultOsgifyContextInflatorFilter(), options == null
          ? new LinkedPropertiesMap()
          : options, dependencies, startTime);
 

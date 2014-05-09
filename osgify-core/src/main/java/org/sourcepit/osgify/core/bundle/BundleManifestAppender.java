@@ -42,7 +42,7 @@ public class BundleManifestAppender
    @Inject
    private PackageImportAppender packageImports;
 
-   public void append(OsgifyContext context, PropertiesSource options)
+   public void append(OsgifyContext context, BundleManifestAppenderFilter filter, PropertiesSource options)
    {
       final BuildOrder buildOrder = OsgifyContextUtils.computeBuildOrder(context);
 
@@ -72,12 +72,12 @@ public class BundleManifestAppender
          {
             LOGGER.info("Building manifest for bundle candidate " + bundleCandidate.getSymbolicName() + "_"
                + bundleCandidate.getVersion());
-            append(bundleCandidate, options);
+            append(bundleCandidate, filter, options);
          }
       }
    }
 
-   private void append(BundleCandidate bundle, PropertiesSource options)
+   private void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
    {
       initManifest(bundle);
 
@@ -91,10 +91,22 @@ public class BundleManifestAppender
       }
       else
       {
-         environmentAppender.append(bundle);
-         packageExports.append(options, bundle);
-         packageImports.append(bundle);
-         dynamicImports.append(bundle);
+         if (filter.isAppendExecutionEnvironment(bundle, options))
+         {
+            environmentAppender.append(bundle);
+         }
+         if (filter.isAppendPackageExports(bundle, options))
+         {
+            packageExports.append(options, bundle);
+         }
+         if (filter.isAppendPackageImports(bundle, options))
+         {
+            packageImports.append(bundle);
+         }
+         if (filter.isAppendDynamicImports(bundle, options))
+         {
+            dynamicImports.append(bundle);
+         }
       }
    }
 

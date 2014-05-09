@@ -20,12 +20,12 @@ import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
+import org.sourcepit.osgify.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.JavaContentAppender;
 import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgify.core.resolve.NativeManifestAppender;
-import org.sourcepit.osgify.core.resolve.NativeManifestAppenderFilter;
 import org.sourcepit.osgify.core.resolve.SymbolicNameAndVersionAppender;
 
 @Named
@@ -43,26 +43,18 @@ public class OsgifyContextInflator
    @Inject
    private BundleManifestAppender manifestAppender;
 
-   public void infalte(final ManifestGeneratorFilter generatorFilter, PropertiesSource options,
-      final OsgifyContext osgifyModel, Date timestamp)
+   public void infalte(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifyContext osgifyModel,
+      Date timestamp)
    {
       options = getOptions(options, timestamp);
 
-      nativeManifestAppender.appendNativeManifests(osgifyModel, new NativeManifestAppenderFilter()
-      {
-         @Override
-         public boolean isAppendNativeManifest(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)
-         {
-            return !generatorFilter.isOverrideNativeBundle(bundle, manifest, options);
-         }
-      }, options);
+      nativeManifestAppender.appendNativeManifests(osgifyModel, filter, options);
 
-      // required to determine whether do scan java content
       javaContentAppender.appendContents(osgifyModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
 
       symbolicNameAndVersionAppender.appendSymbolicNamesAndVersion(osgifyModel, options);
 
-      applyManifests(generatorFilter, options, osgifyModel);
+      applyManifests(filter, options, osgifyModel);
    }
 
    private PropertiesSource getOptions(final PropertiesSource options, Date timestamp)
@@ -84,10 +76,9 @@ public class OsgifyContextInflator
       };
    }
 
-   private void applyManifests(ManifestGeneratorFilter generatorFilter, PropertiesSource options,
-      OsgifyContext osgifyModel)
+   private void applyManifests(BundleManifestAppenderFilter filter, PropertiesSource options, OsgifyContext osgifyModel)
    {
-      manifestAppender.append(osgifyModel, options);
+      manifestAppender.append(osgifyModel, filter, options);
 
       for (BundleCandidate bundle : osgifyModel.getBundles())
       {
