@@ -37,8 +37,8 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    @Parameter(required = false)
    private Map<String, String> options;
 
-   @Parameter(defaultValue = "${project.build.directory}/osgified")
-   private File workDir;
+   @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}.MF")
+   private File manifestFile;
 
    @Inject
    private LegacySupport buildContext;
@@ -104,7 +104,7 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       final BundleManifest manifest = projectBundle.getManifest();
 
-      ModelUtils.writeModel(new File(workDir, "MANIFEST.MF"), manifest);
+      ModelUtils.writeModel(manifestFile, manifest);
    }
 
    private BundleCandidate newBundleCandidate(MavenProject project)
