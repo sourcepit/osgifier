@@ -43,7 +43,7 @@ public class OsgifyContextInflator
    @Inject
    private BundleManifestAppender manifestAppender;
 
-   public void infalte(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifyContext osgifyModel,
+   public void inflate(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifyContext osgifyModel,
       Date timestamp)
    {
       options = getOptions(options, timestamp);

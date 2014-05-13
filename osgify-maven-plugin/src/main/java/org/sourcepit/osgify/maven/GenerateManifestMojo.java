@@ -106,7 +106,7 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       final PropertiesSource options = buildOsgifierOptions(project, symbolicName, getMojoConfigurationOptions());
       final Date startTime = buildContext.getSession().getStartTime();
-      inflater.infalte(inflatorFilter, options, context, startTime);
+      inflater.inflate(inflatorFilter, options, context, startTime);
 
       final BundleManifest manifest = projectBundle.getManifest();
       ModelUtils.writeModel(manifestFile, manifest);

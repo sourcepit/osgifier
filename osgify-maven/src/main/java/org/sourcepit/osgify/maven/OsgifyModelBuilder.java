@@ -80,7 +80,7 @@ public class OsgifyModelBuilder
       final OsgifyContext osgifyModel, Date timestamp)
    {
       log.info("Generating OSGi metadata...");
-      inflator.infalte(filter, options, osgifyModel, timestamp);
+      inflator.inflate(filter, options, osgifyModel, timestamp);
       return osgifyModel;
    }
 
