@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.maven;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
@@ -30,6 +31,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.eclipse.aether.artifact.Artifact;
+import org.eclipse.aether.artifact.ArtifactProperties;
 import org.sourcepit.common.manifest.Header;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -154,6 +156,40 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
       MavenProject project = buildContext.getSession().getCurrentProject();
       project.setContextValue("osgified-artifacts", artifacts);
+
+      printSummary(artifacts);
+   }
+
+   private void printSummary(Collection<Artifact> artifacts)
+   {
+      getLog().info("------------------------------------------------------------------------");
+      getLog().info("Osgified artifacts:");
+      getLog().info("");
+
+      for (Artifact artifact : artifacts)
+      {
+         final String type = artifact.getProperty(ArtifactProperties.TYPE, artifact.getExtension());
+         if ("pom".equals(type))
+         {
+            continue;
+         }
+         
+         getLog().info("<dependency>");
+         getLog().info("   <groupId>" + artifact.getGroupId() + "</groupId>");
+         getLog().info("   <artifactId>" + artifact.getArtifactId() + "</artifactId>");
+         getLog().info("   <version>" + artifact.getVersion() + "</version>");
+         final String classifier = artifact.getClassifier();
+         if (!isNullOrEmpty(classifier))
+         {
+            getLog().info("   <classifier>" + classifier + "</classifier>");
+         }
+         if (!"jar".equals(type))
+         {
+            getLog().info("   <type>" + type + "</type>");
+         }
+         getLog().info("</dependency>");
+         getLog().info("");
+      }
    }
 
    private File getOsgifyContextFile()
