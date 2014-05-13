@@ -67,6 +67,9 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
    @Parameter(required = false)
    private String groupIdPrefix;
 
+   @Parameter(required = false)
+   private String groupId;
+
    @Parameter(defaultValue = "${project.build.directory}/osgified")
    private File workDir;
 
@@ -173,7 +176,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
          {
             continue;
          }
-         
+
          getLog().info("<dependency>");
          getLog().info("   <groupId>" + artifact.getGroupId() + "</groupId>");
          getLog().info("   <artifactId>" + artifact.getArtifactId() + "</artifactId>");
@@ -331,16 +334,29 @@ public class OsgifyArtifactsMojo extends AbstractOsgifyMojo
 
    private void adoptGroupId(final MavenArtifact mavenArtifact, final BundleManifest manifest)
    {
-      if (groupIdPrefix != null)
+      final String customGroupId = getCustomGroupId(mavenArtifact);
+      if (customGroupId != null)
       {
-         final String groupId = groupIdPrefix + mavenArtifact.getGroupId();
-         mavenArtifact.setGroupId(groupId);
+         mavenArtifact.setGroupId(customGroupId);
          final Header header = manifest.getHeader("Maven-GroupId");
          if (header != null)
          {
-            header.setValue(groupId);
+            header.setValue(customGroupId);
          }
       }
+   }
+
+   private String getCustomGroupId(final MavenArtifact mavenArtifact)
+   {
+      if (this.groupId != null)
+      {
+         return this.groupId;
+      }
+      if (groupIdPrefix != null)
+      {
+         return groupIdPrefix + mavenArtifact.getGroupId();
+      }
+      return null;
    }
 
    private static String toMavenVersion(Version version)
