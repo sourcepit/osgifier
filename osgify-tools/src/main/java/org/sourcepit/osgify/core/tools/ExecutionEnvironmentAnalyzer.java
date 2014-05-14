@@ -343,8 +343,16 @@ public class ExecutionEnvironmentAnalyzer
       {
          apiVersion = version;
       }
-      String url = "http://docs.oracle.com/javase/" + apiVersion + "/docs/api/overview-frame.html";
-      return parseJavaPlatformJDoc(url);
+      try
+      {
+         String url = "http://docs.oracle.com/javase/" + apiVersion + "/docs/api/overview-frame.html";
+         return parseJavaPlatformJDoc(url);
+      }
+      catch (Exception e)
+      {
+         String url = "http://docs.oracle.com/javase/" + apiVersion.substring(2, apiVersion.lastIndexOf('.')) + "/docs/api/overview-frame.html";
+         return parseJavaPlatformJDoc(url);
+      }
    }
 
    private List<String> parseJavaPlatformJDoc(String urlString)

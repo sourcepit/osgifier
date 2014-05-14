@@ -62,8 +62,8 @@
 			<artifactId>commons-io</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.bcel</groupId>
-			<artifactId>bcel</artifactId>
+			<groupId>srcpit.org.apache.bcel</groupId>
+			<artifactId>srcpit-bcel</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
