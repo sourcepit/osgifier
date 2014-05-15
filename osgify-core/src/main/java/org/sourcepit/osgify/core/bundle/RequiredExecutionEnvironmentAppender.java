@@ -73,7 +73,7 @@ public class RequiredExecutionEnvironmentAppender
 
    private void append(BundleCandidate bundle, final BundleManifest manifest, final JavaResourceBundle jBundle)
    {
-      final int major = resolveMajorClassVersion(jBundle);
+      final float major = resolveMajorClassVersion(jBundle);
 
       final List<ExecutionEnvironment> winners = determineExecutionEnvironments(bundle, jBundle, major);
 
@@ -81,7 +81,7 @@ public class RequiredExecutionEnvironmentAppender
    }
 
    private List<ExecutionEnvironment> determineExecutionEnvironments(BundleCandidate bundle,
-      final JavaResourceBundle jBundle, final int major)
+      final JavaResourceBundle jBundle, final float major)
    {
       final List<ExecutionEnvironment> winners = new ArrayList<ExecutionEnvironment>();
 
@@ -133,7 +133,7 @@ public class RequiredExecutionEnvironmentAppender
       return winners;
    }
 
-   private void append(final BundleManifest manifest, final int major, final List<ExecutionEnvironment> winners)
+   private void append(final BundleManifest manifest, final float major, final List<ExecutionEnvironment> winners)
    {
       if (!winners.isEmpty())
       {
@@ -163,9 +163,9 @@ public class RequiredExecutionEnvironmentAppender
       }
    }
 
-   private long getClassVersionRating(final int major, ExecutionEnvironment executionEnvironment)
+   private long getClassVersionRating(final float major, ExecutionEnvironment executionEnvironment)
    {
-      final int diff = executionEnvironment.getMaxClassVersion() - major;
+      final float diff = executionEnvironment.getMaxClassVersion() - major;
 
       return -1L * (Math.round(Math.pow(diff, 2)));
       // return diff == 0 ? Integer.MAX_VALUE : diff;
@@ -184,9 +184,9 @@ public class RequiredExecutionEnvironmentAppender
       return packageHits - packageNames.size();
    }
 
-   private int resolveMajorClassVersion(JavaResourceBundle jBundle)
+   private float resolveMajorClassVersion(JavaResourceBundle jBundle)
    {
-      final int[] major = new int[1];
+      final float[] major = new float[1];
       jBundle.accept(new ResourceVisitor()
       {
          public boolean visit(Resource resource)

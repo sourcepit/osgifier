@@ -23,12 +23,12 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
 
    private final String id;
    private final String releaseDate;
-   private final int maxClassVersion;
+   private final float maxClassVersion;
    private final PropertiesMap properties;
    private final List<String> packages;
 
    public ExecutionEnvironment(@NotNull String id, @Pattern(regexp = RELEASE_DATE_FORMAT) String releaseDate,
-      int maxClassVersion, @NotNull PropertiesMap properties, @NotNull List<String> packages)
+      float maxClassVersion, @NotNull PropertiesMap properties, @NotNull List<String> packages)
    {
       this.id = id;
       this.releaseDate = releaseDate;
@@ -47,7 +47,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       return releaseDate;
    }
 
-   public int getMaxClassVersion()
+   public float getMaxClassVersion()
    {
       return maxClassVersion;
    }
@@ -62,62 +62,83 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       return packages;
    }
 
-
    @Override
    public int hashCode()
    {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
-      result = prime * result + maxClassVersion;
+      result = prime * result + Float.floatToIntBits(maxClassVersion);
       result = prime * result + ((packages == null) ? 0 : packages.hashCode());
       result = prime * result + ((properties == null) ? 0 : properties.hashCode());
       result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
       return result;
    }
 
-   // CSOFF
    @Override
    public boolean equals(Object obj)
-   // CSON
    {
       if (this == obj)
+      {
          return true;
+      }
       if (obj == null)
+      {
          return false;
+      }
       if (getClass() != obj.getClass())
+      {
          return false;
+      }
       ExecutionEnvironment other = (ExecutionEnvironment) obj;
       if (id == null)
       {
          if (other.id != null)
+         {
             return false;
+         }
       }
       else if (!id.equals(other.id))
+      {
          return false;
-      if (maxClassVersion != other.maxClassVersion)
+      }
+      if (Float.floatToIntBits(maxClassVersion) != Float.floatToIntBits(other.maxClassVersion))
+      {
          return false;
+      }
       if (packages == null)
       {
          if (other.packages != null)
+         {
             return false;
+         }
       }
       else if (!packages.equals(other.packages))
+      {
          return false;
+      }
       if (properties == null)
       {
          if (other.properties != null)
+         {
             return false;
+         }
       }
       else if (!properties.equals(other.properties))
+      {
          return false;
+      }
       if (releaseDate == null)
       {
          if (other.releaseDate != null)
+         {
             return false;
+         }
       }
       else if (!releaseDate.equals(other.releaseDate))
+      {
          return false;
+      }
       return true;
    }
 
@@ -134,8 +155,8 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
 
    private static int computeDelta(ExecutionEnvironment _this, ExecutionEnvironment other)
    {
-      final int max1 = _this.getMaxClassVersion();
-      final int max2 = other.getMaxClassVersion();
+      final float max1 = _this.getMaxClassVersion();
+      final float max2 = other.getMaxClassVersion();
       if (max1 >= max2)
       {
          final List<String> p1 = _this.getPackages();

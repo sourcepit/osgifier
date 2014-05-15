@@ -109,7 +109,7 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
          return;
       }
 
-      final int maxClassVersion = getIntValue(eeSpec, "maxClassVersion");
+      final float maxClassVersion = getFloatValue(eeSpec, "maxClassVersion");
       if (maxClassVersion < 0)
       {
          LOGGER.debug("Ignoring Execution Environment {}, because of missing or invalid max class version attribute.",
@@ -204,10 +204,10 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
       return jsonElement == null ? null : jsonElement.getAsString();
    }
 
-   private static int getIntValue(JsonObject jsonObject, String property)
+   private static float getFloatValue(JsonObject jsonObject, String property)
    {
       final JsonElement jsonElement = jsonObject.get(property);
-      return jsonElement == null ? -1 : jsonElement.getAsInt();
+      return jsonElement == null ? -1 : jsonElement.getAsFloat();
    }
 
    private static List<String> getListValue(JsonObject jsonObject, String property)

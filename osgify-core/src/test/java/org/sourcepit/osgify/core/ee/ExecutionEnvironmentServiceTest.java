@@ -6,11 +6,7 @@
 
 package org.sourcepit.osgify.core.ee;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.DISCOURAGED;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
@@ -55,19 +51,24 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    public void testGetExecutionEnvironments()
    {
       final List<ExecutionEnvironment> executionEnvironments = environmentService.getExecutionEnvironments();
-      assertThat(executionEnvironments.size(), Is.is(11));
+      assertThat(executionEnvironments.size(), Is.is(16));
 
       assertThat(executionEnvironments.get(0).getId(), IsEqual.equalTo("OSGi/Minimum-1.0"));
       assertThat(executionEnvironments.get(1).getId(), IsEqual.equalTo("OSGi/Minimum-1.1"));
-      assertThat(executionEnvironments.get(2).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
-      assertThat(executionEnvironments.get(3).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
+      assertThat(executionEnvironments.get(2).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
+      assertThat(executionEnvironments.get(3).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
       assertThat(executionEnvironments.get(4).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
-      assertThat(executionEnvironments.get(5).getId(), IsEqual.equalTo("J2SE-1.3"));
-      assertThat(executionEnvironments.get(6).getId(), IsEqual.equalTo("J2SE-1.4"));
-      assertThat(executionEnvironments.get(7).getId(), IsEqual.equalTo("J2SE-1.5"));
-      assertThat(executionEnvironments.get(8).getId(), IsEqual.equalTo("JavaSE-1.6"));
-      assertThat(executionEnvironments.get(9).getId(), IsEqual.equalTo("JavaSE-1.7"));
-      assertThat(executionEnvironments.get(10).getId(), IsEqual.equalTo("JavaSE-1.8"));
+      assertThat(executionEnvironments.get(5).getId(), IsEqual.equalTo("JRE-1.1"));
+      assertThat(executionEnvironments.get(6).getId(), IsEqual.equalTo("JavaSE/compact1-1.8"));
+      assertThat(executionEnvironments.get(7).getId(), IsEqual.equalTo("J2SE-1.2"));
+      assertThat(executionEnvironments.get(8).getId(), IsEqual.equalTo("J2SE-1.3"));
+      assertThat(executionEnvironments.get(9).getId(), IsEqual.equalTo("JavaSE/compact2-1.8"));
+      assertThat(executionEnvironments.get(10).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+      assertThat(executionEnvironments.get(11).getId(), IsEqual.equalTo("J2SE-1.4"));
+      assertThat(executionEnvironments.get(12).getId(), IsEqual.equalTo("J2SE-1.5"));
+      assertThat(executionEnvironments.get(13).getId(), IsEqual.equalTo("JavaSE-1.6"));
+      assertThat(executionEnvironments.get(14).getId(), IsEqual.equalTo("JavaSE-1.7"));
+      assertThat(executionEnvironments.get(15).getId(), IsEqual.equalTo("JavaSE-1.8"));
    }
 
    @Test
@@ -103,47 +104,54 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("OSGi/Minimum-1.0");
          List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
          assertNotNull(execEnv);
-         assertThat(execEnvs.size(), Is.is(10));
+         assertThat(execEnvs.size(), Is.is(14));
          assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("OSGi/Minimum-1.1"));
-         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
-         assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
+         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
+         assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
          assertThat(execEnvs.get(3).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
-         assertThat(execEnvs.get(4).getId(), IsEqual.equalTo("J2SE-1.3"));
-         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("J2SE-1.4"));
-         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("J2SE-1.5"));
-         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("JavaSE-1.6"));
-         assertThat(execEnvs.get(8).getId(), IsEqual.equalTo("JavaSE-1.7"));
-         assertThat(execEnvs.get(9).getId(), IsEqual.equalTo("JavaSE-1.8"));
+         assertThat(execEnvs.get(4).getId(), IsEqual.equalTo("JavaSE/compact1-1.8"));
+         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("J2SE-1.2"));
+         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("J2SE-1.3"));
+         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("JavaSE/compact2-1.8"));
+         assertThat(execEnvs.get(8).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+         assertThat(execEnvs.get(9).getId(), IsEqual.equalTo("J2SE-1.4"));
+         assertThat(execEnvs.get(10).getId(), IsEqual.equalTo("J2SE-1.5"));
+         assertThat(execEnvs.get(11).getId(), IsEqual.equalTo("JavaSE-1.6"));
+         assertThat(execEnvs.get(12).getId(), IsEqual.equalTo("JavaSE-1.7"));
+         assertThat(execEnvs.get(13).getId(), IsEqual.equalTo("JavaSE-1.8"));
       }
       {
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("OSGi/Minimum-1.1");
          List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
          assertNotNull(execEnv);
-         assertThat(execEnvs.size(), Is.is(10));
-         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("OSGi/Minimum-1.0"));
-         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
-         assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
-         assertThat(execEnvs.get(3).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
+         assertThat(execEnvs.size(), Is.is(12));
+         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("OSGi/Minimum-1.2"));
+         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
+         assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("JavaSE/compact1-1.8"));
+         assertThat(execEnvs.get(3).getId(), IsEqual.equalTo("J2SE-1.2"));
          assertThat(execEnvs.get(4).getId(), IsEqual.equalTo("J2SE-1.3"));
-         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("J2SE-1.4"));
-         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("J2SE-1.5"));
-         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("JavaSE-1.6"));
-         assertThat(execEnvs.get(8).getId(), IsEqual.equalTo("JavaSE-1.7"));
-         assertThat(execEnvs.get(9).getId(), IsEqual.equalTo("JavaSE-1.8"));
+         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("JavaSE/compact2-1.8"));
+         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("J2SE-1.4"));
+         assertThat(execEnvs.get(8).getId(), IsEqual.equalTo("J2SE-1.5"));
+         assertThat(execEnvs.get(9).getId(), IsEqual.equalTo("JavaSE-1.6"));
+         assertThat(execEnvs.get(10).getId(), IsEqual.equalTo("JavaSE-1.7"));
+         assertThat(execEnvs.get(11).getId(), IsEqual.equalTo("JavaSE-1.8"));
       }
       {
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("OSGi/Minimum-1.2");
          List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
          assertNotNull(execEnv);
-         assertThat(execEnvs.size(), Is.is(8));
-         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("CDC-1.0/Foundation-1.0"));
-         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
+         assertThat(execEnvs.size(), Is.is(9));
+         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
+         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("J2SE-1.2"));
          assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("J2SE-1.3"));
-         assertThat(execEnvs.get(3).getId(), IsEqual.equalTo("J2SE-1.4"));
-         assertThat(execEnvs.get(4).getId(), IsEqual.equalTo("J2SE-1.5"));
-         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("JavaSE-1.6"));
-         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("JavaSE-1.7"));
-         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("JavaSE-1.8"));
+         assertThat(execEnvs.get(3).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+         assertThat(execEnvs.get(4).getId(), IsEqual.equalTo("J2SE-1.4"));
+         assertThat(execEnvs.get(5).getId(), IsEqual.equalTo("J2SE-1.5"));
+         assertThat(execEnvs.get(6).getId(), IsEqual.equalTo("JavaSE-1.6"));
+         assertThat(execEnvs.get(7).getId(), IsEqual.equalTo("JavaSE-1.7"));
+         assertThat(execEnvs.get(8).getId(), IsEqual.equalTo("JavaSE-1.8"));
       }
       {
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("CDC-1.0/Foundation-1.0");
@@ -198,6 +206,30 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
       }
       {
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("JavaSE-1.7");
+         List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
+         assertNotNull(execEnv);
+         assertThat(execEnvs.size(), Is.is(1));
+         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("JavaSE-1.8"));
+      }
+      {
+         ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("JavaSE/compact1-1.8");
+         List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
+         assertNotNull(execEnv);
+         assertThat(execEnvs.size(), Is.is(3));
+         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("JavaSE/compact2-1.8"));
+         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+         assertThat(execEnvs.get(2).getId(), IsEqual.equalTo("JavaSE-1.8"));
+      }
+      {
+         ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("JavaSE/compact2-1.8");
+         List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
+         assertNotNull(execEnv);
+         assertThat(execEnvs.size(), Is.is(2));
+         assertThat(execEnvs.get(0).getId(), IsEqual.equalTo("JavaSE/compact3-1.8"));
+         assertThat(execEnvs.get(1).getId(), IsEqual.equalTo("JavaSE-1.8"));
+      }
+      {
+         ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("JavaSE/compact3-1.8");
          List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
          assertNotNull(execEnv);
          assertThat(execEnvs.size(), Is.is(1));

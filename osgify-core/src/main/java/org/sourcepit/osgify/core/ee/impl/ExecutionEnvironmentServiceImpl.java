@@ -147,8 +147,8 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
 
    public boolean isCompatible(@NotNull ExecutionEnvironment ee1, @NotNull ExecutionEnvironment ee2)
    {
-      final int max1 = ee1.getMaxClassVersion();
-      final int max2 = ee1.getMaxClassVersion();
+      final float max1 = ee1.getMaxClassVersion();
+      final float max2 = ee2.getMaxClassVersion();
       if (max1 >= max2)
       {
          final List<String> p1 = ee1.getPackages();
