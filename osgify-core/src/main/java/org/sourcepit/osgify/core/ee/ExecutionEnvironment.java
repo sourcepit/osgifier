@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.constraints.Pattern;
-import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.common.utils.props.PropertiesUtils;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -24,16 +22,16 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    private final String id;
    private final String releaseDate;
    private final float maxClassVersion;
-   private final PropertiesMap properties;
+   private final OsgiEE osgiEE;
    private final List<String> packages;
 
    public ExecutionEnvironment(@NotNull String id, @Pattern(regexp = RELEASE_DATE_FORMAT) String releaseDate,
-      float maxClassVersion, @NotNull PropertiesMap properties, @NotNull List<String> packages)
+      float maxClassVersion, @NotNull OsgiEE osgiEE, @NotNull List<String> packages)
    {
       this.id = id;
       this.releaseDate = releaseDate;
       this.maxClassVersion = maxClassVersion;
-      this.properties = PropertiesUtils.unmodifiablePropertiesMap(properties);
+      this.osgiEE = osgiEE;
       this.packages = Collections.unmodifiableList(packages);
    }
 
@@ -52,14 +50,27 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       return maxClassVersion;
    }
 
-   public PropertiesMap getProperties()
+   public OsgiEE getOsgiEE()
    {
-      return properties;
+      return osgiEE;
    }
 
    public List<String> getPackages()
    {
       return packages;
+   }
+
+   public boolean isCompatibleWith(@NotNull ExecutionEnvironment ee2)
+   {
+      final float max1 = getMaxClassVersion();
+      final float max2 = ee2.getMaxClassVersion();
+      if (max1 >= max2)
+      {
+         final List<String> p1 = getPackages();
+         final List<String> p2 = ee2.getPackages();
+         return p1.containsAll(p2);
+      }
+      return false;
    }
 
    @Override
@@ -69,8 +80,8 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
       result = prime * result + Float.floatToIntBits(maxClassVersion);
+      result = prime * result + ((osgiEE == null) ? 0 : osgiEE.hashCode());
       result = prime * result + ((packages == null) ? 0 : packages.hashCode());
-      result = prime * result + ((properties == null) ? 0 : properties.hashCode());
       result = prime * result + ((releaseDate == null) ? 0 : releaseDate.hashCode());
       return result;
    }
@@ -106,6 +117,17 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       {
          return false;
       }
+      if (osgiEE == null)
+      {
+         if (other.osgiEE != null)
+         {
+            return false;
+         }
+      }
+      else if (!osgiEE.equals(other.osgiEE))
+      {
+         return false;
+      }
       if (packages == null)
       {
          if (other.packages != null)
@@ -114,17 +136,6 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
          }
       }
       else if (!packages.equals(other.packages))
-      {
-         return false;
-      }
-      if (properties == null)
-      {
-         if (other.properties != null)
-         {
-            return false;
-         }
-      }
-      else if (!properties.equals(other.properties))
       {
          return false;
       }
@@ -142,44 +153,37 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       return true;
    }
 
+   @Override
    public int compareTo(ExecutionEnvironment other)
    {
-      final int delta1 = computeDelta(this, other);
-      final int delta2 = computeDelta(other, this);
-      if (delta1 == delta2)
+      final int maxClass = Float.compare(getMaxClassVersion(), other.getMaxClassVersion());
+      if (maxClass != 0)
       {
-         return 0;
+         return maxClass;
       }
-      return delta1 > delta2 ? 1 : -1;
-   }
 
-   private static int computeDelta(ExecutionEnvironment _this, ExecutionEnvironment other)
-   {
-      final float max1 = _this.getMaxClassVersion();
-      final float max2 = other.getMaxClassVersion();
-      if (max1 >= max2)
+      final int packages1 = getPackages().size();
+      final int packages2 = other.getPackages().size();
+      final int packages = packages1 < packages2 ? -1 : (packages1 == packages2 ? 0 : 1);
+      if (packages != 0)
       {
-         final List<String> p1 = _this.getPackages();
-         final List<String> p2 = other.getPackages();
-
-         final int pDiff = p1.size() - p2.size();
-         if (pDiff != 0)
-         {
-            return pDiff;
-         }
-
-         final String r1 = _this.getReleaseDate();
-         final String r2 = other.getReleaseDate();
-         return r1.compareTo(r2);
+         return packages;
       }
-      return -1;
+
+      final int date = getReleaseDate().compareTo(other.getReleaseDate());
+      if (date != 0)
+      {
+         return date;
+      }
+
+      return getId().compareTo(other.getId());
    }
 
    @Override
    public String toString()
    {
       return "ExecutionEnvironment [id=" + id + ", releaseDate=" + releaseDate + ", maxClassVersion=" + maxClassVersion
-         + ", properties=" + properties + ", packages=" + packages + "]";
+         + ", packages=" + packages + "]";
    }
 
 }

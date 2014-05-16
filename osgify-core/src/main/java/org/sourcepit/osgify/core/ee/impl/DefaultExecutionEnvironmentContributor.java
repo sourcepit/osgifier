@@ -11,22 +11,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sourcepit.common.utils.props.LinkedPropertiesMap;
-import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
+import org.sourcepit.osgify.core.ee.OsgiEE;
 import org.sourcepit.osgify.core.util.JsonUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -124,11 +121,24 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
          return;
       }
 
+      final OsgiEE osgiEE = getOsgiEE(eeSpec, "osgi.ee");
+
       final List<String> packages = getListValue(eeSpec, "packages");
 
-      final PropertiesMap properties = parseJsonProperties(eeSpec);
+      ees.add(new ExecutionEnvironment(id, releaseDate, maxClassVersion, osgiEE, packages));
+   }
 
-      ees.add(new ExecutionEnvironment(id, releaseDate, maxClassVersion, properties, packages));
+   private OsgiEE getOsgiEE(JsonObject jsonObject, String property)
+   {
+      final JsonElement jsonElement = jsonObject.get(property);
+      if (jsonElement != null)
+      {
+         final JsonObject obj = jsonElement.getAsJsonObject();
+         final String name = getValue(obj, "name");
+         final String version = getValue(obj, "version");
+         return new OsgiEE(name, version);
+      }
+      return null;
    }
 
    private void parseImpls() throws IOException
@@ -180,22 +190,7 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
 
       final List<String> packages = getListValue(eeImpl, "vendorPackages");
 
-      final PropertiesMap properties = parseJsonProperties(eeImpl);
-
-      eeImpls.add(new ExecutionEnvironmentImplementation(eeId, vendor, properties, packages));
-   }
-
-   private PropertiesMap parseJsonProperties(JsonObject jvm)
-   {
-      final PropertiesMap properties = new LinkedPropertiesMap();
-      for (Entry<String, JsonElement> entry : jvm.entrySet())
-      {
-         if (entry.getValue() instanceof JsonPrimitive)
-         {
-            properties.put(entry.getKey(), entry.getValue().getAsString());
-         }
-      }
-      return properties;
+      eeImpls.add(new ExecutionEnvironmentImplementation(eeId, vendor, packages));
    }
 
    private static String getValue(JsonObject jsonObject, String property)

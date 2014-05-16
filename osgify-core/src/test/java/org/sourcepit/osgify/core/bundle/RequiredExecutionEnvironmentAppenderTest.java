@@ -6,6 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
@@ -41,17 +42,17 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       BundleManifest manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("J2SE-1.3"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("J2SE-1.3, JavaSE/compact1-1.8"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      appendType(jArchive, "org.sourcepit.Foo", 48);
+      appendType(jArchive, "org.sourcepit.Foo", 46);
 
       bundle = newBundleCandidate(jArchive);
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
-         IsEqual.equalTo("J2SE-1.4"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("OSGi/Minimum-1.1"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "org.sourcepit.Foo", 51);
@@ -60,7 +61,8 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("JavaSE-1.7"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("JavaSE-1.7, JavaSE/compact1-1.8"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       JavaType jType = appendType(jArchive, "org.sourcepit.Foo", 47);
@@ -70,7 +72,8 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("JavaSE-1.7"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("JavaSE-1.7, JavaSE/compact1-1.8"));
 
       // no perfect match
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -81,8 +84,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
-         IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
+      assertNull(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       jType = appendType(jArchive, "org.sourcepit.Foo", 48);
@@ -93,7 +95,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
 
       manifest = bundle.getManifest();
       assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
-         IsEqual.equalTo("J2SE-1.4"));
+         IsEqual.equalTo("J2SE-1.4, JavaSE/compact1-1.8"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       jType = appendType(jArchive, "org.sourcepit.Foo", 47);
@@ -103,7 +105,8 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("J2SE-1.3"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("J2SE-1.3, JavaSE/compact1-1.8"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       jType = appendType(jArchive, "org.sourcepit.Foo", 49);
@@ -113,7 +116,8 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       execEnvAppender.append(bundle);
 
       manifest = bundle.getManifest();
-      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("J2SE-1.5"));
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("J2SE-1.5, JavaSE/compact1-1.8"));
 
       jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       jType = appendType(jArchive, "org.sourcepit.Foo", 45);
