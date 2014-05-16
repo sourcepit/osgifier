@@ -15,6 +15,8 @@ import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -25,10 +27,14 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
+import org.sourcepit.common.utils.props.PropertiesSource;
+import org.sourcepit.osgify.core.ee.OsgiEE;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaType;
+
+import com.google.common.base.Strings;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -54,11 +60,61 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       assertTrue(excludes.contains("JavaSE/compact1-1.8"));
    }
 
+   public void testToFilterString() throws Exception
+   {
+      OsgiEE foo = new OsgiEE("Foo", null);
+      assertEquals("(osgi.ee=Foo)", toFilterString(Arrays.asList(foo)));
+
+      OsgiEE java6 = new OsgiEE("JavaSE", "1.6");
+      OsgiEE java7 = new OsgiEE("JavaSE", "1.7");
+      OsgiEE compact1 = new OsgiEE("JavaSE/compact1", "1.8");
+
+      assertEquals("(&(osgi.ee=JavaSE)(version>=1.6))", toFilterString(Arrays.asList(java6)));
+      assertEquals("(| (&(osgi.ee=JavaSE)(version>=1.6)) (&(osgi.ee=JavaSE)(version>=1.7)) )",
+         toFilterString(Arrays.asList(java6, java7)));
+      assertEquals(
+         "(| (&(osgi.ee=JavaSE)(version>=1.6)) (&(osgi.ee=JavaSE)(version>=1.7)) (&(osgi.ee=JavaSE/compact1)(version>=1.8)) )",
+         toFilterString(Arrays.asList(java6, java7, compact1)));
+   }
+
+   private static String toFilterString(Collection<OsgiEE> ees)
+   {
+      final StringBuilder sb = new StringBuilder();
+      if (ees.size() > 1)
+      {
+         sb.append("(| ");
+      }
+      for (OsgiEE ee : ees)
+      {
+         final String version = ee.getVersion();
+         final boolean hasVersion = !Strings.isNullOrEmpty(version);
+         if (hasVersion)
+         {
+            sb.append("(&");
+         }
+         sb.append("(osgi.ee=");
+         sb.append(ee.getName());
+         if (hasVersion)
+         {
+            sb.append(")(version>=");
+            sb.append(version);
+            sb.append(")");
+         }
+         sb.append(") ");
+      }
+      sb.deleteCharAt(sb.length() - 1);
+      if (ees.size() > 1)
+      {
+         sb.append(" )");
+      }
+      return sb.toString();
+   }
+
    @Test
    public void test()
    {
-      PropertiesMap options = new LinkedPropertiesMap();
-      
+      PropertiesSource options = new LinkedPropertiesMap();
+
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "org.sourcepit.Foo", 47);
 
@@ -154,5 +210,4 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
       manifest = bundle.getManifest();
       assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("JRE-1.1"));
    }
-
 }

@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
@@ -57,7 +58,22 @@ public class RequiredExecutionEnvironmentAppender
 
    public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
    {
+      // Bundle-RequiredExecutionEnvironment introduced in osgi 3.0.0, deprecated since 4.3.0
+      // Require-Capability: osgi.ee since osgi 4.3.0
+      
+      final Version osgiVersion = Version.parse(options.get("osgifier.osgiVersion", "3.0.0"));
+      final boolean supportsOsgiEE = osgiVersion.compareTo(new Version(4, 3, 0)) >= 0;
+
       final BundleManifest manifest = bundle.getManifest();
+      
+      if (supportsOsgiEE) // supports "Require-Capability: osgi.ee..."
+      {
+      }
+      else
+      {
+         
+      }
+
 
       String execEnv = manifest.getHeaderValue(BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT);
       if (execEnv != null)
@@ -156,35 +172,25 @@ public class RequiredExecutionEnvironmentAppender
       return eePackages;
    }
 
-   private void append(final BundleManifest manifest, final float major, final List<ExecutionEnvironment> winners)
+   private void append(final BundleManifest manifest, final float major,
+      final List<ExecutionEnvironment> executionEnvironments)
    {
-      if (!winners.isEmpty())
+      if (!executionEnvironments.isEmpty())
       {
          final List<String> execEnvIds = new ArrayList<String>();
-         for (ExecutionEnvironment winner : winners)
+         for (ExecutionEnvironment ee : executionEnvironments)
          {
-            execEnvIds.add(winner.getId());
-
-            if (major > winner.getMaxClassVersion())
-            {
-               final Object[] args = new Object[3];
-               args[0] = String.valueOf(major);
-               args[1] = winner.getId();
-               args[2] = String.valueOf(winner.getMaxClassVersion());
-               LOGGER
-                  .warn(
-                     "Classes with major class version ({}) detected. Selected execution environment {} only allows versions less or equal {}.",
-                     args);
-            }
+            execEnvIds.add(ee.getId());
          }
 
          manifest.setBundleRequiredExecutionEnvironment(execEnvIds);
+
          LOGGER.info("Set Bundle-RequiredExecutionEnvironment to {}",
             manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
       }
    }
 
-   private float resolveMajorClassVersion(JavaResourceBundle jBundle)
+   private static float resolveMajorClassVersion(JavaResourceBundle jBundle)
    {
       final float[] major = new float[1];
       jBundle.accept(new ResourceVisitor()
