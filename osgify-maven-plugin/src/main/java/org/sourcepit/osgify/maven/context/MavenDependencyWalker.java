@@ -28,7 +28,7 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.repository.RepositorySystem;
-import org.sourcepit.common.maven.util.MavenProjectUtils;
+import org.sourcepit.common.maven.core.MavenProjectUtils;
 import org.sourcepit.common.utils.lang.Exceptions;
 import org.sourcepit.common.utils.lang.PipedException;
 
