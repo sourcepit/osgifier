@@ -31,7 +31,6 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.maven.impl.OsgifyStubModelCreator;
 
 @Named
 public class OsgifyModelBuilder

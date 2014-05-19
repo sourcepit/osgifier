@@ -17,8 +17,9 @@ import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.util.ManifestUtils;
+import org.sourcepit.common.maven.core.MavenCoreUtils;
+import org.sourcepit.common.maven.core.MavenProjectUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
-import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -92,13 +93,13 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       final BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       if (project == null)
       {
-         MavenArtifact mArtifact = MavenModelUtils.toMavenArtifact(artifact);
+         MavenArtifact mArtifact = MavenCoreUtils.toMavenArtifact(artifact);
          node.setLocation(mArtifact.getFile());
          node.addExtension(mArtifact);
       }
       else
       {
-         org.sourcepit.common.maven.model.MavenProject mProject = MavenModelUtils.toMavenProject(project);
+         org.sourcepit.common.maven.model.MavenProject mProject = MavenProjectUtils.toMavenProject(project);
          node.setLocation(artifact.getFile());
          node.addExtension(mProject);
       }
@@ -135,7 +136,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
    private BundleReference newBundleReference(BundleCandidate bundleNode, Artifact mappedArtifact)
    {
       final BundleReference bundleReference = ContextModelFactory.eINSTANCE.createBundleReference();
-      bundleReference.addExtension(MavenModelUtils.toMavenDependecy(mappedArtifact));
+      bundleReference.addExtension(MavenCoreUtils.toMavenDependecy(mappedArtifact));
 
       bundleReference.setTarget(bundleNode);
       bundleReference.setOptional(mappedArtifact.isOptional());
