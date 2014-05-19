@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgify.maven;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -29,6 +29,7 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgify.maven.OsgifyStubModelCreator;
 
 public class OsgifyStubModelCreatorTest extends InjectedTest
 {

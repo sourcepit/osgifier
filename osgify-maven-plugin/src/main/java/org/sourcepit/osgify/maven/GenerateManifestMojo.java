@@ -32,8 +32,8 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.aether.ArtifactFactory;
+import org.sourcepit.common.maven.core.MavenCoreUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
-import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
@@ -183,14 +183,14 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       for (Artifact artifact : project.getArtifacts())
       {
          final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
-         reference.addExtension(MavenModelUtils.toMavenDependecy(artifact));
+         reference.addExtension(MavenCoreUtils.toMavenDependecy(artifact));
          reference.setOptional(artifact.isOptional());
          reference.setProvided(DefaultArtifact.SCOPE_PROVIDED.equals(artifact.getScope()));
          reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
 
          final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
          bundle.setLocation(artifact.getFile());
-         bundle.addExtension(MavenModelUtils.toMavenArtifact(artifact));
+         bundle.addExtension(MavenCoreUtils.toMavenArtifact(artifact));
 
          reference.setTarget(bundle);
          projectBundle.getDependencies().add(reference);
@@ -208,7 +208,7 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       PropertiesSource options = chain(toPropertiesSource(projectProperties), mojoConfigurationOptions);
 
       final StringBuilder sb = new StringBuilder();
-      sb.append(MavenModelUtils.toArtifactKey(project.getArtifact()));
+      sb.append(MavenCoreUtils.toArtifactKey(project.getArtifact()));
       sb.append('=');
       sb.append(symbolicName);
 
@@ -262,14 +262,14 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       artifact = artifact.setFile(file);
 
-      return MavenModelUtils.toMavenArtifact(artifact);
+      return MavenCoreUtils.toMavenArtifact(artifact);
    }
 
    private static BundleCandidate newBundleCandidate(MavenProject project)
    {
       final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setLocation(project.getArtifact().getFile());
-      bundle.addExtension(MavenModelUtils.toMavenArtifact(project.getArtifact()));
+      bundle.addExtension(MavenCoreUtils.toMavenArtifact(project.getArtifact()));
       return bundle;
    }
 }
