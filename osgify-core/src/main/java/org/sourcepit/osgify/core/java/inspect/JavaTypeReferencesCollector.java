@@ -10,9 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.sourcepit.common.constraints.NotNull;
-
 import org.apache.bcel.Constants;
+import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.DescendingVisitor;
@@ -20,6 +19,7 @@ import org.apache.bcel.classfile.EmptyVisitor;
 import org.apache.bcel.classfile.InnerClass;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Signature;
+import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
 
 public class JavaTypeReferencesCollector extends EmptyVisitor
@@ -37,6 +37,12 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
       new DescendingVisitor(javaClass, collector).visit();
       collector.refs.removeAll(collector.ignoredRefs);
       return collector.refs;
+   }
+
+   @Override
+   public void visitAnnotationEntry(AnnotationEntry obj)
+   {
+      processSignature(obj.getAnnotationType());
    }
 
    @Override
