@@ -9,6 +9,7 @@ package org.sourcepit.osgify.core.bundle;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -29,6 +31,9 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -50,7 +55,7 @@ public class RequiredExecutionEnvironmentAppender
       this.packagesService = packagesService;
    }
 
-   public void append(@NotNull BundleCandidate bundle)
+   public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
    {
       final BundleManifest manifest = bundle.getManifest();
 
@@ -62,24 +67,52 @@ public class RequiredExecutionEnvironmentAppender
       }
 
       final JavaResourceBundle jBundle = bundle.getContent();
-      append(bundle, manifest, jBundle);
+      append(bundle, manifest, jBundle, options);
    }
 
-   private void append(BundleCandidate bundle, final BundleManifest manifest, final JavaResourceBundle jBundle)
+   private void append(BundleCandidate bundle, final BundleManifest manifest, final JavaResourceBundle jBundle,
+      PropertiesSource options)
    {
       final float requiredClassVersion = resolveMajorClassVersion(jBundle);
       final List<String> requiredPackages = packagesService.getRequiredPackages(bundle);
 
-      final List<ExecutionEnvironment> executionEnvironments = execEnvService.getExecutionEnvironments();
+      final Set<String> excludes = getExcludedExecutionEnvironments(options);
+
+      final Collection<ExecutionEnvironment> executionEnvironments = Collections2.filter(
+         execEnvService.getExecutionEnvironments(), new Predicate<ExecutionEnvironment>()
+         {
+            @Override
+            public boolean apply(ExecutionEnvironment input)
+            {
+               return !excludes.contains(input.getId());
+            }
+         });
+
+
       final List<ExecutionEnvironment> winners = determineCompatibleExecutionEnvironments(executionEnvironments,
          requiredClassVersion, requiredPackages);
 
       append(manifest, requiredClassVersion, winners);
    }
 
+   static final Set<String> getExcludedExecutionEnvironments(PropertiesSource options)
+   {
+      final String[] split = options.get("osgifier.excludedExecutionEnvironments", "").split(",");
+      final Set<String> excludes = new HashSet<String>();
+      for (String string : split)
+      {
+         final String exclude = string.trim();
+         if (!exclude.isEmpty())
+         {
+            excludes.add(exclude);
+         }
+      }
+      return excludes;
+   }
+
    private static List<ExecutionEnvironment> determineCompatibleExecutionEnvironments(
-      final List<ExecutionEnvironment> executionEnvironments, final float requiredClassVersion,
-      final List<String> requiredPackages)
+      final Collection<ExecutionEnvironment> executionEnvironments, final float requiredClassVersion,
+      final Collection<String> requiredPackages)
    {
       final Set<String> requiredEEPackages = new HashSet<String>(requiredPackages);
       requiredEEPackages.retainAll(getAllPackages(executionEnvironments));
@@ -113,7 +146,7 @@ public class RequiredExecutionEnvironmentAppender
       return classVersion <= ee.getMaxClassVersion() && ee.getPackages().containsAll(packages);
    }
 
-   private static Set<String> getAllPackages(final List<ExecutionEnvironment> executionEnvironments)
+   private static Set<String> getAllPackages(final Collection<ExecutionEnvironment> executionEnvironments)
    {
       final Set<String> eePackages = new HashSet<String>();
       for (ExecutionEnvironment ee : executionEnvironments)

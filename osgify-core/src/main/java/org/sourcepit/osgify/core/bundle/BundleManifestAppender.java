@@ -93,7 +93,7 @@ public class BundleManifestAppender
       {
          if (filter.isAppendExecutionEnvironment(bundle, options))
          {
-            environmentAppender.append(bundle);
+            environmentAppender.append(bundle, options);
          }
          if (filter.isAppendPackageExports(bundle, options))
          {
