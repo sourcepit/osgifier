@@ -54,7 +54,7 @@ public class InspectJavaPackageNames extends AbstractSymbolicNameResolutionStrat
       final int maxDepth = depth + 1;
 
       final List<JavaPackage> roots = firstWithTypesOrSubPackages(jBundle, minDepth, maxDepth);
-      return resolveSymbolicName(roots, depth);
+      return roots.isEmpty() ? null : resolveSymbolicName(roots, depth);
    }
 
    private String resolveSymbolicName(final List<JavaPackage> roots, final int depth)
