@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sourcepit</groupId>
@@ -83,10 +84,10 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
-                <groupId>org.sourcepit.common</groupId>
-                <artifactId>common-maven-model</artifactId>
-                <version>0.17.0-SNAPSHOT</version>
-            </dependency>
+				<groupId>org.sourcepit.common</groupId>
+				<artifactId>common-maven-model</artifactId>
+				<version>0.17.0-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>common-maven-core</artifactId>
@@ -150,8 +151,20 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
-					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.sourcepit.tools</groupId>
+					<artifactId>osgify-maven-plugin</artifactId>
+					<version>0.18.0</version>
+					<configuration>
+						<options>
+							<excludedExecutionEnvironments>
+								JavaSE/compact1-1.8,
+								JavaSE/compact2-1.8,
+								JavaSE/compact3-1.8
+							</excludedExecutionEnvironments>
+						</options>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -178,6 +191,19 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.sourcepit.tools</groupId>
+										<artifactId>osgify-maven-plugin</artifactId>
+										<versionRange>[0.17.0,)</versionRange>
+										<goals>
+											<goal>generate-manifest</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
