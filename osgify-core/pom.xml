@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.sourcepit.tools</groupId>
 		<artifactId>osgify</artifactId>
-		<version>0.9.1-SNAPSHOT</version>
+		<version>0.9.1</version>
 	</parent>
 	<artifactId>osgify-core</artifactId>
 
