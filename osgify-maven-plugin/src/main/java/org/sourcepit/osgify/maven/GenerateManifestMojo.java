@@ -42,7 +42,7 @@ import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
 
 import com.google.common.base.Strings;
 
-@Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.RUNTIME_PLUS_SYSTEM, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
+@Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo
 {
    @Parameter(required = false)
