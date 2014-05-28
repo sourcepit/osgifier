@@ -40,7 +40,7 @@ public class DynamicPackageImportAppender
       if (!hasDynamicImportPackage(manifest, "*") && packagesService.usesClassForName(bundle.getContent()))
       {
          LOGGER
-            .warn("Detected usage of Class.forName(String). The behaviour of this method is differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
+            .warn("Detected usage of Class.forName(String). The behaviour of this method differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
          manifest.setHeader(DYNAMICIMPORT_PACKAGE, "*");
       }
    }
