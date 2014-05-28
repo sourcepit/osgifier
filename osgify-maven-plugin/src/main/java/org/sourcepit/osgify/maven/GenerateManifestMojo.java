@@ -6,10 +6,13 @@
 
 package org.sourcepit.osgify.maven;
 
+import static org.apache.commons.io.FileUtils.copyFile;
+import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 import static org.sourcepit.common.utils.props.PropertiesSources.chain;
 import static org.sourcepit.common.utils.props.PropertiesSources.toPropertiesSource;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -63,6 +66,9 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    @Parameter(property = "source.skip", defaultValue = "false")
    private boolean skipSource;
 
+   @Parameter(defaultValue = "false")
+   private boolean pde;
+
    @Inject
    private LegacySupport buildContext;
 
@@ -111,6 +117,19 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       final BundleManifest manifest = projectBundle.getManifest();
       ModelUtils.writeModel(manifestFile, manifest);
       project.setContextValue("osgifier.manifestFile", manifestFile);
+
+      if (pde)
+      {
+         // set as derived
+         try
+         {
+            copyFile(manifestFile, new File(project.getBasedir(), "META-INF/MANIFEST.MF"));
+         }
+         catch (IOException e)
+         {
+            throw pipe(e);
+         }
+      }
 
       final BundleCandidate sourceBundle = projectBundle.getSourceBundle();
       if (sourceBundle != null)
