@@ -37,6 +37,8 @@ import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
+import org.sourcepit.osgify.core.headermod.HeaderModifications;
+import org.sourcepit.osgify.core.headermod.HeaderModifier;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -66,6 +68,9 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    @Parameter(property = "source.skip", defaultValue = "false")
    private boolean skipSource;
 
+   @Parameter(required = false)
+   private HeaderModifications headerModifications;
+
    @Parameter(defaultValue = "false")
    private boolean pde;
 
@@ -80,6 +85,9 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
    @Inject
    private ArtifactFactory artifactFactory;
+   
+   @Inject
+   private HeaderModifier headerModifier;
 
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
@@ -115,6 +123,12 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       inflater.inflate(inflatorFilter, options, context, startTime);
 
       final BundleManifest manifest = projectBundle.getManifest();
+      
+      if (headerModifications != null)
+      {
+         headerModifier.applyModifications(manifest, headerModifications);
+      }
+      
       ModelUtils.writeModel(manifestFile, manifest);
       project.setContextValue("osgifier.manifestFile", manifestFile);
 
