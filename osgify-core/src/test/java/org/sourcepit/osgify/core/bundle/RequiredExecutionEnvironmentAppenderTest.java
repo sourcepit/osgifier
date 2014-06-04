@@ -6,8 +6,12 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
+import static org.sourcepit.common.manifest.osgi.BundleHeaderName.EXPORT_PACKAGE;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
@@ -167,6 +171,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
          JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
          appendType(jArchive, "javax.activation.MimeType", 48);
          activation = newBundleCandidate(jArchive);
+         activation.getManifest().setHeader(EXPORT_PACKAGE, "javax.activation");
       }
 
       final BundleCandidate mail;

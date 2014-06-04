@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
@@ -166,19 +167,23 @@ public class RequiredExecutionEnvironmentAppender
    private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle)
    {
       final List<String> requiredPackages = new ArrayList<String>(packagesService.getRequiredPackages(bundle));
-      removeBundlePackages(requiredPackages, bundle);
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
-         removeBundlePackages(requiredPackages, bundleReference.getTarget());
-      }
-      return requiredPackages;
-   }
 
-   private static void removeBundlePackages(final List<String> requiredPackages, BundleCandidate bundle)
-   {
-      JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
+      // remove packages contained in our jar
+      final JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
       packagesCollector.collect();
       requiredPackages.removeAll(packagesCollector.getBundlePackages());
+
+      // remove packages exposed by dependencies
+      for (BundleReference bundleReference : bundle.getDependencies())
+      {
+         final BundleCandidate target = bundleReference.getTarget();
+         final BundleManifest manifest = target.getManifest();
+         for (PackageExport packageExport : manifest.getExportPackage())
+         {
+            requiredPackages.removeAll(packageExport.getPackageNames());
+         }
+      }
+      return requiredPackages;
    }
 
    static final Set<String> getExcludedExecutionEnvironments(PropertiesSource options)
