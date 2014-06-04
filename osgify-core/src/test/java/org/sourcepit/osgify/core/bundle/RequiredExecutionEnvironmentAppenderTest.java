@@ -26,6 +26,8 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
+import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaType;
@@ -58,7 +60,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
    public void test()
    {
       PropertiesMap options = new LinkedPropertiesMap();
-      
+
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "org.sourcepit.Foo", 47);
 
@@ -153,6 +155,44 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
 
       manifest = bundle.getManifest();
       assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("JRE-1.1"));
+   }
+
+   @Test
+   public void testBeAwareOfPackagesFromDependencies() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+
+      final BundleCandidate activation;
+      {
+         JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+         appendType(jArchive, "javax.activation.MimeType", 48);
+         activation = newBundleCandidate(jArchive);
+      }
+
+      final BundleCandidate mail;
+      {
+         JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+         JavaType jType = appendType(jArchive, "javax.mail.Service", 48);
+         appendTypeReference(jType, "javax.activation.MimeType");
+         mail = newBundleCandidate(jArchive);
+      }
+
+      execEnvAppender.append(mail, options);
+
+      BundleManifest manifest = mail.getManifest();
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT), IsEqual.equalTo("JavaSE-1.6"));
+
+      BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
+      ref.setTarget(activation);
+      mail.getDependencies().add(ref);
+
+      manifest.setHeader(BUNDLE_REQUIREDEXECUTIONENVIRONMENT, null);
+
+      execEnvAppender.append(mail, options);
+
+      assertThat(manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT),
+         IsEqual.equalTo("J2SE-1.4, JavaSE/compact1-1.8"));
    }
 
 }

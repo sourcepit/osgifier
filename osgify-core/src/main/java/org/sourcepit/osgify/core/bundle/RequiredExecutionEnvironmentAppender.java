@@ -26,6 +26,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.JavaClass;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
@@ -74,7 +75,7 @@ public class RequiredExecutionEnvironmentAppender
       PropertiesSource options)
    {
       final float requiredClassVersion = resolveMajorClassVersion(jBundle);
-      final List<String> requiredPackages = packagesService.getRequiredPackages(bundle);
+      final List<String> requiredPackages = getRequiredPackagesNotContainedInAnyDependency(bundle);
 
       final Set<String> excludes = getExcludedExecutionEnvironments(options);
 
@@ -93,6 +94,24 @@ public class RequiredExecutionEnvironmentAppender
          requiredClassVersion, requiredPackages);
 
       append(manifest, requiredClassVersion, winners);
+   }
+
+   private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle)
+   {
+      final List<String> requiredPackages = new ArrayList<String>(packagesService.getRequiredPackages(bundle));
+      removeBundlePackages(requiredPackages, bundle);
+      for (BundleReference bundleReference : bundle.getDependencies())
+      {
+         removeBundlePackages(requiredPackages, bundleReference.getTarget());
+      }
+      return requiredPackages;
+   }
+
+   private static void removeBundlePackages(final List<String> requiredPackages, BundleCandidate bundle)
+   {
+      JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
+      packagesCollector.collect();
+      requiredPackages.removeAll(packagesCollector.getBundlePackages());
    }
 
    static final Set<String> getExcludedExecutionEnvironments(PropertiesSource options)
