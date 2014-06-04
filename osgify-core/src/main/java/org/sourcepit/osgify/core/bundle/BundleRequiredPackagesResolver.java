@@ -63,6 +63,12 @@ public class BundleRequiredPackagesResolver
       final List<PackageReference> exportDescriptions = new ArrayList<PackageReference>();
 
       BundleManifest manifest = bundle.getManifest();
+      
+      PackageExport packageExport = resolvePackage(manifest.getExportPackage(), packageName);
+      if (packageExport != null)
+      {
+         exportDescriptions.add(new PackageReference(bundle, packageName, null, bundle, packageExport, ACCESSIBLE));
+      }
 
       final EList<String> executionEnvironments = bundle.getManifest().getBundleRequiredExecutionEnvironment();
       if (executionEnvironments != null)
@@ -72,12 +78,6 @@ public class BundleRequiredPackagesResolver
          {
             exportDescriptions.add(new PackageReference(bundle, packageName, null, null, null, accessRule));
          }
-      }
-      
-      PackageExport packageExport = resolvePackage(manifest.getExportPackage(), packageName);
-      if (packageExport != null)
-      {
-         exportDescriptions.add(new PackageReference(bundle, packageName, null, bundle, packageExport, ACCESSIBLE));
       }
       
       for (BundleReference bundleReference : bundle.getDependencies())
