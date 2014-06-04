@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.bcel.Constants;
 import org.apache.bcel.classfile.AnnotationEntry;
 import org.apache.bcel.classfile.ConstantClass;
+import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantPool;
 import org.apache.bcel.classfile.DescendingVisitor;
 import org.apache.bcel.classfile.EmptyVisitor;
@@ -37,6 +38,13 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
       new DescendingVisitor(javaClass, collector).visit();
       collector.refs.removeAll(collector.ignoredRefs);
       return collector.refs;
+   }
+
+   @Override
+   public void visitConstantNameAndType(ConstantNameAndType obj)
+   {
+      final String signature = obj.getSignature(constantPool);
+      processSignature(signature);
    }
 
    @Override
@@ -65,8 +73,7 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
    @Override
    public void visitSignature(Signature obj)
    {
-      final String signature = obj.getSignature();
-      processSignature(signature);
+      processSignature(obj.getSignature());
    }
 
    private void processSignature(final String signature)
@@ -84,15 +91,7 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
    @Override
    public void visitConstantClass(ConstantClass obj)
    {
-      String name = (String) obj.getConstantValue(constantPool);
-      if (name.charAt(0) == '[')
-      {
-         processSignature(name);
-      }
-      else
-      {
-         refs.add(normalizeTypeName(name));
-      }
+      addClassOrArrayClassName((String) obj.getConstantValue(constantPool));
    }
 
    @Override
@@ -120,5 +119,17 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
          }
       }
       return sb.toString();
+   }
+
+   private void addClassOrArrayClassName(String name)
+   {
+      if (name.charAt(0) == '[')
+      {
+         processSignature(name);
+      }
+      else
+      {
+         refs.add(normalizeTypeName(name));
+      }
    }
 }

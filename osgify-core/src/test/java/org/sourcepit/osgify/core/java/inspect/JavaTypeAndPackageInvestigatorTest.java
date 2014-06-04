@@ -6,15 +6,12 @@
 
 package org.sourcepit.osgify.core.java.inspect;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
 import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.common.util.EList;
@@ -183,17 +180,21 @@ public class JavaTypeAndPackageInvestigatorTest
       typeRefs = jType.getAnnotation("referencedTypes");
 
       expectedRefs = new HashSet<String>();
+      
       expectedRefs.add("java.util.Map");
       expectedRefs.add("java.lang.Short");
       expectedRefs.add("java.lang.Boolean");
       expectedRefs.add("org.hamcrest.Matcher");
       expectedRefs.add("org.hamcrest.BaseMatcher");
       expectedRefs.add("java.lang.Object");
+      expectedRefs.add("java.lang.String");
       expectedRefs.add("java.lang.Long");
       expectedRefs.add("java.util.HashMap");
       expectedRefs.add("java.lang.Runnable");
       expectedRefs.add("java.lang.Integer");
-
-      assertThat(typeRefs.getReferences().keySet(), IsEqual.equalTo(expectedRefs));
+      
+      final Set<String> actualRefs = typeRefs.getReferences().keySet();
+      assertEquals(expectedRefs.size(), actualRefs.size());
+      assertThat(actualRefs, IsEqual.equalTo(expectedRefs));
    }
 }

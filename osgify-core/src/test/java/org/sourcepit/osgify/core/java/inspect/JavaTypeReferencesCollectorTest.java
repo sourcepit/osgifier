@@ -15,7 +15,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.Set;
-
 import java.lang.IllegalArgumentException;
 
 import org.apache.bcel.classfile.JavaClass;
@@ -45,8 +44,8 @@ public class JavaTypeReferencesCollectorTest
       final File jarFile = new File("target/testResources/osgify-core.jar");
       assertTrue(jarFile.exists());
 
-      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(
-         new URL[] { jarFile.toURI().toURL() }));
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(new URL[] { jarFile.toURI()
+         .toURL() }));
 
       JavaClass jClass = classRepo.loadClass(TypeA.class.getName());
 
@@ -63,7 +62,7 @@ public class JavaTypeReferencesCollectorTest
       jClass = classRepo.loadClass(TypeA.Hans.class.getName());
 
       typeRefs = JavaTypeReferencesCollector.collect(jClass);
-      assertThat(typeRefs.size(), Is.is(10));
+      assertThat(typeRefs.size(), Is.is(11));
 
       expectedRefs = new HashSet<String>();
 
@@ -73,10 +72,34 @@ public class JavaTypeReferencesCollectorTest
       expectedRefs.add("org.hamcrest.Matcher");
       expectedRefs.add("org.hamcrest.BaseMatcher");
       expectedRefs.add("java.lang.Object");
+      expectedRefs.add("java.lang.String");
       expectedRefs.add("java.lang.Long");
       expectedRefs.add("java.util.HashMap");
       expectedRefs.add("java.lang.Runnable");
       expectedRefs.add("java.lang.Integer");
+
+      assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
+   }
+
+   @Test
+   public void testSignatureOfInvokedMethod() throws Exception
+   {
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(
+         JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
+
+      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class
+         .getName());
+
+      final Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
+      assertThat(typeRefs.size(), Is.is(4));
+
+      final Set<String> expectedRefs = new HashSet<String>();
+
+      expectedRefs.add("java.lang.Object");
+      expectedRefs
+         .add("org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy");
+      expectedRefs.add("java.lang.Integer");
+      expectedRefs.add("java.lang.String");
 
       assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
    }
