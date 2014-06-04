@@ -6,15 +6,13 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -23,6 +21,7 @@ import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -195,4 +194,65 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
          IsEqual.equalTo("J2SE-1.4, JavaSE/compact1-1.8"));
    }
 
+   @Test
+   public void testGetMappedEEIds() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+      List<String> mappedEEs;
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "foo", Version.parse("1.0.0"));
+      assertEquals("[]", mappedEEs.toString());
+
+      options.put("osgifier.executionEnvironmentMappings", "foo=JavaSE-1.6");
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "foo", Version.parse("1.0.0"));
+      assertEquals("[JavaSE-1.6]", mappedEEs.toString());
+
+      options.put("osgifier.executionEnvironmentMappings", "foo_1.0.0=JavaSE-1.5");
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "foo", Version.parse("1.0.0"));
+      assertEquals("[JavaSE-1.5]", mappedEEs.toString());
+
+      options.put("osgifier.executionEnvironmentMappings", "foo_1.0.0 = J2SE-1.4| | | | JavaSE/compact1-1.8");
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "foo", Version.parse("1.0.0"));
+      assertEquals("[J2SE-1.4, JavaSE/compact1-1.8]", mappedEEs.toString());
+
+      options.put("osgifier.executionEnvironmentMappings",
+         "foo_1.0.0 = J2SE-1.4| | | | JavaSE/compact1-1.8, bar = J2SE-1.3");
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "foo", Version.parse("1.0.0"));
+      assertEquals("[J2SE-1.4, JavaSE/compact1-1.8]", mappedEEs.toString());
+
+      mappedEEs = RequiredExecutionEnvironmentAppender.getMappedEEIds(options, "bar", Version.parse("1.0.0"));
+      assertEquals("[J2SE-1.3]", mappedEEs.toString());
+   }
+
+   @Test
+   public void testExecutionEnvironmentMappings() throws Exception
+   {
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendType(jArchive, "org.sourcepit.Foo", 47);
+
+      BundleCandidate bundle = newBundleCandidate(jArchive);
+      bundle.setSymbolicName("foo");
+      bundle.setVersion(Version.parse("1"));
+
+      // without mapping
+      PropertiesMap options = new LinkedPropertiesMap();
+      execEnvAppender.append(bundle, options);
+      BundleManifest manifest = bundle.getManifest();
+      assertEquals("J2SE-1.3, JavaSE/compact1-1.8", manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
+
+      // with mapping
+      manifest.setHeader(BUNDLE_REQUIREDEXECUTIONENVIRONMENT, null);
+
+      options.put("osgifier.executionEnvironmentMappings", "foo = OSGi/Minimum-1.0 | J2SE-1.3");
+
+      execEnvAppender.append(bundle, options);
+
+      manifest = bundle.getManifest();
+      assertEquals("OSGi/Minimum-1.0, J2SE-1.3", manifest.getHeaderValue(BUNDLE_REQUIREDEXECUTIONENVIRONMENT));
+   }
 }

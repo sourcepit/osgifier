@@ -133,6 +133,12 @@ public class BundleRequiredPackagesCollector
                else
                {
                   final String consumerPackageName = jPackage.getQualifiedName();
+                  
+                  if ("javax.security.sasl".equals(packageName))
+                  {
+                     System.out.println(jType.getQualifiedName());
+                  }
+                  
                   requiredToConsumers.put(packageName, consumerPackageName);
                }
             }
