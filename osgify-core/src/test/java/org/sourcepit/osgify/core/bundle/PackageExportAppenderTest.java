@@ -141,8 +141,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
       exportAppender.append(new LinkedPropertiesMap(), bundle);
-
-      assertThat(manifest.getHeaderValue(EXPORT_PACKAGE), IsEqual.equalTo("org.sourcepit;version=1.0.1"));
+      assertEquals("java.lang;version=1.0.1,org.sourcepit;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
    @Test
@@ -185,7 +184,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testEraseVersionOfPlatformFamilyPackages()
+   public void testDoNotEraseVersionOfPlatformFamilyPackages()
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "javax.xml.stream.Foo", 47);
@@ -199,13 +198,11 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
       exportAppender.append(new LinkedPropertiesMap(), bundle);
-
-      assertThat(manifest.getHeaderValue(EXPORT_PACKAGE),
-         IsEqual.equalTo("javax.xml.stream,org.sourcepit;version=1.0.1"));
+      assertEquals("javax.xml.stream;version=1.0.1,org.sourcepit;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
    @Test
-   public void testEraseVersionOfVendorPackages()
+   public void testDoNotEraseVersionOfVendorPackages()
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "sun.misc.Foo", 47); // vendor specific package of compatible EE
@@ -217,7 +214,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
       exportAppender.append(new LinkedPropertiesMap(), bundle);
-      assertThat(manifest.getHeaderValue(EXPORT_PACKAGE), IsEqual.equalTo("org.sourcepit;version=1.0.1,sun.misc"));
+      assertEquals("org.sourcepit;version=1.0.1,sun.misc;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
    @Test

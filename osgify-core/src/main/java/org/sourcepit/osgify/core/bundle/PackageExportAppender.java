@@ -14,13 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.inject.Named;
-import org.sourcepit.common.constraints.NotNull;
 
 import org.eclipse.emf.common.util.EList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
@@ -31,9 +30,6 @@ import org.sourcepit.common.utils.collections.CollectionUtils;
 import org.sourcepit.common.utils.collections.ValueLookup;
 import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.ee.AccessRule;
-import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
-import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.File;
@@ -48,14 +44,6 @@ import org.sourcepit.osgify.core.model.java.JavaResourcesRoot;
 public class PackageExportAppender
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(PackageExportAppender.class);
-
-   private final ExecutionEnvironmentService execEnvService;
-
-   @Inject
-   public PackageExportAppender(ExecutionEnvironmentService execEnvService)
-   {
-      this.execEnvService = execEnvService;
-   }
 
    public void append(@NotNull PropertiesSource properties, @NotNull BundleCandidate bundle)
    {
@@ -113,7 +101,6 @@ public class PackageExportAppender
    {
       final Map<String, List<JavaPackage>> nameToJPackagesMap = new HashMap<String, List<JavaPackage>>();
       collectPackagesToExport(jBundle, nameToJPackagesMap);
-      filterExecutionEnvironmentPackages(nameToJPackagesMap, executionEnvironments);
       filterPackagesFromReferencedBundles(nameToJPackagesMap, bundle.getDependencies());
       return nameToJPackagesMap;
    }
@@ -152,42 +139,7 @@ public class PackageExportAppender
       {
          version = manifest.getBundleVersion();
       }
-
-      // export packages reachable via execution platforms (and implementations) with default version
-      final EList<String> executionEnvironments = manifest.getBundleRequiredExecutionEnvironment();
-      if (executionEnvironments != null)
-      {
-         final AccessRule accessRule = execEnvService.getAccessRuleById(executionEnvironments, packageName);
-         if (accessRule != AccessRule.NON_ACCESSIBLE)
-         {
-            version = null;
-         }
-      }
-
       return version;
-   }
-
-   private void filterExecutionEnvironmentPackages(final Map<String, List<JavaPackage>> nameToJPackagesMap,
-      EList<String> executionEnvironments)
-   {
-      if (executionEnvironments != null)
-      {
-         for (String execEnvId : executionEnvironments)
-         {
-            ExecutionEnvironment executionEnvironment = execEnvService.getExecutionEnvironment(execEnvId);
-            if (executionEnvironment == null)
-            {
-               LOGGER.warn("Unknow execution environment {}", execEnvId);
-            }
-            else
-            {
-               for (String packageName : executionEnvironment.getPackages())
-               {
-                  nameToJPackagesMap.remove(packageName);
-               }
-            }
-         }
-      }
    }
 
    private static Version determinePackageVersionFromPackageInfo(List<JavaPackage> jPackages)
