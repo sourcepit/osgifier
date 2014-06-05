@@ -6,12 +6,17 @@
 
 package org.sourcepit.osgify.core.ee;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
 import static org.sourcepit.osgify.core.ee.AccessRule.DISCOURAGED;
 import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -312,5 +317,26 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
       assertThat(execEnvImpls.get(2).getExecutionEnvironmentId(), IsEqual.equalTo("J2SE-1.5"));
       assertThat(execEnvImpls.get(3).getExecutionEnvironmentId(), IsEqual.equalTo("JavaSE-1.6"));
       assertThat(execEnvImpls.get(4).getExecutionEnvironmentId(), IsEqual.equalTo("JavaSE-1.7"));
+   }
+
+   @Test
+   public void testGetIntersectingPackages() throws Exception
+   {
+      ExecutionEnvironment java8 = environmentService.getExecutionEnvironment("JavaSE/compact3-1.8");
+      assertTrue(java8.getPackages().contains("java.lang"));
+      assertFalse(java8.getPackages().contains("java.applet"));
+      assertTrue(java8.getPackages().contains("java.nio.file"));
+
+      ExecutionEnvironment java4 = environmentService.getExecutionEnvironment("J2SE-1.4");
+      assertTrue(java4.getPackages().contains("java.lang"));
+      assertTrue(java4.getPackages().contains("java.applet"));
+      assertFalse(java4.getPackages().contains("java.nio.file"));
+
+      List<String> intersectedPackages = environmentService.getIntersectingPackagesByIds(Arrays.asList("J2SE-1.4",
+         "JavaSE/compact3-1.8"));
+      
+      assertTrue(intersectedPackages.contains("java.lang"));
+      assertFalse(intersectedPackages.contains("java.applet"));
+      assertFalse(intersectedPackages.contains("java.nio.file"));
    }
 }

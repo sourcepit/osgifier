@@ -16,6 +16,8 @@ public interface ExecutionEnvironmentService
 {
    ExecutionEnvironment getExecutionEnvironment(String executionEnvironmentId);
 
+   List<ExecutionEnvironment> getExecutionEnvironments(Collection<String> executionEnvironmentIds);
+
    List<ExecutionEnvironment> getExecutionEnvironments();
 
    List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations();
@@ -29,4 +31,8 @@ public interface ExecutionEnvironmentService
    AccessRule getAccessRule(ExecutionEnvironment executionEnvironment, String packageName);
 
    AccessRule getAccessRule(Collection<ExecutionEnvironment> executionEnvironments, String packageName);
+
+   List<String> getIntersectingPackagesByIds(Collection<String> executionEnvironmentIds);
+
+   List<String> getIntersectingPackages(Collection<ExecutionEnvironment> executionEnvironments);
 }

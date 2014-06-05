@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,8 +23,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import org.sourcepit.common.constraints.NotNull;
 
+import org.sourcepit.common.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.utils.collections.MultiValueHashMap;
@@ -158,6 +159,21 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       return false;
    }
 
+   public List<ExecutionEnvironment> getExecutionEnvironments(@NotNull Collection<String> executionEnvironmentIds)
+   {
+      List<ExecutionEnvironment> execEnvs = new ArrayList<ExecutionEnvironment>();
+      for (String id : executionEnvironmentIds)
+      {
+         ExecutionEnvironment execEnv = getExecutionEnvironment(id);
+         if (execEnv == null)
+         {
+            throw new IllegalArgumentException("no execution environment registered for id " + id);
+         }
+         execEnvs.add(execEnv);
+      }
+      return execEnvs;
+   }
+
    public ExecutionEnvironment getExecutionEnvironment(@NotNull String executionEnvironmentId)
    {
       return executionEnvironmentsMap.get(executionEnvironmentId);
@@ -190,16 +206,7 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       PackageAccess packageAccess = packageAccessCache.get(cacheKey);
       if (packageAccess == null)
       {
-         List<ExecutionEnvironment> execEnvs = new ArrayList<ExecutionEnvironment>();
-         for (String id : executionEnvironmentIds)
-         {
-            ExecutionEnvironment execEnv = getExecutionEnvironment(id);
-            if (execEnv == null)
-            {
-               throw new IllegalArgumentException("no execution environment registered for id " + id);
-            }
-            execEnvs.add(execEnv);
-         }
+         List<ExecutionEnvironment> execEnvs = getExecutionEnvironments(executionEnvironmentIds);
          packageAccess = newPackageAccess(execEnvs);
          packageAccessCache.put(cacheKey, packageAccess);
       }
@@ -329,5 +336,39 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       {
          return discouraged;
       }
+   }
+
+   @Override
+   public List<String> getIntersectingPackagesByIds(Collection<String> executionEnvironmentIds)
+   {
+      return getIntersectingPackages(getExecutionEnvironments(executionEnvironmentIds));
+   }
+
+   @Override
+   public List<String> getIntersectingPackages(Collection<ExecutionEnvironment> executionEnvironments)
+   {
+      final List<Collection<String>> packages = new ArrayList<Collection<String>>(executionEnvironments.size());
+      for (ExecutionEnvironment executionEnvironment : executionEnvironments)
+      {
+         packages.add(executionEnvironment.getPackages());
+      }
+      final List<String> result = new ArrayList<String>(newIntersection(packages));
+      Collections.sort(result);
+      return result;
+   }
+
+   static <T> Set<T> newIntersection(Collection<Collection<T>> collections)
+   {
+      final Set<T> intersection = new HashSet<T>();
+      final Iterator<Collection<T>> it = collections.iterator();
+      if (it.hasNext())
+      {
+         intersection.addAll(it.next());
+         while (it.hasNext())
+         {
+            intersection.retainAll(it.next());
+         }
+      }
+      return intersection;
    }
 }
