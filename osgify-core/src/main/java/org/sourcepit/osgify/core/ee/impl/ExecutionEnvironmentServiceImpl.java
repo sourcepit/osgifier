@@ -148,15 +148,7 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
 
    public boolean isCompatible(@NotNull ExecutionEnvironment ee1, @NotNull ExecutionEnvironment ee2)
    {
-      final float max1 = ee1.getMaxClassVersion();
-      final float max2 = ee2.getMaxClassVersion();
-      if (max1 >= max2)
-      {
-         final List<String> p1 = ee1.getPackages();
-         final List<String> p2 = ee2.getPackages();
-         return p1.containsAll(p2);
-      }
-      return false;
+      return ee1.isCompatibleWith(ee2);
    }
 
    public List<ExecutionEnvironment> getExecutionEnvironments(@NotNull Collection<String> executionEnvironmentIds)

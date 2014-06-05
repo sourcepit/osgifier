@@ -101,7 +101,7 @@ public class BundleManifestAppender
          }
          if (filter.isAppendPackageImports(bundle, options))
          {
-            packageImports.append(bundle);
+            packageImports.append(bundle, options);
          }
          if (filter.isAppendDynamicImports(bundle, options))
          {
