@@ -10,20 +10,20 @@ import java.util.Collection;
 
 public class PackageReferences
 {
-   private final Collection<String> implemented;
+   private final Collection<String> inherited;
    private final Collection<String> invoked;
    private final Collection<String> all;
 
-   PackageReferences(Collection<String> implemented, Collection<String> invoked, Collection<String> all)
+   PackageReferences(Collection<String> inherited, Collection<String> invoked, Collection<String> all)
    {
-      this.implemented = implemented;
+      this.inherited = inherited;
       this.invoked = invoked;
       this.all = all;
    }
 
-   public Collection<String> getImplemented()
+   public Collection<String> getInherited()
    {
-      return implemented;
+      return inherited;
    }
 
    public Collection<String> getInvoked()

@@ -188,8 +188,11 @@ public class PackageImportAppender
    {
       final Map<String, Exporter> requiredPackgeToExporterMap = resolve(bundle);
 
+      final boolean treatInheritedPackagesAsInternal = options.getBoolean("osgifier.treatInheritedPackagesAsInternal",
+         false);
+
       final Map<BundleCandidate, AccessModifier> requiredBundleToImportTypeMap = determineOverallImportTypeForRequiredBundles(
-         bundle, requiredPackgeToExporterMap);
+         bundle, requiredPackgeToExporterMap, treatInheritedPackagesAsInternal);
 
       for (Entry<String, Exporter> entry : requiredPackgeToExporterMap.entrySet())
       {
@@ -360,7 +363,7 @@ public class PackageImportAppender
    }
 
    private Map<BundleCandidate, AccessModifier> determineOverallImportTypeForRequiredBundles(BundleCandidate bundle,
-      final Map<String, Exporter> requiredPackgeToExporterMap)
+      final Map<String, Exporter> requiredPackgeToExporterMap, boolean treatInheritedPackagesAsInternal)
    {
       final Map<BundleCandidate, AccessModifier> requiredBundleToImportTypeMap = new HashMap<BundleCandidate, AccessModifier>();
 
@@ -382,11 +385,11 @@ public class PackageImportAppender
                   ? AccessModifier.INTERNAL
                   : AccessModifier.PUBLIC;
 
-               if (importType == AccessModifier.PUBLIC)
+               if (importType == AccessModifier.PUBLIC && treatInheritedPackagesAsInternal)
                {
                   // if our bundle implements classes from a public package we assume that we are providing an api
                   // implementation
-                  final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getImplemented()
+                  final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getInherited()
                      .contains(requiredPackage);
                   if (roleProvider)
                   {

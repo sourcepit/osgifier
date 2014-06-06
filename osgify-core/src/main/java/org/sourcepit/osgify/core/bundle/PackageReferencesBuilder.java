@@ -17,25 +17,25 @@ import java.util.Set;
 
 public class PackageReferencesBuilder
 {
-   private final Set<String> implementedPackages = new HashSet<String>();
+   private final Set<String> inheritedPackages = new HashSet<String>();
 
    private final Set<String> invokedPackages = new HashSet<String>();
 
    private final Set<String> allPackages = new HashSet<String>();
 
-   public void addImplementedTypes(Collection<String> typeNames)
+   public void addInheritedTypes(Collection<String> typeNames)
    {
       for (String typeName : typeNames)
       {
-         addImplementedType(typeName);
+         addInheritedType(typeName);
       }
    }
 
-   public void addImplementedPackages(Collection<String> packageNames)
+   public void addInheritedPackages(Collection<String> packageNames)
    {
       for (String packageName : packageNames)
       {
-         addImplementedPackage(packageName);
+         addInheritedPackage(packageName);
       }
    }
 
@@ -55,9 +55,9 @@ public class PackageReferencesBuilder
       }
    }
 
-   public void addImplementedType(String typeName)
+   public void addInheritedType(String typeName)
    {
-      addImplementedPackage(extractPackageName(typeName));
+      addInheritedPackage(extractPackageName(typeName));
    }
 
    public void addInvokedType(String typeName)
@@ -65,16 +65,16 @@ public class PackageReferencesBuilder
       addInvokedPackage(extractPackageName(typeName));
    }
 
-   public void addImplementedPackage(String packageName)
+   public void addInheritedPackage(String packageName)
    {
       invokedPackages.remove(packageName);
-      implementedPackages.add(packageName);
+      inheritedPackages.add(packageName);
       allPackages.add(packageName);
    }
 
    public void addInvokedPackage(String packageName)
    {
-      if (!implementedPackages.contains(packageName))
+      if (!inheritedPackages.contains(packageName))
       {
          invokedPackages.add(packageName);
          allPackages.add(packageName);
@@ -83,13 +83,13 @@ public class PackageReferencesBuilder
 
    public PackageReferences build()
    {
-      final List<String> implemented = new ArrayList<String>(implementedPackages);
+      final List<String> inherited = new ArrayList<String>(inheritedPackages);
       final List<String> invoked = new ArrayList<String>(invokedPackages);
       final List<String> all = new ArrayList<String>(allPackages);
-      Collections.sort(implemented);
+      Collections.sort(inherited);
       Collections.sort(invoked);
       Collections.sort(all);
-      return new PackageReferences(unmodifiableCollection(implemented), unmodifiableCollection(invoked),
+      return new PackageReferences(unmodifiableCollection(inherited), unmodifiableCollection(invoked),
          unmodifiableCollection(all));
    }
 

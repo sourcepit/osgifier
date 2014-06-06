@@ -154,7 +154,7 @@
 				<plugin>
 					<groupId>org.sourcepit.tools</groupId>
 					<artifactId>osgify-maven-plugin</artifactId>
-					<version>0.18.0</version>
+					<version>0.19.0-preview-2</version>
 					<configuration>
 						<pde>true</pde>
 						<options>

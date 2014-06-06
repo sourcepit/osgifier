@@ -44,7 +44,7 @@ public class BundlePackagesCollector
          bundlePackages.add(packageName);
 
          final PackageReferences refs = entry.getValue();
-         bundleRefs.addImplementedPackages(refs.getImplemented());
+         bundleRefs.addInheritedPackages(refs.getInherited());
          bundleRefs.addInvokedPackages(refs.getInvoked());
       }
 
@@ -115,7 +115,7 @@ public class BundlePackagesCollector
             if (annotation != null)
             {
                final Set<String> typeNames = annotation.getReferences().keySet();
-               refs.addImplementedTypes(typeNames);
+               refs.addInheritedTypes(typeNames);
                qualifiedTypeReferences.addAll(typeNames);
             }
 
@@ -123,7 +123,7 @@ public class BundlePackagesCollector
             if (annotation != null)
             {
                final Set<String> typeNames = annotation.getReferences().keySet();
-               refs.addImplementedTypes(typeNames);
+               refs.addInheritedTypes(typeNames);
                qualifiedTypeReferences.addAll(typeNames);
             }
          }
