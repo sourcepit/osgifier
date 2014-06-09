@@ -6,16 +6,18 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import static org.sourcepit.common.manifest.osgi.ParameterType.DIRECTIVE;
+import static org.sourcepit.common.manifest.osgi.Version.EMPTY_VERSION;
+import static org.sourcepit.common.manifest.osgi.VersionRange.INFINITE_RANGE;
+import static org.sourcepit.osgify.core.bundle.PackageImportType.INTERNAL_IMPORT;
+import static org.sourcepit.osgify.core.bundle.PackageImportType.PUBLIC_IMPORT;
+import static org.sourcepit.osgify.core.bundle.PackageImportType.SELF_IMPORT;
+import static org.sourcepit.osgify.core.bundle.VersionRangePolicy.COMPATIBLE;
+import static org.sourcepit.osgify.core.bundle.VersionRangePolicy.EQUIVALENT;
+
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,11 +27,9 @@ import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.Parameter;
-import org.sourcepit.common.manifest.osgi.ParameterType;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.ee.AccessRule;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
@@ -42,64 +42,29 @@ import org.sourcepit.osgify.core.model.context.BundleReference;
 @Named
 public class PackageImportAppender
 {
+   private final PackageResolver packageResolver;
 
-   private ExecutionEnvironmentService environmentService;
+   private final ExecutionEnvironmentService environmentService;
 
    @Inject
-   public PackageImportAppender(ExecutionEnvironmentService environmentService)
+   public PackageImportAppender(PackageResolver packageResolver, ExecutionEnvironmentService environmentService)
    {
+      this.packageResolver = packageResolver;
       this.environmentService = environmentService;
-   }
-
-   public enum AccessModifier
-   {
-      PUBLIC, INTERNAL
-   }
-
-   public enum ImportType
-   {
-      PUBLIC("public"), INTERNAL("internal"), SELF("self");
-
-      private final String literal;
-
-      private ImportType(String literal)
-      {
-         this.literal = literal;
-      }
-
-      public String getLiteral()
-      {
-         return literal;
-      }
-
-      public static ImportType parse(String literal)
-      {
-         for (ImportType type : values())
-         {
-            if (type.name().equalsIgnoreCase(literal))
-            {
-               return type;
-            }
-         }
-         throw new IllegalArgumentException("Unknown import type: " + literal);
-      }
-
    }
 
    public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
    {
-      final Map<String, Exporter> requiredPackgeToExporterMap = resolve(bundle);
-
       final boolean treatInheritedPackagesAsInternal = options.getBoolean("osgifier.treatInheritedPackagesAsInternal",
          false);
 
-      final Map<BundleCandidate, AccessModifier> requiredBundleToImportTypeMap = determineOverallImportTypeForRequiredBundles(
-         bundle, requiredPackgeToExporterMap, treatInheritedPackagesAsInternal);
+      final List<PackageResolutionResult> results = packageResolver.resolveRequiredPackages(bundle,
+         treatInheritedPackagesAsInternal);
 
-      for (Entry<String, Exporter> entry : requiredPackgeToExporterMap.entrySet())
+      for (PackageResolutionResult result : results)
       {
-         final String requiredPackage = entry.getKey();
-         final Exporter exporter = entry.getValue();
+         final String requiredPackage = result.getRequiredPackage();
+         final PackageOffer exporter = result.getSelectedOffer();
          if (exporter == null)
          {
             newUnresolvableImport(bundle, requiredPackage, options);
@@ -119,7 +84,7 @@ public class PackageImportAppender
                   break;
                case REQUIRED_BUNDLE :
                   newPackageImport(bundle, requiredPackage, exporter.getBundleReference(), exporter.getBundle(),
-                     exporter.getPackageExport(), requiredBundleToImportTypeMap.get(exporter.getBundle()), options);
+                     exporter.getPackageExport(), result.getAccessRule(), options);
                   break;
                default :
                   break;
@@ -157,10 +122,10 @@ public class PackageImportAppender
       }
    }
 
-   private static VersionRangePolicy getVersionRangePolicy(PropertiesSource options, final ImportType importType,
-      final VersionRangePolicy defaultPolicy)
+   private static VersionRangePolicy getVersionRangePolicy(PropertiesSource options,
+      final PackageImportType importType, final VersionRangePolicy defaultPolicy)
    {
-      final String option = "osgifier.importTypes." + importType.getLiteral() + ".policy";
+      final String option = "osgifier." + importType.literal() + "Policy";
       return VersionRangePolicy.parse(options.get(option, defaultPolicy.literal()));
    }
 
@@ -172,10 +137,9 @@ public class PackageImportAppender
       packageImport.getPackageNames().add(requiredPackage);
 
       final Version version = packageExport.getVersion();
-      if (version != null && !version.equals(Version.EMPTY_VERSION))
+      if (version != null && !version.equals(EMPTY_VERSION))
       {
-         final VersionRangePolicy policy = getVersionRangePolicy(options, ImportType.SELF,
-            VersionRangePolicy.EQUIVALENT);
+         final VersionRangePolicy policy = getVersionRangePolicy(options, SELF_IMPORT, EQUIVALENT);
 
          final VersionRange versionRange = policy.toVersionRange(version,
             options.getBoolean("osgifier.eraseMicro", true));
@@ -196,7 +160,7 @@ public class PackageImportAppender
       packageImport.getPackageNames().add(requiredPackage);
 
       final Version version = packageExport.getVersion();
-      if (version != null && !version.equals(Version.EMPTY_VERSION))
+      if (version != null && !version.equals(EMPTY_VERSION))
       {
          VersionRange versionRange = bundleReference.getVersionRange();
          if (versionRange == null || versionRange.getHighVersion() == null || !versionRange.includes(version))
@@ -205,7 +169,7 @@ public class PackageImportAppender
             versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
          }
 
-         if (!VersionRange.INFINITE_RANGE.equals(versionRange))
+         if (!INFINITE_RANGE.equals(versionRange))
          {
             packageImport.setVersion(versionRange);
          }
@@ -224,7 +188,7 @@ public class PackageImportAppender
    {
       Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
       parameter.setName("resolution");
-      parameter.setType(ParameterType.DIRECTIVE);
+      parameter.setType(DIRECTIVE);
       parameter.setValue("optional");
       packageImport.getParameters().add(parameter);
    }
@@ -256,255 +220,13 @@ public class PackageImportAppender
       switch (accessModifier)
       {
          case PUBLIC :
-            return getVersionRangePolicy(options, ImportType.PUBLIC, VersionRangePolicy.COMPATIBLE);
+            return getVersionRangePolicy(options, PUBLIC_IMPORT, COMPATIBLE);
          case INTERNAL :
-            return getVersionRangePolicy(options, ImportType.INTERNAL, VersionRangePolicy.EQUIVALENT);
+            return getVersionRangePolicy(options, INTERNAL_IMPORT, EQUIVALENT);
          default :
             throw new IllegalStateException();
       }
    }
 
-   private Map<BundleCandidate, AccessModifier> determineOverallImportTypeForRequiredBundles(BundleCandidate bundle,
-      final Map<String, Exporter> requiredPackgeToExporterMap, boolean treatInheritedPackagesAsInternal)
-   {
-      final Map<BundleCandidate, AccessModifier> requiredBundleToImportTypeMap = new HashMap<BundleCandidate, AccessModifier>();
-
-      for (Entry<String, Exporter> entry : requiredPackgeToExporterMap.entrySet())
-      {
-         final String requiredPackage = entry.getKey();
-         final Exporter exporter = entry.getValue();
-
-         if (exporter != null && exporter.getType() == ExporterType.REQUIRED_BUNDLE)
-         {
-            final BundleCandidate requiredBundle = exporter.getBundle();
-
-            final AccessModifier currentImportType = requiredBundleToImportTypeMap.get(requiredBundle);
-            if (currentImportType == null || currentImportType == AccessModifier.PUBLIC)
-            {
-               final PackageExport packageExport = exporter.getPackageExport();
-
-               AccessModifier importType = BundleUtils.isInternalPackage(packageExport)
-                  ? AccessModifier.INTERNAL
-                  : AccessModifier.PUBLIC;
-
-               if (importType == AccessModifier.PUBLIC && treatInheritedPackagesAsInternal)
-               {
-                  // if our bundle implements classes from a public package we assume that we are providing an api
-                  // implementation
-                  final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getInherited()
-                     .contains(requiredPackage);
-                  if (roleProvider)
-                  {
-                     importType = AccessModifier.INTERNAL;
-                  }
-               }
-               requiredBundleToImportTypeMap.put(requiredBundle, importType);
-            }
-         }
-      }
-      return requiredBundleToImportTypeMap;
-   }
-
-   private Map<String, Exporter> resolve(BundleCandidate bundle)
-   {
-      final Map<String, Exporter> requiredPackgeToExporterMap = new LinkedHashMap<String, Exporter>();
-      for (String requiredPackage : getReferencedPackages(bundle))
-      {
-         final List<Exporter> exportes = resolve(bundle, requiredPackage);
-         if (exportes.isEmpty())
-         {
-            final boolean hiddenBundlePackage = getBundlePackages(bundle).getPackages().contains(requiredPackage);
-            if (!hiddenBundlePackage)
-            {
-               requiredPackgeToExporterMap.put(requiredPackage, null); // unresolvable
-            }
-         }
-         else
-         {
-            Exporter exporter = exportes.get(0);
-            requiredPackgeToExporterMap.put(requiredPackage, exporter);
-         }
-      }
-      return requiredPackgeToExporterMap;
-   }
-
-   private Collection<String> getReferencedPackages(BundleCandidate bundle)
-   {
-      final BundlePackages bundlePackages = getBundlePackages(bundle);
-
-      final Collection<String> requiredPackges = new ArrayList<String>(bundlePackages.getReferencedPackages().getAll());
-      removeEEPackages(bundle, requiredPackges);
-
-      // add self imports after removing ee packages to add ee packages contributed by our bundle also
-      final List<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
-      if (exportPackage != null)
-      {
-         for (PackageExport packageExport : exportPackage)
-         {
-            requiredPackges.addAll(packageExport.getPackageNames());
-         }
-      }
-
-      return requiredPackges;
-   }
-
-   private final WeakHashMap<BundleCandidate, BundlePackages> cache = new WeakHashMap<BundleCandidate, BundlePackages>();
-
-   private BundlePackages getBundlePackages(BundleCandidate bundle)
-   {
-      BundlePackages result = cache.get(bundle);
-      if (result == null)
-      {
-         result = new BundlePackagesCollector().collect(bundle);
-         cache.put(bundle, result);
-      }
-      return result;
-   }
-
-   public enum ExporterType
-   {
-      OWN_BUNDLE, EXECUTION_ENVIRONMENT, VENDOR, REQUIRED_BUNDLE
-   }
-
-   private static final class Exporter
-   {
-      private final ExporterType type;
-
-      private final BundleReference bundleReference;
-
-      private final BundleCandidate bundle;
-
-      private final PackageExport packageExport;
-
-      public static Exporter exportedByOwnBundle(BundleCandidate bundle, PackageExport packageExport)
-      {
-         return new Exporter(ExporterType.OWN_BUNDLE, null, bundle, packageExport);
-      }
-
-      public static Exporter exportedByExecutionEnvironment()
-      {
-         return new Exporter(ExporterType.EXECUTION_ENVIRONMENT, null, null, null);
-      }
-
-      public static Exporter exportedByVendor()
-      {
-         return new Exporter(ExporterType.VENDOR, null, null, null);
-      }
-
-      public static Exporter exportedByRequiredBundle(BundleReference bundleReference, PackageExport packageExport)
-      {
-         return new Exporter(ExporterType.REQUIRED_BUNDLE, bundleReference, bundleReference.getTarget(), packageExport);
-      }
-
-      private Exporter(@NotNull ExporterType type, BundleReference bundleReference, BundleCandidate bundle,
-         PackageExport packageExport)
-      {
-         this.type = type;
-         this.bundle = bundle;
-         this.bundleReference = bundleReference;
-         this.packageExport = packageExport;
-      }
-
-      public ExporterType getType()
-      {
-         return type;
-      }
-
-      public BundleReference getBundleReference()
-      {
-         return bundleReference;
-      }
-
-      public BundleCandidate getBundle()
-      {
-         return bundle;
-      }
-
-      public PackageExport getPackageExport()
-      {
-         return packageExport;
-      }
-   }
-
-   private List<Exporter> resolve(BundleCandidate bundle, String requiredPackage)
-   {
-      final List<Exporter> exporters = new ArrayList<Exporter>();
-
-      // self
-      {
-         final PackageExport packageExport = getPackageExport(bundle, requiredPackage);
-         if (packageExport != null)
-         {
-            exporters.add(Exporter.exportedByOwnBundle(bundle, packageExport));
-         }
-      }
-
-      // dependencies
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
-         final BundleCandidate requiredBundle = bundleReference.getTarget();
-
-         final PackageExport packageExport = getPackageExport(requiredBundle, requiredPackage);
-         if (packageExport != null)
-         {
-            exporters.add(Exporter.exportedByRequiredBundle(bundleReference, packageExport));
-         }
-      }
-
-      // ee or vendor
-      switch (getAccessRule(bundle, requiredPackage))
-      {
-         case ACCESSIBLE : // ee
-            exporters.add(Exporter.exportedByExecutionEnvironment());
-            break;
-         case DISCOURAGED : // vendor
-            exporters.add(Exporter.exportedByVendor());
-            break;
-         case NON_ACCESSIBLE : // neither nor
-            break;
-         default :
-            throw new IllegalStateException();
-      }
-
-      return exporters;
-   }
-
-   private static final PackageExport getPackageExport(BundleCandidate requiredBundle, String requiredPackage)
-   {
-      final List<PackageExport> exportPackage = requiredBundle.getManifest().getExportPackage();
-      if (exportPackage != null)
-      {
-         for (PackageExport packageExport : exportPackage)
-         {
-            if (packageExport.getPackageNames().contains(requiredPackage))
-            {
-               return packageExport;
-            }
-         }
-      }
-      return null;
-   }
-
-   private AccessRule getAccessRule(BundleCandidate bundle, String requiredPackage)
-   {
-      final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
-      if (requiredEEs != null)
-      {
-         return environmentService.getAccessRuleById(requiredEEs, requiredPackage);
-      }
-      return AccessRule.NON_ACCESSIBLE;
-   }
-
-   private void removeEEPackages(BundleCandidate bundle, final Collection<String> requiredPackges)
-   {
-      final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
-      if (requiredEEs != null)
-      {
-         for (String ee : requiredEEs)
-         {
-            requiredPackges.removeAll(environmentService.getExecutionEnvironment(ee).getPackages());
-         }
-      }
-   }
 
 }
