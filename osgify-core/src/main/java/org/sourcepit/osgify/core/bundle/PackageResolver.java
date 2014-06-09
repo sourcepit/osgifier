@@ -8,8 +8,8 @@ package org.sourcepit.osgify.core.bundle;
 
 import static org.sourcepit.osgify.core.bundle.AccessRestriction.DISCOURAGED;
 import static org.sourcepit.osgify.core.bundle.AccessRestriction.NONE;
-import static org.sourcepit.osgify.core.bundle.PackageOrigin.OWN_BUNDLE;
-import static org.sourcepit.osgify.core.bundle.PackageOrigin.REQUIRED_BUNDLE;
+import static org.sourcepit.osgify.core.bundle.PackageExporterType.OWN_BUNDLE;
+import static org.sourcepit.osgify.core.bundle.PackageExporterType.REQUIRED_BUNDLE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,57 +45,58 @@ public class PackageResolver
    {
       final Collection<String> referencedPackages = getReferencedPackages(bundle);
 
-      Map<String, List<PackageOffer>> foo = new LinkedHashMap<String, List<PackageOffer>>(referencedPackages.size());
+      final Map<String, List<PackageExportDescription>> packageToExportDescriptions = new LinkedHashMap<String, List<PackageExportDescription>>(
+         referencedPackages.size());
       for (String requiredPackage : referencedPackages)
       {
-         final List<PackageOffer> exportes = resolve(bundle, requiredPackage);
+         final List<PackageExportDescription> exportes = resolve(bundle, requiredPackage);
          if (exportes.isEmpty())
          {
             final boolean hiddenBundlePackage = getBundlePackages(bundle).getPackages().contains(requiredPackage);
             if (!hiddenBundlePackage)
             {
-               foo.put(requiredPackage, exportes);
+               packageToExportDescriptions.put(requiredPackage, exportes);
             }
          }
          else
          {
-            foo.put(requiredPackage, exportes);
+            packageToExportDescriptions.put(requiredPackage, exportes);
          }
       }
 
-      final Map<BundleCandidate, AccessRestriction> bundleToAccessRestrictionMap = new HashMap<BundleCandidate, AccessRestriction>();
+      final Map<BundleCandidate, AccessRestriction> bundleToAccessRestriction = new HashMap<BundleCandidate, AccessRestriction>();
 
-      for (Entry<String, List<PackageOffer>> entry : foo.entrySet())
+      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet())
       {
          if (!entry.getValue().isEmpty())
          {
             final String requiredPackage = entry.getKey();
-            final PackageOffer selectedOffer = entry.getValue().get(0);
-            updateBundleAccessRestriction(bundleToAccessRestrictionMap, bundle, requiredPackage, selectedOffer,
+            final PackageExportDescription selectedExporter = entry.getValue().get(0);
+            updateBundleAccessRestriction(bundleToAccessRestriction, bundle, requiredPackage, selectedExporter,
                treatInheritedPackagesAsInternal);
          }
       }
 
       final List<PackageResolutionResult> result = new ArrayList<PackageResolutionResult>();
 
-      for (Entry<String, List<PackageOffer>> entry : foo.entrySet())
+      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet())
       {
          final String requiredPackage = entry.getKey();
-         final List<PackageOffer> offers = entry.getValue();
-         final PackageOffer selectedOffer = offers.isEmpty() ? null : offers.get(0);
+         final List<PackageExportDescription> exporters = entry.getValue();
+         final PackageExportDescription selectedExporter = exporters.isEmpty() ? null : exporters.get(0);
 
          final AccessRestriction accessRestriction;
-         if (selectedOffer == null)
+         if (selectedExporter == null)
          {
             accessRestriction = null;
          }
          else
          {
-            switch (selectedOffer.getType())
+            switch (selectedExporter.getExporterType())
             {
                case OWN_BUNDLE :
                case REQUIRED_BUNDLE :
-                  accessRestriction = bundleToAccessRestrictionMap.get(selectedOffer.getBundle());
+                  accessRestriction = bundleToAccessRestriction.get(selectedExporter.getBundle());
                   break;
                case EXECUTION_ENVIRONMENT :
                   accessRestriction = NONE;
@@ -108,7 +109,7 @@ public class PackageResolver
             }
          }
 
-         result.add(new PackageResolutionResult(requiredPackage, selectedOffer, accessRestriction, offers));
+         result.add(new PackageResolutionResult(requiredPackage, selectedExporter, accessRestriction, exporters));
       }
 
       return result;
@@ -116,47 +117,50 @@ public class PackageResolver
 
    private void updateBundleAccessRestriction(
       final Map<BundleCandidate, AccessRestriction> bundleToAccessRestrictionMap, BundleCandidate bundle,
-      final String requiredPackage, final PackageOffer selectedOffer, boolean treatInheritedPackagesAsInternal)
+      final String requiredPackage, final PackageExportDescription exportDescription,
+      boolean treatInheritedPackagesAsInternal)
    {
-      if (selectedOffer != null
-         && (selectedOffer.getType() == REQUIRED_BUNDLE || selectedOffer.getType() == OWN_BUNDLE))
+      if (exportDescription != null)
       {
-         final BundleCandidate requiredBundle = selectedOffer.getBundle();
-
-         final AccessRestriction currentImportType = bundleToAccessRestrictionMap.get(requiredBundle);
-         if (currentImportType == null || currentImportType == NONE)
+         final PackageExporterType exporterType = exportDescription.getExporterType();
+         if (exporterType == REQUIRED_BUNDLE || exporterType == OWN_BUNDLE)
          {
-            final PackageExport packageExport = selectedOffer.getPackageExport();
+            final BundleCandidate requiredBundle = exportDescription.getBundle();
 
-            AccessRestriction access = BundleUtils.isInternalPackage(packageExport) ? DISCOURAGED : NONE;
-
-            if (access == NONE && treatInheritedPackagesAsInternal)
+            final AccessRestriction currentAccessRestriction = bundleToAccessRestrictionMap.get(requiredBundle);
+            if (currentAccessRestriction == null || currentAccessRestriction == NONE)
             {
-               // if our bundle implements classes from a public package we assume that we are providing an api
-               // implementation
-               final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getInherited()
-                  .contains(requiredPackage);
-               if (roleProvider)
+               final PackageExport packageExport = exportDescription.getPackageExport();
+
+               AccessRestriction access = BundleUtils.isInternalPackage(packageExport) ? DISCOURAGED : NONE;
+
+               if (access == NONE && treatInheritedPackagesAsInternal)
                {
-                  access = DISCOURAGED;
+                  // if our bundle implements classes from a public package we assume that we are providing an api
+                  // implementation
+                  final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getInherited()
+                     .contains(requiredPackage);
+                  if (roleProvider)
+                  {
+                     access = DISCOURAGED;
+                  }
                }
+               bundleToAccessRestrictionMap.put(requiredBundle, access);
             }
-            bundleToAccessRestrictionMap.put(requiredBundle, access);
          }
       }
    }
 
-
-   private List<PackageOffer> resolve(BundleCandidate bundle, String requiredPackage)
+   private List<PackageExportDescription> resolve(BundleCandidate bundle, String requiredPackage)
    {
-      final List<PackageOffer> exporters = new ArrayList<PackageOffer>();
+      final List<PackageExportDescription> exporters = new ArrayList<PackageExportDescription>();
 
       // self
       {
          final PackageExport packageExport = getPackageExport(bundle, requiredPackage);
          if (packageExport != null)
          {
-            exporters.add(PackageOffer.exportedByOwnBundle(bundle, packageExport));
+            exporters.add(PackageExportDescription.exportedByOwnBundle(bundle, packageExport));
          }
       }
 
@@ -168,7 +172,7 @@ public class PackageResolver
          final PackageExport packageExport = getPackageExport(requiredBundle, requiredPackage);
          if (packageExport != null)
          {
-            exporters.add(PackageOffer.exportedByRequiredBundle(bundleReference, packageExport));
+            exporters.add(PackageExportDescription.exportedByRequiredBundle(bundleReference, packageExport));
          }
       }
 
@@ -176,10 +180,10 @@ public class PackageResolver
       switch (getAccessRule(bundle, requiredPackage))
       {
          case ACCESSIBLE : // ee
-            exporters.add(PackageOffer.exportedByExecutionEnvironment());
+            exporters.add(PackageExportDescription.exportedByExecutionEnvironment());
             break;
          case DISCOURAGED : // vendor
-            exporters.add(PackageOffer.exportedByVendor());
+            exporters.add(PackageExportDescription.exportedByVendor());
             break;
          case NON_ACCESSIBLE : // neither nor
             break;

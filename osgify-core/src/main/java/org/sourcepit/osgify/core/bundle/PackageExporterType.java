@@ -5,7 +5,7 @@
  */
 
 package org.sourcepit.osgify.core.bundle;
-public enum PackageOrigin
+public enum PackageExporterType
 {
    OWN_BUNDLE, EXECUTION_ENVIRONMENT, VENDOR, REQUIRED_BUNDLE
 }

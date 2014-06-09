@@ -64,14 +64,14 @@ public class PackageImportAppender
       for (PackageResolutionResult result : results)
       {
          final String requiredPackage = result.getRequiredPackage();
-         final PackageOffer exporter = result.getSelectedOffer();
+         final PackageExportDescription exporter = result.getSelectedExporter();
          if (exporter == null)
          {
             newUnresolvableImport(bundle, requiredPackage, options);
          }
          else
          {
-            switch (exporter.getType())
+            switch (exporter.getExporterType())
             {
                case OWN_BUNDLE :
                   newSelfImport(bundle, requiredPackage, exporter.getPackageExport(), options);

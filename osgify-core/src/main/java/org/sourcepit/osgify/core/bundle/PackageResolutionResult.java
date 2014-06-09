@@ -12,19 +12,19 @@ public class PackageResolutionResult
 {
    private String requiredPackage;
 
-   private PackageOffer selectedOffer;
+   private PackageExportDescription selectedExporter;
 
    private AccessRestriction accessRestriction;
 
-   private Collection<PackageOffer> offers;
+   private Collection<PackageExportDescription> exporters;
 
-   public PackageResolutionResult(String requiredPackage, PackageOffer selectedOffer, AccessRestriction accessRestriction,
-      Collection<PackageOffer> offers)
+   public PackageResolutionResult(String requiredPackage, PackageExportDescription selectedExporter,
+      AccessRestriction accessRestriction, Collection<PackageExportDescription> exporters)
    {
       this.requiredPackage = requiredPackage;
-      this.selectedOffer = selectedOffer;
+      this.selectedExporter = selectedExporter;
       this.accessRestriction = accessRestriction;
-      this.offers = offers;
+      this.exporters = exporters;
    }
 
    public String getRequiredPackage()
@@ -32,9 +32,9 @@ public class PackageResolutionResult
       return requiredPackage;
    }
 
-   public PackageOffer getSelectedOffer()
+   public PackageExportDescription getSelectedExporter()
    {
-      return selectedOffer;
+      return selectedExporter;
    }
 
    public AccessRestriction getAccessRestriction()
@@ -42,8 +42,8 @@ public class PackageResolutionResult
       return accessRestriction;
    }
 
-   public Collection<PackageOffer> getOffers()
+   public Collection<PackageExportDescription> getExporters()
    {
-      return offers;
+      return exporters;
    }
 }
