@@ -84,11 +84,11 @@ public class MavenToOSGiUtilsTest
 
       mVersionRange = "LATEST";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("0.0.0"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("0"));
 
       mVersionRange = "RELEASE";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
-      assertThat(oVersionRange.toString(), IsEqual.equalTo("0.0.0"));
+      assertThat(oVersionRange.toString(), IsEqual.equalTo("0"));
 
       mVersionRange = "1.0";
       oVersionRange = MavenToOSGiUtils.toVersionRange(mVersionRange);
