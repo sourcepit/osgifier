@@ -6,8 +6,8 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.sourcepit.osgify.core.bundle.AccessModifier.INTERNAL;
-import static org.sourcepit.osgify.core.bundle.AccessModifier.PUBLIC;
+import static org.sourcepit.osgify.core.bundle.AccessRestriction.DISCOURAGED;
+import static org.sourcepit.osgify.core.bundle.AccessRestriction.NONE;
 import static org.sourcepit.osgify.core.bundle.PackageOrigin.OWN_BUNDLE;
 import static org.sourcepit.osgify.core.bundle.PackageOrigin.REQUIRED_BUNDLE;
 
@@ -63,7 +63,7 @@ public class PackageResolver
          }
       }
 
-      final Map<BundleCandidate, AccessModifier> bundleToAccessRuleMap = new HashMap<BundleCandidate, AccessModifier>();
+      final Map<BundleCandidate, AccessRestriction> bundleToAccessRestrictionMap = new HashMap<BundleCandidate, AccessRestriction>();
 
       for (Entry<String, List<PackageOffer>> entry : foo.entrySet())
       {
@@ -71,7 +71,7 @@ public class PackageResolver
          {
             final String requiredPackage = entry.getKey();
             final PackageOffer selectedOffer = entry.getValue().get(0);
-            updateBundleAccessRule(bundleToAccessRuleMap, bundle, requiredPackage, selectedOffer,
+            updateBundleAccessRestriction(bundleToAccessRestrictionMap, bundle, requiredPackage, selectedOffer,
                treatInheritedPackagesAsInternal);
          }
       }
@@ -84,10 +84,10 @@ public class PackageResolver
          final List<PackageOffer> offers = entry.getValue();
          final PackageOffer selectedOffer = offers.isEmpty() ? null : offers.get(0);
 
-         final AccessModifier accessRule;
+         final AccessRestriction accessRestriction;
          if (selectedOffer == null)
          {
-            accessRule = null;
+            accessRestriction = null;
          }
          else
          {
@@ -95,42 +95,42 @@ public class PackageResolver
             {
                case OWN_BUNDLE :
                case REQUIRED_BUNDLE :
-                  accessRule = bundleToAccessRuleMap.get(selectedOffer.getBundle());
+                  accessRestriction = bundleToAccessRestrictionMap.get(selectedOffer.getBundle());
                   break;
                case EXECUTION_ENVIRONMENT :
-                  accessRule = PUBLIC;
+                  accessRestriction = NONE;
                   break;
                case VENDOR :
-                  accessRule = INTERNAL;
+                  accessRestriction = DISCOURAGED;
                   break;
                default :
                   throw new IllegalStateException();
             }
          }
 
-         result.add(new PackageResolutionResult(requiredPackage, selectedOffer, accessRule, offers));
+         result.add(new PackageResolutionResult(requiredPackage, selectedOffer, accessRestriction, offers));
       }
 
       return result;
    }
 
-   private void updateBundleAccessRule(final Map<BundleCandidate, AccessModifier> bundleToAccessRuleMap,
-      BundleCandidate bundle, final String requiredPackage, final PackageOffer selectedOffer,
-      boolean treatInheritedPackagesAsInternal)
+   private void updateBundleAccessRestriction(
+      final Map<BundleCandidate, AccessRestriction> bundleToAccessRestrictionMap, BundleCandidate bundle,
+      final String requiredPackage, final PackageOffer selectedOffer, boolean treatInheritedPackagesAsInternal)
    {
       if (selectedOffer != null
          && (selectedOffer.getType() == REQUIRED_BUNDLE || selectedOffer.getType() == OWN_BUNDLE))
       {
          final BundleCandidate requiredBundle = selectedOffer.getBundle();
 
-         final AccessModifier currentImportType = bundleToAccessRuleMap.get(requiredBundle);
-         if (currentImportType == null || currentImportType == PUBLIC)
+         final AccessRestriction currentImportType = bundleToAccessRestrictionMap.get(requiredBundle);
+         if (currentImportType == null || currentImportType == NONE)
          {
             final PackageExport packageExport = selectedOffer.getPackageExport();
 
-            AccessModifier access = BundleUtils.isInternalPackage(packageExport) ? INTERNAL : PUBLIC;
+            AccessRestriction access = BundleUtils.isInternalPackage(packageExport) ? DISCOURAGED : NONE;
 
-            if (access == PUBLIC && treatInheritedPackagesAsInternal)
+            if (access == NONE && treatInheritedPackagesAsInternal)
             {
                // if our bundle implements classes from a public package we assume that we are providing an api
                // implementation
@@ -138,10 +138,10 @@ public class PackageResolver
                   .contains(requiredPackage);
                if (roleProvider)
                {
-                  access = INTERNAL;
+                  access = DISCOURAGED;
                }
             }
-            bundleToAccessRuleMap.put(requiredBundle, access);
+            bundleToAccessRestrictionMap.put(requiredBundle, access);
          }
       }
    }

@@ -14,16 +14,16 @@ public class PackageResolutionResult
 
    private PackageOffer selectedOffer;
 
-   private AccessModifier accessRule;
+   private AccessRestriction accessRestriction;
 
    private Collection<PackageOffer> offers;
 
-   public PackageResolutionResult(String requiredPackage, PackageOffer selectedOffer, AccessModifier accessRule,
+   public PackageResolutionResult(String requiredPackage, PackageOffer selectedOffer, AccessRestriction accessRestriction,
       Collection<PackageOffer> offers)
    {
       this.requiredPackage = requiredPackage;
       this.selectedOffer = selectedOffer;
-      this.accessRule = accessRule;
+      this.accessRestriction = accessRestriction;
       this.offers = offers;
    }
 
@@ -37,9 +37,9 @@ public class PackageResolutionResult
       return selectedOffer;
    }
 
-   public AccessModifier getAccessRule()
+   public AccessRestriction getAccessRestriction()
    {
-      return accessRule;
+      return accessRestriction;
    }
 
    public Collection<PackageOffer> getOffers()

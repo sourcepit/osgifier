@@ -5,7 +5,7 @@
  */
 
 package org.sourcepit.osgify.core.bundle;
-public enum AccessModifier
+public enum AccessRestriction
 {
-   PUBLIC, INTERNAL
+   NONE, DISCOURAGED
 }

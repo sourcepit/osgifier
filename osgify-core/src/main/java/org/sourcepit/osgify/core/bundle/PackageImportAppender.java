@@ -84,7 +84,7 @@ public class PackageImportAppender
                   break;
                case REQUIRED_BUNDLE :
                   newPackageImport(bundle, requiredPackage, exporter.getBundleReference(), exporter.getBundle(),
-                     exporter.getPackageExport(), result.getAccessRule(), options);
+                     exporter.getPackageExport(), result.getAccessRestriction(), options);
                   break;
                default :
                   break;
@@ -154,7 +154,7 @@ public class PackageImportAppender
 
    private void newPackageImport(BundleCandidate importingBundle, String requiredPackage,
       BundleReference bundleReference, BundleCandidate exportingBundle, PackageExport packageExport,
-      AccessModifier accessModifier, PropertiesSource options)
+      AccessRestriction accessRestriction, PropertiesSource options)
    {
       final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       packageImport.getPackageNames().add(requiredPackage);
@@ -165,7 +165,7 @@ public class PackageImportAppender
          VersionRange versionRange = bundleReference.getVersionRange();
          if (versionRange == null || versionRange.getHighVersion() == null || !versionRange.includes(version))
          {
-            final VersionRangePolicy policy = getVersionRangePolicy(accessModifier, options);
+            final VersionRangePolicy policy = getVersionRangePolicy(accessRestriction, options);
             versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
          }
 
@@ -215,13 +215,13 @@ public class PackageImportAppender
       setOptional(packageImport);
    }
 
-   private VersionRangePolicy getVersionRangePolicy(AccessModifier accessModifier, PropertiesSource options)
+   private VersionRangePolicy getVersionRangePolicy(AccessRestriction accessRestriction, PropertiesSource options)
    {
-      switch (accessModifier)
+      switch (accessRestriction)
       {
-         case PUBLIC :
+         case NONE :
             return getVersionRangePolicy(options, PUBLIC_IMPORT, COMPATIBLE);
-         case INTERNAL :
+         case DISCOURAGED :
             return getVersionRangePolicy(options, INTERNAL_IMPORT, EQUIVALENT);
          default :
             throw new IllegalStateException();
