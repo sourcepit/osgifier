@@ -6,7 +6,7 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import java.util.Collection;
+import java.util.List;
 
 public class PackageResolutionResult
 {
@@ -16,10 +16,10 @@ public class PackageResolutionResult
 
    private AccessRestriction accessRestriction;
 
-   private Collection<PackageExportDescription> exporters;
+   private List<PackageExportDescription> exporters;
 
    public PackageResolutionResult(String requiredPackage, PackageExportDescription selectedExporter,
-      AccessRestriction accessRestriction, Collection<PackageExportDescription> exporters)
+      AccessRestriction accessRestriction, List<PackageExportDescription> exporters)
    {
       this.requiredPackage = requiredPackage;
       this.selectedExporter = selectedExporter;
@@ -42,7 +42,7 @@ public class PackageResolutionResult
       return accessRestriction;
    }
 
-   public Collection<PackageExportDescription> getExporters()
+   public List<PackageExportDescription> getExporters()
    {
       return exporters;
    }
