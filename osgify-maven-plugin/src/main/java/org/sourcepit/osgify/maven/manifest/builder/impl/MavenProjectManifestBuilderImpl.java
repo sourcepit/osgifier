@@ -22,6 +22,7 @@ import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.merge.ManifestMerger;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.aether.ArtifactFactory;
 import org.sourcepit.common.maven.core.MavenCoreUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
@@ -332,8 +333,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    @Override
    public MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest)
    {
-      // TODO: ManifestUtils#readJavaManifest
-      this.mergeManifest = null;
+      this.mergeManifest = ManifestUtils.readJavaManifest(manifest);
       return this;
    }
 
