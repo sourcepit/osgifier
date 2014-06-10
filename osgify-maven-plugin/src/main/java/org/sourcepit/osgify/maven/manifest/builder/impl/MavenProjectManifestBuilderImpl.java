@@ -333,7 +333,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    @Override
    public MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest)
    {
-      this.mergeManifest = ManifestUtils.readJavaManifest(manifest);
+      this.mergeManifest = ManifestUtils.toManifest(manifest);
       return this;
    }
 
