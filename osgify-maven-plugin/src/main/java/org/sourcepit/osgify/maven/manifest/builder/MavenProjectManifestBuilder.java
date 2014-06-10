@@ -8,9 +8,8 @@ package org.sourcepit.osgify.maven.manifest.builder;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.jar.Manifest;
 
-import org.apache.maven.project.MavenProject;
+import org.sourcepit.common.manifest.Manifest;
 
 
 /**
@@ -24,25 +23,27 @@ public interface MavenProjectManifestBuilder
 
    MavenProjectManifestBuilder setTimestamp(Date timestamp);
 
-   MavenProjectManifestBuilder setAppendExecutionEnvironment(boolean append);
+   MavenProjectManifestBuilder appendExecutionEnvironment(boolean append);
 
-   MavenProjectManifestBuilder setAppendPackageExports(boolean append);
+   MavenProjectManifestBuilder appendPackageExports(boolean append);
 
-   MavenProjectManifestBuilder setAppendPackageImports(boolean append);
+   MavenProjectManifestBuilder appendPackageImports(boolean append);
 
-   MavenProjectManifestBuilder setAppendDynamicImports(boolean append);
+   MavenProjectManifestBuilder appendDynamicImports(boolean append);
 
-   MavenProjectManifestBuilder attachSourceBundle(boolean withSources);
+   MavenProjectManifestBuilder withSourceBundleManifest(boolean withSources);
 
-   MavenProjectManifestBuilder attachSources(String sourceClassifier);
+   MavenProjectManifestBuilder withSourceBundleManifest(String sourceClassifier);
 
-   MavenProjectManifestBuilder attachOption(String key, String value);
+   MavenProjectManifestBuilder withOption(String key, String value);
 
-   MavenProjectManifestBuilder attachOptions(Map<String, String> options);
+   MavenProjectManifestBuilder withOptions(Map<String, String> options);
+
+   MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest);
+
+   MavenProjectManifestBuilder mergeWith(Manifest manifest);
 
    ManifestBuilderResult build();
-
-   MavenProject getProject();
 
    boolean wasBuilt();
 

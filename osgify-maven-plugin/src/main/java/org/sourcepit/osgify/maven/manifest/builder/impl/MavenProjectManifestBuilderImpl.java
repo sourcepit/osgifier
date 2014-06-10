@@ -19,6 +19,8 @@ import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.project.MavenProject;
+import org.sourcepit.common.manifest.Manifest;
+import org.sourcepit.common.manifest.merge.ManifestMerger;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.aether.ArtifactFactory;
 import org.sourcepit.common.maven.core.MavenCoreUtils;
@@ -55,6 +57,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    private boolean attachSourceBundle = true;
    private String sourceClassifier = DEF_SOURCE_CLASSIFIER;
    private Map<String, String> additionalOptions = new HashMap<String, String>();
+   private Manifest mergeManifest;
 
    private ArtifactFactory artifactFactory;
    private VersionRangeResolver versionRangeResolver;
@@ -65,16 +68,21 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    {
       super();
       this.project = project;
-      this.symbolicName = project.getArtifactId();
+      this.symbolicName = buildSymbolicName(project);
       this.artifactFactory = artifactFactory;
       this.versionRangeResolver = versionRangeResolver;
       this.inflater = inflater;
-      this.osgifyContext = buildOsgifyContext();
+      this.osgifyContext = buildOsgifyContext(project);
       this.projectBundle = resolveProjectBundle(osgifyContext);
       this.inflatorFilter = buildInflatorFilter(projectBundle);
    }
 
-   private OsgifyContext buildOsgifyContext()
+   private String buildSymbolicName(MavenProject project)
+   {
+      return project.getGroupId() + "." + project.getArtifactId();
+   }
+
+   private OsgifyContext buildOsgifyContext(MavenProject project)
    {
       final BundleCandidate projectBundle = newBundleCandidate(project);
 
@@ -117,8 +125,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    {
       if (wasBuilt())
       {
-         // TODO can only be built once
-         throw new IllegalStateException("The Manifest build can only be invoked once");
+         throw new IllegalStateException("The build() method can only be invoked once!");
       }
       try
       {
@@ -128,15 +135,20 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
          }
          final BundleManifest manifest = buildManifest();
 
-         // TODO: Q: headermodifications y/n
-         // TODO: Q: project.setContextValue("osgifier.manifestFile", manifestFile); ?
-
+         if (mergeManifest != null)
+         {
+            mergeWithGivenManifest(manifest);
+         }
 
          ManifestBuilderResultImpl result = new ManifestBuilderResultImpl(manifest);
          if (attachSourceBundle)
          {
             BundleCandidate sourceBundle = projectBundle.getSourceBundle();
             BundleManifest sourceBundleManifest = sourceBundle.getManifest();
+            if (mergeManifest != null)
+            {
+               mergeWithGivenManifest(sourceBundleManifest);
+            }
             result.setSourceBundleManifest(sourceBundleManifest);
          }
 
@@ -189,7 +201,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
 
    private void attachSourceBundle()
    {
-      final MavenArtifact sourceArtifact = newProjectArtifact( sourceClassifier, "jar");
+      final MavenArtifact sourceArtifact = newProjectArtifact(sourceClassifier, "jar");
 
       BundleCandidate sourceBundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       sourceBundle.setLocation(sourceArtifact.getFile());
@@ -201,6 +213,12 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       projectBundle.setSourceBundle(sourceBundle);
    }
 
+   private void mergeWithGivenManifest(BundleManifest bundleManifest)
+   {
+      ManifestMerger manifestMerger = new ManifestMerger();
+      manifestMerger.merge(bundleManifest, mergeManifest);
+   }
+
 
    private static BundleCandidate newBundleCandidate(MavenProject project)
    {
@@ -210,11 +228,11 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       return bundle;
    }
 
-   private MavenArtifact newProjectArtifact( String classifier, String type)
+   private MavenArtifact newProjectArtifact(String classifier, String type)
    {
       org.eclipse.aether.artifact.Artifact artifact = artifactFactory.createArtifact(
          RepositoryUtils.toArtifact(project.getArtifact()), classifier, type);
-      
+
       final String buildDir = project.getBuild().getDirectory();
 
       final String finalName = project.getBuild().getFinalName();
@@ -229,37 +247,35 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    }
 
    @Override
-   public MavenProjectManifestBuilder attachSources(String sourceClassifier)
+   public MavenProjectManifestBuilder withSourceBundleManifest(String sourceClassifier)
    {
-      attachSourceBundle(true);
+      withSourceBundleManifest(true);
       this.sourceClassifier = sourceClassifier;
 
       return this;
    }
 
-
-   @Override
    public MavenProject getProject()
    {
       return project;
    }
 
    @Override
-   public MavenProjectManifestBuilder attachSourceBundle(boolean withSources)
+   public MavenProjectManifestBuilder withSourceBundleManifest(boolean withSources)
    {
       this.attachSourceBundle = withSources;
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder attachOption(String key, String value)
+   public MavenProjectManifestBuilder withOption(String key, String value)
    {
       this.additionalOptions.put(key, value);
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder attachOptions(Map<String, String> options)
+   public MavenProjectManifestBuilder withOptions(Map<String, String> options)
    {
       this.additionalOptions.putAll(options);
       return this;
@@ -286,30 +302,45 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    }
 
    @Override
-   public MavenProjectManifestBuilder setAppendExecutionEnvironment(boolean append)
+   public MavenProjectManifestBuilder appendExecutionEnvironment(boolean append)
    {
       inflatorFilter.setAppendExecutionEnvironment(append);
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder setAppendPackageExports(boolean append)
+   public MavenProjectManifestBuilder appendPackageExports(boolean append)
    {
       inflatorFilter.setAppendPackageExports(append);
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder setAppendPackageImports(boolean append)
+   public MavenProjectManifestBuilder appendPackageImports(boolean append)
    {
       inflatorFilter.setAppendPackageImports(append);
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder setAppendDynamicImports(boolean append)
+   public MavenProjectManifestBuilder appendDynamicImports(boolean append)
    {
       inflatorFilter.setAppendDynamicImports(append);
+      return this;
+   }
+
+   @Override
+   public MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest)
+   {
+      // TODO: ManifestUtils#readJavaManifest
+      this.mergeManifest = null;
+      return this;
+   }
+
+   @Override
+   public MavenProjectManifestBuilder mergeWith(Manifest manifest)
+   {
+      this.mergeManifest = manifest;
       return this;
    }
 

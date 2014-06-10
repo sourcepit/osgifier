@@ -37,7 +37,7 @@ public class ManifestBuilderFactory
    }
 
 
-   public MavenProjectManifestBuilder forProject(MavenProject project)
+   public MavenProjectManifestBuilder createBuilder(MavenProject project)
    {
       return new MavenProjectManifestBuilderImpl(project, artifactFactory, versionRangeResolver, inflater);
    }
