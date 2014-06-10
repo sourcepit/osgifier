@@ -19,12 +19,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.osgify.core.java.TypeReferenceVisitor;
-import org.sourcepit.osgify.core.java.BundlePackages;
-import org.sourcepit.osgify.core.java.PackageReferences;
-import org.sourcepit.osgify.core.java.PackageReferencesBuilder;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaPackage;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
@@ -34,35 +28,34 @@ import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.model.java.Resource;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
-public class BundlePackagesCollector
+public class PackagesInfoCollector
 {
-   public BundlePackages collect(BundleCandidate bundle)
+   public PackagesInfo collect(JavaResourceBundle jBundle, List<JavaResourceBundle> classPath)
    {
-      final Map<String, PackageReferences> packageToRefsMap = collectPackageReferences(bundle);
+      final Map<String, RequiredPackages> packageToRequiredPackages = collectPackageReferences(jBundle, classPath);
 
-      final List<String> bundlePackages = new ArrayList<String>(packageToRefsMap.size());
-      final PackageReferencesBuilder bundleRefs = new PackageReferencesBuilder();
-      for (Entry<String, PackageReferences> entry : packageToRefsMap.entrySet())
+      final List<String> packages = new ArrayList<String>(packageToRequiredPackages.size());
+      final RequiredPackageBuilder bundleRefs = new RequiredPackageBuilder();
+      for (Entry<String, RequiredPackages> entry : packageToRequiredPackages.entrySet())
       {
          final String packageName = entry.getKey();
-         bundlePackages.add(packageName);
+         packages.add(packageName);
 
-         final PackageReferences refs = entry.getValue();
+         final RequiredPackages refs = entry.getValue();
          bundleRefs.addInheritedPackages(refs.getInherited());
          bundleRefs.addInvokedPackages(refs.getInvoked());
       }
 
-      sort(bundlePackages);
+      sort(packages);
 
-      return new BundlePackages(unmodifiableCollection(bundlePackages), bundleRefs.build(),
-         Collections.unmodifiableMap(packageToRefsMap));
+      return new PackagesInfo(unmodifiableCollection(packages), bundleRefs.build(),
+         Collections.unmodifiableMap(packageToRequiredPackages));
    }
 
-   private static Map<String, PackageReferences> collectPackageReferences(final BundleCandidate bundle)
+   private static Map<String, RequiredPackages> collectPackageReferences(final JavaResourceBundle jBundle,
+      final List<JavaResourceBundle> classPath)
    {
-      final Map<String, PackageReferencesBuilder> packageToRefsMap = new HashMap<String, PackageReferencesBuilder>();
-
-      final JavaResourceBundle jBundle = bundle.getContent();
+      final Map<String, RequiredPackageBuilder> packageToRefsMap = new HashMap<String, RequiredPackageBuilder>();
 
       jBundle.accept(new ResourceVisitor()
       {
@@ -71,13 +64,13 @@ public class BundlePackagesCollector
          {
             if (resource instanceof JavaResourcesRoot)
             {
-               packageToRefsMap.put("", new PackageReferencesBuilder());
+               packageToRefsMap.put("", new RequiredPackageBuilder());
                return true;
             }
 
             if (resource instanceof JavaPackage)
             {
-               packageToRefsMap.put(((JavaPackage) resource).getQualifiedName(), new PackageReferencesBuilder());
+               packageToRefsMap.put(((JavaPackage) resource).getQualifiedName(), new RequiredPackageBuilder());
                return true;
             }
 
@@ -87,24 +80,25 @@ public class BundlePackagesCollector
                final JavaPackage jPackage = jFile.getParentPackage();
                if (jPackage != null)
                {
-                  final PackageReferencesBuilder refs = packageToRefsMap.get(jPackage.getQualifiedName());
-                  visit(refs, jPackage, jFile, jFile.getType());
+                  final RequiredPackageBuilder refs = packageToRefsMap.get(jPackage.getQualifiedName());
+                  visit(refs, jPackage, jFile, jFile.getType(), classPath);
                }
             }
 
             return false;
          }
 
-         private void visit(PackageReferencesBuilder refs, JavaPackage jPackage, JavaFile jFile, JavaType jType)
+         private void visit(RequiredPackageBuilder refs, JavaPackage jPackage, JavaFile jFile, JavaType jType,
+            List<JavaResourceBundle> classPath)
          {
             final Set<String> qualifiedTypeReferences = new HashSet<String>();
-            collectReferencedTypes(refs, bundle, jFile, qualifiedTypeReferences);
+            collectReferencedTypes(refs, jFile, qualifiedTypeReferences);
 
             // HACK must be recursive
             addSuperTypeAndInterfaces(refs, jType, qualifiedTypeReferences);
             for (String qualifiedType : new HashSet<String>(qualifiedTypeReferences))
             {
-               JavaType resolveJavaType = resolveJavaType(bundle, qualifiedType);
+               JavaType resolveJavaType = resolveJavaType(classPath, qualifiedType);
                if (resolveJavaType != null)
                {
                   addSuperTypeAndInterfaces(refs, resolveJavaType, qualifiedTypeReferences);
@@ -112,7 +106,7 @@ public class BundlePackagesCollector
             }
          }
 
-         private void addSuperTypeAndInterfaces(final PackageReferencesBuilder refs, JavaType jType,
+         private void addSuperTypeAndInterfaces(final RequiredPackageBuilder refs, JavaType jType,
             final Set<String> qualifiedTypeReferences)
          {
             Annotation annotation = jType.getAnnotation("superclassName");
@@ -133,16 +127,16 @@ public class BundlePackagesCollector
          }
       });
 
-      final Map<String, PackageReferences> result = new HashMap<String, PackageReferences>(packageToRefsMap.size());
-      for (Entry<String, PackageReferencesBuilder> entry : packageToRefsMap.entrySet())
+      final Map<String, RequiredPackages> result = new HashMap<String, RequiredPackages>(packageToRefsMap.size());
+      for (Entry<String, RequiredPackageBuilder> entry : packageToRefsMap.entrySet())
       {
          result.put(entry.getKey(), entry.getValue().build());
       }
       return result;
    }
 
-   private static void collectReferencedTypes(final PackageReferencesBuilder refs, final BundleCandidate bundle,
-      final JavaFile jFile, final Set<String> qualifiedTypeReferences)
+   private static void collectReferencedTypes(final RequiredPackageBuilder refs, final JavaFile jFile,
+      final Set<String> qualifiedTypeReferences)
    {
       jFile.accept(new TypeReferenceVisitor()
       {
@@ -155,24 +149,14 @@ public class BundlePackagesCollector
       });
    }
 
-   private static JavaType resolveJavaType(BundleCandidate bundle, String name)
+   private static JavaType resolveJavaType(List<JavaResourceBundle> classPath, String name)
    {
-      JavaResourceBundle jBundle = bundle.getContent();
-      JavaType jType = resolveJavaType(jBundle, name);
-      if (jType != null)
+      for (JavaResourceBundle jBundle : classPath)
       {
-         return jType;
-      }
-      for (BundleReference reference : bundle.getDependencies())
-      {
-         BundleCandidate target = reference.getTarget();
-         if (target != null && target.getContent() != null)
+         final JavaType jType = resolveJavaType(jBundle, name);
+         if (jType != null)
          {
-            jType = resolveJavaType(target.getContent(), name);
-            if (jType != null)
-            {
-               return jType;
-            }
+            return jType;
          }
       }
       return null;

@@ -26,10 +26,11 @@ import javax.inject.Named;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
-import org.sourcepit.osgify.core.java.BundlePackages;
-import org.sourcepit.osgify.core.java.BundlePackagesCollector;
+import org.sourcepit.osgify.core.java.PackagesInfo;
+import org.sourcepit.osgify.core.java.PackagesInfoCollector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 
 @Named
 public class PackageResolver
@@ -54,7 +55,7 @@ public class PackageResolver
          final List<PackageExportDescription> exportes = resolve(bundle, requiredPackage);
          if (exportes.isEmpty())
          {
-            final boolean hiddenBundlePackage = getBundlePackages(bundle).getPackages().contains(requiredPackage);
+            final boolean hiddenBundlePackage = getBundlePackages(bundle).getContainedPackages().contains(requiredPackage);
             if (!hiddenBundlePackage)
             {
                packageToExportDescriptions.put(requiredPackage, exportes);
@@ -140,7 +141,7 @@ public class PackageResolver
                {
                   // if our bundle implements classes from a public package we assume that we are providing an api
                   // implementation
-                  final boolean roleProvider = getBundlePackages(bundle).getReferencedPackages().getInherited()
+                  final boolean roleProvider = getBundlePackages(bundle).getRequiredPackages().getInherited()
                      .contains(requiredPackage);
                   if (roleProvider)
                   {
@@ -203,9 +204,9 @@ public class PackageResolver
 
    private Collection<String> getReferencedPackages(BundleCandidate bundle)
    {
-      final BundlePackages bundlePackages = getBundlePackages(bundle);
+      final PackagesInfo bundlePackages = getBundlePackages(bundle);
 
-      final Collection<String> requiredPackges = new ArrayList<String>(bundlePackages.getReferencedPackages().getAll());
+      final Collection<String> requiredPackges = new ArrayList<String>(bundlePackages.getRequiredPackages().getAll());
       // removeEEPackages(bundle, requiredPackges);
 
       // add self imports after removing ee packages to add ee packages contributed by our bundle also
@@ -221,17 +222,33 @@ public class PackageResolver
       return requiredPackges;
    }
 
-   private final WeakHashMap<BundleCandidate, BundlePackages> cache = new WeakHashMap<BundleCandidate, BundlePackages>();
+   private final WeakHashMap<BundleCandidate, PackagesInfo> cache = new WeakHashMap<BundleCandidate, PackagesInfo>();
 
-   private BundlePackages getBundlePackages(BundleCandidate bundle)
+   private PackagesInfo getBundlePackages(BundleCandidate bundle)
    {
-      BundlePackages result = cache.get(bundle);
+      PackagesInfo result = cache.get(bundle);
       if (result == null)
       {
-         result = new BundlePackagesCollector().collect(bundle);
+         result = new PackagesInfoCollector().collect(bundle.getContent(), getClassPath(bundle));
          cache.put(bundle, result);
       }
       return result;
+   }
+
+   private static List<JavaResourceBundle> getClassPath(BundleCandidate bundle)
+   {
+      final List<BundleReference> dependencies = bundle.getDependencies();
+      final List<JavaResourceBundle> classPath = new ArrayList<JavaResourceBundle>(dependencies.size() + 1);
+      classPath.add(bundle.getContent());
+      for (BundleReference bundleReference : dependencies)
+      {
+         final JavaResourceBundle jBundle = bundleReference.getTarget().getContent();
+         if (jBundle != null)
+         {
+            classPath.add(jBundle);
+         }
+      }
+      return classPath;
    }
 
    private static final PackageExport getPackageExport(BundleCandidate requiredBundle, String requiredPackage)

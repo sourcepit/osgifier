@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PackageReferencesBuilder
+public class RequiredPackageBuilder
 {
    private final Set<String> inheritedPackages = new HashSet<String>();
 
@@ -81,7 +81,7 @@ public class PackageReferencesBuilder
       }
    }
 
-   public PackageReferences build()
+   public RequiredPackages build()
    {
       final List<String> inherited = new ArrayList<String>(inheritedPackages);
       final List<String> invoked = new ArrayList<String>(invokedPackages);
@@ -89,7 +89,7 @@ public class PackageReferencesBuilder
       Collections.sort(inherited);
       Collections.sort(invoked);
       Collections.sort(all);
-      return new PackageReferences(unmodifiableCollection(inherited), unmodifiableCollection(invoked),
+      return new RequiredPackages(unmodifiableCollection(inherited), unmodifiableCollection(invoked),
          unmodifiableCollection(all));
    }
 

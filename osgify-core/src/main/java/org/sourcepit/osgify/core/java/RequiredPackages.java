@@ -8,13 +8,13 @@ package org.sourcepit.osgify.core.java;
 
 import java.util.Collection;
 
-public class PackageReferences
+public class RequiredPackages
 {
    private final Collection<String> inherited;
    private final Collection<String> invoked;
    private final Collection<String> all;
 
-   PackageReferences(Collection<String> inherited, Collection<String> invoked, Collection<String> all)
+   RequiredPackages(Collection<String> inherited, Collection<String> invoked, Collection<String> all)
    {
       this.inherited = inherited;
       this.invoked = invoked;
