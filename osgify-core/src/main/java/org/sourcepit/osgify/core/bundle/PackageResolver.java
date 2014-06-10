@@ -26,6 +26,8 @@ import javax.inject.Named;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
+import org.sourcepit.osgify.core.java.BundlePackages;
+import org.sourcepit.osgify.core.java.BundlePackagesCollector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 

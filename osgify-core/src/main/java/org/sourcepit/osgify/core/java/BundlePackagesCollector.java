@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.bundle;
+package org.sourcepit.osgify.core.java;
 
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableCollection;
@@ -19,6 +19,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.sourcepit.common.modeling.Annotation;
+import org.sourcepit.osgify.core.java.TypeReferenceVisitor;
+import org.sourcepit.osgify.core.java.BundlePackages;
+import org.sourcepit.osgify.core.java.PackageReferences;
+import org.sourcepit.osgify.core.java.PackageReferencesBuilder;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.JavaFile;

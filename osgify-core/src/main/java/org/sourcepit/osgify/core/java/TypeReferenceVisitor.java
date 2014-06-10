@@ -4,11 +4,12 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.bundle;
+package org.sourcepit.osgify.core.java;
 
 import java.util.Set;
 
 import org.sourcepit.common.modeling.Annotation;
+import org.sourcepit.osgify.core.java.TypeVisitor;
 import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 

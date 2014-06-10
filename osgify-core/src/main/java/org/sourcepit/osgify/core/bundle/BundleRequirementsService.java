@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 
 import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
+import org.sourcepit.osgify.core.java.TypeVisitor;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
