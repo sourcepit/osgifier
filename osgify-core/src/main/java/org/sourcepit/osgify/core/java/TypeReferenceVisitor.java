@@ -9,14 +9,14 @@ package org.sourcepit.osgify.core.java;
 import java.util.Set;
 
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.osgify.core.java.TypeVisitor;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeVisitor;
 import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class TypeReferenceVisitor extends TypeVisitor implements ResourceVisitor
+public abstract class TypeReferenceVisitor extends JavaTypeVisitor implements ResourceVisitor
 {
    @Override
    protected void visit(JavaType jType)

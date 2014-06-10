@@ -16,11 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.DynamicPackageImport;
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.osgify.core.java.TypeVisitor;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgify.core.model.java.JavaType;
+import org.sourcepit.osgify.core.model.java.JavaTypeVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -45,7 +45,7 @@ public class DynamicPackageImportAppender
    {
       try
       {
-         jBundle.accept(new TypeVisitor()
+         jBundle.accept(new JavaTypeVisitor()
          {
             @Override
             protected void visit(JavaType jType)

@@ -4,18 +4,17 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.java;
+package org.sourcepit.osgify.core.model.java;
 
 import org.sourcepit.osgify.core.model.java.JavaFile;
 import org.sourcepit.osgify.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgify.core.model.java.JavaType;
 import org.sourcepit.osgify.core.model.java.Resource;
-import org.sourcepit.osgify.core.model.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class TypeVisitor implements ResourceVisitor
+public abstract class JavaTypeVisitor implements ResourceVisitor
 {
    public boolean visit(Resource resource)
    {
