@@ -8,7 +8,6 @@ package org.sourcepit.osgify.core.bundle;
 
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.DYNAMICIMPORT_PACKAGE;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,7 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.DynamicPackageImport;
+import org.sourcepit.common.modeling.Annotation;
+import org.sourcepit.osgify.core.java.TypeVisitor;
+import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
+import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -26,23 +30,46 @@ public class DynamicPackageImportAppender
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicPackageImportAppender.class);
 
-   private BundleRequirementsService packagesService;
-
-   @Inject
-   public DynamicPackageImportAppender(BundleRequirementsService packagesService)
-   {
-      this.packagesService = packagesService;
-   }
-
    public void append(BundleCandidate bundle)
    {
       final BundleManifest manifest = bundle.getManifest();
-      if (!hasDynamicImportPackage(manifest, "*") && packagesService.usesClassForName(bundle.getContent()))
+      if (!hasDynamicImportPackage(manifest, "*") && usesClassForName(bundle.getContent()))
       {
          LOGGER
             .warn("Detected usage of Class.forName(String). The behaviour of this method differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
          manifest.setHeader(DYNAMICIMPORT_PACKAGE, "*");
       }
+   }
+
+   public boolean usesClassForName(JavaResourceBundle jBundle)
+   {
+      try
+      {
+         jBundle.accept(new TypeVisitor()
+         {
+            @Override
+            protected void visit(JavaType jType)
+            {
+               final Annotation annotation = jType.getAnnotation(ClassForNameDetector.SOURCE);
+               if (annotation != null)
+               {
+                  if (annotation.getData(ClassForNameDetector.CLASS_FOR_NAME, false))
+                  {
+                     throw new IllegalStateException("break");
+                  }
+               }
+            }
+         });
+      }
+      catch (IllegalStateException e)
+      {
+         if ("break".equals(e.getMessage()))
+         {
+            return true;
+         }
+         throw e;
+      }
+      return false;
    }
 
    private boolean hasDynamicImportPackage(BundleManifest manifest, String pattern)

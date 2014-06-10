@@ -51,11 +51,10 @@ public class RequiredExecutionEnvironmentAppender
 
    private ExecutionEnvironmentService execEnvService;
 
-   private BundleRequirementsService packagesService;
+   private BundlePackagesService packagesService;
 
    @Inject
-   public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService,
-      BundleRequirementsService packagesService)
+   public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService, BundlePackagesService packagesService)
    {
       this.execEnvService = execEnvService;
       this.packagesService = packagesService;
@@ -166,7 +165,8 @@ public class RequiredExecutionEnvironmentAppender
 
    private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle)
    {
-      final List<String> requiredPackages = new ArrayList<String>(packagesService.getRequiredPackages(bundle));
+      final List<String> requiredPackages = new ArrayList<String>(packagesService.getPackagesInfo(bundle)
+         .getRequiredPackages().getAll());
 
       // remove packages contained in our jar
       final JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
