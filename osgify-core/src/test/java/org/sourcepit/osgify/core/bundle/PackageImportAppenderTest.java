@@ -7,15 +7,14 @@
 package org.sourcepit.osgify.core.bundle;
 
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newPackageExport;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.setInternal;
 
 import java.util.List;
 
@@ -353,7 +352,7 @@ public class PackageImportAppenderTest extends InjectedTest
       assertNull(packageImport.getVersion());
       assertEquals("optional", packageImport.getParameterValue("resolution"));
    }
-   
+
    @Test
    public void testVersionErasureOfKnownVendorPackages() throws Exception
    {
@@ -381,6 +380,129 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals("com.sun.javafx.event", packageImport.getPackageNames().get(0));
       assertNull(packageImport.getVersion());
       assertEquals("optional", packageImport.getParameterValue("resolution"));
+   }
+
+   @Test
+   public void testCustomVersionRangePolicyForPublicImports() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.publicImportPolicy", VersionRangePolicy.STRICT.literal());
+
+      BundleCandidate requiredBundle = newBundleCandidate(null);
+      addPackageExport(requiredBundle, "required.package", "1.2.3");
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "required.package.Foo");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setTarget(requiredBundle);
+
+      BundleCandidate bundleCandidate = newBundleCandidate(jArchive);
+      bundleCandidate.getDependencies().add(reference);
+
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      final PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("required.package", packageImport.getPackageNames().get(0));
+      assertEquals("[1.2.3,1.2.4)", packageImport.getVersion().toString());
+   }
+
+   @Test
+   public void testCustomVersionRangePolicyForInternalImports() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.internalImportPolicy", VersionRangePolicy.GREATER_OR_EQUAL.literal());
+
+      BundleCandidate requiredBundle = newBundleCandidate(null);
+      setInternal(addPackageExport(requiredBundle, "required.package", "1.2.3"));
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "required.package.Foo");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setTarget(requiredBundle);
+
+      BundleCandidate bundleCandidate = newBundleCandidate(jArchive);
+      bundleCandidate.getDependencies().add(reference);
+
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      final PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("required.package", packageImport.getPackageNames().get(0));
+      // 1.2 because of option osgifier.eraseMicro = true
+      assertEquals("1.2", packageImport.getVersion().toString());
+   }
+
+   @Test
+   public void testCustomVersionRangePolicyForSelfImports() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.selfImportPolicy", VersionRangePolicy.ANY.literal());
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "required.package.Foo");
+
+      BundleCandidate bundleCandidate = newBundleCandidate(jArchive);
+      setInternal(addPackageExport(bundleCandidate, "required.package", "1.2.3"));
+
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      final PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("required.package", packageImport.getPackageNames().get(0));
+      // 1.2 because of option osgifier.eraseMicro = true
+      assertNull(packageImport.getVersion());
+   }
+
+   @Test
+   public void testEraseMicro() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate requiredBundle = newBundleCandidate(null);
+      addPackageExport(requiredBundle, "required.package", "1.2.3");
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "required.package.Foo");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setTarget(requiredBundle);
+
+      BundleCandidate bundleCandidate = newBundleCandidate(jArchive);
+      bundleCandidate.getDependencies().add(reference);
+
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("required.package", packageImport.getPackageNames().get(0));
+      assertEquals("[1.2,2)", packageImport.getVersion().toString());
+
+      options.setBoolean("osgifier.eraseMicro", false);
+      bundleCandidate.getManifest().setImportPackage(null);
+      importAppender.append(bundleCandidate, options);
+
+      importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("required.package", packageImport.getPackageNames().get(0));
+      assertEquals("[1.2.3,2)", packageImport.getVersion().toString());
    }
 
 }

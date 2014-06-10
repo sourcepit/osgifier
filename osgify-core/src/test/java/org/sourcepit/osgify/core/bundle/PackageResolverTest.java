@@ -6,10 +6,12 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.setInternal;
 
 import java.util.List;
 
@@ -17,10 +19,6 @@ import javax.inject.Inject;
 
 import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Test;
-import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
-import org.sourcepit.common.manifest.osgi.PackageExport;
-import org.sourcepit.common.manifest.osgi.Parameter;
-import org.sourcepit.common.manifest.osgi.ParameterType;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -200,7 +198,7 @@ public class PackageResolverTest extends InjectedTest
       List<PackageResolutionResult> results = packageResolver.resolveRequiredPackages(bundleCandidate, false);
       assertEquals(0, results.size());
    }
-   
+
    @Test
    public void testUnresolvableImport() throws Exception
    {
@@ -211,28 +209,12 @@ public class PackageResolverTest extends InjectedTest
 
       List<PackageResolutionResult> results = packageResolver.resolveRequiredPackages(bundleCandidate, false);
       assertEquals(1, results.size());
-      
+
       PackageResolutionResult result = results.get(0);
       assertEquals("bar", result.getRequiredPackage());
       assertNull(result.getAccessRestriction());
       assertNull(result.getSelectedExporter());
       assertEquals(0, result.getExporters().size());
-   }
-
-   private static void setInternal(PackageExport packageExport)
-   {
-      Parameter parameter = packageExport.getParameter("x-internal");
-      if (parameter != null)
-      {
-         packageExport.getParameters().remove(parameter);
-      }
-
-      parameter = BundleManifestFactory.eINSTANCE.createParameter();
-      parameter.setType(ParameterType.DIRECTIVE);
-      parameter.setName("x-internal");
-      parameter.setValue("true");
-
-      packageExport.getParameters().add(parameter);
    }
 
 }

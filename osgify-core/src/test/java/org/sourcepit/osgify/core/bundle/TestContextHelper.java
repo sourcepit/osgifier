@@ -9,6 +9,8 @@ package org.sourcepit.osgify.core.bundle;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
+import org.sourcepit.common.manifest.osgi.Parameter;
+import org.sourcepit.common.manifest.osgi.ParameterType;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -129,5 +131,21 @@ public final class TestContextHelper
          packageExport.setVersion(Version.parse(version));
       }
       return packageExport;
+   }
+   
+   public static void setInternal(PackageExport packageExport)
+   {
+      Parameter parameter = packageExport.getParameter("x-internal");
+      if (parameter != null)
+      {
+         packageExport.getParameters().remove(parameter);
+      }
+
+      parameter = BundleManifestFactory.eINSTANCE.createParameter();
+      parameter.setType(ParameterType.DIRECTIVE);
+      parameter.setName("x-internal");
+      parameter.setValue("true");
+
+      packageExport.getParameters().add(parameter);
    }
 }
