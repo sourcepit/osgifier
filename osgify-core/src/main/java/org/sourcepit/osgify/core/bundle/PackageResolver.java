@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.PackageExport;
-import org.sourcepit.osgify.core.ee.AccessRule;
+import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
@@ -164,6 +164,26 @@ public class PackageResolver
          }
       }
 
+      // ee or vendor
+      final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
+      if (requiredEEs != null)
+      {
+         if (environmentService.getIntersectingPackagesByIds(requiredEEs).contains(requiredPackage))
+         {
+            exporters.add(PackageExportDescription.exportedByExecutionEnvironment());
+         }
+
+         for (ExecutionEnvironmentImplementation vendor : environmentService.getExecutionEnvironmentImplementations())
+         {
+            if (requiredEEs.contains(vendor.getExecutionEnvironmentId())
+               && vendor.getVendorPackages().contains(requiredPackage))
+            {
+               exporters.add(PackageExportDescription.exportedByVendor());
+               break;
+            }
+         }
+      }
+
       // dependencies
       for (BundleReference bundleReference : bundle.getDependencies())
       {
@@ -176,21 +196,6 @@ public class PackageResolver
          }
       }
 
-      // ee or vendor
-      switch (getAccessRule(bundle, requiredPackage))
-      {
-         case ACCESSIBLE : // ee
-            exporters.add(PackageExportDescription.exportedByExecutionEnvironment());
-            break;
-         case DISCOURAGED : // vendor
-            exporters.add(PackageExportDescription.exportedByVendor());
-            break;
-         case NON_ACCESSIBLE : // neither nor
-            break;
-         default :
-            throw new IllegalStateException();
-      }
-
       return exporters;
    }
 
@@ -199,7 +204,7 @@ public class PackageResolver
       final BundlePackages bundlePackages = getBundlePackages(bundle);
 
       final Collection<String> requiredPackges = new ArrayList<String>(bundlePackages.getReferencedPackages().getAll());
-      removeEEPackages(bundle, requiredPackges);
+      // removeEEPackages(bundle, requiredPackges);
 
       // add self imports after removing ee packages to add ee packages contributed by our bundle also
       final List<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
@@ -227,18 +232,6 @@ public class PackageResolver
       return result;
    }
 
-   private void removeEEPackages(BundleCandidate bundle, final Collection<String> requiredPackges)
-   {
-      final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
-      if (requiredEEs != null)
-      {
-         for (String ee : requiredEEs)
-         {
-            requiredPackges.removeAll(environmentService.getExecutionEnvironment(ee).getPackages());
-         }
-      }
-   }
-
    private static final PackageExport getPackageExport(BundleCandidate requiredBundle, String requiredPackage)
    {
       final List<PackageExport> exportPackage = requiredBundle.getManifest().getExportPackage();
@@ -255,14 +248,5 @@ public class PackageResolver
       return null;
    }
 
-   private AccessRule getAccessRule(BundleCandidate bundle, String requiredPackage)
-   {
-      final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
-      if (requiredEEs != null)
-      {
-         return environmentService.getAccessRuleById(requiredEEs, requiredPackage);
-      }
-      return AccessRule.NON_ACCESSIBLE;
-   }
 
 }

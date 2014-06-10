@@ -195,9 +195,9 @@ public class PackageImportAppender
 
    private void newExecutionEnvironmentImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
    {
-      final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
-      packageImport.getPackageNames().add(requiredPackage);
-      bundle.getManifest().getImportPackage(true).add(packageImport);
+      // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
+      // packageImport.getPackageNames().add(requiredPackage);
+      // bundle.getManifest().getImportPackage(true).add(packageImport);
    }
 
    private void newVendorImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)

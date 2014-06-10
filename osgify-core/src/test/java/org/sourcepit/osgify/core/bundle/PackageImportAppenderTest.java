@@ -11,10 +11,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.addPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newPackageExport;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -320,6 +323,64 @@ public class PackageImportAppenderTest extends InjectedTest
       packageImport = importPackage.get(1);
       assertEquals(1, packageImport.getPackageNames().size());
       assertEquals(packageImport.getPackageNames().get(0), "javax.xml.stream");
+   }
+
+   @Test
+   public void testVersionErasureOfKnownEEPackages() throws Exception
+   {
+      BundleCandidate requiredBundle = newBundleCandidate(null);
+      addPackageExport(requiredBundle, "javax.activation", "1.2.3");
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "javax.activation.MimeType");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setOptional(true);
+      reference.setTarget(requiredBundle);
+
+      BundleCandidate bundleCandidate = newBundleCandidate("1", "J2SE-1.4", jArchive);
+      bundleCandidate.getDependencies().add(reference);
+
+      PropertiesMap options = new LinkedPropertiesMap();
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      final PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("javax.activation", packageImport.getPackageNames().get(0));
+      assertNull(packageImport.getVersion());
+      assertEquals("optional", packageImport.getParameterValue("resolution"));
+   }
+   
+   @Test
+   public void testVersionErasureOfKnownVendorPackages() throws Exception
+   {
+      BundleCandidate requiredBundle = newBundleCandidate(null);
+      addPackageExport(requiredBundle, "com.sun.javafx.event", "1.2.3");
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "bundle.package", 47, "com.sun.javafx.event.Foo");
+
+      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
+      reference.setOptional(true);
+      reference.setTarget(requiredBundle);
+
+      BundleCandidate bundleCandidate = newBundleCandidate("1", "J2SE-1.4", jArchive);
+      bundleCandidate.getDependencies().add(reference);
+
+      PropertiesMap options = new LinkedPropertiesMap();
+      importAppender.append(bundleCandidate, options);
+
+      List<PackageImport> importPackage = bundleCandidate.getManifest().getImportPackage();
+      assertEquals(1, importPackage.size());
+
+      final PackageImport packageImport = importPackage.get(0);
+      assertEquals(1, packageImport.getPackageNames().size());
+      assertEquals("com.sun.javafx.event", packageImport.getPackageNames().get(0));
+      assertNull(packageImport.getVersion());
+      assertEquals("optional", packageImport.getParameterValue("resolution"));
    }
 
 }

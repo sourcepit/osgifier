@@ -103,6 +103,11 @@ public final class TestContextHelper
       return appendPackageExport(manifest, packageExport);
    }
 
+   public static PackageExport addPackageExport(BundleCandidate requiredBundle, String packageName, String version)
+   {
+      return appendPackageExport(requiredBundle, newPackageExport(packageName, version));
+   }
+
    public static PackageExport appendPackageExport(BundleReference bundleReference, PackageExport packageExport)
    {
       BundleCandidate bundleCandidate = bundleReference.getTarget();
