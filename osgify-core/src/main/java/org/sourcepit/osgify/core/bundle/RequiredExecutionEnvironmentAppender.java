@@ -29,6 +29,7 @@ import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
+import org.sourcepit.osgify.core.java.PackagesInfo;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.java.JavaClass;
@@ -54,7 +55,8 @@ public class RequiredExecutionEnvironmentAppender
    private BundlePackagesService packagesService;
 
    @Inject
-   public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService, BundlePackagesService packagesService)
+   public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService,
+      BundlePackagesService packagesService)
    {
       this.execEnvService = execEnvService;
       this.packagesService = packagesService;
@@ -165,22 +167,25 @@ public class RequiredExecutionEnvironmentAppender
 
    private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle)
    {
-      final List<String> requiredPackages = new ArrayList<String>(packagesService.getPackagesInfo(bundle)
-         .getRequiredPackages().getAll());
+      final PackagesInfo packagesInfo = packagesService.getPackagesInfo(bundle);
+
+      final List<String> requiredPackages = new ArrayList<String>(packagesInfo.getRequiredPackages().getAll());
 
       // remove packages contained in our jar
-      final JavaBundlePackagesCollector packagesCollector = new JavaBundlePackagesCollector(bundle.getContent());
-      packagesCollector.collect();
-      requiredPackages.removeAll(packagesCollector.getBundlePackages());
+      requiredPackages.removeAll(packagesInfo.getContainedPackages());
 
       // remove packages exposed by dependencies
       for (BundleReference bundleReference : bundle.getDependencies())
       {
          final BundleCandidate target = bundleReference.getTarget();
          final BundleManifest manifest = target.getManifest();
-         for (PackageExport packageExport : manifest.getExportPackage())
+         final List<PackageExport> exportPackage = manifest.getExportPackage();
+         if (exportPackage != null)
          {
-            requiredPackages.removeAll(packageExport.getPackageNames());
+            for (PackageExport packageExport : exportPackage)
+            {
+               requiredPackages.removeAll(packageExport.getPackageNames());
+            }
          }
       }
       return requiredPackages;
@@ -270,6 +275,7 @@ public class RequiredExecutionEnvironmentAppender
       final float[] major = new float[1];
       jBundle.accept(new ResourceVisitor()
       {
+         @Override
          public boolean visit(Resource resource)
          {
             if (resource instanceof JavaClass)
