@@ -10,12 +10,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.sourcepit.osgify.core.ee.AccessRule.ACCESSIBLE;
-import static org.sourcepit.osgify.core.ee.AccessRule.DISCOURAGED;
-import static org.sourcepit.osgify.core.ee.AccessRule.NON_ACCESSIBLE;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -247,64 +242,6 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
          assertThat(execEnvs.size(), Is.is(0));
       }
 
-   }
-
-   @Test
-   public void testAccessRule()
-   {
-      try
-      {
-         environmentService.getAccessRuleById("murks", "java.lang");
-         fail();
-      }
-      catch (IllegalArgumentException e)
-      {
-      }
-
-      AccessRule accessRule = environmentService.getAccessRuleById("J2SE-1.4", "java.lang");
-      assertThat(accessRule, Is.is(ACCESSIBLE));
-
-      accessRule = environmentService.getAccessRuleById("J2SE-1.4", "com.sun.java.swing");
-      assertThat(accessRule, Is.is(DISCOURAGED));
-
-      accessRule = environmentService.getAccessRuleById("J2SE-1.4", "foo");
-      assertThat(accessRule, Is.is(NON_ACCESSIBLE));
-
-      final ExecutionEnvironment java4 = environmentService.getExecutionEnvironment("J2SE-1.4");
-      for (ExecutionEnvironment executionEnvironment : environmentService.getExecutionEnvironments())
-      {
-         if (executionEnvironment.isCompatibleWith(java4))
-         {
-            accessRule = environmentService.getAccessRule(executionEnvironment, "java.lang");
-            assertThat(accessRule, Is.is(ACCESSIBLE));
-
-            accessRule = environmentService.getAccessRule(executionEnvironment, "com.sun.java.swing");
-            assertThat(accessRule, Is.is(DISCOURAGED));
-
-            accessRule = environmentService.getAccessRule(executionEnvironment, "foo");
-            assertThat(accessRule, Is.is(NON_ACCESSIBLE));
-         }
-      }
-   }
-
-   @Test
-   public void testAccessRuleWithIntersection()
-   {
-      List<String> execEnvs = new ArrayList<String>();
-      execEnvs.add("J2SE-1.4");
-      execEnvs.add("CDC-1.1/Foundation-1.1");
-
-      AccessRule accessRule = environmentService.getAccessRuleById(execEnvs, "java.lang");
-      assertThat(accessRule, Is.is(ACCESSIBLE));
-
-      accessRule = environmentService.getAccessRuleById(execEnvs, "javax.microedition.io");
-      assertThat(accessRule, Is.is(DISCOURAGED));
-
-      accessRule = environmentService.getAccessRuleById(execEnvs, "com.sun.net.ssl");
-      assertThat(accessRule, Is.is(DISCOURAGED));
-
-      accessRule = environmentService.getAccessRuleById(execEnvs, "foo");
-      assertThat(accessRule, Is.is(NON_ACCESSIBLE));
    }
 
    @Test

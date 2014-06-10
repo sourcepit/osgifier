@@ -24,14 +24,6 @@ public interface ExecutionEnvironmentService
 
    List<ExecutionEnvironment> getCompatibleExecutionEnvironments(ExecutionEnvironment executionEnvironment);
 
-   AccessRule getAccessRuleById(String executionEnvironmentId, String packageName);
-
-   AccessRule getAccessRuleById(Collection<String> executionEnvironmentIds, String packageName);
-
-   AccessRule getAccessRule(ExecutionEnvironment executionEnvironment, String packageName);
-
-   AccessRule getAccessRule(Collection<ExecutionEnvironment> executionEnvironments, String packageName);
-
    List<String> getIntersectingPackagesByIds(Collection<String> executionEnvironmentIds);
 
    List<String> getIntersectingPackages(Collection<ExecutionEnvironment> executionEnvironments);
