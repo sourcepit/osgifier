@@ -18,7 +18,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Bundle Candidate</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -33,7 +33,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleCandidate#getTargetBundle <em>Target Bundle</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleCandidate()
  * @model
  * @generated

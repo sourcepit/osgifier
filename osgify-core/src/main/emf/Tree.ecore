@@ -28,5 +28,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//BundleCandidate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="provided" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="embedInstruction" lowerBound="1"
+        eType="#//EmbedInstruction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EmbedInstruction">
+    <eLiterals name="NOT" literal="not"/>
+    <eLiterals name="UNPACKED" value="1" literal="unpacked"/>
+    <eLiterals name="PACKED" value="2" literal="packed"/>
   </eClassifiers>
 </ecore:EPackage>

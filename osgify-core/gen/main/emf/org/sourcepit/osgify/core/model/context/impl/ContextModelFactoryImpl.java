@@ -7,6 +7,7 @@
 package org.sourcepit.osgify.core.model.context.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
@@ -15,6 +16,7 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 
 /**
@@ -91,6 +93,42 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
+   @Override
+   public Object createFromString(EDataType eDataType, String initialValue)
+   {
+      switch (eDataType.getClassifierID())
+      {
+         case ContextModelPackage.EMBED_INSTRUCTION :
+            return createEmbedInstructionFromString(eDataType, initialValue);
+         default :
+            throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+      }
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   @Override
+   public String convertToString(EDataType eDataType, Object instanceValue)
+   {
+      switch (eDataType.getClassifierID())
+      {
+         case ContextModelPackage.EMBED_INSTRUCTION :
+            return convertEmbedInstructionToString(eDataType, instanceValue);
+         default :
+            throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+      }
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public OsgifyContext createOsgifyContext()
    {
       OsgifyContextImpl osgifyContext = new OsgifyContextImpl();
@@ -119,6 +157,32 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    {
       BundleReferenceImpl bundleReference = new BundleReferenceImpl();
       return bundleReference;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EmbedInstruction createEmbedInstructionFromString(EDataType eDataType, String initialValue)
+   {
+      EmbedInstruction result = EmbedInstruction.get(initialValue);
+      if (result == null)
+         throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
+            + eDataType.getName() + "'");
+      return result;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public String convertEmbedInstructionToString(EDataType eDataType, Object instanceValue)
+   {
+      return instanceValue == null ? null : instanceValue.toString();
    }
 
    /**

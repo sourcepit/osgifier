@@ -43,7 +43,7 @@ import org.sourcepit.osgify.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleCandidateImpl#getTargetBundle <em>Target Bundle</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate

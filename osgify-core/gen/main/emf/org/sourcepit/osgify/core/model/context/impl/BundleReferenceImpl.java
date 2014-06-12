@@ -15,6 +15,7 @@ import org.sourcepit.common.modeling.impl.XAnnotatableImpl;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,9 +28,11 @@ import org.sourcepit.osgify.core.model.context.ContextModelPackage;
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl#isOptional <em>Optional</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl#getTarget <em>Target</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl#isProvided <em>Provided</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.impl.BundleReferenceImpl#getEmbedInstruction <em>Embed Instruction
+ * </em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class BundleReferenceImpl extends XAnnotatableImpl implements BundleReference
@@ -110,6 +113,28 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @ordered
     */
    protected boolean provided = PROVIDED_EDEFAULT;
+
+   /**
+    * The default value of the '{@link #getEmbedInstruction() <em>Embed Instruction</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getEmbedInstruction()
+    * @generated
+    * @ordered
+    */
+   protected static final EmbedInstruction EMBED_INSTRUCTION_EDEFAULT = EmbedInstruction.NOT;
+
+   /**
+    * The cached value of the '{@link #getEmbedInstruction() <em>Embed Instruction</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getEmbedInstruction()
+    * @generated
+    * @ordered
+    */
+   protected EmbedInstruction embedInstruction = EMBED_INSTRUCTION_EDEFAULT;
 
    /**
     * <!-- begin-user-doc -->
@@ -266,6 +291,32 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
+   public EmbedInstruction getEmbedInstruction()
+   {
+      return embedInstruction;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setEmbedInstruction(EmbedInstruction newEmbedInstruction)
+   {
+      EmbedInstruction oldEmbedInstruction = embedInstruction;
+      embedInstruction = newEmbedInstruction == null ? EMBED_INSTRUCTION_EDEFAULT : newEmbedInstruction;
+      if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_REFERENCE__EMBED_INSTRUCTION,
+            oldEmbedInstruction, embedInstruction));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    @Override
    public Object eGet(int featureID, boolean resolve, boolean coreType)
    {
@@ -281,6 +332,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
             return basicGetTarget();
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             return isProvided();
+         case ContextModelPackage.BUNDLE_REFERENCE__EMBED_INSTRUCTION :
+            return getEmbedInstruction();
       }
       return super.eGet(featureID, resolve, coreType);
    }
@@ -307,6 +360,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
             return;
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             setProvided((Boolean) newValue);
+            return;
+         case ContextModelPackage.BUNDLE_REFERENCE__EMBED_INSTRUCTION :
+            setEmbedInstruction((EmbedInstruction) newValue);
             return;
       }
       super.eSet(featureID, newValue);
@@ -335,6 +391,9 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             setProvided(PROVIDED_EDEFAULT);
             return;
+         case ContextModelPackage.BUNDLE_REFERENCE__EMBED_INSTRUCTION :
+            setEmbedInstruction(EMBED_INSTRUCTION_EDEFAULT);
+            return;
       }
       super.eUnset(featureID);
    }
@@ -358,6 +417,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
             return target != null;
          case ContextModelPackage.BUNDLE_REFERENCE__PROVIDED :
             return provided != PROVIDED_EDEFAULT;
+         case ContextModelPackage.BUNDLE_REFERENCE__EMBED_INSTRUCTION :
+            return embedInstruction != EMBED_INSTRUCTION_EDEFAULT;
       }
       return super.eIsSet(featureID);
    }
@@ -381,6 +442,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
       result.append(optional);
       result.append(", provided: ");
       result.append(provided);
+      result.append(", embedInstruction: ");
+      result.append(embedInstruction);
       result.append(')');
       return result.toString();
    }

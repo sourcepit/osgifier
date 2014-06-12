@@ -13,7 +13,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Bundle Reference</b></em>'.
  * <!-- end-user-doc -->
- * 
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -21,9 +21,10 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isOptional <em>Optional</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getTarget <em>Target</em>}</li>
  * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#isProvided <em>Provided</em>}</li>
+ * <li>{@link org.sourcepit.osgify.core.model.context.BundleReference#getEmbedInstruction <em>Embed Instruction</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference()
  * @model
  * @generated
@@ -145,5 +146,37 @@ public interface BundleReference extends XAnnotatable
     * @generated
     */
    void setProvided(boolean value);
+
+   /**
+    * Returns the value of the '<em><b>Embed Instruction</b></em>' attribute.
+    * The literals are from the enumeration {@link org.sourcepit.osgify.core.model.context.EmbedInstruction}.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Embed Instruction</em>' attribute isn't clear, there really should be more of a
+    * description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Embed Instruction</em>' attribute.
+    * @see org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * @see #setEmbedInstruction(EmbedInstruction)
+    * @see org.sourcepit.osgify.core.model.context.ContextModelPackage#getBundleReference_EmbedInstruction()
+    * @model required="true"
+    * @generated
+    */
+   EmbedInstruction getEmbedInstruction();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgify.core.model.context.BundleReference#getEmbedInstruction
+    * <em>Embed Instruction</em>}' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Embed Instruction</em>' attribute.
+    * @see org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * @see #getEmbedInstruction()
+    * @generated
+    */
+   void setEmbedInstruction(EmbedInstruction value);
 
 } // BundleReference

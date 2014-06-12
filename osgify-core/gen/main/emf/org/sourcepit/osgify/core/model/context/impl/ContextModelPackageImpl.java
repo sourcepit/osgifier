@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.model.context.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -18,6 +19,7 @@ import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.ContextModelPackage;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.model.java.JavaModelPackage;
 import org.sourcepit.osgify.core.model.java.impl.JavaModelPackageImpl;
@@ -54,6 +56,14 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * @generated
     */
    private EClass bundleReferenceEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EEnum embedInstructionEEnum = null;
 
    /**
     * Creates an instance of the model <b>Package</b>, registered with {@link org.eclipse.emf.ecore.EPackage.Registry
@@ -327,6 +337,28 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
+   public EAttribute getBundleReference_EmbedInstruction()
+   {
+      return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(4);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EEnum getEmbedInstruction()
+   {
+      return embedInstructionEEnum;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public ContextModelFactory getContextModelFactory()
    {
       return (ContextModelFactory) getEFactoryInstance();
@@ -374,6 +406,10 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__OPTIONAL);
       createEReference(bundleReferenceEClass, BUNDLE_REFERENCE__TARGET);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__PROVIDED);
+      createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__EMBED_INSTRUCTION);
+
+      // Create enums
+      embedInstructionEEnum = createEEnum(EMBED_INSTRUCTION);
    }
 
    /**
@@ -473,6 +509,15 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEAttribute(getBundleReference_Provided(), ecorePackage.getEBoolean(), "provided", null, 0, 1,
          BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
+      initEAttribute(getBundleReference_EmbedInstruction(), this.getEmbedInstruction(), "embedInstruction", null, 1, 1,
+         BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+         !IS_DERIVED, IS_ORDERED);
+
+      // Initialize enums and add enum literals
+      initEEnum(embedInstructionEEnum, EmbedInstruction.class, "EmbedInstruction");
+      addEEnumLiteral(embedInstructionEEnum, EmbedInstruction.NOT);
+      addEEnumLiteral(embedInstructionEEnum, EmbedInstruction.UNPACKED);
+      addEEnumLiteral(embedInstructionEEnum, EmbedInstruction.PACKED);
 
       // Create resource
       createResource(eNS_URI);

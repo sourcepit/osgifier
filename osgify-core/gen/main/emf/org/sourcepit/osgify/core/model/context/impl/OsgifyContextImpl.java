@@ -29,7 +29,7 @@ import org.sourcepit.osgify.core.model.context.OsgifyContext;
  * <li>{@link org.sourcepit.osgify.core.model.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext

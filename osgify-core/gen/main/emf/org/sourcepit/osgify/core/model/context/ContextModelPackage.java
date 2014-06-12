@@ -8,6 +8,7 @@ package org.sourcepit.osgify.core.model.context;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.sourcepit.common.modeling.CommonModelingPackage;
@@ -323,6 +324,16 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE__PROVIDED = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 3;
 
    /**
+    * The feature id for the '<em><b>Embed Instruction</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_REFERENCE__EMBED_INSTRUCTION = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 4;
+
+   /**
     * The number of structural features of the '<em>Bundle Reference</em>' class.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -330,7 +341,20 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 4;
+   int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 5;
+
+
+   /**
+    * The meta object id for the '{@link org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * <em>Embed Instruction</em>}' enum.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getEmbedInstruction()
+    * @generated
+    */
+   int EMBED_INSTRUCTION = 3;
 
 
    /**
@@ -552,6 +576,31 @@ public interface ContextModelPackage extends EPackage
    EAttribute getBundleReference_Provided();
 
    /**
+    * Returns the meta object for the attribute '
+    * {@link org.sourcepit.osgify.core.model.context.BundleReference#getEmbedInstruction <em>Embed Instruction</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Embed Instruction</em>'.
+    * @see org.sourcepit.osgify.core.model.context.BundleReference#getEmbedInstruction()
+    * @see #getBundleReference()
+    * @generated
+    */
+   EAttribute getBundleReference_EmbedInstruction();
+
+   /**
+    * Returns the meta object for enum '{@link org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * <em>Embed Instruction</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for enum '<em>Embed Instruction</em>'.
+    * @see org.sourcepit.osgify.core.model.context.EmbedInstruction
+    * @generated
+    */
+   EEnum getEmbedInstruction();
+
+   /**
     * Returns the factory that creates the instances of the model.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -737,6 +786,27 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EAttribute BUNDLE_REFERENCE__PROVIDED = eINSTANCE.getBundleReference_Provided();
+
+      /**
+       * The meta object literal for the '<em><b>Embed Instruction</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute BUNDLE_REFERENCE__EMBED_INSTRUCTION = eINSTANCE.getBundleReference_EmbedInstruction();
+
+      /**
+       * The meta object literal for the '{@link org.sourcepit.osgify.core.model.context.EmbedInstruction
+       * <em>Embed Instruction</em>}' enum.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @see org.sourcepit.osgify.core.model.context.EmbedInstruction
+       * @see org.sourcepit.osgify.core.model.context.impl.ContextModelPackageImpl#getEmbedInstruction()
+       * @generated
+       */
+      EEnum EMBED_INSTRUCTION = eINSTANCE.getEmbedInstruction();
 
    }
 
