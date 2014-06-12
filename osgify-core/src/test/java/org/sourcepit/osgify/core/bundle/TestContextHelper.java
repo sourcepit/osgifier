@@ -17,6 +17,7 @@ import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaClass;
+import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 import org.sourcepit.osgify.core.model.java.JavaType;
 
 /**
@@ -42,13 +43,21 @@ public final class TestContextHelper
       return bundle;
    }
 
+   public static BundleCandidate newBundleCandidate(String bundleVersion, JavaArchive jArchive)
+   {
+      return newBundleCandidate(bundleVersion, null, jArchive);
+   }
+
    public static BundleCandidate newBundleCandidate(String bundleVersion, String executionEnvironment,
       JavaArchive jArchive)
    {
       final BundleCandidate bundle = newBundleCandidate(jArchive);
       bundle.getManifest().setBundleVersion(bundleVersion);
       bundle.setVersion(bundle.getManifest().getBundleVersion());
-      bundle.getManifest().setBundleRequiredExecutionEnvironment(executionEnvironment);
+      if (executionEnvironment != null)
+      {
+         bundle.getManifest().setBundleRequiredExecutionEnvironment(executionEnvironment);
+      }
       return bundle;
    }
 
@@ -132,7 +141,7 @@ public final class TestContextHelper
       }
       return packageExport;
    }
-   
+
    public static void setInternal(PackageExport packageExport)
    {
       Parameter parameter = packageExport.getParameter("x-internal");
@@ -147,5 +156,26 @@ public final class TestContextHelper
       parameter.setValue("true");
 
       packageExport.getParameters().add(parameter);
+   }
+
+   public static BundleReference addBundleReference(BundleCandidate from, BundleCandidate to)
+   {
+      final BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
+      ref.setTarget(to);
+      from.getDependencies().add(ref);
+      return ref;
+   }
+
+   public static JavaArchive newJArchive(String... jTypes)
+   {
+      final JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      if (jTypes != null)
+      {
+         for (String jType : jTypes)
+         {
+            appendType(jArchive, jType, 47);
+         }
+      }
+      return jArchive;
    }
 }

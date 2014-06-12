@@ -97,7 +97,7 @@ public class BundleManifestAppender
          }
          if (filter.isAppendPackageExports(bundle, options))
          {
-            packageExports.append(options, bundle);
+            packageExports.append(bundle, options);
          }
          if (filter.isAppendPackageImports(bundle, options))
          {

@@ -13,11 +13,14 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.EXPORT_PACKAGE;
 import static org.sourcepit.common.manifest.osgi.ParameterType.DIRECTIVE;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.addBundleReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.newJArchive;
+
+import java.util.List;
 
 import javax.inject.Inject;
-import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.sisu.launch.InjectedTest;
@@ -31,8 +34,8 @@ import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 import org.sourcepit.osgify.core.model.java.File;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
@@ -52,7 +55,7 @@ public class PackageExportAppenderTest extends InjectedTest
    {
       try
       {
-         exportAppender.append(new LinkedPropertiesMap(), null);
+         exportAppender.append(null, new LinkedPropertiesMap());
          fail();
       }
       catch (IllegalArgumentException e)
@@ -62,19 +65,19 @@ public class PackageExportAppenderTest extends InjectedTest
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       try
       {
-         exportAppender.append(new LinkedPropertiesMap(), bundle);
+         exportAppender.append(bundle, new LinkedPropertiesMap());
          fail();
       }
-      catch (IllegalArgumentException e)
+      catch (NullPointerException e)
       {
       }
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
       try
       {
-         exportAppender.append(new LinkedPropertiesMap(), bundle);
+         exportAppender.append(bundle, new LinkedPropertiesMap());
          fail();
       }
-      catch (IllegalArgumentException e)
+      catch (NullPointerException e)
       {
       }
       JavaProject jProject = JavaModelFactory.eINSTANCE.createJavaProject();
@@ -82,7 +85,7 @@ public class PackageExportAppenderTest extends InjectedTest
       jProject.getType("src/test/java", "foo", "BarTest", true);
       bundle.setContent(jProject);
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
 
       EList<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
       assertThat(exportPackage.size(), Is.is(1));
@@ -101,7 +104,7 @@ public class PackageExportAppenderTest extends InjectedTest
       jProject.getType("src/test/java", "foo", "BarTest", true);
       bundle.setContent(jProject);
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
 
       EList<PackageExport> exportPackage = mf.getExportPackage();
       assertThat(exportPackage.size(), Is.is(1));
@@ -121,7 +124,7 @@ public class PackageExportAppenderTest extends InjectedTest
       jProject.getType("/", null, "Bar", true);
       bundle.setContent(jProject);
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
 
       assertNull(mf.getExportPackage());
    }
@@ -140,7 +143,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleVersion("1.0.1");
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
       assertEquals("java.lang;version=1.0.1,org.sourcepit;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
@@ -154,7 +157,7 @@ public class PackageExportAppenderTest extends InjectedTest
       BundleManifest manifest = bundle.getManifest();
       manifest.setBundleVersion("1.0.1");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
 
       assertThat(manifest.getHeaderValue(EXPORT_PACKAGE), IsEqual.equalTo("org.sourcepit;version=1.0.1"));
    }
@@ -177,7 +180,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleVersion("1.0.1");
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
 
       assertThat(manifest.getHeaderValue(EXPORT_PACKAGE),
          IsEqual.equalTo("org.sourcepit;version=1337,org.sourcepit.foo;version=1.0.1"));
@@ -197,8 +200,9 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleVersion("1.0.1");
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
-      assertEquals("javax.xml.stream;version=1.0.1,org.sourcepit;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
+      exportAppender.append(bundle, new LinkedPropertiesMap());
+      assertEquals("javax.xml.stream;version=1.0.1,org.sourcepit;version=1.0.1",
+         manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
    @Test
@@ -213,7 +217,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleVersion("1.0.1");
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
       assertEquals("org.sourcepit;version=1.0.1,sun.misc;version=1.0.1", manifest.getHeaderValue(EXPORT_PACKAGE));
    }
 
@@ -231,7 +235,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest.setBundleVersion("1.0.1");
       manifest.setBundleRequiredExecutionEnvironment("OSGi/Minimum-1.0");
 
-      exportAppender.append(new LinkedPropertiesMap(), bundle);
+      exportAppender.append(bundle, new LinkedPropertiesMap());
       assertThat(manifest.getHeaderValue(EXPORT_PACKAGE),
          IsEqual.equalTo("a;version=1.0.1,a2;version=1.0.1,d;version=1.0.1,z;version=1.0.1"));
    }
@@ -254,12 +258,10 @@ public class PackageExportAppenderTest extends InjectedTest
       BundleManifest manifestA = bundleA.getManifest();
       manifestA.setBundleVersion("1");
 
-      BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
-      reference.setTarget(bundleB);
-      bundleA.getDependencies().add(reference);
+      addBundleReference(bundleA, bundleB);
 
-      exportAppender.append(new LinkedPropertiesMap(), bundleB);
-      exportAppender.append(new LinkedPropertiesMap(), bundleA);
+      exportAppender.append(bundleB, new LinkedPropertiesMap());
+      exportAppender.append(bundleA, new LinkedPropertiesMap());
 
       EList<PackageExport> exportPackage = manifestA.getExportPackage();
       assertEquals(1, exportPackage.size());
@@ -281,7 +283,7 @@ public class PackageExportAppenderTest extends InjectedTest
       BundleManifest manifest = bundle.getManifest();
       manifest.setBundleVersion("1");
 
-      exportAppender.append(properties, bundle);
+      exportAppender.append(bundle, properties);
 
       EList<PackageExport> exportPackage = manifest.getExportPackage();
       assertEquals(3, exportPackage.size());
@@ -304,7 +306,7 @@ public class PackageExportAppenderTest extends InjectedTest
       manifest = bundle.getManifest();
       manifest.setBundleVersion("1");
 
-      exportAppender.append(properties, bundle);
+      exportAppender.append(bundle, properties);
 
       exportPackage = manifest.getExportPackage();
       assertEquals(3, exportPackage.size());
@@ -326,5 +328,68 @@ public class PackageExportAppenderTest extends InjectedTest
       assertNotNull(parameter);
       assertEquals(DIRECTIVE, parameter.getType());
       assertEquals("true", parameter.getValue());
+   }
+
+   @Test
+   public void testExportEmbeddedPackages() throws Exception
+   {
+      final PropertiesMap properties = new LinkedPropertiesMap();
+
+      BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
+      BundleCandidate b = newBundleCandidate("2", newJArchive("b.B"));
+      BundleCandidate c = newBundleCandidate("3", newJArchive("c.C"));
+      BundleCandidate d = newBundleCandidate("4", newJArchive("d.D"));
+
+      addBundleReference(a, b).setEmbedInstruction(EmbedInstruction.PACKED);
+      addBundleReference(a, c).setEmbedInstruction(EmbedInstruction.UNPACKED);
+      addBundleReference(a, d);
+
+      exportAppender.append(d, properties);
+      exportAppender.append(c, properties);
+      exportAppender.append(b, properties);
+      exportAppender.append(a, properties);
+
+      List<PackageExport> exportPackage = a.getManifest().getExportPackage();
+      assertEquals(3, exportPackage.size());
+
+      PackageExport packageExport = exportPackage.get(0);
+      assertEquals("[a]", packageExport.getPackageNames().toString());
+      assertEquals("1", packageExport.getVersion().toMinimalString());
+
+      packageExport = exportPackage.get(1);
+      assertEquals("[b]", packageExport.getPackageNames().toString());
+      assertEquals("2", packageExport.getVersion().toMinimalString());
+
+      packageExport = exportPackage.get(2);
+      assertEquals("[c]", packageExport.getPackageNames().toString());
+      assertEquals("3", packageExport.getVersion().toMinimalString());
+   }
+
+   @Test
+   public void testExportEmbeddedPackagesWithDups() throws Exception
+   {
+      final PropertiesMap properties = new LinkedPropertiesMap();
+
+      BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
+      BundleCandidate b1 = newBundleCandidate("2", newJArchive("b.B"));
+      BundleCandidate b2 = newBundleCandidate("3", newJArchive("b.B"));
+
+      addBundleReference(a, b1).setEmbedInstruction(EmbedInstruction.PACKED);
+      addBundleReference(a, b2).setEmbedInstruction(EmbedInstruction.UNPACKED);
+
+      exportAppender.append(b2, properties);
+      exportAppender.append(b1, properties);
+      exportAppender.append(a, properties);
+
+      List<PackageExport> exportPackage = a.getManifest().getExportPackage();
+      assertEquals(2, exportPackage.size());
+
+      PackageExport packageExport = exportPackage.get(0);
+      assertEquals("[a]", packageExport.getPackageNames().toString());
+      assertEquals("1", packageExport.getVersion().toMinimalString());
+
+      packageExport = exportPackage.get(1);
+      assertEquals("[b]", packageExport.getPackageNames().toString());
+      assertEquals("2", packageExport.getVersion().toMinimalString());
    }
 }

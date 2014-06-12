@@ -13,10 +13,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.inject.Named;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.constraints.NotNull;
@@ -45,37 +47,98 @@ public class PackageExportAppender
 {
    private static final Logger LOGGER = LoggerFactory.getLogger(PackageExportAppender.class);
 
-   public void append(@NotNull PropertiesSource properties, @NotNull BundleCandidate bundle)
+   public void append(@NotNull BundleCandidate bundle, @NotNull PropertiesSource properties)
+   {
+      final Map<String, PackageExport> packageToExport = new HashMap<String, PackageExport>();
+      addBundlePackageExports(packageToExport, bundle, properties);
+      addPackageExportsOfEmbeddedBundles(packageToExport, bundle);
+
+      if (!packageToExport.isEmpty())
+      {
+         final List<String> packageNames = new ArrayList<String>(packageToExport.keySet());
+         Collections.sort(packageNames);
+
+         final List<PackageExport> exportPackage = bundle.getManifest().getExportPackage(true);
+         for (String packageName : packageNames)
+         {
+            exportPackage.add(packageToExport.get(packageName));
+         }
+      }
+   }
+
+   private void addPackageExportsOfEmbeddedBundles(final Map<String, PackageExport> packageToExport,
+      BundleCandidate bundle)
+   {
+      for (BundleCandidate embeddedBundle : determineEmbeddedBundles(bundle))
+      {
+         final List<PackageExport> exportPackage = embeddedBundle.getManifest().getExportPackage();
+         if (exportPackage != null)
+         {
+            for (PackageExport packageExport : exportPackage)
+            {
+               for (String packageName : packageExport.getPackageNames())
+               {
+                  if (!packageToExport.containsKey(packageName))
+                  {
+                     final PackageExport copy = EcoreUtil.copy(packageExport);
+                     copy.getPackageNames().clear();
+                     copy.getPackageNames().add(packageName);
+                     packageToExport.put(packageName, copy);
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   private void addBundlePackageExports(final Map<String, PackageExport> packageToExport, BundleCandidate bundle,
+      PropertiesSource options)
    {
       final JavaResourceBundle jBundle = bundle.getContent();
-      if (jBundle == null)
-      {
-         throw new IllegalArgumentException("Java content of bundle " + bundle.getSymbolicName() + " must not be null.");
-      }
       final BundleManifest manifest = bundle.getManifest();
-      if (manifest == null)
-      {
-         throw new IllegalArgumentException("Manifest of bundle " + bundle.getSymbolicName() + " must not be null.");
-      }
-
       final Map<String, List<JavaPackage>> nameToJPackagesMap = determinePackagesToExport(bundle, jBundle,
          manifest.getBundleRequiredExecutionEnvironment());
 
-      final List<String> packageNames = new ArrayList<String>(nameToJPackagesMap.keySet());
-      Collections.sort(packageNames);
-
-      final String filter = properties.get("osgifier.internalPackages");
+      final String filter = options.get("osgifier.internalPackages");
       final PathMatcher internalPackages = filter == null ? null : PathMatcher.parsePackagePatterns(filter);
 
-      for (String packageName : packageNames)
+      for (Entry<String, List<JavaPackage>> entry : nameToJPackagesMap.entrySet())
       {
+         final String packageName = entry.getKey();
          final Version version = determinePackageVersion(manifest, packageName, nameToJPackagesMap.get(packageName));
-         appendExport(internalPackages, manifest, packageName, version);
+         packageToExport.put(packageName, newPackageExport(internalPackages, packageName, version));
       }
+   }
+
+   private static List<BundleCandidate> determineEmbeddedBundles(BundleCandidate bundle)
+   {
+      final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
+      for (BundleReference bundleReference : bundle.getDependencies())
+      {
+         switch (bundleReference.getEmbedInstruction())
+         {
+            case NOT :
+               break;
+            case UNPACKED :
+            case PACKED :
+               embeddedBundles.add(bundleReference.getTarget());
+               break;
+            default :
+               throw new IllegalStateException();
+         }
+      }
+      return embeddedBundles;
    }
 
    private void appendExport(PathMatcher internalPackages, final BundleManifest manifest, final String packageName,
       final Version version)
+   {
+      final PackageExport packageExport = newPackageExport(internalPackages, packageName, version);
+
+      manifest.getExportPackage(true).add(packageExport);
+   }
+
+   private PackageExport newPackageExport(PathMatcher internalPackages, final String packageName, final Version version)
    {
       final PackageExport packageExport = BundleManifestFactory.eINSTANCE.createPackageExport();
       packageExport.getPackageNames().add(packageName);
@@ -92,8 +155,7 @@ public class PackageExportAppender
          parameter.setType(DIRECTIVE);
          packageExport.getParameters().add(parameter);
       }
-
-      manifest.getExportPackage(true).add(packageExport);
+      return packageExport;
    }
 
    private Map<String, List<JavaPackage>> determinePackagesToExport(BundleCandidate bundle, JavaResourceBundle jBundle,
