@@ -6,9 +6,7 @@
 
 package org.sourcepit.osgify.core.java.inspect;
 
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.net.URL;
@@ -100,6 +98,26 @@ public class JavaTypeReferencesCollectorTest
          .add("org.sourcepit.osgify.core.java.inspect.JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy");
       expectedRefs.add("java.lang.Integer");
       expectedRefs.add("java.lang.String");
+
+      assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
+   }
+
+   @Test
+   public void testFullyQualfiedMethodSignatureTypes() throws Exception
+   {
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(
+         JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
+
+      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testFullyQualfiedMethodSignatureTypes.class
+         .getName());
+
+      final Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
+      assertThat(typeRefs.size(), Is.is(3));
+
+      final Set<String> expectedRefs = new HashSet<String>();
+      expectedRefs.add("java.lang.Object");
+      expectedRefs.add("javax.activation.CommandObject");
+      expectedRefs.add("javax.activation.DataContentHandler");
 
       assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
    }
