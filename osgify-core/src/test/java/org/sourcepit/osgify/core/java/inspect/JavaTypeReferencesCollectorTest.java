@@ -121,4 +121,23 @@ public class JavaTypeReferencesCollectorTest
 
       assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
    }
+
+   @Test
+   public void testMethodAnnotations() throws Exception
+   {
+      final ClassLoaderRepository classRepo = new ClassLoaderRepository(
+         JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
+
+      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testMethodAnnotations.class.getName());
+
+      final Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
+      assertThat(typeRefs.size(), Is.is(3));
+
+      final Set<String> expectedRefs = new HashSet<String>();
+      expectedRefs.add("java.lang.Object");
+      expectedRefs.add("javax.inject.Inject");
+      expectedRefs.add("javax.inject.Named");
+
+      assertThat(typeRefs, IsEqual.equalTo(expectedRefs));
+   }
 }

@@ -20,7 +20,8 @@ import org.apache.bcel.classfile.EmptyVisitor;
 import org.apache.bcel.classfile.InnerClass;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
-import org.apache.bcel.classfile.MethodParameters;
+import org.apache.bcel.classfile.ParameterAnnotationEntry;
+import org.apache.bcel.classfile.ParameterAnnotations;
 import org.apache.bcel.classfile.Signature;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgify.core.java.util.JavaLangUtils;
@@ -48,19 +49,22 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
       final String signature = obj.getSignature(constantPool);
       processSignature(signature);
    }
-   
+
    @Override
    public void visitMethod(Method obj)
    {
-      final String signature = obj.getSignature();
-      processSignature(signature);
+      processSignature(obj.getSignature());
    }
-   
-   @Override
-   public void visitMethodParameters(MethodParameters obj)
+
+   public void visitParameterAnnotation(ParameterAnnotations obj)
    {
-      // TODO Auto-generated method stub
-      super.visitMethodParameters(obj);
+      for (ParameterAnnotationEntry parameterAnnotation : obj.getParameterAnnotationEntries())
+      {
+         for (AnnotationEntry annotation : parameterAnnotation.getAnnotationEntries())
+         {
+            visitAnnotationEntry(annotation);
+         }
+      }
    }
 
    @Override
