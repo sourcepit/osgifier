@@ -7,12 +7,17 @@
 package org.sourcepit.osgify.core.bundle;
 
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.sourcepit.common.manifest.osgi.BundleHeaderName.EXPORT_PACKAGE;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.addBundleReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendTypeWithReferences;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.newJArchive;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.setInternal;
 
@@ -31,6 +36,7 @@ import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
@@ -39,6 +45,9 @@ import org.sourcepit.osgify.core.model.java.JavaModelFactory;
  */
 public class PackageImportAppenderTest extends InjectedTest
 {
+   @Inject
+   private PackageExportAppender exportAppender;
+
    @Inject
    private PackageImportAppender importAppender;
 
@@ -503,6 +512,144 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals(1, packageImport.getPackageNames().size());
       assertEquals("required.package", packageImport.getPackageNames().get(0));
       assertEquals("[1.2.3,2)", packageImport.getVersion().toString());
+   }
+
+   @Test
+   public void testReimportEmbeddedPackages() throws Exception
+   {
+      final PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
+      BundleCandidate b = newBundleCandidate("2", newJArchive("b.B"));
+      BundleCandidate c = newBundleCandidate("3", newJArchive("c.C"));
+      BundleCandidate d = newBundleCandidate("4", newJArchive("d.D"));
+
+      addBundleReference(a, b).setEmbedInstruction(EmbedInstruction.PACKED);
+      addBundleReference(a, c).setEmbedInstruction(EmbedInstruction.UNPACKED);
+      addBundleReference(a, d);
+
+      exportAppender.append(d, options);
+      importAppender.append(d, options);
+      exportAppender.append(c, options);
+      importAppender.append(c, options);
+      exportAppender.append(b, options);
+      importAppender.append(b, options);
+      exportAppender.append(a, options);
+      importAppender.append(a, options);
+
+      final List<PackageImport> importPackage = a.getManifest().getImportPackage();
+      assertEquals(3, importPackage.size());
+
+      PackageImport packageImport = importPackage.get(0);
+      assertEquals("[a]", packageImport.getPackageNames().toString());
+      assertEquals("[1,1.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(1);
+      assertEquals("[b]", packageImport.getPackageNames().toString());
+      assertEquals("[2,2.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(2);
+      assertEquals("[c]", packageImport.getPackageNames().toString());
+      assertEquals("[3,3.1)", packageImport.getVersion().toString());
+   }
+
+   @Test
+   public void testReimportEmbeddedPackagesWithDep() throws Exception
+   {
+      final PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
+      BundleCandidate b = newBundleCandidate("2", newJArchive("b.B"));
+
+      final JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "c.C", 47, "d.D");
+      BundleCandidate c = newBundleCandidate("3", jArchive);
+
+      BundleCandidate d = newBundleCandidate("4", newJArchive("d.D"));
+      addPackageExport(d, "d", "5");
+
+      addBundleReference(a, b).setEmbedInstruction(EmbedInstruction.PACKED);
+      addBundleReference(a, c).setEmbedInstruction(EmbedInstruction.UNPACKED);
+      addBundleReference(c, d);
+
+      exportAppender.append(d, options);
+      importAppender.append(d, options);
+      exportAppender.append(c, options);
+      importAppender.append(c, options);
+      exportAppender.append(b, options);
+      importAppender.append(b, options);
+      exportAppender.append(a, options);
+      importAppender.append(a, options);
+
+
+      final List<PackageImport> importPackage = a.getManifest().getImportPackage();
+      assertEquals(4, importPackage.size());
+
+      PackageImport packageImport = importPackage.get(0);
+      assertEquals("[a]", packageImport.getPackageNames().toString());
+      assertEquals("[1,1.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(1);
+      assertEquals("[b]", packageImport.getPackageNames().toString());
+      assertEquals("[2,2.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(2);
+      assertEquals("[c]", packageImport.getPackageNames().toString());
+      assertEquals("[3,3.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(3);
+      assertEquals("[d]", packageImport.getPackageNames().toString());
+      assertEquals("[5,6)", packageImport.getVersion().toString());
+   }
+
+   @Test
+   public void testReimportEmbeddedPackagesWithPublicAndInternalPackageRequirement() throws Exception
+   {
+      final PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.internalPackages", "c.internal");
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "a.A", 47, "c.C");
+      BundleCandidate a = newBundleCandidate("1", jArchive);
+
+      jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "b.B", 47, "c.internal.C");
+      BundleCandidate b = newBundleCandidate("2", jArchive);
+
+      BundleCandidate c = newBundleCandidate("4", newJArchive("c.D", "c.internal.C"));
+
+      addBundleReference(a, b).setEmbedInstruction(EmbedInstruction.PACKED);
+      addBundleReference(a, c);
+      addBundleReference(b, c);
+
+      exportAppender.append(c, options);
+      importAppender.append(c, options);
+      exportAppender.append(b, options);
+      importAppender.append(b, options);
+      exportAppender.append(a, options);
+      importAppender.append(a, options);
+
+      assertEquals("c;version=4,c.internal;version=4;x-internal:=true", c.getManifest().getHeaderValue(EXPORT_PACKAGE));
+
+      final List<PackageImport> importPackage = a.getManifest().getImportPackage();
+      assertEquals(4, importPackage.size());
+
+      PackageImport packageImport = importPackage.get(0);
+      assertEquals("[a]", packageImport.getPackageNames().toString());
+      assertEquals("[1,1.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(1);
+      assertEquals("[b]", packageImport.getPackageNames().toString());
+      assertEquals("[2,2.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(2);
+      assertEquals("[c]", packageImport.getPackageNames().toString());
+      // [4,4.1) would be better but hard to determine
+      assertEquals("[4,5)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(3);
+      assertEquals("[c.internal]", packageImport.getPackageNames().toString());
+      assertEquals("[4,4.1)", packageImport.getVersion().toString());
    }
 
 }

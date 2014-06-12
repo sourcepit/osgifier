@@ -15,13 +15,18 @@ import static org.sourcepit.osgify.core.bundle.PackageImportType.SELF_IMPORT;
 import static org.sourcepit.osgify.core.bundle.VersionRangePolicy.COMPATIBLE;
 import static org.sourcepit.osgify.core.bundle.VersionRangePolicy.EQUIVALENT;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
@@ -58,68 +63,125 @@ public class PackageImportAppender
       final boolean treatInheritedPackagesAsInternal = options.getBoolean("osgifier.treatInheritedPackagesAsInternal",
          false);
 
-      final List<PackageResolutionResult> results = packageResolver.resolveRequiredPackages(bundle,
-         treatInheritedPackagesAsInternal);
-
-      for (PackageResolutionResult result : results)
+      final Map<String, PackageImport> packageToImport = new HashMap<String, PackageImport>();
+      for (PackageResolutionResult result : packageResolver.resolveRequiredPackages(bundle,
+         treatInheritedPackagesAsInternal))
       {
-         final String requiredPackage = result.getRequiredPackage();
-         final PackageExportDescription exporter = result.getSelectedExporter();
-         if (exporter == null)
+         final PackageImport packageImport = newPackageImport(bundle, result, options);
+         if (packageImport != null)
          {
-            newUnresolvableImport(bundle, requiredPackage, options);
-         }
-         else
-         {
-            switch (exporter.getExporterType())
-            {
-               case OWN_BUNDLE :
-                  newSelfImport(bundle, requiredPackage, exporter.getPackageExport(), options);
-                  break;
-               case EXECUTION_ENVIRONMENT :
-                  newExecutionEnvironmentImport(bundle, requiredPackage, options);
-                  break;
-               case VENDOR :
-                  newVendorImport(bundle, requiredPackage, options);
-                  break;
-               case REQUIRED_BUNDLE :
-                  newPackageImport(bundle, requiredPackage, exporter.getBundleReference(), exporter.getBundle(),
-                     exporter.getPackageExport(), result.getAccessRestriction(), options);
-                  break;
-               default :
-                  break;
-            }
+            packageToImport.put(result.getRequiredPackage(), packageImport);
          }
       }
 
-      // erase ee and vendor package versions
-      final List<PackageImport> importPackage = bundle.getManifest().getImportPackage();
-      if (importPackage != null)
+      for (BundleCandidate embeddedBundle : determineEmbeddedBundles(bundle))
       {
-         final Set<String> eePackages = new HashSet<String>();
-
-         for (ExecutionEnvironment executionEnvironment : environmentService.getExecutionEnvironments())
+         final List<PackageImport> importPackage = embeddedBundle.getManifest().getImportPackage();
+         if (importPackage != null)
          {
-            eePackages.addAll(executionEnvironment.getPackages());
-         }
-
-         for (ExecutionEnvironmentImplementation vendors : environmentService.getExecutionEnvironmentImplementations())
-         {
-            eePackages.addAll(vendors.getVendorPackages());
-         }
-
-         for (PackageImport packageImport : importPackage)
-         {
-            for (String packageName : packageImport.getPackageNames())
+            for (PackageImport packageImport : importPackage)
             {
-               if (eePackages.contains(packageName))
+               for (String packageName : packageImport.getPackageNames())
                {
-                  packageImport.setVersion(null);
-                  break;
+                  if (!packageToImport.containsKey(packageName))
+                  {
+                     final PackageImport copy = EcoreUtil.copy(packageImport);
+                     copy.getPackageNames().clear();
+                     copy.getPackageNames().add(packageName);
+                     packageToImport.put(packageName, copy);
+                  }
                }
             }
          }
       }
+
+      if (!packageToImport.isEmpty())
+      {
+         final List<String> requiredPackages = new ArrayList<String>(packageToImport.keySet());
+         Collections.sort(requiredPackages);
+
+         final List<PackageImport> importPackage = bundle.getManifest().getImportPackage(true);
+         for (String packageName : requiredPackages)
+         {
+            importPackage.add(packageToImport.get(packageName));
+         }
+
+         // erase ee and vendor package versions
+         if (importPackage != null)
+         {
+            final Set<String> eePackages = new HashSet<String>();
+
+            for (ExecutionEnvironment executionEnvironment : environmentService.getExecutionEnvironments())
+            {
+               eePackages.addAll(executionEnvironment.getPackages());
+            }
+
+            for (ExecutionEnvironmentImplementation vendors : environmentService
+               .getExecutionEnvironmentImplementations())
+            {
+               eePackages.addAll(vendors.getVendorPackages());
+            }
+
+            for (PackageImport packageImport : importPackage)
+            {
+               for (String packageName : packageImport.getPackageNames())
+               {
+                  if (eePackages.contains(packageName))
+                  {
+                     packageImport.setVersion(null);
+                     break;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   private PackageImport newPackageImport(BundleCandidate bundle, PackageResolutionResult result,
+      PropertiesSource options)
+   {
+      final String requiredPackage = result.getRequiredPackage();
+
+      final PackageExportDescription exporter = result.getSelectedExporter();
+      if (exporter == null)
+      {
+         return newUnresolvableImport(bundle, requiredPackage, options);
+      }
+
+      switch (exporter.getExporterType())
+      {
+         case OWN_BUNDLE :
+            return newSelfImport(bundle, requiredPackage, exporter.getPackageExport(), options);
+         case EXECUTION_ENVIRONMENT :
+            return newExecutionEnvironmentImport(bundle, requiredPackage, options);
+         case VENDOR :
+            return newVendorImport(bundle, requiredPackage, options);
+         case REQUIRED_BUNDLE :
+            return newPackageImport(bundle, requiredPackage, exporter.getBundleReference(), exporter.getBundle(),
+               exporter.getPackageExport(), result.getAccessRestriction(), options);
+         default :
+            throw new IllegalStateException();
+      }
+   }
+
+   private static List<BundleCandidate> determineEmbeddedBundles(BundleCandidate bundle)
+   {
+      final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
+      for (BundleReference bundleReference : bundle.getDependencies())
+      {
+         switch (bundleReference.getEmbedInstruction())
+         {
+            case NOT :
+               break;
+            case UNPACKED :
+            case PACKED :
+               embeddedBundles.add(bundleReference.getTarget());
+               break;
+            default :
+               throw new IllegalStateException();
+         }
+      }
+      return embeddedBundles;
    }
 
    private static VersionRangePolicy getVersionRangePolicy(PropertiesSource options,
@@ -130,7 +192,7 @@ public class PackageImportAppender
    }
 
 
-   private void newSelfImport(BundleCandidate bundle, String requiredPackage, PackageExport packageExport,
+   private PackageImport newSelfImport(BundleCandidate bundle, String requiredPackage, PackageExport packageExport,
       PropertiesSource options)
    {
       final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
@@ -148,11 +210,10 @@ public class PackageImportAppender
             packageImport.setVersion(versionRange);
          }
       }
-
-      bundle.getManifest().getImportPackage(true).add(packageImport);
+      return packageImport;
    }
 
-   private void newPackageImport(BundleCandidate importingBundle, String requiredPackage,
+   private PackageImport newPackageImport(BundleCandidate importingBundle, String requiredPackage,
       BundleReference bundleReference, BundleCandidate exportingBundle, PackageExport packageExport,
       AccessRestriction accessRestriction, PropertiesSource options)
    {
@@ -181,7 +242,7 @@ public class PackageImportAppender
          setOptional(packageImport);
       }
 
-      importingBundle.getManifest().getImportPackage(true).add(packageImport);
+      return packageImport;
    }
 
    private void setOptional(final PackageImport packageImport)
@@ -193,26 +254,32 @@ public class PackageImportAppender
       packageImport.getParameters().add(parameter);
    }
 
-   private void newExecutionEnvironmentImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
+   private PackageImport newExecutionEnvironmentImport(BundleCandidate bundle, String requiredPackage,
+      PropertiesSource options)
    {
       // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       // packageImport.getPackageNames().add(requiredPackage);
       // bundle.getManifest().getImportPackage(true).add(packageImport);
+      return null;
    }
 
-   private void newVendorImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
+   private PackageImport newVendorImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
    {
       // TODO currently vendor packages are ignored.. ok?
       // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       // packageImport.getPackageNames().add(requiredPackage);
       // bundle.getManifest().getImportPackage(true).add(packageImport);
+      return null;
    }
 
-   private void newUnresolvableImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
+   private PackageImport newUnresolvableImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
    {
-      final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
-      packageImport.getPackageNames().add(requiredPackage);
-      setOptional(packageImport);
+      // TODO currently unresolvable packages are ignored.. ok?
+      // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
+      // packageImport.getPackageNames().add(requiredPackage);
+      // setOptional(packageImport);
+      // return packageImport;
+      return null;
    }
 
    private VersionRangePolicy getVersionRangePolicy(AccessRestriction accessRestriction, PropertiesSource options)
