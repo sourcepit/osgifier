@@ -29,7 +29,7 @@ public class MavenProjectManifestBuilderTest extends InjectedTest
    public TemporaryFolder tempFolder = new TemporaryFolder();
 
    @Inject
-   public ManifestBuilderFactory manifestBuilderFactory;
+   public MavenProjectManifestBuilder manifestBuilder;
 
    private MavenProject mvnProjectMock;
 
@@ -48,25 +48,13 @@ public class MavenProjectManifestBuilderTest extends InjectedTest
    @Test
    public void test()
    {
-      MavenProjectManifestBuilder builder = manifestBuilderFactory.createBuilder(mvnProjectMock).withSourceBundleManifest(
-         false);
-
-      BundleManifest manifest = builder.build().getBundleManifest();
+      BundleManifest manifest = manifestBuilder.project(mvnProjectMock).withSourceBundleManifest(false).build()
+         .getBundleManifest();
 
       assertNotNull(manifest);
       assertEquals(1, manifest.getBundleVersion().getMajor());
       assertEquals("groupId.artifactId", manifest.getBundleSymbolicName().getSymbolicName());
    }
-
-   @Test(expected = IllegalStateException.class)
-   public void canOnlyBuildOnce()
-   {
-      MavenProjectManifestBuilder builder = manifestBuilderFactory.createBuilder(mvnProjectMock).withSourceBundleManifest(
-         false);
-      builder.build();
-      builder.build();
-   }
-
 
    private Artifact createArtifactMock(String groupId, String artifactId, String version, String classifier,
       String scope, String type) throws Exception

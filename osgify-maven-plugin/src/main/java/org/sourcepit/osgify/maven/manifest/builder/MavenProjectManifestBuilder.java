@@ -9,6 +9,7 @@ package org.sourcepit.osgify.maven.manifest.builder;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.Manifest;
 
 
@@ -18,6 +19,7 @@ import org.sourcepit.common.manifest.Manifest;
  */
 public interface MavenProjectManifestBuilder
 {
+   MavenProjectManifestBuilder project(MavenProject project);
 
    MavenProjectManifestBuilder setSymbolicName(String symbolicName);
 
@@ -44,7 +46,5 @@ public interface MavenProjectManifestBuilder
    MavenProjectManifestBuilder mergeWith(Manifest manifest);
 
    ManifestBuilderResult build();
-
-   boolean wasBuilt();
 
 }
