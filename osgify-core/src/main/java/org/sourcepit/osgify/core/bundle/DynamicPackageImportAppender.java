@@ -8,6 +8,9 @@ package org.sourcepit.osgify.core.bundle;
 
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.DYNAMICIMPORT_PACKAGE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Named;
 
 import org.eclipse.emf.common.util.EList;
@@ -38,6 +41,46 @@ public class DynamicPackageImportAppender
          LOGGER
             .warn("Detected usage of Class.forName(String). The behaviour of this method differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
          manifest.setHeader(DYNAMICIMPORT_PACKAGE, "*");
+      }
+      mergeDynamicPackageImportFromEmbeddedBundles(bundle);
+   }
+
+   private void mergeDynamicPackageImportFromEmbeddedBundles(BundleCandidate bundle)
+   {
+      final List<BundleCandidate> embeddedBundles = BundleUtils.getEmbeddedBundles(bundle);
+      if (!embeddedBundles.isEmpty())
+      {
+         final BundleManifest manifest = bundle.getManifest();
+
+         final List<DynamicPackageImport> dynamicPackageImports = new ArrayList<DynamicPackageImport>();
+         List<DynamicPackageImport> tmp = manifest.getDynamicImportPackage();
+         if (tmp != null)
+         {
+            dynamicPackageImports.addAll(tmp);
+         }
+
+         boolean combine = false;
+         for (BundleCandidate embeddedBundle : embeddedBundles)
+         {
+            tmp = embeddedBundle.getManifest().getDynamicImportPackage();
+            if (tmp != null)
+            {
+               dynamicPackageImports.addAll(tmp);
+               combine = true;
+            }
+         }
+
+         if (combine)
+         {
+            final List<DynamicPackageImport> result = PackageDeclarationCombiner
+               .combineDynamicPackageImports(dynamicPackageImports);
+            if (!result.isEmpty())
+            {
+               final List<DynamicPackageImport> target = manifest.getDynamicImportPackage(true);
+               target.clear();
+               target.addAll(result);
+            }
+         }
       }
    }
 

@@ -6,10 +6,12 @@
 
 package org.sourcepit.osgify.core.bundle;
 
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.DYNAMICIMPORT_PACKAGE;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.addBundleReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendType;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.newBundleCandidate;
+import static org.sourcepit.osgify.core.bundle.TestContextHelper.newJArchive;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.osgify.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.EmbedInstruction;
 import org.sourcepit.osgify.core.model.java.JavaArchive;
 import org.sourcepit.osgify.core.model.java.JavaModelFactory;
 
@@ -99,6 +102,28 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
       String dynamicImportPackage = manifest.getHeaderValue(DYNAMICIMPORT_PACKAGE);
 
       assertThat(dynamicImportPackage, IsNull.nullValue());
+   }
+
+   @Test
+   public void testCombineDynamicImportsFromEmbedded() throws Exception
+   {
+      BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
+      a.getManifest().setHeader(DYNAMICIMPORT_PACKAGE, "foo.*");
+
+      BundleCandidate b = newBundleCandidate("1", newJArchive("b.B"));
+      b.getManifest().setHeader(DYNAMICIMPORT_PACKAGE, "bar.*");
+      
+      BundleCandidate c = newBundleCandidate("1", newJArchive("c.C"));
+      c.getManifest().setHeader(DYNAMICIMPORT_PACKAGE, "acme.*");
+
+      BundleCandidate d = newBundleCandidate("1", newJArchive("d.D"));
+      addBundleReference(d, a).setEmbedInstruction(EmbedInstruction.UNPACKED);
+      addBundleReference(d, b).setEmbedInstruction(EmbedInstruction.UNPACKED);
+      addBundleReference(d, c);
+
+      dynamicImportAppender.append(d);
+
+      assertEquals("bar.*;foo.*", d.getManifest().getHeaderValue(DYNAMICIMPORT_PACKAGE));
    }
 
 }
