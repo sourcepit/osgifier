@@ -92,15 +92,18 @@ public class OsgifyContextInflator
    private void appendMavenHeaders(BundleCandidate bundle)
    {
       final MavenArtifact extension = bundle.getExtension(MavenArtifact.class);
-      final BundleManifest manifest = bundle.getManifest();
-      manifest.setHeader("Maven-GroupId", extension.getGroupId());
-      manifest.setHeader("Maven-ArtifactId", extension.getArtifactId());
-      manifest.setHeader("Maven-Type", extension.getType());
-      final String classifier = extension.getClassifier();
-      if (!isNullOrEmpty(classifier))
+      if (extension != null)
       {
-         manifest.setHeader("Maven-Classifier", classifier);
+         final BundleManifest manifest = bundle.getManifest();
+         manifest.setHeader("Maven-GroupId", extension.getGroupId());
+         manifest.setHeader("Maven-ArtifactId", extension.getArtifactId());
+         manifest.setHeader("Maven-Type", extension.getType());
+         final String classifier = extension.getClassifier();
+         if (!isNullOrEmpty(classifier))
+         {
+            manifest.setHeader("Maven-Classifier", classifier);
+         }
+         manifest.setHeader("Maven-Version", extension.getVersion());
       }
-      manifest.setHeader("Maven-Version", extension.getVersion());
    }
 }
