@@ -69,7 +69,7 @@ public class PackageExportAppender
    private void addPackageExportsOfEmbeddedBundles(final Map<String, PackageExport> packageToExport,
       BundleCandidate bundle)
    {
-      for (BundleCandidate embeddedBundle : determineEmbeddedBundles(bundle))
+      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle))
       {
          final List<PackageExport> exportPackage = embeddedBundle.getManifest().getExportPackage();
          if (exportPackage != null)
@@ -108,34 +108,6 @@ public class PackageExportAppender
          final Version version = determinePackageVersion(manifest, packageName, nameToJPackagesMap.get(packageName));
          packageToExport.put(packageName, newPackageExport(internalPackages, packageName, version));
       }
-   }
-
-   private static List<BundleCandidate> determineEmbeddedBundles(BundleCandidate bundle)
-   {
-      final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
-         switch (bundleReference.getEmbedInstruction())
-         {
-            case NOT :
-               break;
-            case UNPACKED :
-            case PACKED :
-               embeddedBundles.add(bundleReference.getTarget());
-               break;
-            default :
-               throw new IllegalStateException();
-         }
-      }
-      return embeddedBundles;
-   }
-
-   private void appendExport(PathMatcher internalPackages, final BundleManifest manifest, final String packageName,
-      final Version version)
-   {
-      final PackageExport packageExport = newPackageExport(internalPackages, packageName, version);
-
-      manifest.getExportPackage(true).add(packageExport);
    }
 
    private PackageExport newPackageExport(PathMatcher internalPackages, final String packageName, final Version version)
@@ -208,6 +180,7 @@ public class PackageExportAppender
    {
       return CollectionUtils.getValue(jPackages, new ValueLookup<JavaPackage, Version>()
       {
+         @Override
          public Version lookup(JavaPackage element)
          {
             final File packageinfo = element.getFile("packageinfo");

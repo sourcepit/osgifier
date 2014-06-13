@@ -6,10 +6,15 @@
 
 package org.sourcepit.osgify.core.bundle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
+import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 
 public final class BundleUtils
 {
@@ -44,5 +49,25 @@ public final class BundleUtils
          return new Version(version.getMajor(), minor == 0 && micro == 0 ? -1 : minor, micro == 0 ? -1 : micro);
       }
       return version;
+   }
+   
+   public static List<BundleCandidate> getEmbeddedBundles(BundleCandidate bundle)
+   {
+      final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
+      for (BundleReference bundleReference : bundle.getDependencies())
+      {
+         switch (bundleReference.getEmbedInstruction())
+         {
+            case NOT :
+               break;
+            case UNPACKED :
+            case PACKED :
+               embeddedBundles.add(bundleReference.getTarget());
+               break;
+            default :
+               throw new IllegalStateException();
+         }
+      }
+      return embeddedBundles;
    }
 }

@@ -74,7 +74,7 @@ public class PackageImportAppender
          }
       }
 
-      for (BundleCandidate embeddedBundle : determineEmbeddedBundles(bundle))
+      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle))
       {
          final List<PackageImport> importPackage = embeddedBundle.getManifest().getImportPackage();
          if (importPackage != null)
@@ -162,26 +162,6 @@ public class PackageImportAppender
          default :
             throw new IllegalStateException();
       }
-   }
-
-   private static List<BundleCandidate> determineEmbeddedBundles(BundleCandidate bundle)
-   {
-      final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
-         switch (bundleReference.getEmbedInstruction())
-         {
-            case NOT :
-               break;
-            case UNPACKED :
-            case PACKED :
-               embeddedBundles.add(bundleReference.getTarget());
-               break;
-            default :
-               throw new IllegalStateException();
-         }
-      }
-      return embeddedBundles;
    }
 
    private static VersionRangePolicy getVersionRangePolicy(PropertiesSource options,
