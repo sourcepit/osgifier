@@ -41,6 +41,9 @@ public class BundleManifestAppender
 
    @Inject
    private PackageImportAppender packageImports;
+   
+   @Inject
+   private RecommendedImportPolicyAppender importPolicyAppender;
 
    public void append(OsgifyContext context, BundleManifestAppenderFilter filter, PropertiesSource options)
    {
@@ -94,6 +97,10 @@ public class BundleManifestAppender
          if (filter.isAppendExecutionEnvironment(bundle, options))
          {
             environmentAppender.append(bundle, options);
+         }
+         if (filter.isAppendRecommendedImportPolicy(bundle, options))
+         {
+            importPolicyAppender.append(bundle, options);
          }
          if (filter.isAppendPackageExports(bundle, options))
          {

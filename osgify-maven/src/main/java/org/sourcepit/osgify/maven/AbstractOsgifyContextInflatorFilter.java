@@ -25,6 +25,12 @@ public abstract class AbstractOsgifyContextInflatorFilter implements OsgifyConte
    }
 
    @Override
+   public boolean isAppendRecommendedImportPolicy(BundleCandidate bundle, PropertiesSource options)
+   {
+      return true;
+   }
+
+   @Override
    public boolean isAppendPackageExports(BundleCandidate bundle, PropertiesSource options)
    {
       return true;
@@ -41,5 +47,4 @@ public abstract class AbstractOsgifyContextInflatorFilter implements OsgifyConte
    {
       return true;
    }
-
 }
