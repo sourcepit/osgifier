@@ -90,7 +90,7 @@ public class PackageImportFactory
          VersionRange versionRange = bundleReference.getVersionRange();
          if (versionRange == null || versionRange.getHighVersion() == null || !versionRange.includes(version))
          {
-            final VersionRangePolicy policy = getVersionRangePolicy(accessRestriction, options);
+            final VersionRangePolicy policy = getVersionRangePolicy(exportingBundle, accessRestriction, options);
             versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
          }
 
@@ -157,16 +157,39 @@ public class PackageImportFactory
       return VersionRangePolicy.parse(options.get(option, defaultPolicy.literal()));
    }
 
-   private static VersionRangePolicy getVersionRangePolicy(AccessRestriction accessRestriction, PropertiesSource options)
+   private static VersionRangePolicy getVersionRangePolicy(BundleCandidate exportingBundle,
+      AccessRestriction accessRestriction, PropertiesSource options)
    {
+      final VersionRangePolicy[] policies = getImportPolicies(exportingBundle, options);
       switch (accessRestriction)
       {
          case NONE :
-            return getVersionRangePolicy(options, PUBLIC_IMPORT, COMPATIBLE);
+            return getVersionRangePolicy(options, PUBLIC_IMPORT, policies[0]);
          case DISCOURAGED :
-            return getVersionRangePolicy(options, INTERNAL_IMPORT, EQUIVALENT);
+            return getVersionRangePolicy(options, INTERNAL_IMPORT, policies[1]);
          default :
             throw new IllegalStateException();
       }
+   }
+
+   private static VersionRangePolicy[] getImportPolicies(BundleCandidate exportingBundle, PropertiesSource options)
+   {
+      VersionRangePolicy[] policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(
+         exportingBundle.getManifest(), options);
+
+      if (policies == null)
+      {
+         policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(exportingBundle
+            .getManifest());
+      }
+
+      if (policies == null)
+      {
+         policies = new VersionRangePolicy[2];
+         policies[0] = COMPATIBLE;
+         policies[1] = EQUIVALENT;
+      }
+
+      return policies;
    }
 }

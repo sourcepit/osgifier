@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import javax.inject.Named;
 
 import org.sourcepit.common.constraints.NotNull;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -24,7 +25,8 @@ public class RecommendedImportPolicyAppender
 {
    public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
    {
-      final VersionRangePolicy[] policies = getRecommendedImportPolicies(bundle, options);
+      final BundleManifest manifest = bundle.getManifest();
+      final VersionRangePolicy[] policies = getRecommendedImportPoliciesFromOptions(manifest, options);
       if (policies != null)
       {
          final StringBuilder value = new StringBuilder();
@@ -34,11 +36,21 @@ public class RecommendedImportPolicyAppender
             value.append(", ");
             value.append(policies[1].literal());
          }
-         bundle.getManifest().setHeader("Osgifier-RecommendedImportPolicy", value.toString());
+         manifest.setHeader("Osgifier-RecommendedImportPolicy", value.toString());
       }
    }
 
-   static VersionRangePolicy[] getRecommendedImportPolicies(BundleCandidate bundle, PropertiesSource options)
+   static VersionRangePolicy[] getRecommendedImportPoliciesFromHeader(BundleManifest manifest)
+   {
+      final String policies = manifest.getHeaderValue("Osgifier-RecommendedImportPolicy");
+      if (Strings.isNullOrEmpty(policies))
+      {
+         return null;
+      }
+      return toPolicies(policies, ",");
+   }
+
+   static VersionRangePolicy[] getRecommendedImportPoliciesFromOptions(BundleManifest manifest, PropertiesSource options)
    {
       final String mapValue = options.get("osgifier.recommendedImportPolicies");
       if (Strings.isNullOrEmpty(mapValue))
@@ -46,17 +58,21 @@ public class RecommendedImportPolicyAppender
          return null;
       }
 
-      final String symbolicName = bundle.getSymbolicName();
+      final String symbolicName = manifest.getBundleSymbolicName().getSymbolicName();
 
       final Map<String, String> symbolicNameToPolicies = OptionsUtils.parseMapValue(mapValue);
 
-      final String policyNameString = getPolicies(symbolicNameToPolicies, symbolicName);
-      if (Strings.isNullOrEmpty(policyNameString))
+      final String policies = getPolicies(symbolicNameToPolicies, symbolicName);
+      if (Strings.isNullOrEmpty(policies))
       {
          return null;
       }
+      return toPolicies(policies, "\\|");
+   }
 
-      final String[] policyNames = policyNameString.split("\\|");
+   private static VersionRangePolicy[] toPolicies(final String policyNameString, String sep)
+   {
+      final String[] policyNames = policyNameString.split(sep);
 
       final VersionRangePolicy[] result = new VersionRangePolicy[2];
       result[0] = VersionRangePolicy.parse(policyNames[0].trim());

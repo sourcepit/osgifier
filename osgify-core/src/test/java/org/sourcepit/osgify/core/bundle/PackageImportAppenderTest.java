@@ -652,4 +652,63 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals("[4,4.1)", packageImport.getVersion().toString());
    }
 
+   @Test
+   public void testRecommendedImportPolicy() throws Exception
+   {
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "a.A1", 47, "b.B");
+      appendTypeWithReferences(jArchive, "a.A2", 47, "c.internal.C");
+
+      BundleCandidate a = newBundleCandidate("1", jArchive);
+      a.getManifest().setBundleSymbolicName("a");
+
+      BundleCandidate b = newBundleCandidate("2", newJArchive("b.B"));
+      b.getManifest().setBundleSymbolicName("b");
+      b.getManifest().setHeader("Osgifier-RecommendedImportPolicy", "any");
+
+      BundleCandidate c = newBundleCandidate("3", newJArchive("c.internal.C"));
+      c.getManifest().setBundleSymbolicName("c");
+
+      addBundleReference(a, b);
+      addBundleReference(a, c);
+
+      final PropertiesMap options = new LinkedPropertiesMap();
+      options.put("osgifier.internalPackages", "c.internal");
+
+      exportAppender.append(c, options);
+      exportAppender.append(b, options);
+      exportAppender.append(a, options);
+
+      importAppender.append(a, options);
+
+      List<PackageImport> importPackage = a.getManifest().getImportPackage();
+      assertEquals(3, importPackage.size());
+
+      PackageImport packageImport = importPackage.get(1);
+      assertEquals("b", packageImport.getPackageNames().get(0));
+      assertNull(packageImport.getVersion());
+
+      packageImport = importPackage.get(2);
+      assertEquals("c.internal", packageImport.getPackageNames().get(0));
+      assertEquals("[3,3.1)", packageImport.getVersion().toString());
+
+      a.getManifest().setHeader(IMPORT_PACKAGE, null);
+
+      // test options overrides header
+      options.put("osgifier.recommendedImportPolicies", "**=strict|perfect");
+      importAppender.append(a, options);
+
+      importPackage = a.getManifest().getImportPackage();
+      assertEquals(3, importPackage.size());
+
+      packageImport = importPackage.get(1);
+      assertEquals("b", packageImport.getPackageNames().get(0));
+      assertEquals("[2,2.0.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(2);
+      assertEquals("c.internal", packageImport.getPackageNames().get(0));
+      assertEquals("[3,3]", packageImport.getVersion().toString());
+
+   }
+
 }
