@@ -106,7 +106,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testFilterPlatformPackages()
+   public void testFilterJavaPackages()
    {
       PropertiesMap options = new LinkedPropertiesMap();
 
@@ -114,7 +114,7 @@ public class PackageImportAppenderTest extends InjectedTest
       appendPackageExport(ref, newPackageExport("b", null));
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      appendTypeWithReferences(jArchive, "a.Bar", 47, "javax.microedition.io.Foo", "b.Foo");
+      appendTypeWithReferences(jArchive, "a.Bar", 47, "java.lang.String", "javax.microedition.io.Foo", "b.Foo");
 
       BundleCandidate bundle = newBundleCandidate("1.0.1", "CDC-1.0/Foundation-1.0", jArchive);
       bundle.getDependencies().add(ref);
@@ -122,7 +122,7 @@ public class PackageImportAppenderTest extends InjectedTest
       importAppender.append(bundle, options);
 
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertThat(packageImports, IsEqual.equalTo("b"));
+      assertThat(packageImports, IsEqual.equalTo("b,javax.microedition.io"));
    }
 
    @Test
@@ -190,7 +190,7 @@ public class PackageImportAppenderTest extends InjectedTest
       BundleCandidate bundle = newBundleCandidate("1.0.1", "JavaSE-1.6", jArchive);
       importAppender.append(bundle, options);
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
-      assertNull(packageImports);
+      assertThat(packageImports, IsEqual.equalTo("javax.xml.stream"));
    }
 
    @Test
