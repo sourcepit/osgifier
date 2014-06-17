@@ -17,7 +17,7 @@ import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.util.ManifestUtils;
-import org.sourcepit.common.maven.core.MavenCoreUtils;
+import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.core.MavenProjectUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
@@ -93,7 +93,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       final BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
       if (project == null)
       {
-         MavenArtifact mArtifact = MavenCoreUtils.toMavenArtifact(artifact);
+         MavenArtifact mArtifact = MavenArtifactUtils.toMavenArtifact(artifact);
          node.setLocation(mArtifact.getFile());
          node.addExtension(mArtifact);
       }
@@ -136,7 +136,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
    private BundleReference newBundleReference(BundleCandidate bundleNode, Artifact mappedArtifact)
    {
       final BundleReference bundleReference = ContextModelFactory.eINSTANCE.createBundleReference();
-      bundleReference.addExtension(MavenCoreUtils.toMavenDependecy(mappedArtifact));
+      bundleReference.addExtension(MavenArtifactUtils.toMavenDependecy(mappedArtifact));
 
       bundleReference.setTarget(bundleNode);
       bundleReference.setOptional(mappedArtifact.isOptional());

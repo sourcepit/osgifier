@@ -35,7 +35,7 @@ import org.eclipse.aether.artifact.ArtifactProperties;
 import org.sourcepit.common.manifest.Header;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.common.maven.aether.ArtifactFactory;
+import org.sourcepit.common.maven.artifact.ArtifactFactory;
 import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenDependency;

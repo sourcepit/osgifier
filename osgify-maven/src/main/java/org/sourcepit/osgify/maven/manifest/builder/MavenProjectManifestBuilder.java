@@ -6,10 +6,11 @@
 
 package org.sourcepit.osgify.maven.manifest.builder;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.maven.project.MavenProject;
+import org.apache.maven.artifact.Artifact;
 import org.sourcepit.common.manifest.Manifest;
 
 
@@ -19,8 +20,12 @@ import org.sourcepit.common.manifest.Manifest;
  */
 public interface MavenProjectManifestBuilder
 {
-   MavenProjectManifestBuilder project(MavenProject project);
+   MavenProjectManifestBuilder project(Artifact project);
 
+   MavenProjectManifestBuilder withDependency(Artifact dependency);
+   
+   MavenProjectManifestBuilder withDependencies(Collection<Artifact> dependencies);
+   
    MavenProjectManifestBuilder setSymbolicName(String symbolicName);
 
    MavenProjectManifestBuilder setTimestamp(Date timestamp);
@@ -33,10 +38,6 @@ public interface MavenProjectManifestBuilder
 
    MavenProjectManifestBuilder appendDynamicImports(boolean append);
 
-   MavenProjectManifestBuilder withSourceBundleManifest(boolean withSources);
-
-   MavenProjectManifestBuilder withSourceBundleManifest(String sourceClassifier);
-
    MavenProjectManifestBuilder withOption(String key, String value);
 
    MavenProjectManifestBuilder withOptions(Map<String, String> options);
@@ -46,5 +47,10 @@ public interface MavenProjectManifestBuilder
    MavenProjectManifestBuilder mergeWith(Manifest manifest);
 
    ManifestBuilderResult build();
+
+   MavenProjectManifestBuilder withProjectProperties(Map<?, ?> properties);
+
+   MavenProjectManifestBuilder withSourceArtifact(Artifact sourceArtifact);
+
 
 }

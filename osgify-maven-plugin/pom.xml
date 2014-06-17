@@ -22,10 +22,6 @@
 			<artifactId>common-modeling</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-maven-core</artifactId>
-		</dependency>
-		<dependency>
             <groupId>org.sourcepit</groupId>
             <artifactId>maven-dependency-model</artifactId>
         </dependency>

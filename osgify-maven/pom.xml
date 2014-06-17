@@ -22,6 +22,10 @@
 			<artifactId>common-maven-model</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.sourcepit.common</groupId>
+			<artifactId>common-maven-artifact</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>srcpit.osgified</groupId>
 			<artifactId>org.apache.maven.artifact</artifactId>
 		</dependency>
@@ -55,6 +59,12 @@
 	</dependencies>
 
 	<build>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.sourcepit.tools</groupId>

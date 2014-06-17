@@ -9,25 +9,24 @@ package org.sourcepit.osgify.maven.manifest.builder.impl;
 import static org.sourcepit.common.utils.props.PropertiesSources.chain;
 import static org.sourcepit.common.utils.props.PropertiesSources.toPropertiesSource;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.DefaultArtifact;
-import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.merge.ManifestMerger;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.util.ManifestUtils;
-import org.sourcepit.common.maven.aether.ArtifactFactory;
-import org.sourcepit.common.maven.core.MavenCoreUtils;
+import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
@@ -54,15 +53,15 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
 {
    public static final String DEF_SOURCE_CLASSIFIER = "sources";
 
-   private final ArtifactFactory artifactFactory;
    private final VersionRangeResolver versionRangeResolver;
    private final OsgifyContextInflator inflater;
 
-   private MavenProject project;
+   private Artifact projectArtifact;
+   private List<Artifact> projectDependencies = new ArrayList<Artifact>();
+   private Map<?, ?> projectProperties = Collections.emptyMap();
+   private Artifact sourceArtifact;
    private String symbolicName;
    private Date timestamp;
-   private boolean attachSourceBundle = true;
-   private String sourceClassifier = DEF_SOURCE_CLASSIFIER;
    private Map<String, String> additionalOptions = new HashMap<String, String>();
    private Manifest mergeManifest;
 
@@ -75,33 +74,44 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    private boolean appendDynamicImports = true;
 
    @Inject
-   public MavenProjectManifestBuilderImpl(ArtifactFactory artifactFactory, VersionRangeResolver versionRangeResolver,
-      OsgifyContextInflator inflater)
+   public MavenProjectManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater)
    {
-      this.artifactFactory = artifactFactory;
       this.versionRangeResolver = versionRangeResolver;
       this.inflater = inflater;
    }
 
    @Override
-   public MavenProjectManifestBuilder project(MavenProject project)
+   public MavenProjectManifestBuilder project(Artifact project)
    {
-      this.project = project;
+      this.projectArtifact = project;
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder withSourceBundleManifest(String sourceClassifier)
+   public MavenProjectManifestBuilder withProjectProperties(Map<?, ?> properties)
    {
-      withSourceBundleManifest(true);
-      this.sourceClassifier = sourceClassifier;
+      this.projectProperties = properties;
       return this;
    }
 
    @Override
-   public MavenProjectManifestBuilder withSourceBundleManifest(boolean withSources)
+   public MavenProjectManifestBuilder withDependency(Artifact dependency)
    {
-      this.attachSourceBundle = withSources;
+      this.projectDependencies.add(dependency);
+      return this;
+   }
+
+   @Override
+   public MavenProjectManifestBuilder withDependencies(Collection<Artifact> dependencies)
+   {
+      this.projectDependencies.addAll(dependencies);
+      return this;
+   }
+
+   @Override
+   public MavenProjectManifestBuilder withSourceArtifact(Artifact sourceArtifact)
+   {
+      this.sourceArtifact = sourceArtifact;
       return this;
    }
 
@@ -178,14 +188,14 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    @Override
    public ManifestBuilderResult build()
    {
-      final OsgifyContext osgifyContext = buildOsgifyContext(project, versionRangeResolver);
+      final OsgifyContext osgifyContext = buildOsgifyContext(projectArtifact, projectDependencies, versionRangeResolver);
       final BundleCandidate projectBundle = osgifyContext.getBundles().get(0);
 
       final OsgifyContextInflatorFilter inflatorFilter = newInflatorFilter(projectBundle);
 
-      if (attachSourceBundle)
+      if (this.sourceArtifact != null)
       {
-         final MavenArtifact sourceArtifact = newProjectArtifact(artifactFactory, project, sourceClassifier, "jar");
+         final MavenArtifact sourceArtifact = MavenArtifactUtils.toMavenArtifact(this.sourceArtifact);
 
          final BundleCandidate sourceBundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
          sourceBundle.setLocation(sourceArtifact.getFile());
@@ -196,11 +206,11 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       }
 
       final String symbolicName = Strings.isNullOrEmpty(this.symbolicName)
-         ? buildSymbolicName(project)
+         ? buildSymbolicName(projectArtifact)
          : this.symbolicName;
 
-      final PropertiesSource osgifyOptions = buildOsgifyOptions(project.getArtifact(), symbolicName,
-         project.getProperties(), additionalOptions);
+      final PropertiesSource osgifyOptions = buildOsgifyOptions(projectArtifact, symbolicName, projectProperties,
+         additionalOptions);
 
       final Date startTime = timestamp == null ? new Date() : timestamp;
 
@@ -214,7 +224,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       }
 
       final ManifestBuilderResultImpl result = new ManifestBuilderResultImpl(manifest);
-      if (attachSourceBundle)
+      if (this.sourceArtifact != null)
       {
          final BundleCandidate sourceBundle = projectBundle.getSourceBundle();
          final BundleManifest sourceBundleManifest = sourceBundle.getManifest();
@@ -224,29 +234,30 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       return result;
    }
 
-   private static String buildSymbolicName(MavenProject project)
+   private static String buildSymbolicName(Artifact project)
    {
       return project.getGroupId() + "." + project.getArtifactId();
    }
 
-   private static OsgifyContext buildOsgifyContext(MavenProject project, VersionRangeResolver versionRangeResolver)
+   private static OsgifyContext buildOsgifyContext(Artifact artifact, Collection<Artifact> dependencies,
+      VersionRangeResolver versionRangeResolver)
    {
-      final BundleCandidate projectBundle = newBundleCandidate(project);
+      final BundleCandidate projectBundle = newBundleCandidate(artifact);
 
       final OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
       context.getBundles().add(projectBundle);
 
-      for (Artifact artifact : project.getArtifacts())
+      for (Artifact dependency : dependencies)
       {
          final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
-         reference.addExtension(MavenCoreUtils.toMavenDependecy(artifact));
-         reference.setOptional(artifact.isOptional());
-         reference.setProvided(DefaultArtifact.SCOPE_PROVIDED.equals(artifact.getScope()));
+         reference.addExtension(MavenArtifactUtils.toMavenDependecy(dependency));
+         reference.setOptional(dependency.isOptional());
+         reference.setProvided(DefaultArtifact.SCOPE_PROVIDED.equals(dependency.getScope()));
          reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
 
          final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-         bundle.setLocation(artifact.getFile());
-         bundle.addExtension(MavenCoreUtils.toMavenDependecy(artifact));
+         bundle.setLocation(dependency.getFile());
+         bundle.addExtension(MavenArtifactUtils.toMavenDependecy(dependency));
 
          reference.setTarget(bundle);
          projectBundle.getDependencies().add(reference);
@@ -304,12 +315,12 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    }
 
    private static PropertiesSource buildOsgifyOptions(Artifact artifact, String symbolicName,
-      Properties projectProperties, Map<String, String> additionalOptions)
+      Map<?, ?> projectProperties, Map<String, String> additionalOptions)
    {
       PropertiesSource options = chain(toPropertiesSource(projectProperties), toPropertiesSource(additionalOptions));
 
       final StringBuilder sb = new StringBuilder();
-      sb.append(MavenCoreUtils.toArtifactKey(artifact));
+      sb.append(MavenArtifactUtils.toArtifactKey(artifact));
       sb.append('=');
       sb.append(symbolicName);
 
@@ -323,31 +334,12 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       return chain(PropertiesSources.singletonPropertiesSource("osgifier.symbolicNameMappings", sb.toString()), options);
    }
 
-   private static BundleCandidate newBundleCandidate(MavenProject project)
+   private static BundleCandidate newBundleCandidate(Artifact artifact)
    {
       final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      bundle.setLocation(project.getArtifact().getFile());
-      bundle.addExtension(MavenCoreUtils.toMavenArtifact(project.getArtifact()));
+      bundle.setLocation(artifact.getFile());
+      bundle.addExtension(MavenArtifactUtils.toMavenArtifact(artifact));
       return bundle;
-   }
-
-   private static MavenArtifact newProjectArtifact(ArtifactFactory artifactFactory, MavenProject project,
-      String classifier, String type)
-   {
-      org.eclipse.aether.artifact.Artifact artifact = artifactFactory.createArtifact(
-         RepositoryUtils.toArtifact(project.getArtifact()), classifier, type);
-
-      final String buildDir = project.getBuild().getDirectory();
-
-      final String finalName = project.getBuild().getFinalName();
-
-      final String sourceFinalName = finalName + "-" + artifact.getClassifier();
-
-      final File file = new File(buildDir + "/" + sourceFinalName + "." + artifact.getExtension());
-
-      artifact = artifact.setFile(file);
-
-      return MavenCoreUtils.toMavenArtifact(artifact);
    }
 
 }

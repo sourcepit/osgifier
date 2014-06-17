@@ -32,7 +32,7 @@ import org.eclipse.aether.installation.InstallRequest;
 import org.eclipse.aether.installation.InstallationException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.sourcepit.common.maven.aether.ArtifactFactory;
+import org.sourcepit.common.maven.artifact.ArtifactFactory;
 import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.ArtifactKeyBuilder;
 import org.sourcepit.common.maven.model.MavenArtifact;
