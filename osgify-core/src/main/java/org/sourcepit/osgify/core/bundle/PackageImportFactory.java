@@ -65,7 +65,17 @@ public class PackageImportFactory
       final Version version = packageExport.getVersion();
       if (version != null && !version.equals(EMPTY_VERSION))
       {
-         final VersionRangePolicy policy = getVersionRangePolicy(options, SELF_IMPORT, EQUIVALENT);
+         final VersionRangePolicy policy;
+
+         final VersionRangePolicy[] policies = getRecommendedImportPolicies(bundle, options);
+         if (policies == null)
+         {
+            policy = getVersionRangePolicy(options, SELF_IMPORT, EQUIVALENT);
+         }
+         else
+         {
+            policy = policies[1];
+         }
 
          final VersionRange versionRange = policy.toVersionRange(version,
             options.getBoolean("osgifier.eraseMicro", true));
@@ -160,19 +170,28 @@ public class PackageImportFactory
    private static VersionRangePolicy getVersionRangePolicy(BundleCandidate exportingBundle,
       AccessRestriction accessRestriction, PropertiesSource options)
    {
-      final VersionRangePolicy[] policies = getImportPolicies(exportingBundle, options);
+      final VersionRangePolicy[] policies = getRecommendedImportPolicies(exportingBundle, options);
       switch (accessRestriction)
       {
          case NONE :
-            return getVersionRangePolicy(options, PUBLIC_IMPORT, policies[0]);
+            if (policies == null)
+            {
+               return getVersionRangePolicy(options, PUBLIC_IMPORT, COMPATIBLE);
+            }
+            return policies[0];
          case DISCOURAGED :
-            return getVersionRangePolicy(options, INTERNAL_IMPORT, policies[1]);
+            if (policies == null)
+            {
+               return getVersionRangePolicy(options, INTERNAL_IMPORT, EQUIVALENT);
+            }
+            return policies[1];
          default :
             throw new IllegalStateException();
       }
    }
 
-   private static VersionRangePolicy[] getImportPolicies(BundleCandidate exportingBundle, PropertiesSource options)
+   private static VersionRangePolicy[] getRecommendedImportPolicies(BundleCandidate exportingBundle,
+      PropertiesSource options)
    {
       VersionRangePolicy[] policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(
          exportingBundle.getManifest(), options);
@@ -181,13 +200,6 @@ public class PackageImportFactory
       {
          policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(exportingBundle
             .getManifest());
-      }
-
-      if (policies == null)
-      {
-         policies = new VersionRangePolicy[2];
-         policies[0] = COMPATIBLE;
-         policies[1] = EQUIVALENT;
       }
 
       return policies;

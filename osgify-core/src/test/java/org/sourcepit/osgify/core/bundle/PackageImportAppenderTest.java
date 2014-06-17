@@ -7,9 +7,7 @@
 package org.sourcepit.osgify.core.bundle;
 
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.EXPORT_PACKAGE;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addBundleReference;
@@ -692,9 +690,9 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals("c.internal", packageImport.getPackageNames().get(0));
       assertEquals("[3,3.1)", packageImport.getVersion().toString());
 
-      a.getManifest().setHeader(IMPORT_PACKAGE, null);
 
       // test options overrides header
+      a.getManifest().setHeader(IMPORT_PACKAGE, null);
       options.put("osgifier.recommendedImportPolicies", "**=strict|perfect");
       importAppender.append(a, options);
 
@@ -709,6 +707,61 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals("c.internal", packageImport.getPackageNames().get(0));
       assertEquals("[3,3]", packageImport.getVersion().toString());
 
+      // test options publicImportPolicy/internalImportPolicy doesn't override recommendedImportPolicies
+      a.getManifest().setHeader(IMPORT_PACKAGE, null);
+      options.put("osgifier.publicImportPolicy", VersionRangePolicy.ANY.literal());
+      options.put("osgifier.internalImportPolicy", VersionRangePolicy.GREATER_OR_EQUAL.literal());
+      importAppender.append(a, options);
+
+      importPackage = a.getManifest().getImportPackage();
+      assertEquals(3, importPackage.size());
+
+      packageImport = importPackage.get(1);
+      assertEquals("b", packageImport.getPackageNames().get(0));
+      assertEquals("[2,2.0.1)", packageImport.getVersion().toString());
+
+      packageImport = importPackage.get(2);
+      assertEquals("c.internal", packageImport.getPackageNames().get(0));
+      assertEquals("[3,3]", packageImport.getVersion().toString());
    }
 
+   @Test
+   public void testRecommendedImportPolicyOnSelfImports() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      appendTypeWithReferences(jArchive, "a.Bar", 47, "b.Foo");
+
+      BundleCandidate bundle = newBundleCandidate("1.0.1", "CDC-1.0/Foundation-1.0", jArchive);
+      bundle.getManifest().setBundleSymbolicName("bundle");
+      appendPackageExport(bundle, newPackageExport("b", "2"));
+      
+      importAppender.append(bundle, options);
+
+      String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
+      assertThat(packageImports, IsEqual.equalTo("b;version=\"[2,2.1)\""));
+
+      options.put("osgifier.recommendedImportPolicies", "**=any");
+      bundle.getManifest().setHeader(IMPORT_PACKAGE, null);
+      importAppender.append(bundle, options);
+
+      packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
+      assertThat(packageImports, IsEqual.equalTo("b"));
+
+      bundle.getManifest().setHeader(IMPORT_PACKAGE, null);
+      options.put("osgifier.recommendedImportPolicies", "**=any|greaterOrEqual");
+      importAppender.append(bundle, options);
+
+      packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
+      assertThat(packageImports, IsEqual.equalTo("b;version=\"2\""));
+      
+      // test options selfImportPolicy doesn't override recommendedImportPolicies
+      bundle.getManifest().setHeader(IMPORT_PACKAGE, null);
+      options.put("osgifier.selfImportPolicy", VersionRangePolicy.ANY.literal());
+      importAppender.append(bundle, options);
+
+      packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
+      assertThat(packageImports, IsEqual.equalTo("b;version=\"2\""));
+   }
 }
