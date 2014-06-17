@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +61,7 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    private Artifact sourceArtifact;
    private String symbolicName;
    private Date timestamp;
-   private Map<String, String> additionalOptions = new HashMap<String, String>();
+   private PropertiesSource additionalOptions = PropertiesSources.emptyPropertiesSource();
    private Manifest mergeManifest;
 
    private boolean appendExecutionEnvironment = true;
@@ -116,16 +115,9 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    }
 
    @Override
-   public MavenProjectManifestBuilder withOption(String key, String value)
+   public MavenProjectManifestBuilder withOptions(PropertiesSource options)
    {
-      this.additionalOptions.put(key, value);
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder withOptions(Map<String, String> options)
-   {
-      this.additionalOptions.putAll(options);
+      this.additionalOptions = options;
       return this;
    }
 
@@ -315,9 +307,9 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
    }
 
    private static PropertiesSource buildOsgifyOptions(Artifact artifact, String symbolicName,
-      Map<?, ?> projectProperties, Map<String, String> additionalOptions)
+      Map<?, ?> projectProperties, PropertiesSource additionalOptions)
    {
-      PropertiesSource options = chain(toPropertiesSource(projectProperties), toPropertiesSource(additionalOptions));
+      PropertiesSource options = chain(toPropertiesSource(projectProperties), additionalOptions);
 
       final StringBuilder sb = new StringBuilder();
       sb.append(MavenArtifactUtils.toArtifactKey(artifact));

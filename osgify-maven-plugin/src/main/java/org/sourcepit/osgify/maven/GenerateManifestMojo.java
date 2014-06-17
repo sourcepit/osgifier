@@ -8,20 +8,15 @@ package org.sourcepit.osgify.maven;
 
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
-import static org.sourcepit.common.utils.props.PropertiesSources.chain;
-import static org.sourcepit.common.utils.props.PropertiesSources.toPropertiesSource;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.inject.Inject;
 
 import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.DefaultArtifact;
 import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -33,19 +28,13 @@ import org.apache.maven.project.MavenProject;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.artifact.ArtifactFactory;
 import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
-import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgify.core.headermod.HeaderModifications;
 import org.sourcepit.osgify.core.headermod.HeaderModifier;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
-
-import com.google.common.base.Strings;
+import org.sourcepit.osgify.maven.manifest.builder.ManifestBuilderResult;
+import org.sourcepit.osgify.maven.manifest.builder.MavenProjectManifestBuilder;
 
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo
@@ -78,57 +67,37 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    private LegacySupport buildContext;
 
    @Inject
-   private OsgifyContextInflator inflater;
-
-   @Inject
-   private VersionRangeResolver versionRangeResolver;
-
-   @Inject
    private ArtifactFactory artifactFactory;
-   
+
    @Inject
    private HeaderModifier headerModifier;
+
+   @Inject
+   private MavenProjectManifestBuilder manifestBuilder;
 
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
-      final OsgifyContext context = buildOsgifyContext(project, skipSource, sourceClassifier);
-      final BundleCandidate projectBundle = context.getBundles().get(0);
-
-      final OsgifyContextInflatorFilter inflatorFilter = new DefaultOsgifyContextInflatorFilter()
+      manifestBuilder.setTimestamp(buildContext.getSession().getStartTime());
+      manifestBuilder.project(project.getArtifact());
+      manifestBuilder.setSymbolicName(symbolicName);
+      manifestBuilder.withProjectProperties(project.getProperties());
+      manifestBuilder.withDependencies(project.getArtifacts());
+      manifestBuilder.withOptions(getMojoConfigurationOptions());
+      if (!skipSource)
       {
-         @Override
-         public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options)
-         {
-            return bundle.equals(projectBundle);
-         }
-
-         @Override
-         public boolean isAppendPackageImports(BundleCandidate bundle, PropertiesSource options)
-         {
-            return bundle.equals(projectBundle);
-         }
-
-         @Override
-         public boolean isAppendDynamicImports(BundleCandidate bundle, PropertiesSource options)
-         {
-            return bundle.equals(projectBundle);
-         }
-      };
-
-      final PropertiesSource options = buildOsgifierOptions(project, symbolicName, getMojoConfigurationOptions());
-      final Date startTime = buildContext.getSession().getStartTime();
-      inflater.inflate(inflatorFilter, options, context, startTime);
-
-      final BundleManifest manifest = projectBundle.getManifest();
+         manifestBuilder.withSourceArtifact(newProjectArtifact(project, sourceClassifier, "jar"));
+      }
       
+      final ManifestBuilderResult result = manifestBuilder.build();
+
+      final BundleManifest manifest = result.getBundleManifest();
       if (headerModifications != null)
       {
          headerModifier.applyModifications(manifest, headerModifications);
       }
-      
       ModelUtils.writeModel(manifestFile, manifest);
       project.setContextValue("osgifier.manifestFile", manifestFile);
 
@@ -145,81 +114,12 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
          }
       }
 
-      final BundleCandidate sourceBundle = projectBundle.getSourceBundle();
-      if (sourceBundle != null)
+      final BundleManifest sourceManifest = result.getSourceBundleManifest();
+      if (sourceManifest != null)
       {
-         final BundleManifest sourceManifest = sourceBundle.getManifest();
          ModelUtils.writeModel(sourceManifestFile, sourceManifest);
          project.setContextValue("osgifier.sourceManifestFile", sourceManifestFile);
       }
-   }
-
-   private OsgifyContext buildOsgifyContext(MavenProject project, boolean skipSource, String sourceClassifier)
-   {
-      final BundleCandidate projectBundle = newBundleCandidate(project);
-
-      final OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
-      context.getBundles().add(projectBundle);
-
-      final BundleCandidate sourceBundle;
-      if (skipSource)
-      {
-         sourceBundle = null;
-      }
-      else
-      {
-         final MavenArtifact sourceArtifact = newProjectArtifact(project, sourceClassifier, "jar");
-
-         sourceBundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-         sourceBundle.setLocation(sourceArtifact.getFile());
-         sourceBundle.addExtension(sourceArtifact);
-
-         context.getBundles().add(sourceBundle);
-
-         sourceBundle.setTargetBundle(projectBundle);
-         projectBundle.setSourceBundle(sourceBundle);
-      }
-
-      for (Artifact artifact : project.getArtifacts())
-      {
-         final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
-         reference.addExtension(MavenArtifactUtils.toMavenDependecy(artifact));
-         reference.setOptional(artifact.isOptional());
-         reference.setProvided(DefaultArtifact.SCOPE_PROVIDED.equals(artifact.getScope()));
-         reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
-
-         final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-         bundle.setLocation(artifact.getFile());
-         bundle.addExtension(MavenArtifactUtils.toMavenArtifact(artifact));
-
-         reference.setTarget(bundle);
-         projectBundle.getDependencies().add(reference);
-         context.getBundles().add(bundle);
-      }
-
-      return context;
-   }
-
-   private static PropertiesSource buildOsgifierOptions(final MavenProject project, String symbolicName,
-      PropertiesSource mojoConfigurationOptions)
-   {
-      Properties projectProperties = project.getProperties();
-
-      PropertiesSource options = chain(toPropertiesSource(projectProperties), mojoConfigurationOptions);
-
-      final StringBuilder sb = new StringBuilder();
-      sb.append(MavenArtifactUtils.toArtifactKey(project.getArtifact()));
-      sb.append('=');
-      sb.append(symbolicName);
-
-      String symbolicNameMappings = options.get("osgifier.symbolicNameMappings");
-      if (!Strings.isNullOrEmpty(symbolicNameMappings))
-      {
-         sb.append(',');
-         sb.append(symbolicNameMappings);
-      }
-
-      return chain(PropertiesSources.singletonPropertiesSource("osgifier.symbolicNameMappings", sb.toString()), options);
    }
 
    private PropertiesSource getMojoConfigurationOptions()
@@ -247,7 +147,7 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
       };
    }
 
-   private MavenArtifact newProjectArtifact(final MavenProject project, String classifier, String type)
+   private Artifact newProjectArtifact(final MavenProject project, String classifier, String type)
    {
       org.eclipse.aether.artifact.Artifact artifact = artifactFactory.createArtifact(
          RepositoryUtils.toArtifact(project.getArtifact()), classifier, type);
@@ -262,14 +162,6 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       artifact = artifact.setFile(file);
 
-      return MavenArtifactUtils.toMavenArtifact(artifact);
-   }
-
-   private static BundleCandidate newBundleCandidate(MavenProject project)
-   {
-      final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      bundle.setLocation(project.getArtifact().getFile());
-      bundle.addExtension(MavenArtifactUtils.toMavenArtifact(project.getArtifact()));
-      return bundle;
+      return MavenArtifactUtils.toArtifact(artifact);
    }
 }

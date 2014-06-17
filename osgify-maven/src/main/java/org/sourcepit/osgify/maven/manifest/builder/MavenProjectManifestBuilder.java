@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.maven.artifact.Artifact;
 import org.sourcepit.common.manifest.Manifest;
+import org.sourcepit.common.utils.props.PropertiesSource;
 
 
 /**
@@ -38,9 +39,7 @@ public interface MavenProjectManifestBuilder
 
    MavenProjectManifestBuilder appendDynamicImports(boolean append);
 
-   MavenProjectManifestBuilder withOption(String key, String value);
-
-   MavenProjectManifestBuilder withOptions(Map<String, String> options);
+   MavenProjectManifestBuilder withOptions(PropertiesSource options);
 
    MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest);
 
