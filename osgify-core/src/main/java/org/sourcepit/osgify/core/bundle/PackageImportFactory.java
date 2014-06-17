@@ -16,6 +16,7 @@ import static org.sourcepit.osgify.core.bundle.VersionRangePolicy.EQUIVALENT;
 import javax.inject.Named;
 
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
+import org.sourcepit.common.manifest.osgi.BundleRequirement;
 import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.Parameter;
@@ -113,19 +114,19 @@ public class PackageImportFactory
       final boolean optional = bundleReference.isOptional();
       if (optional)
       {
-         setOptional(packageImport);
+         packageImport.getParameters().add(newOptional());
       }
 
       return packageImport;
    }
 
-   private void setOptional(final PackageImport packageImport)
+   private static Parameter newOptional()
    {
-      Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
+      final Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
       parameter.setName("resolution");
       parameter.setType(DIRECTIVE);
       parameter.setValue("optional");
-      packageImport.getParameters().add(parameter);
+      return parameter;
    }
 
    private PackageImport newExecutionEnvironmentImport(BundleCandidate bundle, String requiredPackage,
@@ -203,5 +204,24 @@ public class PackageImportFactory
       }
 
       return policies;
+   }
+
+   public BundleRequirement newRequireBundle(BundleCandidate bundle, BundleCandidate requiredBundle, boolean optional,
+      AccessRestriction accessRestriction, PropertiesSource options)
+   {
+      final VersionRangePolicy policy = getVersionRangePolicy(requiredBundle, accessRestriction, options);
+      final Version version = requiredBundle.getVersion();
+      final VersionRange versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
+      final BundleRequirement requirement = BundleManifestFactory.eINSTANCE.createBundleRequirement();
+      requirement.getSymbolicNames().add(requiredBundle.getSymbolicName());
+      if (!INFINITE_RANGE.equals(versionRange))
+      {
+         requirement.setBundleVersion(versionRange);
+      }
+      if (optional)
+      {
+         requirement.getParameters().add(newOptional());
+      }
+      return requirement;
    }
 }

@@ -7,9 +7,12 @@
 package org.sourcepit.osgify.core.bundle;
 
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.EXPORT_PACKAGE;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.IMPORT_PACKAGE;
+import static org.sourcepit.common.manifest.osgi.BundleHeaderName.REQUIRE_BUNDLE;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addBundleReference;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.addPackageExport;
 import static org.sourcepit.osgify.core.bundle.TestContextHelper.appendPackageExport;
@@ -27,6 +30,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.sisu.launch.InjectedTest;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
@@ -736,7 +740,7 @@ public class PackageImportAppenderTest extends InjectedTest
       BundleCandidate bundle = newBundleCandidate("1.0.1", "CDC-1.0/Foundation-1.0", jArchive);
       bundle.getManifest().setBundleSymbolicName("bundle");
       appendPackageExport(bundle, newPackageExport("b", "2"));
-      
+
       importAppender.append(bundle, options);
 
       String packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
@@ -755,7 +759,7 @@ public class PackageImportAppenderTest extends InjectedTest
 
       packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
       assertThat(packageImports, IsEqual.equalTo("b;version=\"2\""));
-      
+
       // test options selfImportPolicy doesn't override recommendedImportPolicies
       bundle.getManifest().setHeader(IMPORT_PACKAGE, null);
       options.put("osgifier.selfImportPolicy", VersionRangePolicy.ANY.literal());
@@ -763,5 +767,124 @@ public class PackageImportAppenderTest extends InjectedTest
 
       packageImports = bundle.getManifest().getHeaderValue(IMPORT_PACKAGE);
       assertThat(packageImports, IsEqual.equalTo("b;version=\"2\""));
+   }
+
+   @Test
+   public void testRequireBundle() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate c = newBundle("c", "3");
+      appendTypeWithReferences((JavaArchive) c.getContent(), "c.C", 47);
+
+      BundleCandidate b = newBundle("b", "2");
+      appendTypeWithReferences((JavaArchive) b.getContent(), "b.B", 47);
+
+      BundleCandidate a = newBundle("a", "1");
+      appendTypeWithReferences((JavaArchive) a.getContent(), "a.A", 47, "b.B", "c.C");
+
+      addBundleReference(a, b);
+      addBundleReference(a, c);
+
+      exportAppender.append(c, options);
+      exportAppender.append(b, options);
+      exportAppender.append(a, options);
+
+      options.put("osgifier.requireBundle", "c");
+      importAppender.append(a, options);
+
+      BundleManifest mf = a.getManifest();
+      assertEquals("c;bundle-version=\"[3,4)\"", mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertEquals("a;version=\"[1,1.1)\",b;version=\"[2,3)\"", mf.getHeaderValue(IMPORT_PACKAGE));
+
+      options.put("osgifier.requireBundle", "b,c");
+      mf.setRequireBundle(null);
+      mf.setImportPackage(null);
+      importAppender.append(a, options);
+      assertEquals("b;bundle-version=\"[2,3)\",c;bundle-version=\"[3,4)\"", mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
+
+      options.put("osgifier.requireBundle", "**");
+      mf.setRequireBundle(null);
+      mf.setImportPackage(null);
+      importAppender.append(a, options);
+      assertEquals("b;bundle-version=\"[2,3)\",c;bundle-version=\"[3,4)\"", mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertNull(mf.getHeaderValue(IMPORT_PACKAGE));
+   }
+
+   @Test
+   public void testRequireBundleIgnoreSelfReferences() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate a = newBundle("a", "1");
+      appendTypeWithReferences((JavaArchive) a.getContent(), "a.A", 47);
+      exportAppender.append(a, options);
+
+      options.put("osgifier.requireBundle", "a");
+      importAppender.append(a, options);
+
+      BundleManifest mf = a.getManifest();
+      assertNull(mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertNull(mf.getHeaderValue(IMPORT_PACKAGE));
+   }
+
+   @Test
+   public void testRequireBundleWithInternalPackage() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate b = newBundle("b", "2");
+      appendTypeWithReferences((JavaArchive) b.getContent(), "b.B", 47);
+      appendTypeWithReferences((JavaArchive) b.getContent(), "b.internal.B", 47);
+
+      BundleCandidate a = newBundle("a", "1");
+      appendTypeWithReferences((JavaArchive) a.getContent(), "a.A", 47, "b.B", "b.internal.B");
+
+      addBundleReference(a, b);
+
+      options.put("osgifier.internalPackages", "b.internal");
+      exportAppender.append(b, options);
+      exportAppender.append(a, options);
+
+      options.put("osgifier.requireBundle", "b");
+      importAppender.append(a, options);
+
+      BundleManifest mf = a.getManifest();
+      assertEquals("b;bundle-version=\"[2,2.1)\"", mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
+   }
+
+   @Test
+   public void testRequireBundleWithOptional() throws Exception
+   {
+      PropertiesMap options = new LinkedPropertiesMap();
+
+      BundleCandidate b = newBundle("b", "2");
+      appendTypeWithReferences((JavaArchive) b.getContent(), "b.B", 47);
+
+      BundleCandidate a = newBundle("a", "1");
+      appendTypeWithReferences((JavaArchive) a.getContent(), "a.A", 47, "b.B");
+
+      addBundleReference(a, b).setOptional(true);
+
+      exportAppender.append(b, options);
+      exportAppender.append(a, options);
+
+      options.put("osgifier.requireBundle", "b");
+      importAppender.append(a, options);
+
+      BundleManifest mf = a.getManifest();
+      assertEquals("b;bundle-version=\"[2,3)\";resolution:=optional", mf.getHeaderValue(REQUIRE_BUNDLE));
+      assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
+   }
+
+   private BundleCandidate newBundle(String symbolicName, String version)
+   {
+      JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
+      BundleCandidate a = newBundleCandidate(version, jArchive);
+      a.setSymbolicName(symbolicName);
+      a.getManifest().setBundleSymbolicName(symbolicName);
+      return a;
    }
 }

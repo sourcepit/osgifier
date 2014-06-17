@@ -6,7 +6,9 @@
 
 package org.sourcepit.osgify.core.util;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class OptionsUtils
@@ -15,7 +17,7 @@ public final class OptionsUtils
    {
       super();
    }
-   
+
    public static Map<String, String> parseMapValue(String mapValue)
    {
       final Map<String, String> mappings = new LinkedHashMap<String, String>();
@@ -33,6 +35,16 @@ public final class OptionsUtils
       }
       return mappings;
    }
-   
-   
+
+   public static List<String> parseListValue(String value)
+   {
+      final List<String> list = new ArrayList<String>();
+      for (String entry : value.split(","))
+      {
+         list.add(entry.trim());
+      }
+      return list;
+   }
+
+
 }
