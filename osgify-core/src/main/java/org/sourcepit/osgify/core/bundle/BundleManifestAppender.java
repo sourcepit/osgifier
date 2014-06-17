@@ -98,10 +98,6 @@ public class BundleManifestAppender
          {
             environmentAppender.append(bundle, options);
          }
-         if (filter.isAppendRecommendedImportPolicy(bundle, options))
-         {
-            importPolicyAppender.append(bundle, options);
-         }
          if (filter.isAppendPackageExports(bundle, options))
          {
             packageExports.append(bundle, options);
@@ -113,6 +109,10 @@ public class BundleManifestAppender
          if (filter.isAppendDynamicImports(bundle, options))
          {
             dynamicImports.append(bundle);
+         }
+         if (filter.isAppendRecommendedImportPolicy(bundle, options))
+         {
+            importPolicyAppender.append(bundle, options);
          }
       }
    }
