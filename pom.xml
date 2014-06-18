@@ -25,7 +25,7 @@
 		<module>org.sourcepit.osgifier.core</module>
 		<module>org.sourcepit.osgifier.maven</module>
 		<module>osgifier-maven-plugin</module>
-		<module>osgifier-tools</module>
+		<!-- <module>osgifier-tools</module> -->
 	</modules>
 
 	<repositories>
