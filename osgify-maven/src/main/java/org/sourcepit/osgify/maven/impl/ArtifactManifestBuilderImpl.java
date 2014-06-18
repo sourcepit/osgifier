@@ -24,6 +24,8 @@ import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
+import org.sourcepit.osgify.core.headermod.HeaderModifications;
+import org.sourcepit.osgify.core.headermod.HeaderModifier;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
 import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
@@ -46,16 +48,17 @@ import com.google.common.base.Strings;
 @Named
 public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
 {
-   public static final String DEF_SOURCE_CLASSIFIER = "sources";
-
    private final VersionRangeResolver versionRangeResolver;
    private final OsgifyContextInflator inflater;
+   private final HeaderModifier headerModifier;
 
    @Inject
-   public ArtifactManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater)
+   public ArtifactManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater,
+      HeaderModifier headerModifier)
    {
       this.versionRangeResolver = versionRangeResolver;
       this.inflater = inflater;
+      this.headerModifier = headerModifier;
    }
 
    @Override
@@ -100,7 +103,13 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       {
          new ManifestMerger().merge(manifest, mergeManifest);
       }
-      
+
+      final HeaderModifications headerModifications = request.getHeaderModifications();
+      if (headerModifications != null)
+      {
+         headerModifier.applyModifications(manifest, headerModifications);
+      }
+
       final ArtifactManifestBuilderResult result = new ArtifactManifestBuilderResult();
       result.setBundleManifest(manifest);
 

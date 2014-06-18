@@ -34,7 +34,6 @@ import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgify.core.headermod.HeaderModifications;
-import org.sourcepit.osgify.core.headermod.HeaderModifier;
 
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo
@@ -70,9 +69,6 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    private ArtifactFactory artifactFactory;
 
    @Inject
-   private HeaderModifier headerModifier;
-
-   @Inject
    private ArtifactManifestBuilder manifestBuilder;
 
    @Override
@@ -82,13 +78,10 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       final ArtifactManifestBuilderRequest request = newManifestRequest(project);
 
-      ArtifactManifestBuilderResult result = manifestBuilder.buildManifest(request);
+      final ArtifactManifestBuilderResult result = manifestBuilder.buildManifest(request);
 
       final BundleManifest manifest = result.getBundleManifest();
-      if (headerModifications != null)
-      {
-         headerModifier.applyModifications(manifest, headerModifications);
-      }
+
       ModelUtils.writeModel(manifestFile, manifest);
       project.setContextValue("osgifier.manifestFile", manifestFile);
 
@@ -129,6 +122,7 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
 
       request.setSymbolicName(symbolicName);
       request.setTimestamp(buildContext.getSession().getStartTime());
+      request.setHeaderModifications(headerModifications);
       return request;
    }
 

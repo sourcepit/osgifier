@@ -15,6 +15,7 @@ import org.apache.maven.artifact.Artifact;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
+import org.sourcepit.osgify.core.headermod.HeaderModifications;
 
 public class ArtifactManifestBuilderRequest
 {
@@ -31,6 +32,8 @@ public class ArtifactManifestBuilderRequest
    private Date timestamp;
 
    private Manifest manifestToMerge;
+   
+   private HeaderModifications headerModifications;
    
    public static PropertiesSource toOptions(Map<?, ?> map)
    {
@@ -105,5 +108,15 @@ public class ArtifactManifestBuilderRequest
    public void setManifestToMerge(Manifest manifestToMerge)
    {
       this.manifestToMerge = manifestToMerge;
+   }
+   
+   public HeaderModifications getHeaderModifications()
+   {
+      return headerModifications;
+   }
+   
+   public void setHeaderModifications(HeaderModifications headerModifications)
+   {
+      this.headerModifications = headerModifications;
    }
 }
