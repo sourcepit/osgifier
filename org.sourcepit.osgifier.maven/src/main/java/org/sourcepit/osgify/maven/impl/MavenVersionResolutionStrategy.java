@@ -15,8 +15,8 @@ import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.maven.model.MavenProjectCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.resolve.AbstractVersionResolutionStrategy;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.resolve.AbstractVersionResolutionStrategy;
 
 @Named("MavenVersionResolutionStrategy")
 public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStrategy

@@ -15,7 +15,7 @@ import org.apache.maven.artifact.Artifact;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
-import org.sourcepit.osgify.core.headermod.HeaderModifications;
+import org.sourcepit.osgifier.core.headermod.HeaderModifications;
 
 public class ArtifactManifestBuilderRequest
 {

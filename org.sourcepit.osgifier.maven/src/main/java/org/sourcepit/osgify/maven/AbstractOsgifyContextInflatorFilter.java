@@ -8,7 +8,7 @@ package org.sourcepit.osgify.maven;
 
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 public abstract class AbstractOsgifyContextInflatorFilter implements OsgifyContextInflatorFilter
 {

@@ -20,9 +20,9 @@ import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.core.MavenProjectUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

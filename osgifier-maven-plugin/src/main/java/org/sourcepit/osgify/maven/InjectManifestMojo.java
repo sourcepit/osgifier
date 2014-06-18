@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
-import org.sourcepit.osgify.core.packaging.Repackager;
+import org.sourcepit.osgifier.core.packaging.Repackager;
 
 @Mojo(name = "inject-manifest", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE)
 public class InjectManifestMojo extends AbstractOsgifyMojo

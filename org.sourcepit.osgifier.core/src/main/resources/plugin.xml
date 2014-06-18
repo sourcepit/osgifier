@@ -9,17 +9,17 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Example -->
       <package
-            uri="http://www.sourcepit.org/osgify/context/0.1"
-            class="org.sourcepit.osgify.core.model.context.ContextModelPackage"
-            genModel="META-INF/emf/osgify.genmodel"/>
+            uri="http://www.sourcepit.org/osgifier/context/0.1"
+            class="org.sourcepit.osgifier.core.model.context.ContextModelPackage"
+            genModel="META-INF/emf/osgifier.genmodel"/>
    </extension>
    
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Example -->
       <package
-            uri="http://www.sourcepit.org/osgify/java/0.1"
-            class="org.sourcepit.osgify.core.model.java.JavaModelPackage"
-            genModel="META-INF/emf/osgify.genmodel"/>
+            uri="http://www.sourcepit.org/osgifier/java/0.1"
+            class="org.sourcepit.osgifier.core.model.java.JavaModelPackage"
+            genModel="META-INF/emf/osgifier.genmodel"/>
    </extension>
 
 </plugin>

@@ -11,8 +11,8 @@ import javax.inject.Named;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.maven.model.MavenDependency;
 import org.sourcepit.common.utils.priority.Priority;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.resolve.AbstractVersionRangeResolutionStrategy;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.resolve.AbstractVersionRangeResolutionStrategy;
 
 @Named("MavenVersionRangeResolutionStrategy")
 public class MavenVersionRangeResolutionStrategy extends AbstractVersionRangeResolutionStrategy

@@ -19,14 +19,14 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
-import org.sourcepit.osgify.core.bundle.BundleManifestAppenderFilter;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.JavaContentAppender;
-import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
-import org.sourcepit.osgify.core.resolve.NativeManifestAppender;
-import org.sourcepit.osgify.core.resolve.SymbolicNameAndVersionAppender;
+import org.sourcepit.osgifier.core.bundle.BundleManifestAppender;
+import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.resolve.JavaContentAppender;
+import org.sourcepit.osgifier.core.resolve.JavaContentAppenderFilter;
+import org.sourcepit.osgifier.core.resolve.NativeManifestAppender;
+import org.sourcepit.osgifier.core.resolve.SymbolicNameAndVersionAppender;
 
 @Named
 public class OsgifyContextInflator

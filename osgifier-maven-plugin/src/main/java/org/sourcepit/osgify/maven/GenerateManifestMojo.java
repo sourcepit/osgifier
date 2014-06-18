@@ -33,7 +33,7 @@ import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
-import org.sourcepit.osgify.core.headermod.HeaderModifications;
+import org.sourcepit.osgifier.core.headermod.HeaderModifications;
 
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo

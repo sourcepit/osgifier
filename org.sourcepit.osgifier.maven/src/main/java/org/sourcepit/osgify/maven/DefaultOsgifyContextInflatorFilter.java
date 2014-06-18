@@ -10,7 +10,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 public class DefaultOsgifyContextInflatorFilter extends AbstractOsgifyContextInflatorFilter
 {

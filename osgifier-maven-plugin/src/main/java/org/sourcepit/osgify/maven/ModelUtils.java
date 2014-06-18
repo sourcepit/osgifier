@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
 import org.sourcepit.common.utils.io.Write.ToStream;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 
 public final class ModelUtils
 {

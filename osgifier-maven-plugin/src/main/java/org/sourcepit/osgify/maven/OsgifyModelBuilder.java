@@ -30,7 +30,7 @@ import org.sourcepit.maven.dependency.model.DependencyModelResolver;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 
 @Named
 public class OsgifyModelBuilder

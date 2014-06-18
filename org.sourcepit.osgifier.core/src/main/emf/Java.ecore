@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java" nsURI="http://www.sourcepit.org/osgify/java/0.1" nsPrefix="java">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="java" nsURI="http://www.sourcepit.org/osgifier/java/0.1" nsPrefix="java">
   <eClassifiers xsi:type="ecore:EClass" name="Named" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -170,6 +170,6 @@
     <eLiterals name="BIN"/>
     <eLiterals name="SRC" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceVisitor" instanceClassName="org.sourcepit.osgify.core.model.java.ResourceVisitor"
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceVisitor" instanceClassName="org.sourcepit.osgifier.core.model.java.ResourceVisitor"
       abstract="true" interface="true"/>
 </ecore:EPackage>

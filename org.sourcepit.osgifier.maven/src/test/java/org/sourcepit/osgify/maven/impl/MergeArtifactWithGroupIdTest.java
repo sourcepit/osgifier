@@ -13,10 +13,10 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.maven.model.MavenModelFactory;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
-import org.sourcepit.osgify.core.model.java.JavaArchive;
-import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.core.model.java.JavaArchive;
+import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 
 /**
  * @author Bernd

@@ -14,9 +14,9 @@ import org.sourcepit.common.maven.model.ArtifactKey;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
-import org.sourcepit.osgify.core.util.OptionsUtils;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.resolve.AbstractSymbolicNameResolutionStrategy;
+import org.sourcepit.osgifier.core.util.OptionsUtils;
 
 @Named("CustomSymbolicName")
 public class CustomSymbolicName extends AbstractSymbolicNameResolutionStrategy

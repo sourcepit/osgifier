@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context" nsURI="http://www.sourcepit.org/osgify/context/0.1"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="context" nsURI="http://www.sourcepit.org/osgifier/context/0.1"
     nsPrefix="ctx">
   <eClassifiers xsi:type="ecore:EClass" name="OsgifyContext" eSuperTypes="../../../../common-modeling/src/main/emf/CommonModeling.ecore#//XAnnotatable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="bundles" upperBound="-1"

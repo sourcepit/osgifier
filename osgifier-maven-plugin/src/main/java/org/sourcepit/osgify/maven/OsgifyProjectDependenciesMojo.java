@@ -44,9 +44,9 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.packaging.Repackager;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.packaging.Repackager;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

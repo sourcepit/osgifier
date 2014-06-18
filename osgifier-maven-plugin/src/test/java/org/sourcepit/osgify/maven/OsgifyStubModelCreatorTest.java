@@ -27,8 +27,8 @@ import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyModelFactory;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.maven.OsgifyStubModelCreator;
 
 public class OsgifyStubModelCreatorTest extends InjectedTest

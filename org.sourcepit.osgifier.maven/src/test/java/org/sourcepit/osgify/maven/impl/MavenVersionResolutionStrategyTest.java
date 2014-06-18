@@ -20,10 +20,10 @@ import org.sourcepit.common.maven.model.MavenModelFactory;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
-import org.sourcepit.osgify.core.model.java.JavaArchive;
-import org.sourcepit.osgify.core.model.java.JavaModelFactory;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.core.model.java.JavaArchive;
+import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 
 public class MavenVersionResolutionStrategyTest
 {

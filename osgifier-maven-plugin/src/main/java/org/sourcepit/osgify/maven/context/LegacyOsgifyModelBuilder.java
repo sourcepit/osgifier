@@ -29,14 +29,14 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
-import org.sourcepit.osgify.core.bundle.BundleManifestAppender;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.JavaContentAppender;
-import org.sourcepit.osgify.core.resolve.JavaContentAppenderFilter;
-import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
+import org.sourcepit.osgifier.core.bundle.BundleManifestAppender;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.resolve.JavaContentAppender;
+import org.sourcepit.osgifier.core.resolve.JavaContentAppenderFilter;
+import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgify.maven.AbstractOsgifyContextInflatorFilter;
 
 /*

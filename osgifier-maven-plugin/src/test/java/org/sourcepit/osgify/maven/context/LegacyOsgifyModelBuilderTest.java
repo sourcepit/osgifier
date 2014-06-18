@@ -31,9 +31,9 @@ import org.sourcepit.common.maven.testing.EmbeddedMavenEnvironmentTest;
 import org.sourcepit.common.maven.testing.MavenExecutionResult2;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.utils.lang.PipedException;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 
 public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 {

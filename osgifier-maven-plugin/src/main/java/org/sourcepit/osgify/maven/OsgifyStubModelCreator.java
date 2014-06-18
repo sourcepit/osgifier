@@ -24,11 +24,11 @@ import org.sourcepit.common.maven.model.Scope;
 import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.ContextModelFactory;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 
 @Named
 public class OsgifyStubModelCreator

@@ -30,9 +30,9 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
-import org.sourcepit.osgify.core.packaging.Repackager;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.packaging.Repackager;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

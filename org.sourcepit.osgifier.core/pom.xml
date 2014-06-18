@@ -191,13 +191,13 @@
 								<resource>
 									<directory>${project.build.testSourceDirectory}</directory>
 									<includes>
-										<include>org/sourcepit/osgify/test/resources/**</include>
+										<include>org/sourcepit/osgifier/test/resources/**</include>
 									</includes>
 								</resource>
 								<resource>
 									<directory>${project.build.testOutputDirectory}</directory>
 									<includes>
-										<include>org/sourcepit/osgify/test/resources/**</include>
+										<include>org/sourcepit/osgifier/test/resources/**</include>
 										<include>META-INF/MANIFEST.MF</include>
 									</includes>
 								</resource>

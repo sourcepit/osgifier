@@ -12,8 +12,8 @@ import org.sourcepit.common.maven.model.MavenArtifactConflictCoordinates;
 import org.sourcepit.common.maven.model.MavenArtifactCoordinates;
 import org.sourcepit.common.utils.priority.Priority;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.resolve.AbstractSymbolicNameResolutionStrategy;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.resolve.AbstractSymbolicNameResolutionStrategy;
 
 /**
  * @author Bernd

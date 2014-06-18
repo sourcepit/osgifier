@@ -9,9 +9,9 @@ package org.sourcepit.osgify.maven.p2;
 import java.util.Collection;
 import java.util.Stack;
 
-import org.sourcepit.osgify.core.model.context.BundleCandidate;
-import org.sourcepit.osgify.core.model.context.BundleReference;
-import org.sourcepit.osgify.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleReference;
+import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 
 public interface BundleSelector
 {
