@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.tools;
+package org.sourcepit.osgifier.core.tools;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

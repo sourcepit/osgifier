@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.core.tools;
+package org.sourcepit.osgifier.core.tools;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -24,6 +24,7 @@ import org.apache.commons.io.IOUtils;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
+import org.sourcepit.osgifier.core.tools.ExecutionEnvironmentAnalyzer;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
