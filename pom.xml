@@ -158,9 +158,9 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.sourcepit.tools</groupId>
-					<artifactId>osgify-maven-plugin</artifactId>
-					<version>0.19.0-preview-2</version>
+					<groupId>org.sourcepit.osgifier</groupId>
+					<artifactId>osgifier-maven-plugin</artifactId>
+					<version>0.19.0-preview-16</version>
 					<configuration>
 						<pde>true</pde>
 						<options>
@@ -202,9 +202,9 @@
 								</pluginExecution>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>org.sourcepit.tools</groupId>
-										<artifactId>osgify-maven-plugin</artifactId>
-										<versionRange>[0.17.0,)</versionRange>
+										<groupId>org.sourcepit.osgifier</groupId>
+										<artifactId>osgifier-maven-plugin</artifactId>
+										<versionRange>[0,)</versionRange>
 										<goals>
 											<goal>generate-manifest</goal>
 										</goals>
