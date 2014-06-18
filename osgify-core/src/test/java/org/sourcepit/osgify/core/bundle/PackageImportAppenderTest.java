@@ -809,11 +809,11 @@ public class PackageImportAppenderTest extends InjectedTest
       mf.setImportPackage(null);
       importAppender.append(a, options);
       assertEquals("b;bundle-version=\"[2,3)\",c;bundle-version=\"[3,4)\"", mf.getHeaderValue(REQUIRE_BUNDLE));
-      assertNull(mf.getHeaderValue(IMPORT_PACKAGE));
+      assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
    }
 
    @Test
-   public void testRequireBundleIgnoreSelfReferences() throws Exception
+   public void testRequireBundleUsePackageImportsForSelfReferences() throws Exception
    {
       PropertiesMap options = new LinkedPropertiesMap();
 
@@ -826,7 +826,7 @@ public class PackageImportAppenderTest extends InjectedTest
 
       BundleManifest mf = a.getManifest();
       assertNull(mf.getHeaderValue(REQUIRE_BUNDLE));
-      assertNull(mf.getHeaderValue(IMPORT_PACKAGE));
+      assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
    }
 
    @Test

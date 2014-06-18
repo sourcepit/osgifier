@@ -31,6 +31,7 @@ import org.sourcepit.osgify.core.ee.ExecutionEnvironment;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentImplementation;
 import org.sourcepit.osgify.core.ee.ExecutionEnvironmentService;
 import org.sourcepit.osgify.core.model.context.BundleCandidate;
+import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.util.OptionsUtils;
 
 /**
@@ -209,10 +210,10 @@ public class PackageImportAppender
          treatInheritedPackagesAsInternal))
       {
          final BundleCandidate exportingBundle = getExportingBundle(result);
-
-         if (exportingBundle != null && isRequireBundle(exportingBundle, options))
+         if (exportingBundle != null && bundle != exportingBundle && isRequireBundle(exportingBundle, options))
          {
-            processRequireBundle(bundleToRequireBundleInfo, bundle, result, options);
+            processRequireBundle(bundleToRequireBundleInfo, bundle, result.getSelectedExporter().getBundleReference(),
+               result.getAccessRestriction(), options);
          }
          else
          {
@@ -222,21 +223,17 @@ public class PackageImportAppender
    }
 
    private void processRequireBundle(Map<BundleCandidate, RequireBundleInfo> requiredBundleToAccessRestriction,
-      BundleCandidate bundle, PackageResolutionResult result, PropertiesSource options)
+      BundleCandidate bundle, BundleReference reference, AccessRestriction accessRestriction, PropertiesSource options)
    {
-      final PackageExportDescription exporter = result.getSelectedExporter();
-      final BundleCandidate exportingBundle = exporter.getBundle();
-      if (bundle != exportingBundle)
+      final BundleCandidate requiredBundle = reference.getTarget();
+      RequireBundleInfo info = requiredBundleToAccessRestriction.get(requiredBundle);
+      if (info == null)
       {
-         RequireBundleInfo info = requiredBundleToAccessRestriction.get(exportingBundle);
-         if (info == null)
-         {
-            info = new RequireBundleInfo();
-            requiredBundleToAccessRestriction.put(exportingBundle, info);
-         }
-         info.updateAccessRestriction(result.getAccessRestriction());
-         info.updateOptional(exporter.getBundleReference().isOptional());
+         info = new RequireBundleInfo();
+         requiredBundleToAccessRestriction.put(requiredBundle, info);
       }
+      info.updateAccessRestriction(accessRestriction);
+      info.updateOptional(reference.isOptional());
    }
 
    private void processPackageImport(final Map<String, PackageImport> packageToImport, BundleCandidate bundle,
