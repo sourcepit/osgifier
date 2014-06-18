@@ -57,7 +57,7 @@ public class JavaTypeAndPackageInvestigatorTest
       { // noop
       }
 
-      File jarFile = new File("target/testResources/osgify-core.jar");
+      File jarFile = new File("target/testResources/org.sourcepit.osgifier.core.jar");
       assertTrue(jarFile.exists());
 
       javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();

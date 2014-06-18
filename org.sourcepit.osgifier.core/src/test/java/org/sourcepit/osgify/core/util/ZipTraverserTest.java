@@ -17,7 +17,7 @@ public class ZipTraverserTest extends AbstractTraverserTest
    @Override
    protected void travers(ResourceVisitor visitor)
    {
-      File jarFile = new File("target/testResources/osgify-core.jar");
+      File jarFile = new File("target/testResources/org.sourcepit.osgifier.core.jar");
       assertTrue(jarFile.exists());
       new ZipTraverser(jarFile).travers(visitor);
    }

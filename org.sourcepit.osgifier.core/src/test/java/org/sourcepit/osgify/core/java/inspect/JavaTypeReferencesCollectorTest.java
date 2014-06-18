@@ -39,7 +39,7 @@ public class JavaTypeReferencesCollectorTest
       { // expected
       }
 
-      final File jarFile = new File("target/testResources/osgify-core.jar");
+      final File jarFile = new File("target/testResources/org.sourcepit.osgifier.core.jar");
       assertTrue(jarFile.exists());
 
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(new URLClassLoader(new URL[] { jarFile.toURI()

@@ -6,8 +6,8 @@
 		<artifactId>srcpit-parent</artifactId>
 		<version>13</version>
 	</parent>
-	<groupId>org.sourcepit.tools</groupId>
-	<artifactId>osgify</artifactId>
+	<groupId>org.sourcepit.osgifier</groupId>
+	<artifactId>osgifier</artifactId>
 	<version>0.19.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -22,10 +22,10 @@
 	</properties>
 
 	<modules>
-		<module>osgify-core</module>
-		<module>osgify-maven-plugin</module>
-		<!-- <module>osgify-tools</module> -->
-		<module>osgify-maven</module>
+		<module>org.sourcepit.osgifier.core</module>
+		<module>org.sourcepit.osgifier.maven</module>
+		<module>osgifier-maven-plugin</module>
+		<module>osgifier-tools</module>
 	</modules>
 
 	<repositories>
@@ -105,24 +105,24 @@
 				<version>0.7.0</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-core</artifactId>
+				<groupId>org.sourcepit.osgifier</groupId>
+				<artifactId>org.sourcepit.osgifier.core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-maven</artifactId>
+				<groupId>org.sourcepit.osgifier</groupId>
+				<artifactId>org.sourcepit.osgifier.maven</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-core</artifactId>
+				<groupId>org.sourcepit.osgifier</groupId>
+				<artifactId>org.sourcepit.osgifier.core</artifactId>
 				<version>${project.version}</version>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
-				<groupId>org.sourcepit.tools</groupId>
-				<artifactId>osgify-maven-plugin</artifactId>
+				<groupId>org.sourcepit.osgifier</groupId>
+				<artifactId>osgifier-maven-plugin</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
