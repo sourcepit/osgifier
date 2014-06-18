@@ -20,19 +20,19 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-utils</artifactId>
+			<artifactId>org.sourcepit.common.utils</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-constraints</artifactId>
+			<artifactId>org.sourcepit.common.constraints</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-manifest</artifactId>
+			<artifactId>org.sourcepit.common.manifest</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-modeling</artifactId>
+			<artifactId>org.sourcepit.common.modeling</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
@@ -73,7 +73,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.sourcepit.common</groupId>
-			<artifactId>common-modeling</artifactId>
+			<artifactId>org.sourcepit.common.modeling</artifactId>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
@@ -164,11 +164,11 @@
 							<aspectLibraries>
 								<aspectLibrary>
 									<groupId>org.sourcepit.common</groupId>
-									<artifactId>common-modeling</artifactId>
+									<artifactId>org.sourcepit.common.modeling</artifactId>
 								</aspectLibrary>
 								<aspectLibrary>
 									<groupId>org.sourcepit.common</groupId>
-									<artifactId>common-constraints</artifactId>
+									<artifactId>org.sourcepit.common.constraints</artifactId>
 								</aspectLibrary>
 							</aspectLibraries>
 						</configuration>
