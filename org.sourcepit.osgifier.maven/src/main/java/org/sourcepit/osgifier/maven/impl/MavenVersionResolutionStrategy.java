@@ -4,10 +4,10 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static org.sourcepit.osgify.maven.impl.MavenToOSGiUtils.toVersion;
+import static org.sourcepit.osgifier.maven.impl.MavenToOSGiUtils.toVersion;
 
 import javax.inject.Named;
 

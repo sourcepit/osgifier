@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.junit.Assert.assertThat;
 
@@ -24,6 +24,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
+import org.sourcepit.osgifier.maven.impl.MavenVersionResolutionStrategy;
 
 public class MavenVersionResolutionStrategyTest
 {

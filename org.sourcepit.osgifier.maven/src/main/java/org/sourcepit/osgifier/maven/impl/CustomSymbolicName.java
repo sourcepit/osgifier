@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import java.util.Map;
 

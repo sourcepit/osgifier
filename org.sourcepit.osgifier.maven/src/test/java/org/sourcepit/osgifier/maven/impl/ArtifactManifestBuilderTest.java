@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -27,8 +27,8 @@ import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.testing.Workspace;
-import org.sourcepit.osgify.maven.ArtifactManifestBuilder;
-import org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;

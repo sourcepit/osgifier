@@ -31,6 +31,8 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.maven.OsgifyContextInflator;
+import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
 
 @Named
 public class OsgifyModelBuilder

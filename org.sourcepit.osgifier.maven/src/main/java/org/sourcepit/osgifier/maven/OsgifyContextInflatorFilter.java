@@ -4,8 +4,11 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven;
-public interface ArtifactManifestBuilder
+package org.sourcepit.osgifier.maven;
+
+import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
+import org.sourcepit.osgifier.core.resolve.NativeManifestAppenderFilter;
+
+public interface OsgifyContextInflatorFilter extends NativeManifestAppenderFilter, BundleManifestAppenderFilter
 {
-   ArtifactManifestBuilderResult buildManifest(ArtifactManifestBuilderRequest request);
 }

@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.sourcepit.common.utils.props.PropertiesSources.chain;
 
@@ -31,12 +31,12 @@ import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
-import org.sourcepit.osgify.maven.ArtifactManifestBuilder;
-import org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest;
-import org.sourcepit.osgify.maven.ArtifactManifestBuilderResult;
-import org.sourcepit.osgify.maven.DefaultOsgifyContextInflatorFilter;
-import org.sourcepit.osgify.maven.OsgifyContextInflator;
-import org.sourcepit.osgify.maven.OsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
+import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.OsgifyContextInflator;
+import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
 
 import com.google.common.base.Strings;
 

@@ -31,6 +31,7 @@ import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifyMojo
 {

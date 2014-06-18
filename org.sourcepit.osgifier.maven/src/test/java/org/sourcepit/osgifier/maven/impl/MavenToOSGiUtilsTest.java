@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.junit.Assert.assertThat;
 
@@ -16,6 +16,7 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
+import org.sourcepit.osgifier.maven.impl.MavenToOSGiUtils;
 
 public class MavenToOSGiUtilsTest
 {

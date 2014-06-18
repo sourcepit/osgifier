@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,6 +15,7 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.maven.impl.CustomSymbolicName;
 
 public class CustomSymbolicNameTest
 {

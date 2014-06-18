@@ -47,6 +47,7 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
+import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>

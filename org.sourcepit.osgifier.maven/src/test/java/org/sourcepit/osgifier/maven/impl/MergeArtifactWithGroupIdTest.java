@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.impl;
+package org.sourcepit.osgifier.maven.impl;
 
 import static org.junit.Assert.assertThat;
 
@@ -17,6 +17,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
+import org.sourcepit.osgifier.maven.impl.MergeArtifactWithGroupId;
 
 /**
  * @author Bernd
@@ -95,16 +96,16 @@ public class MergeArtifactWithGroupIdTest
       assertThat(name, IsEqual.equalTo("org.sourcepit.common.manifest"));
 
       mavenArtifact.setGroupId("org.sourcepit.tools");
-      mavenArtifact.setArtifactId("osgify-core");
+      mavenArtifact.setArtifactId("osgifier-core");
 
       name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
-      assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgify.core"));
+      assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgifier.core"));
 
       mavenArtifact.setGroupId("org.sourcepit-tools");
-      mavenArtifact.setArtifactId("osgify_maven-plugin");
+      mavenArtifact.setArtifactId("osgifier_maven-plugin");
 
       name = new MergeArtifactWithGroupId().resolveSymbolicName(bundleCandidate, null);
-      assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgify.maven.plugin"));
+      assertThat(name, IsEqual.equalTo("org.sourcepit.tools.osgifier.maven.plugin"));
    }
 
 }

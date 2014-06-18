@@ -37,7 +37,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 import org.sourcepit.osgifier.core.resolve.JavaContentAppender;
 import org.sourcepit.osgifier.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
-import org.sourcepit.osgify.maven.AbstractOsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.AbstractOsgifyContextInflatorFilter;
 
 /*
  * - Artifact as root

@@ -42,7 +42,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifyContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
-import org.sourcepit.osgify.maven.DefaultOsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder;
 import org.sourcepit.osgify.maven.context.LegacyOsgifyModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgify.p2.P2Publisher;

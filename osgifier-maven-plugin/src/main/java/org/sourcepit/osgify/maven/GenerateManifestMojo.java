@@ -8,8 +8,8 @@ package org.sourcepit.osgify.maven;
 
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
-import static org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest.chainOptions;
-import static org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest.toOptions;
+import static org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest.chainOptions;
+import static org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest.toOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +34,9 @@ import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgifier.core.headermod.HeaderModifications;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
+import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
 
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo
