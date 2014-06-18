@@ -13,12 +13,12 @@ import java.util.Stack;
 
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 public abstract class AbstractBundleTreeSelector implements BundleSelector
 {
    @Override
-   public Collection<BundleCandidate> selectRootBundles(OsgifyContext bundleContext)
+   public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext)
    {
       final List<BundleCandidate> rootBundles = new ArrayList<BundleCandidate>();
       for (BundleCandidate bundle : bundleContext.getBundles())

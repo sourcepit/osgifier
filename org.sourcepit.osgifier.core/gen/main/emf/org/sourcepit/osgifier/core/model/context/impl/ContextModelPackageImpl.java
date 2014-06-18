@@ -20,7 +20,7 @@ import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
 import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
 import org.sourcepit.osgifier.core.model.java.impl.JavaModelPackageImpl;
 
@@ -39,7 +39,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   private EClass osgifyContextEClass = null;
+   private EClass osgifierContextEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -150,9 +150,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getOsgifyContext()
+   public EClass getOsgifierContext()
    {
-      return osgifyContextEClass;
+      return osgifierContextEClass;
    }
 
    /**
@@ -161,9 +161,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getOsgifyContext_Bundles()
+   public EReference getOsgifierContext_Bundles()
    {
-      return (EReference) osgifyContextEClass.getEStructuralFeatures().get(0);
+      return (EReference) osgifierContextEClass.getEStructuralFeatures().get(0);
    }
 
    /**
@@ -387,8 +387,8 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       isCreated = true;
 
       // Create classes and their features
-      osgifyContextEClass = createEClass(OSGIFY_CONTEXT);
-      createEReference(osgifyContextEClass, OSGIFY_CONTEXT__BUNDLES);
+      osgifierContextEClass = createEClass(OSGIFIER_CONTEXT);
+      createEReference(osgifierContextEClass, OSGIFIER_CONTEXT__BUNDLES);
 
       bundleCandidateEClass = createEClass(BUNDLE_CANDIDATE);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__LOCATION);
@@ -452,15 +452,15 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       // Set bounds for type parameters
 
       // Add supertypes to classes
-      osgifyContextEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
+      osgifierContextEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
       bundleCandidateEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
       bundleReferenceEClass.getESuperTypes().add(theCommonModelingPackage.getXAnnotatable());
 
       // Initialize classes and features; add operations and parameters
-      initEClass(osgifyContextEClass, OsgifyContext.class, "OsgifyContext", !IS_ABSTRACT, !IS_INTERFACE,
+      initEClass(osgifierContextEClass, OsgifierContext.class, "OsgifierContext", !IS_ABSTRACT, !IS_INTERFACE,
          IS_GENERATED_INSTANCE_CLASS);
-      initEReference(getOsgifyContext_Bundles(), this.getBundleCandidate(), null, "bundles", null, 0, -1,
-         OsgifyContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+      initEReference(getOsgifierContext_Bundles(), this.getBundleCandidate(), null, "bundles", null, 0, -1,
+         OsgifierContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
          !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       initEClass(bundleCandidateEClass, BundleCandidate.class, "BundleCandidate", !IS_ABSTRACT, !IS_INTERFACE,

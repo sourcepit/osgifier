@@ -30,7 +30,7 @@ import org.sourcepit.maven.dependency.model.DependencyModelResolver;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.maven.OsgifyContextInflator;
 import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
 
@@ -49,13 +49,13 @@ public class OsgifyModelBuilder
    @Inject
    private OsgifyContextInflator inflator;
 
-   public OsgifyContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
+   public OsgifierContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp)
    {
       log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(dependencies);
-      final OsgifyContext osgifyModel = createStubModel(dependencyModel);
+      final OsgifierContext osgifyModel = createStubModel(dependencyModel);
       log.info("------------------------------------------------------------------------");
 
       log.info("");
@@ -63,13 +63,13 @@ public class OsgifyModelBuilder
       return build(filter, options, osgifyModel, timestamp);
    }
 
-   public OsgifyContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
+   public OsgifierContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
       MavenProject project, Date timestamp)
    {
       log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(project);
-      final OsgifyContext osgifyModel = createStubModel(dependencyModel);
+      final OsgifierContext osgifyModel = createStubModel(dependencyModel);
       log.info("------------------------------------------------------------------------");
 
       log.info("");
@@ -77,8 +77,8 @@ public class OsgifyModelBuilder
       return build(filter, options, osgifyModel, timestamp);
    }
 
-   private OsgifyContext build(final OsgifyContextInflatorFilter filter, PropertiesSource options,
-      final OsgifyContext osgifyModel, Date timestamp)
+   private OsgifierContext build(final OsgifyContextInflatorFilter filter, PropertiesSource options,
+      final OsgifierContext osgifyModel, Date timestamp)
    {
       log.info("Generating OSGi metadata...");
       inflator.inflate(filter, options, osgifyModel, timestamp);
@@ -172,7 +172,7 @@ public class OsgifyModelBuilder
       }
    }
 
-   private OsgifyContext createStubModel(final DependencyModel dependencyModel)
+   private OsgifierContext createStubModel(final DependencyModel dependencyModel)
    {
       return stubModelCreator.create(dependencyModel);
    }

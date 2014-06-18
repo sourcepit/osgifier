@@ -40,7 +40,7 @@ import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 import org.sourcepit.osgifier.maven.context.LegacyOsgifyModelBuilder;
@@ -63,7 +63,7 @@ public class P2UpdateSiteGenerator
    @Inject
    private P2Publisher p2Publisher;
 
-   public OsgifyContext generateUpdateSite(File siteDir, MavenProject project,
+   public OsgifierContext generateUpdateSite(File siteDir, MavenProject project,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
@@ -71,7 +71,7 @@ public class P2UpdateSiteGenerator
          repositoryName, options);
    }
 
-   public OsgifyContext generateUpdateSite(File siteDir, Artifact artifact,
+   public OsgifierContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
@@ -85,11 +85,11 @@ public class P2UpdateSiteGenerator
    @Inject
    private org.sourcepit.osgifier.maven.OsgifyModelBuilder modelBuilder2;
 
-   public OsgifyContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
+   public OsgifierContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options, Date startTime, BundleSelector bundleSelector)
    {
-      final OsgifyContext model = modelBuilder2.build(new DefaultOsgifyContextInflatorFilter(), options == null
+      final OsgifierContext model = modelBuilder2.build(new DefaultOsgifyContextInflatorFilter(), options == null
          ? new LinkedPropertiesMap()
          : options, dependencies, startTime);
 
@@ -103,12 +103,12 @@ public class P2UpdateSiteGenerator
       return model;
    }
 
-   private OsgifyContext generateUpdateSite(final LegacyOsgifyModelBuilder.Request request, File siteDir,
+   private OsgifierContext generateUpdateSite(final LegacyOsgifyModelBuilder.Request request, File siteDir,
       String repositoryName, PropertiesSource options, BundleSelector bundleSelector)
    {
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
 
-      final OsgifyContext bundleContext = modelBuilder.build(request);
+      final OsgifierContext bundleContext = modelBuilder.build(request);
 
       final Collection<BundleCandidate> selectedBundles = new LinkedHashSet<BundleCandidate>();
       selectBundles(selectedBundles, bundleContext, bundleSelector);

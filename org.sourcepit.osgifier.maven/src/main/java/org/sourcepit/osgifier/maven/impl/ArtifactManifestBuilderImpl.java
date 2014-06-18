@@ -29,7 +29,7 @@ import org.sourcepit.osgifier.core.headermod.HeaderModifier;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
@@ -67,8 +67,8 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       final Artifact projectArtifact = request.getArtifact();
       final List<Artifact> projectDependencies = request.getDependencies();
 
-      final OsgifyContext osgifyContext = buildOsgifyContext(projectArtifact, projectDependencies, versionRangeResolver);
-      final BundleCandidate projectBundle = osgifyContext.getBundles().get(0);
+      final OsgifierContext osgifierContext = buildOsgifyContext(projectArtifact, projectDependencies, versionRangeResolver);
+      final BundleCandidate projectBundle = osgifierContext.getBundles().get(0);
 
       final OsgifyContextInflatorFilter inflatorFilter = newInflatorFilter(projectBundle);
 
@@ -82,19 +82,19 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
          sourceBundle.addExtension(source);
          sourceBundle.setTargetBundle(projectBundle);
          projectBundle.setSourceBundle(sourceBundle);
-         osgifyContext.getBundles().add(sourceBundle);
+         osgifierContext.getBundles().add(sourceBundle);
       }
 
       String symbolicName = request.getSymbolicName();
       symbolicName = Strings.isNullOrEmpty(symbolicName) ? buildSymbolicName(projectArtifact) : symbolicName;
 
-      final PropertiesSource osgifyOptions = buildOsgifyOptions(projectArtifact, symbolicName, request.getOptions());
+      final PropertiesSource osgifierOptions = buildOsgifyOptions(projectArtifact, symbolicName, request.getOptions());
 
       final Date timestamp = request.getTimestamp();
 
       final Date startTime = timestamp == null ? new Date() : timestamp;
 
-      inflater.inflate(inflatorFilter, osgifyOptions, osgifyContext, startTime);
+      inflater.inflate(inflatorFilter, osgifierOptions, osgifierContext, startTime);
 
       final BundleManifest manifest = projectBundle.getManifest();
 
@@ -128,12 +128,12 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       return project.getGroupId() + "." + project.getArtifactId();
    }
 
-   private static OsgifyContext buildOsgifyContext(Artifact artifact, Collection<Artifact> dependencies,
+   private static OsgifierContext buildOsgifyContext(Artifact artifact, Collection<Artifact> dependencies,
       VersionRangeResolver versionRangeResolver)
    {
       final BundleCandidate projectBundle = newBundleCandidate(artifact);
 
-      final OsgifyContext context = ContextModelFactory.eINSTANCE.createOsgifyContext();
+      final OsgifierContext context = ContextModelFactory.eINSTANCE.createOsgifierContext();
       context.getBundles().add(projectBundle);
 
       for (Artifact dependency : dependencies)

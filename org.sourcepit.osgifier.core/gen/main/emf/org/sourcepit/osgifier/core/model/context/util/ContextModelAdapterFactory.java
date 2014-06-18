@@ -16,7 +16,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,9 +87,9 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
    protected ContextModelSwitch<Adapter> modelSwitch = new ContextModelSwitch<Adapter>()
    {
       @Override
-      public Adapter caseOsgifyContext(OsgifyContext object)
+      public Adapter caseOsgifierContext(OsgifierContext object)
       {
-         return createOsgifyContextAdapter();
+         return createOsgifierContextAdapter();
       }
 
       @Override
@@ -146,18 +146,18 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
 
 
    /**
-    * Creates a new adapter for an object of class '{@link org.sourcepit.osgifier.core.model.context.OsgifyContext
-    * <em>Osgify Context</em>}'.
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgifier.core.model.context.OsgifierContext
+    * <em>Osgifier Context</em>}'.
     * <!-- begin-user-doc -->
     * This default implementation returns null so that we can easily ignore cases;
     * it's useful to ignore a case when inheritance will catch all the cases anyway.
     * <!-- end-user-doc -->
     * 
     * @return the new adapter.
-    * @see org.sourcepit.osgifier.core.model.context.OsgifyContext
+    * @see org.sourcepit.osgifier.core.model.context.OsgifierContext
     * @generated
     */
-   public Adapter createOsgifyContextAdapter()
+   public Adapter createOsgifierContextAdapter()
    {
       return null;
    }

@@ -11,21 +11,21 @@ import org.sourcepit.common.modeling.XAnnotatable;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Osgify Context</b></em>'.
+ * A representation of the model object '<em><b>Osgifier Context</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link org.sourcepit.osgifier.core.model.context.OsgifyContext#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgifier.core.model.context.OsgifierContext#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage#getOsgifyContext()
+ * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage#getOsgifierContext()
  * @model
  * @generated
  */
-public interface OsgifyContext extends XAnnotatable
+public interface OsgifierContext extends XAnnotatable
 {
    /**
     * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
@@ -38,10 +38,10 @@ public interface OsgifyContext extends XAnnotatable
     * <!-- end-user-doc -->
     * 
     * @return the value of the '<em>Bundles</em>' containment reference list.
-    * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage#getOsgifyContext_Bundles()
+    * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage#getOsgifierContext_Bundles()
     * @model containment="true"
     * @generated
     */
    EList<BundleCandidate> getBundles();
 
-} // OsgifyContext
+} // OsgifierContext

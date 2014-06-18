@@ -21,7 +21,7 @@ import javax.inject.Named;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
 public class JavaContentAppender
@@ -29,7 +29,7 @@ public class JavaContentAppender
    @Inject
    private BundleCandidateScanner bundleCandidateScanner;
 
-   public OsgifyContext appendContents(OsgifyContext context, JavaContentAppenderFilter filter,
+   public OsgifierContext appendContents(OsgifierContext context, JavaContentAppenderFilter filter,
       PropertiesSource options)
    {
       final List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();

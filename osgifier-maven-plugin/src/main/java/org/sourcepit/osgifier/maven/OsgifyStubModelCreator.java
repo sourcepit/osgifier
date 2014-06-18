@@ -27,7 +27,7 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 
 @Named
@@ -36,9 +36,9 @@ public class OsgifyStubModelCreator
    @Inject
    private VersionRangeResolver versionRangeResolver;
    
-   public OsgifyContext create(DependencyModel dependencyModel)
+   public OsgifierContext create(DependencyModel dependencyModel)
    {
-      final OsgifyContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifyContext();
+      final OsgifierContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifierContext();
       osgifyModel.addExtension(dependencyModel);
 
       final Map<MavenArtifact, BundleCandidate> artifactToBundle = new HashMap<MavenArtifact, BundleCandidate>();

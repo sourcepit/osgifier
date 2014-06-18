@@ -21,7 +21,7 @@ import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.util.OsgifyContextUtils;
 import org.sourcepit.osgifier.core.util.OsgifyContextUtils.BuildOrder;
 
@@ -43,7 +43,7 @@ public class OsgifyContextUtilsTest
       }
 
       // empty
-      OsgifyContext ctx = ContextModelFactory.eINSTANCE.createOsgifyContext();
+      OsgifierContext ctx = ContextModelFactory.eINSTANCE.createOsgifierContext();
       assertThat(OsgifyContextUtils.computeBuildOrder(ctx), IsNull.notNullValue());
 
       // simple a -> b -> c
@@ -100,7 +100,7 @@ public class OsgifyContextUtilsTest
       return ref;
    }
 
-   private BundleCandidate addBundleCandidate(OsgifyContext ctx, String symbolicName, String version)
+   private BundleCandidate addBundleCandidate(OsgifierContext ctx, String symbolicName, String version)
    {
       final BundleCandidate bc = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bc.setSymbolicName(symbolicName);

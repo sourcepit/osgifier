@@ -33,7 +33,7 @@ import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.maven.context.LegacyOsgifyModelBuilder;
 
 public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
@@ -81,7 +81,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setLocalRepository(localRepository);
          request.setSkipManifestDerivation(true);
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -141,7 +141,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setResolveDependenciesOfNativeBundles(true);
          request.setSkipManifestDerivation(true);
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -219,7 +219,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setResolveDependenciesOfNativeBundles(true); // assure that resolution of dependencies of dependencies
                                                               // is suppressed by the 'fat bundle' flag
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -281,7 +281,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
 
          assertThat(request.getArtifact(), notNullValue());
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -327,7 +327,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
             null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -378,7 +378,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
             null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
 
          assertThat(context, notNullValue());
 
@@ -445,7 +445,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setVirtualArtifact(true);
          request.setSkipManifestDerivation(true);
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
          assertThat(context, notNullValue());
 
          EList<BundleCandidate> candidates = context.getBundles();
@@ -538,7 +538,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setVirtualArtifact(true);
          request.setSkipManifestDerivation(true);
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
          assertThat(context, notNullValue());
 
          EList<BundleCandidate> candidates = context.getBundles();
@@ -634,7 +634,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setVirtualArtifact(true);
          request.setSkipManifestDerivation(true);
 
-         OsgifyContext context = builder.build(request);
+         OsgifierContext context = builder.build(request);
          assertThat(context, notNullValue());
 
          EList<BundleCandidate> candidates = context.getBundles();
@@ -705,7 +705,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          final MavenProject reactorProject = projects.get(0);
          assertThat(reactorProject.getArtifactId(), equalTo("bundle-reactor"));
 
-         OsgifyContext context = buildContext(session, reactorProject, localRepository);
+         OsgifierContext context = buildContext(session, reactorProject, localRepository);
          assertBundleReactor(context);
 
          // bundle
@@ -729,7 +729,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
    }
 
 
-   private void assertTestBundleProject(OsgifyContext context)
+   private void assertTestBundleProject(OsgifierContext context)
    {
       assertThat(context, notNullValue());
 
@@ -763,7 +763,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertBundleCandidate(requiredCandidate);
    }
 
-   private void assertBundleProject(OsgifyContext context)
+   private void assertBundleProject(OsgifierContext context)
    {
       assertThat(context, notNullValue());
 
@@ -789,7 +789,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertThat(dependencies.size(), is(0));
    }
 
-   private void assertBundleReactor(OsgifyContext context)
+   private void assertBundleReactor(OsgifierContext context)
    {
       assertThat(context, notNullValue());
 
@@ -808,7 +808,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertThat(dependencies.size(), is(0));
    }
 
-   private OsgifyContext buildContext(MavenSession session, final MavenProject project,
+   private OsgifierContext buildContext(MavenSession session, final MavenProject project,
       final ArtifactRepository localRepository)
    {
       session.setCurrentProject(project);

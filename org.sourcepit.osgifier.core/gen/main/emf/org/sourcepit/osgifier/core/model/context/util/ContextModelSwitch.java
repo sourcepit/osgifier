@@ -16,7 +16,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
  * <!-- begin-user-doc -->
@@ -104,16 +104,16 @@ public class ContextModelSwitch<T>
    {
       switch (classifierID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT :
+         case ContextModelPackage.OSGIFIER_CONTEXT :
          {
-            OsgifyContext osgifyContext = (OsgifyContext) theEObject;
-            T result = caseOsgifyContext(osgifyContext);
+            OsgifierContext osgifierContext = (OsgifierContext) theEObject;
+            T result = caseOsgifierContext(osgifierContext);
             if (result == null)
-               result = caseXAnnotatable(osgifyContext);
+               result = caseXAnnotatable(osgifierContext);
             if (result == null)
-               result = caseExtendable(osgifyContext);
+               result = caseExtendable(osgifierContext);
             if (result == null)
-               result = caseAnnotatable(osgifyContext);
+               result = caseAnnotatable(osgifierContext);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
@@ -152,18 +152,18 @@ public class ContextModelSwitch<T>
    }
 
    /**
-    * Returns the result of interpreting the object as an instance of '<em>Osgify Context</em>'.
+    * Returns the result of interpreting the object as an instance of '<em>Osgifier Context</em>'.
     * <!-- begin-user-doc -->
     * This implementation returns null;
     * returning a non-null result will terminate the switch.
     * <!-- end-user-doc -->
     * 
     * @param object the target of the switch.
-    * @return the result of interpreting the object as an instance of '<em>Osgify Context</em>'.
+    * @return the result of interpreting the object as an instance of '<em>Osgifier Context</em>'.
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseOsgifyContext(OsgifyContext object)
+   public T caseOsgifierContext(OsgifierContext object)
    {
       return null;
    }

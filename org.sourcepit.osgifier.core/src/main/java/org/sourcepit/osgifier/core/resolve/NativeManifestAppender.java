@@ -24,16 +24,16 @@ import org.sourcepit.common.utils.io.Read.FromStream;
 import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
 public class NativeManifestAppender
 {
-   public void appendNativeManifests(final OsgifyContext osgifyContext, NativeManifestAppenderFilter generatorFilter,
+   public void appendNativeManifests(final OsgifierContext osgifierContext, NativeManifestAppenderFilter generatorFilter,
       PropertiesSource options)
    {
       final List<BundleCandidate> overriddenNativeBundles = new ArrayList<BundleCandidate>();
-      for (BundleCandidate bundle : osgifyContext.getBundles())
+      for (BundleCandidate bundle : osgifierContext.getBundles())
       {
          if (bundle.getLocation() != null)
          {

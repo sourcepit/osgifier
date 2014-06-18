@@ -17,22 +17,22 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.sourcepit.common.modeling.impl.XAnnotatableImpl;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Osgify Context</b></em>'.
+ * An implementation of the model object '<em><b>Osgifier Context</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.sourcepit.osgifier.core.model.context.impl.OsgifyContextImpl#getBundles <em>Bundles</em>}</li>
+ * <li>{@link org.sourcepit.osgifier.core.model.context.impl.OsgifierContextImpl#getBundles <em>Bundles</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
+public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierContext
 {
    /**
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
     * 
     * @generated
     */
-   protected OsgifyContextImpl()
+   protected OsgifierContextImpl()
    {
       super();
    }
@@ -65,7 +65,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    @Override
    protected EClass eStaticClass()
    {
-      return ContextModelPackage.Literals.OSGIFY_CONTEXT;
+      return ContextModelPackage.Literals.OSGIFIER_CONTEXT;
    }
 
    /**
@@ -79,7 +79,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
       if (bundles == null)
       {
          bundles = new EObjectContainmentEList<BundleCandidate>(BundleCandidate.class, this,
-            ContextModelPackage.OSGIFY_CONTEXT__BUNDLES);
+            ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES);
       }
       return bundles;
    }
@@ -95,7 +95,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
       return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -112,7 +112,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return getBundles();
       }
       return super.eGet(featureID, resolve, coreType);
@@ -130,7 +130,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             getBundles().clear();
             getBundles().addAll((Collection<? extends BundleCandidate>) newValue);
             return;
@@ -149,7 +149,7 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
       }
@@ -167,10 +167,10 @@ public class OsgifyContextImpl extends XAnnotatableImpl implements OsgifyContext
    {
       switch (featureID)
       {
-         case ContextModelPackage.OSGIFY_CONTEXT__BUNDLES :
+         case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }
       return super.eIsSet(featureID);
    }
 
-} // OsgifyContextImpl
+} // OsgifierContextImpl

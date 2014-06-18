@@ -11,14 +11,14 @@ import java.util.Stack;
 
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 public interface BundleSelector
 {
    BundleSelector ALL = new BundleSelector()
    {
       @Override
-      public Collection<BundleCandidate> selectRootBundles(OsgifyContext bundleContext)
+      public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext)
       {
          return bundleContext.getBundles();
       }
@@ -30,7 +30,7 @@ public interface BundleSelector
       }
    };
 
-   Collection<BundleCandidate> selectRootBundles(OsgifyContext bundleContext);
+   Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext);
 
    boolean select(Stack<BundleCandidate> path, BundleReference reference);
 }

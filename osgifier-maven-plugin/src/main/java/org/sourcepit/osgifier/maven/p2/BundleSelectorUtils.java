@@ -11,7 +11,7 @@ import java.util.Stack;
 
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 public final class BundleSelectorUtils
 {
@@ -20,7 +20,7 @@ public final class BundleSelectorUtils
       super();
    }
 
-   public static void selectBundles(Collection<BundleCandidate> selectedBundles, final OsgifyContext bundleContext,
+   public static void selectBundles(Collection<BundleCandidate> selectedBundles, final OsgifierContext bundleContext,
       BundleSelector bundleSelector)
    {
       final Stack<BundleCandidate> path = new Stack<BundleCandidate>();

@@ -30,7 +30,7 @@ import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
@@ -83,7 +83,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext context = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options, project, startTime);
+      final OsgifierContext context = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options, project, startTime);
 
       final File contextFile = getContextFile(goal);
       LOGGER.info("Writing osgifier context to " + contextFile.getAbsolutePath());
@@ -97,7 +97,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
       writeManifest(manifest, manifestFile);
    }
 
-   private BundleCandidate getProjectBundle(final OsgifyContext context)
+   private BundleCandidate getProjectBundle(final OsgifierContext context)
    {
       final String projectPath = project.getBasedir().getAbsolutePath();
       for (BundleCandidate bundle : context.getBundles())
@@ -123,7 +123,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
       return options;
    }
 
-   private void writeContext(File file, final OsgifyContext context)
+   private void writeContext(File file, final OsgifierContext context)
    {
       XMLResourceImpl resource = new XMLResourceImpl();
       resource.getContents().add(context);

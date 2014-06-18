@@ -22,7 +22,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
 public class SymbolicNameAndVersionAppender
@@ -36,7 +36,7 @@ public class SymbolicNameAndVersionAppender
    @Inject
    private SymbolicNameConflictResolver nameConflictResolver;
 
-   public void appendSymbolicNamesAndVersion(OsgifyContext osgifyContext, PropertiesSource options)
+   public void appendSymbolicNamesAndVersion(OsgifierContext osgifierContext, PropertiesSource options)
    {
       final Map<String, BundleCandidate> keyToBundle = new HashMap<String, BundleCandidate>();
       final List<BundleCandidate> sourceBundles = new ArrayList<BundleCandidate>();
@@ -44,7 +44,7 @@ public class SymbolicNameAndVersionAppender
       final List<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
 
       // register native keys we cannot override
-      for (BundleCandidate bundle : osgifyContext.getBundles())
+      for (BundleCandidate bundle : osgifierContext.getBundles())
       {
          if (bundle.isNativeBundle())
          {

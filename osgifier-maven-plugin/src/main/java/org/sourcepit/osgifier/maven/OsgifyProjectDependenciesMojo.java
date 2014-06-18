@@ -45,7 +45,7 @@ import org.sourcepit.maven.dependency.model.DependencyModel;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
 
@@ -74,7 +74,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifyContext bundleModel = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options,
+      final OsgifierContext bundleModel = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options,
          project.getDependencies(), startTime);
 
       ModelUtils.writeModel(new File(targetDir, "osgifyModel.xml"), bundleModel);

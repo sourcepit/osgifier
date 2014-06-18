@@ -29,14 +29,14 @@ public interface ContextModelFactory extends EFactory
    ContextModelFactory eINSTANCE = org.sourcepit.osgifier.core.model.context.impl.ContextModelFactoryImpl.init();
 
    /**
-    * Returns a new object of class '<em>Osgify Context</em>'.
+    * Returns a new object of class '<em>Osgifier Context</em>'.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
-    * @return a new object of class '<em>Osgify Context</em>'.
+    * @return a new object of class '<em>Osgifier Context</em>'.
     * @generated
     */
-   OsgifyContext createOsgifyContext();
+   OsgifierContext createOsgifierContext();
 
    /**
     * Returns a new object of class '<em>Bundle Candidate</em>'.

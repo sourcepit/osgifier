@@ -28,7 +28,7 @@ import org.sourcepit.maven.dependency.model.DependencyModelFactory;
 import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.maven.OsgifyStubModelCreator;
 
 public class OsgifyStubModelCreatorTest extends InjectedTest
@@ -53,7 +53,7 @@ public class OsgifyStubModelCreatorTest extends InjectedTest
    public void testEmpty()
    {
       DependencyModel dependencyModel = DependencyModelFactory.eINSTANCE.createDependencyModel();
-      OsgifyContext stubModel = stubModelCreator.create(dependencyModel);
+      OsgifierContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(0, stubModel.getBundles().size());
    }
 
@@ -74,7 +74,7 @@ public class OsgifyStubModelCreatorTest extends InjectedTest
       dependencyModel.getArtifacts().add(artifact);
       dependencyModel.getDependencyTrees().add(tree);
 
-      OsgifyContext stubModel = stubModelCreator.create(dependencyModel);
+      OsgifierContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(1, stubModel.getBundles().size());
 
       BundleCandidate bundle = stubModel.getBundles().get(0);
@@ -138,7 +138,7 @@ public class OsgifyStubModelCreatorTest extends InjectedTest
       dependencyModel.getDependencyTrees().add(treeC);
       dependencyModel.getDependencyTrees().add(treeD);
       
-      OsgifyContext stubModel = stubModelCreator.create(dependencyModel);
+      OsgifierContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(4, stubModel.getBundles().size());
    }
 

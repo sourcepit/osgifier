@@ -14,7 +14,7 @@ import org.sourcepit.common.constraints.NotNull;
 import org.eclipse.emf.common.util.EList;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -43,7 +43,7 @@ public final class OsgifyContextUtils
       }
    }
 
-   public static BuildOrder computeBuildOrder(@NotNull OsgifyContext context)
+   public static BuildOrder computeBuildOrder(@NotNull OsgifierContext context)
    {
       BuildOrder buildOrder = new BuildOrder();
 

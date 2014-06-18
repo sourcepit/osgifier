@@ -31,7 +31,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 
 /**
@@ -58,7 +58,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
-      final OsgifyContext context = readContext();
+      final OsgifierContext context = readContext();
 
       final File outDir = new File(targetDir, "osgified-dependencies");
       outDir.mkdirs();
@@ -81,7 +81,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       repackageSourceJars(outDir, context);
    }
 
-   public void repackageNonOsgiJars(File outDir, OsgifyContext context)
+   public void repackageNonOsgiJars(File outDir, OsgifierContext context)
    {
       for (BundleCandidate candidate : context.getBundles())
       {
@@ -100,7 +100,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       }
    }
 
-   public void repackageSourceJars(File outDir, OsgifyContext context)
+   public void repackageSourceJars(File outDir, OsgifierContext context)
    {
       for (BundleCandidate candidate : context.getBundles())
       {
@@ -190,13 +190,13 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       return o1.equals(o2);
    }
 
-   private OsgifyContext readContext()
+   private OsgifierContext readContext()
    {
       try
       {
          final Resource resource = new XMIResourceImpl(URI.createFileURI(getContextFile(Goal.OSGIFY).getAbsolutePath()));
          resource.load(null);
-         return (OsgifyContext) resource.getContents().get(0);
+         return (OsgifierContext) resource.getContents().get(0);
       }
       catch (Exception e)
       {

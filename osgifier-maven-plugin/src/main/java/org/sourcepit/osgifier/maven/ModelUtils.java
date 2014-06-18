@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
 import org.sourcepit.common.utils.io.Write.ToStream;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 public final class ModelUtils
 {
@@ -42,7 +42,7 @@ public final class ModelUtils
       write(toStream, buffOut(fileOut(file, true)), model);
    }
 
-   public static void writeModel(File file, OsgifyContext model)
+   public static void writeModel(File file, OsgifierContext model)
    {
       final ToStream<EObject> toStream = new ToStream<EObject>()
       {

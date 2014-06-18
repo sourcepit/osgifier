@@ -22,7 +22,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.core.model.context.OsgifyContext;
+import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.JavaContentAppender;
 import org.sourcepit.osgifier.core.resolve.JavaContentAppenderFilter;
 import org.sourcepit.osgifier.core.resolve.NativeManifestAppender;
@@ -43,18 +43,18 @@ public class OsgifyContextInflator
    @Inject
    private BundleManifestAppender manifestAppender;
 
-   public void inflate(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifyContext osgifyModel,
+   public void inflate(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifierContext osgifierModel,
       Date timestamp)
    {
       options = getOptions(options, timestamp);
 
-      nativeManifestAppender.appendNativeManifests(osgifyModel, filter, options);
+      nativeManifestAppender.appendNativeManifests(osgifierModel, filter, options);
 
-      javaContentAppender.appendContents(osgifyModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
+      javaContentAppender.appendContents(osgifierModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
 
-      symbolicNameAndVersionAppender.appendSymbolicNamesAndVersion(osgifyModel, options);
+      symbolicNameAndVersionAppender.appendSymbolicNamesAndVersion(osgifierModel, options);
 
-      applyManifests(filter, options, osgifyModel);
+      applyManifests(filter, options, osgifierModel);
    }
 
    private PropertiesSource getOptions(final PropertiesSource options, Date timestamp)
@@ -76,11 +76,11 @@ public class OsgifyContextInflator
       };
    }
 
-   private void applyManifests(BundleManifestAppenderFilter filter, PropertiesSource options, OsgifyContext osgifyModel)
+   private void applyManifests(BundleManifestAppenderFilter filter, PropertiesSource options, OsgifierContext osgifierModel)
    {
-      manifestAppender.append(osgifyModel, filter, options);
+      manifestAppender.append(osgifierModel, filter, options);
 
-      for (BundleCandidate bundle : osgifyModel.getBundles())
+      for (BundleCandidate bundle : osgifierModel.getBundles())
       {
          if (!bundle.isNativeBundle())
          {

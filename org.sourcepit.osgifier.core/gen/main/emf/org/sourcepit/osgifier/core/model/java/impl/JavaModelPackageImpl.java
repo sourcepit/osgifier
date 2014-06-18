@@ -6,8 +6,6 @@
 
 package org.sourcepit.osgifier.core.model.java.impl;
 
-import static org.sourcepit.osgifier.core.model.java.JavaModelPackage.RESOURCE;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
