@@ -12,7 +12,7 @@
 	<packaging>pom</packaging>
 
 	<scm>
-		<connection>scm:git:git@github.com:sourcepit/osgify.git</connection>
+		<connection>scm:git:git@github.com:sourcepit/osgifier.git</connection>
 		<tag>HEAD</tag>
 	</scm>
 
