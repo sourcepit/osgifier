@@ -17,10 +17,10 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
-import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
+import org.sourcepit.osgifier.maven.OsgifierContextInflatorFilter;
 
-public class DefaultOsgifyContextInflatorFilterTest
+public class DefaultOsgifierContextInflatorFilterTest
 {
 
    @Test
@@ -33,7 +33,7 @@ public class DefaultOsgifyContextInflatorFilterTest
 
       PropertiesMap options = new LinkedPropertiesMap();
 
-      OsgifyContextInflatorFilter filter = new DefaultOsgifyContextInflatorFilter();
+      OsgifierContextInflatorFilter filter = new DefaultOsgifierContextInflatorFilter();
 
       boolean override = filter.isAppendNativeManifest(bundle, manifest, options);
       assertTrue(override);

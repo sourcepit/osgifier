@@ -31,11 +31,11 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.OsgifyContextInflator;
-import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.OsgifierContextInflator;
+import org.sourcepit.osgifier.maven.OsgifierContextInflatorFilter;
 
 @Named
-public class OsgifyModelBuilder
+public class OsgifierModelBuilder
 {
    @Inject
    private Logger log;
@@ -44,12 +44,12 @@ public class OsgifyModelBuilder
    private DependencyModelResolver dependencyModelResolver;
 
    @Inject
-   private OsgifyStubModelCreator stubModelCreator;
+   private OsgifierStubModelCreator stubModelCreator;
 
    @Inject
-   private OsgifyContextInflator inflator;
+   private OsgifierContextInflator inflator;
 
-   public OsgifierContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
+   public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp)
    {
       log.info("");
@@ -63,7 +63,7 @@ public class OsgifyModelBuilder
       return build(filter, options, osgifyModel, timestamp);
    }
 
-   public OsgifierContext build(OsgifyContextInflatorFilter filter, PropertiesSource options,
+   public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options,
       MavenProject project, Date timestamp)
    {
       log.info("");
@@ -77,7 +77,7 @@ public class OsgifyModelBuilder
       return build(filter, options, osgifyModel, timestamp);
    }
 
-   private OsgifierContext build(final OsgifyContextInflatorFilter filter, PropertiesSource options,
+   private OsgifierContext build(final OsgifierContextInflatorFilter filter, PropertiesSource options,
       final OsgifierContext osgifyModel, Date timestamp)
    {
       log.info("Generating OSGi metadata...");

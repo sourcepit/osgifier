@@ -154,7 +154,7 @@ public class MavenToOSGiUtilsTest
       // 1.2.3 1.2.3 <= x
 
 
-      // Version (Maven Syntax) :: Maven : Enforcer : OSGi :: Osgify (OSGi Syntax)
+      // Version (Maven Syntax) :: Maven : Enforcer : OSGi :: Osgifier (OSGi Syntax)
       // 1.0 :: * : x >= 1.0 : x >= 1.0 :: 1.0
       // (,1.0] :: x <= 1.0 : 0 < x <= 1.0 : 0 < x <= 1.0 :: [,1.0]
 

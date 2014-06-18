@@ -34,9 +34,9 @@ import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
-import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
-import org.sourcepit.osgifier.maven.OsgifyContextInflator;
-import org.sourcepit.osgifier.maven.OsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
+import org.sourcepit.osgifier.maven.OsgifierContextInflator;
+import org.sourcepit.osgifier.maven.OsgifierContextInflatorFilter;
 
 import com.google.common.base.Strings;
 
@@ -49,11 +49,11 @@ import com.google.common.base.Strings;
 public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
 {
    private final VersionRangeResolver versionRangeResolver;
-   private final OsgifyContextInflator inflater;
+   private final OsgifierContextInflator inflater;
    private final HeaderModifier headerModifier;
 
    @Inject
-   public ArtifactManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater,
+   public ArtifactManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifierContextInflator inflater,
       HeaderModifier headerModifier)
    {
       this.versionRangeResolver = versionRangeResolver;
@@ -67,10 +67,10 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       final Artifact projectArtifact = request.getArtifact();
       final List<Artifact> projectDependencies = request.getDependencies();
 
-      final OsgifierContext osgifierContext = buildOsgifyContext(projectArtifact, projectDependencies, versionRangeResolver);
+      final OsgifierContext osgifierContext = buildOsgiferContext(projectArtifact, projectDependencies, versionRangeResolver);
       final BundleCandidate projectBundle = osgifierContext.getBundles().get(0);
 
-      final OsgifyContextInflatorFilter inflatorFilter = newInflatorFilter(projectBundle);
+      final OsgifierContextInflatorFilter inflatorFilter = newInflatorFilter(projectBundle);
 
       final Artifact sourceArtifact = request.getSourceArtifact();
       if (sourceArtifact != null)
@@ -88,7 +88,7 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       String symbolicName = request.getSymbolicName();
       symbolicName = Strings.isNullOrEmpty(symbolicName) ? buildSymbolicName(projectArtifact) : symbolicName;
 
-      final PropertiesSource osgifierOptions = buildOsgifyOptions(projectArtifact, symbolicName, request.getOptions());
+      final PropertiesSource osgifierOptions = buildOsgiferOptions(projectArtifact, symbolicName, request.getOptions());
 
       final Date timestamp = request.getTimestamp();
 
@@ -128,7 +128,7 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       return project.getGroupId() + "." + project.getArtifactId();
    }
 
-   private static OsgifierContext buildOsgifyContext(Artifact artifact, Collection<Artifact> dependencies,
+   private static OsgifierContext buildOsgiferContext(Artifact artifact, Collection<Artifact> dependencies,
       VersionRangeResolver versionRangeResolver)
    {
       final BundleCandidate projectBundle = newBundleCandidate(artifact);
@@ -156,9 +156,9 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       return context;
    }
 
-   private OsgifyContextInflatorFilter newInflatorFilter(final BundleCandidate projectBundle)
+   private OsgifierContextInflatorFilter newInflatorFilter(final BundleCandidate projectBundle)
    {
-      final OsgifyContextInflatorFilter inflatorFilter = new DefaultOsgifyContextInflatorFilter()
+      final OsgifierContextInflatorFilter inflatorFilter = new DefaultOsgifierContextInflatorFilter()
       {
          @Override
          public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options)
@@ -181,7 +181,7 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
       return inflatorFilter;
    }
 
-   private static PropertiesSource buildOsgifyOptions(Artifact artifact, String symbolicName, PropertiesSource options)
+   private static PropertiesSource buildOsgiferOptions(Artifact artifact, String symbolicName, PropertiesSource options)
    {
       options = options == null ? PropertiesSources.emptyPropertiesSource() : options;
 

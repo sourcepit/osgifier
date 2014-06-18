@@ -31,14 +31,14 @@ import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
 {
    private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 
    @Inject
-   private OsgifyModelBuilder modelBuilder;
+   private OsgifierModelBuilder modelBuilder;
 
    @Inject
    private LegacySupport buildContext;
@@ -83,7 +83,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
 
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifierContext context = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options, project, startTime);
+      final OsgifierContext context = modelBuilder.build(new DefaultOsgifierContextInflatorFilter(), options, project, startTime);
 
       final File contextFile = getContextFile(goal);
       LOGGER.info("Writing osgifier context to " + contextFile.getAbsolutePath());

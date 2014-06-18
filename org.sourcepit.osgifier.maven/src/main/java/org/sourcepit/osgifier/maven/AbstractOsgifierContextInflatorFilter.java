@@ -10,7 +10,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
-public abstract class AbstractOsgifyContextInflatorFilter implements OsgifyContextInflatorFilter
+public abstract class AbstractOsgifierContextInflatorFilter implements OsgifierContextInflatorFilter
 {
    @Override
    public boolean isAppendNativeManifest(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)

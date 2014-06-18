@@ -42,9 +42,9 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
-import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
-import org.sourcepit.osgifier.maven.context.LegacyOsgifyModelBuilder;
-import org.sourcepit.osgifier.maven.context.LegacyOsgifyModelBuilder.NativeBundleStrategy;
+import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
+import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder;
+import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgifier.p2.P2Publisher;
 
 @Named
@@ -55,7 +55,7 @@ public class P2UpdateSiteGenerator
    public static final String OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS = "forkedProcessTimeoutInSeconds";
 
    @Inject
-   private LegacyOsgifyModelBuilder modelBuilder;
+   private LegacyOsgifierModelBuilder modelBuilder;
 
    @Inject
    private Repackager repackager;
@@ -75,7 +75,7 @@ public class P2UpdateSiteGenerator
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options)
    {
-      final LegacyOsgifyModelBuilder.Request request = modelBuilder.createBundleRequest(artifact,
+      final LegacyOsgifierModelBuilder.Request request = modelBuilder.createBundleRequest(artifact,
          Artifact.SCOPE_COMPILE, false, remoteArtifactRepositories, localRepository);
 
       return generateUpdateSite(request, siteDir, repositoryName,
@@ -83,13 +83,13 @@ public class P2UpdateSiteGenerator
    }
 
    @Inject
-   private org.sourcepit.osgifier.maven.OsgifyModelBuilder modelBuilder2;
+   private org.sourcepit.osgifier.maven.OsgifierModelBuilder modelBuilder2;
 
    public OsgifierContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
       PropertiesSource options, Date startTime, BundleSelector bundleSelector)
    {
-      final OsgifierContext model = modelBuilder2.build(new DefaultOsgifyContextInflatorFilter(), options == null
+      final OsgifierContext model = modelBuilder2.build(new DefaultOsgifierContextInflatorFilter(), options == null
          ? new LinkedPropertiesMap()
          : options, dependencies, startTime);
 
@@ -103,7 +103,7 @@ public class P2UpdateSiteGenerator
       return model;
    }
 
-   private OsgifierContext generateUpdateSite(final LegacyOsgifyModelBuilder.Request request, File siteDir,
+   private OsgifierContext generateUpdateSite(final LegacyOsgifierModelBuilder.Request request, File siteDir,
       String repositoryName, PropertiesSource options, BundleSelector bundleSelector)
    {
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
@@ -128,7 +128,7 @@ public class P2UpdateSiteGenerator
       {
          final PathMatcher matcher = PathMatcher.parse(forceMfPatterns, ".", ",");
 
-         return new LegacyOsgifyModelBuilder.NativeBundleStrategy()
+         return new LegacyOsgifierModelBuilder.NativeBundleStrategy()
          {
             public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
             {
@@ -137,7 +137,7 @@ public class P2UpdateSiteGenerator
                {
                   return false;
                }
-               return LegacyOsgifyModelBuilder.NativeBundleStrategy.DEFAULT.isNativeBundle(artifact, project,
+               return LegacyOsgifierModelBuilder.NativeBundleStrategy.DEFAULT.isNativeBundle(artifact, project,
                   bundleCandidate);
             }
 
@@ -157,7 +157,7 @@ public class P2UpdateSiteGenerator
          };
       }
 
-      return LegacyOsgifyModelBuilder.NativeBundleStrategy.DEFAULT;
+      return LegacyOsgifierModelBuilder.NativeBundleStrategy.DEFAULT;
    }
 
    private void generateUpdateSite(Collection<BundleCandidate> bundles, File siteDir, String repositoryName,

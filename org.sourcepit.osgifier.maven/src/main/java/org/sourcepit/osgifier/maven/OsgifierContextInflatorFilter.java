@@ -9,6 +9,6 @@ package org.sourcepit.osgifier.maven;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgifier.core.resolve.NativeManifestAppenderFilter;
 
-public interface OsgifyContextInflatorFilter extends NativeManifestAppenderFilter, BundleManifestAppenderFilter
+public interface OsgifierContextInflatorFilter extends NativeManifestAppenderFilter, BundleManifestAppenderFilter
 {
 }

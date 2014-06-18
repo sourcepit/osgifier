@@ -12,7 +12,7 @@ import org.sourcepit.common.utils.path.PathMatcher;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
-public class DefaultOsgifyContextInflatorFilter extends AbstractOsgifyContextInflatorFilter
+public class DefaultOsgifierContextInflatorFilter extends AbstractOsgifierContextInflatorFilter
 {
    @Override
    public boolean isAppendNativeManifest(BundleCandidate bundle, BundleManifest manifest, PropertiesSource options)

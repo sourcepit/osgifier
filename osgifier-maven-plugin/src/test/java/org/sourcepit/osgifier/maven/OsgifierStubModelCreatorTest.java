@@ -29,12 +29,12 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.OsgifyStubModelCreator;
+import org.sourcepit.osgifier.maven.OsgifierStubModelCreator;
 
-public class OsgifyStubModelCreatorTest extends InjectedTest
+public class OsgifierStubModelCreatorTest extends InjectedTest
 {
    @Inject
-   private OsgifyStubModelCreator stubModelCreator;
+   private OsgifierStubModelCreator stubModelCreator;
 
    @Test
    public void testNull()

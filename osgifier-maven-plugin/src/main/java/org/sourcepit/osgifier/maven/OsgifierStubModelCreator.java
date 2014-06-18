@@ -31,7 +31,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 
 @Named
-public class OsgifyStubModelCreator
+public class OsgifierStubModelCreator
 {
    @Inject
    private VersionRangeResolver versionRangeResolver;

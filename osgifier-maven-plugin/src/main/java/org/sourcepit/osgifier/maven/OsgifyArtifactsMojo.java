@@ -46,14 +46,14 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
-import org.sourcepit.osgifier.maven.DefaultOsgifyContextInflatorFilter;
+import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
 @Mojo(name = "osgify-artifacts", defaultPhase = LifecyclePhase.PACKAGE)
 public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 {
    private final LegacySupport buildContext;
 
-   private OsgifyModelBuilder modelBuilder;
+   private OsgifierModelBuilder modelBuilder;
 
    private final Repackager repackager;
 
@@ -75,7 +75,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
    private File workDir;
 
    @Inject
-   public OsgifyArtifactsMojo(LegacySupport buildContext, OsgifyModelBuilder modelBuilder, Repackager repackager,
+   public OsgifyArtifactsMojo(LegacySupport buildContext, OsgifierModelBuilder modelBuilder, Repackager repackager,
       ArtifactFactory artifactFactory)
    {
       this.buildContext = buildContext;
@@ -91,7 +91,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          .getProperties(), this.options);
       final Date startTime = buildContext.getSession().getStartTime();
 
-      final OsgifierContext osgifyContext = modelBuilder.build(new DefaultOsgifyContextInflatorFilter(), options,
+      final OsgifierContext osgifyContext = modelBuilder.build(new DefaultOsgifierContextInflatorFilter(), options,
          artifacts, startTime);
 
       final Collection<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
@@ -125,7 +125,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          }
       }
 
-      ModelUtils.writeModel(getOsgifyContextFile(), osgifyContext);
+      ModelUtils.writeModel(getOsgifierContextFile(), osgifyContext);
 
       final Collection<Artifact> artifacts = new ArrayList<Artifact>();
       for (BundleCandidate bundle : bundles)
@@ -196,7 +196,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       }
    }
 
-   private File getOsgifyContextFile()
+   private File getOsgifierContextFile()
    {
       return new File(workDir, "osgifier-context.xml");
    }

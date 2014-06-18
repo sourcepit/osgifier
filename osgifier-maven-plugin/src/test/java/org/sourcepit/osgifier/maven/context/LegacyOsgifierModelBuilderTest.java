@@ -34,12 +34,12 @@ import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.context.LegacyOsgifyModelBuilder;
+import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder;
 
-public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
+public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
 {
    @Inject
-   private LegacyOsgifyModelBuilder builder;
+   private LegacyOsgifierModelBuilder builder;
 
    @Inject
    private LegacySupport legacySupport;
@@ -76,7 +76,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
+         LegacyOsgifierModelBuilder.Request request = new LegacyOsgifierModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setSkipManifestDerivation(true);
@@ -135,7 +135,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "project-with-dependencies";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
+         LegacyOsgifierModelBuilder.Request request = new LegacyOsgifierModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setResolveDependenciesOfNativeBundles(true);
@@ -211,7 +211,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          final MavenProject project = projects.get(0);
          assertThat(project.getArtifactId(), equalTo("project-with-dependencies"));
 
-         LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
+         LegacyOsgifierModelBuilder.Request request = new LegacyOsgifierModelBuilder.Request();
          request.setArtifact(project.getArtifact());
          request.setLocalRepository(localRepository);
          request.setFatBundle(true);
@@ -275,7 +275,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+         LegacyOsgifierModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
             null, false, null, localRepository);
          request.setResolveDependenciesOfNativeBundles(false);
 
@@ -323,7 +323,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+         LegacyOsgifierModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
             null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -374,7 +374,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
+         LegacyOsgifierModelBuilder.Request request = builder.createBundleRequest("javax.mail", "mail", "1.4.5", null,
             null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -425,7 +425,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifierModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -519,7 +519,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifierModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, false, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -612,7 +612,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
          String artifactId = "standalone-pom";
          assertThat(project.getArtifactId(), equalTo(artifactId));
 
-         LegacyOsgifyModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
+         LegacyOsgifierModelBuilder.Request request = builder.createVirtualBundleRequest("virtual-artifact",
             "virtual-artifact", "1.2.3", null, null, null, true, null, localRepository);
          assertThat(request.getArtifact(), notNullValue());
 
@@ -813,7 +813,7 @@ public class LegacyOsgifyModelBuilderTest extends EmbeddedMavenEnvironmentTest
    {
       session.setCurrentProject(project);
 
-      LegacyOsgifyModelBuilder.Request request = new LegacyOsgifyModelBuilder.Request();
+      LegacyOsgifierModelBuilder.Request request = new LegacyOsgifierModelBuilder.Request();
       request.setArtifact(project.getArtifact());
       request.setLocalRepository(localRepository);
       request.setResolveDependenciesOfNativeBundles(true);

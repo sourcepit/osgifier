@@ -22,20 +22,20 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.core.util.OsgifyContextUtils;
-import org.sourcepit.osgifier.core.util.OsgifyContextUtils.BuildOrder;
+import org.sourcepit.osgifier.core.util.OsgifierContextUtils;
+import org.sourcepit.osgifier.core.util.OsgifierContextUtils.BuildOrder;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class OsgifyContextUtilsTest
+public class OsgifierContextUtilsTest
 {
    @Test
    public void testComputeBuildOrder()
    {
       try
       {
-         OsgifyContextUtils.computeBuildOrder(null);
+         OsgifierContextUtils.computeBuildOrder(null);
          fail();
       }
       catch (IllegalArgumentException e)
@@ -44,7 +44,7 @@ public class OsgifyContextUtilsTest
 
       // empty
       OsgifierContext ctx = ContextModelFactory.eINSTANCE.createOsgifierContext();
-      assertThat(OsgifyContextUtils.computeBuildOrder(ctx), IsNull.notNullValue());
+      assertThat(OsgifierContextUtils.computeBuildOrder(ctx), IsNull.notNullValue());
 
       // simple a -> b -> c
       BundleCandidate a = addBundleCandidate(ctx, "A", "1");
@@ -54,7 +54,7 @@ public class OsgifyContextUtilsTest
       addBundleReference(a, b);
       addBundleReference(b, c);
 
-      List<BundleCandidate> orderedBundles = OsgifyContextUtils.computeBuildOrder(ctx).getOrderedBundles();
+      List<BundleCandidate> orderedBundles = OsgifierContextUtils.computeBuildOrder(ctx).getOrderedBundles();
       assertThat(orderedBundles.get(0), IsEqual.equalTo(c));
       assertThat(orderedBundles.get(1), IsEqual.equalTo(b));
       assertThat(orderedBundles.get(2), IsEqual.equalTo(a));
@@ -65,7 +65,7 @@ public class OsgifyContextUtilsTest
       addBundleReference(c, d);
       addBundleReference(b, d);
 
-      orderedBundles = OsgifyContextUtils.computeBuildOrder(ctx).getOrderedBundles();
+      orderedBundles = OsgifierContextUtils.computeBuildOrder(ctx).getOrderedBundles();
       assertThat(orderedBundles.get(0), IsEqual.equalTo(d));
       assertThat(orderedBundles.get(1), IsEqual.equalTo(c));
       assertThat(orderedBundles.get(2), IsEqual.equalTo(b));
@@ -74,7 +74,7 @@ public class OsgifyContextUtilsTest
       // recursion a -> b -> c -> a
       addBundleReference(c, a);
 
-      BuildOrder buildOrder = OsgifyContextUtils.computeBuildOrder(ctx);
+      BuildOrder buildOrder = OsgifierContextUtils.computeBuildOrder(ctx);
       orderedBundles = buildOrder.getOrderedBundles();
       assertThat(orderedBundles.get(1), IsEqual.equalTo(c));
       assertThat(orderedBundles.get(2), IsEqual.equalTo(b));

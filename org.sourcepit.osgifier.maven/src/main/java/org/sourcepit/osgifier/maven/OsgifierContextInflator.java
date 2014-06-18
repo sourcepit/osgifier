@@ -29,7 +29,7 @@ import org.sourcepit.osgifier.core.resolve.NativeManifestAppender;
 import org.sourcepit.osgifier.core.resolve.SymbolicNameAndVersionAppender;
 
 @Named
-public class OsgifyContextInflator
+public class OsgifierContextInflator
 {
    @Inject
    private JavaContentAppender javaContentAppender;
@@ -43,7 +43,7 @@ public class OsgifyContextInflator
    @Inject
    private BundleManifestAppender manifestAppender;
 
-   public void inflate(OsgifyContextInflatorFilter filter, PropertiesSource options, final OsgifierContext osgifierModel,
+   public void inflate(OsgifierContextInflatorFilter filter, PropertiesSource options, final OsgifierContext osgifierModel,
       Date timestamp)
    {
       options = getOptions(options, timestamp);

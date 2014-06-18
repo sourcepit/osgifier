@@ -19,8 +19,8 @@ import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.core.util.OsgifyContextUtils;
-import org.sourcepit.osgifier.core.util.OsgifyContextUtils.BuildOrder;
+import org.sourcepit.osgifier.core.util.OsgifierContextUtils;
+import org.sourcepit.osgifier.core.util.OsgifierContextUtils.BuildOrder;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -47,7 +47,7 @@ public class BundleManifestAppender
 
    public void append(OsgifierContext context, BundleManifestAppenderFilter filter, PropertiesSource options)
    {
-      final BuildOrder buildOrder = OsgifyContextUtils.computeBuildOrder(context);
+      final BuildOrder buildOrder = OsgifierContextUtils.computeBuildOrder(context);
 
       for (List<BundleCandidate> cycle : buildOrder.getCycles())
       {

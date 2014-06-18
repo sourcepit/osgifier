@@ -19,9 +19,9 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class OsgifyContextUtils
+public final class OsgifierContextUtils
 {
-   private OsgifyContextUtils()
+   private OsgifierContextUtils()
    {
       super();
    }
