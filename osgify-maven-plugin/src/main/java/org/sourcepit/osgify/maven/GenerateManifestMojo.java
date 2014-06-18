@@ -8,6 +8,8 @@ package org.sourcepit.osgify.maven;
 
 import static org.apache.commons.io.FileUtils.copyFile;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
+import static org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest.chainOptions;
+import static org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest.toOptions;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,8 +35,6 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgify.core.headermod.HeaderModifications;
 import org.sourcepit.osgify.core.headermod.HeaderModifier;
-import org.sourcepit.osgify.maven.manifest.builder.ManifestBuilderResult;
-import org.sourcepit.osgify.maven.manifest.builder.MavenProjectManifestBuilder;
 
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifyMojo
@@ -73,25 +73,16 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
    private HeaderModifier headerModifier;
 
    @Inject
-   private MavenProjectManifestBuilder manifestBuilder;
+   private ArtifactManifestBuilder manifestBuilder;
 
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
-      manifestBuilder.setTimestamp(buildContext.getSession().getStartTime());
-      manifestBuilder.project(project.getArtifact());
-      manifestBuilder.setSymbolicName(symbolicName);
-      manifestBuilder.withProjectProperties(project.getProperties());
-      manifestBuilder.withDependencies(project.getArtifacts());
-      manifestBuilder.withOptions(getMojoConfigurationOptions());
-      if (!skipSource)
-      {
-         manifestBuilder.withSourceArtifact(newProjectArtifact(project, sourceClassifier, "jar"));
-      }
-      
-      final ManifestBuilderResult result = manifestBuilder.build();
+      final ArtifactManifestBuilderRequest request = newManifestRequest(project);
+
+      ArtifactManifestBuilderResult result = manifestBuilder.buildManifest(request);
 
       final BundleManifest manifest = result.getBundleManifest();
       if (headerModifications != null)
@@ -120,6 +111,25 @@ public class GenerateManifestMojo extends AbstractOsgifyMojo
          ModelUtils.writeModel(sourceManifestFile, sourceManifest);
          project.setContextValue("osgifier.sourceManifestFile", sourceManifestFile);
       }
+   }
+
+   private ArtifactManifestBuilderRequest newManifestRequest(final MavenProject project)
+   {
+      final ArtifactManifestBuilderRequest request = new ArtifactManifestBuilderRequest();
+      request.setArtifact(project.getArtifact());
+      if (!skipSource)
+      {
+         request.setSourceArtifact(newProjectArtifact(project, sourceClassifier, "jar"));
+      }
+      request.getDependencies().addAll(project.getArtifacts());
+
+      final PropertiesSource options = chainOptions(getMojoConfigurationOptions(), toOptions(project.getProperties()),
+         toOptions(System.getProperties()));
+      request.setOptions(options);
+
+      request.setSymbolicName(symbolicName);
+      request.setTimestamp(buildContext.getSession().getStartTime());
+      return request;
    }
 
    private PropertiesSource getMojoConfigurationOptions()

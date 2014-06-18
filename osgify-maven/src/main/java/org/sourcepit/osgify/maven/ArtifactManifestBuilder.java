@@ -4,17 +4,8 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.manifest.builder;
-
-import org.sourcepit.common.manifest.osgi.BundleManifest;
-
-/**
- * @author DerGilb
- *
- */
-public interface ManifestBuilderResult
+package org.sourcepit.osgify.maven;
+public interface ArtifactManifestBuilder
 {
-   BundleManifest getBundleManifest();
-
-   BundleManifest getSourceBundleManifest();
+   ArtifactManifestBuilderResult buildManifest(ArtifactManifestBuilderRequest request);
 }

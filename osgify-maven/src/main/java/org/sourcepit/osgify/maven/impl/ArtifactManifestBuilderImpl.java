@@ -4,17 +4,13 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.manifest.builder.impl;
+package org.sourcepit.osgify.maven.impl;
 
 import static org.sourcepit.common.utils.props.PropertiesSources.chain;
-import static org.sourcepit.common.utils.props.PropertiesSources.toPropertiesSource;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,7 +20,6 @@ import org.apache.maven.artifact.DefaultArtifact;
 import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.merge.ManifestMerger;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.common.manifest.util.ManifestUtils;
 import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
@@ -34,11 +29,12 @@ import org.sourcepit.osgify.core.model.context.BundleReference;
 import org.sourcepit.osgify.core.model.context.ContextModelFactory;
 import org.sourcepit.osgify.core.model.context.OsgifyContext;
 import org.sourcepit.osgify.core.resolve.VersionRangeResolver;
+import org.sourcepit.osgify.maven.ArtifactManifestBuilder;
+import org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest;
+import org.sourcepit.osgify.maven.ArtifactManifestBuilderResult;
 import org.sourcepit.osgify.maven.DefaultOsgifyContextInflatorFilter;
 import org.sourcepit.osgify.maven.OsgifyContextInflator;
 import org.sourcepit.osgify.maven.OsgifyContextInflatorFilter;
-import org.sourcepit.osgify.maven.manifest.builder.ManifestBuilderResult;
-import org.sourcepit.osgify.maven.manifest.builder.MavenProjectManifestBuilder;
 
 import com.google.common.base.Strings;
 
@@ -48,161 +44,50 @@ import com.google.common.base.Strings;
  * @author Bernd
  */
 @Named
-public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuilder
+public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
 {
    public static final String DEF_SOURCE_CLASSIFIER = "sources";
 
    private final VersionRangeResolver versionRangeResolver;
    private final OsgifyContextInflator inflater;
 
-   private Artifact projectArtifact;
-   private List<Artifact> projectDependencies = new ArrayList<Artifact>();
-   private Map<?, ?> projectProperties = Collections.emptyMap();
-   private Artifact sourceArtifact;
-   private String symbolicName;
-   private Date timestamp;
-   private PropertiesSource additionalOptions = PropertiesSources.emptyPropertiesSource();
-   private Manifest mergeManifest;
-
-   private boolean appendExecutionEnvironment = true;
-
-   private boolean appendPackageExports = true;
-
-   private boolean appendPackageImports = true;
-
-   private boolean appendDynamicImports = true;
-
    @Inject
-   public MavenProjectManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater)
+   public ArtifactManifestBuilderImpl(VersionRangeResolver versionRangeResolver, OsgifyContextInflator inflater)
    {
       this.versionRangeResolver = versionRangeResolver;
       this.inflater = inflater;
    }
 
    @Override
-   public MavenProjectManifestBuilder project(Artifact project)
+   public ArtifactManifestBuilderResult buildManifest(ArtifactManifestBuilderRequest request)
    {
-      this.projectArtifact = project;
-      return this;
-   }
+      final Artifact projectArtifact = request.getArtifact();
+      final List<Artifact> projectDependencies = request.getDependencies();
 
-   @Override
-   public MavenProjectManifestBuilder withProjectProperties(Map<?, ?> properties)
-   {
-      this.projectProperties = properties;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder withDependency(Artifact dependency)
-   {
-      this.projectDependencies.add(dependency);
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder withDependencies(Collection<Artifact> dependencies)
-   {
-      this.projectDependencies.addAll(dependencies);
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder withSourceArtifact(Artifact sourceArtifact)
-   {
-      this.sourceArtifact = sourceArtifact;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder withOptions(PropertiesSource options)
-   {
-      this.additionalOptions = options;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder setSymbolicName(String symbolicName)
-   {
-      this.symbolicName = symbolicName;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder setTimestamp(Date timestamp)
-   {
-      this.timestamp = timestamp;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder appendExecutionEnvironment(boolean append)
-   {
-      appendExecutionEnvironment = append;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder appendPackageExports(boolean append)
-   {
-      appendPackageExports = append;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder appendPackageImports(boolean append)
-   {
-      appendPackageImports = append;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder appendDynamicImports(boolean append)
-   {
-      appendDynamicImports = append;
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder mergeWith(java.util.jar.Manifest manifest)
-   {
-      this.mergeManifest = ManifestUtils.toManifest(manifest);
-      return this;
-   }
-
-   @Override
-   public MavenProjectManifestBuilder mergeWith(Manifest manifest)
-   {
-      this.mergeManifest = manifest;
-      return this;
-   }
-
-   @Override
-   public ManifestBuilderResult build()
-   {
       final OsgifyContext osgifyContext = buildOsgifyContext(projectArtifact, projectDependencies, versionRangeResolver);
       final BundleCandidate projectBundle = osgifyContext.getBundles().get(0);
 
       final OsgifyContextInflatorFilter inflatorFilter = newInflatorFilter(projectBundle);
 
-      if (this.sourceArtifact != null)
+      final Artifact sourceArtifact = request.getSourceArtifact();
+      if (sourceArtifact != null)
       {
-         final MavenArtifact sourceArtifact = MavenArtifactUtils.toMavenArtifact(this.sourceArtifact);
+         final MavenArtifact source = MavenArtifactUtils.toMavenArtifact(sourceArtifact);
 
          final BundleCandidate sourceBundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-         sourceBundle.setLocation(sourceArtifact.getFile());
-         sourceBundle.addExtension(sourceArtifact);
+         sourceBundle.setLocation(source.getFile());
+         sourceBundle.addExtension(source);
          sourceBundle.setTargetBundle(projectBundle);
          projectBundle.setSourceBundle(sourceBundle);
          osgifyContext.getBundles().add(sourceBundle);
       }
 
-      final String symbolicName = Strings.isNullOrEmpty(this.symbolicName)
-         ? buildSymbolicName(projectArtifact)
-         : this.symbolicName;
+      String symbolicName = request.getSymbolicName();
+      symbolicName = Strings.isNullOrEmpty(symbolicName) ? buildSymbolicName(projectArtifact) : symbolicName;
 
-      final PropertiesSource osgifyOptions = buildOsgifyOptions(projectArtifact, symbolicName, projectProperties,
-         additionalOptions);
+      final PropertiesSource osgifyOptions = buildOsgifyOptions(projectArtifact, symbolicName, request.getOptions());
+
+      final Date timestamp = request.getTimestamp();
 
       final Date startTime = timestamp == null ? new Date() : timestamp;
 
@@ -210,13 +95,16 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
 
       final BundleManifest manifest = projectBundle.getManifest();
 
+      final Manifest mergeManifest = request.getManifestToMerge();
       if (mergeManifest != null)
       {
          new ManifestMerger().merge(manifest, mergeManifest);
       }
+      
+      final ArtifactManifestBuilderResult result = new ArtifactManifestBuilderResult();
+      result.setBundleManifest(manifest);
 
-      final ManifestBuilderResultImpl result = new ManifestBuilderResultImpl(manifest);
-      if (this.sourceArtifact != null)
+      if (sourceArtifact != null)
       {
          final BundleCandidate sourceBundle = projectBundle.getSourceBundle();
          final BundleManifest sourceBundleManifest = sourceBundle.getManifest();
@@ -264,52 +152,29 @@ public class MavenProjectManifestBuilderImpl implements MavenProjectManifestBuil
       final OsgifyContextInflatorFilter inflatorFilter = new DefaultOsgifyContextInflatorFilter()
       {
          @Override
-         public boolean isAppendPackageExports(BundleCandidate bundle, PropertiesSource options)
-         {
-            if (bundle.equals(projectBundle))
-            {
-               return appendPackageExports;
-            }
-            return true;
-         }
-
-         @Override
          public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options)
          {
-            if (bundle.equals(projectBundle))
-            {
-               return appendExecutionEnvironment;
-            }
-            return false;
+            return bundle.equals(projectBundle);
          }
 
          @Override
          public boolean isAppendPackageImports(BundleCandidate bundle, PropertiesSource options)
          {
-            if (bundle.equals(projectBundle))
-            {
-               return appendPackageImports;
-            }
-            return false;
+            return bundle.equals(projectBundle);
          }
 
          @Override
          public boolean isAppendDynamicImports(BundleCandidate bundle, PropertiesSource options)
          {
-            if (bundle.equals(projectBundle))
-            {
-               return appendDynamicImports;
-            }
-            return false;
+            return bundle.equals(projectBundle);
          }
       };
       return inflatorFilter;
    }
 
-   private static PropertiesSource buildOsgifyOptions(Artifact artifact, String symbolicName,
-      Map<?, ?> projectProperties, PropertiesSource additionalOptions)
+   private static PropertiesSource buildOsgifyOptions(Artifact artifact, String symbolicName, PropertiesSource options)
    {
-      PropertiesSource options = chain(toPropertiesSource(projectProperties), additionalOptions);
+      options = options == null ? PropertiesSources.emptyPropertiesSource() : options;
 
       final StringBuilder sb = new StringBuilder();
       sb.append(MavenArtifactUtils.toArtifactKey(artifact));

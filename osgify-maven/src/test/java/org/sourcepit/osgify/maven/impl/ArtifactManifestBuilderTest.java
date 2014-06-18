@@ -4,7 +4,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-package org.sourcepit.osgify.maven.manifest.builder;
+package org.sourcepit.osgify.maven.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -27,11 +27,13 @@ import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
 import org.sourcepit.common.maven.model.util.MavenModelUtils;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.testing.Workspace;
+import org.sourcepit.osgify.maven.ArtifactManifestBuilder;
+import org.sourcepit.osgify.maven.ArtifactManifestBuilderRequest;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
-public class MavenProjectManifestBuilderTest extends InjectedTest
+public class ArtifactManifestBuilderTest extends InjectedTest
 {
    private final Environment env = Environment.get("env-test.properties");
 
@@ -47,7 +49,7 @@ public class MavenProjectManifestBuilderTest extends InjectedTest
    public TemporaryFolder tempFolder = new TemporaryFolder();
 
    @Inject
-   public MavenProjectManifestBuilder manifestBuilder;
+   public ArtifactManifestBuilder manifestBuilder;
 
    private Artifact artifact;
 
@@ -78,7 +80,10 @@ public class MavenProjectManifestBuilderTest extends InjectedTest
    @Test
    public void test()
    {
-      BundleManifest manifest = manifestBuilder.project(artifact).build().getBundleManifest();
+      ArtifactManifestBuilderRequest request = new ArtifactManifestBuilderRequest();
+      request.setArtifact(artifact);
+      
+      BundleManifest manifest = manifestBuilder.buildManifest(request).getBundleManifest();
 
       assertNotNull(manifest);
       assertEquals(1, manifest.getBundleVersion().getMajor());
