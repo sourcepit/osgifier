@@ -159,16 +159,9 @@
 				<plugin>
 					<groupId>org.sourcepit.osgifier</groupId>
 					<artifactId>osgifier-maven-plugin</artifactId>
-					<version>0.19.0</version>
+					<version>0.20.0</version>
 					<configuration>
 						<pde>true</pde>
-						<options>
-							<excludedExecutionEnvironments>
-								JavaSE/compact1-1.8,
-								JavaSE/compact2-1.8,
-								JavaSE/compact3-1.8
-							</excludedExecutionEnvironments>
-						</options>
 					</configuration>
 				</plugin>
 				<plugin>
