@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
  * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -38,30 +38,101 @@ import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
 
+/**
+ * The goal <i>generate-manifest</i> can be used to generate OSGi manifest files for Java projects.<br>
+ * <br>
+ * <b>Note:</b> This goal considers the dependency information of this project to determine proper OSGi requirements.
+ * For that the dependency artifacts musn't be OSGi bundles for themselves but it is highly recommended.
+ * 
+ * @author Bernd Vogt <bernd.vogt@sourcepit.org>
+ */
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class GenerateManifestMojo extends AbstractOsgifierMojo
 {
+   /**
+    * Mapping between option name and value. These options will be passed to the OSGifier and are intended to customize
+    * the OSGifiers default behavior to your needs.<br>
+    * </br>
+    * 
+    * <pre>
+    * &lt;options&gt;
+    *   &lt;symbolicNameMappings&gt;
+    *     xalan:xalan:jar=org.apache.xalan,
+    *     stax:stax-api:jar=javax.xml.stream,
+    *   &lt;/symbolicNameMappings&gt;
+    *   &lt;overrideNativeBundles&gt;
+    *     slf4j.api
+    *   &lt;/overrideNativeBundles&gt;
+    * &lt;/options&gt;
+    * </pre>
+    */
    @Parameter(required = false)
    private Map<String, String> options;
 
-   @Parameter(required = false, property = "project.artifactId")
+   /**
+    * <code>Bundle-SymbolicName</code> header value for this project.
+    */
+   @Parameter(required = false, defaultValue = "${project.artifactId}")
    private String symbolicName;
 
+   /**
+    * Output file for the generated OSGi manifest.
+    */
    @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}.MF")
    private File manifestFile;
 
+   /**
+    * Output file for the generated Eclipse compatible manifest file for the source artifact related to this project.
+    */
    @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}-sources.MF")
    private File sourceManifestFile;
 
+   /**
+    * Classifier that is used for the internal source artifact stub (used when an Eclipse compatible
+    * <code>MANIFEST.MF</code> file should be generated).
+    */
    @Parameter(property = "maven.source.classifier", defaultValue = "sources")
    private String sourceClassifier;
 
+   /**
+    * Whether an Eclipse compatible <code>MANIFEST.MF</code> file for the source artifacts should be generated or not.
+    */
    @Parameter(property = "source.skip", defaultValue = "false")
    private boolean skipSource;
 
+   /**
+    * With header modifications you can customize the generated <code>MANIFEST.MF</code> file. You can remove or add
+    * headers.<br>
+    * <br>
+    * 
+    * <pre>
+    * &lt;headerModifications&gt;
+    *   &lt;headers&gt;
+    *     &lt;header&gt;
+    *       &lt;name&gt;Bundle-Vendor&lt;/name&gt;
+    *       &lt;value&gt;Sourcepit.org&lt;/value&gt;
+    *       &lt;after&gt;Bundle-SymbolicName&lt;/after&gt;
+    *     &lt;/header&gt;
+    *     &lt;header&gt;
+    *       &lt;name&gt;Bundle-Name&lt;/name&gt;
+    *       &lt;value&gt;${project.name}&lt;/value&gt;
+    *       &lt;before&gt;Bundle-Vendor&lt;/before&gt;
+    *     &lt;/header&gt;
+    *   &lt;/headers&gt;
+    *   &lt;removals&gt;
+    *     &lt;name&gt;Ant-Version&lt;name&gt;
+    *     &lt;name&gt;Created-By&lt;name&gt;
+    *   &lt;/removals&gt;
+    * &lt;/headerModifications&gt;
+    * </pre>
+    */
    @Parameter(required = false)
    private HeaderModifications headerModifications;
 
+   /**
+    * When set to <code>true</code>, the generated
+    * <code>MANIFEST.MF<code> will also be copied to <code>${project.basedir}/META-INF/MANIFEST.MF</code>.
+    */
    @Parameter(defaultValue = "false")
    private boolean pde;
 

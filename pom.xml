@@ -47,7 +47,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 
 In OSGi it is a significant problem to re-use functionality from third-party libraries that are not OSGi-enabled. Existing solutions (known by me) either contradict the idea of modularization, or are only satisfactorily applicable to simple libraries without any dependencies.
 
-To respect both, idea of modularization and dependencies of third-party libraries, the *OSGifier* provides tooling to
+To respect both, idea of modularization and transitive dependencies, the *OSGifier* provides tooling to
 *   fetch a set of libraries and their dependencies from Maven repositories and to equip each with its own `MANIFES.MF`.
 *   deploy those *osgified* libaries to a Maven repository (using customized Maven coordinates). So you can use those as normal Maven dependencies in your project.
 
@@ -57,23 +57,75 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 *   [osgifier:deploy-osgified-artifacts](#osgifierdeploy-osgified-artifacts)
 *   [osgifier:install-osgified-artifacts](#osgifierinstall-osgified-artifacts)
 
-# Adopt the OSGifier to your needs
+# Configuration Options
 
-*   `osgifier.internalPackages`: Comma separated list with patterns to determine which Java packages should be treated as internal and not as public API, e.g. `**.internal.**, **.impl.**, !**.api.**`.
-*   `osgifier.treatInheritedPackagesAsInternal`: When set to `true`, packages from classes your classes inherits from are treated as internal, default is `false`. 
-*   `osgifier.requireBundle`: Comma separated list with patterns to determine which bundles should be referenced via `Require-Bundle`instead of `Import-Package` header.
-*   `osgifier.eraseMicro`: When set to `true`, the *micro* version numbers are considered when determining version ranges to requirements, default is `false`.
-*   `osgifier.publicImportPolicy`: Policy that takes place when determining version ranges for imports of public packages, default is `compatible`.
-*   `osgifier.internalImportPolicy`: Policy that takes place when determining version ranges for imports of internal packages, default is `equivalent`.
-*   `osgifier.selfImportPolicy`: Policy that takes place when determining version ranges for imports of packages from the own bundle, default is `equivalent`.
-*   `osgifier.recommendedImportPolicies`: Comma separated list with mappings of bundle symbolic name patterns to the import policies that should take place when importing packages from this bundle, e.g. `org.sourcepit.dev.**=strict|perfect` (public packages will be imported *strict*, internal *perfect*).
-*   `osgifier.executionEnvironmentMappings`: Comma separated list with mappings to set one or more *Execution Environments* for a bundle, e.g. `org.sourcepit.core.**=JavaSE/compact1-1.8|JavaSE-1.7,org.sourcepit.runtime.**=JavaSE/compact1-1.8`.
-*   `osgifier.excludedExecutionEnvironments`: Comma separated list with *Execution Environments* won't be considered when determining the required execution environments for a bundle.
-*   `osgifier.forceContextQualifier`: String that will be appended as qualifier to the OSGi version that is determined for a osgified project or library. Usually this is sth. like a date or timestamp.
-*   `osgifier.saveMavenQualifier`: When set to `true` Maven version qualifiers will always be appended to at the end of the determined OSGi version, default `true`.
-*   `osgifier.symbolicNameMappings`: Comma separated list with mappings of Maven coordinate to a specific *Symbolic Bundle Names*, e.g "xalan:xalan:jar=org.apache.xalan, stax:stax-api:jar=javax.xml.stream"
-*   `osgifier.overrideNativeBundles`: `true`, `false` or a list with patterns that will be used to determine if `MANIFEST.MF` files of existing bundles should be overridden, default is `false`.     
-</description>
+## Adopt Bundle Symbolic Name and Version
+
+*   `forceContextQualifier`
+    
+    String that will be appended as qualifier to the OSGi version that is determined for a osgified project or library. Usually this is sth. like a date or timestamp.
+    
+*   `saveMavenQualifier`
+    
+    When set to `true` Maven version qualifiers will always be appended to at the end of the determined OSGi version, default `true`.
+    
+*   `symbolicNameMappings`
+    
+    Comma separated list with mappings of Maven coordinate to a specific *Symbolic Bundle Names*, e.g &quot;xalan:xalan:jar=org.apache.xalan, stax:stax-api:jar=javax.xml.stream&quot;
+
+## Determine internal Packages
+
+*   `internalPackages`
+    
+    Comma separated list with patterns to determine which Java packages should be treated as internal and not as public API, e.g. `**.internal.**, **.impl.**, !**.api.**`.
+    
+*   `treatInheritedPackagesAsInternal`
+    
+    When set to `true`, packages from classes your classes inherits from are treated as internal, default is `false`.
+
+## Adopt version ranges for package imports
+
+*   `eraseMicro`
+    
+    When set to `true`, the *micro* version numbers are considered when determining version ranges to requirements, default is `false`.
+    
+*   `publicImportPolicy`
+    
+    Policy that takes place when determining version ranges for imports of public packages, default is `compatible`.
+    
+*   `internalImportPolicy`
+    
+    Policy that takes place when determining version ranges for imports of internal packages, default is `equivalent`.
+    
+*   `selfImportPolicy`
+    
+    Policy that takes place when determining version ranges for imports of packages from the own bundle, default is `equivalent`.
+    
+*   `recommendedImportPolicies`
+    
+    Comma separated list with mappings of bundle symbolic name patterns to the import policies that should take place when importing packages from this bundle, e.g. `org.sourcepit.dev.**=strict|perfect` (public packages will be imported *strict*, internal *perfect*).
+
+## Require-Bundle instead of Import-Package
+    
+*   `requireBundle`
+    
+    Comma separated list with patterns to determine which bundles should be referenced via `Require-Bundle`instead of `Import-Package` header.
+
+##  Bundle-RequiredExecutionEnvironment
+
+*   `executionEnvironmentMappings`
+    
+    Comma separated list with mappings to set one or more *Execution Environments* for a bundle, e.g. `org.sourcepit.core.**=JavaSE/compact1-1.8|JavaSE-1.7,org.sourcepit.runtime.**=JavaSE/compact1-1.8`.
+    
+*   `excludedExecutionEnvironments`
+    
+    Comma separated list with *Execution Environments* won't be considered when determining the required execution environments for a bundle.
+
+## Force OSGifier to override MANIFEST.MF of native Bundles
+
+*   `overrideNativeBundles`
+    
+    `true`, `false` or a list with patterns that will be used to determine if `MANIFEST.MF` files of existing bundles should be overridden, default is `false`.</description>
 
 	<scm>
 		<connection>scm:git:git@github.com:sourcepit/osgifier.git</connection>

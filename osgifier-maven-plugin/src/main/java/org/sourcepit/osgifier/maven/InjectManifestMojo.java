@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
  * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -14,6 +14,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.apache.maven.artifact.Artifact;
+import org.apache.maven.plugin.LegacySupport;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -26,14 +27,25 @@ import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 
+/**
+ * The goal <i>inject-manifest</i> can be used to inject the OSGi manifest (generated with the <i>generate-manifest</i>
+ * goal) into packaged JAR. Reason: Lines are not wrapped after 72 bytes, so content of the manifest file is still human
+ * readable (and parsable by each parser known to me).
+ * 
+ * @author Bernd Vogt <bernd.vogt@sourcepit.org>
+ *
+ */
 @Mojo(name = "inject-manifest", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE)
 public class InjectManifestMojo extends AbstractOsgifierMojo
 {
-   @Parameter(property = "project", required = true, readonly = true)
-   private MavenProject project;
-
+   /**
+    * Classifier to identify this projects source artifact.
+    */
    @Parameter(property = "maven.source.classifier", defaultValue = "sources")
    private String sourceClassifier;
+
+   @Inject
+   private LegacySupport buildContext;
 
    @Inject
    private Repackager repackager;
@@ -41,6 +53,8 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
    @Override
    protected void doExecute() throws MojoExecutionException, MojoFailureException
    {
+      final MavenProject project = buildContext.getSession().getCurrentProject();
+
       final File manifestFile = (File) project.getContextValue("osgifier.manifestFile");
       if (manifestFile != null)
       {
