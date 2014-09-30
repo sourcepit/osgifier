@@ -15,12 +15,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.apache.maven.RepositoryUtils;
 import org.apache.maven.model.Dependency;
+import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.DefaultModelWriter;
 import org.apache.maven.plugin.LegacySupport;
@@ -29,9 +32,15 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuilder;
+import org.apache.maven.project.ProjectBuildingException;
+import org.apache.maven.project.ProjectBuildingRequest;
+import org.apache.maven.project.ProjectBuildingResult;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.ArtifactProperties;
+import org.slf4j.Logger;
 import org.sourcepit.common.manifest.Header;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -53,11 +62,15 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 {
    private final LegacySupport buildContext;
 
+   private final ProjectBuilder projectBuilder;
+
    private OsgifierModelBuilder modelBuilder;
 
    private final Repackager repackager;
 
    private final ArtifactFactory artifactFactory;
+
+   private final Logger log;
 
    @Parameter(required = true)
    private List<Dependency> artifacts;
@@ -75,13 +88,15 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
    private File workDir;
 
    @Inject
-   public OsgifyArtifactsMojo(LegacySupport buildContext, OsgifierModelBuilder modelBuilder, Repackager repackager,
-      ArtifactFactory artifactFactory)
+   public OsgifyArtifactsMojo(LegacySupport buildContext, ProjectBuilder projectBuilder,
+      OsgifierModelBuilder modelBuilder, Repackager repackager, ArtifactFactory artifactFactory, Logger log)
    {
       this.buildContext = buildContext;
+      this.projectBuilder = projectBuilder;
       this.modelBuilder = modelBuilder;
       this.repackager = repackager;
       this.artifactFactory = artifactFactory;
+      this.log = log;
    }
 
    @Override
@@ -105,8 +120,25 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
       final DependencyModel dependencyModel = osgifyContext.getExtension(DependencyModel.class);
 
+      final Map<BundleCandidate, MavenProject> mavenProjectMapping = new HashMap<BundleCandidate, MavenProject>(
+         bundles.size());
+
       for (BundleCandidate bundle : bundles)
       {
+         final MavenArtifact artifact = bundle.getExtension(MavenArtifact.class);
+
+         try
+         {
+            ProjectBuildingResult result = buildMavenProject(artifact);
+            mavenProjectMapping.put(bundle, result.getProject());
+         }
+         catch (ProjectBuildingException e)
+         {
+            log.warn(
+               "Failed to resolve original Maven model for artifact {}. Some information may note be available in genrated pom.",
+               artifact, e);
+         }
+
          adoptMavenCoordinates(dependencyModel, bundle);
          final BundleCandidate sourceBundle = bundle.getSourceBundle();
          if (sourceBundle != null)
@@ -144,6 +176,25 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          }
 
          final Model model = buildPom(bundle, dependencyModel);
+
+         final MavenProject mavenProject = mavenProjectMapping.get(bundle);
+         if (mavenProject != null)
+         {
+            final Model oriModel = mavenProject.getModel();
+
+            model.setCiManagement(oriModel.getCiManagement());
+            model.setContributors(oriModel.getContributors());
+            model.setDescription(oriModel.getDescription());
+            model.setDevelopers(oriModel.getDevelopers());
+            model.setInceptionYear(oriModel.getInceptionYear());
+            model.setLicenses(oriModel.getLicenses());
+            model.setMailingLists(oriModel.getMailingLists());
+            model.setName(oriModel.getName());
+            model.setOrganization(oriModel.getOrganization());
+            model.setScm(oriModel.getScm());
+            model.setUrl(oriModel.getUrl());
+         }
+
          final File pomFile = new File(workDir, getBundleId(bundle) + ".xml");
          try
          {
@@ -162,6 +213,20 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       project.setContextValue("osgified-artifacts", artifacts);
 
       printSummary(artifacts);
+   }
+
+   private ProjectBuildingResult buildMavenProject(final MavenArtifact artifact) throws ProjectBuildingException
+   {
+      final ProjectBuildingRequest request = new DefaultProjectBuildingRequest(buildContext.getSession()
+         .getProjectBuildingRequest());
+      request.setProject(null);
+      request.setResolveDependencies(false);
+      request.setProcessPlugins(false);
+
+      final org.apache.maven.artifact.Artifact projectArtifact = RepositoryUtils.toArtifact(artifactFactory
+         .createArtifact(artifactFactory.createArtifact(artifact.getArtifactKey()), null, "pom"));
+
+      return projectBuilder.build(projectArtifact, true, request);
    }
 
    private void printSummary(Collection<Artifact> artifacts)

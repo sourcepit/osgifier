@@ -43,6 +43,9 @@ public class BundleManifestAppender
    private PackageImportAppender packageImports;
    
    @Inject
+   private List<BundleManifestAppenderParticipant> participants;
+
+   @Inject
    private RecommendedImportPolicyAppender importPolicyAppender;
 
    public void append(OsgifierContext context, BundleManifestAppenderFilter filter, PropertiesSource options)
@@ -76,6 +79,11 @@ public class BundleManifestAppender
             LOGGER.info("Building manifest for bundle candidate " + bundleCandidate.getSymbolicName() + "_"
                + bundleCandidate.getVersion());
             append(bundleCandidate, filter, options);
+
+            for (BundleManifestAppenderParticipant participant : participants)
+            {
+               participant.append(bundleCandidate, filter, options);
+            }
          }
       }
    }
