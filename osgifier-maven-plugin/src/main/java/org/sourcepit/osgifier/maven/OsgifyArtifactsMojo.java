@@ -23,7 +23,6 @@ import javax.inject.Inject;
 
 import org.apache.maven.RepositoryUtils;
 import org.apache.maven.model.Dependency;
-import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.DefaultModelWriter;
 import org.apache.maven.plugin.LegacySupport;
@@ -55,7 +54,6 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
-import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
 @Mojo(name = "osgify-artifacts", defaultPhase = LifecyclePhase.PACKAGE)
 public class OsgifyArtifactsMojo extends AbstractOsgifierMojo

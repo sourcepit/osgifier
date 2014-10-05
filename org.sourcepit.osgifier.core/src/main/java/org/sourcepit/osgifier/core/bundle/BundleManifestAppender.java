@@ -43,7 +43,7 @@ public class BundleManifestAppender
    private PackageImportAppender packageImports;
    
    @Inject
-   private List<BundleManifestAppenderParticipant> participants;
+   private List<BundleHeadersAppender> headersAppenders;
 
    @Inject
    private RecommendedImportPolicyAppender importPolicyAppender;
@@ -80,9 +80,9 @@ public class BundleManifestAppender
                + bundleCandidate.getVersion());
             append(bundleCandidate, filter, options);
 
-            for (BundleManifestAppenderParticipant participant : participants)
+            for (BundleHeadersAppender headersAppender : headersAppenders)
             {
-               participant.append(bundleCandidate, filter, options);
+               headersAppender.append(bundleCandidate, filter, options);
             }
          }
       }

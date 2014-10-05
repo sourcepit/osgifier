@@ -1,10 +1,9 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements. See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
+ * Copyright 2014 Bernd Vogt and others.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
@@ -25,14 +24,14 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
-import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderParticipant;
+import org.sourcepit.osgifier.core.bundle.BundleHeadersAppender;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
  */
 @Named
-public class MavenBundleManifestAppenderParticipant implements BundleManifestAppenderParticipant
+public class MavenGAVHeadersAppender implements BundleHeadersAppender
 {
    @Override
    public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
