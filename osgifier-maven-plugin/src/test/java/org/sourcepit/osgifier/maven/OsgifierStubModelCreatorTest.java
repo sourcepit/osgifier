@@ -1,7 +1,17 @@
-/**
- * Copyright (c) 2013 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
+/*
+ * Copyright 2014 Bernd Vogt and others.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.sourcepit.osgifier.maven;
@@ -108,26 +118,26 @@ public class OsgifierStubModelCreatorTest extends InjectedTest
       DependencyNode nodeB = toDependencyNode(artifactB);
       DependencyNode nodeC = toDependencyNode(artifactC);
       DependencyNode nodeD = toDependencyNode(artifactD);
-      
+
       final DependencyTree treeA = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeA.setArtifact(artifactA);
       treeA.getDependencyNodes().add(nodeB);
       nodeB.getChildren().add(nodeC);
       treeA.getDependencyNodes().add(nodeD);
-      
+
       final DependencyTree treeB = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeB.setArtifact(artifactB);
       nodeB = toDependencyNode(artifactB);
       nodeC = toDependencyNode(artifactC);
       treeB.getDependencyNodes().add(nodeB);
       nodeB.getChildren().add(nodeC);
-      
+
       final DependencyTree treeC = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeC.setArtifact(artifactC);
-      
+
       final DependencyTree treeD = DependencyModelFactory.eINSTANCE.createDependencyTree();
       treeD.setArtifact(artifactD);
-      
+
       DependencyModel dependencyModel = DependencyModelFactory.eINSTANCE.createDependencyModel();
       dependencyModel.getArtifacts().add(artifactA);
       dependencyModel.getArtifacts().add(artifactB);
@@ -137,7 +147,7 @@ public class OsgifierStubModelCreatorTest extends InjectedTest
       dependencyModel.getDependencyTrees().add(treeB);
       dependencyModel.getDependencyTrees().add(treeC);
       dependencyModel.getDependencyTrees().add(treeD);
-      
+
       OsgifierContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(4, stubModel.getBundles().size());
    }

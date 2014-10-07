@@ -484,7 +484,7 @@ It is a good practice to define plugin versions in the plugin management section
         <plugin>
           <groupId>org.sourcepit.osgifier</groupId>
           <artifactId>osgifier-maven-plugin</artifactId>
-          <version>0.20.0</version>
+          <version>0.21.0-SNAPSHOT</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -514,7 +514,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.maven</artifactId>
-      <version>0.20.0</version>
+      <version>0.21.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
@@ -528,7 +528,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.core</artifactId>
-      <version>0.20.0</version>
+      <version>0.21.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>
@@ -549,5 +549,5 @@ For general information see [Contributing to Open Source on GitHub](https://guid
 
 ## License
 
-[Eclipse Public License v1.0](http://www.eclipse.org/legal/epl-v10.html)
+[The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
 

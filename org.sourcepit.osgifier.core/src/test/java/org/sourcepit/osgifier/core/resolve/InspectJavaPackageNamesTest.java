@@ -1,7 +1,17 @@
-/**
- * Copyright (c) 2011 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
- * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
- * and is available at http://www.eclipse.org/legal/epl-v10.html
+/*
+ * Copyright 2014 Bernd Vogt and others.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.sourcepit.osgifier.core.resolve;
@@ -123,14 +133,14 @@ public class InspectJavaPackageNamesTest
       String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.dom4j"));
    }
-   
+
    @Test
    public void testXercesImpl() throws Exception
    {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
-      
+
       jArchive.getType("org.apache.html.dom", "CollectionIndex", true);
       jArchive.getType("org.apache.wml", "WMLAccessElement", true);
       jArchive.getType("org.apache.wml.dom", "WMLAccessElementImpl", true);
@@ -146,7 +156,7 @@ public class InspectJavaPackageNamesTest
       jArchive.getType("org.apache.xml.serialize", "BaseMarkupSerializer", true);
       jArchive.getType("org.w3c.dom.html", "HTMLDOMImplementation", true);
       jArchive.getType("org.w3c.dom.ls", "DOMImplementationLS", true);
-      
+
       String name = new InspectJavaPackageNames().resolveSymbolicName(bundleCandidate, null);
       assertThat(name, equalTo("org.apache.xerces"));
    }
