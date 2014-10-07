@@ -16,8 +16,6 @@
 
 package org.sourcepit.osgifier.maven;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -25,16 +23,13 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppender;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
-import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.core.resolve.JavaContentAppender;
-import org.sourcepit.osgifier.core.resolve.JavaContentAppenderFilter;
+import org.sourcepit.osgifier.core.resolve.ContentAppender;
+import org.sourcepit.osgifier.core.resolve.ContentAppenderFilter;
 import org.sourcepit.osgifier.core.resolve.NativeManifestAppender;
 import org.sourcepit.osgifier.core.resolve.SymbolicNameAndVersionAppender;
 
@@ -42,7 +37,7 @@ import org.sourcepit.osgifier.core.resolve.SymbolicNameAndVersionAppender;
 public class OsgifierContextInflator
 {
    @Inject
-   private JavaContentAppender javaContentAppender;
+   private ContentAppender javaContentAppender;
 
    @Inject
    private SymbolicNameAndVersionAppender symbolicNameAndVersionAppender;
@@ -60,7 +55,7 @@ public class OsgifierContextInflator
 
       nativeManifestAppender.appendNativeManifests(osgifierModel, filter, options);
 
-      javaContentAppender.appendContents(osgifierModel, JavaContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
+      javaContentAppender.appendContents(osgifierModel, ContentAppenderFilter.SKIP_NATIVE_AND_SOURCE, options);
 
       symbolicNameAndVersionAppender.appendSymbolicNamesAndVersion(osgifierModel, options);
 
@@ -90,31 +85,5 @@ public class OsgifierContextInflator
       OsgifierContext osgifierModel)
    {
       manifestAppender.append(osgifierModel, filter, options);
-
-      for (BundleCandidate bundle : osgifierModel.getBundles())
-      {
-         if (!bundle.isNativeBundle())
-         {
-            appendMavenHeaders(bundle);
-         }
-      }
-   }
-
-   private void appendMavenHeaders(BundleCandidate bundle)
-   {
-      final MavenArtifact extension = bundle.getExtension(MavenArtifact.class);
-      if (extension != null)
-      {
-         final BundleManifest manifest = bundle.getManifest();
-         manifest.setHeader("Maven-GroupId", extension.getGroupId());
-         manifest.setHeader("Maven-ArtifactId", extension.getArtifactId());
-         manifest.setHeader("Maven-Type", extension.getType());
-         final String classifier = extension.getClassifier();
-         if (!isNullOrEmpty(classifier))
-         {
-            manifest.setHeader("Maven-Classifier", classifier);
-         }
-         manifest.setHeader("Maven-Version", extension.getVersion());
-      }
    }
 }

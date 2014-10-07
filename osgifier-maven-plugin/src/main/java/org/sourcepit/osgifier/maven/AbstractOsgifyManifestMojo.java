@@ -45,7 +45,7 @@ import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
 public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
 {
-   private final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 
    @Inject
    private OsgifierModelBuilder modelBuilder;
