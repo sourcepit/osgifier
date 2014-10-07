@@ -30,6 +30,7 @@ import javax.inject.Named;
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Organization;
+import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.BundleLicense;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
@@ -52,10 +53,20 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       {
          final Model model = new ModelFromString().fromString(modelAsString);
          final BundleManifest manifest = bundle.getManifest();
+         appendBundleName(manifest, model);
          appendBundleVendor(manifest, model);
          appendBundleDocURL(manifest, model);
          appendBundleDescription(manifest, model);
          appendBundleLicense(manifest, model);
+      }
+   }
+
+   private void appendBundleName(final BundleManifest manifest, final Model model)
+   {
+      final String name = model.getName();
+      if (isNotEmpty(name))
+      {
+         manifest.setHeader(BundleHeaderName.BUNDLE_NAME, name);
       }
    }
 
