@@ -6,6 +6,8 @@
 		<version>0.21.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>org.sourcepit.osgifier.core</artifactId>
+	
+	<name>OSGifier Core APIs and Components</name>
 
 	<dependencies>
 		<dependency>

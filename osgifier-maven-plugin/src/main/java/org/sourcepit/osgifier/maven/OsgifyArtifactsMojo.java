@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
  * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -48,6 +48,15 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
+/**
+ * The goal <i>osgify-artifacts</i> can be used to fetch a set of artifacts together with their transitive dependencies
+ * from Maven repositories and to equip each with its own OSGi `MANIFES.MF`.<br>
+ * <br>
+ * <b>Note</b>: Use this goal together with the goals <i>install-osgified-artifacts</i> and
+ * <i>deploy-osgified-artifacts</i> to install and deploy the osgified artifacts to a Maven repository.
+ * 
+ * @author Bernd Vogt <bernd.vogt@sourcepit.org>
+ */
 @Mojo(name = "osgify-artifacts", defaultPhase = LifecyclePhase.PACKAGE)
 public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 {
@@ -62,15 +71,43 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
    @Parameter(required = true)
    private List<Dependency> artifacts;
 
+   /**
+    * Mapping between option name and value. These options will be passed to the OSGifier and are intended to customize
+    * the OSGifiers default behavior to your needs.<br>
+    * </br>
+    * 
+    * <pre>
+    * &lt;options&gt;
+    *   &lt;symbolicNameMappings&gt;
+    *     xalan:xalan:jar=org.apache.xalan,
+    *     stax:stax-api:jar=javax.xml.stream,
+    *   &lt;/symbolicNameMappings&gt;
+    *   &lt;overrideNativeBundles&gt;
+    *     slf4j.api
+    *   &lt;/overrideNativeBundles&gt;
+    * &lt;/options&gt;
+    * </pre>
+    */
    @Parameter(required = false)
    private Map<String, String> options;
 
+   /**
+    * Optional string that will be prepended to the <i>groupId</i> of any osgified artifact. Use this to prevent
+    * conflicts with the original artifacts.
+    */
    @Parameter(required = false)
    private String groupIdPrefix;
 
+   /**
+    * Optional string that replaces the <i>groupId</i> of any osgified artifact. Use this to prevent conflicts with the
+    * original artifacts.
+    */
    @Parameter(required = false)
    private String groupId;
 
+   /**
+    * Directory the osgified artifacts will be stored in.
+    */
    @Parameter(defaultValue = "${project.build.directory}/osgified")
    private File workDir;
 

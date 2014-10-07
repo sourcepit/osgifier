@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2014 Sourcepit.org contributors and others. All rights reserved. This program and the accompanying
  * materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
@@ -27,6 +27,11 @@ import org.eclipse.aether.deployment.DeployRequest;
 import org.eclipse.aether.deployment.DeploymentException;
 import org.eclipse.aether.repository.RemoteRepository;
 
+/**
+ * Use this goal to deploy artifacts which previously was osgified via goal <i>osgify-artifacts</i>.
+ * 
+ * @author Bernd Vogt <bernd.vogt@sourcepit.org>
+ */
 @Mojo(name = "deploy-osgified-artifacts", defaultPhase = LifecyclePhase.DEPLOY)
 public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
 {
@@ -34,6 +39,16 @@ public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
 
    private final RepositorySystem repositorySystem;
 
+   /**
+    * Target repository.
+    * 
+    * <pre>
+    * &lt;repository&gt;
+    *   &lt;id&gt;repo-id&lt;/id&gt;
+    *   &lt;url&gt;http://foo.bar/repo&lt;/url&gt;
+    * &lt;/repository&gt;
+    * </pre>
+    */
    @Parameter(required = true)
    private Repository repository;
 
