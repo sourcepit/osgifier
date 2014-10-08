@@ -324,7 +324,8 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       final Collection<String> pathFilters = Arrays.asList("!META-INF/maven/**");
 
       final File destJarFile = new File(workDir, bundleId + ".jar");
-      repackager.copyJarAndInjectManifest(bundle.getLocation(), destJarFile, bundle.getManifest(), pathFilters);
+      repackager.copyJarAndInjectManifest(bundle.getLocation(), destJarFile, bundle.getManifest(),
+         GenerateManifestMojo.getBundleLocalization(bundle), pathFilters);
       updateBundleLocation(bundle, dependencyModel, destJarFile);
    }
 

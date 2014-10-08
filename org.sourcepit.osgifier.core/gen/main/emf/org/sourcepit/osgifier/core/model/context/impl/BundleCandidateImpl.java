@@ -31,6 +31,7 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.modeling.impl.XAnnotatableImpl;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
 import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
@@ -50,6 +51,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
  * </li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.impl.BundleCandidateImpl#isNativeBundle <em>Native Bundle</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.impl.BundleCandidateImpl#getManifest <em>Manifest</em>}</li>
+ * <li>{@link org.sourcepit.osgifier.core.model.context.impl.BundleCandidateImpl#getLocalization <em>Localization</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.impl.BundleCandidateImpl#getSourceBundle <em>Source Bundle</em>}
  * </li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.impl.BundleCandidateImpl#getTargetBundle <em>Target Bundle</em>}
@@ -181,6 +183,17 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @ordered
     */
    protected BundleManifest manifest;
+
+   /**
+    * The cached value of the '{@link #getLocalization() <em>Localization</em>}' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see #getLocalization()
+    * @generated
+    * @ordered
+    */
+   protected BundleLocalization localization;
 
    /**
     * The cached value of the '{@link #getSourceBundle() <em>Source Bundle</em>}' reference.
@@ -471,6 +484,65 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
+   public BundleLocalization getLocalization()
+   {
+      return localization;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public NotificationChain basicSetLocalization(BundleLocalization newLocalization, NotificationChain msgs)
+   {
+      BundleLocalization oldLocalization = localization;
+      localization = newLocalization;
+      if (eNotificationRequired())
+      {
+         ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+            ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION, oldLocalization, newLocalization);
+         if (msgs == null)
+            msgs = notification;
+         else
+            msgs.add(notification);
+      }
+      return msgs;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public void setLocalization(BundleLocalization newLocalization)
+   {
+      if (newLocalization != localization)
+      {
+         NotificationChain msgs = null;
+         if (localization != null)
+            msgs = ((InternalEObject) localization).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+               - ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION, null, msgs);
+         if (newLocalization != null)
+            msgs = ((InternalEObject) newLocalization).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+               - ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION, null, msgs);
+         msgs = basicSetLocalization(newLocalization, msgs);
+         if (msgs != null)
+            msgs.dispatch();
+      }
+      else if (eNotificationRequired())
+         eNotify(new ENotificationImpl(this, Notification.SET, ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION,
+            newLocalization, newLocalization));
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public BundleCandidate getSourceBundle()
    {
       if (sourceBundle != null && sourceBundle.eIsProxy())
@@ -669,6 +741,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return ((InternalEList<?>) getDependencies()).basicRemove(otherEnd, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return basicSetManifest(null, msgs);
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION :
+            return basicSetLocalization(null, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             return basicSetSourceBundle(null, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :
@@ -702,6 +776,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return isNativeBundle();
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return getManifest();
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION :
+            return getLocalization();
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             if (resolve)
                return getSourceBundle();
@@ -748,6 +824,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             setManifest((BundleManifest) newValue);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION :
+            setLocalization((BundleLocalization) newValue);
+            return;
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             setSourceBundle((BundleCandidate) newValue);
             return;
@@ -790,6 +869,9 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             setManifest((BundleManifest) null);
             return;
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION :
+            setLocalization((BundleLocalization) null);
+            return;
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             setSourceBundle((BundleCandidate) null);
             return;
@@ -825,6 +907,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
             return nativeBundle != NATIVE_BUNDLE_EDEFAULT;
          case ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST :
             return manifest != null;
+         case ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION :
+            return localization != null;
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             return sourceBundle != null;
          case ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE :

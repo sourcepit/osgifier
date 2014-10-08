@@ -23,10 +23,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
 import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
+import org.sourcepit.osgifier.core.model.context.LocalizedData;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
@@ -92,6 +94,10 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
             return createBundleCandidate();
          case ContextModelPackage.BUNDLE_REFERENCE :
             return createBundleReference();
+         case ContextModelPackage.BUNDLE_LOCALIZATION :
+            return createBundleLocalization();
+         case ContextModelPackage.LOCALIZED_DATA :
+            return createLocalizedData();
          default :
             throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
       }
@@ -167,6 +173,30 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
    {
       BundleReferenceImpl bundleReference = new BundleReferenceImpl();
       return bundleReference;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public BundleLocalization createBundleLocalization()
+   {
+      BundleLocalizationImpl bundleLocalization = new BundleLocalizationImpl();
+      return bundleLocalization;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public LocalizedData createLocalizedData()
+   {
+      LocalizedDataImpl localizedData = new LocalizedDataImpl();
+      return localizedData;
    }
 
    /**

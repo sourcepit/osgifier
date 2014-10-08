@@ -19,6 +19,7 @@ package org.sourcepit.osgifier.core.model.context.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -26,10 +27,12 @@ import org.sourcepit.common.manifest.ManifestPackage;
 import org.sourcepit.common.manifest.osgi.BundleManifestPackage;
 import org.sourcepit.common.modeling.CommonModelingPackage;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
 import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
+import org.sourcepit.osgifier.core.model.context.LocalizedData;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
 import org.sourcepit.osgifier.core.model.java.impl.JavaModelPackageImpl;
@@ -66,6 +69,22 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * @generated
     */
    private EClass bundleReferenceEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass bundleLocalizationEClass = null;
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   private EClass localizedDataEClass = null;
 
    /**
     * <!-- begin-user-doc -->
@@ -270,7 +289,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_SourceBundle()
+   public EReference getBundleCandidate_Localization()
    {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(7);
    }
@@ -281,9 +300,20 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_TargetBundle()
+   public EReference getBundleCandidate_SourceBundle()
    {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(8);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getBundleCandidate_TargetBundle()
+   {
+      return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(9);
    }
 
    /**
@@ -358,6 +388,61 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
+   public EClass getBundleLocalization()
+   {
+      return bundleLocalizationEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getBundleLocalization_Data()
+   {
+      return (EReference) bundleLocalizationEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EClass getLocalizedData()
+   {
+      return localizedDataEClass;
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EAttribute getLocalizedData_Locale()
+   {
+      return (EAttribute) localizedDataEClass.getEStructuralFeatures().get(0);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
+   public EReference getLocalizedData_Data()
+   {
+      return (EReference) localizedDataEClass.getEStructuralFeatures().get(1);
+   }
+
+   /**
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    */
    public EEnum getEmbedInstruction()
    {
       return embedInstructionEEnum;
@@ -408,6 +493,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__SYMBOLIC_NAME);
       createEAttribute(bundleCandidateEClass, BUNDLE_CANDIDATE__NATIVE_BUNDLE);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__MANIFEST);
+      createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__LOCALIZATION);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__SOURCE_BUNDLE);
       createEReference(bundleCandidateEClass, BUNDLE_CANDIDATE__TARGET_BUNDLE);
 
@@ -417,6 +503,13 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       createEReference(bundleReferenceEClass, BUNDLE_REFERENCE__TARGET);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__PROVIDED);
       createEAttribute(bundleReferenceEClass, BUNDLE_REFERENCE__EMBED_INSTRUCTION);
+
+      bundleLocalizationEClass = createEClass(BUNDLE_LOCALIZATION);
+      createEReference(bundleLocalizationEClass, BUNDLE_LOCALIZATION__DATA);
+
+      localizedDataEClass = createEClass(LOCALIZED_DATA);
+      createEAttribute(localizedDataEClass, LOCALIZED_DATA__LOCALE);
+      createEReference(localizedDataEClass, LOCALIZED_DATA__DATA);
 
       // Create enums
       embedInstructionEEnum = createEEnum(EMBED_INSTRUCTION);
@@ -496,6 +589,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEReference(getBundleCandidate_Manifest(), theBundleManifestPackage.getBundleManifest(), null, "manifest",
          null, 0, 1, BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
          !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getBundleCandidate_Localization(), this.getBundleLocalization(), null, "localization", null, 0, 1,
+         BundleCandidate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
       initEReference(getBundleCandidate_SourceBundle(), this.getBundleCandidate(),
          this.getBundleCandidate_TargetBundle(), "sourceBundle", null, 0, 1, BundleCandidate.class, !IS_TRANSIENT,
          !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
@@ -522,6 +618,29 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       initEAttribute(getBundleReference_EmbedInstruction(), this.getEmbedInstruction(), "embedInstruction", null, 1, 1,
          BundleReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
          !IS_DERIVED, IS_ORDERED);
+
+      initEClass(bundleLocalizationEClass, BundleLocalization.class, "BundleLocalization", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+      initEReference(getBundleLocalization_Data(), this.getLocalizedData(), null, "data", null, 0, -1,
+         BundleLocalization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+      EOperation op = addEOperation(bundleLocalizationEClass, null, "set", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "locale", 1, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "key", 1, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+      op = addEOperation(bundleLocalizationEClass, ecorePackage.getEString(), "get", 0, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "locale", 1, 1, IS_UNIQUE, IS_ORDERED);
+      addEParameter(op, ecorePackage.getEString(), "key", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+      initEClass(localizedDataEClass, LocalizedData.class, "LocalizedData", !IS_ABSTRACT, !IS_INTERFACE,
+         IS_GENERATED_INSTANCE_CLASS);
+      initEAttribute(getLocalizedData_Locale(), ecorePackage.getEString(), "locale", "\"\"", 1, 1, LocalizedData.class,
+         !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+      initEReference(getLocalizedData_Data(), theCommonModelingPackage.getEStringMapEntry(), null, "data", null, 0, -1,
+         LocalizedData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+         !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
       // Initialize enums and add enum literals
       initEEnum(embedInstructionEEnum, EmbedInstruction.class, "EmbedInstruction");

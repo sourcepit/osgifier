@@ -57,7 +57,7 @@ public class RepackagerTest extends InjectedTest
       Manifest manifest = ManifestFactory.eINSTANCE.createManifest();
       manifest.setHeader("Foo", "bar");
 
-      repackager.injectManifest(jarFile, manifest);
+      repackager.injectManifest(jarFile, manifest, null);
 
       JarFile jar = new JarFile(jarFile);
 
@@ -76,7 +76,7 @@ public class RepackagerTest extends InjectedTest
       File destJarFile = ws.newFile();
       FileUtils.forceDelete(destJarFile);
 
-      repackager.copyJarAndInjectManifest(jarFile, destJarFile, manifest);
+      repackager.copyJarAndInjectManifest(jarFile, destJarFile, manifest, null);
 
       JarFile jar = new JarFile(destJarFile);
 

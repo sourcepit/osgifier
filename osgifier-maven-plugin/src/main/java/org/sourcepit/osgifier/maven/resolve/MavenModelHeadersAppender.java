@@ -53,24 +53,25 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       {
          final Model model = new ModelFromString().fromString(modelAsString);
          final BundleManifest manifest = bundle.getManifest();
-         appendBundleName(manifest, model);
+         appendBundleName(bundle, manifest, model);
          appendBundleVendor(manifest, model);
          appendBundleDocURL(manifest, model);
-         appendBundleDescription(manifest, model);
+         appendBundleDescription(bundle, manifest, model);
          appendBundleLicense(manifest, model);
       }
    }
 
-   private void appendBundleName(final BundleManifest manifest, final Model model)
+   private void appendBundleName(BundleCandidate bundle, BundleManifest manifest, Model model)
    {
       final String name = model.getName();
       if (isNotEmpty(name))
       {
-         manifest.setHeader(BundleHeaderName.BUNDLE_NAME, name);
+         bundle.getAnnotation("Bundle-Localization", true).setAnnotationData("", "bundle.name", name);
+         manifest.setHeader(BundleHeaderName.BUNDLE_NAME, "%bundle.name");
       }
    }
 
-   private void appendBundleVendor(final BundleManifest manifest, final Model model)
+   private void appendBundleVendor(BundleManifest manifest, Model model)
    {
       final Organization organization = model.getOrganization();
       if (organization != null)
@@ -87,7 +88,7 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       }
    }
 
-   private void appendBundleDocURL(final BundleManifest manifest, final Model model)
+   private void appendBundleDocURL(BundleManifest manifest, Model model)
    {
       final String url = model.getUrl();
       if (isNotEmpty(url))
@@ -96,12 +97,13 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       }
    }
 
-   private void appendBundleDescription(final BundleManifest manifest, final Model model)
+   private void appendBundleDescription(BundleCandidate bundle, BundleManifest manifest, Model model)
    {
       final String description = model.getDescription();
       if (isNotEmpty(description))
       {
-         manifest.setHeader(BUNDLE_DESCRIPTION, description);
+         bundle.getAnnotation("Bundle-Localization", true).setAnnotationData("", "bundle.description", description);
+         manifest.setHeader(BUNDLE_DESCRIPTION, "%bundle.description");
       }
    }
 

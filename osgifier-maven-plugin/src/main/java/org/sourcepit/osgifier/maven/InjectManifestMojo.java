@@ -20,6 +20,7 @@ import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -68,8 +69,10 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
       final File manifestFile = (File) project.getContextValue("osgifier.manifestFile");
       if (manifestFile != null)
       {
+         final Map<String, Map> foo = (Map<String, Map>) project.getContextValue("osgifier.Bundle-Localization");
+
          final Manifest manifest = readManifest(manifestFile);
-         repackager.injectManifest(project.getArtifact().getFile(), manifest);
+         repackager.injectManifest(project.getArtifact().getFile(), manifest, foo);
       }
 
       final File sourceManifestFile = (File) project.getContextValue("osgifier.sourceManifestFile");
@@ -79,7 +82,7 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
          if (sourceArtifact != null)
          {
             final Manifest sourceManifest = readManifest(sourceManifestFile);
-            repackager.injectManifest(sourceArtifact.getFile(), sourceManifest);
+            repackager.injectManifest(sourceArtifact.getFile(), sourceManifest, null);
          }
       }
    }

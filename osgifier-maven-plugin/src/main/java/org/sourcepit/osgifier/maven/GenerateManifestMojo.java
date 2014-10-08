@@ -23,6 +23,7 @@ import static org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest.toOpti
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -37,13 +38,16 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
+import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.artifact.ArtifactFactory;
 import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
+import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgifier.core.headermod.HeaderModifications;
+import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
 import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
@@ -140,8 +144,8 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
    private HeaderModifications headerModifications;
 
    /**
-    * When set to <code>true</code>, the generated
-    * <code>MANIFEST.MF<code> will also be copied to <code>${project.basedir}/META-INF/MANIFEST.MF</code>.
+    * When set to <code>true</code>, the generated <code>MANIFEST.MF</code> will also be copied to
+    * <code>${project.basedir}/META-INF/MANIFEST.MF</code>.
     */
    @Parameter(defaultValue = "false")
    private boolean pde;
@@ -166,6 +170,10 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
 
       final BundleManifest manifest = result.getBundleManifest();
 
+      final BundleCandidate bundle = (BundleCandidate) manifest.eContainer();
+
+      project.setContextValue("osgifier.Bundle-Localization", getBundleLocalization(bundle));
+
       ModelUtils.writeModel(manifestFile, manifest);
       project.setContextValue("osgifier.manifestFile", manifestFile);
 
@@ -188,6 +196,22 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
          ModelUtils.writeModel(sourceManifestFile, sourceManifest);
          project.setContextValue("osgifier.sourceManifestFile", sourceManifestFile);
       }
+   }
+
+   public static Map<String, Map> getBundleLocalization(final BundleCandidate bundle)
+   {
+      final Map<String, Map> foo = new LinkedHashMap<String, Map>();
+
+      final Annotation localization = bundle.getAnnotation("Bundle-Localization");
+      if (localization != null)
+      {
+         for (Annotation nl : localization.getAnnotations())
+         {
+            final String name = nl.getSource();
+            foo.put(name, nl.getData().map());
+         }
+      }
+      return foo;
    }
 
    private ArtifactManifestBuilderRequest newManifestRequest(final MavenProject project)

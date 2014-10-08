@@ -53,6 +53,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
+import org.sourcepit.osgifier.maven.GenerateManifestMojo;
 import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder;
 import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder.NativeBundleStrategy;
 import org.sourcepit.osgifier.p2.P2Publisher;
@@ -231,7 +232,8 @@ public class P2UpdateSiteGenerator
          }
          else
          {
-            repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest());
+            repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest(),
+               GenerateManifestMojo.getBundleLocalization(bundle));
          }
          bundle.setLocation(bundleJar);
          bundleJars.add(bundleJar);

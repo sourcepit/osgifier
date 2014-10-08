@@ -24,8 +24,10 @@ import org.sourcepit.common.modeling.Annotatable;
 import org.sourcepit.common.modeling.Extendable;
 import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
+import org.sourcepit.osgifier.core.model.context.LocalizedData;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
@@ -112,6 +114,18 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBundleReference(BundleReference object)
       {
          return createBundleReferenceAdapter();
+      }
+
+      @Override
+      public Adapter caseBundleLocalization(BundleLocalization object)
+      {
+         return createBundleLocalizationAdapter();
+      }
+
+      @Override
+      public Adapter caseLocalizedData(LocalizedData object)
+      {
+         return createLocalizedDataAdapter();
       }
 
       @Override
@@ -202,6 +216,40 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    public Adapter createBundleReferenceAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgifier.core.model.context.BundleLocalization
+    * <em>Bundle Localization</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgifier.core.model.context.BundleLocalization
+    * @generated
+    */
+   public Adapter createBundleLocalizationAdapter()
+   {
+      return null;
+   }
+
+   /**
+    * Creates a new adapter for an object of class '{@link org.sourcepit.osgifier.core.model.context.LocalizedData
+    * <em>Localized Data</em>}'.
+    * <!-- begin-user-doc -->
+    * This default implementation returns null so that we can easily ignore cases;
+    * it's useful to ignore a case when inheritance will catch all the cases anyway.
+    * <!-- end-user-doc -->
+    * 
+    * @return the new adapter.
+    * @see org.sourcepit.osgifier.core.model.context.LocalizedData
+    * @generated
+    */
+   public Adapter createLocalizedDataAdapter()
    {
       return null;
    }

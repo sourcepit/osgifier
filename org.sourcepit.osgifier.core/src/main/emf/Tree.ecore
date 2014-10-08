@@ -18,6 +18,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nativeBundle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="manifest" eType="ecore:EClass ../../../../org.sourcepit.common.manifest/src/main/emf/manifest.ecore#//osgi/BundleManifest"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localization" eType="#//BundleLocalization"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceBundle" eType="#//BundleCandidate"
         eOpposite="#//BundleCandidate/targetBundle"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetBundle" eType="#//BundleCandidate"
@@ -35,5 +37,24 @@
     <eLiterals name="NOT" literal="not"/>
     <eLiterals name="UNPACKED" value="1" literal="unpacked"/>
     <eLiterals name="PACKED" value="2" literal="packed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BundleLocalization">
+    <eOperations name="set">
+      <eParameters name="locale" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="get" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="locale" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="-1" eType="#//LocalizedData"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalizedData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="&quot;&quot;"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" upperBound="-1" eType="ecore:EClass ../../../../org.sourcepit.common.modeling/src/main/emf/CommonModeling.ecore#//EStringMapEntry"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

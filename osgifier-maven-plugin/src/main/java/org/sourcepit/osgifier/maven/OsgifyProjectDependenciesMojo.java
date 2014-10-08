@@ -227,7 +227,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
    {
       final File srcJarFile = bundle.getLocation();
       final File destJarFile = new File(getWorkDir(bundle), getBundleId(bundle) + ".jar");
-      repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, bundle.getManifest());
+      repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, bundle.getManifest(), null);
       return destJarFile;
    }
 
