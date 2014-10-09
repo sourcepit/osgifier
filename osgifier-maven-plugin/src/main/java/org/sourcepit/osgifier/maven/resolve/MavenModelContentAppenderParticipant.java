@@ -16,6 +16,7 @@
 
 package org.sourcepit.osgifier.maven.resolve;
 
+import static org.apache.maven.model.building.ModelBuildingRequest.VALIDATION_LEVEL_MINIMAL;
 import static org.sourcepit.common.maven.model.util.MavenModelUtils.toArtifactKey;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
@@ -106,6 +107,7 @@ public class MavenModelContentAppenderParticipant implements ContentAppenderPart
       request.setProject(null);
       request.setResolveDependencies(false);
       request.setProcessPlugins(false);
+      request.setValidationLevel(VALIDATION_LEVEL_MINIMAL);
 
       try
       {
