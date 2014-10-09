@@ -24,6 +24,7 @@
 	<artifactId>org.sourcepit.osgifier.maven</artifactId>
 	
 	<name>OSGifier Maven APIs and Components</name>
+	<description></description>
 
 	<dependencies>
 		<dependency>

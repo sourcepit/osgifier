@@ -24,6 +24,7 @@
 	<artifactId>org.sourcepit.osgifier.core</artifactId>
 	
 	<name>OSGifier Core APIs and Components</name>
+	<description></description>
 
 	<dependencies>
 		<dependency>

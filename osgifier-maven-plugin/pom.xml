@@ -25,6 +25,7 @@
 	<packaging>maven-plugin</packaging>
 	
 	<name>OSGifier Maven Plugin</name>
+	<description></description>
 
 	<dependencies>
 		<dependency>
