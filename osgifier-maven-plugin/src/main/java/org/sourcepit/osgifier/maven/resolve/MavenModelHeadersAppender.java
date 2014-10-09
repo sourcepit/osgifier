@@ -48,7 +48,7 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
    @Override
    public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
    {
-      final String modelAsString = bundle.getAnnotationData("maven", "model");
+      final String modelAsString = getMavenModelAsString(bundle);
       if (modelAsString != null)
       {
          final Model model = new ModelFromString().fromString(modelAsString);
@@ -59,6 +59,16 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
          appendBundleDescription(manifest, model);
          appendBundleLicense(manifest, model);
       }
+   }
+
+   private String getMavenModelAsString(BundleCandidate bundle)
+   {
+      String modelAsString = bundle.getAnnotationData("maven", "model");
+      if (modelAsString == null && bundle.getTargetBundle() != null) // get main bundles model if i'm a source bundle
+      {
+         modelAsString = bundle.getTargetBundle().getAnnotationData("maven", "model");
+      }
+      return modelAsString;
    }
 
    private void appendBundleName(final BundleManifest manifest, final Model model)
