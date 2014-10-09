@@ -39,6 +39,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
  * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getSymbolicName <em>Symbolic Name</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#isNativeBundle <em>Native Bundle</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getManifest <em>Manifest</em>}</li>
+ * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getLocalization <em>Localization</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getSourceBundle <em>Source Bundle</em>}</li>
  * <li>{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getTargetBundle <em>Target Bundle</em>}</li>
  * </ul>
@@ -240,6 +241,35 @@ public interface BundleCandidate extends XAnnotatable
     * @generated
     */
    void setManifest(BundleManifest value);
+
+   /**
+    * Returns the value of the '<em><b>Localization</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <p>
+    * If the meaning of the '<em>Localization</em>' containment reference isn't clear, there really should be more of a
+    * description here...
+    * </p>
+    * <!-- end-user-doc -->
+    * 
+    * @return the value of the '<em>Localization</em>' containment reference.
+    * @see #setLocalization(BundleLocalization)
+    * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage#getBundleCandidate_Localization()
+    * @model containment="true"
+    * @generated
+    */
+   BundleLocalization getLocalization();
+
+   /**
+    * Sets the value of the '{@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getLocalization
+    * <em>Localization</em>}' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @param value the new value of the '<em>Localization</em>' containment reference.
+    * @see #getLocalization()
+    * @generated
+    */
+   void setLocalization(BundleLocalization value);
 
    /**
     * Returns the value of the '<em><b>Source Bundle</b></em>' reference.

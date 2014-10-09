@@ -82,7 +82,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
             final BundleCandidate candidate = context.getBundles().get(0);
             final BundleManifest manifest = createEclipseSourceBundleManifest(candidate);
 
-            repackager.injectManifest(sourcesJarFile, manifest);
+            repackager.injectManifest(sourcesJarFile, manifest, null);
          }
       }
 
@@ -104,7 +104,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
                   + ".jar";
                final File destJarFile = new File(outDir, bundleFileName);
                final BundleManifest manifest = candidate.getManifest();
-               repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, manifest);
+               repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, null);
             }
          }
       }
@@ -145,7 +145,7 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       final File destJarFile = new File(outDir, manifest.getBundleSymbolicName().getSymbolicName() + "_"
          + manifest.getBundleVersion().toFullString() + ".jar");
 
-      repackager.copyJarAndInjectManifest(sourceJarFile, destJarFile, manifest);
+      repackager.copyJarAndInjectManifest(sourceJarFile, destJarFile, manifest, null);
 
       return destJarFile;
    }

@@ -28,6 +28,8 @@ import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
+import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.util.OsgifierContextUtils;
 import org.sourcepit.osgifier.core.util.OsgifierContextUtils.BuildOrder;
@@ -144,6 +146,13 @@ public class BundleManifestAppender
          manifest.setBundleSymbolicName(bundle.getSymbolicName());
          manifest.setBundleVersion(bundle.getVersion());
          bundle.setManifest(manifest);
+      }
+      
+      BundleLocalization localization = bundle.getLocalization();
+      if (localization == null)
+      {
+         localization = ContextModelFactory.eINSTANCE.createBundleLocalization();
+         bundle.setLocalization(localization);
       }
    }
 

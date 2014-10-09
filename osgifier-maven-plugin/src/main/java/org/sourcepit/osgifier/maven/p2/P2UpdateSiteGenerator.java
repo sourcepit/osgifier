@@ -231,7 +231,8 @@ public class P2UpdateSiteGenerator
          }
          else
          {
-            repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest());
+            repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest(),
+               bundle.getLocalization());
          }
          bundle.setLocation(bundleJar);
          bundleJars.add(bundleJar);

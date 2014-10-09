@@ -69,6 +69,26 @@ public interface ContextModelFactory extends EFactory
    BundleReference createBundleReference();
 
    /**
+    * Returns a new object of class '<em>Bundle Localization</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Bundle Localization</em>'.
+    * @generated
+    */
+   BundleLocalization createBundleLocalization();
+
+   /**
+    * Returns a new object of class '<em>Localized Data</em>'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return a new object of class '<em>Localized Data</em>'.
+    * @generated
+    */
+   LocalizedData createLocalizedData();
+
+   /**
     * Returns the package supported by this factory.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

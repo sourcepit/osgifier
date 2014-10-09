@@ -20,6 +20,7 @@ import static org.apache.commons.lang.StringUtils.isEmpty;
 import static org.apache.commons.lang.StringUtils.isNotEmpty;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_DESCRIPTION;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_DOCURL;
+import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_NAME;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.BUNDLE_VENDOR;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.bundle.BundleHeadersAppender;
 import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -53,10 +55,11 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       {
          final Model model = new ModelFromString().fromString(modelAsString);
          final BundleManifest manifest = bundle.getManifest();
-         appendBundleName(manifest, model);
-         appendBundleVendor(manifest, model);
-         appendBundleDocURL(manifest, model);
-         appendBundleDescription(manifest, model);
+         final BundleLocalization localization = bundle.getLocalization();
+         appendBundleName(manifest, localization, model);
+         appendBundleVendor(manifest, localization, model);
+         appendBundleDocURL(manifest, localization, model);
+         appendBundleDescription(manifest, localization, model);
          appendBundleLicense(manifest, model);
       }
    }
@@ -71,16 +74,16 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       return modelAsString;
    }
 
-   private void appendBundleName(final BundleManifest manifest, final Model model)
+   private void appendBundleName(BundleManifest manifest, BundleLocalization localization, Model model)
    {
       final String name = model.getName();
       if (isNotEmpty(name))
       {
-         manifest.setHeader(BundleHeaderName.BUNDLE_NAME, name);
+         append(manifest, localization, BUNDLE_NAME, "bundle.name", name);
       }
    }
 
-   private void appendBundleVendor(final BundleManifest manifest, final Model model)
+   private void appendBundleVendor(BundleManifest manifest, BundleLocalization localization, Model model)
    {
       final Organization organization = model.getOrganization();
       if (organization != null)
@@ -92,26 +95,26 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
          }
          if (isNotEmpty(value))
          {
-            manifest.setHeader(BUNDLE_VENDOR, value);
+            append(manifest, localization, BUNDLE_VENDOR, "bundle.vendor", value);
          }
       }
    }
 
-   private void appendBundleDocURL(final BundleManifest manifest, final Model model)
+   private void appendBundleDocURL(BundleManifest manifest, BundleLocalization localization, Model model)
    {
       final String url = model.getUrl();
       if (isNotEmpty(url))
       {
-         manifest.setHeader(BUNDLE_DOCURL, url);
+         append(manifest, localization, BUNDLE_DOCURL, "bundle.docURL", url);
       }
    }
 
-   private void appendBundleDescription(final BundleManifest manifest, final Model model)
+   private void appendBundleDescription(BundleManifest manifest, BundleLocalization localization, Model model)
    {
       final String description = model.getDescription();
       if (isNotEmpty(description))
       {
-         manifest.setHeader(BUNDLE_DESCRIPTION, description);
+         append(manifest, localization, BUNDLE_DESCRIPTION, "bundle.description", description);
       }
    }
 
@@ -122,6 +125,13 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       {
          manifest.setBundleLicense(bundleLicenses);
       }
+   }
+
+   private static void append(BundleManifest manifest, BundleLocalization localization, BundleHeaderName header,
+      String key, final String value)
+   {
+      localization.set("", key, value);
+      manifest.setHeader(header, "%" + key);
    }
 
    private List<BundleLicense> toBundleLicenses(List<License> licenses)
@@ -137,6 +147,7 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       }
       return bundleLicenses;
    }
+
 
    static BundleLicense toBundleLicense(License license)
    {

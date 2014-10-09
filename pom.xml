@@ -14,12 +14,13 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.sourcepit</groupId>
 		<artifactId>srcpit-parent</artifactId>
-		<version>18</version>
+		<version>19</version>
 	</parent>
 	<groupId>org.sourcepit.osgifier</groupId>
 	<artifactId>osgifier</artifactId>
@@ -155,7 +156,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 
 	<properties>
 		<tycho.version>0.21.0</tycho.version>
-		<common-maven.version>0.21.0</common-maven.version>
+		<common-maven.version>0.21.1</common-maven.version>
 	</properties>
 
 	<modules>
@@ -192,27 +193,27 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>org.sourcepit.common.utils</artifactId>
-				<version>0.14.0</version>
+				<version>0.14.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>org.sourcepit.common.constraints</artifactId>
-				<version>0.14.0</version>
+				<version>0.14.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>org.sourcepit.common.manifest</artifactId>
-				<version>0.17.0</version>
+				<version>0.17.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>org.sourcepit.common.modeling</artifactId>
-				<version>0.12.0</version>
+				<version>0.12.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.common</groupId>
 				<artifactId>org.sourcepit.common.modeling</artifactId>
-				<version>0.12.0</version>
+				<version>0.12.1</version>
 				<type>test-jar</type>
 			</dependency>
 			<dependency>
@@ -239,7 +240,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 			<dependency>
 				<groupId>org.sourcepit</groupId>
 				<artifactId>maven-dependency-model</artifactId>
-				<version>0.10.0</version>
+				<version>0.10.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.sourcepit.osgifier</groupId>

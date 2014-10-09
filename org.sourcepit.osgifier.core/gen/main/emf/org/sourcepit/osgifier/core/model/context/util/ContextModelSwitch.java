@@ -24,8 +24,10 @@ import org.sourcepit.common.modeling.Annotatable;
 import org.sourcepit.common.modeling.Extendable;
 import org.sourcepit.common.modeling.XAnnotatable;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelPackage;
+import org.sourcepit.osgifier.core.model.context.LocalizedData;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 /**
@@ -156,6 +158,22 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
+         case ContextModelPackage.BUNDLE_LOCALIZATION :
+         {
+            BundleLocalization bundleLocalization = (BundleLocalization) theEObject;
+            T result = caseBundleLocalization(bundleLocalization);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
+         case ContextModelPackage.LOCALIZED_DATA :
+         {
+            LocalizedData localizedData = (LocalizedData) theEObject;
+            T result = caseLocalizedData(localizedData);
+            if (result == null)
+               result = defaultCase(theEObject);
+            return result;
+         }
          default :
             return defaultCase(theEObject);
       }
@@ -208,6 +226,40 @@ public class ContextModelSwitch<T>
     * @generated
     */
    public T caseBundleReference(BundleReference object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Bundle Localization</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Bundle Localization</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseBundleLocalization(BundleLocalization object)
+   {
+      return null;
+   }
+
+   /**
+    * Returns the result of interpreting the object as an instance of '<em>Localized Data</em>'.
+    * <!-- begin-user-doc -->
+    * This implementation returns null;
+    * returning a non-null result will terminate the switch.
+    * <!-- end-user-doc -->
+    * 
+    * @param object the target of the switch.
+    * @return the result of interpreting the object as an instance of '<em>Localized Data</em>'.
+    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+    * @generated
+    */
+   public T caseLocalizedData(LocalizedData object)
    {
       return null;
    }

@@ -48,6 +48,7 @@ import org.sourcepit.common.utils.io.IOOperation;
 import org.sourcepit.common.utils.lang.Exceptions;
 import org.sourcepit.common.utils.lang.PipedIOException;
 import org.sourcepit.common.utils.path.PathMatcher;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -55,16 +56,17 @@ import org.sourcepit.common.utils.path.PathMatcher;
 @Named
 public class Repackager
 {
-   private final static PathMatcher DEFAULT_CONTENT_MATCHER = createJarContentMatcher(null);
+   private static final PathMatcher DEFAULT_CONTENT_MATCHER = createJarContentMatcher(null);
 
    private final Logger logger = LoggerFactory.getLogger(Repackager.class);
 
-   public void injectManifest(final File jarFile, final Manifest manifest) throws PipedIOException
+   public void injectManifest(final File jarFile, final Manifest manifest, final BundleLocalization localization)
+      throws PipedIOException
    {
       try
       {
          final File tmpFile = move(jarFile);
-         copyJarAndInjectManifest(tmpFile, jarFile, manifest);
+         copyJarAndInjectManifest(tmpFile, jarFile, manifest, localization);
          org.apache.commons.io.FileUtils.forceDelete(tmpFile);
       }
       catch (IOException e)
@@ -126,31 +128,41 @@ public class Repackager
       return new File(path.toString());
    }
 
-   public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest)
-      throws PipedIOException
+   public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
+      final BundleLocalization localization) throws PipedIOException
    {
-      copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, null);
+      copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, localization, null);
    }
 
-   public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
-      final Collection<String> pathFilters) throws PipedIOException
+   public <T> void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
+      final BundleLocalization localization, final Collection<String> pathFilters) throws PipedIOException
    {
       new IOOperation<JarOutputStream>(jarOut(buffOut(fileOut(destJarFile))))
       {
          @Override
          protected void run(JarOutputStream destJarOut) throws IOException
          {
-            rePackageJarFile(srcJarFile, manifest, destJarOut, pathFilters);
+            rePackageJarFile(srcJarFile, manifest, localization, destJarOut, pathFilters);
          }
       }.run();
    }
 
-   private void rePackageJarFile(File srcJarFile, final Manifest manifest, final JarOutputStream destJarOut,
-      Collection<String> pathFilters) throws IOException
+   private void rePackageJarFile(File srcJarFile, final Manifest manifest, BundleLocalization localization,
+      final JarOutputStream destJarOut, Collection<String> pathFilters) throws IOException
    {
       destJarOut.putNextEntry(new JarEntry(JarFile.MANIFEST_NAME));
       writeManifest(manifest, destJarOut);
       destJarOut.closeEntry();
+
+      if (localization != null)
+      {
+         final Set<String> paths = BundleLocalizationWriter.write(destJarOut, manifest, localization).keySet();
+         pathFilters = pathFilters == null ? new HashSet<String>() : new HashSet<String>(pathFilters);
+         for (String path : paths)
+         {
+            pathFilters.add("!" + path);
+         }
+      }
 
       final PathMatcher pathMatcher = pathFilters == null
          ? DEFAULT_CONTENT_MATCHER

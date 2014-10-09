@@ -232,6 +232,16 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_CANDIDATE__MANIFEST = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 6;
 
    /**
+    * The feature id for the '<em><b>Localization</b></em>' containment reference.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_CANDIDATE__LOCALIZATION = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 7;
+
+   /**
     * The feature id for the '<em><b>Source Bundle</b></em>' reference.
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -239,7 +249,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__SOURCE_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 7;
+   int BUNDLE_CANDIDATE__SOURCE_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 8;
 
    /**
     * The feature id for the '<em><b>Target Bundle</b></em>' reference.
@@ -249,7 +259,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE__TARGET_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 8;
+   int BUNDLE_CANDIDATE__TARGET_BUNDLE = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 9;
 
    /**
     * The number of structural features of the '<em>Bundle Candidate</em>' class.
@@ -259,7 +269,7 @@ public interface ContextModelPackage extends EPackage
     * @generated
     * @ordered
     */
-   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 9;
+   int BUNDLE_CANDIDATE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 10;
 
    /**
     * The meta object id for the '{@link org.sourcepit.osgifier.core.model.context.impl.BundleReferenceImpl
@@ -354,6 +364,80 @@ public interface ContextModelPackage extends EPackage
    int BUNDLE_REFERENCE_FEATURE_COUNT = CommonModelingPackage.XANNOTATABLE_FEATURE_COUNT + 5;
 
    /**
+    * The meta object id for the '{@link org.sourcepit.osgifier.core.model.context.impl.BundleLocalizationImpl
+    * <em>Bundle Localization</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see org.sourcepit.osgifier.core.model.context.impl.BundleLocalizationImpl
+    * @see org.sourcepit.osgifier.core.model.context.impl.ContextModelPackageImpl#getBundleLocalization()
+    * @generated
+    */
+   int BUNDLE_LOCALIZATION = 3;
+
+   /**
+    * The feature id for the '<em><b>Data</b></em>' containment reference list.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_LOCALIZATION__DATA = 0;
+
+   /**
+    * The number of structural features of the '<em>Bundle Localization</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int BUNDLE_LOCALIZATION_FEATURE_COUNT = 1;
+
+   /**
+    * The meta object id for the '{@link org.sourcepit.osgifier.core.model.context.impl.LocalizedDataImpl
+    * <em>Localized Data</em>}' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @see org.sourcepit.osgifier.core.model.context.impl.LocalizedDataImpl
+    * @see org.sourcepit.osgifier.core.model.context.impl.ContextModelPackageImpl#getLocalizedData()
+    * @generated
+    */
+   int LOCALIZED_DATA = 4;
+
+   /**
+    * The feature id for the '<em><b>Locale</b></em>' attribute.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int LOCALIZED_DATA__LOCALE = 0;
+
+   /**
+    * The feature id for the '<em><b>Data</b></em>' map.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int LOCALIZED_DATA__DATA = 1;
+
+   /**
+    * The number of structural features of the '<em>Localized Data</em>' class.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @generated
+    * @ordered
+    */
+   int LOCALIZED_DATA_FEATURE_COUNT = 2;
+
+   /**
     * The meta object id for the '{@link org.sourcepit.osgifier.core.model.context.EmbedInstruction
     * <em>Embed Instruction</em>}' enum.
     * <!-- begin-user-doc -->
@@ -363,7 +447,7 @@ public interface ContextModelPackage extends EPackage
     * @see org.sourcepit.osgifier.core.model.context.impl.ContextModelPackageImpl#getEmbedInstruction()
     * @generated
     */
-   int EMBED_INSTRUCTION = 3;
+   int EMBED_INSTRUCTION = 5;
 
 
    /**
@@ -495,6 +579,19 @@ public interface ContextModelPackage extends EPackage
    EReference getBundleCandidate_Manifest();
 
    /**
+    * Returns the meta object for the containment reference '
+    * {@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getLocalization <em>Localization</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the containment reference '<em>Localization</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.BundleCandidate#getLocalization()
+    * @see #getBundleCandidate()
+    * @generated
+    */
+   EReference getBundleCandidate_Localization();
+
+   /**
     * Returns the meta object for the reference '
     * {@link org.sourcepit.osgifier.core.model.context.BundleCandidate#getSourceBundle <em>Source Bundle</em>}'.
     * <!-- begin-user-doc -->
@@ -596,6 +693,69 @@ public interface ContextModelPackage extends EPackage
     * @generated
     */
    EAttribute getBundleReference_EmbedInstruction();
+
+   /**
+    * Returns the meta object for class '{@link org.sourcepit.osgifier.core.model.context.BundleLocalization
+    * <em>Bundle Localization</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for class '<em>Bundle Localization</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.BundleLocalization
+    * @generated
+    */
+   EClass getBundleLocalization();
+
+   /**
+    * Returns the meta object for the containment reference list '
+    * {@link org.sourcepit.osgifier.core.model.context.BundleLocalization#getData <em>Data</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the containment reference list '<em>Data</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.BundleLocalization#getData()
+    * @see #getBundleLocalization()
+    * @generated
+    */
+   EReference getBundleLocalization_Data();
+
+   /**
+    * Returns the meta object for class '{@link org.sourcepit.osgifier.core.model.context.LocalizedData
+    * <em>Localized Data</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for class '<em>Localized Data</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.LocalizedData
+    * @generated
+    */
+   EClass getLocalizedData();
+
+   /**
+    * Returns the meta object for the attribute '
+    * {@link org.sourcepit.osgifier.core.model.context.LocalizedData#getLocale <em>Locale</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the attribute '<em>Locale</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.LocalizedData#getLocale()
+    * @see #getLocalizedData()
+    * @generated
+    */
+   EAttribute getLocalizedData_Locale();
+
+   /**
+    * Returns the meta object for the map '{@link org.sourcepit.osgifier.core.model.context.LocalizedData#getData
+    * <em>Data</em>}'.
+    * <!-- begin-user-doc -->
+    * <!-- end-user-doc -->
+    * 
+    * @return the meta object for the map '<em>Data</em>'.
+    * @see org.sourcepit.osgifier.core.model.context.LocalizedData#getData()
+    * @see #getLocalizedData()
+    * @generated
+    */
+   EReference getLocalizedData_Data();
 
    /**
     * Returns the meta object for enum '{@link org.sourcepit.osgifier.core.model.context.EmbedInstruction
@@ -731,6 +891,15 @@ public interface ContextModelPackage extends EPackage
       EReference BUNDLE_CANDIDATE__MANIFEST = eINSTANCE.getBundleCandidate_Manifest();
 
       /**
+       * The meta object literal for the '<em><b>Localization</b></em>' containment reference feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_CANDIDATE__LOCALIZATION = eINSTANCE.getBundleCandidate_Localization();
+
+      /**
        * The meta object literal for the '<em><b>Source Bundle</b></em>' reference feature.
        * <!-- begin-user-doc -->
        * <!-- end-user-doc -->
@@ -804,6 +973,57 @@ public interface ContextModelPackage extends EPackage
        * @generated
        */
       EAttribute BUNDLE_REFERENCE__EMBED_INSTRUCTION = eINSTANCE.getBundleReference_EmbedInstruction();
+
+      /**
+       * The meta object literal for the '{@link org.sourcepit.osgifier.core.model.context.impl.BundleLocalizationImpl
+       * <em>Bundle Localization</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @see org.sourcepit.osgifier.core.model.context.impl.BundleLocalizationImpl
+       * @see org.sourcepit.osgifier.core.model.context.impl.ContextModelPackageImpl#getBundleLocalization()
+       * @generated
+       */
+      EClass BUNDLE_LOCALIZATION = eINSTANCE.getBundleLocalization();
+
+      /**
+       * The meta object literal for the '<em><b>Data</b></em>' containment reference list feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference BUNDLE_LOCALIZATION__DATA = eINSTANCE.getBundleLocalization_Data();
+
+      /**
+       * The meta object literal for the '{@link org.sourcepit.osgifier.core.model.context.impl.LocalizedDataImpl
+       * <em>Localized Data</em>}' class.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @see org.sourcepit.osgifier.core.model.context.impl.LocalizedDataImpl
+       * @see org.sourcepit.osgifier.core.model.context.impl.ContextModelPackageImpl#getLocalizedData()
+       * @generated
+       */
+      EClass LOCALIZED_DATA = eINSTANCE.getLocalizedData();
+
+      /**
+       * The meta object literal for the '<em><b>Locale</b></em>' attribute feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EAttribute LOCALIZED_DATA__LOCALE = eINSTANCE.getLocalizedData_Locale();
+
+      /**
+       * The meta object literal for the '<em><b>Data</b></em>' map feature.
+       * <!-- begin-user-doc -->
+       * <!-- end-user-doc -->
+       * 
+       * @generated
+       */
+      EReference LOCALIZED_DATA__DATA = eINSTANCE.getLocalizedData_Data();
 
       /**
        * The meta object literal for the '{@link org.sourcepit.osgifier.core.model.context.EmbedInstruction
