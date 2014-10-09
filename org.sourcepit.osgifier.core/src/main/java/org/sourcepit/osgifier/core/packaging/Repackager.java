@@ -28,8 +28,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -45,14 +43,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sourcepit.common.manifest.Manifest;
-import org.sourcepit.common.manifest.osgi.BundleHeaderName;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.common.utils.io.IOOperation;
 import org.sourcepit.common.utils.lang.Exceptions;
-import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.common.utils.lang.PipedIOException;
 import org.sourcepit.common.utils.path.PathMatcher;
-import org.sourcepit.common.utils.props.PropertiesUtils;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -64,13 +60,13 @@ public class Repackager
 
    private final Logger logger = LoggerFactory.getLogger(Repackager.class);
 
-   public void injectManifest(final File jarFile, final Manifest manifest, final Map<String, Map> bundleLocalizations)
+   public void injectManifest(final File jarFile, final Manifest manifest, final BundleLocalization localization)
       throws PipedIOException
    {
       try
       {
          final File tmpFile = move(jarFile);
-         copyJarAndInjectManifest(tmpFile, jarFile, manifest, bundleLocalizations);
+         copyJarAndInjectManifest(tmpFile, jarFile, manifest, localization);
          org.apache.commons.io.FileUtils.forceDelete(tmpFile);
       }
       catch (IOException e)
@@ -133,72 +129,40 @@ public class Repackager
    }
 
    public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
-      final Map<String, Map> bundleLocalizations) throws PipedIOException
+      final BundleLocalization localization) throws PipedIOException
    {
-      copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, bundleLocalizations, null);
+      copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, localization, null);
    }
 
    public <T> void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
-      final Map<String, Map> bundleLocalizations, final Collection<String> pathFilters) throws PipedIOException
+      final BundleLocalization localization, final Collection<String> pathFilters) throws PipedIOException
    {
       new IOOperation<JarOutputStream>(jarOut(buffOut(fileOut(destJarFile))))
       {
          @Override
          protected void run(JarOutputStream destJarOut) throws IOException
          {
-            rePackageJarFile(srcJarFile, manifest, bundleLocalizations, destJarOut, pathFilters);
+            rePackageJarFile(srcJarFile, manifest, localization, destJarOut, pathFilters);
          }
       }.run();
    }
 
-   private void rePackageJarFile(File srcJarFile, final Manifest manifest, Map<String, Map> bundleLocalizations,
+   private void rePackageJarFile(File srcJarFile, final Manifest manifest, BundleLocalization localization,
       final JarOutputStream destJarOut, Collection<String> pathFilters) throws IOException
    {
       destJarOut.putNextEntry(new JarEntry(JarFile.MANIFEST_NAME));
       writeManifest(manifest, destJarOut);
       destJarOut.closeEntry();
 
-      if (bundleLocalizations != null && !bundleLocalizations.isEmpty())
+      if (localization != null)
       {
-         String prefix = manifest.getHeaderValue(BundleHeaderName.BUNDLE_LOCALIZATION.getLiteral());
-         if (prefix == null)
+         final Set<String> paths = BundleLocalizationWriter.write(destJarOut, manifest, localization).keySet();
+         pathFilters = pathFilters == null ? new HashSet<String>() : new HashSet<String>(pathFilters);
+         for (String path : paths)
          {
-            prefix = "OSGI-INF/l10n/bundle";
+            pathFilters.add("!" + path);
          }
-
-         for (Entry<String, Map> entry : bundleLocalizations.entrySet())
-         {
-            final Map properties = entry.getValue();
-            if (properties != null)
-            {
-
-               final StringBuilder name = new StringBuilder(prefix);
-
-               final String nl = entry.getKey();
-               if (!nl.isEmpty())
-               {
-                  name.append('_');
-                  name.append(nl);
-               }
-
-               name.append(".properties");
-               destJarOut.putNextEntry(new JarEntry(name.toString()));
-               try
-               {
-                  PropertiesUtils.store(properties, destJarOut);
-               }
-               catch (PipedException pipe)
-               {
-                  pipe.adaptAndThrow(IOException.class);
-                  throw pipe;
-               }
-               destJarOut.closeEntry();
-            }
-         }
-
-
       }
-
 
       final PathMatcher pathMatcher = pathFilters == null
          ? DEFAULT_CONTENT_MATCHER

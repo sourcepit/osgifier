@@ -17,12 +17,17 @@
 package org.sourcepit.osgifier.maven;
 
 import org.sourcepit.common.manifest.osgi.BundleManifest;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 
 public class ArtifactManifestBuilderResult
 {
    private BundleManifest bundleManifest;
 
+   private BundleLocalization bundleLocalization;
+
    private BundleManifest sourceBundleManifest;
+
+   private BundleLocalization sourceBundleLocalization;
 
    public BundleManifest getBundleManifest()
    {
@@ -34,6 +39,22 @@ public class ArtifactManifestBuilderResult
       this.bundleManifest = bundleManifest;
    }
 
+   /**
+    * @since 0.22.0
+    */
+   public BundleLocalization getBundleLocalization()
+   {
+      return bundleLocalization;
+   }
+
+   /**
+    * @since 0.22.0
+    */
+   public void setBundleLocalization(BundleLocalization bundleLocalization)
+   {
+      this.bundleLocalization = bundleLocalization;
+   }
+
    public BundleManifest getSourceBundleManifest()
    {
       return sourceBundleManifest;
@@ -42,5 +63,21 @@ public class ArtifactManifestBuilderResult
    public void setSourceBundleManifest(BundleManifest sourceBundleManifest)
    {
       this.sourceBundleManifest = sourceBundleManifest;
+   }
+
+   /**
+    * @since 0.22.0
+    */
+   public BundleLocalization getSourceBundleLocalization()
+   {
+      return sourceBundleLocalization;
+   }
+
+   /**
+    * @since 0.22.0
+    */
+   public void setSourceBundleLocalization(BundleLocalization sourceBundleLocalization)
+   {
+      this.sourceBundleLocalization = sourceBundleLocalization;
    }
 }

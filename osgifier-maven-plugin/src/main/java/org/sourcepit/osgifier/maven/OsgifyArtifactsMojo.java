@@ -325,7 +325,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
       final File destJarFile = new File(workDir, bundleId + ".jar");
       repackager.copyJarAndInjectManifest(bundle.getLocation(), destJarFile, bundle.getManifest(),
-         GenerateManifestMojo.getBundleLocalization(bundle), pathFilters);
+         bundle.getLocalization(), pathFilters);
       updateBundleLocation(bundle, dependencyModel, destJarFile);
    }
 

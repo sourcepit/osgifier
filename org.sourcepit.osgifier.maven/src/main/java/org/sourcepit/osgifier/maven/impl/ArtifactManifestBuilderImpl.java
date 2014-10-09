@@ -53,7 +53,7 @@ import com.google.common.base.Strings;
 /**
  * 
  * @author DerGilb
- * @author Bernd
+ * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
 public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
@@ -123,12 +123,14 @@ public class ArtifactManifestBuilderImpl implements ArtifactManifestBuilder
 
       final ArtifactManifestBuilderResult result = new ArtifactManifestBuilderResult();
       result.setBundleManifest(manifest);
+      result.setBundleLocalization(projectBundle.getLocalization());
 
       if (sourceArtifact != null)
       {
          final BundleCandidate sourceBundle = projectBundle.getSourceBundle();
          final BundleManifest sourceBundleManifest = sourceBundle.getManifest();
          result.setSourceBundleManifest(sourceBundleManifest);
+         result.setSourceBundleLocalization(sourceBundle.getLocalization());
       }
 
       return result;

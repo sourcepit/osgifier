@@ -20,7 +20,6 @@ import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -35,6 +34,7 @@ import org.apache.maven.project.MavenProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.sourcepit.common.manifest.Manifest;
+import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.resource.GenericManifestResourceImpl;
 import org.sourcepit.osgifier.core.packaging.Repackager;
 
@@ -66,23 +66,26 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
    {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
-      final File manifestFile = (File) project.getContextValue("osgifier.manifestFile");
-      if (manifestFile != null)
-      {
-         final Map<String, Map> foo = (Map<String, Map>) project.getContextValue("osgifier.Bundle-Localization");
+      final ArtifactManifestBuilderResult result = (ArtifactManifestBuilderResult) project
+         .getContextValue("osgifier.manifestBuilderResult");
 
-         final Manifest manifest = readManifest(manifestFile);
-         repackager.injectManifest(project.getArtifact().getFile(), manifest, foo);
-      }
-
-      final File sourceManifestFile = (File) project.getContextValue("osgifier.sourceManifestFile");
-      if (sourceManifestFile != null)
+      if (result != null)
       {
-         final Artifact sourceArtifact = getAttachedArtifact(project, sourceClassifier);
-         if (sourceArtifact != null)
+         final BundleManifest manifest = result.getBundleManifest();
+         if (manifest != null)
          {
-            final Manifest sourceManifest = readManifest(sourceManifestFile);
-            repackager.injectManifest(sourceArtifact.getFile(), sourceManifest, null);
+            repackager.injectManifest(project.getArtifact().getFile(), manifest, result.getBundleLocalization());
+         }
+
+         final BundleManifest sourceManifest = result.getSourceBundleManifest();
+         if (manifest != null)
+         {
+            final Artifact sourceArtifact = getAttachedArtifact(project, sourceClassifier);
+            if (sourceArtifact != null)
+            {
+               repackager
+                  .injectManifest(sourceArtifact.getFile(), sourceManifest, result.getSourceBundleLocalization());
+            }
          }
       }
    }

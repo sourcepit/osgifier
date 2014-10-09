@@ -16,15 +16,16 @@
 
 package org.sourcepit.osgifier.maven;
 
-import static org.apache.commons.io.FileUtils.copyFile;
+import static org.apache.commons.io.FileUtils.copyDirectory;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 import static org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest.chainOptions;
 import static org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest.toOptions;
+import static org.sourcepit.osgifier.maven.ModelUtils.writeModel;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.jar.JarFile;
 
 import javax.inject.Inject;
 
@@ -38,19 +39,15 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.emf.ecore.EObject;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.artifact.ArtifactFactory;
 import org.sourcepit.common.maven.artifact.MavenArtifactUtils;
-import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgifier.core.headermod.HeaderModifications;
-import org.sourcepit.osgifier.core.model.context.BundleCandidate;
-import org.sourcepit.osgifier.maven.ArtifactManifestBuilder;
-import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
-import org.sourcepit.osgifier.maven.ArtifactManifestBuilderResult;
+import org.sourcepit.osgifier.core.model.context.BundleLocalization;
+import org.sourcepit.osgifier.core.packaging.BundleLocalizationWriter;
 
 /**
  * The goal <i>generate-manifest</i> can be used to generate OSGi manifest files for Java projects.<br>
@@ -90,16 +87,20 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
    private String symbolicName;
 
    /**
-    * Output file for the generated OSGi manifest.
+    * Output directory where the generated META-INF/MANIFEST.MF for the main bundle goes to.
+    * 
+    * @since 0.22.0
     */
-   @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}.MF")
-   private File manifestFile;
+   @Parameter(defaultValue = "${project.build.directory}/generated-resources/bundle")
+   private File bundleOutputDirectory;
 
    /**
-    * Output file for the generated Eclipse compatible manifest file for the source artifact related to this project.
+    * Output directory where the generated META-INF/MANIFEST.MF for the source bundle goes to.
+    * 
+    * @since 0.22.0
     */
-   @Parameter(defaultValue = "${project.build.directory}/${project.build.finalName}-sources.MF")
-   private File sourceManifestFile;
+   @Parameter(defaultValue = "${project.build.directory}/generated-resources/bundle.source")
+   private File sourceBundleOutputDirectory;
 
    /**
     * Classifier that is used for the internal source artifact stub (used when an Eclipse compatible
@@ -167,51 +168,46 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
       final ArtifactManifestBuilderRequest request = newManifestRequest(project);
 
       final ArtifactManifestBuilderResult result = manifestBuilder.buildManifest(request);
+      project.setContextValue("osgifier.manifestBuilderResult", result);
 
       final BundleManifest manifest = result.getBundleManifest();
+      write(bundleOutputDirectory, manifest, result.getBundleLocalization());
 
-      final BundleCandidate bundle = (BundleCandidate) manifest.eContainer();
-
-      project.setContextValue("osgifier.Bundle-Localization", getBundleLocalization(bundle));
-
-      ModelUtils.writeModel(manifestFile, manifest);
-      project.setContextValue("osgifier.manifestFile", manifestFile);
+      final BundleManifest sourceManifest = result.getSourceBundleManifest();
+      if (sourceManifest != null)
+      {
+         write(sourceBundleOutputDirectory, sourceManifest, result.getSourceBundleLocalization());
+      }
 
       if (pde)
       {
          // set as derived
          try
          {
-            copyFile(manifestFile, new File(project.getBasedir(), "META-INF/MANIFEST.MF"));
+            copyDirectory(bundleOutputDirectory, project.getBasedir());
          }
          catch (IOException e)
          {
             throw pipe(e);
          }
       }
-
-      final BundleManifest sourceManifest = result.getSourceBundleManifest();
-      if (sourceManifest != null)
-      {
-         ModelUtils.writeModel(sourceManifestFile, sourceManifest);
-         project.setContextValue("osgifier.sourceManifestFile", sourceManifestFile);
-      }
    }
 
-   public static Map<String, Map> getBundleLocalization(final BundleCandidate bundle)
+   private void write(final File dir, final BundleManifest manifest, final BundleLocalization localization)
    {
-      final Map<String, Map> foo = new LinkedHashMap<String, Map>();
-
-      final Annotation localization = bundle.getAnnotation("Bundle-Localization");
+      final File manifestFile = new File(dir, JarFile.MANIFEST_NAME);
+      writeModel(manifestFile, manifest);
       if (localization != null)
       {
-         for (Annotation nl : localization.getAnnotations())
+         try
          {
-            final String name = nl.getSource();
-            foo.put(name, nl.getData().map());
+            BundleLocalizationWriter.write(dir, manifest, localization);
+         }
+         catch (IOException e)
+         {
+            throw pipe(e);
          }
       }
-      return foo;
    }
 
    private ArtifactManifestBuilderRequest newManifestRequest(final MavenProject project)
