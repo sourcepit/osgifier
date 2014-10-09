@@ -224,6 +224,15 @@ to your needs.
         </goals>
         <configuration>
           <!-- 
+            Output directory where the generated META-INF/MANIFEST.MF for the main bundle
+            goes to.
+            
+            Type: java.io.File
+            Default Value: ${project.build.directory}/generated-resources/bundle
+            Required: false
+          -->
+          <bundleOutputDirectory />
+          <!-- 
             With header modifications you can customize the generated `MANIFEST.MF` file.
             You can remove or add headers.
             
@@ -253,14 +262,6 @@ to your needs.
           -->
           <headerModifications />
           <!-- 
-            Output file for the generated OSGi manifest.
-            
-            Type: java.io.File
-            Default Value: ${project.build.directory}/${project.build.finalName}.MF
-            Required: false
-          -->
-          <manifestFile />
-          <!-- 
             Mapping between option name and value. These options will be passed to the
             OSGifier and are intended to customize the OSGifiers default behavior to your
             needs.
@@ -282,8 +283,8 @@ to your needs.
           -->
           <options />
           <!-- 
-            When set to `true`, the generated `MANIFEST.MF will also be copied to
-            ${project.basedir}/META-INF/MANIFEST.MF.`
+            When set to `true`, the generated `MANIFEST.MF` will also be copied to
+            `${project.basedir}/META-INF/MANIFEST.MF`.
             
             Type: boolean
             Default Value: false
@@ -301,6 +302,15 @@ to your needs.
           -->
           <skipSource />
           <!-- 
+            Output directory where the generated META-INF/MANIFEST.MF for the source bundle
+            goes to.
+            
+            Type: java.io.File
+            Default Value: ${project.build.directory}/generated-resources/bundle.source
+            Required: false
+          -->
+          <sourceBundleOutputDirectory />
+          <!-- 
             Classifier that is used for the internal source artifact stub (used when an
             Eclipse compatible `MANIFEST.MF` file should be generated).
             
@@ -310,15 +320,6 @@ to your needs.
             Required: false
           -->
           <sourceClassifier />
-          <!-- 
-            Output file for the generated Eclipse compatible manifest file for the source
-            artifact related to this project.
-            
-            Type: java.io.File
-            Default Value: ${project.build.directory}/${project.build.finalName}-sources.MF
-            Required: false
-          -->
-          <sourceManifestFile />
           <!-- 
             `Bundle-SymbolicName` header value for this project.
             
@@ -484,7 +485,7 @@ It is a good practice to define plugin versions in the plugin management section
         <plugin>
           <groupId>org.sourcepit.osgifier</groupId>
           <artifactId>osgifier-maven-plugin</artifactId>
-          <version>0.21.0-SNAPSHOT</version>
+          <version>0.22.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -514,7 +515,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.maven</artifactId>
-      <version>0.21.0-SNAPSHOT</version>
+      <version>0.22.0</version>
     </dependency>
   </dependencies>
 </project>
@@ -528,7 +529,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.core</artifactId>
-      <version>0.21.0-SNAPSHOT</version>
+      <version>0.22.0</version>
     </dependency>
   </dependencies>
 </project>
