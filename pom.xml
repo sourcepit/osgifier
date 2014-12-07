@@ -154,7 +154,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 	</issueManagement>
 
 	<properties>
-		<tycho.version>0.21.0</tycho.version>
+		<tycho.version>0.22.0</tycho.version>
 		<common-maven.version>0.22.0-SNAPSHOT</common-maven.version>
 	</properties>
 
