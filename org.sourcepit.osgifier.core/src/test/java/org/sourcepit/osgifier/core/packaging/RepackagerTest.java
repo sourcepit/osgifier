@@ -18,6 +18,7 @@ package org.sourcepit.osgifier.core.packaging;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.sourcepit.common.utils.file.FileUtils.deleteFileOrDirectory;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +26,6 @@ import java.util.jar.JarFile;
 
 import javax.inject.Inject;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +33,6 @@ import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.testing.Environment;
 import org.sourcepit.common.testing.Workspace;
-import org.sourcepit.osgifier.core.packaging.Repackager;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -74,7 +73,7 @@ public class RepackagerTest extends InjectedTest
       manifest.setHeader("Foo", "bar");
 
       File destJarFile = ws.newFile();
-      FileUtils.forceDelete(destJarFile);
+      deleteFileOrDirectory(destJarFile);
 
       repackager.copyJarAndInjectManifest(jarFile, destJarFile, manifest, null);
 

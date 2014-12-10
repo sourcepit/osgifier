@@ -16,6 +16,7 @@
 
 package org.sourcepit.osgifier.core.packaging;
 
+import static org.sourcepit.common.utils.file.FileUtils.deleteFileOrDirectory;
 import static org.sourcepit.common.utils.io.IO.buffIn;
 import static org.sourcepit.common.utils.io.IO.buffOut;
 import static org.sourcepit.common.utils.io.IO.fileIn;
@@ -67,7 +68,7 @@ public class Repackager
       {
          final File tmpFile = move(jarFile);
          copyJarAndInjectManifest(tmpFile, jarFile, manifest, localization);
-         org.apache.commons.io.FileUtils.forceDelete(tmpFile);
+         deleteFileOrDirectory(tmpFile);
       }
       catch (IOException e)
       {
@@ -86,7 +87,11 @@ public class Repackager
       if (!rename)
       {
          org.apache.commons.io.FileUtils.copyFile(srcFile, destFile);
-         if (!srcFile.delete())
+         try
+         {
+            deleteFileOrDirectory(srcFile);
+         }
+         catch (IOException e)
          {
             FileUtils.deleteQuietly(destFile);
             throw new IOException("Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");

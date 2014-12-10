@@ -18,6 +18,7 @@ package org.sourcepit.osgifier.maven.p2;
 
 import static java.util.Collections.singletonList;
 import static org.apache.commons.io.FileUtils.copyFile;
+import static org.sourcepit.common.utils.file.FileUtils.deleteFileOrDirectory;
 import static org.sourcepit.common.utils.io.IO.buffOut;
 import static org.sourcepit.common.utils.io.IO.fileOut;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
@@ -36,7 +37,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -247,7 +247,7 @@ public class P2UpdateSiteGenerator
       {
          try
          {
-            FileUtils.forceDelete(siteDir);
+            deleteFileOrDirectory(siteDir);
          }
          catch (IOException e)
          {
