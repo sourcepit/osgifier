@@ -485,7 +485,7 @@ It is a good practice to define plugin versions in the plugin management section
         <plugin>
           <groupId>org.sourcepit.osgifier</groupId>
           <artifactId>osgifier-maven-plugin</artifactId>
-          <version>0.22.0</version>
+          <version>0.23.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -515,7 +515,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.maven</artifactId>
-      <version>0.22.0</version>
+      <version>0.23.0</version>
     </dependency>
   </dependencies>
 </project>
@@ -529,7 +529,7 @@ See also [Introduction to Plugin Prefix Resolution](http://maven.apache.org/guid
     <dependency>
       <groupId>org.sourcepit.osgifier</groupId>
       <artifactId>org.sourcepit.osgifier.core</artifactId>
-      <version>0.22.0</version>
+      <version>0.23.0</version>
     </dependency>
   </dependencies>
 </project>
