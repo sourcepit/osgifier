@@ -307,7 +307,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 				<plugin>
 					<groupId>org.sourcepit.osgifier</groupId>
 					<artifactId>osgifier-maven-plugin</artifactId>
-					<version>0.22.1</version>
+					<version>0.23.0</version>
 					<configuration>
 						<pde>true</pde>
 					</configuration>
