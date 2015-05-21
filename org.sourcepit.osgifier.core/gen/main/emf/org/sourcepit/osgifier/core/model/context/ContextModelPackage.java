@@ -39,8 +39,7 @@ import org.sourcepit.common.modeling.CommonModelingPackage;
  * @model kind="package"
  * @generated
  */
-public interface ContextModelPackage extends EPackage
-{
+public interface ContextModelPackage extends EPackage {
    /**
     * The package name.
     * <!-- begin-user-doc -->
@@ -792,8 +791,7 @@ public interface ContextModelPackage extends EPackage
     * 
     * @generated
     */
-   interface Literals
-   {
+   interface Literals {
       /**
        * The meta object literal for the '{@link org.sourcepit.osgifier.core.model.context.impl.OsgifierContextImpl
        * <em>Osgifier Context</em>}' class.

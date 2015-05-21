@@ -53,43 +53,33 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class PackageExportAppender
-{
+public class PackageExportAppender {
    private static final Logger LOGGER = LoggerFactory.getLogger(PackageExportAppender.class);
 
-   public void append(@NotNull BundleCandidate bundle, @NotNull PropertiesSource properties)
-   {
+   public void append(@NotNull BundleCandidate bundle, @NotNull PropertiesSource properties) {
       final Map<String, PackageExport> packageToExport = new HashMap<String, PackageExport>();
       addBundlePackageExports(packageToExport, bundle, properties);
       addPackageExportsOfEmbeddedBundles(packageToExport, bundle);
 
-      if (!packageToExport.isEmpty())
-      {
+      if (!packageToExport.isEmpty()) {
          final List<String> packageNames = new ArrayList<String>(packageToExport.keySet());
          Collections.sort(packageNames);
 
          final List<PackageExport> exportPackage = bundle.getManifest().getExportPackage(true);
-         for (String packageName : packageNames)
-         {
+         for (String packageName : packageNames) {
             exportPackage.add(packageToExport.get(packageName));
          }
       }
    }
 
    private void addPackageExportsOfEmbeddedBundles(final Map<String, PackageExport> packageToExport,
-      BundleCandidate bundle)
-   {
-      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle))
-      {
+      BundleCandidate bundle) {
+      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle)) {
          final List<PackageExport> exportPackage = embeddedBundle.getManifest().getExportPackage();
-         if (exportPackage != null)
-         {
-            for (PackageExport packageExport : exportPackage)
-            {
-               for (String packageName : packageExport.getPackageNames())
-               {
-                  if (!packageToExport.containsKey(packageName))
-                  {
+         if (exportPackage != null) {
+            for (PackageExport packageExport : exportPackage) {
+               for (String packageName : packageExport.getPackageNames()) {
+                  if (!packageToExport.containsKey(packageName)) {
                      final PackageExport copy = EcoreUtil.copy(packageExport);
                      copy.getPackageNames().clear();
                      copy.getPackageNames().add(packageName);
@@ -102,8 +92,7 @@ public class PackageExportAppender
    }
 
    private void addBundlePackageExports(final Map<String, PackageExport> packageToExport, BundleCandidate bundle,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final JavaResourceBundle jBundle = bundle.getContent();
       final BundleManifest manifest = bundle.getManifest();
       final Map<String, List<JavaPackage>> nameToJPackagesMap = determinePackagesToExport(bundle, jBundle,
@@ -112,25 +101,21 @@ public class PackageExportAppender
       final String filter = options.get("osgifier.internalPackages");
       final PathMatcher internalPackages = filter == null ? null : PathMatcher.parsePackagePatterns(filter);
 
-      for (Entry<String, List<JavaPackage>> entry : nameToJPackagesMap.entrySet())
-      {
+      for (Entry<String, List<JavaPackage>> entry : nameToJPackagesMap.entrySet()) {
          final String packageName = entry.getKey();
          final Version version = determinePackageVersion(manifest, packageName, nameToJPackagesMap.get(packageName));
          packageToExport.put(packageName, newPackageExport(internalPackages, packageName, version));
       }
    }
 
-   private PackageExport newPackageExport(PathMatcher internalPackages, final String packageName, final Version version)
-   {
+   private PackageExport newPackageExport(PathMatcher internalPackages, final String packageName, final Version version) {
       final PackageExport packageExport = BundleManifestFactory.eINSTANCE.createPackageExport();
       packageExport.getPackageNames().add(packageName);
-      if (version != null)
-      {
+      if (version != null) {
          packageExport.setVersion(version);
       }
 
-      if (internalPackages != null && internalPackages.isMatch(packageName))
-      {
+      if (internalPackages != null && internalPackages.isMatch(packageName)) {
          final Parameter parameter = BundleManifestFactoryImpl.eINSTANCE.createParameter();
          parameter.setName("x-internal");
          parameter.setValue("true");
@@ -141,8 +126,7 @@ public class PackageExportAppender
    }
 
    private Map<String, List<JavaPackage>> determinePackagesToExport(BundleCandidate bundle, JavaResourceBundle jBundle,
-      EList<String> executionEnvironments)
-   {
+      EList<String> executionEnvironments) {
       final Map<String, List<JavaPackage>> nameToJPackagesMap = new HashMap<String, List<JavaPackage>>();
       collectPackagesToExport(jBundle, nameToJPackagesMap);
       filterPackagesFromReferencedBundles(nameToJPackagesMap, bundle.getDependencies());
@@ -150,10 +134,8 @@ public class PackageExportAppender
    }
 
    private void filterPackagesFromReferencedBundles(Map<String, List<JavaPackage>> nameToJPackagesMap,
-      EList<BundleReference> dependencies)
-   {
-      for (BundleReference bundleReference : dependencies)
-      {
+      EList<BundleReference> dependencies) {
+      for (BundleReference bundleReference : dependencies) {
          final BundleCandidate referencedBundle = bundleReference.getTarget();
 
          final BundleManifest manifest = referencedBundle.getManifest();
@@ -163,12 +145,9 @@ public class PackageExportAppender
          }
 
          final EList<PackageExport> exportPackage = manifest.getExportPackage();
-         if (exportPackage != null)
-         {
-            for (PackageExport packageExport : exportPackage)
-            {
-               for (String packageName : packageExport.getPackageNames())
-               {
+         if (exportPackage != null) {
+            for (PackageExport packageExport : exportPackage) {
+               for (String packageName : packageExport.getPackageNames()) {
                   nameToJPackagesMap.remove(packageName);
                }
             }
@@ -176,39 +155,29 @@ public class PackageExportAppender
       }
    }
 
-   private Version determinePackageVersion(BundleManifest manifest, String packageName, List<JavaPackage> jPackages)
-   {
+   private Version determinePackageVersion(BundleManifest manifest, String packageName, List<JavaPackage> jPackages) {
       Version version = determinePackageVersionFromPackageInfo(jPackages);
-      if (version == null)
-      {
+      if (version == null) {
          version = manifest.getBundleVersion();
       }
       return version;
    }
 
-   private static Version determinePackageVersionFromPackageInfo(List<JavaPackage> jPackages)
-   {
-      return CollectionUtils.getValue(jPackages, new ValueLookup<JavaPackage, Version>()
-      {
+   private static Version determinePackageVersionFromPackageInfo(List<JavaPackage> jPackages) {
+      return CollectionUtils.getValue(jPackages, new ValueLookup<JavaPackage, Version>() {
          @Override
-         public Version lookup(JavaPackage element)
-         {
+         public Version lookup(JavaPackage element) {
             final File packageinfo = element.getFile("packageinfo");
-            if (packageinfo != null)
-            {
+            if (packageinfo != null) {
                final String versionString = packageinfo.getAnnotationData("content", "version");
-               if (versionString != null)
-               {
-                  try
-                  {
+               if (versionString != null) {
+                  try {
                      return Version.parse(versionString);
                   }
-                  catch (IllegalArgumentException e)
-                  {
-                     LOGGER
-                        .warn(
-                           "Unable to determine version from 'packageinfo' file in package {}. Format of version '{}' is invalid.",
-                           element.getQualifiedName(), versionString);
+                  catch (IllegalArgumentException e) {
+                     LOGGER.warn(
+                        "Unable to determine version from 'packageinfo' file in package {}. Format of version '{}' is invalid.",
+                        element.getQualifiedName(), versionString);
                   }
                }
             }
@@ -218,40 +187,32 @@ public class PackageExportAppender
    }
 
    private static void collectPackagesToExport(final JavaResourceBundle jBundle,
-      Map<String, List<JavaPackage>> nameToJPackagesMap)
-   {
+      Map<String, List<JavaPackage>> nameToJPackagesMap) {
       final EList<JavaResourcesRoot> jResources = jBundle.getResourcesRoots();
-      for (JavaResourcesRoot resourcesRoot : jResources)
-      {
-         if (!resourcesRoot.getFiles().isEmpty())
-         {
+      for (JavaResourcesRoot resourcesRoot : jResources) {
+         if (!resourcesRoot.getFiles().isEmpty()) {
             LOGGER.debug("Default package of " + jBundle.getName()
                + " contains files. These files are not accessible in OSGi.");
          }
          EList<JavaPackage> packages = resourcesRoot.getPackages();
-         for (JavaPackage jPackage : packages)
-         {
+         for (JavaPackage jPackage : packages) {
             collectPackagesToExport(nameToJPackagesMap, jPackage);
          }
       }
    }
 
-   private static void collectPackagesToExport(Map<String, List<JavaPackage>> nameToJPackagesMap, JavaPackage jPackage)
-   {
-      if (!jPackage.getFiles().isEmpty())
-      {
+   private static void collectPackagesToExport(Map<String, List<JavaPackage>> nameToJPackagesMap, JavaPackage jPackage) {
+      if (!jPackage.getFiles().isEmpty()) {
          final String fully = jPackage.getQualifiedName();
 
          List<JavaPackage> jPackages = nameToJPackagesMap.get(fully);
-         if (jPackages == null)
-         {
+         if (jPackages == null) {
             jPackages = new ArrayList<JavaPackage>();
             nameToJPackagesMap.put(fully, jPackages);
          }
          jPackages.add(jPackage);
       }
-      for (JavaPackage javaPackage : jPackage.getPackages())
-      {
+      for (JavaPackage javaPackage : jPackage.getPackages()) {
          collectPackagesToExport(nameToJPackagesMap, javaPackage);
       }
    }

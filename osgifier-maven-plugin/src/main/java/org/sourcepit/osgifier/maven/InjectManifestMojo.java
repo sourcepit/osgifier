@@ -47,8 +47,7 @@ import org.sourcepit.osgifier.core.packaging.Repackager;
  *
  */
 @Mojo(name = "inject-manifest", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE)
-public class InjectManifestMojo extends AbstractOsgifierMojo
-{
+public class InjectManifestMojo extends AbstractOsgifierMojo {
    /**
     * Classifier to identify this projects source artifact.
     */
@@ -62,46 +61,34 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
    private Repackager repackager;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
-      final ArtifactManifestBuilderResult result = (ArtifactManifestBuilderResult) project
-         .getContextValue("osgifier.manifestBuilderResult");
+      final ArtifactManifestBuilderResult result = (ArtifactManifestBuilderResult) project.getContextValue("osgifier.manifestBuilderResult");
 
-      if (result != null)
-      {
+      if (result != null) {
          final BundleManifest manifest = result.getBundleManifest();
-         if (manifest != null)
-         {
+         if (manifest != null) {
             repackager.injectManifest(project.getArtifact().getFile(), manifest, result.getBundleLocalization());
          }
 
          final BundleManifest sourceManifest = result.getSourceBundleManifest();
-         if (manifest != null)
-         {
+         if (manifest != null) {
             final Artifact sourceArtifact = getAttachedArtifact(project, sourceClassifier);
-            if (sourceArtifact != null)
-            {
-               repackager
-                  .injectManifest(sourceArtifact.getFile(), sourceManifest, result.getSourceBundleLocalization());
+            if (sourceArtifact != null) {
+               repackager.injectManifest(sourceArtifact.getFile(), sourceManifest, result.getSourceBundleLocalization());
             }
          }
       }
    }
 
-   private static Artifact getAttachedArtifact(MavenProject project, String classifier)
-   {
-      if (classifier == null)
-      {
+   private static Artifact getAttachedArtifact(MavenProject project, String classifier) {
+      if (classifier == null) {
          return project.getArtifact();
       }
-      else
-      {
-         for (Artifact artifact : project.getAttachedArtifacts())
-         {
-            if (classifier.equals(artifact.getClassifier()))
-            {
+      else {
+         for (Artifact artifact : project.getAttachedArtifacts()) {
+            if (classifier.equals(artifact.getClassifier())) {
                return artifact;
             }
          }
@@ -109,16 +96,13 @@ public class InjectManifestMojo extends AbstractOsgifierMojo
       return null;
    }
 
-   private static Manifest readManifest(File manifestFile)
-   {
+   private static Manifest readManifest(File manifestFile) {
       final URI uri = URI.createFileURI(manifestFile.getAbsolutePath());
       final Resource resource = new GenericManifestResourceImpl(uri);
-      try
-      {
+      try {
          resource.load(null);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw pipe(e);
       }
       return (Manifest) resource.getContents().get(0);

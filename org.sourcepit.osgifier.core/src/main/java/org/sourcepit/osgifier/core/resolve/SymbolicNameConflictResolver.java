@@ -23,18 +23,14 @@ import javax.inject.Named;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 @Named
-public class SymbolicNameConflictResolver
-{
+public class SymbolicNameConflictResolver {
    public boolean resolveNameConflict(BundleCandidate bundle1, final List<String> names1, BundleCandidate bundle2,
-      final List<String> names2)
-   {
-      if (resolveParallel(bundle1, names1, bundle2, names2))
-      {
+      final List<String> names2) {
+      if (resolveParallel(bundle1, names1, bundle2, names2)) {
          return true;
       }
 
-      if (resolveLeftDominant(bundle1, names1, bundle2, names2))
-      {
+      if (resolveLeftDominant(bundle1, names1, bundle2, names2)) {
          return true;
       }
 
@@ -42,16 +38,12 @@ public class SymbolicNameConflictResolver
    }
 
    private boolean resolveParallel(BundleCandidate conflictBundle, final List<String> conflictNames,
-      BundleCandidate bundle, final List<String> names)
-   {
-      for (int i = 0; i < conflictNames.size(); i++)
-      {
-         if (names.size() > i)
-         {
+      BundleCandidate bundle, final List<String> names) {
+      for (int i = 0; i < conflictNames.size(); i++) {
+         if (names.size() > i) {
             final String conflictName = conflictNames.get(i);
             final String name = names.get(i);
-            if (!conflictName.equals(name))
-            {
+            if (!conflictName.equals(name)) {
                applySymbolicName(conflictBundle, conflictName);
                applySymbolicName(bundle, name);
                return true;
@@ -62,14 +54,10 @@ public class SymbolicNameConflictResolver
    }
 
    private boolean resolveLeftDominant(BundleCandidate dominantBundle, List<String> names1, BundleCandidate bundle,
-      final List<String> names)
-   {
-      for (String conflictName : names1)
-      {
-         for (String name : names)
-         {
-            if (!conflictName.equals(name))
-            {
+      final List<String> names) {
+      for (String conflictName : names1) {
+         for (String name : names) {
+            if (!conflictName.equals(name)) {
                applySymbolicName(dominantBundle, conflictName);
                applySymbolicName(bundle, name);
                return true;
@@ -79,8 +67,7 @@ public class SymbolicNameConflictResolver
       return false;
    }
 
-   private static void applySymbolicName(BundleCandidate conflictBundle, String conflictName)
-   {
+   private static void applySymbolicName(BundleCandidate conflictBundle, String conflictName) {
       conflictBundle.getManifest().setBundleSymbolicName(conflictName);
       conflictBundle.setSymbolicName(conflictName);
    }

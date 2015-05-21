@@ -22,8 +22,7 @@ import java.util.List;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public interface ExecutionEnvironmentService
-{
+public interface ExecutionEnvironmentService {
    ExecutionEnvironment getExecutionEnvironment(String executionEnvironmentId);
 
    List<ExecutionEnvironment> getExecutionEnvironments(Collection<String> executionEnvironmentIds);

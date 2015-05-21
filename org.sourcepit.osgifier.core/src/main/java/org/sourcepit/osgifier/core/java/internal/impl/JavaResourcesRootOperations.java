@@ -24,28 +24,22 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class JavaResourcesRootOperations
-{
-   public JavaResourcesRootOperations()
-   {
+public final class JavaResourcesRootOperations {
+   public JavaResourcesRootOperations() {
       super();
    }
 
    public static JavaType getType(@NotNull JavaResourcesRoot jRoot, String qualifiedPackageName,
-      @NotNull String typeName, boolean createOnDemand)
-   {
+      @NotNull String typeName, boolean createOnDemand) {
       final JavaResourceDirectory parentJDir;
-      if (qualifiedPackageName == null)
-      {
+      if (qualifiedPackageName == null) {
          parentJDir = jRoot;
       }
-      else
-      {
+      else {
          parentJDir = jRoot.getPackage(qualifiedPackageName, createOnDemand);
       }
 
-      if (parentJDir == null)
-      {
+      if (parentJDir == null) {
          return null;
       }
       return parentJDir.getType(typeName, createOnDemand);

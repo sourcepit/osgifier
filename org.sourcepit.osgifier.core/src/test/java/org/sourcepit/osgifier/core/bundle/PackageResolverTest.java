@@ -29,25 +29,18 @@ import javax.inject.Inject;
 
 import org.eclipse.sisu.launch.InjectedTest;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.bundle.AccessRestriction;
-import org.sourcepit.osgifier.core.bundle.PackageExportDescription;
-import org.sourcepit.osgifier.core.bundle.PackageExporterType;
-import org.sourcepit.osgifier.core.bundle.PackageResolutionResult;
-import org.sourcepit.osgifier.core.bundle.PackageResolver;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 
-public class PackageResolverTest extends InjectedTest
-{
+public class PackageResolverTest extends InjectedTest {
    @Inject
    private PackageResolver packageResolver;
 
    @Test
-   public void testImportPublicPackage()
-   {
+   public void testImportPublicPackage() {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       addPackageExport(requiredBundle, "required.package", "1.2.3");
 
@@ -73,8 +66,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testImportInternalPackage()
-   {
+   public void testImportInternalPackage() {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       setInternal(addPackageExport(requiredBundle, "required.package", "1.2.3"));
 
@@ -100,8 +92,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testImportInternalAndPublicPackageFromSameBundle()
-   {
+   public void testImportInternalAndPublicPackageFromSameBundle() {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       addPackageExport(requiredBundle, "required.package", "1.2.3");
       setInternal(addPackageExport(requiredBundle, "required.internal.package", "1.2.3"));
@@ -137,8 +128,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testPlatformPackage() throws Exception
-   {
+   public void testPlatformPackage() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "bundle.package", 47, "java.lang.Object");
 
@@ -161,8 +151,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testResolutionOrderSelfPlatformDependencies() throws Exception
-   {
+   public void testResolutionOrderSelfPlatformDependencies() throws Exception {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       addPackageExport(requiredBundle, "javax.activation", "1.2.3");
 
@@ -203,8 +192,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testReferenceToDefaultPackage() throws Exception
-   {
+   public void testReferenceToDefaultPackage() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "bundle.Foo", 47, "Bar");
 
@@ -215,8 +203,7 @@ public class PackageResolverTest extends InjectedTest
    }
 
    @Test
-   public void testUnresolvableImport() throws Exception
-   {
+   public void testUnresolvableImport() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "foo.Bar", 47, "bar.Foo");
 

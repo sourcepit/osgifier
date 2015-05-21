@@ -28,60 +28,47 @@ import org.eclipse.emf.common.util.EMap;
 import org.sourcepit.common.manifest.Manifest;
 
 @Named
-public class HeaderModifier
-{
-   public void applyModifications(Manifest manifest, HeaderModifications headerMods)
-   {
-      for (SetHeaderModification set : headerMods.getHeaders())
-      {
+public class HeaderModifier {
+   public void applyModifications(Manifest manifest, HeaderModifications headerMods) {
+      for (SetHeaderModification set : headerMods.getHeaders()) {
          applySetHeaderModification(manifest, set);
       }
 
-      for (String removal : headerMods.getRemovals())
-      {
+      for (String removal : headerMods.getRemovals()) {
          applyRemoval(manifest, Pattern.compile(removal));
       }
    }
 
-   private void applyRemoval(Manifest manifest, Pattern removal)
-   {
+   private void applyRemoval(Manifest manifest, Pattern removal) {
       final EMap<String, String> headers = manifest.getHeaders();
 
       final Iterator<Entry<String, String>> it = headers.iterator();
-      while (it.hasNext())
-      {
+      while (it.hasNext()) {
          Entry<java.lang.String, java.lang.String> header = (Entry<java.lang.String, java.lang.String>) it.next();
-         if (removal.matcher(header.getKey()).matches())
-         {
+         if (removal.matcher(header.getKey()).matches()) {
             it.remove();
          }
       }
    }
 
-   private void applySetHeaderModification(Manifest manifest, SetHeaderModification set)
-   {
+   private void applySetHeaderModification(Manifest manifest, SetHeaderModification set) {
       final boolean after = !isNullOrEmpty(set.getAfter());
       final boolean before = !isNullOrEmpty(set.getBefore());
 
       manifest.setHeader(set.getName(), set.getValue());
 
-      if (after || before)
-      {
+      if (after || before) {
          final EMap<String, String> headers = manifest.getHeaders();
          final int currentIdx = headers.indexOfKey(set.getName());
          int newIdx = headers.indexOfKey(after ? set.getAfter() : set.getBefore());
-         if (newIdx > -1)
-         {
-            if (before)
-            {
+         if (newIdx > -1) {
+            if (before) {
                headers.move(newIdx, currentIdx);
             }
-            else if (newIdx == headers.size() - 1)
-            {
+            else if (newIdx == headers.size() - 1) {
                headers.add(headers.remove(currentIdx));
             }
-            else
-            {
+            else {
                headers.move(newIdx + 1, currentIdx);
             }
          }

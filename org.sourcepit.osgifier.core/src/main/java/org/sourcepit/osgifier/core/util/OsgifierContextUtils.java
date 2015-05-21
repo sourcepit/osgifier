@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import org.sourcepit.common.constraints.NotNull;
 import org.eclipse.emf.common.util.EList;
+import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
@@ -29,48 +29,39 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class OsgifierContextUtils
-{
-   private OsgifierContextUtils()
-   {
+public final class OsgifierContextUtils {
+   private OsgifierContextUtils() {
       super();
    }
 
-   public static class BuildOrder
-   {
+   public static class BuildOrder {
       private final List<BundleCandidate> orderedBundles = new ArrayList<BundleCandidate>();
 
       private final List<List<BundleCandidate>> cycles = new ArrayList<List<BundleCandidate>>();
 
-      public List<BundleCandidate> getOrderedBundles()
-      {
+      public List<BundleCandidate> getOrderedBundles() {
          return orderedBundles;
       }
 
-      public List<List<BundleCandidate>> getCycles()
-      {
+      public List<List<BundleCandidate>> getCycles() {
          return cycles;
       }
    }
 
-   public static BuildOrder computeBuildOrder(@NotNull OsgifierContext context)
-   {
+   public static BuildOrder computeBuildOrder(@NotNull OsgifierContext context) {
       BuildOrder buildOrder = new BuildOrder();
 
       final EList<BundleCandidate> bundles = context.getBundles();
       final Stack<BundleCandidate> path = new Stack<BundleCandidate>();
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          computeBuildOrder2(buildOrder, path, bundle);
       }
       return buildOrder;
    }
 
-   private static void computeBuildOrder2(BuildOrder buildOrder, Stack<BundleCandidate> path, BundleCandidate bundle)
-   {
+   private static void computeBuildOrder2(BuildOrder buildOrder, Stack<BundleCandidate> path, BundleCandidate bundle) {
       final List<BundleCandidate> orderedBundles = buildOrder.getOrderedBundles();
-      if (!orderedBundles.contains(bundle))
-      {
+      if (!orderedBundles.contains(bundle)) {
          if (path.contains(bundle)) // cycle
          {
             path.push(bundle);
@@ -80,8 +71,7 @@ public final class OsgifierContextUtils
          }
 
          path.push(bundle);
-         for (BundleCandidate requiredBundle : getRequiredBundles(bundle))
-         {
+         for (BundleCandidate requiredBundle : getRequiredBundles(bundle)) {
             computeBuildOrder2(buildOrder, path, requiredBundle);
          }
          orderedBundles.add(bundle);
@@ -89,21 +79,17 @@ public final class OsgifierContextUtils
       }
    }
 
-   private static List<BundleCandidate> getRequiredBundles(BundleCandidate bundle)
-   {
+   private static List<BundleCandidate> getRequiredBundles(BundleCandidate bundle) {
       final EList<BundleReference> dependencies = bundle.getDependencies();
       final List<BundleCandidate> bundles = new ArrayList<BundleCandidate>(dependencies.size() + 1);
-      for (BundleReference reference : dependencies)
-      {
+      for (BundleReference reference : dependencies) {
          final BundleCandidate referencedBundle = reference.getTarget();
-         if (referencedBundle != null)
-         {
+         if (referencedBundle != null) {
             bundles.add(referencedBundle);
          }
       }
       final BundleCandidate sourceTarget = bundle.getTargetBundle();
-      if (sourceTarget != null)
-      {
+      if (sourceTarget != null) {
          bundles.add(sourceTarget);
       }
       return bundles;

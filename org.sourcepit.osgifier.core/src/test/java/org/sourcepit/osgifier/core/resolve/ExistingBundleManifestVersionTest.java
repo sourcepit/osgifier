@@ -16,7 +16,7 @@
 
 package org.sourcepit.osgifier.core.resolve;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.jar.JarFile;
 
@@ -31,13 +31,10 @@ import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.File;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.resolve.ExistingBundleManifestVersion;
 
-public class ExistingBundleManifestVersionTest
-{
+public class ExistingBundleManifestVersionTest {
    @Test
-   public void test()
-   {
+   public void test() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       resolveAndAssert("1.1.1.foo", "1.1.1.foo", options);
@@ -49,8 +46,7 @@ public class ExistingBundleManifestVersionTest
       resolveAndAssert("1.1.1", "1.1.1.murks", options);
    }
 
-   private static void resolveAndAssert(String origin, String expected, PropertiesMap options)
-   {
+   private static void resolveAndAssert(String origin, String expected, PropertiesMap options) {
       BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
       manifest.setBundleVersion(origin);
 

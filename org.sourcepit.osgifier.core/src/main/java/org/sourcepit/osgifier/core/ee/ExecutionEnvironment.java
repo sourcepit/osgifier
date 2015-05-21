@@ -25,8 +25,7 @@ import org.sourcepit.common.constraints.Pattern;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class ExecutionEnvironment implements Comparable<ExecutionEnvironment>
-{
+public final class ExecutionEnvironment implements Comparable<ExecutionEnvironment> {
    private static final String RELEASE_DATE_FORMAT = "\\d\\d\\d\\d-\\d\\d-\\d\\d";
 
    private final String id;
@@ -36,8 +35,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    private final List<String> packages;
 
    public ExecutionEnvironment(@NotNull String id, @Pattern(regexp = RELEASE_DATE_FORMAT) String releaseDate,
-      float maxClassVersion, @NotNull OsgiEE osgiEE, @NotNull List<String> packages)
-   {
+      float maxClassVersion, @NotNull OsgiEE osgiEE, @NotNull List<String> packages) {
       this.id = id;
       this.releaseDate = releaseDate;
       this.maxClassVersion = maxClassVersion;
@@ -45,37 +43,30 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
       this.packages = Collections.unmodifiableList(packages);
    }
 
-   public String getId()
-   {
+   public String getId() {
       return id;
    }
 
-   public String getReleaseDate()
-   {
+   public String getReleaseDate() {
       return releaseDate;
    }
 
-   public float getMaxClassVersion()
-   {
+   public float getMaxClassVersion() {
       return maxClassVersion;
    }
 
-   public OsgiEE getOsgiEE()
-   {
+   public OsgiEE getOsgiEE() {
       return osgiEE;
    }
 
-   public List<String> getPackages()
-   {
+   public List<String> getPackages() {
       return packages;
    }
 
-   public boolean isCompatibleWith(@NotNull ExecutionEnvironment ee2)
-   {
+   public boolean isCompatibleWith(@NotNull ExecutionEnvironment ee2) {
       final float max1 = getMaxClassVersion();
       final float max2 = ee2.getMaxClassVersion();
-      if (max1 >= max2)
-      {
+      if (max1 >= max2) {
          final List<String> p1 = getPackages();
          final List<String> p2 = ee2.getPackages();
          return p1.containsAll(p2);
@@ -84,8 +75,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    }
 
    @Override
-   public int hashCode()
-   {
+   public int hashCode() {
       final int prime = 31;
       int result = 1;
       result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -97,92 +87,71 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    }
 
    @Override
-   public boolean equals(Object obj)
-   {
-      if (this == obj)
-      {
+   public boolean equals(Object obj) {
+      if (this == obj) {
          return true;
       }
-      if (obj == null)
-      {
+      if (obj == null) {
          return false;
       }
-      if (getClass() != obj.getClass())
-      {
+      if (getClass() != obj.getClass()) {
          return false;
       }
       ExecutionEnvironment other = (ExecutionEnvironment) obj;
-      if (id == null)
-      {
-         if (other.id != null)
-         {
+      if (id == null) {
+         if (other.id != null) {
             return false;
          }
       }
-      else if (!id.equals(other.id))
-      {
+      else if (!id.equals(other.id)) {
          return false;
       }
-      if (Float.floatToIntBits(maxClassVersion) != Float.floatToIntBits(other.maxClassVersion))
-      {
+      if (Float.floatToIntBits(maxClassVersion) != Float.floatToIntBits(other.maxClassVersion)) {
          return false;
       }
-      if (osgiEE == null)
-      {
-         if (other.osgiEE != null)
-         {
+      if (osgiEE == null) {
+         if (other.osgiEE != null) {
             return false;
          }
       }
-      else if (!osgiEE.equals(other.osgiEE))
-      {
+      else if (!osgiEE.equals(other.osgiEE)) {
          return false;
       }
-      if (packages == null)
-      {
-         if (other.packages != null)
-         {
+      if (packages == null) {
+         if (other.packages != null) {
             return false;
          }
       }
-      else if (!packages.equals(other.packages))
-      {
+      else if (!packages.equals(other.packages)) {
          return false;
       }
-      if (releaseDate == null)
-      {
-         if (other.releaseDate != null)
-         {
+      if (releaseDate == null) {
+         if (other.releaseDate != null) {
             return false;
          }
       }
-      else if (!releaseDate.equals(other.releaseDate))
-      {
+      else if (!releaseDate.equals(other.releaseDate)) {
          return false;
       }
       return true;
    }
 
    @Override
-   public int compareTo(ExecutionEnvironment other)
-   {
+   public int compareTo(ExecutionEnvironment other) {
       final int maxClass = Float.compare(getMaxClassVersion(), other.getMaxClassVersion());
-      if (maxClass != 0)
-      {
+      if (maxClass != 0) {
          return maxClass;
       }
 
       final int packages1 = getPackages().size();
       final int packages2 = other.getPackages().size();
       final int packages = packages1 < packages2 ? -1 : (packages1 == packages2 ? 0 : 1);
-      if (packages != 0)
-      {
+      if (packages != 0) {
          return packages;
       }
 
       final int date = getReleaseDate().compareTo(other.getReleaseDate());
-      if (date != 0)
-      {
+      if (date != 0) {
          return date;
       }
 
@@ -190,8 +159,7 @@ public final class ExecutionEnvironment implements Comparable<ExecutionEnvironme
    }
 
    @Override
-   public String toString()
-   {
+   public String toString() {
       return "ExecutionEnvironment [id=" + id + ", releaseDate=" + releaseDate + ", maxClassVersion=" + maxClassVersion
          + ", packages=" + packages + "]";
    }

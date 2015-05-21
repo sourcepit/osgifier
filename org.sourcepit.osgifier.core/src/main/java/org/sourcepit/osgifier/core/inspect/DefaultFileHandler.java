@@ -25,58 +25,47 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class DefaultFileHandler extends AbstractJavaResourceHandler
-{
+public class DefaultFileHandler extends AbstractJavaResourceHandler {
    private boolean createEmptyDirectories = true;
 
    private boolean createEmptyFiles = true;
 
-   public boolean isCreateEmptyDirectories()
-   {
+   public boolean isCreateEmptyDirectories() {
       return createEmptyDirectories;
    }
 
-   public void setCreateEmptyDirectories(boolean createEmptyDirectories)
-   {
+   public void setCreateEmptyDirectories(boolean createEmptyDirectories) {
       this.createEmptyDirectories = createEmptyDirectories;
    }
 
-   public boolean isCreateEmptyFiles()
-   {
+   public boolean isCreateEmptyFiles() {
       return createEmptyFiles;
    }
 
-   public void setCreateEmptyFiles(boolean createEmptyFiles)
-   {
+   public void setCreateEmptyFiles(boolean createEmptyFiles) {
       this.createEmptyFiles = createEmptyFiles;
    }
 
    public boolean handle(JavaResourcesRoot jResources, JavaResourceType type, ReadWriteLock modelLock, Path path,
-      InputStream content)
-   {
-      switch (type)
-      {
+      InputStream content) {
+      switch (type) {
          case DIRECTORY_IN_PACKAGE :
-            if (isCreateEmptyDirectories())
-            {
+            if (isCreateEmptyDirectories()) {
                getJavaPackage(jResources, modelLock, path);
             }
             return true;
          case DIRECTORY_OUTSIDE_PACKAGE :
-            if (isCreateEmptyDirectories())
-            {
+            if (isCreateEmptyDirectories()) {
                getDirectory(jResources, modelLock, path);
             }
             return true;
          case FILE_IN_PACKAGE :
-            if (isCreateEmptyFiles())
-            {
+            if (isCreateEmptyFiles()) {
                getFileInJavaPackage(jResources, modelLock, path);
             }
             return true;
          case FILE_OUTSIDE_PACKAGE :
-            if (isCreateEmptyFiles())
-            {
+            if (isCreateEmptyFiles()) {
                getFile(jResources, modelLock, path);
             }
             return true;

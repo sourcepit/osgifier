@@ -15,7 +15,6 @@
  */
 
 package org.sourcepit.osgifier.maven;
-public interface ArtifactManifestBuilder
-{
+public interface ArtifactManifestBuilder {
    ArtifactManifestBuilderResult buildManifest(ArtifactManifestBuilderRequest request);
 }

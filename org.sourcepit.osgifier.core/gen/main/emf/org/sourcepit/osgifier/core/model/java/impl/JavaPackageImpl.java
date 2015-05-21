@@ -48,8 +48,7 @@ import org.sourcepit.osgifier.core.model.java.Resource;
  *
  * @generated
  */
-public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
-{
+public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage {
    /**
     * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -67,8 +66,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   protected JavaPackageImpl()
-   {
+   protected JavaPackageImpl() {
       super();
    }
 
@@ -79,8 +77,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_PACKAGE;
    }
 
@@ -90,10 +87,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public EList<Resource> getResources()
-   {
-      if (resources == null)
-      {
+   public EList<Resource> getResources() {
+      if (resources == null) {
          resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
             JavaModelPackage.JAVA_PACKAGE__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
@@ -106,8 +101,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public EList<JavaPackage> getPackages()
-   {
+   public EList<JavaPackage> getPackages() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -119,8 +113,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public EList<JavaFile> getJavaFiles()
-   {
+   public EList<JavaFile> getJavaFiles() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -132,8 +125,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaPackage getPackage(String name)
-   {
+   public JavaPackage getPackage(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -145,8 +137,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaPackage getPackage(String name, boolean createOnDemand)
-   {
+   public JavaPackage getPackage(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -158,8 +149,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaFile getJavaFile(String name)
-   {
+   public JavaFile getJavaFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -171,8 +161,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaFile getJavaFile(String name, boolean createOnDemand)
-   {
+   public JavaFile getJavaFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -184,8 +173,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaType getType(String name)
-   {
+   public JavaType getType(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -197,8 +185,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaType getType(String name, boolean createOnDemand)
-   {
+   public JavaType getType(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -210,8 +197,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public JavaResourcesType getResourcesType()
-   {
+   public JavaResourcesType getResourcesType() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -223,8 +209,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public Resource getResource(String name)
-   {
+   public Resource getResource(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -236,8 +221,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public EList<Directory> getDirectories()
-   {
+   public EList<Directory> getDirectories() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -249,8 +233,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public Directory getDirectory(String name)
-   {
+   public Directory getDirectory(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -262,8 +245,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public Directory getDirectory(String name, boolean createOnDemand)
-   {
+   public Directory getDirectory(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -275,8 +257,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public File getFile(String name)
-   {
+   public File getFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -288,8 +269,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public File getFile(String name, boolean createOnDemand)
-   {
+   public File getFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -301,8 +281,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public EList<File> getFiles()
-   {
+   public EList<File> getFiles() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -314,8 +293,7 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * 
     * @generated
     */
-   public String getQualifiedName()
-   {
+   public String getQualifiedName() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -329,10 +307,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
       }
@@ -346,10 +322,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
       }
@@ -363,10 +337,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             return getResources();
       }
@@ -381,10 +353,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             getResources().clear();
             getResources().addAll((Collection<? extends Resource>) newValue);
@@ -400,10 +370,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             getResources().clear();
             return;
@@ -418,10 +386,8 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
             return resources != null && !resources.isEmpty();
       }
@@ -435,30 +401,23 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == QualifiedJavaElement.class)
-      {
-         switch (derivedFeatureID)
-         {
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+      if (baseClass == QualifiedJavaElement.class) {
+         switch (derivedFeatureID) {
             default :
                return -1;
          }
       }
-      if (baseClass == Directory.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Directory.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_PACKAGE__RESOURCES :
                return JavaModelPackage.DIRECTORY__RESOURCES;
             default :
                return -1;
          }
       }
-      if (baseClass == JavaResourceDirectory.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == JavaResourceDirectory.class) {
+         switch (derivedFeatureID) {
             default :
                return -1;
          }
@@ -473,30 +432,23 @@ public class JavaPackageImpl extends JavaResourceImpl implements JavaPackage
     * @generated
     */
    @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == QualifiedJavaElement.class)
-      {
-         switch (baseFeatureID)
-         {
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+      if (baseClass == QualifiedJavaElement.class) {
+         switch (baseFeatureID) {
             default :
                return -1;
          }
       }
-      if (baseClass == Directory.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Directory.class) {
+         switch (baseFeatureID) {
             case JavaModelPackage.DIRECTORY__RESOURCES :
                return JavaModelPackage.JAVA_PACKAGE__RESOURCES;
             default :
                return -1;
          }
       }
-      if (baseClass == JavaResourceDirectory.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == JavaResourceDirectory.class) {
+         switch (baseFeatureID) {
             default :
                return -1;
          }

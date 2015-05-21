@@ -15,11 +15,9 @@
  */
 
 package org.sourcepit.osgifier.core.java.inspect;
-public class JavaTypeReferencesCollectorTest_testMethodAnnotations
-{
+public class JavaTypeReferencesCollectorTest_testMethodAnnotations {
    @javax.inject.Inject
-   public Object foo(@javax.inject.Named Object o)
-   {
+   public Object foo(@javax.inject.Named Object o) {
       return null;
    }
 }

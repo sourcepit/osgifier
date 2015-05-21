@@ -25,49 +25,35 @@ import org.hamcrest.core.IsSame;
 import org.junit.Test;
 import org.sourcepit.common.modeling.utils.EcoreUtils;
 import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
-import org.sourcepit.osgifier.core.model.java.JavaFile;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
-import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
-import org.sourcepit.osgifier.core.model.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaTypeTest
-{
+public class JavaTypeTest {
    @Test
-   public void testGetResourceBundle()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetResourceBundle() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetResourceBundle((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetResourceBundle(JavaResourceBundle jBundle)
-   {
+   private void testGetResourceBundle(JavaResourceBundle jBundle) {
       JavaType jType = jBundle.getType("/", "org.sourcepit", "Foo", true);
       assertThat(jType.getResourceBundle(), IsSame.sameInstance(jBundle));
    }
 
    @Test
-   public void testName()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testName() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testName((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testName(JavaResourceBundle jBundle)
-   {
+   private void testName(JavaResourceBundle jBundle) {
       JavaType jType = JavaModelFactory.eINSTANCE.createJavaType();
       assertThat(jType.getName(), IsNull.nullValue());
 

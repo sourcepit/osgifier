@@ -36,8 +36,7 @@ import org.sourcepit.osgifier.maven.p2.P2UpdateSiteGenerator;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "generate-p2-update-site", requiresProject = true, defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class GenerateP2UpdateSiteMojo extends AbstractOsgifierMojo
-{
+public class GenerateP2UpdateSiteMojo extends AbstractOsgifierMojo {
    @Parameter(defaultValue = "${localRepository}")
    protected ArtifactRepository localRepository;
 
@@ -68,8 +67,7 @@ public class GenerateP2UpdateSiteMojo extends AbstractOsgifierMojo
    private P2UpdateSiteGenerator siteGenerator;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final PropertiesMap options = new LinkedPropertiesMap();
       options.setBoolean(P2UpdateSiteGenerator.OPTION_COMPRESS_REPOSITORY, compressRepository);
       options.setInt(P2UpdateSiteGenerator.OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS, forkedProcessTimeoutInSeconds);

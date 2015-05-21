@@ -29,39 +29,29 @@ import org.sourcepit.osgifier.core.resolve.AbstractSymbolicNameResolutionStrateg
  * @author Bernd
  */
 @Named("MergeArtifactWithGroupId")
-public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStrategy {
+   public Priority getPriority() {
       return Priority.LOW;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
-      final MavenArtifactConflictCoordinates mavenArtifact = bundleCandidate
-         .getExtension(MavenArtifactConflictCoordinates.class);
-      if (mavenArtifact != null)
-      {
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options) {
+      final MavenArtifactConflictCoordinates mavenArtifact = bundleCandidate.getExtension(MavenArtifactConflictCoordinates.class);
+      if (mavenArtifact != null) {
          final String groupId = mavenArtifact.getGroupId();
-         if (groupId != null)
-         {
+         if (groupId != null) {
             final String artifactId = mavenArtifact.getArtifactId();
-            if (artifactId != null)
-            {
+            if (artifactId != null) {
                String symbolicName = resolveSymbolicName(groupId, artifactId);
-               if (symbolicName != null && mavenArtifact instanceof MavenArtifactCoordinates)
-               {
+               if (symbolicName != null && mavenArtifact instanceof MavenArtifactCoordinates) {
                   final MavenArtifactCoordinates gav = (MavenArtifactCoordinates) mavenArtifact;
 
                   String classifier = gav.getClassifier();
-                  if ("java-source".equals(gav.getType()) && (classifier == null || "sources".equals(classifier)))
-                  {
+                  if ("java-source".equals(gav.getType()) && (classifier == null || "sources".equals(classifier))) {
                      classifier = "source";
                   }
 
-                  if (classifier != null)
-                  {
+                  if (classifier != null) {
                      symbolicName = resolveSymbolicName(symbolicName, classifier);
                   }
                }
@@ -72,17 +62,13 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
       return null;
    }
 
-   private String beautify(String symbolicName)
-   {
-      if (symbolicName == null)
-      {
+   private String beautify(String symbolicName) {
+      if (symbolicName == null) {
          return null;
       }
       final StringBuilder sb = new StringBuilder();
-      for (char c : symbolicName.toCharArray())
-      {
-         switch (c)
-         {
+      for (char c : symbolicName.toCharArray()) {
+         switch (c) {
             case '-' :
             case '_' :
                sb.append('.');
@@ -95,38 +81,30 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
       return sb.toString();
    }
 
-   private String resolveSymbolicName(String groupId, String artifactId)
-   {
+   private String resolveSymbolicName(String groupId, String artifactId) {
       final String[] segments = groupId.split("\\.");
-      if (segments.length > 1)
-      {
+      if (segments.length > 1) {
          final StringBuilder sb = new StringBuilder();
          sb.append(groupId);
 
          String idPrefix = groupId;
-         if (!artifactId.startsWith(idPrefix))
-         {
+         if (!artifactId.startsWith(idPrefix)) {
             idPrefix = segments[segments.length - 1];
          }
 
-         if (artifactId.startsWith(idPrefix))
-         {
+         if (artifactId.startsWith(idPrefix)) {
             final String appendix = artifactId.substring(idPrefix.length());
             boolean trim = true;
-            for (char c : appendix.toCharArray())
-            {
-               switch (c)
-               {
+            for (char c : appendix.toCharArray()) {
+               switch (c) {
                   case '-' :
                   case '_' :
                   case '.' :
-                     if (trim)
-                     {
+                     if (trim) {
                         break;
                      }
                   default :
-                     if (trim)
-                     {
+                     if (trim) {
                         sb.append('.');
                      }
                      trim = false;
@@ -139,8 +117,7 @@ public class MergeArtifactWithGroupId extends AbstractSymbolicNameResolutionStra
                return null;
             }
          }
-         else
-         {
+         else {
             sb.append('.');
             sb.append(artifactId);
          }

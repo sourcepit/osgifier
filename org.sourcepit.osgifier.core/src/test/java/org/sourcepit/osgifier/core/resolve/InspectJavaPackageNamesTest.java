@@ -24,17 +24,14 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.resolve.InspectJavaPackageNames;
 
 /**
  * @author Bernd
  */
-public class InspectJavaPackageNamesTest
-{
+public class InspectJavaPackageNamesTest {
 
    @Test
-   public void testJaxmeApi() throws Exception
-   {
+   public void testJaxmeApi() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -54,8 +51,7 @@ public class InspectJavaPackageNamesTest
    }
 
    @Test
-   public void testJunit38() throws Exception
-   {
+   public void testJunit38() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -72,8 +68,7 @@ public class InspectJavaPackageNamesTest
    }
 
    @Test
-   public void testStaxApi() throws Exception
-   {
+   public void testStaxApi() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -91,8 +86,7 @@ public class InspectJavaPackageNamesTest
    }
 
    @Test
-   public void testPullParser() throws Exception
-   {
+   public void testPullParser() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -118,8 +112,7 @@ public class InspectJavaPackageNamesTest
    }
 
    @Test
-   public void testDom4j() throws Exception
-   {
+   public void testDom4j() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -135,8 +128,7 @@ public class InspectJavaPackageNamesTest
    }
 
    @Test
-   public void testXercesImpl() throws Exception
-   {
+   public void testXercesImpl() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);

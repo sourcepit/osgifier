@@ -16,23 +16,15 @@
 
 package org.sourcepit.osgifier.core.model.java;
 
-import org.sourcepit.osgifier.core.model.java.JavaFile;
-import org.sourcepit.osgifier.core.model.java.JavaResourceDirectory;
-import org.sourcepit.osgifier.core.model.java.JavaType;
-import org.sourcepit.osgifier.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class JavaTypeVisitor implements ResourceVisitor
-{
-   public boolean visit(Resource resource)
-   {
-      if (resource instanceof JavaFile)
-      {
+public abstract class JavaTypeVisitor implements ResourceVisitor {
+   public boolean visit(Resource resource) {
+      if (resource instanceof JavaFile) {
          final JavaType jType = ((JavaFile) resource).getType();
-         if (jType != null)
-         {
+         if (jType != null) {
             visit(jType);
          }
       }

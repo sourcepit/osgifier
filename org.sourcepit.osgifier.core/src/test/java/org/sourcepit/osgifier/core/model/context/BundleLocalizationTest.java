@@ -16,16 +16,14 @@
 
 package org.sourcepit.osgifier.core.model.context;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class BundleLocalizationTest
-{
+public class BundleLocalizationTest {
 
    @Test
-   public void test()
-   {
+   public void test() {
       BundleLocalization localization = ContextModelFactory.eINSTANCE.createBundleLocalization();
       assertEquals(localization.getData().size(), 0);
 
@@ -36,17 +34,17 @@ public class BundleLocalizationTest
       localization.set("", "foo", "bar");
       assertEquals(localization.getData().size(), 1);
       assertEquals("bar", localization.get("", "foo"));
-      
+
       localization.set("", "bar", "foo");
       assertEquals(localization.getData().size(), 1);
       assertEquals("bar", localization.get("", "foo"));
       assertEquals("foo", localization.get("", "bar"));
-      
+
       localization.set("", "bar", "bar");
       assertEquals(localization.getData().size(), 1);
       assertEquals("bar", localization.get("", "foo"));
       assertEquals("bar", localization.get("", "bar"));
-      
+
       localization.set("de", "foo", "bar");
       assertEquals(localization.getData().size(), 2);
       assertEquals("bar", localization.get("", "foo"));

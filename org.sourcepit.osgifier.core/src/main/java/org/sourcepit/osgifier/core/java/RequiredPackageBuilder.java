@@ -25,74 +25,59 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RequiredPackageBuilder
-{
+public class RequiredPackageBuilder {
    private final Set<String> inheritedPackages = new HashSet<String>();
 
    private final Set<String> invokedPackages = new HashSet<String>();
 
    private final Set<String> allPackages = new HashSet<String>();
 
-   public void addInheritedTypes(Collection<String> typeNames)
-   {
-      for (String typeName : typeNames)
-      {
+   public void addInheritedTypes(Collection<String> typeNames) {
+      for (String typeName : typeNames) {
          addInheritedType(typeName);
       }
    }
 
-   public void addInheritedPackages(Collection<String> packageNames)
-   {
-      for (String packageName : packageNames)
-      {
+   public void addInheritedPackages(Collection<String> packageNames) {
+      for (String packageName : packageNames) {
          addInheritedPackage(packageName);
       }
    }
 
-   public void addInvokedTypes(Collection<String> typeNames)
-   {
-      for (String typeName : typeNames)
-      {
+   public void addInvokedTypes(Collection<String> typeNames) {
+      for (String typeName : typeNames) {
          addInvokedType(typeName);
       }
    }
 
-   public void addInvokedPackages(Collection<String> packageNames)
-   {
-      for (String packageName : packageNames)
-      {
+   public void addInvokedPackages(Collection<String> packageNames) {
+      for (String packageName : packageNames) {
          addInvokedPackage(packageName);
       }
    }
 
-   public void addInheritedType(String typeName)
-   {
+   public void addInheritedType(String typeName) {
       addInheritedPackage(extractPackageName(typeName));
    }
 
-   public void addInvokedType(String typeName)
-   {
+   public void addInvokedType(String typeName) {
       addInvokedPackage(extractPackageName(typeName));
    }
 
-   public void addInheritedPackage(String packageName)
-   {
+   public void addInheritedPackage(String packageName) {
       invokedPackages.remove(packageName);
       inheritedPackages.add(packageName);
       allPackages.add(packageName);
    }
 
-   public void addInvokedPackage(String packageName)
-   {
-      if (!inheritedPackages.contains(packageName))
-      {
+   public void addInvokedPackage(String packageName) {
+      if (!inheritedPackages.contains(packageName)) {
          invokedPackages.add(packageName);
          allPackages.add(packageName);
       }
    }
 
-   public RequiredPackages build()
-   {
+   public RequiredPackages build() {
       final List<String> inherited = new ArrayList<String>(inheritedPackages);
       final List<String> invoked = new ArrayList<String>(invokedPackages);
       final List<String> all = new ArrayList<String>(allPackages);
@@ -103,8 +88,7 @@ public class RequiredPackageBuilder
          unmodifiableCollection(all));
    }
 
-   private static String extractPackageName(String typeName)
-   {
+   private static String extractPackageName(String typeName) {
       final int idx = typeName.lastIndexOf('.');
       return idx > -1 ? typeName.substring(0, idx) : "";
    }

@@ -18,7 +18,6 @@ package org.sourcepit.osgifier.p2;
 
 import org.eclipse.sisu.equinox.launching.internal.P2ApplicationLauncher;
 
-public interface P2ApplicationLauncherFactory
-{
+public interface P2ApplicationLauncherFactory {
    P2ApplicationLauncher createP2ApplicationLauncher();
 }

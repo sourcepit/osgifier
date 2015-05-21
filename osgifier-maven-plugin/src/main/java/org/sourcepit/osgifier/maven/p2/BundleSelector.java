@@ -23,19 +23,15 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
-public interface BundleSelector
-{
-   BundleSelector ALL = new BundleSelector()
-   {
+public interface BundleSelector {
+   BundleSelector ALL = new BundleSelector() {
       @Override
-      public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext)
-      {
+      public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext) {
          return bundleContext.getBundles();
       }
 
       @Override
-      public boolean select(Stack<BundleCandidate> path, BundleReference reference)
-      {
+      public boolean select(Stack<BundleCandidate> path, BundleReference reference) {
          return true;
       }
    };

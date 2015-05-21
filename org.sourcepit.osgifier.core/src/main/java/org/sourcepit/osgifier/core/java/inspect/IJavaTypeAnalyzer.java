@@ -19,7 +19,6 @@ package org.sourcepit.osgifier.core.java.inspect;
 import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.osgifier.core.model.java.JavaType;
 
-public interface IJavaTypeAnalyzer
-{
+public interface IJavaTypeAnalyzer {
    void analyze(JavaType javaType, JavaClass javaClass);
 }

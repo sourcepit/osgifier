@@ -55,44 +55,36 @@ import org.sourcepit.osgifier.core.model.context.BundleLocalization;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class Repackager
-{
+public class Repackager {
    private static final PathMatcher DEFAULT_CONTENT_MATCHER = createJarContentMatcher(null);
 
    private final Logger logger = LoggerFactory.getLogger(Repackager.class);
 
    public void injectManifest(final File jarFile, final Manifest manifest, final BundleLocalization localization)
-      throws PipedIOException
-   {
-      try
-      {
+      throws PipedIOException {
+      try {
          final File tmpFile = move(jarFile);
          copyJarAndInjectManifest(tmpFile, jarFile, manifest, localization);
          deleteFileOrDirectory(tmpFile);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw Exceptions.pipe(e);
       }
    }
 
-   private File move(final File srcFile) throws IOException
-   {
+   private File move(final File srcFile) throws IOException {
       String prefix = ".rejar";
       String dirName = srcFile.getParentFile().getAbsolutePath();
       String fileName = srcFile.getName();
 
       File destFile = createTmpFile(dirName, fileName, prefix);
       final boolean rename = srcFile.renameTo(destFile);
-      if (!rename)
-      {
+      if (!rename) {
          org.apache.commons.io.FileUtils.copyFile(srcFile, destFile);
-         try
-         {
+         try {
             deleteFileOrDirectory(srcFile);
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             FileUtils.deleteQuietly(destFile);
             throw new IOException("Failed to delete original file '" + srcFile + "' after copy to '" + destFile + "'");
          }
@@ -100,12 +92,10 @@ public class Repackager
       return destFile;
    }
 
-   private static File createTmpFile(String dirName, String fileName, String prefix) throws IOException
-   {
+   private static File createTmpFile(String dirName, String fileName, String prefix) throws IOException {
       int unique = 0;
       File file;
-      do
-      {
+      do {
          file = genFile(dirName, fileName, prefix, unique++);
       }
       while (!file.createNewFile());
@@ -113,18 +103,15 @@ public class Repackager
       return file;
    }
 
-   private static File genFile(String dirName, String fileName, String prefix, int counter)
-   {
+   private static File genFile(String dirName, String fileName, String prefix, int counter) {
       StringBuilder path = new StringBuilder();
       path.append(dirName);
       path.append(File.separatorChar);
       path.append(fileName);
-      if (counter > 0)
-      {
+      if (counter > 0) {
          final String n = String.valueOf(counter);
          int lead = 5 - n.length();
-         for (int i = 0; i < lead; i++)
-         {
+         for (int i = 0; i < lead; i++) {
             path.append('0');
          }
          path.append(n);
@@ -134,37 +121,30 @@ public class Repackager
    }
 
    public void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
-      final BundleLocalization localization) throws PipedIOException
-   {
+      final BundleLocalization localization) throws PipedIOException {
       copyJarAndInjectManifest(srcJarFile, destJarFile, manifest, localization, null);
    }
 
    public <T> void copyJarAndInjectManifest(final File srcJarFile, final File destJarFile, final Manifest manifest,
-      final BundleLocalization localization, final Collection<String> pathFilters) throws PipedIOException
-   {
-      new IOOperation<JarOutputStream>(jarOut(buffOut(fileOut(destJarFile))))
-      {
+      final BundleLocalization localization, final Collection<String> pathFilters) throws PipedIOException {
+      new IOOperation<JarOutputStream>(jarOut(buffOut(fileOut(destJarFile)))) {
          @Override
-         protected void run(JarOutputStream destJarOut) throws IOException
-         {
+         protected void run(JarOutputStream destJarOut) throws IOException {
             rePackageJarFile(srcJarFile, manifest, localization, destJarOut, pathFilters);
          }
       }.run();
    }
 
    private void rePackageJarFile(File srcJarFile, final Manifest manifest, BundleLocalization localization,
-      final JarOutputStream destJarOut, Collection<String> pathFilters) throws IOException
-   {
+      final JarOutputStream destJarOut, Collection<String> pathFilters) throws IOException {
       destJarOut.putNextEntry(new JarEntry(JarFile.MANIFEST_NAME));
       writeManifest(manifest, destJarOut);
       destJarOut.closeEntry();
 
-      if (localization != null)
-      {
+      if (localization != null) {
          final Set<String> paths = BundleLocalizationWriter.write(destJarOut, manifest, localization).keySet();
          pathFilters = pathFilters == null ? new HashSet<String>() : new HashSet<String>(pathFilters);
-         for (String path : paths)
-         {
+         for (String path : paths) {
             pathFilters.add("!" + path);
          }
       }
@@ -173,42 +153,34 @@ public class Repackager
          ? DEFAULT_CONTENT_MATCHER
          : createJarContentMatcher(pathFilters);
 
-      new IOOperation<JarInputStream>(jarIn(buffIn(fileIn(srcJarFile))))
-      {
+      new IOOperation<JarInputStream>(jarIn(buffIn(fileIn(srcJarFile)))) {
          @Override
-         protected void run(JarInputStream srcJarIn) throws IOException
-         {
+         protected void run(JarInputStream srcJarIn) throws IOException {
             copyJarContents(srcJarIn, destJarOut, pathMatcher);
          }
       }.run();
    }
 
-   private void writeManifest(Manifest manifest, OutputStream out) throws IOException
-   {
+   private void writeManifest(Manifest manifest, OutputStream out) throws IOException {
       Resource manifestResource = new GenericManifestResourceImpl();
       manifestResource.getContents().add(EcoreUtil.copy(manifest));
       manifestResource.save(out, null);
    }
 
    private void copyJarContents(JarInputStream srcJarIn, final JarOutputStream destJarOut, PathMatcher contentMatcher)
-      throws IOException
-   {
+      throws IOException {
       final Set<String> processedEntires = new HashSet<String>();
 
       JarEntry srcEntry = srcJarIn.getNextJarEntry();
-      while (srcEntry != null)
-      {
+      while (srcEntry != null) {
          final String entryName = srcEntry.getName();
-         if (contentMatcher.isMatch(entryName))
-         {
-            if (processedEntires.add(entryName))
-            {
+         if (contentMatcher.isMatch(entryName)) {
+            if (processedEntires.add(entryName)) {
                destJarOut.putNextEntry(new JarEntry(srcEntry.getName()));
                IOUtils.copy(srcJarIn, destJarOut);
                destJarOut.closeEntry();
             }
-            else
-            {
+            else {
                logger.warn("Ignored duplicate jar entry: " + entryName);
             }
          }
@@ -217,16 +189,14 @@ public class Repackager
       }
    }
 
-   private static PathMatcher createJarContentMatcher(Collection<String> customPathFilters)
-   {
+   private static PathMatcher createJarContentMatcher(Collection<String> customPathFilters) {
       final Set<String> pathFilters = new HashSet<String>();
       pathFilters.add("!" + JarFile.MANIFEST_NAME); // will be set manually
       pathFilters.add("!META-INF/*.SF");
       pathFilters.add("!META-INF/*.DSA");
       pathFilters.add("!META-INF/*.RSA");
 
-      if (customPathFilters != null)
-      {
+      if (customPathFilters != null) {
          pathFilters.addAll(customPathFilters);
       }
 
@@ -235,16 +205,13 @@ public class Repackager
       return PathMatcher.parse(matcherPattern, "/", ",");
    }
 
-   private static String toPathMatcherPattern(Set<String> pathFilters)
-   {
+   private static String toPathMatcherPattern(Set<String> pathFilters) {
       final StringBuilder sb = new StringBuilder();
-      for (String exclude : pathFilters)
-      {
+      for (String exclude : pathFilters) {
          sb.append(exclude);
          sb.append(',');
       }
-      if (sb.length() > 0)
-      {
+      if (sb.length() > 0) {
          sb.deleteCharAt(sb.length() - 1);
       }
       return sb.toString();

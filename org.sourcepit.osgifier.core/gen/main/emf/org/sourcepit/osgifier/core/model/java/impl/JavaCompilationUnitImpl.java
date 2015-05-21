@@ -42,8 +42,7 @@ import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
  *
  * @generated
  */
-public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompilationUnit
-{
+public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompilationUnit {
    /**
     * The cached value of the '{@link #getImportDeclarations() <em>Import Declarations</em>}' containment reference
     * list.
@@ -62,8 +61,7 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * 
     * @generated
     */
-   protected JavaCompilationUnitImpl()
-   {
+   protected JavaCompilationUnitImpl() {
       super();
    }
 
@@ -74,8 +72,7 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_COMPILATION_UNIT;
    }
 
@@ -85,10 +82,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * 
     * @generated
     */
-   public EList<ImportDeclaration> getImportDeclarations()
-   {
-      if (importDeclarations == null)
-      {
+   public EList<ImportDeclaration> getImportDeclarations() {
+      if (importDeclarations == null) {
          importDeclarations = new EObjectContainmentWithInverseEList<ImportDeclaration>(ImportDeclaration.class, this,
             JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS,
             JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT);
@@ -104,10 +99,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getImportDeclarations()).basicAdd(otherEnd,
                msgs);
@@ -122,10 +115,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             return ((InternalEList<?>) getImportDeclarations()).basicRemove(otherEnd, msgs);
       }
@@ -139,10 +130,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             return getImportDeclarations();
       }
@@ -157,10 +146,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             getImportDeclarations().clear();
             getImportDeclarations().addAll((Collection<? extends ImportDeclaration>) newValue);
@@ -176,10 +163,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             getImportDeclarations().clear();
             return;
@@ -194,10 +179,8 @@ public class JavaCompilationUnitImpl extends JavaFileImpl implements JavaCompila
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS :
             return importDeclarations != null && !importDeclarations.isEmpty();
       }

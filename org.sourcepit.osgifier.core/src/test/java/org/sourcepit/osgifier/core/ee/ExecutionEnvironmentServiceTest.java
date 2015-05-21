@@ -31,21 +31,16 @@ import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.ee.ExecutionEnvironment;
-import org.sourcepit.osgifier.core.ee.ExecutionEnvironmentImplementation;
-import org.sourcepit.osgifier.core.ee.ExecutionEnvironmentService;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ExecutionEnvironmentServiceTest extends InjectedTest
-{
+public class ExecutionEnvironmentServiceTest extends InjectedTest {
    @Inject
    private ExecutionEnvironmentService environmentService;
 
    @Test
-   public void testCompare()
-   {
+   public void testCompare() {
       ExecutionEnvironment cdc10 = environmentService.getExecutionEnvironment("CDC-1.0/Foundation-1.0");
       ExecutionEnvironment cdc11 = environmentService.getExecutionEnvironment("CDC-1.1/Foundation-1.1");
       ExecutionEnvironment j2se13 = environmentService.getExecutionEnvironment("J2SE-1.3");
@@ -61,8 +56,7 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    }
 
    @Test
-   public void testGetExecutionEnvironments()
-   {
+   public void testGetExecutionEnvironments() {
       final List<ExecutionEnvironment> executionEnvironments = environmentService.getExecutionEnvironments();
       assertThat(executionEnvironments.size(), Is.is(16));
 
@@ -85,8 +79,7 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    }
 
    @Test
-   public void isCompatible()
-   {
+   public void isCompatible() {
       ExecutionEnvironment java7 = environmentService.getExecutionEnvironment("JavaSE-1.7");
       assertThat(java7, IsNull.notNullValue());
 
@@ -111,8 +104,7 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    }
 
    @Test
-   public void testGetCompatibles()
-   {
+   public void testGetCompatibles() {
       {
          ExecutionEnvironment execEnv = environmentService.getExecutionEnvironment("OSGi/Minimum-1.0");
          List<ExecutionEnvironment> execEnvs = environmentService.getCompatibleExecutionEnvironments(execEnv);
@@ -258,10 +250,8 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    }
 
    @Test
-   public void getExecutionEnvironmentImplementations()
-   {
-      List<ExecutionEnvironmentImplementation> execEnvImpls = environmentService
-         .getExecutionEnvironmentImplementations();
+   public void getExecutionEnvironmentImplementations() {
+      List<ExecutionEnvironmentImplementation> execEnvImpls = environmentService.getExecutionEnvironmentImplementations();
       assertThat(execEnvImpls.get(0).getExecutionEnvironmentId(), IsEqual.equalTo("CDC-1.1/Foundation-1.1"));
       assertThat(execEnvImpls.get(1).getExecutionEnvironmentId(), IsEqual.equalTo("J2SE-1.4"));
       assertThat(execEnvImpls.get(2).getExecutionEnvironmentId(), IsEqual.equalTo("J2SE-1.5"));
@@ -270,8 +260,7 @@ public class ExecutionEnvironmentServiceTest extends InjectedTest
    }
 
    @Test
-   public void testGetIntersectingPackages() throws Exception
-   {
+   public void testGetIntersectingPackages() throws Exception {
       ExecutionEnvironment java8 = environmentService.getExecutionEnvironment("JavaSE/compact3-1.8");
       assertTrue(java8.getPackages().contains("java.lang"));
       assertFalse(java8.getPackages().contains("java.applet"));

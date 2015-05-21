@@ -34,8 +34,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface JavaClass extends JavaFile
-{
+public interface JavaClass extends JavaFile {
    /**
     * Returns the value of the '<em><b>Major</b></em>' attribute.
     * <!-- begin-user-doc -->

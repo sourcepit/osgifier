@@ -28,22 +28,17 @@ import org.apache.maven.model.io.DefaultModelWriter;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ModelToString
-{
-   public String toString(final Model model)
-   {
+public class ModelToString {
+   public String toString(final Model model) {
       final StringWriter w = new StringWriter();
-      try
-      {
+      try {
          new DefaultModelWriter().write(w, null, model);
          return w.toString();
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw pipe(e);
       }
-      finally
-      {
+      finally {
          closeQuietly(w);
       }
    }

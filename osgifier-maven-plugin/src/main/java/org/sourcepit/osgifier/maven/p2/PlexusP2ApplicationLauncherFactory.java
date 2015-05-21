@@ -26,26 +26,21 @@ import org.sourcepit.common.utils.lang.Exceptions;
 import org.sourcepit.osgifier.p2.P2ApplicationLauncherFactory;
 
 @Named
-public class PlexusP2ApplicationLauncherFactory implements P2ApplicationLauncherFactory
-{
+public class PlexusP2ApplicationLauncherFactory implements P2ApplicationLauncherFactory {
    @Inject
    private PlexusContainer plexus;
 
-   public P2ApplicationLauncher createP2ApplicationLauncher()
-   {
+   public P2ApplicationLauncher createP2ApplicationLauncher() {
       final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
-      try
-      {
+      try {
          Thread.currentThread().setContextClassLoader(P2ApplicationLauncher.class.getClassLoader());
 
          return plexus.lookup(P2ApplicationLauncher.class);
       }
-      catch (ComponentLookupException e)
-      {
+      catch (ComponentLookupException e) {
          throw Exceptions.pipe(e);
       }
-      finally
-      {
+      finally {
          Thread.currentThread().setContextClassLoader(ccl);
       }
    }

@@ -38,8 +38,7 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd
  */
-public class JavaResourceVisitor implements ResourceVisitor
-{
+public class JavaResourceVisitor implements ResourceVisitor {
    private final List<JavaResourceHandler> resourceHandlers = new ArrayList<JavaResourceHandler>();
 
    private final JavaResourceBundle jBundle;
@@ -48,91 +47,72 @@ public class JavaResourceVisitor implements ResourceVisitor
 
    private JavaResourcesRoot jRoot;
 
-   public JavaResourceVisitor(JavaResourceBundle jResources, String rootName, ReadWriteLock modelLock)
-   {
+   public JavaResourceVisitor(JavaResourceBundle jResources, String rootName, ReadWriteLock modelLock) {
       this.jBundle = jResources;
       this.rootName = rootName;
       this.modelLock = modelLock;
    }
 
-   public List<JavaResourceHandler> getResourceHandlers()
-   {
+   public List<JavaResourceHandler> getResourceHandlers() {
       return resourceHandlers;
    }
 
-   protected JavaResourcesRoot getPackageRoot(boolean createOnDemand)
-   {
-      if (jRoot == null)
-      {
+   protected JavaResourcesRoot getPackageRoot(boolean createOnDemand) {
+      if (jRoot == null) {
          modelLock.writeLock().lock();
-         try
-         {
+         try {
             jRoot = jBundle.getResourcesRoot(rootName, createOnDemand);
          }
-         finally
-         {
+         finally {
             modelLock.writeLock().unlock();
          }
       }
       return jRoot;
    }
 
-   protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
-   {
+   protected JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand) {
       final JavaResourcesRoot root = getPackageRoot(createOnDemand);
       return root == null ? null : root.getPackage(fullyQualifiedName, createOnDemand);
    }
 
-   protected JavaType getType(String packageName, String typeName, boolean createOnDemand)
-   {
+   protected JavaType getType(String packageName, String typeName, boolean createOnDemand) {
       final JavaPackage pkg = getPackage(packageName, createOnDemand);
       return pkg == null ? null : pkg.getType(typeName, createOnDemand);
    }
 
-   public void visit(Path path, boolean isDirectory, InputStream content)
-   {
+   public void visit(Path path, boolean isDirectory, InputStream content) {
       final JavaResourceType type;
       final boolean isJPackage = isDirectory && JavaLangUtils.isFullyQuallifiedPackageName(path);
-      if (isJPackage)
-      {
+      if (isJPackage) {
          type = PACKAGE;
       }
-      else if (isInJPackage(path))
-      {
-         if (!isDirectory && isJClass(path))
-         {
+      else if (isInJPackage(path)) {
+         if (!isDirectory && isJClass(path)) {
             type = CLASS_FILE;
          }
-         else
-         {
+         else {
             type = isDirectory ? DIRECTORY_IN_PACKAGE : FILE_IN_PACKAGE;
          }
       }
-      else
-      {
+      else {
          type = isDirectory ? DIRECTORY_OUTSIDE_PACKAGE : FILE_OUTSIDE_PACKAGE;
       }
       handleResource(type, path, content);
    }
 
-   private void handleResource(JavaResourceType type, Path path, InputStream content)
-   {
-      for (JavaResourceHandler resourceHandler : getResourceHandlers())
-      {
-         if (resourceHandler.handle(getPackageRoot(true), type, modelLock, path, content))
-         {
+   private void handleResource(JavaResourceType type, Path path, InputStream content) {
+      for (JavaResourceHandler resourceHandler : getResourceHandlers()) {
+         if (resourceHandler.handle(getPackageRoot(true), type, modelLock, path, content)) {
             break;
          }
       }
    }
 
-   private boolean isInJPackage(Path path)
-   {
+   private boolean isInJPackage(Path path) {
       return path.getParent() == null || JavaLangUtils.isFullyQuallifiedPackageName(path.getParent());
    }
 
-   private boolean isJClass(Path path)
-   {
+   private boolean isJClass(Path path) {
       return "class".equals(path.getFileExtension());
    }
 }

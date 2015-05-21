@@ -49,8 +49,7 @@ import org.sourcepit.osgifier.core.resolve.ContentAppenderParticipant;
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
  */
 @Named
-public class MavenModelContentAppenderParticipant implements ContentAppenderParticipant
-{
+public class MavenModelContentAppenderParticipant implements ContentAppenderParticipant {
    private final LegacySupport buildContext;
 
    private final ProjectBuilder projectBuilder;
@@ -59,33 +58,27 @@ public class MavenModelContentAppenderParticipant implements ContentAppenderPart
 
    @Inject
    public MavenModelContentAppenderParticipant(LegacySupport buildContext, ProjectBuilder projectBuilder,
-      ArtifactFactory artifactFactory)
-   {
+      ArtifactFactory artifactFactory) {
       this.buildContext = buildContext;
       this.projectBuilder = projectBuilder;
       this.artifactFactory = artifactFactory;
    }
 
    @Override
-   public void appendContents(OsgifierContext context, ContentAppenderFilter filter, PropertiesSource options)
-   {
+   public void appendContents(OsgifierContext context, ContentAppenderFilter filter, PropertiesSource options) {
       final List<BundleCandidate> bundles = context.getBundles();
 
       final Map<ArtifactKey, String> cache = new HashMap<ArtifactKey, String>(bundles.size());
 
-      for (BundleCandidate bundle : bundles)
-      {
-         if (filter.isAppendContent(bundle, options))
-         {
+      for (BundleCandidate bundle : bundles) {
+         if (filter.isAppendContent(bundle, options)) {
             final MavenArtifact artifact = bundle.getExtension(MavenArtifact.class);
-            if (artifact != null)
-            {
+            if (artifact != null) {
                final ArtifactKey pomKey = toArtifactKey(artifact.getGroupId(), artifact.getArtifactId(), "pom", null,
                   artifact.getVersion());
 
                String modelAsString = cache.get(pomKey);
-               if (modelAsString == null)
-               {
+               if (modelAsString == null) {
                   // the normalized model
                   final Model model = buildMavenModel(pomKey);
                   modelAsString = new ModelToString().toString(model);
@@ -98,8 +91,7 @@ public class MavenModelContentAppenderParticipant implements ContentAppenderPart
       }
    }
 
-   private Model buildMavenModel(final ArtifactKey pomKey)
-   {
+   private Model buildMavenModel(final ArtifactKey pomKey) {
       final Artifact pomArtifact = RepositoryUtils.toArtifact(artifactFactory.createArtifact(pomKey));
 
       final ProjectBuildingRequest request = new DefaultProjectBuildingRequest(buildContext.getSession()
@@ -109,13 +101,11 @@ public class MavenModelContentAppenderParticipant implements ContentAppenderPart
       request.setProcessPlugins(false);
       request.setValidationLevel(VALIDATION_LEVEL_MINIMAL);
 
-      try
-      {
+      try {
          final ProjectBuildingResult result = projectBuilder.build(pomArtifact, true, request);
          return result.getProject().getModel();
       }
-      catch (ProjectBuildingException e)
-      {
+      catch (ProjectBuildingException e) {
          throw pipe(e);
       }
    }

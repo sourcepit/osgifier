@@ -38,7 +38,6 @@ import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.osgifier.core.bundle.RequiredExecutionEnvironmentAppender;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
@@ -49,14 +48,12 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
-{
+public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest {
    @Inject
    private RequiredExecutionEnvironmentAppender execEnvAppender;
 
    @Test
-   public void testGetExcludedExecutionEnvironments() throws Exception
-   {
+   public void testGetExcludedExecutionEnvironments() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       Set<String> excludes = RequiredExecutionEnvironmentAppender.getExcludedExecutionEnvironments(options);
@@ -71,8 +68,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
    }
 
    @Test
-   public void test()
-   {
+   public void test() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -172,8 +168,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testBeAwareOfPackagesFromDependencies() throws Exception
-   {
+   public void testBeAwareOfPackagesFromDependencies() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
 
@@ -211,8 +206,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testGetMappedEEIds() throws Exception
-   {
+   public void testGetMappedEEIds() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
       List<String> mappedEEs;
 
@@ -245,8 +239,7 @@ public class RequiredExecutionEnvironmentAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testExecutionEnvironmentMappings() throws Exception
-   {
+   public void testExecutionEnvironmentMappings() throws Exception {
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "org.sourcepit.Foo", 47);

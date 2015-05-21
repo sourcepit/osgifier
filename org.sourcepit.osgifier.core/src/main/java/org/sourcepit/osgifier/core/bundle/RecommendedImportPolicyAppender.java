@@ -31,18 +31,14 @@ import org.sourcepit.osgifier.core.util.OptionsUtils;
 import com.google.common.base.Strings;
 
 @Named
-public class RecommendedImportPolicyAppender
-{
-   public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
-   {
+public class RecommendedImportPolicyAppender {
+   public void append(@NotNull BundleCandidate bundle, PropertiesSource options) {
       final BundleManifest manifest = bundle.getManifest();
       final VersionRangePolicy[] policies = getRecommendedImportPoliciesFromOptions(manifest, options);
-      if (policies != null)
-      {
+      if (policies != null) {
          final StringBuilder value = new StringBuilder();
          value.append(policies[0].literal());
-         if (policies[1] != policies[0])
-         {
+         if (policies[1] != policies[0]) {
             value.append(", ");
             value.append(policies[1].literal());
          }
@@ -50,21 +46,17 @@ public class RecommendedImportPolicyAppender
       }
    }
 
-   static VersionRangePolicy[] getRecommendedImportPoliciesFromHeader(BundleManifest manifest)
-   {
+   static VersionRangePolicy[] getRecommendedImportPoliciesFromHeader(BundleManifest manifest) {
       final String policies = manifest.getHeaderValue("Osgifier-RecommendedImportPolicy");
-      if (Strings.isNullOrEmpty(policies))
-      {
+      if (Strings.isNullOrEmpty(policies)) {
          return null;
       }
       return toPolicies(policies, ",");
    }
 
-   static VersionRangePolicy[] getRecommendedImportPoliciesFromOptions(BundleManifest manifest, PropertiesSource options)
-   {
+   static VersionRangePolicy[] getRecommendedImportPoliciesFromOptions(BundleManifest manifest, PropertiesSource options) {
       final String mapValue = options.get("osgifier.recommendedImportPolicies");
-      if (Strings.isNullOrEmpty(mapValue))
-      {
+      if (Strings.isNullOrEmpty(mapValue)) {
          return null;
       }
 
@@ -73,46 +65,37 @@ public class RecommendedImportPolicyAppender
       final Map<String, String> symbolicNameToPolicies = OptionsUtils.parseMapValue(mapValue);
 
       final String policies = getPolicies(symbolicNameToPolicies, symbolicName);
-      if (Strings.isNullOrEmpty(policies))
-      {
+      if (Strings.isNullOrEmpty(policies)) {
          return null;
       }
       return toPolicies(policies, "\\|");
    }
 
-   private static VersionRangePolicy[] toPolicies(final String policyNameString, String sep)
-   {
+   private static VersionRangePolicy[] toPolicies(final String policyNameString, String sep) {
       final String[] policyNames = policyNameString.split(sep);
 
       final VersionRangePolicy[] result = new VersionRangePolicy[2];
       result[0] = VersionRangePolicy.parse(policyNames[0].trim());
-      if (policyNames.length == 1)
-      {
+      if (policyNames.length == 1) {
          result[1] = result[0];
       }
-      else if (policyNames.length == 2)
-      {
+      else if (policyNames.length == 2) {
          result[1] = VersionRangePolicy.parse(policyNames[1].trim());
       }
-      else
-      {
+      else {
          throw new IllegalArgumentException("Invalid import policy: " + policyNameString);
       }
       return result;
    }
 
-   private static String getPolicies(final Map<String, String> symbolicNameToPolicies, final String symbolicName)
-   {
+   private static String getPolicies(final Map<String, String> symbolicNameToPolicies, final String symbolicName) {
       final String policies = symbolicNameToPolicies.get(symbolicName);
-      if (!Strings.isNullOrEmpty(policies))
-      {
+      if (!Strings.isNullOrEmpty(policies)) {
          return policies;
       }
 
-      for (Entry<String, String> entry : symbolicNameToPolicies.entrySet())
-      {
-         if (PathMatcher.parsePackagePatterns(entry.getKey()).isMatch(symbolicName))
-         {
+      for (Entry<String, String> entry : symbolicNameToPolicies.entrySet()) {
+         if (PathMatcher.parsePackagePatterns(entry.getKey()).isMatch(symbolicName)) {
             return entry.getValue();
          }
       }

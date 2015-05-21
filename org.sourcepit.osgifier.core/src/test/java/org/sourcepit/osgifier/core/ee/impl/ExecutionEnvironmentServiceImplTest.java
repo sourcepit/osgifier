@@ -24,15 +24,12 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.junit.Test;
-import org.sourcepit.osgifier.core.ee.impl.ExecutionEnvironmentServiceImpl;
 
-public class ExecutionEnvironmentServiceImplTest
-{
+public class ExecutionEnvironmentServiceImplTest {
 
    @SuppressWarnings("unchecked")
    @Test
-   public void testNewIntersection0() throws Exception
-   {
+   public void testNewIntersection0() throws Exception {
       Collection<String> c1 = asList("a");
       Set<String> intersection = ExecutionEnvironmentServiceImpl.newIntersection(asList(c1));
       assertEquals(1, intersection.size());
@@ -41,8 +38,7 @@ public class ExecutionEnvironmentServiceImplTest
 
    @SuppressWarnings("unchecked")
    @Test
-   public void testNewIntersection1() throws Exception
-   {
+   public void testNewIntersection1() throws Exception {
       Collection<String> c1 = asList("a");
       Collection<String> c2 = asList("b");
       Collection<String> c3 = asList("c");
@@ -53,8 +49,7 @@ public class ExecutionEnvironmentServiceImplTest
 
    @SuppressWarnings("unchecked")
    @Test
-   public void testNewIntersection2() throws Exception
-   {
+   public void testNewIntersection2() throws Exception {
       Collection<String> c1 = asList("a", "b");
       Collection<String> c2 = asList("b");
       Collection<String> c3 = asList("b", "c");
@@ -66,8 +61,7 @@ public class ExecutionEnvironmentServiceImplTest
 
    @SuppressWarnings("unchecked")
    @Test
-   public void testNewIntersection3() throws Exception
-   {
+   public void testNewIntersection3() throws Exception {
       Collection<String> c1 = asList("a", "b", "c");
       Collection<String> c2 = asList("b", "c");
 
@@ -79,8 +73,7 @@ public class ExecutionEnvironmentServiceImplTest
 
    @SuppressWarnings("unchecked")
    @Test
-   public void testNewIntersection4() throws Exception
-   {
+   public void testNewIntersection4() throws Exception {
       Collection<String> c1 = asList("a", "b", "c");
       Collection<String> c2 = asList("b", "c", "d");
       Collection<String> c3 = asList("b", "c", "d", "e");

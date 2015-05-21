@@ -21,7 +21,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -32,24 +31,19 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.core.util.OsgifierContextUtils;
 import org.sourcepit.osgifier.core.util.OsgifierContextUtils.BuildOrder;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class OsgifierContextUtilsTest
-{
+public class OsgifierContextUtilsTest {
    @Test
-   public void testComputeBuildOrder()
-   {
-      try
-      {
+   public void testComputeBuildOrder() {
+      try {
          OsgifierContextUtils.computeBuildOrder(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       // empty
@@ -101,8 +95,7 @@ public class OsgifierContextUtilsTest
       assertThat(path.get(3), IsEqual.equalTo(a));
    }
 
-   private BundleReference addBundleReference(BundleCandidate from, BundleCandidate to)
-   {
+   private BundleReference addBundleReference(BundleCandidate from, BundleCandidate to) {
       final BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
       ref.setTarget(to);
       ref.setVersionRange(VersionRange.parse(to.getVersion().toMinimalString()));
@@ -110,8 +103,7 @@ public class OsgifierContextUtilsTest
       return ref;
    }
 
-   private BundleCandidate addBundleCandidate(OsgifierContext ctx, String symbolicName, String version)
-   {
+   private BundleCandidate addBundleCandidate(OsgifierContext ctx, String symbolicName, String version) {
       final BundleCandidate bc = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bc.setSymbolicName(symbolicName);
       bc.setVersion(Version.parse(version));

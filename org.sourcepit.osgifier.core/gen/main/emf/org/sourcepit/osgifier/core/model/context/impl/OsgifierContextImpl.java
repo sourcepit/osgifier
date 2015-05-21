@@ -42,8 +42,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
  *
  * @generated
  */
-public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierContext
-{
+public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierContext {
    /**
     * The cached value of the '{@link #getBundles() <em>Bundles</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -61,8 +60,7 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * 
     * @generated
     */
-   protected OsgifierContextImpl()
-   {
+   protected OsgifierContextImpl() {
       super();
    }
 
@@ -73,8 +71,7 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return ContextModelPackage.Literals.OSGIFIER_CONTEXT;
    }
 
@@ -84,10 +81,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * 
     * @generated
     */
-   public EList<BundleCandidate> getBundles()
-   {
-      if (bundles == null)
-      {
+   public EList<BundleCandidate> getBundles() {
+      if (bundles == null) {
          bundles = new EObjectContainmentEList<BundleCandidate>(BundleCandidate.class, this,
             ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES);
       }
@@ -101,10 +96,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return ((InternalEList<?>) getBundles()).basicRemove(otherEnd, msgs);
       }
@@ -118,10 +111,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return getBundles();
       }
@@ -136,10 +127,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             getBundles().clear();
             getBundles().addAll((Collection<? extends BundleCandidate>) newValue);
@@ -155,10 +144,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             getBundles().clear();
             return;
@@ -173,10 +160,8 @@ public class OsgifierContextImpl extends XAnnotatableImpl implements OsgifierCon
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.OSGIFIER_CONTEXT__BUNDLES :
             return bundles != null && !bundles.isEmpty();
       }

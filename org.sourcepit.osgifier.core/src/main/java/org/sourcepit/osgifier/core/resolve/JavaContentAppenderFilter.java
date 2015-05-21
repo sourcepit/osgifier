@@ -19,22 +19,17 @@ package org.sourcepit.osgifier.core.resolve;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
-public interface JavaContentAppenderFilter
-{
-   static JavaContentAppenderFilter APPEND_ALL = new JavaContentAppenderFilter()
-   {
+public interface JavaContentAppenderFilter {
+   static JavaContentAppenderFilter APPEND_ALL = new JavaContentAppenderFilter() {
       @Override
-      public boolean isAppendContent(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendContent(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
    };
 
-   static JavaContentAppenderFilter SKIP_NATIVE_AND_SOURCE = new JavaContentAppenderFilter()
-   {
+   static JavaContentAppenderFilter SKIP_NATIVE_AND_SOURCE = new JavaContentAppenderFilter() {
       @Override
-      public boolean isAppendContent(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendContent(BundleCandidate bundle, PropertiesSource options) {
          return !bundle.isNativeBundle() && bundle.getTargetBundle() == null;
       }
    };

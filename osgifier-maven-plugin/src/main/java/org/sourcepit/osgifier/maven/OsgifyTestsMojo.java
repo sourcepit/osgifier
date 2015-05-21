@@ -29,20 +29,17 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
  * @author bernd
  */
 @Mojo(name = "osgify-tests", defaultPhase = LifecyclePhase.TEST_COMPILE, requiresDependencyResolution = ResolutionScope.TEST)
-public class OsgifyTestsMojo extends AbstractOsgifyManifestMojo
-{
+public class OsgifyTestsMojo extends AbstractOsgifyManifestMojo {
    @Parameter(defaultValue = "${project.build.testOutputDirectory}/META-INF/MANIFEST.MF")
    private File manifestFile;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       doExecute(Goal.OSGIFY_TESTS);
    }
 
    @Override
-   protected File getManifestFile()
-   {
+   protected File getManifestFile() {
       return manifestFile;
    }
 }

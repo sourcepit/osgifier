@@ -41,10 +41,8 @@ import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
-public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
-{
+public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo {
    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractOsgifyManifestMojo.class);
 
    @Inject
@@ -62,10 +60,8 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
    @Parameter(defaultValue = "${project}")
    protected MavenProject project;
 
-   protected void doExecute(Goal goal)
-   {
-      if (goal == Goal.OSGIFY_TESTS)
-      {
+   protected void doExecute(Goal goal) {
+      if (goal == Goal.OSGIFY_TESTS) {
          throw new UnsupportedOperationException("Bundling test artifacts is currently not supported.");
       }
       // TODO
@@ -108,85 +104,68 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
       writeManifest(manifest, manifestFile);
    }
 
-   private BundleCandidate getProjectBundle(final OsgifierContext context)
-   {
+   private BundleCandidate getProjectBundle(final OsgifierContext context) {
       final String projectPath = project.getBasedir().getAbsolutePath();
-      for (BundleCandidate bundle : context.getBundles())
-      {
-         if (bundle.getLocation().getAbsolutePath().startsWith(projectPath))
-         {
+      for (BundleCandidate bundle : context.getBundles()) {
+         if (bundle.getLocation().getAbsolutePath().startsWith(projectPath)) {
             return bundle;
          }
       }
       return null;
    }
 
-   private PropertiesSource createOptions()
-   {
-      final PropertiesSource options = new AbstractPropertiesSource()
-      {
+   private PropertiesSource createOptions() {
+      final PropertiesSource options = new AbstractPropertiesSource() {
          @Override
-         public String get(String key)
-         {
+         public String get(String key) {
             return project.getProperties().getProperty(key);
          }
       };
       return options;
    }
 
-   private void writeContext(File file, final OsgifierContext context)
-   {
+   private void writeContext(File file, final OsgifierContext context) {
       XMLResourceImpl resource = new XMLResourceImpl();
       resource.getContents().add(context);
 
       OutputStream out = null;
-      try
-      {
+      try {
          out = newOutStream(file);
          resource.save(out, null);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
-      finally
-      {
+      finally {
          IOUtils.closeQuietly(out);
       }
    }
 
    protected abstract File getManifestFile();
 
-   private void writeManifest(BundleManifest manifest, File manifestFile)
-   {
+   private void writeManifest(BundleManifest manifest, File manifestFile) {
       OutputStream out = null;
-      try
-      {
+      try {
          out = newOutStream(manifestFile);
          writeManifest(manifest, out);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
-      finally
-      {
+      finally {
          IOUtils.closeQuietly(out);
       }
    }
 
-   private void writeManifest(BundleManifest manifest, OutputStream out) throws IOException
-   {
+   private void writeManifest(BundleManifest manifest, OutputStream out) throws IOException {
       Resource manifestResource = new GenericManifestResourceImpl();
       manifestResource.getContents().add(EcoreUtil.copy(manifest));
       manifestResource.save(out, null);
    }
 
 
-   private BufferedOutputStream newOutStream(File file) throws IOException
-   {
-      if (file.exists())
-      {
+   private BufferedOutputStream newOutStream(File file) throws IOException {
+      if (file.exists()) {
          file.delete();
       }
       file.getParentFile().mkdirs();
@@ -194,8 +173,7 @@ public abstract class AbstractOsgifyManifestMojo extends AbstractOsgifierMojo
       return new BufferedOutputStream(new FileOutputStream(file));
    }
 
-   private File getContextFile(Goal goal)
-   {
+   private File getContextFile(Goal goal) {
       return new File(targetDir, goal == Goal.OSGIFY ? "osgify-context.xml" : "osgify-tests-context.xml");
    }
 }

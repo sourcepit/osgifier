@@ -69,8 +69,7 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
  *
  * @generated
  */
-public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesRoot
-{
+public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesRoot {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -154,8 +153,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   protected JavaResourcesRootImpl()
-   {
+   protected JavaResourcesRootImpl() {
       super();
    }
 
@@ -166,8 +164,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_RESOURCES_ROOT;
    }
 
@@ -177,8 +174,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public String getName()
-   {
+   public String getName() {
       return name;
    }
 
@@ -188,8 +184,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public void setName(String newName)
-   {
+   public void setName(String newName) {
       String oldName = name;
       name = newName;
       if (eNotificationRequired())
@@ -203,10 +198,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<EObject> getExtensions()
-   {
-      if (extensions == null)
-      {
+   public EList<EObject> getExtensions() {
+      if (extensions == null) {
          extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
             JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS);
       }
@@ -219,10 +212,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
+   public EList<Annotation> getAnnotations() {
+      if (annotations == null) {
          annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
             JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS, CommonModelingPackage.ANNOTATION__TARGET);
       }
@@ -235,8 +226,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Directory getParentDirectory()
-   {
+   public Directory getParentDirectory() {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY)
          return null;
       return (Directory) eInternalContainer();
@@ -248,8 +238,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public NotificationChain basicSetParentDirectory(Directory newParentDirectory, NotificationChain msgs)
-   {
+   public NotificationChain basicSetParentDirectory(Directory newParentDirectory, NotificationChain msgs) {
       msgs = eBasicSetContainer((InternalEObject) newParentDirectory,
          JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY, msgs);
       return msgs;
@@ -261,11 +250,9 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public void setParentDirectory(Directory newParentDirectory)
-   {
+   public void setParentDirectory(Directory newParentDirectory) {
       if (newParentDirectory != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY && newParentDirectory != null))
-      {
+         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY && newParentDirectory != null)) {
          if (EcoreUtil.isAncestor(this, newParentDirectory))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
          NotificationChain msgs = null;
@@ -289,10 +276,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<Resource> getResources()
-   {
-      if (resources == null)
-      {
+   public EList<Resource> getResources() {
+      if (resources == null) {
          resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
             JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
@@ -305,8 +290,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaResourceBundle getPackageBundle()
-   {
+   public JavaResourceBundle getPackageBundle() {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE)
          return null;
       return (JavaResourceBundle) eInternalContainer();
@@ -318,8 +302,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public NotificationChain basicSetPackageBundle(JavaResourceBundle newPackageBundle, NotificationChain msgs)
-   {
+   public NotificationChain basicSetPackageBundle(JavaResourceBundle newPackageBundle, NotificationChain msgs) {
       msgs = eBasicSetContainer((InternalEObject) newPackageBundle,
          JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE, msgs);
       return msgs;
@@ -331,11 +314,9 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public void setPackageBundle(JavaResourceBundle newPackageBundle)
-   {
+   public void setPackageBundle(JavaResourceBundle newPackageBundle) {
       if (newPackageBundle != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE && newPackageBundle != null))
-      {
+         || (eContainerFeatureID() != JavaModelPackage.JAVA_RESOURCES_ROOT__PACKAGE_BUNDLE && newPackageBundle != null)) {
          if (EcoreUtil.isAncestor(this, newPackageBundle))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
          NotificationChain msgs = null;
@@ -359,8 +340,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaResourcesType getResourcesType()
-   {
+   public JavaResourcesType getResourcesType() {
       return resourcesType;
    }
 
@@ -370,8 +350,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public void setResourcesType(JavaResourcesType newResourcesType)
-   {
+   public void setResourcesType(JavaResourcesType newResourcesType) {
       JavaResourcesType oldResourcesType = resourcesType;
       resourcesType = newResourcesType == null ? RESOURCES_TYPE_EDEFAULT : newResourcesType;
       if (eNotificationRequired())
@@ -385,8 +364,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaType getType(String qualifiedPackageName, String typeName, boolean createOnDemand)
-   {
+   public JavaType getType(String qualifiedPackageName, String typeName, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -398,8 +376,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<JavaPackage> getPackages()
-   {
+   public EList<JavaPackage> getPackages() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -411,8 +388,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<JavaFile> getJavaFiles()
-   {
+   public EList<JavaFile> getJavaFiles() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -424,8 +400,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaPackage getPackage(String name)
-   {
+   public JavaPackage getPackage(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -437,8 +412,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaPackage getPackage(String name, boolean createOnDemand)
-   {
+   public JavaPackage getPackage(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -450,8 +424,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaFile getJavaFile(String name)
-   {
+   public JavaFile getJavaFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -463,8 +436,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaFile getJavaFile(String name, boolean createOnDemand)
-   {
+   public JavaFile getJavaFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -476,8 +448,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaType getType(String name)
-   {
+   public JavaType getType(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -489,8 +460,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaType getType(String name, boolean createOnDemand)
-   {
+   public JavaType getType(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -502,8 +472,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Resource getResource(String name)
-   {
+   public Resource getResource(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -515,8 +484,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<Directory> getDirectories()
-   {
+   public EList<Directory> getDirectories() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -528,8 +496,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Directory getDirectory(String name)
-   {
+   public Directory getDirectory(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -541,8 +508,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Directory getDirectory(String name, boolean createOnDemand)
-   {
+   public Directory getDirectory(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -554,8 +520,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public File getFile(String name)
-   {
+   public File getFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -567,8 +532,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public File getFile(String name, boolean createOnDemand)
-   {
+   public File getFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -580,8 +544,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public EList<File> getFiles()
-   {
+   public EList<File> getFiles() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -593,8 +556,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public void accept(ResourceVisitor visitor)
-   {
+   public void accept(ResourceVisitor visitor) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -606,8 +568,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public JavaResourceBundle getResourceBundle()
-   {
+   public JavaResourceBundle getResourceBundle() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -619,8 +580,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
+   public Annotation getAnnotation(String source) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -632,8 +592,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
+   public Annotation getAnnotation(String source, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -645,8 +604,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public String getAnnotationData(String source, String key)
-   {
+   public String getAnnotationData(String source, String key) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -658,8 +616,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public String setAnnotationData(String source, String key, String value)
-   {
+   public String setAnnotationData(String source, String key, String value) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -671,8 +628,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public <T extends EObject> T getExtension(Class<T> extensionType)
-   {
+   public <T extends EObject> T getExtension(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -684,8 +640,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
-   {
+   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -697,8 +652,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public <T extends EObject> void addExtension(T extension)
-   {
+   public <T extends EObject> void addExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -710,8 +664,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtension(T extension)
-   {
+   public <T extends EObject> void removeExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -723,8 +676,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtensions(Class<T> extentionType)
-   {
+   public <T extends EObject> void removeExtensions(Class<T> extentionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -738,10 +690,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
@@ -765,10 +715,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
             return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
@@ -790,10 +738,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-   {
-      switch (eContainerFeatureID())
-      {
+   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+      switch (eContainerFeatureID()) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
             return eInternalContainer().eInverseRemove(this, JavaModelPackage.DIRECTORY__RESOURCES, Directory.class,
                msgs);
@@ -811,10 +757,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
             return getName();
          case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
@@ -841,10 +785,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
             setName((String) newValue);
             return;
@@ -880,10 +822,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
             setName(NAME_EDEFAULT);
             return;
@@ -916,10 +856,8 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_RESOURCES_ROOT__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
          case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
@@ -945,50 +883,39 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (derivedFeatureID)
-         {
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS :
                return CommonModelingPackage.EXTENDABLE__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS :
                return CommonModelingPackage.ANNOTATABLE__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (derivedFeatureID) {
             default :
                return -1;
          }
       }
-      if (baseClass == Resource.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Resource.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY :
                return JavaModelPackage.RESOURCE__PARENT_DIRECTORY;
             default :
                return -1;
          }
       }
-      if (baseClass == Directory.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Directory.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES :
                return JavaModelPackage.DIRECTORY__RESOURCES;
             default :
@@ -1005,50 +932,39 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (baseFeatureID)
-         {
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.EXTENDABLE__EXTENSIONS :
                return JavaModelPackage.JAVA_RESOURCES_ROOT__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.ANNOTATABLE__ANNOTATIONS :
                return JavaModelPackage.JAVA_RESOURCES_ROOT__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (baseFeatureID) {
             default :
                return -1;
          }
       }
-      if (baseClass == Resource.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Resource.class) {
+         switch (baseFeatureID) {
             case JavaModelPackage.RESOURCE__PARENT_DIRECTORY :
                return JavaModelPackage.JAVA_RESOURCES_ROOT__PARENT_DIRECTORY;
             default :
                return -1;
          }
       }
-      if (baseClass == Directory.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Directory.class) {
+         switch (baseFeatureID) {
             case JavaModelPackage.DIRECTORY__RESOURCES :
                return JavaModelPackage.JAVA_RESOURCES_ROOT__RESOURCES;
             default :
@@ -1065,8 +981,7 @@ public class JavaResourcesRootImpl extends EObjectImpl implements JavaResourcesR
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

@@ -39,37 +39,30 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.OsgifierStubModelCreator;
 
-public class OsgifierStubModelCreatorTest extends InjectedTest
-{
+public class OsgifierStubModelCreatorTest extends InjectedTest {
    @Inject
    private OsgifierStubModelCreator stubModelCreator;
 
    @Test
-   public void testNull()
-   {
-      try
-      {
+   public void testNull() {
+      try {
          stubModelCreator.create(null);
          fail();
       }
-      catch (RuntimeException e)
-      {
+      catch (RuntimeException e) {
       }
    }
 
    @Test
-   public void testEmpty()
-   {
+   public void testEmpty() {
       DependencyModel dependencyModel = DependencyModelFactory.eINSTANCE.createDependencyModel();
       OsgifierContext stubModel = stubModelCreator.create(dependencyModel);
       assertEquals(0, stubModel.getBundles().size());
    }
 
    @Test
-   public void testBundleCandidate()
-   {
+   public void testBundleCandidate() {
       DependencyModel dependencyModel = DependencyModelFactory.eINSTANCE.createDependencyModel();
 
       MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
@@ -108,8 +101,7 @@ public class OsgifierStubModelCreatorTest extends InjectedTest
    }
 
    @Test
-   public void testBundleReference()
-   {
+   public void testBundleReference() {
       MavenArtifact artifactA = MavenModelUtils.parseArtifactKey("a:A:jar:1");
       MavenArtifact artifactB = MavenModelUtils.parseArtifactKey("b:B:jar:1");
       MavenArtifact artifactC = MavenModelUtils.parseArtifactKey("c:C:jar:1");
@@ -152,16 +144,14 @@ public class OsgifierStubModelCreatorTest extends InjectedTest
       assertEquals(4, stubModel.getBundles().size());
    }
 
-   private DependencyNode toDependencyNode(MavenArtifact artifact)
-   {
+   private DependencyNode toDependencyNode(MavenArtifact artifact) {
       DependencyNode node = DependencyModelFactory.eINSTANCE.createDependencyNode();
       node.setArtifact(artifact);
       node.setDeclaredDependency(toMavenDependency(artifact));
       return node;
    }
 
-   private MavenDependency toMavenDependency(MavenArtifact artifact)
-   {
+   private MavenDependency toMavenDependency(MavenArtifact artifact) {
       MavenDependency dependency = MavenModelFactory.eINSTANCE.createMavenDependency();
       dependency.setGroupId(artifact.getGroupId());
       dependency.setArtifactId(artifact.getArtifactId());

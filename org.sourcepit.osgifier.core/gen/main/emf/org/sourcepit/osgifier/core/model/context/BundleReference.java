@@ -39,8 +39,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * @model
  * @generated
  */
-public interface BundleReference extends XAnnotatable
-{
+public interface BundleReference extends XAnnotatable {
    /**
     * Returns the value of the '<em><b>Version Range</b></em>' attribute.
     * <!-- begin-user-doc -->

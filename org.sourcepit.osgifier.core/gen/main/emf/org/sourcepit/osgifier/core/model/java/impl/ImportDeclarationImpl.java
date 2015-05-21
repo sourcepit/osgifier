@@ -57,8 +57,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
  *
  * @generated
  */
-public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclaration
-{
+public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclaration {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -109,8 +108,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   protected ImportDeclarationImpl()
-   {
+   protected ImportDeclarationImpl() {
       super();
    }
 
@@ -121,8 +119,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.IMPORT_DECLARATION;
    }
 
@@ -132,8 +129,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public String getName()
-   {
+   public String getName() {
       return name;
    }
 
@@ -143,8 +139,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public void setName(String newName)
-   {
+   public void setName(String newName) {
       String oldName = name;
       name = newName;
       if (eNotificationRequired())
@@ -157,10 +152,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public EList<EObject> getExtensions()
-   {
-      if (extensions == null)
-      {
+   public EList<EObject> getExtensions() {
+      if (extensions == null) {
          extensions = new EObjectContainmentEList<EObject>(EObject.class, this,
             JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS);
       }
@@ -173,10 +166,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
+   public EList<Annotation> getAnnotations() {
+      if (annotations == null) {
          annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
             JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS, CommonModelingPackage.ANNOTATION__TARGET);
       }
@@ -189,8 +180,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public JavaCompilationUnit getCompilationUnit()
-   {
+   public JavaCompilationUnit getCompilationUnit() {
       if (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT)
          return null;
       return (JavaCompilationUnit) eInternalContainer();
@@ -202,8 +192,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public NotificationChain basicSetCompilationUnit(JavaCompilationUnit newCompilationUnit, NotificationChain msgs)
-   {
+   public NotificationChain basicSetCompilationUnit(JavaCompilationUnit newCompilationUnit, NotificationChain msgs) {
       msgs = eBasicSetContainer((InternalEObject) newCompilationUnit,
          JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT, msgs);
       return msgs;
@@ -215,11 +204,9 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public void setCompilationUnit(JavaCompilationUnit newCompilationUnit)
-   {
+   public void setCompilationUnit(JavaCompilationUnit newCompilationUnit) {
       if (newCompilationUnit != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT && newCompilationUnit != null))
-      {
+         || (eContainerFeatureID() != JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT && newCompilationUnit != null)) {
          if (EcoreUtil.isAncestor(this, newCompilationUnit))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
          NotificationChain msgs = null;
@@ -243,8 +230,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public JavaResourceBundle getResourceBundle()
-   {
+   public JavaResourceBundle getResourceBundle() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -256,8 +242,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
+   public Annotation getAnnotation(String source) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -269,8 +254,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
+   public Annotation getAnnotation(String source, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -282,8 +266,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public String getAnnotationData(String source, String key)
-   {
+   public String getAnnotationData(String source, String key) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -295,8 +278,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public String setAnnotationData(String source, String key, String value)
-   {
+   public String setAnnotationData(String source, String key, String value) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -308,8 +290,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public <T extends EObject> T getExtension(Class<T> extensionType)
-   {
+   public <T extends EObject> T getExtension(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -321,8 +302,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
-   {
+   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -334,8 +314,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public <T extends EObject> void addExtension(T extension)
-   {
+   public <T extends EObject> void addExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -347,8 +326,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtension(T extension)
-   {
+   public <T extends EObject> void removeExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -360,8 +338,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtensions(Class<T> extentionType)
-   {
+   public <T extends EObject> void removeExtensions(Class<T> extentionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -375,10 +352,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
@@ -396,10 +371,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
             return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
@@ -417,10 +390,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-   {
-      switch (eContainerFeatureID())
-      {
+   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+      switch (eContainerFeatureID()) {
          case JavaModelPackage.IMPORT_DECLARATION__COMPILATION_UNIT :
             return eInternalContainer().eInverseRemove(this,
                JavaModelPackage.JAVA_COMPILATION_UNIT__IMPORT_DECLARATIONS, JavaCompilationUnit.class, msgs);
@@ -435,10 +406,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__NAME :
             return getName();
          case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
@@ -459,10 +428,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__NAME :
             setName((String) newValue);
             return;
@@ -488,10 +455,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__NAME :
             setName(NAME_EDEFAULT);
             return;
@@ -515,10 +480,8 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.IMPORT_DECLARATION__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
          case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
@@ -538,32 +501,25 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (derivedFeatureID)
-         {
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS :
                return CommonModelingPackage.EXTENDABLE__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS :
                return CommonModelingPackage.ANNOTATABLE__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (derivedFeatureID) {
             default :
                return -1;
          }
@@ -578,32 +534,25 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (baseFeatureID)
-         {
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.EXTENDABLE__EXTENSIONS :
                return JavaModelPackage.IMPORT_DECLARATION__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.ANNOTATABLE__ANNOTATIONS :
                return JavaModelPackage.IMPORT_DECLARATION__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (baseFeatureID) {
             default :
                return -1;
          }
@@ -618,8 +567,7 @@ public class ImportDeclarationImpl extends EObjectImpl implements ImportDeclarat
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

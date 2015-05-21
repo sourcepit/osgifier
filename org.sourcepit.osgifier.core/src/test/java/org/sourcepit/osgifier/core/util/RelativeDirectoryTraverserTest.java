@@ -21,13 +21,10 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.sourcepit.osgifier.core.inspect.ResourceVisitor;
-import org.sourcepit.osgifier.core.util.RelativeDirectoryTraverser;
 
-public class RelativeDirectoryTraverserTest extends AbstractTraverserTest
-{
+public class RelativeDirectoryTraverserTest extends AbstractTraverserTest {
    @Override
-   protected void travers(ResourceVisitor visitor)
-   {
+   protected void travers(ResourceVisitor visitor) {
       File testResources = new File("target/testResources");
       assertTrue(testResources.exists());
       new RelativeDirectoryTraverser(testResources).travers(visitor);

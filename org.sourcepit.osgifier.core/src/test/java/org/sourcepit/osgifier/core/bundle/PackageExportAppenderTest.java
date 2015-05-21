@@ -43,7 +43,6 @@ import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.common.manifest.osgi.Parameter;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.osgifier.core.bundle.PackageExportAppender;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
@@ -56,40 +55,32 @@ import org.sourcepit.osgifier.core.model.java.JavaProject;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class PackageExportAppenderTest extends InjectedTest
-{
+public class PackageExportAppenderTest extends InjectedTest {
    @Inject
    private PackageExportAppender exportAppender;
 
    @Test
-   public void testNullArguments()
-   {
-      try
-      {
+   public void testNullArguments() {
+      try {
          exportAppender.append(null, new LinkedPropertiesMap());
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      try
-      {
+      try {
          exportAppender.append(bundle, new LinkedPropertiesMap());
          fail();
       }
-      catch (NullPointerException e)
-      {
+      catch (NullPointerException e) {
       }
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
-      try
-      {
+      try {
          exportAppender.append(bundle, new LinkedPropertiesMap());
          fail();
       }
-      catch (NullPointerException e)
-      {
+      catch (NullPointerException e) {
       }
       JavaProject jProject = JavaModelFactory.eINSTANCE.createJavaProject();
       jProject.getType("src/main/java", "foo", "Bar", true);
@@ -103,8 +94,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testMultiplePackageRoot()
-   {
+   public void testMultiplePackageRoot() {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
 
       BundleManifest mf = BundleManifestFactory.eINSTANCE.createBundleManifest();
@@ -124,8 +114,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testDefaultPackage()
-   {
+   public void testDefaultPackage() {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
 
       BundleManifest mf = BundleManifestFactory.eINSTANCE.createBundleManifest();
@@ -141,8 +130,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testFilterPlatformPackages()
-   {
+   public void testFilterPlatformPackages() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "java.lang.Object", 47);
       appendType(jArchive, "org.sourcepit.Foo", 47);
@@ -159,8 +147,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testFallbackToBundleVersion()
-   {
+   public void testFallbackToBundleVersion() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "org.sourcepit.Foo", 47);
 
@@ -174,8 +161,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testVersionFromPackageinfo()
-   {
+   public void testVersionFromPackageinfo() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       JavaPackage jPackage = appendType(jArchive, "org.sourcepit.Foo", 47).getFile().getParentPackage();
       File packageInfo = jPackage.getFile("packageinfo", true);
@@ -198,8 +184,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testDoNotEraseVersionOfPlatformFamilyPackages()
-   {
+   public void testDoNotEraseVersionOfPlatformFamilyPackages() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "javax.xml.stream.Foo", 47);
       appendType(jArchive, "org.sourcepit.Foo", 47);
@@ -217,8 +202,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testDoNotEraseVersionOfVendorPackages()
-   {
+   public void testDoNotEraseVersionOfVendorPackages() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "sun.misc.Foo", 47); // vendor specific package of compatible EE
       appendType(jArchive, "org.sourcepit.Foo", 47);
@@ -233,8 +217,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testSortAlphabetically()
-   {
+   public void testSortAlphabetically() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "z.Foo", 47);
       appendType(jArchive, "d.Foo", 47);
@@ -252,8 +235,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testDoNotExportPackagesAlreadyExportedByDependency()
-   {
+   public void testDoNotExportPackagesAlreadyExportedByDependency() {
       JavaArchive jArchivB = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchivB, "org.sourcepit.bundleB.Foo", 47);
 
@@ -281,8 +263,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testInternal()
-   {
+   public void testInternal() {
       final PropertiesMap properties = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -342,8 +323,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testExportEmbeddedPackages() throws Exception
-   {
+   public void testExportEmbeddedPackages() throws Exception {
       final PropertiesMap properties = new LinkedPropertiesMap();
 
       BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
@@ -377,8 +357,7 @@ public class PackageExportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testExportEmbeddedPackagesWithDups() throws Exception
-   {
+   public void testExportEmbeddedPackagesWithDups() throws Exception {
       final PropertiesMap properties = new LinkedPropertiesMap();
 
       BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));

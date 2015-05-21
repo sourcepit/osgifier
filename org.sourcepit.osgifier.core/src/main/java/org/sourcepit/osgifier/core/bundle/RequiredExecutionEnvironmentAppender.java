@@ -56,8 +56,7 @@ import com.google.common.collect.Collections2;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class RequiredExecutionEnvironmentAppender
-{
+public class RequiredExecutionEnvironmentAppender {
    private static final Logger LOGGER = LoggerFactory.getLogger(RequiredExecutionEnvironmentAppender.class);
 
    private ExecutionEnvironmentService execEnvService;
@@ -66,19 +65,16 @@ public class RequiredExecutionEnvironmentAppender
 
    @Inject
    public RequiredExecutionEnvironmentAppender(ExecutionEnvironmentService execEnvService,
-      BundlePackagesService packagesService)
-   {
+      BundlePackagesService packagesService) {
       this.execEnvService = execEnvService;
       this.packagesService = packagesService;
    }
 
-   public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
-   {
+   public void append(@NotNull BundleCandidate bundle, PropertiesSource options) {
       final BundleManifest manifest = bundle.getManifest();
 
       String execEnv = manifest.getHeaderValue(BundleHeaderName.BUNDLE_REQUIREDEXECUTIONENVIRONMENT);
-      if (execEnv != null)
-      {
+      if (execEnv != null) {
          LOGGER.debug("Execution environment is already set to {}. Skipping automatic investigation.", execEnv);
          return;
       }
@@ -88,14 +84,12 @@ public class RequiredExecutionEnvironmentAppender
    }
 
    private void append(BundleCandidate bundle, final BundleManifest manifest, final JavaResourceBundle jBundle,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final float requiredClassVersion = resolveMajorClassVersion(jBundle);
       final List<String> requiredPackages = getRequiredPackagesNotContainedInAnyDependency(bundle);
 
       List<ExecutionEnvironment> ees = getMappedEEs(bundle, options);
-      if (ees.isEmpty())
-      {
+      if (ees.isEmpty()) {
          ees = determineEEs(requiredClassVersion, requiredPackages, options);
       }
 
@@ -103,16 +97,13 @@ public class RequiredExecutionEnvironmentAppender
    }
 
    private List<ExecutionEnvironment> determineEEs(final float requiredClassVersion,
-      final List<String> requiredPackages, PropertiesSource options)
-   {
+      final List<String> requiredPackages, PropertiesSource options) {
       final Set<String> excludes = getExcludedExecutionEnvironments(options);
 
       final Collection<ExecutionEnvironment> executionEnvironments = Collections2.filter(
-         execEnvService.getExecutionEnvironments(), new Predicate<ExecutionEnvironment>()
-         {
+         execEnvService.getExecutionEnvironments(), new Predicate<ExecutionEnvironment>() {
             @Override
-            public boolean apply(ExecutionEnvironment input)
-            {
+            public boolean apply(ExecutionEnvironment input) {
                return !excludes.contains(input.getId());
             }
          });
@@ -120,16 +111,13 @@ public class RequiredExecutionEnvironmentAppender
       return determineCompatibleExecutionEnvironments(executionEnvironments, requiredClassVersion, requiredPackages);
    }
 
-   private List<ExecutionEnvironment> getMappedEEs(BundleCandidate bundle, PropertiesSource options)
-   {
+   private List<ExecutionEnvironment> getMappedEEs(BundleCandidate bundle, PropertiesSource options) {
       final List<String> mappedEEIds = getMappedEEIds(bundle, options);
 
       final List<ExecutionEnvironment> mappedEEs = new ArrayList<ExecutionEnvironment>(mappedEEIds.size());
-      for (String eeId : mappedEEIds)
-      {
+      for (String eeId : mappedEEIds) {
          final ExecutionEnvironment ee = execEnvService.getExecutionEnvironment(eeId);
-         if (ee == null)
-         {
+         if (ee == null) {
             throw new IllegalStateException("Unknown executionenvironment " + eeId);
          }
          mappedEEs.add(ee);
@@ -138,45 +126,38 @@ public class RequiredExecutionEnvironmentAppender
       return mappedEEs;
    }
 
-   private static List<String> getMappedEEIds(BundleCandidate bundle, PropertiesSource options)
-   {
+   private static List<String> getMappedEEIds(BundleCandidate bundle, PropertiesSource options) {
       final String symbolicName = bundle.getSymbolicName();
       final Version version = bundle.getVersion();
       return getMappedEEIds(options, symbolicName, version);
    }
 
-   static List<String> getMappedEEIds(PropertiesSource options, final String symbolicName, final Version version)
-   {
+   static List<String> getMappedEEIds(PropertiesSource options, final String symbolicName, final Version version) {
       final Map<String, String> eeMappings = OptionsUtils.parseMapValue(options.get(
          "osgifier.executionEnvironmentMappings", ""));
 
       String mapping = eeMappings.get(symbolicName + "_" + version);
-      if (mapping == null)
-      {
+      if (mapping == null) {
          mapping = eeMappings.get(symbolicName);
       }
 
-      if (mapping == null)
-      {
+      if (mapping == null) {
          return Collections.emptyList();
       }
 
       final String[] split = mapping.split("\\|");
 
       final List<String> mappedEEs = new ArrayList<String>(split.length);
-      for (String ee : split)
-      {
+      for (String ee : split) {
          ee = ee.trim();
-         if (ee.length() > 0)
-         {
+         if (ee.length() > 0) {
             mappedEEs.add(ee);
          }
       }
       return mappedEEs;
    }
 
-   private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle)
-   {
+   private List<String> getRequiredPackagesNotContainedInAnyDependency(BundleCandidate bundle) {
       final PackagesInfo packagesInfo = packagesService.getPackagesInfo(bundle);
 
       final List<String> requiredPackages = new ArrayList<String>(packagesInfo.getRequiredPackages().getAll());
@@ -185,15 +166,12 @@ public class RequiredExecutionEnvironmentAppender
       requiredPackages.removeAll(packagesInfo.getContainedPackages());
 
       // remove packages exposed by dependencies
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
+      for (BundleReference bundleReference : bundle.getDependencies()) {
          final BundleCandidate target = bundleReference.getTarget();
          final BundleManifest manifest = target.getManifest();
          final List<PackageExport> exportPackage = manifest.getExportPackage();
-         if (exportPackage != null)
-         {
-            for (PackageExport packageExport : exportPackage)
-            {
+         if (exportPackage != null) {
+            for (PackageExport packageExport : exportPackage) {
                requiredPackages.removeAll(packageExport.getPackageNames());
             }
          }
@@ -201,15 +179,12 @@ public class RequiredExecutionEnvironmentAppender
       return requiredPackages;
    }
 
-   static final Set<String> getExcludedExecutionEnvironments(PropertiesSource options)
-   {
+   static final Set<String> getExcludedExecutionEnvironments(PropertiesSource options) {
       final String[] split = options.get("osgifier.excludedExecutionEnvironments", "").split(",");
       final Set<String> excludes = new HashSet<String>();
-      for (String string : split)
-      {
+      for (String string : split) {
          final String exclude = string.trim();
-         if (!exclude.isEmpty())
-         {
+         if (!exclude.isEmpty()) {
             excludes.add(exclude);
          }
       }
@@ -218,16 +193,13 @@ public class RequiredExecutionEnvironmentAppender
 
    private static List<ExecutionEnvironment> determineCompatibleExecutionEnvironments(
       final Collection<ExecutionEnvironment> executionEnvironments, final float requiredClassVersion,
-      final Collection<String> requiredPackages)
-   {
+      final Collection<String> requiredPackages) {
       final Set<String> requiredEEPackages = new HashSet<String>(requiredPackages);
       requiredEEPackages.retainAll(getAllPackages(executionEnvironments));
 
       final List<ExecutionEnvironment> compatibleEEs = new ArrayList<ExecutionEnvironment>();
-      for (ExecutionEnvironment ee : executionEnvironments)
-      {
-         if (isCompatible(ee, requiredClassVersion, requiredEEPackages) && !containsCompatible(compatibleEEs, ee))
-         {
+      for (ExecutionEnvironment ee : executionEnvironments) {
+         if (isCompatible(ee, requiredClassVersion, requiredEEPackages) && !containsCompatible(compatibleEEs, ee)) {
             compatibleEEs.add(ee);
          }
       }
@@ -235,41 +207,32 @@ public class RequiredExecutionEnvironmentAppender
       return compatibleEEs;
    }
 
-   private static boolean containsCompatible(final List<ExecutionEnvironment> ees, ExecutionEnvironment ee)
-   {
-      for (ExecutionEnvironment e : ees)
-      {
-         if (ee.isCompatibleWith(e))
-         {
+   private static boolean containsCompatible(final List<ExecutionEnvironment> ees, ExecutionEnvironment ee) {
+      for (ExecutionEnvironment e : ees) {
+         if (ee.isCompatibleWith(e)) {
             return true;
          }
       }
       return false;
    }
 
-   private static boolean isCompatible(ExecutionEnvironment ee, final float classVersion, final Set<String> packages)
-   {
+   private static boolean isCompatible(ExecutionEnvironment ee, final float classVersion, final Set<String> packages) {
       return classVersion <= ee.getMaxClassVersion() && ee.getPackages().containsAll(packages);
    }
 
-   private static Set<String> getAllPackages(final Collection<ExecutionEnvironment> executionEnvironments)
-   {
+   private static Set<String> getAllPackages(final Collection<ExecutionEnvironment> executionEnvironments) {
       final Set<String> eePackages = new HashSet<String>();
-      for (ExecutionEnvironment ee : executionEnvironments)
-      {
+      for (ExecutionEnvironment ee : executionEnvironments) {
          eePackages.addAll(ee.getPackages());
       }
       return eePackages;
    }
 
-   private void append(final BundleManifest manifest, final float major, final List<ExecutionEnvironment> ees)
-   {
-      if (!ees.isEmpty())
-      {
+   private void append(final BundleManifest manifest, final float major, final List<ExecutionEnvironment> ees) {
+      if (!ees.isEmpty()) {
          final List<String> execEnvIds = new ArrayList<String>();
 
-         for (ExecutionEnvironment ee : ees)
-         {
+         for (ExecutionEnvironment ee : ees) {
             execEnvIds.add(ee.getId());
          }
 
@@ -280,16 +243,12 @@ public class RequiredExecutionEnvironmentAppender
       }
    }
 
-   private float resolveMajorClassVersion(JavaResourceBundle jBundle)
-   {
+   private float resolveMajorClassVersion(JavaResourceBundle jBundle) {
       final float[] major = new float[1];
-      jBundle.accept(new ResourceVisitor()
-      {
+      jBundle.accept(new ResourceVisitor() {
          @Override
-         public boolean visit(Resource resource)
-         {
-            if (resource instanceof JavaClass)
-            {
+         public boolean visit(Resource resource) {
+            if (resource instanceof JavaClass) {
                major[0] = Math.max(major[0], ((JavaClass) resource).getMajor());
             }
             return resource instanceof JavaResourceDirectory;

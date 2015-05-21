@@ -34,8 +34,7 @@ import org.sourcepit.osgifier.core.resolve.NativeManifestAppender;
 import org.sourcepit.osgifier.core.resolve.SymbolicNameAndVersionAppender;
 
 @Named
-public class OsgifierContextInflator
-{
+public class OsgifierContextInflator {
    @Inject
    private ContentAppender javaContentAppender;
 
@@ -49,8 +48,7 @@ public class OsgifierContextInflator
    private BundleManifestAppender manifestAppender;
 
    public void inflate(OsgifierContextInflatorFilter filter, PropertiesSource options,
-      final OsgifierContext osgifierModel, Date timestamp)
-   {
+      final OsgifierContext osgifierModel, Date timestamp) {
       options = getOptions(options, timestamp);
 
       nativeManifestAppender.appendNativeManifests(osgifierModel, filter, options);
@@ -62,18 +60,14 @@ public class OsgifierContextInflator
       applyManifests(filter, options, osgifierModel);
    }
 
-   private PropertiesSource getOptions(final PropertiesSource options, Date timestamp)
-   {
+   private PropertiesSource getOptions(final PropertiesSource options, Date timestamp) {
       final SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmm");
       format.setTimeZone(TimeZone.getTimeZone("UTC"));
       final String ctxQualifier = format.format(timestamp);
-      return new AbstractPropertiesSource()
-      {
+      return new AbstractPropertiesSource() {
          @Override
-         public String get(String key)
-         {
-            if ("osgifier.forceContextQualifier".equals(key))
-            {
+         public String get(String key) {
+            if ("osgifier.forceContextQualifier".equals(key)) {
                return ctxQualifier;
             }
             return options == null ? null : options.get(key);
@@ -82,8 +76,7 @@ public class OsgifierContextInflator
    }
 
    private void applyManifests(BundleManifestAppenderFilter filter, PropertiesSource options,
-      OsgifierContext osgifierModel)
-   {
+      OsgifierContext osgifierModel) {
       manifestAppender.append(osgifierModel, filter, options);
    }
 }

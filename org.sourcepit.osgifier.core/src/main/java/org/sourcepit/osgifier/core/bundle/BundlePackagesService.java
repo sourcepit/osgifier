@@ -31,31 +31,25 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
 
 @Named
 @Singleton
-public class BundlePackagesService
-{
+public class BundlePackagesService {
    private final WeakHashMap<BundleCandidate, PackagesInfo> cache = new WeakHashMap<BundleCandidate, PackagesInfo>();
 
-   public PackagesInfo getPackagesInfo(BundleCandidate bundle)
-   {
+   public PackagesInfo getPackagesInfo(BundleCandidate bundle) {
       PackagesInfo result = cache.get(bundle);
-      if (result == null)
-      {
+      if (result == null) {
          result = new PackagesInfoCollector().collect(bundle.getContent(), getClassPath(bundle));
          cache.put(bundle, result);
       }
       return result;
    }
 
-   private static List<JavaResourceBundle> getClassPath(BundleCandidate bundle)
-   {
+   private static List<JavaResourceBundle> getClassPath(BundleCandidate bundle) {
       final List<BundleReference> dependencies = bundle.getDependencies();
       final List<JavaResourceBundle> classPath = new ArrayList<JavaResourceBundle>(dependencies.size() + 1);
       classPath.add(bundle.getContent());
-      for (BundleReference bundleReference : dependencies)
-      {
+      for (BundleReference bundleReference : dependencies) {
          final JavaResourceBundle jBundle = bundleReference.getTarget().getContent();
-         if (jBundle != null)
-         {
+         if (jBundle != null) {
             classPath.add(jBundle);
          }
       }

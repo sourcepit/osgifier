@@ -16,8 +16,8 @@
 
 package org.sourcepit.osgifier.core.java.internal.impl;
 
-import org.sourcepit.common.constraints.NotNull;
 import org.eclipse.emf.common.util.EList;
+import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgifier.core.model.java.Directory;
 import org.sourcepit.osgifier.core.model.java.Resource;
 import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
@@ -25,20 +25,15 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class ResourceOperations
-{
-   private ResourceOperations()
-   {
+public final class ResourceOperations {
+   private ResourceOperations() {
       super();
    }
 
-   public static void accept(@NotNull Resource resource, @NotNull ResourceVisitor visitor)
-   {
-      if (visitor.visit(resource) && resource instanceof Directory)
-      {
+   public static void accept(@NotNull Resource resource, @NotNull ResourceVisitor visitor) {
+      if (visitor.visit(resource) && resource instanceof Directory) {
          final EList<Resource> members = ((Directory) resource).getResources();
-         for (Resource member : members)
-         {
+         for (Resource member : members) {
             member.accept(visitor);
          }
       }

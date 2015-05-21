@@ -23,38 +23,30 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgifier.core.model.java.JavaType;
 import org.sourcepit.osgifier.core.model.java.Resource;
 
-public final class JavaArchiveOperations
-{
-   private JavaArchiveOperations()
-   {
+public final class JavaArchiveOperations {
+   private JavaArchiveOperations() {
       super();
    }
 
-   public static JavaType getType(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand)
-   {
+   public static JavaType getType(JavaArchive bundle, String packageName, String typeName, boolean createOnDemand) {
       return JavaResourceBundleOperations.getType(bundle, "", packageName, typeName, createOnDemand);
    }
 
-   public static JavaPackage getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand)
-   {
+   public static JavaPackage getPackage(JavaArchive bundle, String fullyQualified, boolean createOnDemand) {
       return JavaResourceBundleOperations.getPackage(bundle, "", fullyQualified, createOnDemand);
    }
 
-   public static Resource getResource(JavaArchive bundle, String name)
-   {
-      for (JavaResourcesRoot jRoot : bundle.getResourcesRoots())
-      {
+   public static Resource getResource(JavaArchive bundle, String name) {
+      for (JavaResourcesRoot jRoot : bundle.getResourcesRoots()) {
          final Resource resource = jRoot.getResource(name);
-         if (resource != null)
-         {
+         if (resource != null) {
             return resource;
          }
       }
       return null;
    }
 
-   public static File getFile(JavaArchive bundle, String name, boolean createOnDemand)
-   {
+   public static File getFile(JavaArchive bundle, String name, boolean createOnDemand) {
       return JavaResourceBundleOperations.getFile(bundle, "", name, createOnDemand);
    }
 }

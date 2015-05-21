@@ -16,7 +16,8 @@
 
 package org.sourcepit.osgifier.maven;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
@@ -27,15 +28,11 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
-import org.sourcepit.osgifier.maven.OsgifierContextInflatorFilter;
 
-public class DefaultOsgifierContextInflatorFilterTest
-{
+public class DefaultOsgifierContextInflatorFilterTest {
 
    @Test
-   public void testIsOverrideNativeBundle()
-   {
+   public void testIsOverrideNativeBundle() {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
 
       BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();

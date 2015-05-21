@@ -41,28 +41,23 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.VersionRangeResolver;
 
 @Named
-public class OsgifierStubModelCreator
-{
+public class OsgifierStubModelCreator {
    @Inject
    private VersionRangeResolver versionRangeResolver;
 
-   public OsgifierContext create(DependencyModel dependencyModel)
-   {
+   public OsgifierContext create(DependencyModel dependencyModel) {
       final OsgifierContext osgifyModel = ContextModelFactory.eINSTANCE.createOsgifierContext();
       osgifyModel.addExtension(dependencyModel);
 
       final Map<MavenArtifact, BundleCandidate> artifactToBundle = new HashMap<MavenArtifact, BundleCandidate>();
-      for (MavenArtifact artifact : dependencyModel.getArtifacts())
-      {
+      for (MavenArtifact artifact : dependencyModel.getArtifacts()) {
          BundleCandidate bundle = toBundleCandidate(artifact);
          osgifyModel.getBundles().add(bundle);
          artifactToBundle.put(artifact, bundle);
       }
 
-      for (MavenArtifact artifact : dependencyModel.getArtifacts())
-      {
-         if ("java-source".equals(artifact.getType()))
-         {
+      for (MavenArtifact artifact : dependencyModel.getArtifacts()) {
+         if ("java-source".equals(artifact.getType())) {
             final ArtifactKey jarKey = toArtifactKey(artifact.getGroupId(), artifact.getArtifactId(), "jar", null,
                artifact.getVersion());
 
@@ -70,39 +65,31 @@ public class OsgifierStubModelCreator
 
             final BundleCandidate sourceBundle = artifactToBundle.get(artifact);
             final BundleCandidate bundle = artifactToBundle.get(jarArtifact);
-            if (bundle == null)
-            {
+            if (bundle == null) {
                osgifyModel.getBundles().remove(sourceBundle);
             }
-            else
-            {
+            else {
                bundle.setSourceBundle(sourceBundle);
             }
          }
       }
 
-      for (DependencyTree dependencyTree : dependencyModel.getDependencyTrees())
-      {
-         if (dependencyTree.getArtifact() != null && dependencyTree.getArtifact().getFile() != null)
-         {
+      for (DependencyTree dependencyTree : dependencyModel.getDependencyTrees()) {
+         if (dependencyTree.getArtifact() != null && dependencyTree.getArtifact().getFile() != null) {
             final BundleCandidate bundle = artifactToBundle.get(dependencyTree.getArtifact());
             checkNotNull(bundle);
 
-            for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
-            {
+            for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes()) {
                addBundleReferences(artifactToBundle, bundle, dependencyNode);
             }
          }
       }
 
-      for (BundleCandidate bundle : osgifyModel.getBundles())
-      {
-         for (BundleReference reference : bundle.getDependencies())
-         {
+      for (BundleCandidate bundle : osgifyModel.getBundles()) {
+         for (BundleReference reference : bundle.getDependencies()) {
             reference.setVersionRange(versionRangeResolver.resolveVersionRange(reference));
             final MavenDependency mavenDependency = reference.getExtension(MavenDependency.class);
-            if (mavenDependency != null)
-            {
+            if (mavenDependency != null) {
                reference.setOptional(mavenDependency.isOptional());
                reference.setProvided(mavenDependency.getScope() == Scope.PROVIDED);
             }
@@ -113,10 +100,8 @@ public class OsgifierStubModelCreator
    }
 
    private void addBundleReferences(Map<MavenArtifact, BundleCandidate> artifactToBundle, BundleCandidate master,
-      DependencyNode dependencyNode)
-   {
-      if (dependencyNode.isSelected() && dependencyNode.getCycleNode() == null)
-      {
+      DependencyNode dependencyNode) {
+      if (dependencyNode.isSelected() && dependencyNode.getCycleNode() == null) {
          final MavenArtifact artifact = dependencyNode.getArtifact();
          checkNotNull(artifact);
 
@@ -126,15 +111,13 @@ public class OsgifierStubModelCreator
          final BundleReference reference = toBundleReference(bundle, dependencyNode);
          master.getDependencies().add(reference);
 
-         for (DependencyNode childNode : dependencyNode.getChildren())
-         {
+         for (DependencyNode childNode : dependencyNode.getChildren()) {
             addBundleReferences(artifactToBundle, master, childNode);
          }
       }
    }
 
-   private BundleReference toBundleReference(BundleCandidate bundle, DependencyNode dependencyNode)
-   {
+   private BundleReference toBundleReference(BundleCandidate bundle, DependencyNode dependencyNode) {
       final BundleReference reference = ContextModelFactory.eINSTANCE.createBundleReference();
       reference.setTarget(bundle);
 
@@ -152,8 +135,7 @@ public class OsgifierStubModelCreator
       return reference;
    }
 
-   private BundleCandidate toBundleCandidate(MavenArtifact artifact)
-   {
+   private BundleCandidate toBundleCandidate(MavenArtifact artifact) {
       final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setLocation(artifact.getFile());
       bundle.addExtension(EcoreUtil.copy(artifact));

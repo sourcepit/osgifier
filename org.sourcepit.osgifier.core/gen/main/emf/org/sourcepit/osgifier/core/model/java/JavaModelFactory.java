@@ -27,8 +27,7 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.sourcepit.osgifier.core.model.java.JavaModelPackage
  * @generated
  */
-public interface JavaModelFactory extends EFactory
-{
+public interface JavaModelFactory extends EFactory {
    /**
     * The singleton instance of the factory.
     * <!-- begin-user-doc -->

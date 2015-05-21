@@ -27,6 +27,5 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface File extends Resource
-{
+public interface File extends Resource {
 } // File

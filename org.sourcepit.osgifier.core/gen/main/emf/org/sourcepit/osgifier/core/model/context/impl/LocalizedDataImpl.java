@@ -45,8 +45,7 @@ import org.sourcepit.osgifier.core.model.context.LocalizedData;
  *
  * @generated
  */
-public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
-{
+public class LocalizedDataImpl extends EObjectImpl implements LocalizedData {
    /**
     * The default value of the '{@link #getLocale() <em>Locale</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -86,8 +85,7 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * 
     * @generated
     */
-   protected LocalizedDataImpl()
-   {
+   protected LocalizedDataImpl() {
       super();
    }
 
@@ -98,8 +96,7 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return ContextModelPackage.Literals.LOCALIZED_DATA;
    }
 
@@ -109,8 +106,7 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * 
     * @generated
     */
-   public String getLocale()
-   {
+   public String getLocale() {
       return locale;
    }
 
@@ -120,8 +116,7 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * 
     * @generated
     */
-   public void setLocale(String newLocale)
-   {
+   public void setLocale(String newLocale) {
       String oldLocale = locale;
       locale = newLocale;
       if (eNotificationRequired())
@@ -135,10 +130,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * 
     * @generated
     */
-   public EMap<String, String> getData()
-   {
-      if (data == null)
-      {
+   public EMap<String, String> getData() {
+      if (data == null) {
          data = new EcoreEMap<String, String>(CommonModelingPackage.Literals.ESTRING_MAP_ENTRY,
             EStringMapEntryImpl.class, this, ContextModelPackage.LOCALIZED_DATA__DATA);
       }
@@ -152,10 +145,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case ContextModelPackage.LOCALIZED_DATA__DATA :
             return ((InternalEList<?>) getData()).basicRemove(otherEnd, msgs);
       }
@@ -169,10 +160,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case ContextModelPackage.LOCALIZED_DATA__LOCALE :
             return getLocale();
          case ContextModelPackage.LOCALIZED_DATA__DATA :
@@ -191,10 +180,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case ContextModelPackage.LOCALIZED_DATA__LOCALE :
             setLocale((String) newValue);
             return;
@@ -212,10 +199,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.LOCALIZED_DATA__LOCALE :
             setLocale(LOCALE_EDEFAULT);
             return;
@@ -233,10 +218,8 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.LOCALIZED_DATA__LOCALE :
             return LOCALE_EDEFAULT == null ? locale != null : !LOCALE_EDEFAULT.equals(locale);
          case ContextModelPackage.LOCALIZED_DATA__DATA :
@@ -252,8 +235,7 @@ public class LocalizedDataImpl extends EObjectImpl implements LocalizedData
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

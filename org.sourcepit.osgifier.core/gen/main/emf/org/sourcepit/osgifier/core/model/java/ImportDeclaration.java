@@ -33,8 +33,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface ImportDeclaration extends JavaElement
-{
+public interface ImportDeclaration extends JavaElement {
    /**
     * Returns the value of the '<em><b>Compilation Unit</b></em>' container reference.
     * It is bidirectional and its opposite is '

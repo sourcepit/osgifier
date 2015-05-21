@@ -18,7 +18,6 @@ package org.sourcepit.osgifier.core.util;
 
 import org.sourcepit.osgifier.core.inspect.ResourceVisitor;
 
-public interface IResourceTraverser
-{
+public interface IResourceTraverser {
    public void travers(ResourceVisitor resourceVisitor);
 }

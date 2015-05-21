@@ -23,15 +23,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
-import org.sourcepit.osgifier.core.ee.ExecutionEnvironment;
-import org.sourcepit.osgifier.core.ee.OsgiEE;
 
-public class ExecutionEnvironmentTest
-{
+public class ExecutionEnvironmentTest {
 
    @Test
-   public void testCompareTo()
-   {
+   public void testCompareTo() {
       ExecutionEnvironment ee1 = newExecutionEnvironment("ee1", "2000-01-01", 0, Collections.<String> emptyList());
       assertEquals(0, ee1.compareTo(ee1));
 
@@ -85,8 +81,7 @@ public class ExecutionEnvironmentTest
    }
 
    private ExecutionEnvironment newExecutionEnvironment(String id, String releaseDate, float maxClassVersion,
-      final List<String> packages)
-   {
+      final List<String> packages) {
       return new ExecutionEnvironment(id, releaseDate, maxClassVersion,
          new OsgiEE(id, String.valueOf(maxClassVersion)), packages);
    }

@@ -24,10 +24,8 @@ import org.apache.maven.plugin.MojoFailureException;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class AbstractOsgifierMojo extends AbstractMojo
-{
-   public final void execute() throws MojoExecutionException, MojoFailureException
-   {
+public abstract class AbstractOsgifierMojo extends AbstractMojo {
+   public final void execute() throws MojoExecutionException, MojoFailureException {
       doExecute();
    }
 

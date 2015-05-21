@@ -38,16 +38,13 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 import org.sourcepit.osgifier.core.model.java.Resource;
 import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 
-public class PackagesInfoCollector
-{
-   public PackagesInfo collect(JavaResourceBundle jBundle, List<JavaResourceBundle> classPath)
-   {
+public class PackagesInfoCollector {
+   public PackagesInfo collect(JavaResourceBundle jBundle, List<JavaResourceBundle> classPath) {
       final Map<String, RequiredPackages> packageToRequiredPackages = collectPackageReferences(jBundle, classPath);
 
       final List<String> packages = new ArrayList<String>(packageToRequiredPackages.size());
       final RequiredPackageBuilder bundleRefs = new RequiredPackageBuilder();
-      for (Entry<String, RequiredPackages> entry : packageToRequiredPackages.entrySet())
-      {
+      for (Entry<String, RequiredPackages> entry : packageToRequiredPackages.entrySet()) {
          final String packageName = entry.getKey();
          packages.add(packageName);
 
@@ -63,33 +60,26 @@ public class PackagesInfoCollector
    }
 
    private static Map<String, RequiredPackages> collectPackageReferences(final JavaResourceBundle jBundle,
-      final List<JavaResourceBundle> classPath)
-   {
+      final List<JavaResourceBundle> classPath) {
       final Map<String, RequiredPackageBuilder> packageToRefsMap = new HashMap<String, RequiredPackageBuilder>();
 
-      jBundle.accept(new ResourceVisitor()
-      {
+      jBundle.accept(new ResourceVisitor() {
          @Override
-         public boolean visit(Resource resource)
-         {
-            if (resource instanceof JavaResourcesRoot)
-            {
+         public boolean visit(Resource resource) {
+            if (resource instanceof JavaResourcesRoot) {
                packageToRefsMap.put("", new RequiredPackageBuilder());
                return true;
             }
 
-            if (resource instanceof JavaPackage)
-            {
+            if (resource instanceof JavaPackage) {
                packageToRefsMap.put(((JavaPackage) resource).getQualifiedName(), new RequiredPackageBuilder());
                return true;
             }
 
-            if (resource instanceof JavaFile)
-            {
+            if (resource instanceof JavaFile) {
                final JavaFile jFile = (JavaFile) resource;
                final JavaPackage jPackage = jFile.getParentPackage();
-               if (jPackage != null)
-               {
+               if (jPackage != null) {
                   final RequiredPackageBuilder refs = packageToRefsMap.get(jPackage.getQualifiedName());
                   visit(refs, jPackage, jFile, jFile.getType(), classPath);
                }
@@ -99,37 +89,31 @@ public class PackagesInfoCollector
          }
 
          private void visit(RequiredPackageBuilder refs, JavaPackage jPackage, JavaFile jFile, JavaType jType,
-            List<JavaResourceBundle> classPath)
-         {
+            List<JavaResourceBundle> classPath) {
             final Set<String> qualifiedTypeReferences = new HashSet<String>();
             collectReferencedTypes(refs, jFile, qualifiedTypeReferences);
 
             // HACK must be recursive
             addSuperTypeAndInterfaces(refs, jType, qualifiedTypeReferences);
-            for (String qualifiedType : new HashSet<String>(qualifiedTypeReferences))
-            {
+            for (String qualifiedType : new HashSet<String>(qualifiedTypeReferences)) {
                JavaType resolveJavaType = resolveJavaType(classPath, qualifiedType);
-               if (resolveJavaType != null)
-               {
+               if (resolveJavaType != null) {
                   addSuperTypeAndInterfaces(refs, resolveJavaType, qualifiedTypeReferences);
                }
             }
          }
 
          private void addSuperTypeAndInterfaces(final RequiredPackageBuilder refs, JavaType jType,
-            final Set<String> qualifiedTypeReferences)
-         {
+            final Set<String> qualifiedTypeReferences) {
             Annotation annotation = jType.getAnnotation("superclassName");
-            if (annotation != null)
-            {
+            if (annotation != null) {
                final Set<String> typeNames = annotation.getReferences().keySet();
                refs.addInheritedTypes(typeNames);
                qualifiedTypeReferences.addAll(typeNames);
             }
 
             annotation = jType.getAnnotation("interfaceNames");
-            if (annotation != null)
-            {
+            if (annotation != null) {
                final Set<String> typeNames = annotation.getReferences().keySet();
                refs.addInheritedTypes(typeNames);
                qualifiedTypeReferences.addAll(typeNames);
@@ -138,60 +122,48 @@ public class PackagesInfoCollector
       });
 
       final Map<String, RequiredPackages> result = new HashMap<String, RequiredPackages>(packageToRefsMap.size());
-      for (Entry<String, RequiredPackageBuilder> entry : packageToRefsMap.entrySet())
-      {
+      for (Entry<String, RequiredPackageBuilder> entry : packageToRefsMap.entrySet()) {
          result.put(entry.getKey(), entry.getValue().build());
       }
       return result;
    }
 
    private static void collectReferencedTypes(final RequiredPackageBuilder refs, final JavaFile jFile,
-      final Set<String> qualifiedTypeReferences)
-   {
-      jFile.accept(new TypeReferenceVisitor()
-      {
+      final Set<String> qualifiedTypeReferences) {
+      jFile.accept(new TypeReferenceVisitor() {
          @Override
-         protected void foundTypeReference(JavaType jType, Set<String> qualifiedNames)
-         {
+         protected void foundTypeReference(JavaType jType, Set<String> qualifiedNames) {
             qualifiedTypeReferences.addAll(qualifiedNames);
             refs.addInvokedTypes(qualifiedNames);
          }
       });
    }
 
-   private static JavaType resolveJavaType(List<JavaResourceBundle> classPath, String name)
-   {
-      for (JavaResourceBundle jBundle : classPath)
-      {
+   private static JavaType resolveJavaType(List<JavaResourceBundle> classPath, String name) {
+      for (JavaResourceBundle jBundle : classPath) {
          final JavaType jType = resolveJavaType(jBundle, name);
-         if (jType != null)
-         {
+         if (jType != null) {
             return jType;
          }
       }
       return null;
    }
 
-   private static JavaType resolveJavaType(JavaResourceBundle jBundle, String name)
-   {
+   private static JavaType resolveJavaType(JavaResourceBundle jBundle, String name) {
       final String[] segments = name.replace('$', '.').split("\\.");
-      for (JavaResourcesRoot javaResourcesRoot : jBundle.getResourcesRoots())
-      {
+      for (JavaResourcesRoot javaResourcesRoot : jBundle.getResourcesRoots()) {
          JavaResourceDirectory jPackage = javaResourcesRoot;
          JavaType type = null;
-         for (int i = 0; i < segments.length; i++)
-         {
+         for (int i = 0; i < segments.length; i++) {
             final String segment = segments[i];
             final JavaPackage nextPackage = jPackage.getPackage(segment);
-            if (nextPackage != null)
-            {
+            if (nextPackage != null) {
                jPackage = nextPackage;
                continue;
             }
 
             type = jPackage.getType(segment);
-            if (type != null)
-            {
+            if (type != null) {
                return type;
             }
          }

@@ -57,14 +57,12 @@ import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.packaging.Repackager;
-import org.sourcepit.osgifier.maven.DefaultOsgifierContextInflatorFilter;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "osgify-dependencies", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
-{
+public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo {
    @Parameter(defaultValue = "${project.build.directory}")
    private File targetDir;
 
@@ -78,8 +76,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
    private OsgifierModelBuilder modelBuilder;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final PropertiesSource options = createOptions();
 
       final Date startTime = buildContext.getSession().getStartTime();
@@ -95,8 +92,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
       final Map<ArtifactKey, BundleCandidate> keyToBundle = new HashMap<ArtifactKey, BundleCandidate>();
       final Map<ArtifactKey, Model> keyToPom = new HashMap<ArtifactKey, Model>();
       final Map<ArtifactKey, ArtifactKey> keyToNewKey = new HashMap<ArtifactKey, ArtifactKey>();
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final MavenArtifact artifact = bundle.getExtension(MavenArtifact.class);
          final ArtifactKey key = artifact.getArtifactKey();
          keyToBundle.put(key, bundle);
@@ -104,8 +100,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
          final Model pom = getPom(bundle);
          keyToPom.put(key, pom);
 
-         if (!bundle.isNativeBundle())
-         {
+         if (!bundle.isNativeBundle()) {
             final ArtifactKeyBuilder newKey = new ArtifactKeyBuilder();
             newKey.setGroupId(pom.getGroupId());
             newKey.setArtifactId(pom.getArtifactId());
@@ -114,25 +109,20 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
             newKey.setVersion(pom.getVersion());
             keyToNewKey.put(key, newKey.toArtifactKey());
          }
-         else
-         {
+         else {
             keyToNewKey.put(key, key);
          }
       }
 
       final DependencyModel dependencyModel = bundleModel.getExtension(DependencyModel.class);
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final ArtifactKey key = getArtifactKey(bundle);
          final Model pom = keyToPom.get(key);
 
          final DependencyTree dependencyTree = dependencyModel.getDependencyTree(key);
-         if (dependencyTree != null)
-         {
-            for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
-            {
-               if (dependencyNode.isSelected())
-               {
+         if (dependencyTree != null) {
+            for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes()) {
+               if (dependencyNode.isSelected()) {
                   pom.addDependency(toDependency(keyToNewKey.get(dependencyNode.getArtifact().getArtifactKey()),
                      dependencyNode));
                }
@@ -140,8 +130,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
          }
       }
 
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final ArtifactKey key = getArtifactKey(bundle);
 
          final File dir = getWorkDir(bundle);
@@ -149,17 +138,14 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
          ModelUtils.writeModel(new File(dir, "MANIFEST.MF"), EcoreUtil.copy(bundle.getManifest()));
 
          final File pomFile = new File(dir, "pom.xml");
-         try
-         {
+         try {
             new DefaultModelWriter().write(pomFile, null, keyToPom.get(key));
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw pipe(e);
          }
 
-         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null)
-         {
+         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null) {
             final File destJarFile = copyJarAndInjectManifest(bundle);
 
             InstallRequest request = new InstallRequest();
@@ -170,29 +156,24 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
             request.addArtifact(artifact.setFile(destJarFile));
 
             BundleCandidate sourceBundle = bundle.getSourceBundle();
-            if (sourceBundle != null && sourceBundle.getLocation() != null)
-            {
+            if (sourceBundle != null && sourceBundle.getLocation() != null) {
                final ArtifactKey sourceKey = getArtifactKey(sourceBundle);
                final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, sourceKey.getClassifier(),
                   sourceKey.getType());
                final File sourceJar;
-               if (!bundle.isNativeBundle())
-               {
+               if (!bundle.isNativeBundle()) {
                   sourceJar = copyJarAndInjectManifest(sourceBundle);
                }
-               else
-               {
+               else {
                   sourceJar = sourceBundle.getLocation();
                }
                request.addArtifact(sourceArtifact.setFile(sourceJar));
             }
 
-            try
-            {
+            try {
                repositorySystem.install(buildContext.getRepositorySession(), request);
             }
-            catch (InstallationException e)
-            {
+            catch (InstallationException e) {
                throw pipe(e);
             }
 
@@ -201,19 +182,15 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
 
    }
 
-   private PropertiesSource createOptions()
-   {
+   private PropertiesSource createOptions() {
       final PropertiesMap properties = new LinkedPropertiesMap();
       properties.put("osgifier.internalPackages", internalPackages);
 
-      final PropertiesSource options = new AbstractPropertiesSource()
-      {
+      final PropertiesSource options = new AbstractPropertiesSource() {
          @Override
-         public String get(String key)
-         {
+         public String get(String key) {
             String value = properties.get(key);
-            if (value == null)
-            {
+            if (value == null) {
                value = project.getProperties().getProperty(key);
             }
             return value;
@@ -223,24 +200,21 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
       return options;
    }
 
-   private File copyJarAndInjectManifest(BundleCandidate bundle)
-   {
+   private File copyJarAndInjectManifest(BundleCandidate bundle) {
       final File srcJarFile = bundle.getLocation();
       final File destJarFile = new File(getWorkDir(bundle), getBundleId(bundle) + ".jar");
       repackager.copyJarAndInjectManifest(srcJarFile, destJarFile, bundle.getManifest(), null);
       return destJarFile;
    }
 
-   private File getWorkDir(BundleCandidate bundle)
-   {
+   private File getWorkDir(BundleCandidate bundle) {
       final String bundleDir = (bundle.isNativeBundle() ? "native/" : "osgified/") + getBundleId(bundle);
 
       File dir = new File(targetDir, bundleDir);
       return dir;
    }
 
-   private String getBundleId(BundleCandidate bundle)
-   {
+   private String getBundleId(BundleCandidate bundle) {
       return bundle.getSymbolicName() + "_" + bundle.getVersion();
    }
 
@@ -257,8 +231,7 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
    private LegacySupport buildContext;
 
 
-   private Dependency toDependency(ArtifactKey newKey, DependencyNode dependencyNode)
-   {
+   private Dependency toDependency(ArtifactKey newKey, DependencyNode dependencyNode) {
       final MavenDependency declaredDependency = dependencyNode.getDeclaredDependency();
       final Dependency dependency = new Dependency();
       dependency.setGroupId(newKey.getGroupId());
@@ -266,32 +239,27 @@ public class OsgifyProjectDependenciesMojo extends AbstractOsgifierMojo
       dependency.setVersion(declaredDependency.getVersionConstraint());
       dependency.setClassifier(newKey.getClassifier());
       final String type = newKey.getType();
-      if (!"jar".equals(type))
-      {
+      if (!"jar".equals(type)) {
          dependency.setType(type);
       }
       final boolean optional = declaredDependency.isOptional();
-      if (optional)
-      {
+      if (optional) {
          dependency.setOptional(optional);
       }
       final String scope = declaredDependency.getScope().toString();
-      if (!"compile".equals(scope))
-      {
+      if (!"compile".equals(scope)) {
          dependency.setScope(scope);
       }
       return dependency;
    }
 
 
-   private ArtifactKey getArtifactKey(BundleCandidate bundle)
-   {
+   private ArtifactKey getArtifactKey(BundleCandidate bundle) {
       return bundle.getExtension(MavenArtifact.class).getArtifactKey();
    }
 
 
-   private Model getPom(BundleCandidate bundle)
-   {
+   private Model getPom(BundleCandidate bundle) {
       Model model = new Model();
       model.setModelVersion("4.0.0");
       // TODO

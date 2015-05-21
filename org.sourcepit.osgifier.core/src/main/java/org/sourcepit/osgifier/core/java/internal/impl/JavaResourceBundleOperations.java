@@ -29,41 +29,33 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class JavaResourceBundleOperations
-{
-   private JavaResourceBundleOperations()
-   {
+public final class JavaResourceBundleOperations {
+   private JavaResourceBundleOperations() {
       super();
    }
 
    public static File getFile(@NotNull JavaResourceBundle bundle, @NotNull String rootName, @NotNull String name,
-      boolean createOnDemand)
-   {
+      boolean createOnDemand) {
       final JavaResourcesRoot resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
-      if (resourcesRoot == null)
-      {
+      if (resourcesRoot == null) {
          return null;
       }
       return resourcesRoot.getFile(name, createOnDemand);
    }
 
    public static JavaType getType(@NotNull JavaResourceBundle bundle, @NotNull String rootName, String packageName,
-      @NotNull String typeName, boolean createOnDemand)
-   {
+      @NotNull String typeName, boolean createOnDemand) {
       final JavaResourcesRoot resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
-      if (resourcesRoot == null)
-      {
+      if (resourcesRoot == null) {
          return null;
       }
       return resourcesRoot.getType(packageName, typeName, createOnDemand);
    }
 
    public static JavaResourcesRoot getResourcesRoot(@NotNull JavaResourceBundle bundle, @NotNull String rootName,
-      boolean createOnDemand)
-   {
+      boolean createOnDemand) {
       JavaResourcesRoot packageRoot = getResourcesRoot(bundle, rootName);
-      if (packageRoot == null && createOnDemand)
-      {
+      if (packageRoot == null && createOnDemand) {
          packageRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
          packageRoot.setName(rootName);
          bundle.getResourcesRoots().add(packageRoot);
@@ -71,12 +63,9 @@ public final class JavaResourceBundleOperations
       return packageRoot;
    }
 
-   private static JavaResourcesRoot getResourcesRoot(JavaResourceBundle bundle, String path)
-   {
-      for (JavaResourcesRoot packageRoot : bundle.getResourcesRoots())
-      {
-         if (path.equals(packageRoot.getName()))
-         {
+   private static JavaResourcesRoot getResourcesRoot(JavaResourceBundle bundle, String path) {
+      for (JavaResourcesRoot packageRoot : bundle.getResourcesRoots()) {
+         if (path.equals(packageRoot.getName())) {
             return packageRoot;
          }
       }
@@ -84,20 +73,16 @@ public final class JavaResourceBundleOperations
    }
 
    public static JavaPackage getPackage(@NotNull JavaResourceBundle bundle, @NotNull String rootName,
-      @NotNull String qualifiedName, boolean createOnDemand)
-   {
+      @NotNull String qualifiedName, boolean createOnDemand) {
       final JavaResourceDirectory resourcesRoot = getResourcesRoot(bundle, rootName, createOnDemand);
-      if (resourcesRoot == null)
-      {
+      if (resourcesRoot == null) {
          return null;
       }
       return resourcesRoot.getPackage(qualifiedName, createOnDemand);
    }
 
-   public static void accept(@NotNull JavaResourceBundle bundle, @NotNull ResourceVisitor visitor)
-   {
-      for (JavaResourcesRoot resourcesRoot : bundle.getResourcesRoots())
-      {
+   public static void accept(@NotNull JavaResourceBundle bundle, @NotNull ResourceVisitor visitor) {
+      for (JavaResourcesRoot resourcesRoot : bundle.getResourcesRoots()) {
          resourcesRoot.accept(visitor);
       }
    }

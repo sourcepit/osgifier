@@ -21,7 +21,6 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
@@ -29,61 +28,42 @@ import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.sourcepit.common.modeling.utils.EcoreUtils;
 import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
-import org.sourcepit.osgifier.core.model.java.Directory;
-import org.sourcepit.osgifier.core.model.java.File;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
-import org.sourcepit.osgifier.core.model.java.Resource;
-import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ResourceVisitorTest
-{
+public class ResourceVisitorTest {
 
    @Test
-   public void testNull()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getResource(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testNull() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getResource(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testNull((Resource) eObject);
          }
       });
    }
 
-   private void testNull(Resource resource)
-   {
-      try
-      {
+   private void testNull(Resource resource) {
+      try {
          resource.accept(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
    }
 
    @Test
-   public void testThis()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getResource(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testThis() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getResource(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testThis((Resource) eObject);
          }
       });
    }
 
-   private void testThis(final Resource resource)
-   {
-      resource.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource r)
-         {
+   private void testThis(final Resource resource) {
+      resource.accept(new ResourceVisitor() {
+         public boolean visit(Resource r) {
             assertThat(r, IsEqual.equalTo(resource));
             return false;
          }
@@ -91,19 +71,15 @@ public class ResourceVisitorTest
    }
 
    @Test
-   public void testDir()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getDirectory(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testDir() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getDirectory(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testDir((Directory) eObject);
          }
       });
    }
 
-   private void testDir(Directory dir)
-   {
+   private void testDir(Directory dir) {
       final Directory dir2 = JavaModelFactory.eINSTANCE.createDirectory();
       final File file = JavaModelFactory.eINSTANCE.createFile();
       final File file2 = JavaModelFactory.eINSTANCE.createFile();
@@ -113,10 +89,8 @@ public class ResourceVisitorTest
       dir2.getResources().add(file2);
 
       final List<Resource> visited = new ArrayList<Resource>();
-      dir.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
+      dir.accept(new ResourceVisitor() {
+         public boolean visit(Resource resource) {
             visited.add(resource);
             return false;
          }
@@ -127,10 +101,8 @@ public class ResourceVisitorTest
 
       visited.clear();
 
-      dir.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
+      dir.accept(new ResourceVisitor() {
+         public boolean visit(Resource resource) {
             visited.add(resource);
             return resource != dir2;
          }
@@ -143,10 +115,8 @@ public class ResourceVisitorTest
 
       visited.clear();
 
-      dir.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
+      dir.accept(new ResourceVisitor() {
+         public boolean visit(Resource resource) {
             visited.add(resource);
             return true;
          }

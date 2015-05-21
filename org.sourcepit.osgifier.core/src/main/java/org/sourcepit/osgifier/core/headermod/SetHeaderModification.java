@@ -15,47 +15,38 @@
  */
 
 package org.sourcepit.osgifier.core.headermod;
-public class SetHeaderModification
-{
+public class SetHeaderModification {
    private String name, value, before, after;
 
-   public String getName()
-   {
+   public String getName() {
       return name;
    }
 
-   public void setName(String name)
-   {
+   public void setName(String name) {
       this.name = name;
    }
 
-   public String getValue()
-   {
+   public String getValue() {
       return value;
    }
 
-   public void setValue(String value)
-   {
+   public void setValue(String value) {
       this.value = value;
    }
 
-   public String getBefore()
-   {
+   public String getBefore() {
       return before;
    }
 
-   public void setBefore(String before)
-   {
+   public void setBefore(String before) {
       this.before = before;
    }
 
-   public String getAfter()
-   {
+   public String getAfter() {
       return after;
    }
 
-   public void setAfter(String after)
-   {
+   public void setAfter(String after) {
       this.after = after;
    }
 }

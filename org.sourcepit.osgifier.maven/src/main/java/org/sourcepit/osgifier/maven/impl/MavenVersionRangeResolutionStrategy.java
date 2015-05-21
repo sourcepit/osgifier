@@ -25,30 +25,24 @@ import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.resolve.AbstractVersionRangeResolutionStrategy;
 
 @Named("MavenVersionRangeResolutionStrategy")
-public class MavenVersionRangeResolutionStrategy extends AbstractVersionRangeResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class MavenVersionRangeResolutionStrategy extends AbstractVersionRangeResolutionStrategy {
+   public Priority getPriority() {
       return Priority.HIGH;
    }
 
    @Override
-   public VersionRange resolveVersionRange(BundleReference bundleReference)
-   {
+   public VersionRange resolveVersionRange(BundleReference bundleReference) {
       final String mVersionRange = getMavenVersionRange(bundleReference);
-      if (mVersionRange != null)
-      {
+      if (mVersionRange != null) {
          return MavenToOSGiUtils.toVersionRange(mVersionRange);
       }
       return null;
    }
 
 
-   private String getMavenVersionRange(BundleReference bundleReference)
-   {
+   private String getMavenVersionRange(BundleReference bundleReference) {
       final MavenDependency mavenDependency = bundleReference.getExtension(MavenDependency.class);
-      if (mavenDependency != null)
-      {
+      if (mavenDependency != null) {
          return mavenDependency.getVersionConstraint();
       }
       return null;

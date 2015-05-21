@@ -38,8 +38,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
  * 
  * @generated
  */
-public class ContextModelFactoryImpl extends EFactoryImpl implements ContextModelFactory
-{
+public class ContextModelFactoryImpl extends EFactoryImpl implements ContextModelFactory {
    /**
     * Creates the default factory implementation.
     * <!-- begin-user-doc -->
@@ -47,19 +46,14 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public static ContextModelFactory init()
-   {
-      try
-      {
-         ContextModelFactory theContextModelFactory = (ContextModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory(ContextModelPackage.eNS_URI);
-         if (theContextModelFactory != null)
-         {
+   public static ContextModelFactory init() {
+      try {
+         ContextModelFactory theContextModelFactory = (ContextModelFactory) EPackage.Registry.INSTANCE.getEFactory(ContextModelPackage.eNS_URI);
+         if (theContextModelFactory != null) {
             return theContextModelFactory;
          }
       }
-      catch (Exception exception)
-      {
+      catch (Exception exception) {
          EcorePlugin.INSTANCE.log(exception);
       }
       return new ContextModelFactoryImpl();
@@ -72,8 +66,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public ContextModelFactoryImpl()
-   {
+   public ContextModelFactoryImpl() {
       super();
    }
 
@@ -84,10 +77,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * @generated
     */
    @Override
-   public EObject create(EClass eClass)
-   {
-      switch (eClass.getClassifierID())
-      {
+   public EObject create(EClass eClass) {
+      switch (eClass.getClassifierID()) {
          case ContextModelPackage.OSGIFIER_CONTEXT :
             return createOsgifierContext();
          case ContextModelPackage.BUNDLE_CANDIDATE :
@@ -110,10 +101,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * @generated
     */
    @Override
-   public Object createFromString(EDataType eDataType, String initialValue)
-   {
-      switch (eDataType.getClassifierID())
-      {
+   public Object createFromString(EDataType eDataType, String initialValue) {
+      switch (eDataType.getClassifierID()) {
          case ContextModelPackage.EMBED_INSTRUCTION :
             return createEmbedInstructionFromString(eDataType, initialValue);
          default :
@@ -128,10 +117,8 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * @generated
     */
    @Override
-   public String convertToString(EDataType eDataType, Object instanceValue)
-   {
-      switch (eDataType.getClassifierID())
-      {
+   public String convertToString(EDataType eDataType, Object instanceValue) {
+      switch (eDataType.getClassifierID()) {
          case ContextModelPackage.EMBED_INSTRUCTION :
             return convertEmbedInstructionToString(eDataType, instanceValue);
          default :
@@ -145,8 +132,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public OsgifierContext createOsgifierContext()
-   {
+   public OsgifierContext createOsgifierContext() {
       OsgifierContextImpl osgifierContext = new OsgifierContextImpl();
       return osgifierContext;
    }
@@ -157,8 +143,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public BundleCandidate createBundleCandidate()
-   {
+   public BundleCandidate createBundleCandidate() {
       BundleCandidateImpl bundleCandidate = new BundleCandidateImpl();
       return bundleCandidate;
    }
@@ -169,8 +154,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public BundleReference createBundleReference()
-   {
+   public BundleReference createBundleReference() {
       BundleReferenceImpl bundleReference = new BundleReferenceImpl();
       return bundleReference;
    }
@@ -181,8 +165,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public BundleLocalization createBundleLocalization()
-   {
+   public BundleLocalization createBundleLocalization() {
       BundleLocalizationImpl bundleLocalization = new BundleLocalizationImpl();
       return bundleLocalization;
    }
@@ -193,8 +176,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public LocalizedData createLocalizedData()
-   {
+   public LocalizedData createLocalizedData() {
       LocalizedDataImpl localizedData = new LocalizedDataImpl();
       return localizedData;
    }
@@ -205,8 +187,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public EmbedInstruction createEmbedInstructionFromString(EDataType eDataType, String initialValue)
-   {
+   public EmbedInstruction createEmbedInstructionFromString(EDataType eDataType, String initialValue) {
       EmbedInstruction result = EmbedInstruction.get(initialValue);
       if (result == null)
          throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
@@ -220,8 +201,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public String convertEmbedInstructionToString(EDataType eDataType, Object instanceValue)
-   {
+   public String convertEmbedInstructionToString(EDataType eDataType, Object instanceValue) {
       return instanceValue == null ? null : instanceValue.toString();
    }
 
@@ -231,8 +211,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * 
     * @generated
     */
-   public ContextModelPackage getContextModelPackage()
-   {
+   public ContextModelPackage getContextModelPackage() {
       return (ContextModelPackage) getEPackage();
    }
 
@@ -244,8 +223,7 @@ public class ContextModelFactoryImpl extends EFactoryImpl implements ContextMode
     * @generated
     */
    @Deprecated
-   public static ContextModelPackage getPackage()
-   {
+   public static ContextModelPackage getPackage() {
       return ContextModelPackage.eINSTANCE;
    }
 

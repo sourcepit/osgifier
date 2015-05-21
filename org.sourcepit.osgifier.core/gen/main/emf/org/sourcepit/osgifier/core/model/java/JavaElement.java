@@ -28,8 +28,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface JavaElement extends Named, XAnnotatable
-{
+public interface JavaElement extends Named, XAnnotatable {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

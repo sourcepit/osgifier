@@ -38,8 +38,7 @@ import org.sourcepit.osgifier.core.util.OsgifierContextUtils.BuildOrder;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class BundleManifestAppender
-{
+public class BundleManifestAppender {
    private static final Logger LOGGER = LoggerFactory.getLogger(BundleManifestAppender.class);
 
    @Inject
@@ -60,15 +59,12 @@ public class BundleManifestAppender
    @Inject
    private RecommendedImportPolicyAppender importPolicyAppender;
 
-   public void append(OsgifierContext context, BundleManifestAppenderFilter filter, PropertiesSource options)
-   {
+   public void append(OsgifierContext context, BundleManifestAppenderFilter filter, PropertiesSource options) {
       final BuildOrder buildOrder = OsgifierContextUtils.computeBuildOrder(context);
 
-      for (List<BundleCandidate> cycle : buildOrder.getCycles())
-      {
+      for (List<BundleCandidate> cycle : buildOrder.getCycles()) {
          final StringBuilder sb = new StringBuilder();
-         for (BundleCandidate cyclicBundle : cycle)
-         {
+         for (BundleCandidate cyclicBundle : cycle) {
             sb.append(getBundleKey(cyclicBundle));
             sb.append(" - ");
          }
@@ -79,29 +75,24 @@ public class BundleManifestAppender
       }
 
       final List<BundleCandidate> bundleCandidates = buildOrder.getOrderedBundles();
-      for (BundleCandidate bundleCandidate : bundleCandidates)
-      {
-         if (bundleCandidate.isNativeBundle())
-         {
+      for (BundleCandidate bundleCandidate : bundleCandidates) {
+         if (bundleCandidate.isNativeBundle()) {
             LOGGER.info("Skipping manifest creation for native bundle " + bundleCandidate.getSymbolicName() + "_"
                + bundleCandidate.getVersion());
          }
-         else
-         {
+         else {
             LOGGER.info("Building manifest for bundle candidate " + bundleCandidate.getSymbolicName() + "_"
                + bundleCandidate.getVersion());
             append(bundleCandidate, filter, options);
 
-            for (BundleHeadersAppender headersAppender : headersAppenders)
-            {
+            for (BundleHeadersAppender headersAppender : headersAppenders) {
                headersAppender.append(bundleCandidate, filter, options);
             }
          }
       }
    }
 
-   private void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
-   {
+   private void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options) {
       initManifest(bundle);
 
       if (bundle.getTargetBundle() != null) // source bundle
@@ -112,52 +103,42 @@ public class BundleManifestAppender
          manifest.setHeader("Eclipse-SourceBundle", targetBundle.getSymbolicName() + ";version=\"" + version
             + "\";roots:=\".\"");
       }
-      else
-      {
-         if (filter.isAppendExecutionEnvironment(bundle, options))
-         {
+      else {
+         if (filter.isAppendExecutionEnvironment(bundle, options)) {
             environmentAppender.append(bundle, options);
          }
-         if (filter.isAppendPackageExports(bundle, options))
-         {
+         if (filter.isAppendPackageExports(bundle, options)) {
             packageExports.append(bundle, options);
          }
-         if (filter.isAppendPackageImports(bundle, options))
-         {
+         if (filter.isAppendPackageImports(bundle, options)) {
             packageImports.append(bundle, options);
          }
-         if (filter.isAppendDynamicImports(bundle, options))
-         {
+         if (filter.isAppendDynamicImports(bundle, options)) {
             dynamicImports.append(bundle);
          }
-         if (filter.isAppendRecommendedImportPolicy(bundle, options))
-         {
+         if (filter.isAppendRecommendedImportPolicy(bundle, options)) {
             importPolicyAppender.append(bundle, options);
          }
       }
    }
 
-   private void initManifest(BundleCandidate bundle)
-   {
+   private void initManifest(BundleCandidate bundle) {
       BundleManifest manifest = bundle.getManifest();
-      if (manifest == null)
-      {
+      if (manifest == null) {
          manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
          manifest.setBundleSymbolicName(bundle.getSymbolicName());
          manifest.setBundleVersion(bundle.getVersion());
          bundle.setManifest(manifest);
       }
-      
+
       BundleLocalization localization = bundle.getLocalization();
-      if (localization == null)
-      {
+      if (localization == null) {
          localization = ContextModelFactory.eINSTANCE.createBundleLocalization();
          bundle.setLocalization(localization);
       }
    }
 
-   private static String getBundleKey(BundleCandidate bundle)
-   {
+   private static String getBundleKey(BundleCandidate bundle) {
       return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
    }
 }

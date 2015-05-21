@@ -15,28 +15,22 @@
  */
 
 package org.sourcepit.osgifier.core.bundle;
-public enum PackageImportType
-{
+public enum PackageImportType {
    PUBLIC_IMPORT("publicImport"), INTERNAL_IMPORT("internalImport"), SELF_IMPORT("selfImport");
 
    private final String literal;
 
-   private PackageImportType(String literal)
-   {
+   private PackageImportType(String literal) {
       this.literal = literal;
    }
 
-   public String literal()
-   {
+   public String literal() {
       return literal;
    }
 
-   public static PackageImportType parse(String literal)
-   {
-      for (PackageImportType type : values())
-      {
-         if (type.literal().equalsIgnoreCase(literal))
-         {
+   public static PackageImportType parse(String literal) {
+      for (PackageImportType type : values()) {
+         if (type.literal().equalsIgnoreCase(literal)) {
             return type;
          }
       }

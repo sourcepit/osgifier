@@ -39,22 +39,18 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 
 @Named
-public class PackageImportFactory
-{
+public class PackageImportFactory {
 
    public PackageImport newPackageImport(BundleCandidate bundle, PackageResolutionResult result,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final String requiredPackage = result.getRequiredPackage();
 
       final PackageExportDescription exporter = result.getSelectedExporter();
-      if (exporter == null)
-      {
+      if (exporter == null) {
          return newUnresolvableImport(bundle, requiredPackage, options);
       }
 
-      switch (exporter.getExporterType())
-      {
+      switch (exporter.getExporterType()) {
          case OWN_BUNDLE :
             return newSelfImport(bundle, requiredPackage, exporter.getPackageExport(), options);
          case EXECUTION_ENVIRONMENT :
@@ -70,30 +66,25 @@ public class PackageImportFactory
    }
 
    private PackageImport newSelfImport(BundleCandidate bundle, String requiredPackage, PackageExport packageExport,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       packageImport.getPackageNames().add(requiredPackage);
 
       final Version version = packageExport.getVersion();
-      if (version != null && !version.equals(EMPTY_VERSION))
-      {
+      if (version != null && !version.equals(EMPTY_VERSION)) {
          final VersionRangePolicy policy;
 
          final VersionRangePolicy[] policies = getRecommendedImportPolicies(bundle, options);
-         if (policies == null)
-         {
+         if (policies == null) {
             policy = getVersionRangePolicy(options, SELF_IMPORT, EQUIVALENT);
          }
-         else
-         {
+         else {
             policy = policies[1];
          }
 
          final VersionRange versionRange = policy.toVersionRange(version,
             options.getBoolean("osgifier.eraseMicro", true));
-         if (!VersionRange.INFINITE_RANGE.equals(versionRange))
-         {
+         if (!VersionRange.INFINITE_RANGE.equals(versionRange)) {
             packageImport.setVersion(versionRange);
          }
       }
@@ -102,38 +93,32 @@ public class PackageImportFactory
 
    private PackageImport newPackageImport(BundleCandidate importingBundle, String requiredPackage,
       BundleReference bundleReference, BundleCandidate exportingBundle, PackageExport packageExport,
-      AccessRestriction accessRestriction, PropertiesSource options)
-   {
+      AccessRestriction accessRestriction, PropertiesSource options) {
       final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       packageImport.getPackageNames().add(requiredPackage);
 
       final Version version = packageExport.getVersion();
-      if (version != null && !version.equals(EMPTY_VERSION))
-      {
+      if (version != null && !version.equals(EMPTY_VERSION)) {
          VersionRange versionRange = bundleReference.getVersionRange();
-         if (versionRange == null || versionRange.getHighVersion() == null || !versionRange.includes(version))
-         {
+         if (versionRange == null || versionRange.getHighVersion() == null || !versionRange.includes(version)) {
             final VersionRangePolicy policy = getVersionRangePolicy(exportingBundle, accessRestriction, options);
             versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
          }
 
-         if (!INFINITE_RANGE.equals(versionRange))
-         {
+         if (!INFINITE_RANGE.equals(versionRange)) {
             packageImport.setVersion(versionRange);
          }
       }
 
       final boolean optional = bundleReference.isOptional();
-      if (optional)
-      {
+      if (optional) {
          packageImport.getParameters().add(newOptional());
       }
 
       return packageImport;
    }
 
-   private static Parameter newOptional()
-   {
+   private static Parameter newOptional() {
       final Parameter parameter = BundleManifestFactory.eINSTANCE.createParameter();
       parameter.setName("resolution");
       parameter.setType(DIRECTIVE);
@@ -142,11 +127,9 @@ public class PackageImportFactory
    }
 
    private PackageImport newExecutionEnvironmentImport(BundleCandidate bundle, String requiredPackage,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       // see http://wiki.osgi.org/wiki/Why_does_Eclipse_find_javax.swing_but_not_Felix%3F
-      if (requiredPackage.startsWith("java."))
-      {
+      if (requiredPackage.startsWith("java.")) {
          return null;
       }
 
@@ -155,16 +138,14 @@ public class PackageImportFactory
       return packageImport;
    }
 
-   private PackageImport newVendorImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
-   {
+   private PackageImport newVendorImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options) {
       // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       // packageImport.getPackageNames().add(requiredPackage);
       // return packageImport;
       return null;
    }
 
-   private PackageImport newUnresolvableImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options)
-   {
+   private PackageImport newUnresolvableImport(BundleCandidate bundle, String requiredPackage, PropertiesSource options) {
       // TODO currently unresolvable packages are ignored.. ok?
       // final PackageImport packageImport = BundleManifestFactory.eINSTANCE.createPackageImport();
       // packageImport.getPackageNames().add(requiredPackage);
@@ -174,27 +155,22 @@ public class PackageImportFactory
    }
 
    private static VersionRangePolicy getVersionRangePolicy(PropertiesSource options,
-      final PackageImportType importType, final VersionRangePolicy defaultPolicy)
-   {
+      final PackageImportType importType, final VersionRangePolicy defaultPolicy) {
       final String option = "osgifier." + importType.literal() + "Policy";
       return VersionRangePolicy.parse(options.get(option, defaultPolicy.literal()));
    }
 
    private static VersionRangePolicy getVersionRangePolicy(BundleCandidate exportingBundle,
-      AccessRestriction accessRestriction, PropertiesSource options)
-   {
+      AccessRestriction accessRestriction, PropertiesSource options) {
       final VersionRangePolicy[] policies = getRecommendedImportPolicies(exportingBundle, options);
-      switch (accessRestriction)
-      {
+      switch (accessRestriction) {
          case NONE :
-            if (policies == null)
-            {
+            if (policies == null) {
                return getVersionRangePolicy(options, PUBLIC_IMPORT, COMPATIBLE);
             }
             return policies[0];
          case DISCOURAGED :
-            if (policies == null)
-            {
+            if (policies == null) {
                return getVersionRangePolicy(options, INTERNAL_IMPORT, EQUIVALENT);
             }
             return policies[1];
@@ -204,34 +180,28 @@ public class PackageImportFactory
    }
 
    private static VersionRangePolicy[] getRecommendedImportPolicies(BundleCandidate exportingBundle,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       VersionRangePolicy[] policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(
          exportingBundle.getManifest(), options);
 
-      if (policies == null)
-      {
-         policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(exportingBundle
-            .getManifest());
+      if (policies == null) {
+         policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(exportingBundle.getManifest());
       }
 
       return policies;
    }
 
    public BundleRequirement newRequireBundle(BundleCandidate bundle, BundleCandidate requiredBundle, boolean optional,
-      AccessRestriction accessRestriction, PropertiesSource options)
-   {
+      AccessRestriction accessRestriction, PropertiesSource options) {
       final VersionRangePolicy policy = getVersionRangePolicy(requiredBundle, accessRestriction, options);
       final Version version = requiredBundle.getVersion();
       final VersionRange versionRange = policy.toVersionRange(version, options.getBoolean("osgifier.eraseMicro", true));
       final BundleRequirement requirement = BundleManifestFactory.eINSTANCE.createBundleRequirement();
       requirement.getSymbolicNames().add(requiredBundle.getSymbolicName());
-      if (!INFINITE_RANGE.equals(versionRange))
-      {
+      if (!INFINITE_RANGE.equals(versionRange)) {
          requirement.setBundleVersion(versionRange);
       }
-      if (optional)
-      {
+      if (optional) {
          requirement.getParameters().add(newOptional());
       }
       return requirement;

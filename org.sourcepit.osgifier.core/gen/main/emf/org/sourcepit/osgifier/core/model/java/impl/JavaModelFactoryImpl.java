@@ -43,8 +43,7 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
  * 
  * @generated
  */
-public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFactory
-{
+public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFactory {
    /**
     * Creates the default factory implementation.
     * <!-- begin-user-doc -->
@@ -52,19 +51,14 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public static JavaModelFactory init()
-   {
-      try
-      {
-         JavaModelFactory theJavaModelFactory = (JavaModelFactory) EPackage.Registry.INSTANCE
-            .getEFactory(JavaModelPackage.eNS_URI);
-         if (theJavaModelFactory != null)
-         {
+   public static JavaModelFactory init() {
+      try {
+         JavaModelFactory theJavaModelFactory = (JavaModelFactory) EPackage.Registry.INSTANCE.getEFactory(JavaModelPackage.eNS_URI);
+         if (theJavaModelFactory != null) {
             return theJavaModelFactory;
          }
       }
-      catch (Exception exception)
-      {
+      catch (Exception exception) {
          EcorePlugin.INSTANCE.log(exception);
       }
       return new JavaModelFactoryImpl();
@@ -77,8 +71,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaModelFactoryImpl()
-   {
+   public JavaModelFactoryImpl() {
       super();
    }
 
@@ -89,10 +82,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * @generated
     */
    @Override
-   public EObject create(EClass eClass)
-   {
-      switch (eClass.getClassifierID())
-      {
+   public EObject create(EClass eClass) {
+      switch (eClass.getClassifierID()) {
          case JavaModelPackage.DIRECTORY :
             return createDirectory();
          case JavaModelPackage.FILE :
@@ -125,10 +116,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * @generated
     */
    @Override
-   public Object createFromString(EDataType eDataType, String initialValue)
-   {
-      switch (eDataType.getClassifierID())
-      {
+   public Object createFromString(EDataType eDataType, String initialValue) {
+      switch (eDataType.getClassifierID()) {
          case JavaModelPackage.JAVA_RESOURCES_TYPE :
             return createJavaResourcesTypeFromString(eDataType, initialValue);
          default :
@@ -143,10 +132,8 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * @generated
     */
    @Override
-   public String convertToString(EDataType eDataType, Object instanceValue)
-   {
-      switch (eDataType.getClassifierID())
-      {
+   public String convertToString(EDataType eDataType, Object instanceValue) {
+      switch (eDataType.getClassifierID()) {
          case JavaModelPackage.JAVA_RESOURCES_TYPE :
             return convertJavaResourcesTypeToString(eDataType, instanceValue);
          default :
@@ -160,8 +147,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public Directory createDirectory()
-   {
+   public Directory createDirectory() {
       DirectoryImpl directory = new DirectoryImpl();
       return directory;
    }
@@ -172,8 +158,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public File createFile()
-   {
+   public File createFile() {
       FileImpl file = new FileImpl();
       return file;
    }
@@ -184,8 +169,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaProject createJavaProject()
-   {
+   public JavaProject createJavaProject() {
       JavaProjectImpl javaProject = new JavaProjectImpl();
       return javaProject;
    }
@@ -196,8 +180,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaArchive createJavaArchive()
-   {
+   public JavaArchive createJavaArchive() {
       JavaArchiveImpl javaArchive = new JavaArchiveImpl();
       return javaArchive;
    }
@@ -208,8 +191,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaResourcesRoot createJavaResourcesRoot()
-   {
+   public JavaResourcesRoot createJavaResourcesRoot() {
       JavaResourcesRootImpl javaResourcesRoot = new JavaResourcesRootImpl();
       return javaResourcesRoot;
    }
@@ -220,8 +202,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaPackage createJavaPackage()
-   {
+   public JavaPackage createJavaPackage() {
       JavaPackageImpl javaPackage = new JavaPackageImpl();
       return javaPackage;
    }
@@ -232,8 +213,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaClass createJavaClass()
-   {
+   public JavaClass createJavaClass() {
       JavaClassImpl javaClass = new JavaClassImpl();
       return javaClass;
    }
@@ -244,8 +224,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaCompilationUnit createJavaCompilationUnit()
-   {
+   public JavaCompilationUnit createJavaCompilationUnit() {
       JavaCompilationUnitImpl javaCompilationUnit = new JavaCompilationUnitImpl();
       return javaCompilationUnit;
    }
@@ -256,8 +235,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public ImportDeclaration createImportDeclaration()
-   {
+   public ImportDeclaration createImportDeclaration() {
       ImportDeclarationImpl importDeclaration = new ImportDeclarationImpl();
       return importDeclaration;
    }
@@ -268,8 +246,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaType createJavaType()
-   {
+   public JavaType createJavaType() {
       JavaTypeImpl javaType = new JavaTypeImpl();
       return javaType;
    }
@@ -280,8 +257,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaResourcesType createJavaResourcesTypeFromString(EDataType eDataType, String initialValue)
-   {
+   public JavaResourcesType createJavaResourcesTypeFromString(EDataType eDataType, String initialValue) {
       JavaResourcesType result = JavaResourcesType.get(initialValue);
       if (result == null)
          throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '"
@@ -295,8 +271,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public String convertJavaResourcesTypeToString(EDataType eDataType, Object instanceValue)
-   {
+   public String convertJavaResourcesTypeToString(EDataType eDataType, Object instanceValue) {
       return instanceValue == null ? null : instanceValue.toString();
    }
 
@@ -306,8 +281,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * 
     * @generated
     */
-   public JavaModelPackage getJavaModelPackage()
-   {
+   public JavaModelPackage getJavaModelPackage() {
       return (JavaModelPackage) getEPackage();
    }
 
@@ -319,8 +293,7 @@ public class JavaModelFactoryImpl extends EFactoryImpl implements JavaModelFacto
     * @generated
     */
    @Deprecated
-   public static JavaModelPackage getPackage()
-   {
+   public static JavaModelPackage getPackage() {
       return JavaModelPackage.eINSTANCE;
    }
 

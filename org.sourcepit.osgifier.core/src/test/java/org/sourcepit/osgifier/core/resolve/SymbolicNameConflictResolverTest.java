@@ -28,18 +28,15 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.core.resolve.SymbolicNameConflictResolver;
 
-public class SymbolicNameConflictResolverTest
-{
+public class SymbolicNameConflictResolverTest {
    private SymbolicNameConflictResolver conflictResolver;
 
    private BundleCandidate bundle1;
    private BundleCandidate bundle2;
 
    @Before
-   public void setUp()
-   {
+   public void setUp() {
       conflictResolver = new SymbolicNameConflictResolver();
 
       ContextModelFactory contextFactory = ContextModelFactory.eINSTANCE;
@@ -52,8 +49,7 @@ public class SymbolicNameConflictResolverTest
    }
 
    @Test
-   public void testResolveParallel()
-   {
+   public void testResolveParallel() {
       List<String> names1 = asList("foo", "bar1");
       List<String> names2 = asList("foo", "bar2");
 
@@ -65,8 +61,7 @@ public class SymbolicNameConflictResolverTest
    }
 
    @Test
-   public void testAsync()
-   {
+   public void testAsync() {
       List<String> names1 = asList("foo", "bar1");
       List<String> names2 = asList("foo");
 
@@ -88,8 +83,7 @@ public class SymbolicNameConflictResolverTest
    }
 
    @Test
-   public void testUnresolveable()
-   {
+   public void testUnresolveable() {
       List<String> names1 = asList("foo");
       List<String> names2 = asList("foo");
 

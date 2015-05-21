@@ -19,25 +19,17 @@ package org.sourcepit.osgifier.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import java.lang.IllegalArgumentException;
-
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.model.java.Directory;
-import org.sourcepit.osgifier.core.model.java.File;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class DirectoryTest
-{
+public class DirectoryTest {
    @Test
-   public void testGetDirectories()
-   {
+   public void testGetDirectories() {
       Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
       assertThat(dir.getDirectories().size(), Is.is(0));
 
@@ -57,19 +49,16 @@ public class DirectoryTest
       assertThat(dir.getDirectories().get(0), Is.is(dir2));
       assertThat(dir.getDirectories().get(1), Is.is(dir3));
 
-      try
-      {
+      try {
          dir.getDirectories().add(JavaModelFactory.eINSTANCE.createDirectory());
          fail("expected unmodifiable EList");
       }
-      catch (UnsupportedOperationException e)
-      {
+      catch (UnsupportedOperationException e) {
       }
    }
 
    @Test
-   public void testGetFiles()
-   {
+   public void testGetFiles() {
       Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
       assertThat(dir.getFiles().size(), Is.is(0));
 
@@ -89,27 +78,22 @@ public class DirectoryTest
       assertThat(dir.getFiles().get(0), Is.is(file));
       assertThat(dir.getFiles().get(1), Is.is(file2));
 
-      try
-      {
+      try {
          dir.getFiles().add(JavaModelFactory.eINSTANCE.createFile());
          fail("expected unmodifiable EList");
       }
-      catch (UnsupportedOperationException e)
-      {
+      catch (UnsupportedOperationException e) {
       }
    }
 
    @Test
-   public void testGetFile()
-   {
+   public void testGetFile() {
       Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
-      try
-      {
+      try {
          dir.getFile(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(dir.getFile("a", false), IsNull.nullValue());
@@ -130,16 +114,13 @@ public class DirectoryTest
    }
 
    @Test
-   public void testGetResource()
-   {
+   public void testGetResource() {
       Directory dir = JavaModelFactory.eINSTANCE.createDirectory();
-      try
-      {
+      try {
          dir.getResource(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(dir.getResource("a"), IsNull.nullValue());

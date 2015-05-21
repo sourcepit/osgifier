@@ -24,8 +24,7 @@ import org.sourcepit.osgifier.core.ee.ExecutionEnvironmentImplementation;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public interface ExecutionEnvironmentContributor
-{
+public interface ExecutionEnvironmentContributor {
    List<ExecutionEnvironment> getExecutionEnvironments();
 
    List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations();

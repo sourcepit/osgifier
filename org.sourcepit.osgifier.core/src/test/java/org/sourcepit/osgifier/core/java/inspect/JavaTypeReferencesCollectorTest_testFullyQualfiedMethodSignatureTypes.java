@@ -15,10 +15,8 @@
  */
 
 package org.sourcepit.osgifier.core.java.inspect;
-public class JavaTypeReferencesCollectorTest_testFullyQualfiedMethodSignatureTypes
-{
-   public javax.activation.CommandObject getCommandObject(javax.activation.DataContentHandler handler)
-   {
+public class JavaTypeReferencesCollectorTest_testFullyQualfiedMethodSignatureTypes {
+   public javax.activation.CommandObject getCommandObject(javax.activation.DataContentHandler handler) {
       return null;
    }
 }

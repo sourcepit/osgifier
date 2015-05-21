@@ -48,8 +48,7 @@ import org.sourcepit.osgifier.core.packaging.Repackager;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "osgify-package", defaultPhase = LifecyclePhase.PACKAGE, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class OsgifyPackageMojo extends AbstractOsgifierMojo
-{
+public class OsgifyPackageMojo extends AbstractOsgifierMojo {
    @Inject
    private Repackager repackager;
 
@@ -66,19 +65,16 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
    protected ArtifactRepository localRepository;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final OsgifierContext context = readContext();
 
       final File outDir = new File(targetDir, "osgified-dependencies");
       outDir.mkdirs();
 
       final Artifact sourcesArtifact = findAttachedArtifact(project, "sources", "java-source");
-      if (sourcesArtifact != null)
-      {
+      if (sourcesArtifact != null) {
          final File sourcesJarFile = sourcesArtifact.getFile();
-         if (sourcesJarFile != null && sourcesJarFile.exists() && !isEclipseSourceBundle(sourcesJarFile))
-         {
+         if (sourcesJarFile != null && sourcesJarFile.exists() && !isEclipseSourceBundle(sourcesJarFile)) {
             final BundleCandidate candidate = context.getBundles().get(0);
             final BundleManifest manifest = createEclipseSourceBundleManifest(candidate);
 
@@ -91,15 +87,11 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       repackageSourceJars(outDir, context);
    }
 
-   public void repackageNonOsgiJars(File outDir, OsgifierContext context)
-   {
-      for (BundleCandidate candidate : context.getBundles())
-      {
-         if (!candidate.isNativeBundle())
-         {
+   public void repackageNonOsgiJars(File outDir, OsgifierContext context) {
+      for (BundleCandidate candidate : context.getBundles()) {
+         if (!candidate.isNativeBundle()) {
             final File srcJarFile = candidate.getLocation();
-            if (srcJarFile.isFile() && srcJarFile.exists())
-            {
+            if (srcJarFile.isFile() && srcJarFile.exists()) {
                final String bundleFileName = candidate.getSymbolicName() + "_" + candidate.getVersion().toFullString()
                   + ".jar";
                final File destJarFile = new File(outDir, bundleFileName);
@@ -110,13 +102,10 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       }
    }
 
-   public void repackageSourceJars(File outDir, OsgifierContext context)
-   {
-      for (BundleCandidate candidate : context.getBundles())
-      {
+   public void repackageSourceJars(File outDir, OsgifierContext context) {
+      for (BundleCandidate candidate : context.getBundles()) {
          final MavenArtifact mArtifact = candidate.getExtension(MavenArtifact.class);
-         if (mArtifact != null)
-         {
+         if (mArtifact != null) {
             Artifact sourcesArtifact = repositorySystem.createArtifactWithClassifier(mArtifact.getGroupId(),
                mArtifact.getArtifactId(), mArtifact.getVersion(), "java-source", "sources");
 
@@ -130,16 +119,14 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
             repositorySystem.resolve(request);
 
             final File sourceJarFile = sourcesArtifact.getFile();
-            if (sourceJarFile != null && sourceJarFile.exists() && !isEclipseSourceBundle(sourceJarFile))
-            {
+            if (sourceJarFile != null && sourceJarFile.exists() && !isEclipseSourceBundle(sourceJarFile)) {
                repackageSourcesJar(outDir, candidate, sourceJarFile);
             }
          }
       }
    }
 
-   private File repackageSourcesJar(File outDir, BundleCandidate candidate, File sourceJarFile)
-   {
+   private File repackageSourcesJar(File outDir, BundleCandidate candidate, File sourceJarFile) {
       BundleManifest manifest = createEclipseSourceBundleManifest(candidate);
 
       final File destJarFile = new File(outDir, manifest.getBundleSymbolicName().getSymbolicName() + "_"
@@ -150,21 +137,17 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       return destJarFile;
    }
 
-   private boolean isEclipseSourceBundle(File jarFile)
-   {
+   private boolean isEclipseSourceBundle(File jarFile) {
       Manifest manifest = null;
-      try
-      {
+      try {
          manifest = ManifestUtils.readJarManifest(jarFile);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
       }
       return manifest != null && manifest.getHeader("Eclipse-SourceBundle") != null;
    }
 
-   private BundleManifest createEclipseSourceBundleManifest(BundleCandidate candidate)
-   {
+   private BundleManifest createEclipseSourceBundleManifest(BundleCandidate candidate) {
       BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
       manifest.setBundleSymbolicName(candidate.getSymbolicName() + ".source"); // without 's' in eclipse
       manifest.setBundleVersion(candidate.getVersion());
@@ -179,43 +162,34 @@ public class OsgifyPackageMojo extends AbstractOsgifierMojo
       return manifest;
    }
 
-   private Artifact findAttachedArtifact(MavenProject mavenProject, String classifier, String type)
-   {
-      for (Artifact artifact : project.getAttachedArtifacts())
-      {
-         if (equals(classifier, artifact.getClassifier()) && equals(type, artifact.getType()))
-         {
+   private Artifact findAttachedArtifact(MavenProject mavenProject, String classifier, String type) {
+      for (Artifact artifact : project.getAttachedArtifacts()) {
+         if (equals(classifier, artifact.getClassifier()) && equals(type, artifact.getType())) {
             return artifact;
          }
       }
       return null;
    }
 
-   private boolean equals(Object o1, Object o2)
-   {
-      if (o1 == null)
-      {
+   private boolean equals(Object o1, Object o2) {
+      if (o1 == null) {
          return o2 == null;
       }
       return o1.equals(o2);
    }
 
-   private OsgifierContext readContext()
-   {
-      try
-      {
+   private OsgifierContext readContext() {
+      try {
          final Resource resource = new XMIResourceImpl(URI.createFileURI(getContextFile(Goal.OSGIFY).getAbsolutePath()));
          resource.load(null);
          return (OsgifierContext) resource.getContents().get(0);
       }
-      catch (Exception e)
-      {
+      catch (Exception e) {
          throw new IllegalStateException(e);
       }
    }
 
-   private File getContextFile(Goal goal)
-   {
+   private File getContextFile(Goal goal) {
       return new File(targetDir, goal == Goal.OSGIFY ? "osgify-context.xml" : "osgify-tests-context.xml");
    }
 }

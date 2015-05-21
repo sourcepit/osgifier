@@ -39,8 +39,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
  * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage
  * @generated
  */
-public class ContextModelAdapterFactory extends AdapterFactoryImpl
-{
+public class ContextModelAdapterFactory extends AdapterFactoryImpl {
    /**
     * The cached model package.
     * <!-- begin-user-doc -->
@@ -57,10 +56,8 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * 
     * @generated
     */
-   public ContextModelAdapterFactory()
-   {
-      if (modelPackage == null)
-      {
+   public ContextModelAdapterFactory() {
+      if (modelPackage == null) {
          modelPackage = ContextModelPackage.eINSTANCE;
       }
    }
@@ -76,14 +73,11 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    @Override
-   public boolean isFactoryForType(Object object)
-   {
-      if (object == modelPackage)
-      {
+   public boolean isFactoryForType(Object object) {
+      if (object == modelPackage) {
          return true;
       }
-      if (object instanceof EObject)
-      {
+      if (object instanceof EObject) {
          return ((EObject) object).eClass().getEPackage() == modelPackage;
       }
       return false;
@@ -96,59 +90,49 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * 
     * @generated
     */
-   protected ContextModelSwitch<Adapter> modelSwitch = new ContextModelSwitch<Adapter>()
-   {
+   protected ContextModelSwitch<Adapter> modelSwitch = new ContextModelSwitch<Adapter>() {
       @Override
-      public Adapter caseOsgifierContext(OsgifierContext object)
-      {
+      public Adapter caseOsgifierContext(OsgifierContext object) {
          return createOsgifierContextAdapter();
       }
 
       @Override
-      public Adapter caseBundleCandidate(BundleCandidate object)
-      {
+      public Adapter caseBundleCandidate(BundleCandidate object) {
          return createBundleCandidateAdapter();
       }
 
       @Override
-      public Adapter caseBundleReference(BundleReference object)
-      {
+      public Adapter caseBundleReference(BundleReference object) {
          return createBundleReferenceAdapter();
       }
 
       @Override
-      public Adapter caseBundleLocalization(BundleLocalization object)
-      {
+      public Adapter caseBundleLocalization(BundleLocalization object) {
          return createBundleLocalizationAdapter();
       }
 
       @Override
-      public Adapter caseLocalizedData(LocalizedData object)
-      {
+      public Adapter caseLocalizedData(LocalizedData object) {
          return createLocalizedDataAdapter();
       }
 
       @Override
-      public Adapter caseExtendable(Extendable object)
-      {
+      public Adapter caseExtendable(Extendable object) {
          return createExtendableAdapter();
       }
 
       @Override
-      public Adapter caseAnnotatable(Annotatable object)
-      {
+      public Adapter caseAnnotatable(Annotatable object) {
          return createAnnotatableAdapter();
       }
 
       @Override
-      public Adapter caseXAnnotatable(XAnnotatable object)
-      {
+      public Adapter caseXAnnotatable(XAnnotatable object) {
          return createXAnnotatableAdapter();
       }
 
       @Override
-      public Adapter defaultCase(EObject object)
-      {
+      public Adapter defaultCase(EObject object) {
          return createEObjectAdapter();
       }
    };
@@ -163,8 +147,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    @Override
-   public Adapter createAdapter(Notifier target)
-   {
+   public Adapter createAdapter(Notifier target) {
       return modelSwitch.doSwitch((EObject) target);
    }
 
@@ -181,8 +164,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.context.OsgifierContext
     * @generated
     */
-   public Adapter createOsgifierContextAdapter()
-   {
+   public Adapter createOsgifierContextAdapter() {
       return null;
    }
 
@@ -198,8 +180,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.context.BundleCandidate
     * @generated
     */
-   public Adapter createBundleCandidateAdapter()
-   {
+   public Adapter createBundleCandidateAdapter() {
       return null;
    }
 
@@ -215,8 +196,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.context.BundleReference
     * @generated
     */
-   public Adapter createBundleReferenceAdapter()
-   {
+   public Adapter createBundleReferenceAdapter() {
       return null;
    }
 
@@ -232,8 +212,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.context.BundleLocalization
     * @generated
     */
-   public Adapter createBundleLocalizationAdapter()
-   {
+   public Adapter createBundleLocalizationAdapter() {
       return null;
    }
 
@@ -249,8 +228,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.context.LocalizedData
     * @generated
     */
-   public Adapter createLocalizedDataAdapter()
-   {
+   public Adapter createLocalizedDataAdapter() {
       return null;
    }
 
@@ -266,8 +244,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.Extendable
     * @generated
     */
-   public Adapter createExtendableAdapter()
-   {
+   public Adapter createExtendableAdapter() {
       return null;
    }
 
@@ -283,8 +260,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.Annotatable
     * @generated
     */
-   public Adapter createAnnotatableAdapter()
-   {
+   public Adapter createAnnotatableAdapter() {
       return null;
    }
 
@@ -300,8 +276,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.XAnnotatable
     * @generated
     */
-   public Adapter createXAnnotatableAdapter()
-   {
+   public Adapter createXAnnotatableAdapter() {
       return null;
    }
 
@@ -314,8 +289,7 @@ public class ContextModelAdapterFactory extends AdapterFactoryImpl
     * @return the new adapter.
     * @generated
     */
-   public Adapter createEObjectAdapter()
-   {
+   public Adapter createEObjectAdapter() {
       return null;
    }
 

@@ -48,8 +48,7 @@ import org.sourcepit.osgifier.core.util.OptionsUtils;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class PackageImportAppender
-{
+public class PackageImportAppender {
    private final PackageResolver packageResolver;
 
    private final ExecutionEnvironmentService environmentService;
@@ -58,39 +57,32 @@ public class PackageImportAppender
 
    @Inject
    public PackageImportAppender(PackageResolver packageResolver, ExecutionEnvironmentService environmentService,
-      PackageImportFactory packageImportFactory)
-   {
+      PackageImportFactory packageImportFactory) {
       this.packageResolver = packageResolver;
       this.environmentService = environmentService;
       this.packageImportFactory = packageImportFactory;
    }
 
-   private static final class RequireBundleInfo
-   {
+   private static final class RequireBundleInfo {
       AccessRestriction accessRestriction;
 
       boolean optional;
 
-      void updateAccessRestriction(AccessRestriction accessRestriction)
-      {
+      void updateAccessRestriction(AccessRestriction accessRestriction) {
          if (this.accessRestriction == null || this.accessRestriction == AccessRestriction.NONE
-            && accessRestriction == AccessRestriction.DISCOURAGED)
-         {
+            && accessRestriction == AccessRestriction.DISCOURAGED) {
             this.accessRestriction = accessRestriction;
          }
       }
 
-      void updateOptional(boolean optional)
-      {
-         if (!this.optional && optional)
-         {
+      void updateOptional(boolean optional) {
+         if (!this.optional && optional) {
             this.optional = optional;
          }
       }
    }
 
-   public void append(@NotNull BundleCandidate bundle, PropertiesSource options)
-   {
+   public void append(@NotNull BundleCandidate bundle, PropertiesSource options) {
       final Map<BundleCandidate, RequireBundleInfo> bundleToRequireBundleInfo = new HashMap<BundleCandidate, RequireBundleInfo>();
       final Map<String, PackageImport> packageToImport = new HashMap<String, PackageImport>();
       collectRequirements(bundleToRequireBundleInfo, packageToImport, bundle, options);
@@ -98,65 +90,52 @@ public class PackageImportAppender
       final Map<String, BundleRequirement> symbolicNameToBundleRequirement = new HashMap<String, BundleRequirement>(
          bundleToRequireBundleInfo.size());
 
-      for (Entry<BundleCandidate, RequireBundleInfo> entry : bundleToRequireBundleInfo.entrySet())
-      {
+      for (Entry<BundleCandidate, RequireBundleInfo> entry : bundleToRequireBundleInfo.entrySet()) {
          final RequireBundleInfo info = entry.getValue();
          final BundleCandidate requiredBundle = entry.getKey();
          final BundleRequirement bundleRequirement = packageImportFactory.newRequireBundle(bundle, requiredBundle,
             info.optional, info.accessRestriction, options);
-         if (bundleRequirement != null)
-         {
+         if (bundleRequirement != null) {
             symbolicNameToBundleRequirement.put(requiredBundle.getSymbolicName(), bundleRequirement);
          }
       }
 
       collectRequirementsOfEmbeddedBundles(packageToImport, symbolicNameToBundleRequirement, bundle);
 
-      if (!symbolicNameToBundleRequirement.isEmpty())
-      {
+      if (!symbolicNameToBundleRequirement.isEmpty()) {
          final List<String> symbolicNames = new ArrayList<String>(symbolicNameToBundleRequirement.keySet());
          Collections.sort(symbolicNames);
 
          final List<BundleRequirement> requireBundle = bundle.getManifest().getRequireBundle(true);
-         for (String symbolicName : symbolicNames)
-         {
+         for (String symbolicName : symbolicNames) {
             requireBundle.add(symbolicNameToBundleRequirement.get(symbolicName));
          }
       }
 
-      if (!packageToImport.isEmpty())
-      {
+      if (!packageToImport.isEmpty()) {
          final List<String> requiredPackages = new ArrayList<String>(packageToImport.keySet());
          Collections.sort(requiredPackages);
 
          final List<PackageImport> importPackage = bundle.getManifest().getImportPackage(true);
-         for (String packageName : requiredPackages)
-         {
+         for (String packageName : requiredPackages) {
             importPackage.add(packageToImport.get(packageName));
          }
 
          // erase ee and vendor package versions
-         if (importPackage != null)
-         {
+         if (importPackage != null) {
             final Set<String> eePackages = new HashSet<String>();
 
-            for (ExecutionEnvironment executionEnvironment : environmentService.getExecutionEnvironments())
-            {
+            for (ExecutionEnvironment executionEnvironment : environmentService.getExecutionEnvironments()) {
                eePackages.addAll(executionEnvironment.getPackages());
             }
 
-            for (ExecutionEnvironmentImplementation vendors : environmentService
-               .getExecutionEnvironmentImplementations())
-            {
+            for (ExecutionEnvironmentImplementation vendors : environmentService.getExecutionEnvironmentImplementations()) {
                eePackages.addAll(vendors.getVendorPackages());
             }
 
-            for (PackageImport packageImport : importPackage)
-            {
-               for (String packageName : packageImport.getPackageNames())
-               {
-                  if (eePackages.contains(packageName))
-                  {
+            for (PackageImport packageImport : importPackage) {
+               for (String packageName : packageImport.getPackageNames()) {
+                  if (eePackages.contains(packageName)) {
                      packageImport.setVersion(null);
                      break;
                   }
@@ -167,21 +146,15 @@ public class PackageImportAppender
    }
 
    private void collectRequirementsOfEmbeddedBundles(final Map<String, PackageImport> packageToImport,
-      final Map<String, BundleRequirement> bundleToRequirement, BundleCandidate bundle)
-   {
-      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle))
-      {
+      final Map<String, BundleRequirement> bundleToRequirement, BundleCandidate bundle) {
+      for (BundleCandidate embeddedBundle : BundleUtils.getEmbeddedBundles(bundle)) {
          final BundleManifest manifest = embeddedBundle.getManifest();
 
          final List<BundleRequirement> requireBundle = manifest.getRequireBundle();
-         if (requireBundle != null)
-         {
-            for (BundleRequirement bundleRequirement : requireBundle)
-            {
-               for (String symbolicName : bundleRequirement.getSymbolicNames())
-               {
-                  if (!bundleToRequirement.containsKey(symbolicName))
-                  {
+         if (requireBundle != null) {
+            for (BundleRequirement bundleRequirement : requireBundle) {
+               for (String symbolicName : bundleRequirement.getSymbolicNames()) {
+                  if (!bundleToRequirement.containsKey(symbolicName)) {
                      final BundleRequirement copy = EcoreUtil.copy(bundleRequirement);
                      copy.getSymbolicNames().clear();
                      copy.getSymbolicNames().add(symbolicName);
@@ -192,14 +165,10 @@ public class PackageImportAppender
          }
 
          final List<PackageImport> importPackage = manifest.getImportPackage();
-         if (importPackage != null)
-         {
-            for (PackageImport packageImport : importPackage)
-            {
-               for (String packageName : packageImport.getPackageNames())
-               {
-                  if (!packageToImport.containsKey(packageName))
-                  {
+         if (importPackage != null) {
+            for (PackageImport packageImport : importPackage) {
+               for (String packageName : packageImport.getPackageNames()) {
+                  if (!packageToImport.containsKey(packageName)) {
                      final PackageImport copy = EcoreUtil.copy(packageImport);
                      copy.getPackageNames().clear();
                      copy.getPackageNames().add(packageName);
@@ -212,33 +181,27 @@ public class PackageImportAppender
    }
 
    private void collectRequirements(final Map<BundleCandidate, RequireBundleInfo> bundleToRequireBundleInfo,
-      final Map<String, PackageImport> packageToImport, BundleCandidate bundle, PropertiesSource options)
-   {
+      final Map<String, PackageImport> packageToImport, BundleCandidate bundle, PropertiesSource options) {
       final boolean treatInheritedPackagesAsInternal = options.getBoolean("osgifier.treatInheritedPackagesAsInternal",
          false);
       for (PackageResolutionResult result : packageResolver.resolveRequiredPackages(bundle,
-         treatInheritedPackagesAsInternal))
-      {
+         treatInheritedPackagesAsInternal)) {
          final BundleCandidate exportingBundle = getExportingBundle(result);
-         if (exportingBundle != null && bundle != exportingBundle && isRequireBundle(exportingBundle, options))
-         {
+         if (exportingBundle != null && bundle != exportingBundle && isRequireBundle(exportingBundle, options)) {
             processRequireBundle(bundleToRequireBundleInfo, bundle, result.getSelectedExporter().getBundleReference(),
                result.getAccessRestriction(), options);
          }
-         else
-         {
+         else {
             processPackageImport(packageToImport, bundle, result, options);
          }
       }
    }
 
    private void processRequireBundle(Map<BundleCandidate, RequireBundleInfo> requiredBundleToAccessRestriction,
-      BundleCandidate bundle, BundleReference reference, AccessRestriction accessRestriction, PropertiesSource options)
-   {
+      BundleCandidate bundle, BundleReference reference, AccessRestriction accessRestriction, PropertiesSource options) {
       final BundleCandidate requiredBundle = reference.getTarget();
       RequireBundleInfo info = requiredBundleToAccessRestriction.get(requiredBundle);
-      if (info == null)
-      {
+      if (info == null) {
          info = new RequireBundleInfo();
          requiredBundleToAccessRestriction.put(requiredBundle, info);
       }
@@ -247,34 +210,27 @@ public class PackageImportAppender
    }
 
    private void processPackageImport(final Map<String, PackageImport> packageToImport, BundleCandidate bundle,
-      PackageResolutionResult result, PropertiesSource options)
-   {
+      PackageResolutionResult result, PropertiesSource options) {
       final PackageImport packageImport = packageImportFactory.newPackageImport(bundle, result, options);
-      if (packageImport != null)
-      {
+      if (packageImport != null) {
          packageToImport.put(result.getRequiredPackage(), packageImport);
       }
    }
 
-   private static boolean isRequireBundle(BundleCandidate bundle, PropertiesSource options)
-   {
+   private static boolean isRequireBundle(BundleCandidate bundle, PropertiesSource options) {
       final String string = options.get("osgifier.requireBundle");
-      if (isNullOrEmpty(string))
-      {
+      if (isNullOrEmpty(string)) {
          return false;
       }
 
       final String symbolicName = bundle.getManifest().getBundleSymbolicName().getSymbolicName();
 
       final List<String> list = OptionsUtils.parseListValue(string);
-      if (list.contains(symbolicName))
-      {
+      if (list.contains(symbolicName)) {
          return true;
       }
-      for (String pattern : list)
-      {
-         if (PathMatcher.parsePackagePatterns(pattern).isMatch(symbolicName))
-         {
+      for (String pattern : list) {
+         if (PathMatcher.parsePackagePatterns(pattern).isMatch(symbolicName)) {
             return true;
          }
       }
@@ -282,11 +238,9 @@ public class PackageImportAppender
       return false;
    }
 
-   private static BundleCandidate getExportingBundle(PackageResolutionResult result)
-   {
+   private static BundleCandidate getExportingBundle(PackageResolutionResult result) {
       final PackageExportDescription exporter = result.getSelectedExporter();
-      if (exporter == null)
-      {
+      if (exporter == null) {
          return null;
       }
       return exporter.getBundle();

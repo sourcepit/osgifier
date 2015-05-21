@@ -34,16 +34,14 @@ import org.sourcepit.osgifier.core.model.java.Resource;
  *
  * @generated
  */
-public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchive
-{
+public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchive {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     */
-   protected JavaArchiveImpl()
-   {
+   protected JavaArchiveImpl() {
       super();
    }
 
@@ -54,8 +52,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_ARCHIVE;
    }
 
@@ -65,8 +62,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand)
-   {
+   public JavaPackage getPackage(String fullyQualifiedName, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -78,8 +74,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public JavaType getType(String packageName, String typeName, boolean createOnDemand)
-   {
+   public JavaType getType(String packageName, String typeName, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -91,8 +86,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public Resource getResource(String name)
-   {
+   public Resource getResource(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -104,8 +98,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public Directory getDirectory(String name)
-   {
+   public Directory getDirectory(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -117,8 +110,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public Directory getDirectory(String name, boolean createOnDemand)
-   {
+   public Directory getDirectory(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -130,8 +122,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public File getFile(String name)
-   {
+   public File getFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -143,8 +134,7 @@ public class JavaArchiveImpl extends JavaResourceBundleImpl implements JavaArchi
     * 
     * @generated
     */
-   public File getFile(String name, boolean createOnDemand)
-   {
+   public File getFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();

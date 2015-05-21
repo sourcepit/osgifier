@@ -26,23 +26,18 @@ import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 
-public final class BundleUtils
-{
-   private BundleUtils()
-   {
+public final class BundleUtils {
+   private BundleUtils() {
       super();
    }
 
-   public static boolean isInternalPackage(PackageExport packageExport)
-   {
+   public static boolean isInternalPackage(PackageExport packageExport) {
       final Parameter parameter = packageExport.getParameter("x-internal");
       return parameter != null && "true".equals(parameter.getValue());
    }
 
-   public static VersionRange trimQualifiers(VersionRange range)
-   {
-      if (range != null)
-      {
+   public static VersionRange trimQualifiers(VersionRange range) {
+      if (range != null) {
          final Version low = trimQualifier(range.getLowVersion());
          final Version high = trimQualifier(range.getHighVersion());
          return new VersionRange(low, range.isLowInclusive(), high, range.isHighInclusive());
@@ -50,10 +45,8 @@ public final class BundleUtils
       return null;
    }
 
-   private static Version trimQualifier(Version version)
-   {
-      if (version != null && version.getQualifier().length() > 0)
-      {
+   private static Version trimQualifier(Version version) {
+      if (version != null && version.getQualifier().length() > 0) {
          final int minor = version.getMinor();
          final int micro = version.getMicro();
          return new Version(version.getMajor(), minor == 0 && micro == 0 ? -1 : minor, micro == 0 ? -1 : micro);
@@ -61,13 +54,10 @@ public final class BundleUtils
       return version;
    }
 
-   public static List<BundleCandidate> getEmbeddedBundles(BundleCandidate bundle)
-   {
+   public static List<BundleCandidate> getEmbeddedBundles(BundleCandidate bundle) {
       final List<BundleCandidate> embeddedBundles = new ArrayList<BundleCandidate>();
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
-         switch (bundleReference.getEmbedInstruction())
-         {
+      for (BundleReference bundleReference : bundle.getDependencies()) {
+         switch (bundleReference.getEmbedInstruction()) {
             case NOT :
                break;
             case UNPACKED :

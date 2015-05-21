@@ -19,37 +19,25 @@ package org.sourcepit.osgifier.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import java.lang.IllegalArgumentException;
-
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsInstanceOf;
 import org.hamcrest.core.IsNull;
 import org.hamcrest.core.IsSame;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.model.java.JavaClass;
-import org.sourcepit.osgifier.core.model.java.JavaCompilationUnit;
-import org.sourcepit.osgifier.core.model.java.JavaFile;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesType;
-import org.sourcepit.osgifier.core.model.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaResourcesRootTest
-{
+public class JavaResourcesRootTest {
    @Test
-   public void testResourcesTypeDefault()
-   {
+   public void testResourcesTypeDefault() {
       JavaResourcesRoot jResources = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
       assertThat(jResources.getResourcesType(), Is.is(JavaResourcesType.BIN));
    }
 
    @Test
-   public void testResourcesType()
-   {
+   public void testResourcesType() {
       JavaResourcesRoot jResources = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
       jResources.setResourcesType(JavaResourcesType.BIN);
       assertThat(jResources.getJavaFile("Foo", true), IsInstanceOf.instanceOf(JavaClass.class));
@@ -62,25 +50,20 @@ public class JavaResourcesRootTest
    }
 
    @Test
-   public void testGetType()
-   {
+   public void testGetType() {
       JavaResourcesRoot jRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
-      try
-      {
+      try {
          jRoot.getType(null, null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          jRoot.getType("foo", null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(jRoot.getType(null, "Foo", false), IsNull.nullValue());

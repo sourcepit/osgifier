@@ -16,12 +16,10 @@
 
 package org.sourcepit.osgifier.core.model.java;
 
-import org.sourcepit.osgifier.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public interface ResourceVisitor
-{
+public interface ResourceVisitor {
    boolean visit(Resource resource);
 }

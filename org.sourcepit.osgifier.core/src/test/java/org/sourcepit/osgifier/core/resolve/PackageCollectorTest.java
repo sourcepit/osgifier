@@ -27,13 +27,10 @@ import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaPackage;
-import org.sourcepit.osgifier.core.resolve.PackageCollector;
 
-public class PackageCollectorTest
-{
+public class PackageCollectorTest {
    @Test
-   public void testFirstWithTypes()
-   {
+   public void testFirstWithTypes() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -60,8 +57,7 @@ public class PackageCollectorTest
    }
 
    @Test
-   public void testFirstWithTypesOrSubPackages()
-   {
+   public void testFirstWithTypesOrSubPackages() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);
@@ -134,8 +130,7 @@ public class PackageCollectorTest
    }
 
    @Test
-   public void testGetDepthOfFirstPackageWithTypes()
-   {
+   public void testGetDepthOfFirstPackageWithTypes() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate bundleCandidate = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundleCandidate.setContent(jArchive);

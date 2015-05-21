@@ -28,19 +28,16 @@ import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ClassForNameDetectorTest
-{
+public class ClassForNameDetectorTest {
 
    @Test
-   public void testPositive() throws Exception
-   {
+   public void testPositive() throws Exception {
       // fake usage of class for name
       Class.forName("java.lang.Object");
 
@@ -64,8 +61,7 @@ public class ClassForNameDetectorTest
    }
 
    @Test
-   public void testNegative() throws Exception
-   {
+   public void testNegative() throws Exception {
       JavaClass javaClass = parseClass(Object.class);
 
       JavaType jType = JavaModelFactory.eINSTANCE.createJavaType();
@@ -77,30 +73,24 @@ public class ClassForNameDetectorTest
       assertNull(jType.getAnnotationData(ClassForNameDetector.SOURCE, ClassForNameDetector.CLASSLOADER_LOAD_CLASS));
    }
 
-   private InputStream openByteCodeStream(Class<?> clazz)
-   {
+   private InputStream openByteCodeStream(Class<?> clazz) {
       String qualifiedName = clazz.getName();
       String resourceName = qualifiedName.replace('.', '/') + ".class";
       return getClass().getClassLoader().getResourceAsStream(resourceName);
    }
 
-   private JavaClass parseClass(Class<?> clazz)
-   {
+   private JavaClass parseClass(Class<?> clazz) {
       InputStream inputStream = openByteCodeStream(clazz);
-      try
-      {
+      try {
          return new ClassParser(inputStream, clazz.getName()).parse();
       }
-      catch (ClassFormatException e)
-      {
+      catch (ClassFormatException e) {
          throw new IllegalStateException(e);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
-      finally
-      {
+      finally {
          IOUtils.closeQuietly(inputStream);
       }
    }

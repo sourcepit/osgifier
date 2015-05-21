@@ -23,40 +23,31 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
-public final class BundleSelectorUtils
-{
-   private BundleSelectorUtils()
-   {
+public final class BundleSelectorUtils {
+   private BundleSelectorUtils() {
       super();
    }
 
    public static void selectBundles(Collection<BundleCandidate> selectedBundles, final OsgifierContext bundleContext,
-      BundleSelector bundleSelector)
-   {
+      BundleSelector bundleSelector) {
       final Stack<BundleCandidate> path = new Stack<BundleCandidate>();
-      for (BundleCandidate root : bundleSelector.selectRootBundles(bundleContext))
-      {
+      for (BundleCandidate root : bundleSelector.selectRootBundles(bundleContext)) {
          selectBundles(selectedBundles, path, root, bundleSelector);
       }
    }
 
    private static void selectBundles(final Collection<BundleCandidate> selectedBundles, Stack<BundleCandidate> path,
-      BundleCandidate bundle, BundleSelector bundleSelector)
-   {
-      if (!selectedBundles.contains(bundle) && !path.contains(bundle))
-      {
+      BundleCandidate bundle, BundleSelector bundleSelector) {
+      if (!selectedBundles.contains(bundle) && !path.contains(bundle)) {
          path.push(bundle);
-         for (BundleReference reference : bundle.getDependencies())
-         {
-            if (reference.getTarget() != null && bundleSelector.select(path, reference))
-            {
+         for (BundleReference reference : bundle.getDependencies()) {
+            if (reference.getTarget() != null && bundleSelector.select(path, reference)) {
                selectBundles(selectedBundles, path, reference.getTarget(), bundleSelector);
             }
          }
          selectedBundles.add(bundle);
          BundleCandidate sourceBundle = bundle.getSourceBundle();
-         if (sourceBundle != null)
-         {
+         if (sourceBundle != null) {
             selectedBundles.add(sourceBundle);
          }
          path.pop();

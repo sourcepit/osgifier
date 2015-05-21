@@ -58,8 +58,7 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
  * @see org.sourcepit.osgifier.core.model.java.JavaModelPackage
  * @generated
  */
-public class JavaModelSwitch<T>
-{
+public class JavaModelSwitch<T> {
    /**
     * The cached model package
     * <!-- begin-user-doc -->
@@ -76,10 +75,8 @@ public class JavaModelSwitch<T>
     * 
     * @generated
     */
-   public JavaModelSwitch()
-   {
-      if (modelPackage == null)
-      {
+   public JavaModelSwitch() {
+      if (modelPackage == null) {
          modelPackage = JavaModelPackage.eINSTANCE;
       }
    }
@@ -92,8 +89,7 @@ public class JavaModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   public T doSwitch(EObject theEObject)
-   {
+   public T doSwitch(EObject theEObject) {
       return doSwitch(theEObject.eClass(), theEObject);
    }
 
@@ -105,14 +101,11 @@ public class JavaModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   protected T doSwitch(EClass theEClass, EObject theEObject)
-   {
-      if (theEClass.eContainer() == modelPackage)
-      {
+   protected T doSwitch(EClass theEClass, EObject theEObject) {
+      if (theEClass.eContainer() == modelPackage) {
          return doSwitch(theEClass.getClassifierID(), theEObject);
       }
-      else
-      {
+      else {
          List<EClass> eSuperTypes = theEClass.getESuperTypes();
          return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0), theEObject);
       }
@@ -126,20 +119,16 @@ public class JavaModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   protected T doSwitch(int classifierID, EObject theEObject)
-   {
-      switch (classifierID)
-      {
-         case JavaModelPackage.NAMED :
-         {
+   protected T doSwitch(int classifierID, EObject theEObject) {
+      switch (classifierID) {
+         case JavaModelPackage.NAMED : {
             Named named = (Named) theEObject;
             T result = caseNamed(named);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.RESOURCE :
-         {
+         case JavaModelPackage.RESOURCE : {
             Resource resource = (Resource) theEObject;
             T result = caseResource(resource);
             if (result == null)
@@ -154,8 +143,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.DIRECTORY :
-         {
+         case JavaModelPackage.DIRECTORY : {
             Directory directory = (Directory) theEObject;
             T result = caseDirectory(directory);
             if (result == null)
@@ -172,8 +160,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.FILE :
-         {
+         case JavaModelPackage.FILE : {
             File file = (File) theEObject;
             T result = caseFile(file);
             if (result == null)
@@ -190,8 +177,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_ELEMENT :
-         {
+         case JavaModelPackage.JAVA_ELEMENT : {
             JavaElement javaElement = (JavaElement) theEObject;
             T result = caseJavaElement(javaElement);
             if (result == null)
@@ -206,8 +192,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.QUALIFIED_JAVA_ELEMENT :
-         {
+         case JavaModelPackage.QUALIFIED_JAVA_ELEMENT : {
             QualifiedJavaElement qualifiedJavaElement = (QualifiedJavaElement) theEObject;
             T result = caseQualifiedJavaElement(qualifiedJavaElement);
             if (result == null)
@@ -224,8 +209,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_RESOURCE_BUNDLE :
-         {
+         case JavaModelPackage.JAVA_RESOURCE_BUNDLE : {
             JavaResourceBundle javaResourceBundle = (JavaResourceBundle) theEObject;
             T result = caseJavaResourceBundle(javaResourceBundle);
             if (result == null)
@@ -242,8 +226,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PROJECT :
-         {
+         case JavaModelPackage.JAVA_PROJECT : {
             JavaProject javaProject = (JavaProject) theEObject;
             T result = caseJavaProject(javaProject);
             if (result == null)
@@ -262,8 +245,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_ARCHIVE :
-         {
+         case JavaModelPackage.JAVA_ARCHIVE : {
             JavaArchive javaArchive = (JavaArchive) theEObject;
             T result = caseJavaArchive(javaArchive);
             if (result == null)
@@ -282,8 +264,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_RESOURCE_DIRECTORY :
-         {
+         case JavaModelPackage.JAVA_RESOURCE_DIRECTORY : {
             JavaResourceDirectory javaResourceDirectory = (JavaResourceDirectory) theEObject;
             T result = caseJavaResourceDirectory(javaResourceDirectory);
             if (result == null)
@@ -304,8 +285,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_RESOURCES_ROOT :
-         {
+         case JavaModelPackage.JAVA_RESOURCES_ROOT : {
             JavaResourcesRoot javaResourcesRoot = (JavaResourcesRoot) theEObject;
             T result = caseJavaResourcesRoot(javaResourcesRoot);
             if (result == null)
@@ -328,8 +308,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_PACKAGE :
-         {
+         case JavaModelPackage.JAVA_PACKAGE : {
             JavaPackage javaPackage = (JavaPackage) theEObject;
             T result = caseJavaPackage(javaPackage);
             if (result == null)
@@ -356,8 +335,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_FILE :
-         {
+         case JavaModelPackage.JAVA_FILE : {
             JavaFile javaFile = (JavaFile) theEObject;
             T result = caseJavaFile(javaFile);
             if (result == null)
@@ -380,8 +358,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_CLASS :
-         {
+         case JavaModelPackage.JAVA_CLASS : {
             JavaClass javaClass = (JavaClass) theEObject;
             T result = caseJavaClass(javaClass);
             if (result == null)
@@ -406,8 +383,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_COMPILATION_UNIT :
-         {
+         case JavaModelPackage.JAVA_COMPILATION_UNIT : {
             JavaCompilationUnit javaCompilationUnit = (JavaCompilationUnit) theEObject;
             T result = caseJavaCompilationUnit(javaCompilationUnit);
             if (result == null)
@@ -432,8 +408,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.IMPORT_DECLARATION :
-         {
+         case JavaModelPackage.IMPORT_DECLARATION : {
             ImportDeclaration importDeclaration = (ImportDeclaration) theEObject;
             T result = caseImportDeclaration(importDeclaration);
             if (result == null)
@@ -450,8 +425,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_TYPE :
-         {
+         case JavaModelPackage.JAVA_TYPE : {
             JavaType javaType = (JavaType) theEObject;
             T result = caseJavaType(javaType);
             if (result == null)
@@ -470,8 +444,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.JAVA_RESOURCE :
-         {
+         case JavaModelPackage.JAVA_RESOURCE : {
             JavaResource javaResource = (JavaResource) theEObject;
             T result = caseJavaResource(javaResource);
             if (result == null)
@@ -490,8 +463,7 @@ public class JavaModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case JavaModelPackage.RESOURCE_VISITOR :
-         {
+         case JavaModelPackage.RESOURCE_VISITOR : {
             ResourceVisitor resourceVisitor = (ResourceVisitor) theEObject;
             T result = caseResourceVisitor(resourceVisitor);
             if (result == null)
@@ -515,8 +487,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseNamed(Named object)
-   {
+   public T caseNamed(Named object) {
       return null;
    }
 
@@ -532,8 +503,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseResource(Resource object)
-   {
+   public T caseResource(Resource object) {
       return null;
    }
 
@@ -549,8 +519,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseDirectory(Directory object)
-   {
+   public T caseDirectory(Directory object) {
       return null;
    }
 
@@ -566,8 +535,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseFile(File object)
-   {
+   public T caseFile(File object) {
       return null;
    }
 
@@ -583,8 +551,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaElement(JavaElement object)
-   {
+   public T caseJavaElement(JavaElement object) {
       return null;
    }
 
@@ -600,8 +567,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseQualifiedJavaElement(QualifiedJavaElement object)
-   {
+   public T caseQualifiedJavaElement(QualifiedJavaElement object) {
       return null;
    }
 
@@ -617,8 +583,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaResourceBundle(JavaResourceBundle object)
-   {
+   public T caseJavaResourceBundle(JavaResourceBundle object) {
       return null;
    }
 
@@ -634,8 +599,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaProject(JavaProject object)
-   {
+   public T caseJavaProject(JavaProject object) {
       return null;
    }
 
@@ -651,8 +615,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaArchive(JavaArchive object)
-   {
+   public T caseJavaArchive(JavaArchive object) {
       return null;
    }
 
@@ -668,8 +631,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaResourceDirectory(JavaResourceDirectory object)
-   {
+   public T caseJavaResourceDirectory(JavaResourceDirectory object) {
       return null;
    }
 
@@ -685,8 +647,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaResourcesRoot(JavaResourcesRoot object)
-   {
+   public T caseJavaResourcesRoot(JavaResourcesRoot object) {
       return null;
    }
 
@@ -702,8 +663,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaPackage(JavaPackage object)
-   {
+   public T caseJavaPackage(JavaPackage object) {
       return null;
    }
 
@@ -719,8 +679,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaFile(JavaFile object)
-   {
+   public T caseJavaFile(JavaFile object) {
       return null;
    }
 
@@ -736,8 +695,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaClass(JavaClass object)
-   {
+   public T caseJavaClass(JavaClass object) {
       return null;
    }
 
@@ -753,8 +711,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaCompilationUnit(JavaCompilationUnit object)
-   {
+   public T caseJavaCompilationUnit(JavaCompilationUnit object) {
       return null;
    }
 
@@ -770,8 +727,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseImportDeclaration(ImportDeclaration object)
-   {
+   public T caseImportDeclaration(ImportDeclaration object) {
       return null;
    }
 
@@ -787,8 +743,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaType(JavaType object)
-   {
+   public T caseJavaType(JavaType object) {
       return null;
    }
 
@@ -804,8 +759,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseJavaResource(JavaResource object)
-   {
+   public T caseJavaResource(JavaResource object) {
       return null;
    }
 
@@ -821,8 +775,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseResourceVisitor(ResourceVisitor object)
-   {
+   public T caseResourceVisitor(ResourceVisitor object) {
       return null;
    }
 
@@ -838,8 +791,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseExtendable(Extendable object)
-   {
+   public T caseExtendable(Extendable object) {
       return null;
    }
 
@@ -855,8 +807,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseAnnotatable(Annotatable object)
-   {
+   public T caseAnnotatable(Annotatable object) {
       return null;
    }
 
@@ -872,8 +823,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseXAnnotatable(XAnnotatable object)
-   {
+   public T caseXAnnotatable(XAnnotatable object) {
       return null;
    }
 
@@ -889,8 +839,7 @@ public class JavaModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject)
     * @generated
     */
-   public T defaultCase(EObject object)
-   {
+   public T defaultCase(EObject object) {
       return null;
    }
 

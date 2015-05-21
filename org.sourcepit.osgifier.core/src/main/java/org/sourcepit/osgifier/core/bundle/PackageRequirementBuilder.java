@@ -18,36 +18,30 @@ package org.sourcepit.osgifier.core.bundle;
 
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
-public class PackageRequirementBuilder
-{
+public class PackageRequirementBuilder {
    private BundleCandidate demandingBundle;
 
    private String requiredPackage;
 
    private boolean demandedByInternalPackages, demandedByPublicPackages;
 
-   public void setDemandingBundle(BundleCandidate demandingBundle)
-   {
+   public void setDemandingBundle(BundleCandidate demandingBundle) {
       this.demandingBundle = demandingBundle;
    }
 
-   public void setRequiredPackage(String requiredPackage)
-   {
+   public void setRequiredPackage(String requiredPackage) {
       this.requiredPackage = requiredPackage;
    }
 
-   public void setDemandedByInternalPackages(boolean demandedByInternalPackages)
-   {
+   public void setDemandedByInternalPackages(boolean demandedByInternalPackages) {
       this.demandedByInternalPackages = demandedByInternalPackages;
    }
 
-   public void setDemandedByPublicPackages(boolean demandedByPublicPackages)
-   {
+   public void setDemandedByPublicPackages(boolean demandedByPublicPackages) {
       this.demandedByPublicPackages = demandedByPublicPackages;
    }
 
-   public PackageRequirement toPackageRequirement()
-   {
+   public PackageRequirement toPackageRequirement() {
       return new PackageRequirement(demandingBundle, requiredPackage, demandedByPublicPackages,
          demandedByInternalPackages);
    }

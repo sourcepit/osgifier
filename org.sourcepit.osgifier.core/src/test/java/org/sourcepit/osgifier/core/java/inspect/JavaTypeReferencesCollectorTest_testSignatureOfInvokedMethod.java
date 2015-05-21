@@ -15,10 +15,8 @@
  */
 
 package org.sourcepit.osgifier.core.java.inspect;
-public class JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod
-{
-   void invokeSth(JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy o)
-   {
+public class JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod {
+   void invokeSth(JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy o) {
       o.invoke(null);
    }
 }

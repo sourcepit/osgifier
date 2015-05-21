@@ -31,20 +31,15 @@ import org.sourcepit.common.utils.path.Path;
 import org.sourcepit.osgifier.core.inspect.ResourceVisitor;
 import org.sourcepit.osgifier.test.resources.TypeA;
 
-public abstract class AbstractTraverserTest
-{
+public abstract class AbstractTraverserTest {
    public static final String TEST_RESOURCES_PACKAGE_PATH = TypeA.class.getPackage().getName().replace('.', '/');
 
    @Test
-   public void testTravers()
-   {
+   public void testTravers() {
       final Map<String, Boolean> pathToIsDir = Collections.synchronizedMap(new HashMap<String, Boolean>());
-      ResourceVisitor visitor = new ResourceVisitor()
-      {
-         public void visit(Path path, boolean isDirectory, InputStream content)
-         {
-            if (isDirectory)
-            {
+      ResourceVisitor visitor = new ResourceVisitor() {
+         public void visit(Path path, boolean isDirectory, InputStream content) {
+            if (isDirectory) {
                assertThat(content, IsNull.nullValue());
             }
             pathToIsDir.put(path.toString(), Boolean.valueOf(isDirectory));
@@ -61,15 +56,11 @@ public abstract class AbstractTraverserTest
    protected abstract void travers(ResourceVisitor visitor);
 
    @Test
-   public void testSkipChildren()
-   {
+   public void testSkipChildren() {
       final Map<String, Boolean> pathToIsDir = new HashMap<String, Boolean>();
-      ResourceVisitor visitor = new ResourceVisitor()
-      {
-         public void visit(Path path, boolean isDirectory, InputStream content)
-         {
-            if (isDirectory && path.getSegments().size() == 1)
-            {
+      ResourceVisitor visitor = new ResourceVisitor() {
+         public void visit(Path path, boolean isDirectory, InputStream content) {
+            if (isDirectory && path.getSegments().size() == 1) {
                assertThat(content, IsNull.nullValue());
                pathToIsDir.put(path.toString(), Boolean.valueOf(isDirectory));
             }

@@ -44,8 +44,7 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
  * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage
  * @generated
  */
-public class ContextModelSwitch<T>
-{
+public class ContextModelSwitch<T> {
    /**
     * The cached model package
     * <!-- begin-user-doc -->
@@ -62,10 +61,8 @@ public class ContextModelSwitch<T>
     * 
     * @generated
     */
-   public ContextModelSwitch()
-   {
-      if (modelPackage == null)
-      {
+   public ContextModelSwitch() {
+      if (modelPackage == null) {
          modelPackage = ContextModelPackage.eINSTANCE;
       }
    }
@@ -78,8 +75,7 @@ public class ContextModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   public T doSwitch(EObject theEObject)
-   {
+   public T doSwitch(EObject theEObject) {
       return doSwitch(theEObject.eClass(), theEObject);
    }
 
@@ -91,14 +87,11 @@ public class ContextModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   protected T doSwitch(EClass theEClass, EObject theEObject)
-   {
-      if (theEClass.eContainer() == modelPackage)
-      {
+   protected T doSwitch(EClass theEClass, EObject theEObject) {
+      if (theEClass.eContainer() == modelPackage) {
          return doSwitch(theEClass.getClassifierID(), theEObject);
       }
-      else
-      {
+      else {
          List<EClass> eSuperTypes = theEClass.getESuperTypes();
          return eSuperTypes.isEmpty() ? defaultCase(theEObject) : doSwitch(eSuperTypes.get(0), theEObject);
       }
@@ -112,12 +105,9 @@ public class ContextModelSwitch<T>
     * @return the first non-null result returned by a <code>caseXXX</code> call.
     * @generated
     */
-   protected T doSwitch(int classifierID, EObject theEObject)
-   {
-      switch (classifierID)
-      {
-         case ContextModelPackage.OSGIFIER_CONTEXT :
-         {
+   protected T doSwitch(int classifierID, EObject theEObject) {
+      switch (classifierID) {
+         case ContextModelPackage.OSGIFIER_CONTEXT : {
             OsgifierContext osgifierContext = (OsgifierContext) theEObject;
             T result = caseOsgifierContext(osgifierContext);
             if (result == null)
@@ -130,8 +120,7 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_CANDIDATE :
-         {
+         case ContextModelPackage.BUNDLE_CANDIDATE : {
             BundleCandidate bundleCandidate = (BundleCandidate) theEObject;
             T result = caseBundleCandidate(bundleCandidate);
             if (result == null)
@@ -144,8 +133,7 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_REFERENCE :
-         {
+         case ContextModelPackage.BUNDLE_REFERENCE : {
             BundleReference bundleReference = (BundleReference) theEObject;
             T result = caseBundleReference(bundleReference);
             if (result == null)
@@ -158,16 +146,14 @@ public class ContextModelSwitch<T>
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.BUNDLE_LOCALIZATION :
-         {
+         case ContextModelPackage.BUNDLE_LOCALIZATION : {
             BundleLocalization bundleLocalization = (BundleLocalization) theEObject;
             T result = caseBundleLocalization(bundleLocalization);
             if (result == null)
                result = defaultCase(theEObject);
             return result;
          }
-         case ContextModelPackage.LOCALIZED_DATA :
-         {
+         case ContextModelPackage.LOCALIZED_DATA : {
             LocalizedData localizedData = (LocalizedData) theEObject;
             T result = caseLocalizedData(localizedData);
             if (result == null)
@@ -191,8 +177,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseOsgifierContext(OsgifierContext object)
-   {
+   public T caseOsgifierContext(OsgifierContext object) {
       return null;
    }
 
@@ -208,8 +193,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleCandidate(BundleCandidate object)
-   {
+   public T caseBundleCandidate(BundleCandidate object) {
       return null;
    }
 
@@ -225,8 +209,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleReference(BundleReference object)
-   {
+   public T caseBundleReference(BundleReference object) {
       return null;
    }
 
@@ -242,8 +225,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseBundleLocalization(BundleLocalization object)
-   {
+   public T caseBundleLocalization(BundleLocalization object) {
       return null;
    }
 
@@ -259,8 +241,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseLocalizedData(LocalizedData object)
-   {
+   public T caseLocalizedData(LocalizedData object) {
       return null;
    }
 
@@ -276,8 +257,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseExtendable(Extendable object)
-   {
+   public T caseExtendable(Extendable object) {
       return null;
    }
 
@@ -293,8 +273,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseAnnotatable(Annotatable object)
-   {
+   public T caseAnnotatable(Annotatable object) {
       return null;
    }
 
@@ -310,8 +289,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
     * @generated
     */
-   public T caseXAnnotatable(XAnnotatable object)
-   {
+   public T caseXAnnotatable(XAnnotatable object) {
       return null;
    }
 
@@ -327,8 +305,7 @@ public class ContextModelSwitch<T>
     * @see #doSwitch(org.eclipse.emf.ecore.EObject)
     * @generated
     */
-   public T defaultCase(EObject object)
-   {
+   public T defaultCase(EObject object) {
       return null;
    }
 

@@ -19,19 +19,16 @@ package org.sourcepit.osgifier.core.headermod;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeaderModifications
-{
+public class HeaderModifications {
    private final List<SetHeaderModification> headers = new ArrayList<SetHeaderModification>(2);
 
    private final List<String> removals = new ArrayList<String>(2);
 
-   public List<SetHeaderModification> getHeaders()
-   {
+   public List<SetHeaderModification> getHeaders() {
       return headers;
    }
 
-   public List<String> getRemovals()
-   {
+   public List<String> getRemovals() {
       return removals;
    }
 

@@ -29,16 +29,14 @@ import org.sourcepit.osgifier.core.model.java.JavaProject;
  *
  * @generated
  */
-public class JavaProjectImpl extends JavaResourceBundleImpl implements JavaProject
-{
+public class JavaProjectImpl extends JavaResourceBundleImpl implements JavaProject {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     */
-   protected JavaProjectImpl()
-   {
+   protected JavaProjectImpl() {
       super();
    }
 
@@ -49,8 +47,7 @@ public class JavaProjectImpl extends JavaResourceBundleImpl implements JavaProje
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_PROJECT;
    }
 

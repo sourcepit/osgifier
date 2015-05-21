@@ -22,19 +22,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.lang.IllegalArgumentException;
 
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.java.util.JavaLangUtils;
 
-public class JavaLangUtilsTest
-{
+public class JavaLangUtilsTest {
 
    @Test
-   public void testIsFullyQiallifiedPackageName()
-   {
+   public void testIsFullyQiallifiedPackageName() {
       assertTrue(JavaLangUtils.isFullyQuallifiedPackageName("", "."));
       assertTrue(JavaLangUtils.isFullyQuallifiedPackageName("com.bosch", "."));
       assertTrue(JavaLangUtils.isFullyQuallifiedPackageName("com.bosch", "."));
@@ -55,15 +51,12 @@ public class JavaLangUtilsTest
    }
 
    @Test
-   public void testExtractTypesFromSignature()
-   {
-      try
-      {
+   public void testExtractTypesFromSignature() {
+      try {
          JavaLangUtils.extractTypeNamesFromSignature(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       List<String> types = JavaLangUtils.extractTypeNamesFromSignature("Z");
@@ -92,21 +85,18 @@ public class JavaLangUtilsTest
       assertThat(types.get(1), IsEqual.equalTo("java.lang.Short"));
       assertThat(types.get(2), IsEqual.equalTo("org.sourcepit.Lulu"));
 
-      types = JavaLangUtils
-         .extractTypeNamesFromSignature("(Lorg/hamcrest/Matcher<+TE;>;)Lorg/junit/internal/matchers/CombinableMatcher<TE;>;");
+      types = JavaLangUtils.extractTypeNamesFromSignature("(Lorg/hamcrest/Matcher<+TE;>;)Lorg/junit/internal/matchers/CombinableMatcher<TE;>;");
       assertThat(types.size(), Is.is(2));
       assertThat(types.get(0), IsEqual.equalTo("org.hamcrest.Matcher"));
       assertThat(types.get(1), IsEqual.equalTo("org.junit.internal.matchers.CombinableMatcher"));
 
-      types = JavaLangUtils
-         .extractTypeNamesFromSignature("<E:Ljava/lang/Object;>(Lorg/hamcrest/Matcher<+TE;>;)Lorg/junit/internal/matchers/CombinableMatcher<TE;>;");
+      types = JavaLangUtils.extractTypeNamesFromSignature("<E:Ljava/lang/Object;>(Lorg/hamcrest/Matcher<+TE;>;)Lorg/junit/internal/matchers/CombinableMatcher<TE;>;");
       assertThat(types.size(), Is.is(3));
       assertThat(types.get(0), IsEqual.equalTo("java.lang.Object"));
       assertThat(types.get(1), IsEqual.equalTo("org.hamcrest.Matcher"));
       assertThat(types.get(2), IsEqual.equalTo("org.junit.internal.matchers.CombinableMatcher"));
 
-      types = JavaLangUtils
-         .extractTypeNamesFromSignature("<LHS:Ljava/lang/Object;>(Lorg/hamcrest/Matcher<-TLHS;>;)Lorg/hamcrest/core/CombinableMatcher<TLHS;>;");
+      types = JavaLangUtils.extractTypeNamesFromSignature("<LHS:Ljava/lang/Object;>(Lorg/hamcrest/Matcher<-TLHS;>;)Lorg/hamcrest/core/CombinableMatcher<TLHS;>;");
       assertThat(types.size(), Is.is(3));
       assertThat(types.get(0), IsEqual.equalTo("java.lang.Object"));
       assertThat(types.get(1), IsEqual.equalTo("org.hamcrest.Matcher"));

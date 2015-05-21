@@ -25,8 +25,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public interface JavaResourceHandler
-{
+public interface JavaResourceHandler {
    boolean handle(JavaResourcesRoot jResources, JavaResourceType type, ReadWriteLock modelLock, Path path,
       InputStream content);
 }

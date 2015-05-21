@@ -34,13 +34,10 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.maven.impl.MavenVersionResolutionStrategy;
 
-public class MavenVersionResolutionStrategyTest
-{
+public class MavenVersionResolutionStrategyTest {
    @Test
-   public void testDefault()
-   {
+   public void testDefault() {
       Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
       mavenToOsgiVersion.put(null, null);
       mavenToOsgiVersion.put("1", "1.0.0");
@@ -55,8 +52,7 @@ public class MavenVersionResolutionStrategyTest
    }
 
    @Test
-   public void testForceContextQualifier()
-   {
+   public void testForceContextQualifier() {
       Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
       mavenToOsgiVersion.put(null, null);
       mavenToOsgiVersion.put("1", "1.0.0.foo");
@@ -72,8 +68,7 @@ public class MavenVersionResolutionStrategyTest
    }
 
    @Test
-   public void testForceContextQualifierTrimMavenQualifier()
-   {
+   public void testForceContextQualifierTrimMavenQualifier() {
       Map<String, String> mavenToOsgiVersion = new LinkedHashMap<String, String>();
       mavenToOsgiVersion.put(null, null);
       mavenToOsgiVersion.put("1", "1.0.0.foo");
@@ -89,8 +84,7 @@ public class MavenVersionResolutionStrategyTest
       assertEquals(mavenToOsgiVersion, options);
    }
 
-   private void assertEquals(Map<String, String> mavenToOsgiVersion, PropertiesSource options)
-   {
+   private void assertEquals(Map<String, String> mavenToOsgiVersion, PropertiesSource options) {
       MavenArtifact mavenArtifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -98,8 +92,7 @@ public class MavenVersionResolutionStrategyTest
       bundleCandidate.setContent(jArchive);
       bundleCandidate.addExtension(mavenArtifact);
 
-      for (Entry<String, String> entry : mavenToOsgiVersion.entrySet())
-      {
+      for (Entry<String, String> entry : mavenToOsgiVersion.entrySet()) {
          mavenArtifact.setVersion(entry.getKey());
          Version version = new MavenVersionResolutionStrategy().resolveVersion(bundleCandidate, options);
          assertThat(version == null ? null : version.toString(), IsEqual.equalTo(entry.getValue()));

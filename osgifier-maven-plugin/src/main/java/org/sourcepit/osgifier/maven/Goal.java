@@ -15,7 +15,6 @@
  */
 
 package org.sourcepit.osgifier.maven;
-public enum Goal
-{
+public enum Goal {
    OSGIFY, OSGIFY_TESTS
 }

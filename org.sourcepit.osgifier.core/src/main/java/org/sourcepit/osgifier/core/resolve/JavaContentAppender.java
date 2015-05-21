@@ -34,20 +34,16 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
-public class JavaContentAppender
-{
+public class JavaContentAppender {
    @Inject
    private BundleCandidateScanner bundleCandidateScanner;
 
    public OsgifierContext appendContents(OsgifierContext context, JavaContentAppenderFilter filter,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final List<BundleScannerTask> bundleScannerTasks = new ArrayList<BundleScannerTask>();
 
-      for (BundleCandidate candidate : context.getBundles())
-      {
-         if (candidate.getLocation() != null && filter.isAppendContent(candidate, options))
-         {
+      for (BundleCandidate candidate : context.getBundles()) {
+         if (candidate.getLocation() != null && filter.isAppendContent(candidate, options)) {
             bundleScannerTasks.add(new BundleScannerTask(candidate, candidate.getLocation()));
          }
       }
@@ -57,13 +53,11 @@ public class JavaContentAppender
       return context;
    }
 
-   private void executeBundleScannerTasks(List<BundleScannerTask> bundleScannerTasks)
-   {
+   private void executeBundleScannerTasks(List<BundleScannerTask> bundleScannerTasks) {
       Collections.sort(bundleScannerTasks);
 
       ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
-      for (BundleScannerTask scan : bundleScannerTasks)
-      {
+      for (BundleScannerTask scan : bundleScannerTasks) {
          executor.execute(scan);
       }
 
@@ -72,62 +66,51 @@ public class JavaContentAppender
       BlockingQueue<Runnable> queue = executor.getQueue();
 
       Runnable poll = queue.poll();
-      while (poll != null)
-      {
+      while (poll != null) {
          poll.run();
          poll = queue.poll();
       }
 
-      try
-      {
+      try {
          executor.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
       }
-      catch (InterruptedException e)
-      {
+      catch (InterruptedException e) {
       }
    }
 
 
-   class BundleScannerTask implements Runnable, Comparable<BundleScannerTask>
-   {
+   class BundleScannerTask implements Runnable, Comparable<BundleScannerTask> {
       private final BundleCandidate bundleCandidate;
       private final File jarFileOrProjectDir;
       private final String[] binDirPaths;
 
       public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File projectDir,
-         String... binDirPaths)
-      {
+         String... binDirPaths) {
          this.bundleCandidate = bundleCandidate;
          this.jarFileOrProjectDir = projectDir;
          this.binDirPaths = binDirPaths == null ? new String[0] : binDirPaths;
       }
 
-      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File jarFile)
-      {
+      public BundleScannerTask(@NotNull BundleCandidate bundleCandidate, @NotNull File jarFile) {
          this.bundleCandidate = bundleCandidate;
          this.jarFileOrProjectDir = jarFile;
          this.binDirPaths = new String[0];
       }
 
-      public void run()
-      {
-         if (jarFileOrProjectDir.isDirectory())
-         {
+      public void run() {
+         if (jarFileOrProjectDir.isDirectory()) {
             // TODO try to re-load already build contexts from reactor projects
             bundleCandidateScanner.scanProject(bundleCandidate, jarFileOrProjectDir, binDirPaths);
          }
-         else
-         {
+         else {
             bundleCandidateScanner.scanJar(bundleCandidate, jarFileOrProjectDir);
          }
       }
 
-      public int compareTo(BundleScannerTask other)
-      {
+      public int compareTo(BundleScannerTask other) {
          final File f1 = bundleCandidate.getLocation();
          final File f2 = other.bundleCandidate.getLocation();
-         if (f1.isDirectory())
-         {
+         if (f1.isDirectory()) {
             return f2.isDirectory() ? 0 : -1;
          }
          return (int) -(f1.length() - f2.length());

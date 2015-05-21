@@ -38,8 +38,7 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
  *
  * @generated
  */
-public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
-{
+public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile {
    /**
     * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
     * <!-- begin-user-doc -->
@@ -57,8 +56,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * 
     * @generated
     */
-   protected JavaFileImpl()
-   {
+   protected JavaFileImpl() {
       super();
    }
 
@@ -69,8 +67,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_FILE;
    }
 
@@ -80,8 +77,7 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * 
     * @generated
     */
-   public JavaType getType()
-   {
+   public JavaType getType() {
       return type;
    }
 
@@ -91,12 +87,10 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * 
     * @generated
     */
-   public NotificationChain basicSetType(JavaType newType, NotificationChain msgs)
-   {
+   public NotificationChain basicSetType(JavaType newType, NotificationChain msgs) {
       JavaType oldType = type;
       type = newType;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             JavaModelPackage.JAVA_FILE__TYPE, oldType, newType);
          if (msgs == null)
@@ -113,10 +107,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * 
     * @generated
     */
-   public void setType(JavaType newType)
-   {
-      if (newType != type)
-      {
+   public void setType(JavaType newType) {
+      if (newType != type) {
          NotificationChain msgs = null;
          if (type != null)
             msgs = ((InternalEObject) type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -139,10 +131,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_FILE__TYPE :
             return basicSetType(null, msgs);
       }
@@ -156,10 +146,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_FILE__TYPE :
             return getType();
       }
@@ -173,10 +161,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_FILE__TYPE :
             setType((JavaType) newValue);
             return;
@@ -191,10 +177,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_FILE__TYPE :
             setType((JavaType) null);
             return;
@@ -209,10 +193,8 @@ public abstract class JavaFileImpl extends JavaResourceImpl implements JavaFile
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_FILE__TYPE :
             return type != null;
       }

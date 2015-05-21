@@ -27,6 +27,5 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface JavaProject extends JavaResourceBundle
-{
+public interface JavaProject extends JavaResourceBundle {
 } // JavaProject

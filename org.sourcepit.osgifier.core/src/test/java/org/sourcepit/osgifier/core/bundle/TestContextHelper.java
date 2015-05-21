@@ -33,70 +33,57 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class TestContextHelper
-{
-   private TestContextHelper()
-   {
+public final class TestContextHelper {
+   private TestContextHelper() {
       super();
    }
 
-   public static void appendTypeReference(JavaType jType, String qualifiedName)
-   {
+   public static void appendTypeReference(JavaType jType, String qualifiedName) {
       jType.getAnnotation("referencedTypes", true).getReferences().put(qualifiedName, null);
    }
 
-   public static BundleCandidate newBundleCandidate(JavaArchive jArchive)
-   {
+   public static BundleCandidate newBundleCandidate(JavaArchive jArchive) {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
       bundle.setContent(jArchive);
       return bundle;
    }
 
-   public static BundleCandidate newBundleCandidate(String bundleVersion, JavaArchive jArchive)
-   {
+   public static BundleCandidate newBundleCandidate(String bundleVersion, JavaArchive jArchive) {
       return newBundleCandidate(bundleVersion, null, jArchive);
    }
 
    public static BundleCandidate newBundleCandidate(String bundleVersion, String executionEnvironment,
-      JavaArchive jArchive)
-   {
+      JavaArchive jArchive) {
       final BundleCandidate bundle = newBundleCandidate(jArchive);
       bundle.getManifest().setBundleVersion(bundleVersion);
       bundle.setVersion(bundle.getManifest().getBundleVersion());
-      if (executionEnvironment != null)
-      {
+      if (executionEnvironment != null) {
          bundle.getManifest().setBundleRequiredExecutionEnvironment(executionEnvironment);
       }
       return bundle;
    }
 
    public static JavaType appendTypeWithReferences(JavaArchive jArchive, String qualifiedName, int major,
-      String... typeReferences)
-   {
+      String... typeReferences) {
       JavaType jType = appendType(jArchive, qualifiedName, major);
-      if (typeReferences != null)
-      {
-         for (String typeReference : typeReferences)
-         {
+      if (typeReferences != null) {
+         for (String typeReference : typeReferences) {
             appendTypeReference(jType, typeReference);
          }
       }
       return jType;
    }
 
-   public static JavaType appendType(JavaArchive jArchive, String qualifiedName, int major)
-   {
+   public static JavaType appendType(JavaArchive jArchive, String qualifiedName, int major) {
       final String packageName;
       final String typeName;
       int idx = qualifiedName.lastIndexOf('.');
-      if (idx > -1)
-      {
+      if (idx > -1) {
          packageName = qualifiedName.substring(0, idx);
          typeName = qualifiedName.substring(idx + 1);
       }
-      else
-      {
+      else {
          packageName = null;
          typeName = qualifiedName;
       }
@@ -107,33 +94,27 @@ public final class TestContextHelper
       return jType;
    }
 
-   public static PackageExport appendPackageExport(BundleManifest manifest, PackageExport packageExport)
-   {
+   public static PackageExport appendPackageExport(BundleManifest manifest, PackageExport packageExport) {
       manifest.getExportPackage(true).add(packageExport);
       return packageExport;
    }
 
-   public static PackageExport appendPackageExport(BundleCandidate bundleCandidate, PackageExport packageExport)
-   {
+   public static PackageExport appendPackageExport(BundleCandidate bundleCandidate, PackageExport packageExport) {
       BundleManifest manifest = bundleCandidate.getManifest();
-      if (manifest == null)
-      {
+      if (manifest == null) {
          manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
          bundleCandidate.setManifest(manifest);
       }
       return appendPackageExport(manifest, packageExport);
    }
 
-   public static PackageExport addPackageExport(BundleCandidate requiredBundle, String packageName, String version)
-   {
+   public static PackageExport addPackageExport(BundleCandidate requiredBundle, String packageName, String version) {
       return appendPackageExport(requiredBundle, newPackageExport(packageName, version));
    }
 
-   public static PackageExport appendPackageExport(BundleReference bundleReference, PackageExport packageExport)
-   {
+   public static PackageExport appendPackageExport(BundleReference bundleReference, PackageExport packageExport) {
       BundleCandidate bundleCandidate = bundleReference.getTarget();
-      if (bundleCandidate == null)
-      {
+      if (bundleCandidate == null) {
          Version pkgVersion = packageExport.getVersion();
          bundleCandidate = newBundleCandidate(pkgVersion == null ? "1" : pkgVersion.toString(), null, null);
          bundleReference.setTarget(bundleCandidate);
@@ -141,22 +122,18 @@ public final class TestContextHelper
       return appendPackageExport(bundleCandidate, packageExport);
    }
 
-   public static PackageExport newPackageExport(String packageName, String version)
-   {
+   public static PackageExport newPackageExport(String packageName, String version) {
       PackageExport packageExport = BundleManifestFactory.eINSTANCE.createPackageExport();
       packageExport.getPackageNames().add(packageName);
-      if (version != null)
-      {
+      if (version != null) {
          packageExport.setVersion(Version.parse(version));
       }
       return packageExport;
    }
 
-   public static void setInternal(PackageExport packageExport)
-   {
+   public static void setInternal(PackageExport packageExport) {
       Parameter parameter = packageExport.getParameter("x-internal");
-      if (parameter != null)
-      {
+      if (parameter != null) {
          packageExport.getParameters().remove(parameter);
       }
 
@@ -168,21 +145,17 @@ public final class TestContextHelper
       packageExport.getParameters().add(parameter);
    }
 
-   public static BundleReference addBundleReference(BundleCandidate from, BundleCandidate to)
-   {
+   public static BundleReference addBundleReference(BundleCandidate from, BundleCandidate to) {
       final BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
       ref.setTarget(to);
       from.getDependencies().add(ref);
       return ref;
    }
 
-   public static JavaArchive newJArchive(String... jTypes)
-   {
+   public static JavaArchive newJArchive(String... jTypes) {
       final JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      if (jTypes != null)
-      {
-         for (String jType : jTypes)
-         {
+      if (jTypes != null) {
+         for (String jType : jTypes) {
             appendType(jArchive, jType, 47);
          }
       }

@@ -39,53 +39,41 @@ import org.sourcepit.osgifier.core.model.java.JavaTypeVisitor;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class DynamicPackageImportAppender
-{
+public class DynamicPackageImportAppender {
    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicPackageImportAppender.class);
 
-   public void append(BundleCandidate bundle)
-   {
+   public void append(BundleCandidate bundle) {
       final BundleManifest manifest = bundle.getManifest();
-      if (!hasDynamicImportPackage(manifest, "*") && usesClassForName(bundle.getContent()))
-      {
-         LOGGER
-            .warn("Detected usage of Class.forName(String). The behaviour of this method differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
+      if (!hasDynamicImportPackage(manifest, "*") && usesClassForName(bundle.getContent())) {
+         LOGGER.warn("Detected usage of Class.forName(String). The behaviour of this method differs between OSGi and pure Java. Setting the 'DynamicImport-Package: *' header to workaround this problem. ");
          manifest.setHeader(DYNAMICIMPORT_PACKAGE, "*");
       }
       mergeDynamicPackageImportFromEmbeddedBundles(bundle);
    }
 
-   private void mergeDynamicPackageImportFromEmbeddedBundles(BundleCandidate bundle)
-   {
+   private void mergeDynamicPackageImportFromEmbeddedBundles(BundleCandidate bundle) {
       final List<BundleCandidate> embeddedBundles = BundleUtils.getEmbeddedBundles(bundle);
-      if (!embeddedBundles.isEmpty())
-      {
+      if (!embeddedBundles.isEmpty()) {
          final BundleManifest manifest = bundle.getManifest();
 
          final List<DynamicPackageImport> dynamicPackageImports = new ArrayList<DynamicPackageImport>();
          List<DynamicPackageImport> tmp = manifest.getDynamicImportPackage();
-         if (tmp != null)
-         {
+         if (tmp != null) {
             dynamicPackageImports.addAll(tmp);
          }
 
          boolean combine = false;
-         for (BundleCandidate embeddedBundle : embeddedBundles)
-         {
+         for (BundleCandidate embeddedBundle : embeddedBundles) {
             tmp = embeddedBundle.getManifest().getDynamicImportPackage();
-            if (tmp != null)
-            {
+            if (tmp != null) {
                dynamicPackageImports.addAll(tmp);
                combine = true;
             }
          }
 
-         if (combine)
-         {
-            final List<DynamicPackageImport> result = PackageDeclarationCombiner
-               .combineDynamicPackageImports(dynamicPackageImports);
-            if (!result.isEmpty())
-            {
+         if (combine) {
+            final List<DynamicPackageImport> result = PackageDeclarationCombiner.combineDynamicPackageImports(dynamicPackageImports);
+            if (!result.isEmpty()) {
                final List<DynamicPackageImport> target = manifest.getDynamicImportPackage(true);
                target.clear();
                target.addAll(result);
@@ -94,30 +82,22 @@ public class DynamicPackageImportAppender
       }
    }
 
-   public boolean usesClassForName(JavaResourceBundle jBundle)
-   {
-      try
-      {
-         jBundle.accept(new JavaTypeVisitor()
-         {
+   public boolean usesClassForName(JavaResourceBundle jBundle) {
+      try {
+         jBundle.accept(new JavaTypeVisitor() {
             @Override
-            protected void visit(JavaType jType)
-            {
+            protected void visit(JavaType jType) {
                final Annotation annotation = jType.getAnnotation(ClassForNameDetector.SOURCE);
-               if (annotation != null)
-               {
-                  if (annotation.getData(ClassForNameDetector.CLASS_FOR_NAME, false))
-                  {
+               if (annotation != null) {
+                  if (annotation.getData(ClassForNameDetector.CLASS_FOR_NAME, false)) {
                      throw new IllegalStateException("break");
                   }
                }
             }
          });
       }
-      catch (IllegalStateException e)
-      {
-         if ("break".equals(e.getMessage()))
-         {
+      catch (IllegalStateException e) {
+         if ("break".equals(e.getMessage())) {
             return true;
          }
          throw e;
@@ -125,15 +105,11 @@ public class DynamicPackageImportAppender
       return false;
    }
 
-   private boolean hasDynamicImportPackage(BundleManifest manifest, String pattern)
-   {
+   private boolean hasDynamicImportPackage(BundleManifest manifest, String pattern) {
       EList<DynamicPackageImport> dynamicImportPackage = manifest.getDynamicImportPackage();
-      if (dynamicImportPackage != null)
-      {
-         for (DynamicPackageImport dynamicPackageImport : dynamicImportPackage)
-         {
-            if (dynamicPackageImport.getPackageNames().contains(pattern))
-            {
+      if (dynamicImportPackage != null) {
+         for (DynamicPackageImport dynamicPackageImport : dynamicImportPackage) {
+            if (dynamicPackageImport.getPackageNames().contains(pattern)) {
                return true;
             }
          }

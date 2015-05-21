@@ -29,32 +29,25 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.resolve.AbstractVersionResolutionStrategy;
 
 @Named("MavenVersionResolutionStrategy")
-public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class MavenVersionResolutionStrategy extends AbstractVersionResolutionStrategy {
+   public Priority getPriority() {
       return Priority.NORMAL;
    }
 
    @Override
-   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options) {
       final String ctxQualifier = options.get("osgifier.forceContextQualifier");
       final boolean saveMaveQualifier = options.getBoolean("osgifier.saveMavenQualifier", true);
 
       final MavenProjectCoordinates mavenArtifact = bundleCandidate.getExtension(MavenProjectCoordinates.class);
-      if (mavenArtifact != null)
-      {
+      if (mavenArtifact != null) {
          final String mvnVersion = mavenArtifact.getVersion();
-         if (mvnVersion != null)
-         {
+         if (mvnVersion != null) {
             Version version = toVersion(mvnVersion, true);
-            if (!isNullOrEmpty(ctxQualifier))
-            {
+            if (!isNullOrEmpty(ctxQualifier)) {
                final String oldQualifier = version.getQualifier();
                String newQualifier = ctxQualifier;
-               if (saveMaveQualifier && !isNullOrEmpty(oldQualifier))
-               {
+               if (saveMaveQualifier && !isNullOrEmpty(oldQualifier)) {
                   newQualifier = ctxQualifier + "-" + oldQualifier;
                }
                version = new Version(version.getMajor(), version.getMinor(), version.getMicro(), newQualifier);

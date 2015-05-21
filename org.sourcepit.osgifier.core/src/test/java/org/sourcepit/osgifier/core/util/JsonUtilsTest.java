@@ -25,7 +25,6 @@ import java.io.StringWriter;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.util.JsonUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -34,12 +33,10 @@ import com.google.gson.stream.JsonWriter;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JsonUtilsTest
-{
+public class JsonUtilsTest {
 
    @Test
-   public void testParse() throws IOException
-   {
+   public void testParse() throws IOException {
       StringWriter writer = new StringWriter();
 
       JsonWriter json = new JsonWriter(writer);

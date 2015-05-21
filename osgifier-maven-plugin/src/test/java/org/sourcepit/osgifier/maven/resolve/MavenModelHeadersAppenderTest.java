@@ -16,7 +16,8 @@
 
 package org.sourcepit.osgifier.maven.resolve;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.apache.maven.model.License;
 import org.apache.maven.model.Model;
@@ -27,12 +28,10 @@ import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 
-public class MavenModelHeadersAppenderTest
-{
+public class MavenModelHeadersAppenderTest {
 
    @Test
-   public void testAppend() throws Exception
-   {
+   public void testAppend() throws Exception {
       final BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
 
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
@@ -91,8 +90,7 @@ public class MavenModelHeadersAppenderTest
    }
 
    @Test
-   public void testToBundleLicense()
-   {
+   public void testToBundleLicense() {
       License lic = new License();
       BundleLicense bundleLic = MavenModelHeadersAppender.toBundleLicense(lic);
       assertNull(bundleLic);

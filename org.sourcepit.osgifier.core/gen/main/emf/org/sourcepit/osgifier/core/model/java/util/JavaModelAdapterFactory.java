@@ -53,8 +53,7 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
  * @see org.sourcepit.osgifier.core.model.java.JavaModelPackage
  * @generated
  */
-public class JavaModelAdapterFactory extends AdapterFactoryImpl
-{
+public class JavaModelAdapterFactory extends AdapterFactoryImpl {
    /**
     * The cached model package.
     * <!-- begin-user-doc -->
@@ -71,10 +70,8 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * 
     * @generated
     */
-   public JavaModelAdapterFactory()
-   {
-      if (modelPackage == null)
-      {
+   public JavaModelAdapterFactory() {
+      if (modelPackage == null) {
          modelPackage = JavaModelPackage.eINSTANCE;
       }
    }
@@ -90,14 +87,11 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    @Override
-   public boolean isFactoryForType(Object object)
-   {
-      if (object == modelPackage)
-      {
+   public boolean isFactoryForType(Object object) {
+      if (object == modelPackage) {
          return true;
       }
-      if (object instanceof EObject)
-      {
+      if (object instanceof EObject) {
          return ((EObject) object).eClass().getEPackage() == modelPackage;
       }
       return false;
@@ -110,143 +104,119 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * 
     * @generated
     */
-   protected JavaModelSwitch<Adapter> modelSwitch = new JavaModelSwitch<Adapter>()
-   {
+   protected JavaModelSwitch<Adapter> modelSwitch = new JavaModelSwitch<Adapter>() {
       @Override
-      public Adapter caseNamed(Named object)
-      {
+      public Adapter caseNamed(Named object) {
          return createNamedAdapter();
       }
 
       @Override
-      public Adapter caseResource(Resource object)
-      {
+      public Adapter caseResource(Resource object) {
          return createResourceAdapter();
       }
 
       @Override
-      public Adapter caseDirectory(Directory object)
-      {
+      public Adapter caseDirectory(Directory object) {
          return createDirectoryAdapter();
       }
 
       @Override
-      public Adapter caseFile(File object)
-      {
+      public Adapter caseFile(File object) {
          return createFileAdapter();
       }
 
       @Override
-      public Adapter caseJavaElement(JavaElement object)
-      {
+      public Adapter caseJavaElement(JavaElement object) {
          return createJavaElementAdapter();
       }
 
       @Override
-      public Adapter caseQualifiedJavaElement(QualifiedJavaElement object)
-      {
+      public Adapter caseQualifiedJavaElement(QualifiedJavaElement object) {
          return createQualifiedJavaElementAdapter();
       }
 
       @Override
-      public Adapter caseJavaResourceBundle(JavaResourceBundle object)
-      {
+      public Adapter caseJavaResourceBundle(JavaResourceBundle object) {
          return createJavaResourceBundleAdapter();
       }
 
       @Override
-      public Adapter caseJavaProject(JavaProject object)
-      {
+      public Adapter caseJavaProject(JavaProject object) {
          return createJavaProjectAdapter();
       }
 
       @Override
-      public Adapter caseJavaArchive(JavaArchive object)
-      {
+      public Adapter caseJavaArchive(JavaArchive object) {
          return createJavaArchiveAdapter();
       }
 
       @Override
-      public Adapter caseJavaResourceDirectory(JavaResourceDirectory object)
-      {
+      public Adapter caseJavaResourceDirectory(JavaResourceDirectory object) {
          return createJavaResourceDirectoryAdapter();
       }
 
       @Override
-      public Adapter caseJavaResourcesRoot(JavaResourcesRoot object)
-      {
+      public Adapter caseJavaResourcesRoot(JavaResourcesRoot object) {
          return createJavaResourcesRootAdapter();
       }
 
       @Override
-      public Adapter caseJavaPackage(JavaPackage object)
-      {
+      public Adapter caseJavaPackage(JavaPackage object) {
          return createJavaPackageAdapter();
       }
 
       @Override
-      public Adapter caseJavaFile(JavaFile object)
-      {
+      public Adapter caseJavaFile(JavaFile object) {
          return createJavaFileAdapter();
       }
 
       @Override
-      public Adapter caseJavaClass(JavaClass object)
-      {
+      public Adapter caseJavaClass(JavaClass object) {
          return createJavaClassAdapter();
       }
 
       @Override
-      public Adapter caseJavaCompilationUnit(JavaCompilationUnit object)
-      {
+      public Adapter caseJavaCompilationUnit(JavaCompilationUnit object) {
          return createJavaCompilationUnitAdapter();
       }
 
       @Override
-      public Adapter caseImportDeclaration(ImportDeclaration object)
-      {
+      public Adapter caseImportDeclaration(ImportDeclaration object) {
          return createImportDeclarationAdapter();
       }
 
       @Override
-      public Adapter caseJavaType(JavaType object)
-      {
+      public Adapter caseJavaType(JavaType object) {
          return createJavaTypeAdapter();
       }
 
       @Override
-      public Adapter caseJavaResource(JavaResource object)
-      {
+      public Adapter caseJavaResource(JavaResource object) {
          return createJavaResourceAdapter();
       }
 
       @Override
-      public Adapter caseResourceVisitor(ResourceVisitor object)
-      {
+      public Adapter caseResourceVisitor(ResourceVisitor object) {
          return createResourceVisitorAdapter();
       }
 
       @Override
-      public Adapter caseExtendable(Extendable object)
-      {
+      public Adapter caseExtendable(Extendable object) {
          return createExtendableAdapter();
       }
 
       @Override
-      public Adapter caseAnnotatable(Annotatable object)
-      {
+      public Adapter caseAnnotatable(Annotatable object) {
          return createAnnotatableAdapter();
       }
 
       @Override
-      public Adapter caseXAnnotatable(XAnnotatable object)
-      {
+      public Adapter caseXAnnotatable(XAnnotatable object) {
          return createXAnnotatableAdapter();
       }
 
       @Override
-      public Adapter defaultCase(EObject object)
-      {
+      public Adapter defaultCase(EObject object) {
          return createEObjectAdapter();
       }
    };
@@ -261,8 +231,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @generated
     */
    @Override
-   public Adapter createAdapter(Notifier target)
-   {
+   public Adapter createAdapter(Notifier target) {
       return modelSwitch.doSwitch((EObject) target);
    }
 
@@ -279,8 +248,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.Named
     * @generated
     */
-   public Adapter createNamedAdapter()
-   {
+   public Adapter createNamedAdapter() {
       return null;
    }
 
@@ -296,8 +264,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.Resource
     * @generated
     */
-   public Adapter createResourceAdapter()
-   {
+   public Adapter createResourceAdapter() {
       return null;
    }
 
@@ -313,8 +280,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.Directory
     * @generated
     */
-   public Adapter createDirectoryAdapter()
-   {
+   public Adapter createDirectoryAdapter() {
       return null;
    }
 
@@ -329,8 +295,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.File
     * @generated
     */
-   public Adapter createFileAdapter()
-   {
+   public Adapter createFileAdapter() {
       return null;
    }
 
@@ -346,8 +311,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaElement
     * @generated
     */
-   public Adapter createJavaElementAdapter()
-   {
+   public Adapter createJavaElementAdapter() {
       return null;
    }
 
@@ -363,8 +327,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.QualifiedJavaElement
     * @generated
     */
-   public Adapter createQualifiedJavaElementAdapter()
-   {
+   public Adapter createQualifiedJavaElementAdapter() {
       return null;
    }
 
@@ -380,8 +343,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaResourceBundle
     * @generated
     */
-   public Adapter createJavaResourceBundleAdapter()
-   {
+   public Adapter createJavaResourceBundleAdapter() {
       return null;
    }
 
@@ -397,8 +359,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaProject
     * @generated
     */
-   public Adapter createJavaProjectAdapter()
-   {
+   public Adapter createJavaProjectAdapter() {
       return null;
    }
 
@@ -414,8 +375,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaArchive
     * @generated
     */
-   public Adapter createJavaArchiveAdapter()
-   {
+   public Adapter createJavaArchiveAdapter() {
       return null;
    }
 
@@ -431,8 +391,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaResourceDirectory
     * @generated
     */
-   public Adapter createJavaResourceDirectoryAdapter()
-   {
+   public Adapter createJavaResourceDirectoryAdapter() {
       return null;
    }
 
@@ -448,8 +407,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaResourcesRoot
     * @generated
     */
-   public Adapter createJavaResourcesRootAdapter()
-   {
+   public Adapter createJavaResourcesRootAdapter() {
       return null;
    }
 
@@ -465,8 +423,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaPackage
     * @generated
     */
-   public Adapter createJavaPackageAdapter()
-   {
+   public Adapter createJavaPackageAdapter() {
       return null;
    }
 
@@ -482,8 +439,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaFile
     * @generated
     */
-   public Adapter createJavaFileAdapter()
-   {
+   public Adapter createJavaFileAdapter() {
       return null;
    }
 
@@ -499,8 +455,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaClass
     * @generated
     */
-   public Adapter createJavaClassAdapter()
-   {
+   public Adapter createJavaClassAdapter() {
       return null;
    }
 
@@ -516,8 +471,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaCompilationUnit
     * @generated
     */
-   public Adapter createJavaCompilationUnitAdapter()
-   {
+   public Adapter createJavaCompilationUnitAdapter() {
       return null;
    }
 
@@ -533,8 +487,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.ImportDeclaration
     * @generated
     */
-   public Adapter createImportDeclarationAdapter()
-   {
+   public Adapter createImportDeclarationAdapter() {
       return null;
    }
 
@@ -550,8 +503,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaType
     * @generated
     */
-   public Adapter createJavaTypeAdapter()
-   {
+   public Adapter createJavaTypeAdapter() {
       return null;
    }
 
@@ -567,8 +519,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.JavaResource
     * @generated
     */
-   public Adapter createJavaResourceAdapter()
-   {
+   public Adapter createJavaResourceAdapter() {
       return null;
    }
 
@@ -584,8 +535,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.osgifier.core.model.java.ResourceVisitor
     * @generated
     */
-   public Adapter createResourceVisitorAdapter()
-   {
+   public Adapter createResourceVisitorAdapter() {
       return null;
    }
 
@@ -601,8 +551,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.Extendable
     * @generated
     */
-   public Adapter createExtendableAdapter()
-   {
+   public Adapter createExtendableAdapter() {
       return null;
    }
 
@@ -618,8 +567,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.Annotatable
     * @generated
     */
-   public Adapter createAnnotatableAdapter()
-   {
+   public Adapter createAnnotatableAdapter() {
       return null;
    }
 
@@ -635,8 +583,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @see org.sourcepit.common.modeling.XAnnotatable
     * @generated
     */
-   public Adapter createXAnnotatableAdapter()
-   {
+   public Adapter createXAnnotatableAdapter() {
       return null;
    }
 
@@ -649,8 +596,7 @@ public class JavaModelAdapterFactory extends AdapterFactoryImpl
     * @return the new adapter.
     * @generated
     */
-   public Adapter createEObjectAdapter()
-   {
+   public Adapter createEObjectAdapter() {
       return null;
    }
 

@@ -16,7 +16,7 @@
 
 package org.sourcepit.osgifier.core.headermod;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map.Entry;
 
@@ -26,15 +26,10 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.PackageExport;
-import org.sourcepit.osgifier.core.headermod.HeaderModifications;
-import org.sourcepit.osgifier.core.headermod.HeaderModifier;
-import org.sourcepit.osgifier.core.headermod.SetHeaderModification;
 
-public class HeaderModifierTest
-{
+public class HeaderModifierTest {
    @Test
-   public void testSetHeader()
-   {
+   public void testSetHeader() {
       final HeaderModifier headerModifier = new HeaderModifier();
 
       HeaderModifications headerMods = new HeaderModifications();
@@ -58,8 +53,7 @@ public class HeaderModifierTest
    }
 
    @Test
-   public void testSetHeaderAfter()
-   {
+   public void testSetHeaderAfter() {
       final HeaderModifier headerModifier = new HeaderModifier();
 
       HeaderModifications headerMods = new HeaderModifications();
@@ -123,8 +117,7 @@ public class HeaderModifierTest
    }
 
    @Test
-   public void testSetHeaderBefore()
-   {
+   public void testSetHeaderBefore() {
       final HeaderModifier headerModifier = new HeaderModifier();
 
       HeaderModifications headerMods = new HeaderModifications();
@@ -189,8 +182,7 @@ public class HeaderModifierTest
    }
 
    @Test
-   public void testRemovals() throws Exception
-   {
+   public void testRemovals() throws Exception {
       final HeaderModifier headerModifier = new HeaderModifier();
 
       final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();

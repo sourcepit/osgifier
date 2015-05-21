@@ -19,8 +19,6 @@ package org.sourcepit.osgifier.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import java.lang.IllegalArgumentException;
-
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
@@ -29,69 +27,52 @@ import org.hamcrest.core.IsSame;
 import org.junit.Test;
 import org.sourcepit.common.modeling.utils.EcoreUtils;
 import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
-import org.sourcepit.osgifier.core.model.java.JavaPackage;
-import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaPackageTest
-{
+public class JavaPackageTest {
    @Test
-   public void testGetResourceBundle()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetResourceBundle() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetResourceBundle((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetResourceBundle(JavaResourceBundle jBundle)
-   {
+   private void testGetResourceBundle(JavaResourceBundle jBundle) {
       JavaPackage jPackage = jBundle.getPackage("/", "foo", true);
       assertThat(jPackage.getResourceBundle(), IsSame.sameInstance(jBundle));
    }
 
    @Test
-   public void testGetResourceRoot()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetResourceRoot() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetResourceRoot((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetResourceRoot(JavaResourceBundle jBundle)
-   {
+   private void testGetResourceRoot(JavaResourceBundle jBundle) {
       JavaPackage jPackage = jBundle.getPackage("/", "foo", true);
       assertThat(jPackage.getResourcesRoot(), IsSame.sameInstance(jBundle.getResourcesRoot("/")));
    }
 
    @Test
-   public void testNullArguments()
-   {
-      try
-      {
+   public void testNullArguments() {
+      try {
          JavaPackage jPackage = JavaModelFactory.eINSTANCE.createJavaPackage();
          jPackage.getPackage(null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
    }
 
    @Test
-   public void testGetPackage()
-   {
+   public void testGetPackage() {
       JavaPackage jPackage = JavaModelFactory.eINSTANCE.createJavaPackage();
       assertThat(jPackage.getPackages(), IsNull.notNullValue());
       assertThat(jPackage.getPackages().size(), Is.is(0));

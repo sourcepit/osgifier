@@ -26,13 +26,10 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgifier.maven.impl.MavenToOSGiUtils;
 
-public class MavenToOSGiUtilsTest
-{
+public class MavenToOSGiUtilsTest {
    @Test
-   public void testToVersion() throws Exception
-   {
+   public void testToVersion() throws Exception {
       // assertEquals("1.0.0", JavaUtil.cleanupVersion("1"));
       // assertEquals("1.1.0", JavaUtil.cleanupVersion("1.1"));
       // assertEquals("0.0.0.murks", JavaUtil.cleanupVersion("murks"));
@@ -69,8 +66,7 @@ public class MavenToOSGiUtilsTest
    }
 
    @Test
-   public void testToVersionRange() throws Exception
-   {
+   public void testToVersionRange() throws Exception {
       // Form eclipse version range doc
       // 1.0 Version 1.0
       // [1.0,2.0) Versions 1.0 (included) to 2.0 (not included)
@@ -370,37 +366,31 @@ public class MavenToOSGiUtilsTest
    }
 
    private static void mavn_assertIsIncluded(String versionRange, String version)
-      throws InvalidVersionSpecificationException
-   {
+      throws InvalidVersionSpecificationException {
       assertThat(newMvnVersionRange(versionRange).containsVersion(newMvnVersion(version)), Is.is(true));
    }
 
    private static void mavn_assertIsNotIncluded(String versionRange, String version)
-      throws InvalidVersionSpecificationException
-   {
+      throws InvalidVersionSpecificationException {
       assertThat(newMvnVersionRange(versionRange).containsVersion(newMvnVersion(version)), Is.is(false));
    }
 
    private static void osgi_assertIsIncluded(String versionRange, String version)
-      throws InvalidVersionSpecificationException
-   {
+      throws InvalidVersionSpecificationException {
       assertThat(VersionRange.parse(versionRange).includes(Version.parse(version)), Is.is(true));
    }
 
    private static void osgi_assertIsNotIncluded(String versionRange, String version)
-      throws InvalidVersionSpecificationException
-   {
+      throws InvalidVersionSpecificationException {
       assertThat(VersionRange.parse(versionRange).includes(Version.parse(version)), Is.is(false));
    }
 
-   private static DefaultArtifactVersion newMvnVersion(String version)
-   {
+   private static DefaultArtifactVersion newMvnVersion(String version) {
       return new DefaultArtifactVersion(version);
    }
 
    private static org.apache.maven.artifact.versioning.VersionRange newMvnVersionRange(String versionRange)
-      throws InvalidVersionSpecificationException
-   {
+      throws InvalidVersionSpecificationException {
       return org.apache.maven.artifact.versioning.VersionRange.createFromVersionSpec(versionRange);
    }
 }

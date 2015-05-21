@@ -22,7 +22,6 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 /**
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
  */
-public interface BundleHeadersAppender
-{
+public interface BundleHeadersAppender {
    void append(BundleCandidate bundleCandidate, BundleManifestAppenderFilter filter, PropertiesSource options);
 }

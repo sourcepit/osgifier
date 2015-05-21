@@ -39,94 +39,77 @@ import com.google.gson.JsonObject;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironmentContributor
-{
+public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironmentContributor {
    private final static Logger LOGGER = LoggerFactory.getLogger(DefaultExecutionEnvironmentContributor.class);
 
    private List<ExecutionEnvironment> ees;
 
    private List<ExecutionEnvironmentImplementation> eeImpls;
 
-   public List<ExecutionEnvironment> getExecutionEnvironments()
-   {
+   public List<ExecutionEnvironment> getExecutionEnvironments() {
       lazyInit();
       return ees;
    }
 
-   public List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations()
-   {
+   public List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations() {
       lazyInit();
       return eeImpls;
    }
 
-   private synchronized void lazyInit()
-   {
-      if (ees != null)
-      {
+   private synchronized void lazyInit() {
+      if (ees != null) {
          return;
       }
 
       ees = new ArrayList<ExecutionEnvironment>();
       eeImpls = new ArrayList<ExecutionEnvironmentImplementation>();
 
-      try
-      {
+      try {
          parseSpecs();
          parseImpls();
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
    }
 
-   private void parseSpecs() throws IOException
-   {
+   private void parseSpecs() throws IOException {
       final Enumeration<URL> resources = getClass().getClassLoader().getResources("META-INF/osgifier/ee.spec");
-      while (resources.hasMoreElements())
-      {
+      while (resources.hasMoreElements()) {
          final JsonElement jsonElement = JsonUtils.parse(((URL) resources.nextElement()).openStream());
-         if (jsonElement instanceof JsonArray)
-         {
-            for (JsonElement eeSpec : jsonElement.getAsJsonArray())
-            {
+         if (jsonElement instanceof JsonArray) {
+            for (JsonElement eeSpec : jsonElement.getAsJsonArray()) {
                parseSpec(eeSpec.getAsJsonObject());
             }
          }
-         else if (jsonElement instanceof JsonObject)
-         {
+         else if (jsonElement instanceof JsonObject) {
             parseSpec(jsonElement.getAsJsonObject());
          }
       }
    }
 
-   private void parseSpec(JsonObject eeSpec)
-   {
+   private void parseSpec(JsonObject eeSpec) {
       final String id = getValue(eeSpec, "id");
-      if (id == null)
-      {
+      if (id == null) {
          LOGGER.debug("Ignoring Execution Environment Specification, because of missing id attribute.");
          return;
       }
 
       final String releaseDate = getValue(eeSpec, "releaseDate");
-      if (releaseDate == null)
-      {
+      if (releaseDate == null) {
          LOGGER.debug("Ignoring Execution Environment {}, because of missing releaseDate attribute.", id);
          return;
       }
 
       final float maxClassVersion = getFloatValue(eeSpec, "maxClassVersion");
-      if (maxClassVersion < 0)
-      {
+      if (maxClassVersion < 0) {
          LOGGER.debug("Ignoring Execution Environment {}, because of missing or invalid max class version attribute.",
             id);
          return;
       }
 
       final String vendor = getValue(eeSpec, "vendor");
-      if (vendor == null)
-      {
+      if (vendor == null) {
          LOGGER.debug("Ignoring Execution Environment {}, because of missing vendor attribute.", id);
          return;
       }
@@ -138,11 +121,9 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
       ees.add(new ExecutionEnvironment(id, releaseDate, maxClassVersion, osgiEE, packages));
    }
 
-   private OsgiEE getOsgiEE(JsonObject jsonObject, String property)
-   {
+   private OsgiEE getOsgiEE(JsonObject jsonObject, String property) {
       final JsonElement jsonElement = jsonObject.get(property);
-      if (jsonElement != null)
-      {
+      if (jsonElement != null) {
          final JsonObject obj = jsonElement.getAsJsonObject();
          final String name = getValue(obj, "name");
          final String version = getValue(obj, "version");
@@ -151,47 +132,37 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
       return null;
    }
 
-   private void parseImpls() throws IOException
-   {
+   private void parseImpls() throws IOException {
       final Enumeration<URL> resources = getClass().getClassLoader().getResources("META-INF/osgifier/ee.impl");
-      while (resources.hasMoreElements())
-      {
+      while (resources.hasMoreElements()) {
          final JsonElement jsonElement = JsonUtils.parse(((URL) resources.nextElement()).openStream());
-         if (jsonElement instanceof JsonArray)
-         {
-            for (JsonElement eeImpl : jsonElement.getAsJsonArray())
-            {
+         if (jsonElement instanceof JsonArray) {
+            for (JsonElement eeImpl : jsonElement.getAsJsonArray()) {
                parseImpl(eeImpl.getAsJsonObject());
             }
          }
-         else if (jsonElement instanceof JsonObject)
-         {
+         else if (jsonElement instanceof JsonObject) {
             parseImpl(jsonElement.getAsJsonObject());
          }
       }
    }
 
-   private void parseImpl(JsonObject eeImpl)
-   {
+   private void parseImpl(JsonObject eeImpl) {
       final String eeId = getValue(eeImpl, "executionEnvironmentId");
-      if (eeId == null)
-      {
-         LOGGER
-            .debug("Ignoring Execution Environment Implementation, because of missing executionEnvironmentId attribute.");
+      if (eeId == null) {
+         LOGGER.debug("Ignoring Execution Environment Implementation, because of missing executionEnvironmentId attribute.");
          return;
       }
 
       final String vendor = getValue(eeImpl, "vendor");
-      if (vendor == null)
-      {
+      if (vendor == null) {
          LOGGER.debug("Ignoring Execution Environment Implementation for {}, because of missing vendor attribute.",
             eeId);
          return;
       }
 
       final String version = getValue(eeImpl, "version");
-      if (version == null)
-      {
+      if (version == null) {
          LOGGER.debug(
             "Ignoring Execution Environment Implementation for {} of vendor {}, because of missing version attribute.",
             eeId, vendor);
@@ -203,27 +174,22 @@ public class DefaultExecutionEnvironmentContributor implements ExecutionEnvironm
       eeImpls.add(new ExecutionEnvironmentImplementation(eeId, vendor, packages));
    }
 
-   private static String getValue(JsonObject jsonObject, String property)
-   {
+   private static String getValue(JsonObject jsonObject, String property) {
       final JsonElement jsonElement = jsonObject.get(property);
       return jsonElement == null ? null : jsonElement.getAsString();
    }
 
-   private static float getFloatValue(JsonObject jsonObject, String property)
-   {
+   private static float getFloatValue(JsonObject jsonObject, String property) {
       final JsonElement jsonElement = jsonObject.get(property);
       return jsonElement == null ? -1 : jsonElement.getAsFloat();
    }
 
-   private static List<String> getListValue(JsonObject jsonObject, String property)
-   {
+   private static List<String> getListValue(JsonObject jsonObject, String property) {
       final List<String> result = new ArrayList<String>();
       final JsonElement jsonElement = jsonObject.get(property);
-      if (jsonElement != null)
-      {
+      if (jsonElement != null) {
          final JsonArray jsonArray = jsonElement.getAsJsonArray();
-         for (JsonElement entry : jsonArray)
-         {
+         for (JsonElement entry : jsonArray) {
             result.add(entry.getAsString());
          }
       }

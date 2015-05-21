@@ -26,8 +26,7 @@ import org.sourcepit.common.manifest.osgi.PackageExport;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 
-public final class PackageExportDescription
-{
+public final class PackageExportDescription {
    private final PackageExporterType exporterType;
 
    private final BundleReference bundleReference;
@@ -36,53 +35,44 @@ public final class PackageExportDescription
 
    private final PackageExport packageExport;
 
-   public static PackageExportDescription exportedByOwnBundle(BundleCandidate bundle, PackageExport packageExport)
-   {
+   public static PackageExportDescription exportedByOwnBundle(BundleCandidate bundle, PackageExport packageExport) {
       return new PackageExportDescription(OWN_BUNDLE, null, bundle, packageExport);
    }
 
-   public static PackageExportDescription exportedByExecutionEnvironment()
-   {
+   public static PackageExportDescription exportedByExecutionEnvironment() {
       return new PackageExportDescription(EXECUTION_ENVIRONMENT, null, null, null);
    }
 
-   public static PackageExportDescription exportedByVendor()
-   {
+   public static PackageExportDescription exportedByVendor() {
       return new PackageExportDescription(VENDOR, null, null, null);
    }
 
    public static PackageExportDescription exportedByRequiredBundle(BundleReference bundleReference,
-      PackageExport packageExport)
-   {
+      PackageExport packageExport) {
       return new PackageExportDescription(REQUIRED_BUNDLE, bundleReference, bundleReference.getTarget(), packageExport);
    }
 
    private PackageExportDescription(@NotNull PackageExporterType exporterType, BundleReference bundleReference,
-      BundleCandidate bundle, PackageExport packageExport)
-   {
+      BundleCandidate bundle, PackageExport packageExport) {
       this.exporterType = exporterType;
       this.bundle = bundle;
       this.bundleReference = bundleReference;
       this.packageExport = packageExport;
    }
 
-   public PackageExporterType getExporterType()
-   {
+   public PackageExporterType getExporterType() {
       return exporterType;
    }
 
-   public BundleReference getBundleReference()
-   {
+   public BundleReference getBundleReference() {
       return bundleReference;
    }
 
-   public BundleCandidate getBundle()
-   {
+   public BundleCandidate getBundle() {
       return bundle;
    }
 
-   public PackageExport getPackageExport()
-   {
+   public PackageExport getPackageExport() {
       return packageExport;
    }
 }

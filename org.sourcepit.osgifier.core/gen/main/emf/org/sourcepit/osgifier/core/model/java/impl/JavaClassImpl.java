@@ -36,8 +36,7 @@ import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
  *
  * @generated
  */
-public class JavaClassImpl extends JavaFileImpl implements JavaClass
-{
+public class JavaClassImpl extends JavaFileImpl implements JavaClass {
    /**
     * The default value of the '{@link #getMajor() <em>Major</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -88,8 +87,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * 
     * @generated
     */
-   protected JavaClassImpl()
-   {
+   protected JavaClassImpl() {
       super();
    }
 
@@ -100,8 +98,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_CLASS;
    }
 
@@ -111,8 +108,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * 
     * @generated
     */
-   public int getMajor()
-   {
+   public int getMajor() {
       return major;
    }
 
@@ -122,8 +118,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * 
     * @generated
     */
-   public void setMajor(int newMajor)
-   {
+   public void setMajor(int newMajor) {
       int oldMajor = major;
       major = newMajor;
       if (eNotificationRequired())
@@ -136,8 +131,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * 
     * @generated
     */
-   public int getMinor()
-   {
+   public int getMinor() {
       return minor;
    }
 
@@ -147,8 +141,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * 
     * @generated
     */
-   public void setMinor(int newMinor)
-   {
+   public void setMinor(int newMinor) {
       int oldMinor = minor;
       minor = newMinor;
       if (eNotificationRequired())
@@ -162,10 +155,8 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_CLASS__MAJOR :
             return getMajor();
          case JavaModelPackage.JAVA_CLASS__MINOR :
@@ -181,10 +172,8 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_CLASS__MAJOR :
             setMajor((Integer) newValue);
             return;
@@ -202,10 +191,8 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_CLASS__MAJOR :
             setMajor(MAJOR_EDEFAULT);
             return;
@@ -223,10 +210,8 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_CLASS__MAJOR :
             return major != MAJOR_EDEFAULT;
          case JavaModelPackage.JAVA_CLASS__MINOR :
@@ -242,8 +227,7 @@ public class JavaClassImpl extends JavaFileImpl implements JavaClass
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

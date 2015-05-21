@@ -16,7 +16,8 @@
 
 package org.sourcepit.osgifier.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.DYNAMICIMPORT_PACKAGE;
 import static org.sourcepit.osgifier.core.bundle.TestContextHelper.addBundleReference;
 import static org.sourcepit.osgifier.core.bundle.TestContextHelper.appendType;
@@ -30,7 +31,6 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
-import org.sourcepit.osgifier.core.bundle.DynamicPackageImportAppender;
 import org.sourcepit.osgifier.core.java.inspect.ClassForNameDetector;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
@@ -40,14 +40,12 @@ import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class DynamicPackageImportAppenderTest extends InjectedTest
-{
+public class DynamicPackageImportAppenderTest extends InjectedTest {
    @Inject
    private DynamicPackageImportAppender dynamicImportAppender;
 
    @Test
-   public void testPositive()
-   {
+   public void testPositive() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "foo.Bar", 47).getAnnotation(ClassForNameDetector.SOURCE, true).setData(
          ClassForNameDetector.CLASS_FOR_NAME, true);
@@ -63,8 +61,7 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testAlreadySet()
-   {
+   public void testAlreadySet() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "foo.Bar", 47).getAnnotation(ClassForNameDetector.SOURCE, true).setData(
          ClassForNameDetector.CLASS_FOR_NAME, true);
@@ -81,8 +78,7 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testIsAlreadySettoSthElse()
-   {
+   public void testIsAlreadySettoSthElse() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "foo.Bar", 47).getAnnotation(ClassForNameDetector.SOURCE, true).setData(
          ClassForNameDetector.CLASS_FOR_NAME, true);
@@ -99,8 +95,7 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testNegative()
-   {
+   public void testNegative() {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendType(jArchive, "foo.Bar", 47).getAnnotation(ClassForNameDetector.SOURCE, true).setData(
          ClassForNameDetector.CLASS_FOR_NAME, false);
@@ -116,8 +111,7 @@ public class DynamicPackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testCombineDynamicImportsFromEmbedded() throws Exception
-   {
+   public void testCombineDynamicImportsFromEmbedded() throws Exception {
       BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
       a.getManifest().setHeader(DYNAMICIMPORT_PACKAGE, "foo.*");
 

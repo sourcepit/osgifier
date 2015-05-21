@@ -34,8 +34,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * @model abstract="true"
  * @generated
  */
-public interface Resource extends Named, XAnnotatable
-{
+public interface Resource extends Named, XAnnotatable {
    /**
     * Returns the value of the '<em><b>Parent Directory</b></em>' container reference.
     * It is bidirectional and its opposite is '{@link org.sourcepit.osgifier.core.model.java.Directory#getResources

@@ -25,14 +25,11 @@ import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
-import org.sourcepit.osgifier.maven.impl.CustomSymbolicName;
 
-public class CustomSymbolicNameTest
-{
+public class CustomSymbolicNameTest {
 
    @Test
-   public void testWithClassifier()
-   {
+   public void testWithClassifier() {
       CustomSymbolicName strategy = new CustomSymbolicName();
 
       MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
@@ -74,8 +71,7 @@ public class CustomSymbolicNameTest
    }
 
    @Test
-   public void testWithoutClassifier()
-   {
+   public void testWithoutClassifier() {
       CustomSymbolicName strategy = new CustomSymbolicName();
 
       MavenArtifact artifact = MavenModelFactory.eINSTANCE.createMavenArtifact();

@@ -31,16 +31,14 @@ import org.sourcepit.osgifier.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 @Named
-public class BundleCandidateScanner
-{
+public class BundleCandidateScanner {
    @Inject
    private SymbolicNameResolver symbolicNameResolver;
 
    @Inject
    private VersionResolver versionResolver;
 
-   public void scanProject(BundleCandidate bundleCandidate, File projectDir, String... binDirPaths)
-   {
+   public void scanProject(BundleCandidate bundleCandidate, File projectDir, String... binDirPaths) {
       // scan jar contents
       final JavaResourcesBundleScanner scanner = newScanner();
       bundleCandidate.setContent(scanner.scan(projectDir, binDirPaths));
@@ -49,8 +47,7 @@ public class BundleCandidateScanner
       resolveOSGiAttributes(bundleCandidate);
    }
 
-   public void scanJar(BundleCandidate bundleCandidate, File jarFile)
-   {
+   public void scanJar(BundleCandidate bundleCandidate, File jarFile) {
       // scan jar contents
       final JavaResourcesBundleScanner scanner = newScanner();
       bundleCandidate.setContent(scanner.scan(jarFile));
@@ -59,15 +56,13 @@ public class BundleCandidateScanner
       resolveOSGiAttributes(bundleCandidate);
    }
 
-   private void resolveOSGiAttributes(BundleCandidate bundleCandidate)
-   {
+   private void resolveOSGiAttributes(BundleCandidate bundleCandidate) {
       bundleCandidate.setSymbolicName(symbolicNameResolver.resolveSymbolicName(bundleCandidate,
          new LinkedPropertiesMap()));
       bundleCandidate.setVersion(versionResolver.resolveVersion(bundleCandidate, new LinkedPropertiesMap()));
    }
 
-   private JavaResourcesBundleScanner newScanner()
-   {
+   private JavaResourcesBundleScanner newScanner() {
       final JavaResourcesBundleScanner scanner = new JavaResourcesBundleScanner();
       final List<IJavaTypeAnalyzer> typeAnalyzers = new ArrayList<IJavaTypeAnalyzer>();
       typeAnalyzers.add(new JavaTypeReferencesAnalyzer());

@@ -44,8 +44,7 @@ import org.sourcepit.osgifier.core.model.java.impl.JavaModelPackageImpl;
  * 
  * @generated
  */
-public class ContextModelPackageImpl extends EPackageImpl implements ContextModelPackage
-{
+public class ContextModelPackageImpl extends EPackageImpl implements ContextModelPackage {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -108,8 +107,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * @see #init()
     * @generated
     */
-   private ContextModelPackageImpl()
-   {
+   private ContextModelPackageImpl() {
       super(eNS_URI, ContextModelFactory.eINSTANCE);
    }
 
@@ -134,14 +132,12 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * @see #initializePackageContents()
     * @generated
     */
-   public static ContextModelPackage init()
-   {
+   public static ContextModelPackage init() {
       if (isInited)
          return (ContextModelPackage) EPackage.Registry.INSTANCE.getEPackage(ContextModelPackage.eNS_URI);
 
       // Obtain or create and register package
-      ContextModelPackageImpl theContextModelPackage = (ContextModelPackageImpl) (EPackage.Registry.INSTANCE
-         .get(eNS_URI) instanceof ContextModelPackageImpl
+      ContextModelPackageImpl theContextModelPackage = (ContextModelPackageImpl) (EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ContextModelPackageImpl
          ? EPackage.Registry.INSTANCE.get(eNS_URI)
          : new ContextModelPackageImpl());
 
@@ -152,9 +148,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       ManifestPackage.eINSTANCE.eClass();
 
       // Obtain or create and register interdependencies
-      JavaModelPackageImpl theJavaModelPackage = (JavaModelPackageImpl) (EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI) instanceof JavaModelPackageImpl ? EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI) : JavaModelPackage.eINSTANCE);
+      JavaModelPackageImpl theJavaModelPackage = (JavaModelPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(JavaModelPackage.eNS_URI) instanceof JavaModelPackageImpl
+         ? EPackage.Registry.INSTANCE.getEPackage(JavaModelPackage.eNS_URI)
+         : JavaModelPackage.eINSTANCE);
 
       // Create package meta-data objects
       theContextModelPackage.createPackageContents();
@@ -179,8 +175,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getOsgifierContext()
-   {
+   public EClass getOsgifierContext() {
       return osgifierContextEClass;
    }
 
@@ -190,8 +185,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getOsgifierContext_Bundles()
-   {
+   public EReference getOsgifierContext_Bundles() {
       return (EReference) osgifierContextEClass.getEStructuralFeatures().get(0);
    }
 
@@ -201,8 +195,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getBundleCandidate()
-   {
+   public EClass getBundleCandidate() {
       return bundleCandidateEClass;
    }
 
@@ -212,8 +205,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_Location()
-   {
+   public EAttribute getBundleCandidate_Location() {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(0);
    }
 
@@ -223,8 +215,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Content()
-   {
+   public EReference getBundleCandidate_Content() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(1);
    }
 
@@ -234,8 +225,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Dependencies()
-   {
+   public EReference getBundleCandidate_Dependencies() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(2);
    }
 
@@ -245,8 +235,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_Version()
-   {
+   public EAttribute getBundleCandidate_Version() {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(3);
    }
 
@@ -256,8 +245,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_SymbolicName()
-   {
+   public EAttribute getBundleCandidate_SymbolicName() {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(4);
    }
 
@@ -267,8 +255,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleCandidate_NativeBundle()
-   {
+   public EAttribute getBundleCandidate_NativeBundle() {
       return (EAttribute) bundleCandidateEClass.getEStructuralFeatures().get(5);
    }
 
@@ -278,8 +265,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Manifest()
-   {
+   public EReference getBundleCandidate_Manifest() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(6);
    }
 
@@ -289,8 +275,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_Localization()
-   {
+   public EReference getBundleCandidate_Localization() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(7);
    }
 
@@ -300,8 +285,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_SourceBundle()
-   {
+   public EReference getBundleCandidate_SourceBundle() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(8);
    }
 
@@ -311,8 +295,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleCandidate_TargetBundle()
-   {
+   public EReference getBundleCandidate_TargetBundle() {
       return (EReference) bundleCandidateEClass.getEStructuralFeatures().get(9);
    }
 
@@ -322,8 +305,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getBundleReference()
-   {
+   public EClass getBundleReference() {
       return bundleReferenceEClass;
    }
 
@@ -333,8 +315,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleReference_VersionRange()
-   {
+   public EAttribute getBundleReference_VersionRange() {
       return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(0);
    }
 
@@ -344,8 +325,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleReference_Optional()
-   {
+   public EAttribute getBundleReference_Optional() {
       return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(1);
    }
 
@@ -355,8 +335,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleReference_Target()
-   {
+   public EReference getBundleReference_Target() {
       return (EReference) bundleReferenceEClass.getEStructuralFeatures().get(2);
    }
 
@@ -366,8 +345,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleReference_Provided()
-   {
+   public EAttribute getBundleReference_Provided() {
       return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(3);
    }
 
@@ -377,8 +355,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getBundleReference_EmbedInstruction()
-   {
+   public EAttribute getBundleReference_EmbedInstruction() {
       return (EAttribute) bundleReferenceEClass.getEStructuralFeatures().get(4);
    }
 
@@ -388,8 +365,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getBundleLocalization()
-   {
+   public EClass getBundleLocalization() {
       return bundleLocalizationEClass;
    }
 
@@ -399,8 +375,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getBundleLocalization_Data()
-   {
+   public EReference getBundleLocalization_Data() {
       return (EReference) bundleLocalizationEClass.getEStructuralFeatures().get(0);
    }
 
@@ -410,8 +385,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EClass getLocalizedData()
-   {
+   public EClass getLocalizedData() {
       return localizedDataEClass;
    }
 
@@ -421,8 +395,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EAttribute getLocalizedData_Locale()
-   {
+   public EAttribute getLocalizedData_Locale() {
       return (EAttribute) localizedDataEClass.getEStructuralFeatures().get(0);
    }
 
@@ -432,8 +405,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EReference getLocalizedData_Data()
-   {
+   public EReference getLocalizedData_Data() {
       return (EReference) localizedDataEClass.getEStructuralFeatures().get(1);
    }
 
@@ -443,8 +415,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public EEnum getEmbedInstruction()
-   {
+   public EEnum getEmbedInstruction() {
       return embedInstructionEEnum;
    }
 
@@ -454,8 +425,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public ContextModelFactory getContextModelFactory()
-   {
+   public ContextModelFactory getContextModelFactory() {
       return (ContextModelFactory) getEFactoryInstance();
    }
 
@@ -475,8 +445,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public void createPackageContents()
-   {
+   public void createPackageContents() {
       if (isCreated)
          return;
       isCreated = true;
@@ -531,8 +500,7 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
     * 
     * @generated
     */
-   public void initializePackageContents()
-   {
+   public void initializePackageContents() {
       if (isInitialized)
          return;
       isInitialized = true;
@@ -543,12 +511,9 @@ public class ContextModelPackageImpl extends EPackageImpl implements ContextMode
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
-      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE
-         .getEPackage(CommonModelingPackage.eNS_URI);
-      JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE
-         .getEPackage(JavaModelPackage.eNS_URI);
-      BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE
-         .getEPackage(BundleManifestPackage.eNS_URI);
+      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE.getEPackage(CommonModelingPackage.eNS_URI);
+      JavaModelPackage theJavaModelPackage = (JavaModelPackage) EPackage.Registry.INSTANCE.getEPackage(JavaModelPackage.eNS_URI);
+      BundleManifestPackage theBundleManifestPackage = (BundleManifestPackage) EPackage.Registry.INSTANCE.getEPackage(BundleManifestPackage.eNS_URI);
 
       // Create type parameters
 

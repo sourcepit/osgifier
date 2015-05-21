@@ -22,55 +22,43 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 import org.sourcepit.osgifier.core.model.java.QualifiedJavaElement;
 import org.sourcepit.osgifier.core.model.java.util.JavaModelSwitch;
 
-public final class QualifiedJavaElementOperations
-{
-   private QualifiedJavaElementOperations()
-   {
+public final class QualifiedJavaElementOperations {
+   private QualifiedJavaElementOperations() {
       super();
    }
 
-   public static String getQualifiedName(QualifiedJavaElement qualified)
-   {
+   public static String getQualifiedName(QualifiedJavaElement qualified) {
       final StringBuilder sb = new StringBuilder();
       buildQualifiedName(sb, qualified);
-      if (sb.length() == 0)
-      {
+      if (sb.length() == 0) {
          return null;
       }
       sb.deleteCharAt(sb.length() - 1);
       return sb.toString();
    }
 
-   private static void buildQualifiedName(StringBuilder sb, QualifiedJavaElement qualified)
-   {
-      if (qualified == null)
-      {
+   private static void buildQualifiedName(StringBuilder sb, QualifiedJavaElement qualified) {
+      if (qualified == null) {
          return;
       }
       buildQualifiedName(sb, getParent(qualified));
       String name = qualified.getName();
-      if (name == null)
-      {
+      if (name == null) {
          return;
       }
       sb.append(name);
       sb.append('.');
    }
 
-   private static QualifiedJavaElement getParent(QualifiedJavaElement fullyQualified)
-   {
-      return new JavaModelSwitch<QualifiedJavaElement>()
-      {
-         public QualifiedJavaElement caseJavaPackage(JavaPackage pgk)
-         {
+   private static QualifiedJavaElement getParent(QualifiedJavaElement fullyQualified) {
+      return new JavaModelSwitch<QualifiedJavaElement>() {
+         public QualifiedJavaElement caseJavaPackage(JavaPackage pgk) {
             return pgk.getParentPackage();
          };
 
-         public QualifiedJavaElement caseJavaType(JavaType type)
-         {
+         public QualifiedJavaElement caseJavaType(JavaType type) {
             final JavaType outerType = type.getOuterType();
-            if (outerType != null)
-            {
+            if (outerType != null) {
                return outerType;
             }
             final JavaFile typeRoot = type.getFile();

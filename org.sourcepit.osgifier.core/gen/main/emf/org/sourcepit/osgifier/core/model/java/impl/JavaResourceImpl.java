@@ -33,16 +33,14 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
  *
  * @generated
  */
-public abstract class JavaResourceImpl extends ResourceImpl implements JavaResource
-{
+public abstract class JavaResourceImpl extends ResourceImpl implements JavaResource {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     */
-   protected JavaResourceImpl()
-   {
+   protected JavaResourceImpl() {
       super();
    }
 
@@ -53,8 +51,7 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_RESOURCE;
    }
 
@@ -64,8 +61,7 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
     * 
     * @generated
     */
-   public JavaResourcesRoot getResourcesRoot()
-   {
+   public JavaResourcesRoot getResourcesRoot() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -77,8 +73,7 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
     * 
     * @generated
     */
-   public JavaResourceDirectory getParentDirectory()
-   {
+   public JavaResourceDirectory getParentDirectory() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -90,8 +85,7 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
     * 
     * @generated
     */
-   public JavaPackage getParentPackage()
-   {
+   public JavaPackage getParentPackage() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -103,8 +97,7 @@ public abstract class JavaResourceImpl extends ResourceImpl implements JavaResou
     * 
     * @generated
     */
-   public JavaResourceBundle getResourceBundle()
-   {
+   public JavaResourceBundle getResourceBundle() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();

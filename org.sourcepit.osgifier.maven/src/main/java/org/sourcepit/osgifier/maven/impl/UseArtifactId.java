@@ -28,22 +28,17 @@ import org.sourcepit.osgifier.core.resolve.AbstractSymbolicNameResolutionStrateg
  * @author Bernd
  */
 @Named("UseArtifactId")
-public class UseArtifactId extends AbstractSymbolicNameResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class UseArtifactId extends AbstractSymbolicNameResolutionStrategy {
+   public Priority getPriority() {
       return Priority.MINIMUM;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options) {
       final MavenArtifact mavenArtifact = bundleCandidate.getExtension(MavenArtifact.class);
-      if (mavenArtifact != null)
-      {
+      if (mavenArtifact != null) {
          final String artifactId = mavenArtifact.getArtifactId();
-         if (artifactId != null)
-         {
+         if (artifactId != null) {
             return artifactId;
          }
       }

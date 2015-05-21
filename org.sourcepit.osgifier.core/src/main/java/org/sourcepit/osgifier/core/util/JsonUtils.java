@@ -28,34 +28,27 @@ import com.google.gson.JsonStreamParser;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class JsonUtils
-{
-   private JsonUtils()
-   {
+public final class JsonUtils {
+   private JsonUtils() {
       super();
    }
 
    private static final String UTF_8 = "UTF-8";
 
-   public static JsonElement parse(InputStream inputStream)
-   {
+   public static JsonElement parse(InputStream inputStream) {
       return parse(inputStream, UTF_8);
    }
 
-   public static JsonElement parse(InputStream inputStream, String charset)
-   {
-      try
-      {
+   public static JsonElement parse(InputStream inputStream, String charset) {
+      try {
          return parse(new InputStreamReader(inputStream, charset));
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
    }
 
-   public static JsonElement parse(Reader reader)
-   {
+   public static JsonElement parse(Reader reader) {
       return (JsonArray) new JsonStreamParser(reader).next();
    }
 

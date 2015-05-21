@@ -25,26 +25,21 @@ import org.sourcepit.common.utils.zip.ZipProcessor;
 import org.sourcepit.osgifier.core.inspect.ResourceVisitor;
 import org.sourcepit.osgifier.core.inspect.ZipEntryHandlerAdapter;
 
-public class ZipTraverser implements IResourceTraverser
-{
+public class ZipTraverser implements IResourceTraverser {
    private File zipFile;
 
-   public ZipTraverser(File zipFile)
-   {
+   public ZipTraverser(File zipFile) {
       this.zipFile = zipFile;
    }
 
-   public void travers(ResourceVisitor visitor)
-   {
+   public void travers(ResourceVisitor visitor) {
       final ZipProcessingRequest request = new ZipProcessingRequest();
       request.setStreamFactory(new FileZipInputStreamFactory(zipFile));
       request.setEntryHandler(new ZipEntryHandlerAdapter(visitor));
-      try
-      {
+      try {
          new ZipProcessor().process(request);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
    }

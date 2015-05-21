@@ -45,14 +45,11 @@ import org.sourcepit.osgifier.core.model.context.BundleLocalization;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Named
-public class MavenModelHeadersAppender implements BundleHeadersAppender
-{
+public class MavenModelHeadersAppender implements BundleHeadersAppender {
    @Override
-   public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
-   {
+   public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options) {
       final String modelAsString = getMavenModelAsString(bundle);
-      if (modelAsString != null)
-      {
+      if (modelAsString != null) {
          final Model model = new ModelFromString().fromString(modelAsString);
          final BundleManifest manifest = bundle.getManifest();
          final BundleLocalization localization = bundle.getLocalization();
@@ -64,8 +61,7 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       }
    }
 
-   private String getMavenModelAsString(BundleCandidate bundle)
-   {
+   private String getMavenModelAsString(BundleCandidate bundle) {
       String modelAsString = bundle.getAnnotationData("maven", "model");
       if (modelAsString == null && bundle.getTargetBundle() != null) // get main bundles model if i'm a source bundle
       {
@@ -74,74 +70,58 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       return modelAsString;
    }
 
-   private void appendBundleName(BundleManifest manifest, BundleLocalization localization, Model model)
-   {
+   private void appendBundleName(BundleManifest manifest, BundleLocalization localization, Model model) {
       final String name = model.getName();
-      if (isNotEmpty(name))
-      {
+      if (isNotEmpty(name)) {
          append(manifest, localization, BUNDLE_NAME, "bundle.name", name);
       }
    }
 
-   private void appendBundleVendor(BundleManifest manifest, BundleLocalization localization, Model model)
-   {
+   private void appendBundleVendor(BundleManifest manifest, BundleLocalization localization, Model model) {
       final Organization organization = model.getOrganization();
-      if (organization != null)
-      {
+      if (organization != null) {
          String value = organization.getName();
-         if (isEmpty(value))
-         {
+         if (isEmpty(value)) {
             value = organization.getUrl();
          }
-         if (isNotEmpty(value))
-         {
+         if (isNotEmpty(value)) {
             append(manifest, localization, BUNDLE_VENDOR, "bundle.vendor", value);
          }
       }
    }
 
-   private void appendBundleDocURL(BundleManifest manifest, BundleLocalization localization, Model model)
-   {
+   private void appendBundleDocURL(BundleManifest manifest, BundleLocalization localization, Model model) {
       final String url = model.getUrl();
-      if (isNotEmpty(url))
-      {
+      if (isNotEmpty(url)) {
          append(manifest, localization, BUNDLE_DOCURL, "bundle.docURL", url);
       }
    }
 
-   private void appendBundleDescription(BundleManifest manifest, BundleLocalization localization, Model model)
-   {
+   private void appendBundleDescription(BundleManifest manifest, BundleLocalization localization, Model model) {
       final String description = model.getDescription();
-      if (isNotEmpty(description))
-      {
+      if (isNotEmpty(description)) {
          append(manifest, localization, BUNDLE_DESCRIPTION, "bundle.description", description);
       }
    }
 
-   private void appendBundleLicense(BundleManifest manifest, final Model model)
-   {
+   private void appendBundleLicense(BundleManifest manifest, final Model model) {
       final List<BundleLicense> bundleLicenses = toBundleLicenses(model.getLicenses());
-      if (!bundleLicenses.isEmpty())
-      {
+      if (!bundleLicenses.isEmpty()) {
          manifest.setBundleLicense(bundleLicenses);
       }
    }
 
    private static void append(BundleManifest manifest, BundleLocalization localization, BundleHeaderName header,
-      String key, final String value)
-   {
+      String key, final String value) {
       localization.set("", key, value);
       manifest.setHeader(header, "%" + key);
    }
 
-   private List<BundleLicense> toBundleLicenses(List<License> licenses)
-   {
+   private List<BundleLicense> toBundleLicenses(List<License> licenses) {
       final List<BundleLicense> bundleLicenses = new ArrayList<BundleLicense>();
-      for (License license : licenses)
-      {
+      for (License license : licenses) {
          BundleLicense bundleLicense = toBundleLicense(license);
-         if (bundleLicense != null)
-         {
+         if (bundleLicense != null) {
             bundleLicenses.add(bundleLicense);
          }
       }
@@ -149,32 +129,25 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
    }
 
 
-   static BundleLicense toBundleLicense(License license)
-   {
+   static BundleLicense toBundleLicense(License license) {
       final BundleLicense bundleLicense = BundleManifestFactory.eINSTANCE.createBundleLicense();
 
       final String name = license.getName();
-      if (isNotEmpty(name))
-      {
+      if (isNotEmpty(name)) {
          final String safeName = toBundleLicenseName(license.getName());
-         if (isNotEmpty(safeName))
-         {
+         if (isNotEmpty(safeName)) {
             bundleLicense.setName(safeName);
          }
       }
 
       final String url = license.getUrl();
-      if (isNotEmpty(url))
-      {
-         if (isNotEmpty(bundleLicense.getName()))
-         {
+      if (isNotEmpty(url)) {
+         if (isNotEmpty(bundleLicense.getName())) {
             bundleLicense.setLink(url);
          }
-         else
-         {
+         else {
             final String safeName = toBundleLicenseName(url);
-            if (isNotEmpty(safeName))
-            {
+            if (isNotEmpty(safeName)) {
                bundleLicense.setName(safeName);
             }
          }
@@ -183,13 +156,10 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender
       return isNotEmpty(bundleLicense.getName()) || isNotEmpty(bundleLicense.getLink()) ? bundleLicense : null;
    }
 
-   private static String toBundleLicenseName(String name)
-   {
+   private static String toBundleLicenseName(String name) {
       final StringBuilder sb = new StringBuilder(name.length());
-      for (char c : name.toCharArray())
-      {
-         if (c == ',' || c == ';')
-         {
+      for (char c : name.toCharArray()) {
+         if (c == ',' || c == ';') {
             continue;
          }
          sb.append(c);

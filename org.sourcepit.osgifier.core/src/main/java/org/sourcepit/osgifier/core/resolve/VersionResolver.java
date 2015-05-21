@@ -32,30 +32,24 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
  * @author Bernd
  */
 @Named
-public class VersionResolver
-{
+public class VersionResolver {
    @Inject
    private Map<String, AbstractVersionResolutionStrategy> strategiesMap;
 
    private List<AbstractVersionResolutionStrategy> strategies;
 
-   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
-      for (AbstractVersionResolutionStrategy strategy : getStrategies())
-      {
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options) {
+      for (AbstractVersionResolutionStrategy strategy : getStrategies()) {
          final Version version = strategy.resolveVersion(bundleCandidate, options);
-         if (version != null)
-         {
+         if (version != null) {
             return version;
          }
       }
       return Version.EMPTY_VERSION;
    }
 
-   private synchronized List<AbstractVersionResolutionStrategy> getStrategies()
-   {
-      if (strategies == null)
-      {
+   private synchronized List<AbstractVersionResolutionStrategy> getStrategies() {
+      if (strategies == null) {
          strategies = new ArrayList<AbstractVersionResolutionStrategy>(strategiesMap.values());
          Collections.sort(strategies);
       }

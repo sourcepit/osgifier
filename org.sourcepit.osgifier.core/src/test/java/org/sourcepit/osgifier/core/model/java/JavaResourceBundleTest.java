@@ -21,7 +21,6 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.hamcrest.core.Is;
@@ -33,68 +32,43 @@ import org.hamcrest.core.IsSame;
 import org.junit.Test;
 import org.sourcepit.common.modeling.utils.EcoreUtils;
 import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
-import org.sourcepit.osgifier.core.model.java.JavaClass;
-import org.sourcepit.osgifier.core.model.java.JavaCompilationUnit;
-import org.sourcepit.osgifier.core.model.java.JavaFile;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
-import org.sourcepit.osgifier.core.model.java.JavaPackage;
-import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesType;
-import org.sourcepit.osgifier.core.model.java.JavaType;
-import org.sourcepit.osgifier.core.model.java.Resource;
-import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 
-public class JavaResourceBundleTest
-{
+public class JavaResourceBundleTest {
    @Test
-   public void testGetResourceBundle()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetResourceBundle() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetResourceBundle((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetResourceBundle(JavaResourceBundle jBundle)
-   {
+   private void testGetResourceBundle(JavaResourceBundle jBundle) {
       assertThat(jBundle.getResourceBundle(), IsSame.sameInstance(jBundle));
    }
 
    @Test
-   public void testGetResourceRoot()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetResourceRoot() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetResourceRoot((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetResourceRoot(JavaResourceBundle jBundle)
-   {
-      try
-      {
+   private void testGetResourceRoot(JavaResourceBundle jBundle) {
+      try {
          jBundle.getResourcesRoot(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
-      try
-      {
+      try {
          jBundle.getResourcesRoot(null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
       assertThat(jBundle.getResourcesRoot("src"), IsNull.nullValue());
@@ -124,35 +98,27 @@ public class JavaResourceBundleTest
    }
 
    @Test
-   public void testGetPackage()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetPackage() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetPackage((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetPackage(JavaResourceBundle jBundle)
-   {
-      try
-      {
+   private void testGetPackage(JavaResourceBundle jBundle) {
+      try {
          jBundle.getPackage(null, null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          jBundle.getPackage("", null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(jBundle.getPackage("", "org.sourcepit", false), IsNull.nullValue());
@@ -164,44 +130,34 @@ public class JavaResourceBundleTest
    }
 
    @Test
-   public void testGetType()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetType() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetType((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testGetType(JavaResourceBundle jBundle)
-   {
-      try
-      {
+   private void testGetType(JavaResourceBundle jBundle) {
+      try {
          jBundle.getType(null, null, null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          jBundle.getType("", null, null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          jBundle.getType("", "foo", null, false);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(jBundle.getType("", null, "Foo", false), IsNull.nullValue());
@@ -217,19 +173,15 @@ public class JavaResourceBundleTest
    }
 
    @Test
-   public void testResourcesType()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testResourcesType() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testResourcesType((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testResourcesType(JavaResourceBundle jBundle)
-   {
+   private void testResourcesType(JavaResourceBundle jBundle) {
       JavaResourcesRoot src = jBundle.getResourcesRoot("src", true);
       src.setResourcesType(JavaResourcesType.SRC);
       JavaResourcesRoot bin = jBundle.getResourcesRoot("bin", true);
@@ -240,36 +192,28 @@ public class JavaResourceBundleTest
    }
 
    @Test
-   public void testAccept()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testAccept() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceBundle(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testAccept((JavaResourceBundle) eObject);
          }
       });
    }
 
-   private void testAccept(JavaResourceBundle jBundle)
-   {
-      try
-      {
+   private void testAccept(JavaResourceBundle jBundle) {
+      try {
          jBundle.accept(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       JavaResourcesRoot root1 = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
       JavaResourcesRoot root2 = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
 
       final List<Resource> visited = new ArrayList<Resource>();
-      jBundle.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
+      jBundle.accept(new ResourceVisitor() {
+         public boolean visit(Resource resource) {
             visited.add(resource);
             return true;
          }
@@ -280,10 +224,8 @@ public class JavaResourceBundleTest
       jBundle.getResourcesRoots().add(root2);
 
       visited.clear();
-      jBundle.accept(new ResourceVisitor()
-      {
-         public boolean visit(Resource resource)
-         {
+      jBundle.accept(new ResourceVisitor() {
+         public boolean visit(Resource resource) {
             visited.add(resource);
             return true;
          }

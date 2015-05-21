@@ -24,7 +24,6 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 /**
  * @author Bernd
  */
-public abstract class AbstractVersionResolutionStrategy extends AbstractPriorized
-{
+public abstract class AbstractVersionResolutionStrategy extends AbstractPriorized {
    public abstract Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options);
 }

@@ -16,38 +16,34 @@
 
 package org.sourcepit.osgifier.core.java.inspect;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashSet;
 import java.util.Set;
-import java.lang.IllegalArgumentException;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.util.ClassLoaderRepository;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.java.inspect.JavaTypeReferencesCollector;
 import org.sourcepit.osgifier.test.resources.TypeA;
 
 /**
  * @author Bernd
  */
-public class JavaTypeReferencesCollectorTest
-{
+public class JavaTypeReferencesCollectorTest {
    @Test
-   public void test() throws Exception
-   {
-      try
-      {
+   public void test() throws Exception {
+      try {
          JavaTypeReferencesCollector.collect(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // expected
+      catch (IllegalArgumentException e) { // expected
       }
 
       final File jarFile = new File("target/testResources/org.sourcepit.osgifier.core.jar");
@@ -91,13 +87,11 @@ public class JavaTypeReferencesCollectorTest
    }
 
    @Test
-   public void testSignatureOfInvokedMethod() throws Exception
-   {
+   public void testSignatureOfInvokedMethod() throws Exception {
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(
          JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
 
-      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class
-         .getName());
+      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getName());
 
       final Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(4));
@@ -105,8 +99,7 @@ public class JavaTypeReferencesCollectorTest
       final Set<String> expectedRefs = new HashSet<String>();
 
       expectedRefs.add("java.lang.Object");
-      expectedRefs
-         .add("org.sourcepit.osgifier.core.java.inspect.JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy");
+      expectedRefs.add("org.sourcepit.osgifier.core.java.inspect.JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod_Dummy");
       expectedRefs.add("java.lang.Integer");
       expectedRefs.add("java.lang.String");
 
@@ -114,13 +107,11 @@ public class JavaTypeReferencesCollectorTest
    }
 
    @Test
-   public void testFullyQualfiedMethodSignatureTypes() throws Exception
-   {
+   public void testFullyQualfiedMethodSignatureTypes() throws Exception {
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(
          JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
 
-      JavaClass jClass = classRepo
-         .loadClass(JavaTypeReferencesCollectorTest_testFullyQualfiedMethodSignatureTypes.class.getName());
+      JavaClass jClass = classRepo.loadClass(JavaTypeReferencesCollectorTest_testFullyQualfiedMethodSignatureTypes.class.getName());
 
       final Set<String> typeRefs = JavaTypeReferencesCollector.collect(jClass);
       assertThat(typeRefs.size(), Is.is(3));
@@ -134,8 +125,7 @@ public class JavaTypeReferencesCollectorTest
    }
 
    @Test
-   public void testMethodAnnotations() throws Exception
-   {
+   public void testMethodAnnotations() throws Exception {
       final ClassLoaderRepository classRepo = new ClassLoaderRepository(
          JavaTypeReferencesCollectorTest_testSignatureOfInvokedMethod.class.getClassLoader());
 

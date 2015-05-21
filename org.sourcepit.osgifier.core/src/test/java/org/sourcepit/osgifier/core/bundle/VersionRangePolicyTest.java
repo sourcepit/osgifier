@@ -28,30 +28,23 @@ import static org.sourcepit.osgifier.core.bundle.VersionRangePolicy.STRICT;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.Version;
-import org.sourcepit.osgifier.core.bundle.VersionRangePolicy;
 
-public class VersionRangePolicyTest
-{
+public class VersionRangePolicyTest {
 
    @Test
-   public void testParse()
-   {
-      try
-      {
+   public void testParse() {
+      try {
          VersionRangePolicy.parse(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // expected
+      catch (IllegalArgumentException e) { // expected
       }
 
-      try
-      {
+      try {
          VersionRangePolicy.parse("foo");
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // expected
+      catch (IllegalArgumentException e) { // expected
       }
 
       assertSame(PERFECT, VersionRangePolicy.parse("perfect"));
@@ -65,8 +58,7 @@ public class VersionRangePolicyTest
    }
 
    @Test
-   public void testToVersionRange() throws Exception
-   {
+   public void testToVersionRange() throws Exception {
       final Version version = Version.parse("1.2.3.qualifier");
 
       assertEquals("[" + version + "," + version + "]", PERFECT.toVersionRange(version, false).toString());
@@ -89,8 +81,7 @@ public class VersionRangePolicyTest
    }
 
    @Test
-   public void testToVersionRange2() throws Exception
-   {
+   public void testToVersionRange2() throws Exception {
       final Version version = Version.parse("1.0.0.qualifier");
 
       assertEquals("[" + version + "," + version + "]", PERFECT.toVersionRange(version, false).toString());

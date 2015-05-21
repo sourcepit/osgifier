@@ -22,30 +22,22 @@ import java.util.Properties;
 import org.sourcepit.common.utils.props.AbstractPropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSource;
 
-public final class MojoUtils
-{
-   private MojoUtils()
-   {
+public final class MojoUtils {
+   private MojoUtils() {
       super();
    }
 
    public static PropertiesSource getOptions(final Properties projectProperties,
-      final Map<String, String> pluginProperties)
-   {
-      return new AbstractPropertiesSource()
-      {
+      final Map<String, String> pluginProperties) {
+      return new AbstractPropertiesSource() {
          @Override
-         public String get(String key)
-         {
+         public String get(String key) {
             String value = projectProperties.getProperty(key);
-            if (pluginProperties != null)
-            {
-               if (value == null)
-               {
+            if (pluginProperties != null) {
+               if (value == null) {
                   value = pluginProperties.get(key);
                }
-               if (value == null && key.startsWith("osgifier."))
-               {
+               if (value == null && key.startsWith("osgifier.")) {
                   value = pluginProperties.get(key.substring(9));
                }
             }

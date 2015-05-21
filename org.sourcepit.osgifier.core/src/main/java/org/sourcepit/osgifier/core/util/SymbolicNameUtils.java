@@ -24,33 +24,25 @@ import org.sourcepit.common.constraints.NotNull;
 /**
  * @author Bernd
  */
-public final class SymbolicNameUtils
-{
+public final class SymbolicNameUtils {
    private static final String ALLOWED = "_-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-   public static boolean isValidSymbolicName(String symbolicName)
-   {
-      if (symbolicName == null || symbolicName.length() == 0)
-      {
+   public static boolean isValidSymbolicName(String symbolicName) {
+      if (symbolicName == null || symbolicName.length() == 0) {
          return false;
       }
       char[] chars = symbolicName.toCharArray();
       int length = chars.length;
-      for (int i = 0; i < length; i++)
-      {
+      for (int i = 0; i < length; i++) {
          char c = chars[i];
-         if (ALLOWED.indexOf(c) < 0)
-         {
-            if ('.' != c)
-            {
+         if (ALLOWED.indexOf(c) < 0) {
+            if ('.' != c) {
                return false;
             }
-            if (i == 0 || i == length - 1)
-            {
+            if (i == 0 || i == length - 1) {
                return false;
             }
-            if (i > 0 && chars[i - 1] == '.')
-            {
+            if (i > 0 && chars[i - 1] == '.') {
                return false;
             }
          }
@@ -58,35 +50,28 @@ public final class SymbolicNameUtils
       return true;
    }
 
-   public static String toValidSymbolicName(@NotNull String symbolicName)
-   {
+   public static String toValidSymbolicName(@NotNull String symbolicName) {
       checkArgument(symbolicName.length() > 0);
       final StringBuilder sb = new StringBuilder();
       char[] chars = symbolicName.trim().toCharArray();
       int length = chars.length;
-      for (int i = 0; i < length; i++)
-      {
+      for (int i = 0; i < length; i++) {
          char c = chars[i];
-         if (ALLOWED.indexOf(c) < 0)
-         {
+         if (ALLOWED.indexOf(c) < 0) {
             replace(sb, c, i, length);
          }
-         else
-         {
+         else {
             sb.append(c);
          }
       }
-      if (sb.length() == 0)
-      {
+      if (sb.length() == 0) {
          sb.append('_');
       }
       return sb.toString();
    }
 
-   private static void replace(final StringBuilder sb, char c, int idx, int length)
-   {
-      switch (c)
-      {
+   private static void replace(final StringBuilder sb, char c, int idx, int length) {
+      switch (c) {
          case 'ä' :
             sb.append("ae");
             break;
@@ -100,8 +85,7 @@ public final class SymbolicNameUtils
             sb.append("ss");
             break;
          case '.' :
-            if (sb.length() != 0 && idx != length - 1)
-            {
+            if (sb.length() != 0 && idx != length - 1) {
                sb.append(c);
             }
             break;

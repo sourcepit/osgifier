@@ -41,12 +41,9 @@ import org.sourcepit.maven.dependency.model.DependencyNode;
 import org.sourcepit.maven.dependency.model.DependencyTree;
 import org.sourcepit.maven.dependency.model.JavaSourceAttachmentFactory;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.OsgifierContextInflator;
-import org.sourcepit.osgifier.maven.OsgifierContextInflatorFilter;
 
 @Named
-public class OsgifierModelBuilder
-{
+public class OsgifierModelBuilder {
    @Inject
    private Logger log;
 
@@ -60,8 +57,7 @@ public class OsgifierModelBuilder
    private OsgifierContextInflator inflator;
 
    public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options,
-      Collection<Dependency> dependencies, Date timestamp)
-   {
+      Collection<Dependency> dependencies, Date timestamp) {
       log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(dependencies);
@@ -74,8 +70,7 @@ public class OsgifierModelBuilder
    }
 
    public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options, MavenProject project,
-      Date timestamp)
-   {
+      Date timestamp) {
       log.info("");
       log.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(project);
@@ -88,27 +83,23 @@ public class OsgifierModelBuilder
    }
 
    private OsgifierContext build(final OsgifierContextInflatorFilter filter, PropertiesSource options,
-      final OsgifierContext osgifyModel, Date timestamp)
-   {
+      final OsgifierContext osgifyModel, Date timestamp) {
       log.info("Generating OSGi metadata...");
       inflator.inflate(filter, options, osgifyModel, timestamp);
       return osgifyModel;
    }
 
-   private DependencyModel resolve(MavenProject project)
-   {
+   private DependencyModel resolve(MavenProject project) {
       final DependencyModel dependencyModel;
 
       final boolean includeSource = true;
 
       final ArtifactAttachmentFactory attachmentFactory = includeSource ? new JavaSourceAttachmentFactory() : null;
 
-      try
-      {
+      try {
          dependencyModel = dependencyModelResolver.resolve(project, attachmentFactory);
       }
-      catch (DependencyResolutionException e)
-      {
+      catch (DependencyResolutionException e) {
          throw pipe(e);
       }
 
@@ -117,24 +108,20 @@ public class OsgifierModelBuilder
       return dependencyModel;
    }
 
-   private DependencyModel resolve(Collection<Dependency> dependencies)
-   {
+   private DependencyModel resolve(Collection<Dependency> dependencies) {
       final DependencyModel dependencyModel;
 
       final boolean includeSource = true;
 
       final ArtifactAttachmentFactory attachmentFactory = includeSource ? new JavaSourceAttachmentFactory() : null;
 
-      try
-      {
+      try {
          dependencyModel = dependencyModelResolver.resolve(dependencies, attachmentFactory);
       }
-      catch (ProjectBuildingException e)
-      {
+      catch (ProjectBuildingException e) {
          throw pipe(e);
       }
-      catch (DependencyResolutionException e)
-      {
+      catch (DependencyResolutionException e) {
          throw pipe(e);
       }
 
@@ -143,32 +130,24 @@ public class OsgifierModelBuilder
       return dependencyModel;
    }
 
-   private static void removeUnresolvedArtifacts(final DependencyModel dependencyModel)
-   {
+   private static void removeUnresolvedArtifacts(final DependencyModel dependencyModel) {
       final Iterator<MavenArtifact> it = dependencyModel.getArtifacts().iterator();
-      while (it.hasNext())
-      {
+      while (it.hasNext()) {
          MavenArtifact mavenArtifact = (MavenArtifact) it.next();
-         if (mavenArtifact.getFile() == null)
-         {
+         if (mavenArtifact.getFile() == null) {
             DependencyTree dependencyTree = dependencyModel.getDependencyTree(mavenArtifact);
-            if (dependencyTree != null)
-            {
+            if (dependencyTree != null) {
                dependencyTree.setArtifact(null);
             }
             // dependencyModel.getDependencyTrees().remove(dependencyTree);
 
-            for (DependencyTree tree : dependencyModel.getDependencyTrees())
-            {
+            for (DependencyTree tree : dependencyModel.getDependencyTrees()) {
                TreeIterator<EObject> eAllContents = tree.eAllContents();
-               while (eAllContents.hasNext())
-               {
+               while (eAllContents.hasNext()) {
                   EObject eObject = (EObject) eAllContents.next();
-                  if (eObject instanceof DependencyNode)
-                  {
+                  if (eObject instanceof DependencyNode) {
                      DependencyNode node = (DependencyNode) eObject;
-                     if (node.getArtifact() == mavenArtifact)
-                     {
+                     if (node.getArtifact() == mavenArtifact) {
                         node.setArtifact(null);
                         node.setSelected(false);
                      }
@@ -182,8 +161,7 @@ public class OsgifierModelBuilder
       }
    }
 
-   private OsgifierContext createStubModel(final DependencyModel dependencyModel)
-   {
+   private OsgifierContext createStubModel(final DependencyModel dependencyModel) {
       return stubModelCreator.create(dependencyModel);
    }
 

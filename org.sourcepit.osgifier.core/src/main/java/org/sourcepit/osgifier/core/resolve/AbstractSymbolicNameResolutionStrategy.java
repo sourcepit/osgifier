@@ -23,10 +23,8 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 /**
  * @author Bernd
  */
-public abstract class AbstractSymbolicNameResolutionStrategy extends AbstractPriorized
-{
-   public boolean isUnambiguous()
-   {
+public abstract class AbstractSymbolicNameResolutionStrategy extends AbstractPriorized {
+   public boolean isUnambiguous() {
       return false;
    }
 

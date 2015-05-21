@@ -35,8 +35,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BundleLocalization extends EObject
-{
+public interface BundleLocalization extends EObject {
    /**
     * Returns the value of the '<em><b>Data</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.context.LocalizedData}.

@@ -27,8 +27,7 @@ import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.common.utils.props.PropertiesSources;
 import org.sourcepit.osgifier.core.headermod.HeaderModifications;
 
-public class ArtifactManifestBuilderRequest
-{
+public class ArtifactManifestBuilderRequest {
    private Artifact artifact;
 
    private Artifact sourceArtifact;
@@ -45,88 +44,71 @@ public class ArtifactManifestBuilderRequest
 
    private HeaderModifications headerModifications;
 
-   public static PropertiesSource toOptions(Map<?, ?> map)
-   {
+   public static PropertiesSource toOptions(Map<?, ?> map) {
       return PropertiesSources.toPropertiesSource(map);
    }
 
-   public static PropertiesSource chainOptions(PropertiesSource... options)
-   {
+   public static PropertiesSource chainOptions(PropertiesSource... options) {
       return PropertiesSources.chain(options);
    }
 
-   public Artifact getArtifact()
-   {
+   public Artifact getArtifact() {
       return artifact;
    }
 
-   public void setArtifact(Artifact artifact)
-   {
+   public void setArtifact(Artifact artifact) {
       this.artifact = artifact;
    }
 
-   public Artifact getSourceArtifact()
-   {
+   public Artifact getSourceArtifact() {
       return sourceArtifact;
    }
 
-   public void setSourceArtifact(Artifact sourceArtifact)
-   {
+   public void setSourceArtifact(Artifact sourceArtifact) {
       this.sourceArtifact = sourceArtifact;
    }
 
-   public List<Artifact> getDependencies()
-   {
+   public List<Artifact> getDependencies() {
       return dependencies;
    }
 
-   public PropertiesSource getOptions()
-   {
+   public PropertiesSource getOptions() {
       return options;
    }
 
-   public void setOptions(PropertiesSource options)
-   {
+   public void setOptions(PropertiesSource options) {
       this.options = options;
    }
 
-   public String getSymbolicName()
-   {
+   public String getSymbolicName() {
       return symbolicName;
    }
 
-   public void setSymbolicName(String symbolicName)
-   {
+   public void setSymbolicName(String symbolicName) {
       this.symbolicName = symbolicName;
    }
 
-   public Date getTimestamp()
-   {
+   public Date getTimestamp() {
       return timestamp;
    }
 
-   public void setTimestamp(Date timestamp)
-   {
+   public void setTimestamp(Date timestamp) {
       this.timestamp = timestamp;
    }
 
-   public Manifest getManifestToMerge()
-   {
+   public Manifest getManifestToMerge() {
       return manifestToMerge;
    }
 
-   public void setManifestToMerge(Manifest manifestToMerge)
-   {
+   public void setManifestToMerge(Manifest manifestToMerge) {
       this.manifestToMerge = manifestToMerge;
    }
 
-   public HeaderModifications getHeaderModifications()
-   {
+   public HeaderModifications getHeaderModifications() {
       return headerModifications;
    }
 
-   public void setHeaderModifications(HeaderModifications headerModifications)
-   {
+   public void setHeaderModifications(HeaderModifications headerModifications) {
       this.headerModifications = headerModifications;
    }
 }

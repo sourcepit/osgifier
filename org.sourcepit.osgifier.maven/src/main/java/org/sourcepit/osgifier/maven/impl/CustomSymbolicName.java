@@ -29,41 +29,33 @@ import org.sourcepit.osgifier.core.resolve.AbstractSymbolicNameResolutionStrateg
 import org.sourcepit.osgifier.core.util.OptionsUtils;
 
 @Named("CustomSymbolicName")
-public class CustomSymbolicName extends AbstractSymbolicNameResolutionStrategy
-{
+public class CustomSymbolicName extends AbstractSymbolicNameResolutionStrategy {
    @Override
-   public Priority getPriority()
-   {
+   public Priority getPriority() {
       return Priority.MAXIMUM;
    }
 
    @Override
-   public boolean isUnambiguous()
-   {
+   public boolean isUnambiguous() {
       return true;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options) {
       final MavenArtifact artifact = bundleCandidate.getExtension(MavenArtifact.class);
-      if (artifact != null)
-      {
+      if (artifact != null) {
          return resolveSymbolicName(artifact.getArtifactKey(), options);
       }
       return null;
    }
 
-   private String resolveSymbolicName(ArtifactKey artifact, PropertiesSource options)
-   {
+   private String resolveSymbolicName(ArtifactKey artifact, PropertiesSource options) {
       final String rawMappings = options.get("osgifier.symbolicNameMappings");
-      if (rawMappings != null)
-      {
+      if (rawMappings != null) {
          final Map<String, String> mappings = OptionsUtils.parseMapValue(rawMappings);
          String artifactKey = artifact.toString();
          String name = mappings.get(artifactKey);
-         if (name == null)
-         {
+         if (name == null) {
             artifactKey = artifactKey.substring(0, artifactKey.lastIndexOf(":"));
             name = mappings.get(artifactKey);
          }

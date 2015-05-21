@@ -37,8 +37,7 @@ import org.sourcepit.common.testing.Workspace;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class RepackagerTest extends InjectedTest
-{
+public class RepackagerTest extends InjectedTest {
    protected Environment env = Environment.get("env-test.properties");
 
    @Rule
@@ -48,8 +47,7 @@ public class RepackagerTest extends InjectedTest
    private Repackager repackager;
 
    @Test
-   public void testInjectManifest() throws Exception
-   {
+   public void testInjectManifest() throws Exception {
       final File jarFile = getResource("lib/stax-api-1.0.1.jar");
       assertTrue(jarFile.canRead());
 
@@ -64,8 +62,7 @@ public class RepackagerTest extends InjectedTest
    }
 
    @Test
-   public void testCopyJarAndInjectManifest() throws Exception
-   {
+   public void testCopyJarAndInjectManifest() throws Exception {
       final File jarFile = getResource("lib/stax-api-1.0.1.jar");
       assertTrue(jarFile.canRead());
 
@@ -82,25 +79,21 @@ public class RepackagerTest extends InjectedTest
       assertEquals("bar", jar.getManifest().getMainAttributes().getValue("Foo"));
    }
 
-   public Environment getEnvironment()
-   {
+   public Environment getEnvironment() {
       return env;
    }
 
-   protected Workspace getWs()
-   {
+   protected Workspace getWs() {
       return ws;
    }
 
-   protected File getResource(String path) throws IOException
-   {
+   protected File getResource(String path) throws IOException {
       File resources = getResourcesDir();
       File resource = new File(resources, path).getCanonicalFile();
       return ws.importFileOrDir(resource);
    }
 
-   protected File getResourcesDir()
-   {
+   protected File getResourcesDir() {
       return getEnvironment().getResourcesDir();
    }
 

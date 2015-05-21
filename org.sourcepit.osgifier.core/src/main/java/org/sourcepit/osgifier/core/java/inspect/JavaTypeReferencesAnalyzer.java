@@ -24,33 +24,26 @@ import org.apache.bcel.classfile.JavaClass;
 import org.sourcepit.common.modeling.Annotation;
 import org.sourcepit.osgifier.core.model.java.JavaType;
 
-public class JavaTypeReferencesAnalyzer implements IJavaTypeAnalyzer
-{
-   public void analyze(JavaType javaType, JavaClass javaClass)
-   {
+public class JavaTypeReferencesAnalyzer implements IJavaTypeAnalyzer {
+   public void analyze(JavaType javaType, JavaClass javaClass) {
       final String superclassName = javaClass.getSuperclassName();
-      if (!isNullOrEmpty(superclassName))
-      {
+      if (!isNullOrEmpty(superclassName)) {
          final Annotation annotation = javaType.getAnnotation("superclassName", true);
          annotation.getReferences().put(superclassName, null);
       }
 
       final String[] interfaceNames = javaClass.getInterfaceNames();
-      if (interfaceNames != null && interfaceNames.length > 0)
-      {
+      if (interfaceNames != null && interfaceNames.length > 0) {
          final Annotation annotation = javaType.getAnnotation("interfaceNames", true);
-         for (String interfaceName : interfaceNames)
-         {
+         for (String interfaceName : interfaceNames) {
             annotation.getReferences().put(interfaceName, null);
          }
       }
 
       final Set<String> refs = JavaTypeReferencesCollector.collect(javaClass);
-      if (!refs.isEmpty())
-      {
+      if (!refs.isEmpty()) {
          final Annotation annotation = javaType.getAnnotation("referencedTypes", true);
-         for (String ref : refs)
-         {
+         for (String ref : refs) {
             annotation.getReferences().put(ref, null);
          }
       }

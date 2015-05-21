@@ -21,24 +21,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public final class OptionsUtils
-{
-   private OptionsUtils()
-   {
+public final class OptionsUtils {
+   private OptionsUtils() {
       super();
    }
 
-   public static Map<String, String> parseMapValue(String mapValue)
-   {
+   public static Map<String, String> parseMapValue(String mapValue) {
       final Map<String, String> mappings = new LinkedHashMap<String, String>();
-      for (String entry : mapValue.split(","))
-      {
+      for (String entry : mapValue.split(",")) {
          final String[] keyToValue = entry.split("=");
-         if (keyToValue.length == 2)
-         {
+         if (keyToValue.length == 2) {
             final String key = keyToValue[0].trim();
-            if (!mappings.containsKey(key))
-            {
+            if (!mappings.containsKey(key)) {
                mappings.put(key, keyToValue[1].trim());
             }
          }
@@ -46,11 +40,9 @@ public final class OptionsUtils
       return mappings;
    }
 
-   public static List<String> parseListValue(String value)
-   {
+   public static List<String> parseListValue(String value) {
       final List<String> list = new ArrayList<String>();
-      for (String entry : value.split(","))
-      {
+      for (String entry : value.split(",")) {
          list.add(entry.trim());
       }
       return list;

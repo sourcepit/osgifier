@@ -16,24 +16,22 @@
 
 package org.sourcepit.osgifier.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.osgifier.core.bundle.RecommendedImportPolicyAppender;
-import org.sourcepit.osgifier.core.bundle.VersionRangePolicy;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 
-public class RecommendedImportPolicyAppenderTest
-{
+public class RecommendedImportPolicyAppenderTest {
 
    @Test
-   public void testGetRecommendedImportPoliciesFromHeader()
-   {
+   public void testGetRecommendedImportPoliciesFromHeader() {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
 
@@ -56,30 +54,25 @@ public class RecommendedImportPolicyAppenderTest
       assertEquals(VersionRangePolicy.ANY, policies[0]);
       assertEquals(VersionRangePolicy.STRICT, policies[1]);
 
-      try
-      {
+      try {
          manifest.setHeader("Osgifier-RecommendedImportPolicy", "any, strict, perfect");
          RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(manifest);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          manifest.setHeader("Osgifier-RecommendedImportPolicy", "foo");
          RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromHeader(manifest);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
    }
 
    @Test
-   public void testGetRecommendedImportPoliciesFromOptions()
-   {
+   public void testGetRecommendedImportPoliciesFromOptions() {
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();
       bundle.setManifest(BundleManifestFactory.eINSTANCE.createBundleManifest());
 
@@ -92,24 +85,20 @@ public class RecommendedImportPolicyAppenderTest
       policies = RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(manifest, options);
       assertNull(policies);
 
-      try
-      {
+      try {
          options.put("osgifier.recommendedImportPolicies", "org.sourcepit.foo=bar");
          RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(manifest, options);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          options.put("osgifier.recommendedImportPolicies", "org.sourcepit.foo=perfect|compatible|any");
          RecommendedImportPolicyAppender.getRecommendedImportPoliciesFromOptions(manifest, options);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       options.put("osgifier.recommendedImportPolicies", "org.sourcepit.foo = perfect ");
@@ -130,8 +119,7 @@ public class RecommendedImportPolicyAppenderTest
    }
 
    @Test
-   public void testGetRecommendedImportPolicyHeader()
-   {
+   public void testGetRecommendedImportPolicyHeader() {
       final RecommendedImportPolicyAppender appender = new RecommendedImportPolicyAppender();
 
       BundleCandidate bundle = ContextModelFactory.eINSTANCE.createBundleCandidate();

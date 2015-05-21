@@ -44,10 +44,8 @@ import org.sourcepit.common.utils.lang.PipedException;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
-import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder;
 
-public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
-{
+public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest {
    @Inject
    private LegacyOsgifierModelBuilder builder;
 
@@ -55,20 +53,17 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
    private LegacySupport legacySupport;
 
    @Override
-   protected Environment newEnvironment()
-   {
+   protected Environment newEnvironment() {
       return Environment.get("env-test.properties");
    }
 
    @Override
-   protected File getResourcesDir()
-   {
+   protected File getResourcesDir() {
       return getEnvironment().getPropertyAsFile("test.resources", true);
    }
 
    @Test
-   public void testProjectWithDependencies() throws Exception
-   {
+   public void testProjectWithDependencies() throws Exception {
       final File projectDir = getResource("projects/project-with-dependencies");
 
       final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"), true);
@@ -76,8 +71,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -119,15 +113,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testProjectWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception
-   {
+   public void testProjectWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception {
       final File projectDir = getResource("projects/project-with-dependencies");
 
       final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"), true);
@@ -135,8 +127,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -179,32 +170,27 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
-   private void assertIsMavenProject(BundleCandidate candidate, String artifactId)
-   {
+   private void assertIsMavenProject(BundleCandidate candidate, String artifactId) {
       assertThat(candidate, notNullValue());
-      org.sourcepit.common.maven.model.MavenProject mProject = candidate
-         .getExtension(org.sourcepit.common.maven.model.MavenProject.class);
+      org.sourcepit.common.maven.model.MavenProject mProject = candidate.getExtension(org.sourcepit.common.maven.model.MavenProject.class);
       assertThat(mProject, notNullValue());
       assertThat(mProject.getArtifactId(), equalTo(artifactId));
       assertThat(mProject.getPackaging(), equalTo("jar"));
    }
 
-   private void assertIsMavenArtifact(BundleCandidate candidate, String artifactId)
-   {
+   private void assertIsMavenArtifact(BundleCandidate candidate, String artifactId) {
       MavenArtifact mArtifact = candidate.getExtension(MavenArtifact.class);
       assertThat(mArtifact, notNullValue());
       assertThat(mArtifact.getArtifactId(), equalTo(artifactId));
    }
 
    @Test
-   public void testProjectWithDependencies_FatBundle() throws Exception
-   {
+   public void testProjectWithDependencies_FatBundle() throws Exception {
       final File projectDir = getResource("projects/project-with-dependencies");
 
       final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"), true);
@@ -212,8 +198,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -257,15 +242,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testArtifactWithDependencies() throws Exception
-   {
+   public void testArtifactWithDependencies() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -275,8 +258,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -305,15 +287,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(true));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testArtifactWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception
-   {
+   public void testArtifactWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -323,8 +303,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -356,15 +335,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testArtifactWithDependencies_FatBundle() throws Exception
-   {
+   public void testArtifactWithDependencies_FatBundle() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -374,8 +351,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -407,15 +383,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testVirtualArtifactWithDependencies() throws Exception
-   {
+   public void testVirtualArtifactWithDependencies() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -425,8 +399,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -442,13 +415,11 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          request.setVirtualArtifact(false);
          request.setResolveDependenciesOfNativeBundles(false);
 
-         try
-         {
+         try {
             builder.build(request);
             Assert.fail();
          }
-         catch (PipedException e)
-         {
+         catch (PipedException e) {
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
@@ -501,15 +472,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testVirtualArtifactWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception
-   {
+   public void testVirtualArtifactWithDependencies_ResolveDependenciesOfNativeBundles() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -519,8 +488,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -535,13 +503,11 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
 
          request.setVirtualArtifact(false);
 
-         try
-         {
+         try {
             builder.build(request);
             Assert.fail();
          }
-         catch (PipedException e)
-         {
+         catch (PipedException e) {
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
@@ -594,15 +560,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testVirtualArtifactWithDependencies_FatBundle() throws Exception
-   {
+   public void testVirtualArtifactWithDependencies_FatBundle() throws Exception {
       MavenExecutionRequest mavenRequest = newMavenExecutionRequest(null);
       mavenRequest.setProjectPresent(false);
 
@@ -612,8 +576,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(1));
 
@@ -631,13 +594,11 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
 
          request.setVirtualArtifact(false);
 
-         try
-         {
+         try {
             builder.build(request);
             Assert.fail();
          }
-         catch (PipedException e)
-         {
+         catch (PipedException e) {
             assertThat(e.adapt(ArtifactNotFoundException.class), notNullValue());
          }
 
@@ -690,15 +651,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          assertThat(candidate.isNativeBundle(), is(false));
          assertThat(candidate.getDependencies().size(), is(0));
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
    @Test
-   public void testReactorBuild() throws Exception
-   {
+   public void testReactorBuild() throws Exception {
       final File projectDir = getResource("projects/bundle-reactor");
 
       final MavenExecutionResult2 result = buildProject(new File(projectDir, "pom.xml"), true);
@@ -706,8 +665,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       final ArtifactRepository localRepository = session.getLocalRepository();
 
       legacySupport.setSession(session);
-      try
-      {
+      try {
          final List<MavenProject> projects = result.getTopologicallySortedProjects();
          assertThat(projects.size(), is(3));
 
@@ -732,15 +690,13 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
          context = buildContext(session, testBundleProject, localRepository);
          assertTestBundleProject(context);
       }
-      finally
-      {
+      finally {
          legacySupport.setSession(null);
       }
    }
 
 
-   private void assertTestBundleProject(OsgifierContext context)
-   {
+   private void assertTestBundleProject(OsgifierContext context) {
       assertThat(context, notNullValue());
 
       EList<BundleCandidate> candidates = context.getBundles();
@@ -753,13 +709,11 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertBundleCandidate(candidate);
    }
 
-   private void assertTestBundleCandidate(BundleCandidate candidate)
-   {
+   private void assertTestBundleCandidate(BundleCandidate candidate) {
       assertThat(candidate, notNullValue());
       assertThat(candidate.isNativeBundle(), is(false));
 
-      org.sourcepit.common.maven.model.MavenProject mProject = candidate
-         .getExtension(org.sourcepit.common.maven.model.MavenProject.class);
+      org.sourcepit.common.maven.model.MavenProject mProject = candidate.getExtension(org.sourcepit.common.maven.model.MavenProject.class);
       assertThat(mProject, notNullValue());
       assertThat(mProject.getArtifactId(), equalTo("org.sourcepit.test.bundle.tests"));
       assertThat(mProject.getPackaging(), equalTo("jar"));
@@ -773,8 +727,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertBundleCandidate(requiredCandidate);
    }
 
-   private void assertBundleProject(OsgifierContext context)
-   {
+   private void assertBundleProject(OsgifierContext context) {
       assertThat(context, notNullValue());
 
       EList<BundleCandidate> candidates = context.getBundles();
@@ -784,13 +737,11 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertBundleCandidate(candidate);
    }
 
-   private void assertBundleCandidate(BundleCandidate candidate)
-   {
+   private void assertBundleCandidate(BundleCandidate candidate) {
       assertThat(candidate, notNullValue());
       assertThat(candidate.isNativeBundle(), is(false));
 
-      org.sourcepit.common.maven.model.MavenProject mProject = candidate
-         .getExtension(org.sourcepit.common.maven.model.MavenProject.class);
+      org.sourcepit.common.maven.model.MavenProject mProject = candidate.getExtension(org.sourcepit.common.maven.model.MavenProject.class);
       assertThat(mProject, notNullValue());
       assertThat(mProject.getArtifactId(), equalTo("org.sourcepit.test.bundle"));
       assertThat(mProject.getPackaging(), equalTo("jar"));
@@ -799,8 +750,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       assertThat(dependencies.size(), is(0));
    }
 
-   private void assertBundleReactor(OsgifierContext context)
-   {
+   private void assertBundleReactor(OsgifierContext context) {
       assertThat(context, notNullValue());
 
       EList<BundleCandidate> candidates = context.getBundles();
@@ -809,8 +759,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
       BundleCandidate candidate = candidates.get(0);
       assertThat(candidate.isNativeBundle(), is(false));
 
-      org.sourcepit.common.maven.model.MavenProject mProject = candidate
-         .getExtension(org.sourcepit.common.maven.model.MavenProject.class);
+      org.sourcepit.common.maven.model.MavenProject mProject = candidate.getExtension(org.sourcepit.common.maven.model.MavenProject.class);
       assertThat(mProject, notNullValue());
       assertThat(mProject.getPackaging(), equalTo("pom"));
 
@@ -819,8 +768,7 @@ public class LegacyOsgifierModelBuilderTest extends EmbeddedMavenEnvironmentTest
    }
 
    private OsgifierContext buildContext(MavenSession session, final MavenProject project,
-      final ArtifactRepository localRepository)
-   {
+      final ArtifactRepository localRepository) {
       session.setCurrentProject(project);
 
       LegacyOsgifierModelBuilder.Request request = new LegacyOsgifierModelBuilder.Request();

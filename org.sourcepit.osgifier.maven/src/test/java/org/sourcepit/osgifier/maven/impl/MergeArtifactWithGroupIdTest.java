@@ -27,17 +27,14 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.maven.impl.MergeArtifactWithGroupId;
 
 /**
  * @author Bernd
  */
-public class MergeArtifactWithGroupIdTest
-{
+public class MergeArtifactWithGroupIdTest {
 
    @Test
-   public void test()
-   {
+   public void test() {
       MavenArtifact mavenArtifact = MavenModelFactory.eINSTANCE.createMavenArtifact();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();

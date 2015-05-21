@@ -16,22 +16,16 @@
 
 package org.sourcepit.osgifier.core.model.java;
 
-import org.sourcepit.osgifier.core.model.java.JavaPackage;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesType;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class JavaPackageOperations
-{
-   private JavaPackageOperations()
-   {
+public final class JavaPackageOperations {
+   private JavaPackageOperations() {
       super();
    }
 
-   public static JavaResourcesType getResourcesType(JavaPackage jPackage)
-   {
+   public static JavaResourcesType getResourcesType(JavaPackage jPackage) {
       final JavaResourcesRoot jResources = jPackage.getResourcesRoot();
       return jResources == null ? null : jResources.getResourcesType();
    }

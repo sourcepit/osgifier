@@ -31,8 +31,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
  * @author Bernd
  */
 @Named
-public class SymbolicNameResolver
-{
+public class SymbolicNameResolver {
    // existing manifest
    // is set
    // artifactId
@@ -46,15 +45,11 @@ public class SymbolicNameResolver
 
    private List<AbstractSymbolicNameResolutionStrategy> ambiguousStartegies;
 
-   private synchronized List<AbstractSymbolicNameResolutionStrategy> getUnambiguousStartegies()
-   {
-      if (unambiguousStartegies == null)
-      {
+   private synchronized List<AbstractSymbolicNameResolutionStrategy> getUnambiguousStartegies() {
+      if (unambiguousStartegies == null) {
          unambiguousStartegies = new ArrayList<AbstractSymbolicNameResolutionStrategy>();
-         for (AbstractSymbolicNameResolutionStrategy strategy : strategiesMap.values())
-         {
-            if (strategy.isUnambiguous())
-            {
+         for (AbstractSymbolicNameResolutionStrategy strategy : strategiesMap.values()) {
+            if (strategy.isUnambiguous()) {
                getUnambiguousStartegies().add(strategy);
             }
          }
@@ -63,15 +58,11 @@ public class SymbolicNameResolver
       return unambiguousStartegies;
    }
 
-   private synchronized List<AbstractSymbolicNameResolutionStrategy> getAmbiguousStartegies()
-   {
-      if (ambiguousStartegies == null)
-      {
+   private synchronized List<AbstractSymbolicNameResolutionStrategy> getAmbiguousStartegies() {
+      if (ambiguousStartegies == null) {
          ambiguousStartegies = new ArrayList<AbstractSymbolicNameResolutionStrategy>();
-         for (AbstractSymbolicNameResolutionStrategy strategy : strategiesMap.values())
-         {
-            if (!strategy.isUnambiguous())
-            {
+         for (AbstractSymbolicNameResolutionStrategy strategy : strategiesMap.values()) {
+            if (!strategy.isUnambiguous()) {
                getAmbiguousStartegies().add(strategy);
             }
          }
@@ -80,40 +71,32 @@ public class SymbolicNameResolver
       return ambiguousStartegies;
    }
 
-   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options) {
       final List<String> symbolicNames = resolveSymbolicNames(bundleCandidate, true, options);
       return symbolicNames.isEmpty() ? null : symbolicNames.get(0);
    }
 
-   public List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, PropertiesSource options) {
       return resolveSymbolicNames(bundleCandidate, false, options);
    }
 
    private List<String> resolveSymbolicNames(BundleCandidate bundleCandidate, final boolean firstHit,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final List<String> symbolicNames = new ArrayList<String>();
       addResolvedNames(getUnambiguousStartegies(), firstHit, bundleCandidate, symbolicNames, options);
-      if (symbolicNames.isEmpty() || !firstHit)
-      {
+      if (symbolicNames.isEmpty() || !firstHit) {
          addResolvedNames(getAmbiguousStartegies(), firstHit, bundleCandidate, symbolicNames, options);
       }
       return symbolicNames;
    }
 
    private void addResolvedNames(List<AbstractSymbolicNameResolutionStrategy> strategies, boolean firstHit,
-      BundleCandidate bundleCandidate, List<String> symbolicNames, PropertiesSource options)
-   {
-      for (AbstractSymbolicNameResolutionStrategy strategy : strategies)
-      {
+      BundleCandidate bundleCandidate, List<String> symbolicNames, PropertiesSource options) {
+      for (AbstractSymbolicNameResolutionStrategy strategy : strategies) {
          final String symbolicName = strategy.resolveSymbolicName(bundleCandidate, options);
-         if (symbolicName != null && !symbolicNames.contains(symbolicName))
-         {
+         if (symbolicName != null && !symbolicNames.contains(symbolicName)) {
             symbolicNames.add(symbolicName);
-            if (firstHit)
-            {
+            if (firstHit) {
                break;
             }
          }

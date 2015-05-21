@@ -31,36 +31,27 @@ import org.sourcepit.osgifier.core.model.java.Resource;
  * @author Bernd
  */
 @Named("ExistingBundleManifestSymbolicName")
-public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class ExistingBundleManifestSymbolicName extends AbstractSymbolicNameResolutionStrategy {
+   public Priority getPriority() {
       return Priority.HIGH;
    }
 
    @Override
-   public boolean isUnambiguous()
-   {
+   public boolean isUnambiguous() {
       return true;
    }
 
    @Override
-   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public String resolveSymbolicName(BundleCandidate bundleCandidate, PropertiesSource options) {
       final JavaResourceBundle jBundle = bundleCandidate.getContent();
-      if (jBundle != null)
-      {
-         for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
-         {
+      if (jBundle != null) {
+         for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots()) {
             Resource resource = jRoot.getResource("META-INF/MANIFEST.MF");
-            if (resource != null)
-            {
+            if (resource != null) {
                final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
-               if (bundleManifest != null)
-               {
+               if (bundleManifest != null) {
                   final BundleSymbolicName bundleSymbolicName = bundleManifest.getBundleSymbolicName();
-                  if (bundleSymbolicName != null)
-                  {
+                  if (bundleSymbolicName != null) {
                      return bundleSymbolicName.getSymbolicName();
                   }
                }

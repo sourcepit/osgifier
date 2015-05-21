@@ -58,8 +58,7 @@ import org.sourcepit.osgifier.maven.context.LegacyOsgifierModelBuilder.NativeBun
 import org.sourcepit.osgifier.p2.P2Publisher;
 
 @Named
-public class P2UpdateSiteGenerator
-{
+public class P2UpdateSiteGenerator {
    public static final String OPTION_FORCE_MANIFEST_GENERATION = "forceManifestGeneration";
    public static final String OPTION_COMPRESS_REPOSITORY = "compressRepository";
    public static final String OPTION_FORKED_PROCESS_TIMEOUT_IN_SECONDS = "forkedProcessTimeoutInSeconds";
@@ -75,16 +74,14 @@ public class P2UpdateSiteGenerator
 
    public OsgifierContext generateUpdateSite(File siteDir, MavenProject project,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       return generateUpdateSite(siteDir, project.getArtifact(), remoteArtifactRepositories, localRepository,
          repositoryName, options);
    }
 
    public OsgifierContext generateUpdateSite(File siteDir, Artifact artifact,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesSource options)
-   {
+      PropertiesSource options) {
       final LegacyOsgifierModelBuilder.Request request = modelBuilder.createBundleRequest(artifact,
          Artifact.SCOPE_COMPILE, false, remoteArtifactRepositories, localRepository);
 
@@ -97,8 +94,7 @@ public class P2UpdateSiteGenerator
 
    public OsgifierContext generateUpdateSite(File siteDir, List<Dependency> dependencies, boolean includeSources,
       List<ArtifactRepository> remoteArtifactRepositories, ArtifactRepository localRepository, String repositoryName,
-      PropertiesSource options, Date startTime, BundleSelector bundleSelector)
-   {
+      PropertiesSource options, Date startTime, BundleSelector bundleSelector) {
       final OsgifierContext model = modelBuilder2.build(new DefaultOsgifierContextInflatorFilter(), options == null
          ? new LinkedPropertiesMap()
          : options, dependencies, startTime);
@@ -114,8 +110,7 @@ public class P2UpdateSiteGenerator
    }
 
    private OsgifierContext generateUpdateSite(final LegacyOsgifierModelBuilder.Request request, File siteDir,
-      String repositoryName, PropertiesSource options, BundleSelector bundleSelector)
-   {
+      String repositoryName, PropertiesSource options, BundleSelector bundleSelector) {
       request.setNativeBundleStrategy(getNativeBundleStrategy(options));
 
       final OsgifierContext bundleContext = modelBuilder.build(request);
@@ -131,34 +126,26 @@ public class P2UpdateSiteGenerator
    }
 
 
-   private NativeBundleStrategy getNativeBundleStrategy(PropertiesSource options)
-   {
+   private NativeBundleStrategy getNativeBundleStrategy(PropertiesSource options) {
       final String forceMfPatterns = options.get(OPTION_FORCE_MANIFEST_GENERATION);
-      if (forceMfPatterns != null)
-      {
+      if (forceMfPatterns != null) {
          final PathMatcher matcher = PathMatcher.parse(forceMfPatterns, ".", ",");
 
-         return new LegacyOsgifierModelBuilder.NativeBundleStrategy()
-         {
-            public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
-            {
+         return new LegacyOsgifierModelBuilder.NativeBundleStrategy() {
+            public boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate) {
                final String symbolicName = getBundleSymbolicName(bundleCandidate);
-               if (symbolicName != null && matcher.isMatch(symbolicName))
-               {
+               if (symbolicName != null && matcher.isMatch(symbolicName)) {
                   return false;
                }
                return LegacyOsgifierModelBuilder.NativeBundleStrategy.DEFAULT.isNativeBundle(artifact, project,
                   bundleCandidate);
             }
 
-            private String getBundleSymbolicName(BundleCandidate bundleCandidate)
-            {
+            private String getBundleSymbolicName(BundleCandidate bundleCandidate) {
                BundleManifest manifest = bundleCandidate.getManifest();
-               if (manifest != null)
-               {
+               if (manifest != null) {
                   BundleSymbolicName bundleSymbolicName = manifest.getBundleSymbolicName();
-                  if (bundleSymbolicName != null)
-                  {
+                  if (bundleSymbolicName != null) {
                      return bundleSymbolicName.getSymbolicName();
                   }
                }
@@ -171,8 +158,7 @@ public class P2UpdateSiteGenerator
    }
 
    private void generateUpdateSite(Collection<BundleCandidate> bundles, File siteDir, String repositoryName,
-      boolean compressRepository, int forkedProcessTimeoutInSeconds)
-   {
+      boolean compressRepository, int forkedProcessTimeoutInSeconds) {
       final File bundlesDir = getCleanDir(siteDir, "plugins");
 
       copyJarsAndInjectManifests(bundles, bundlesDir);
@@ -186,8 +172,7 @@ public class P2UpdateSiteGenerator
       p2Publisher.publishCategories(siteDir, categoryFile, compressRepository, forkedProcessTimeoutInSeconds);
    }
 
-   private static void writeCategoryXml(File categoryFile)
-   {
+   private static void writeCategoryXml(File categoryFile) {
       final StringBuilder sb = new StringBuilder();
       sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
       sb.append("<site>\n");
@@ -200,37 +185,29 @@ public class P2UpdateSiteGenerator
       sb.append("   </iu>\n");
       sb.append("</site>\n");
 
-      new IOOperation<OutputStream>(buffOut(fileOut(categoryFile, true)))
-      {
+      new IOOperation<OutputStream>(buffOut(fileOut(categoryFile, true))) {
          @Override
-         protected void run(OutputStream output) throws IOException
-         {
+         protected void run(OutputStream output) throws IOException {
             IOUtils.copy(new ByteArrayInputStream(sb.toString().getBytes("UTF-8")), output);
          }
       }.run();
    }
 
-   private List<File> copyJarsAndInjectManifests(Collection<BundleCandidate> bundles, final File workDir)
-   {
+   private List<File> copyJarsAndInjectManifests(Collection<BundleCandidate> bundles, final File workDir) {
       List<File> bundleJars = new ArrayList<File>();
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final File bundleJar = new File(workDir, bundle.getSymbolicName() + "_" + bundle.getVersion().toFullString()
             + ".jar");
 
-         if (bundle.isNativeBundle())
-         {
-            try
-            {
+         if (bundle.isNativeBundle()) {
+            try {
                copyFile(bundle.getLocation(), bundleJar);
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                throw pipe(e);
             }
          }
-         else
-         {
+         else {
             repackager.copyJarAndInjectManifest(bundle.getLocation(), bundleJar, bundle.getManifest(),
                bundle.getLocalization());
          }
@@ -240,17 +217,13 @@ public class P2UpdateSiteGenerator
       return bundleJars;
    }
 
-   private static File getCleanDir(File workDir, String name)
-   {
+   private static File getCleanDir(File workDir, String name) {
       final File siteDir = new File(workDir, name);
-      if (siteDir.exists())
-      {
-         try
-         {
+      if (siteDir.exists()) {
+         try {
             deleteFileOrDirectory(siteDir);
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw Exceptions.pipe(e);
          }
       }

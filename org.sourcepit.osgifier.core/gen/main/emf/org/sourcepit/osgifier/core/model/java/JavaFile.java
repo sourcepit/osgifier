@@ -33,8 +33,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model abstract="true"
  * @generated
  */
-public interface JavaFile extends JavaResource, File
-{
+public interface JavaFile extends JavaResource, File {
    /**
     * Returns the value of the '<em><b>Type</b></em>' containment reference.
     * <!-- begin-user-doc -->

@@ -19,40 +19,28 @@ package org.sourcepit.osgifier.core.model.java;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-import java.lang.IllegalArgumentException;
-
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.model.java.Directory;
-import org.sourcepit.osgifier.core.model.java.File;
-import org.sourcepit.osgifier.core.model.java.JavaArchive;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
-import org.sourcepit.osgifier.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaArchiveTest
-{
+public class JavaArchiveTest {
    @Test
-   public void testGetResource()
-   {
+   public void testGetResource() {
       JavaResourcesRoot jRoot = JavaModelFactory.eINSTANCE.createJavaResourcesRoot();
       jRoot.setName(".");
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       jArchive.getResourcesRoots().add(jRoot);
 
-      try
-      {
+      try {
          jArchive.getResource(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(jArchive.getResource("a"), IsNull.nullValue());

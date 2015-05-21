@@ -38,8 +38,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
-public interface JavaModelPackage extends EPackage
-{
+public interface JavaModelPackage extends EPackage {
    /**
     * The package name.
     * <!-- begin-user-doc -->
@@ -1732,8 +1731,7 @@ public interface JavaModelPackage extends EPackage
     * 
     * @generated
     */
-   interface Literals
-   {
+   interface Literals {
       /**
        * The meta object literal for the '{@link org.sourcepit.osgifier.core.model.java.Named <em>Named</em>}' class.
        * <!-- begin-user-doc -->

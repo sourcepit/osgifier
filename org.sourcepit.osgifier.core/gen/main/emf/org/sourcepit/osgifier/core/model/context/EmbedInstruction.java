@@ -32,8 +32,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * @model
  * @generated
  */
-public enum EmbedInstruction implements Enumerator
-{
+public enum EmbedInstruction implements Enumerator {
    /**
     * The '<em><b>NOT</b></em>' literal object.
     * <!-- begin-user-doc -->
@@ -140,13 +139,10 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public static EmbedInstruction get(String literal)
-   {
-      for (int i = 0; i < VALUES_ARRAY.length; ++i)
-      {
+   public static EmbedInstruction get(String literal) {
+      for (int i = 0; i < VALUES_ARRAY.length; ++i) {
          EmbedInstruction result = VALUES_ARRAY[i];
-         if (result.toString().equals(literal))
-         {
+         if (result.toString().equals(literal)) {
             return result;
          }
       }
@@ -160,13 +156,10 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public static EmbedInstruction getByName(String name)
-   {
-      for (int i = 0; i < VALUES_ARRAY.length; ++i)
-      {
+   public static EmbedInstruction getByName(String name) {
+      for (int i = 0; i < VALUES_ARRAY.length; ++i) {
          EmbedInstruction result = VALUES_ARRAY[i];
-         if (result.getName().equals(name))
-         {
+         if (result.getName().equals(name)) {
             return result;
          }
       }
@@ -180,10 +173,8 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public static EmbedInstruction get(int value)
-   {
-      switch (value)
-      {
+   public static EmbedInstruction get(int value) {
+      switch (value) {
          case NOT_VALUE :
             return NOT;
          case UNPACKED_VALUE :
@@ -225,8 +216,7 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   private EmbedInstruction(int value, String name, String literal)
-   {
+   private EmbedInstruction(int value, String name, String literal) {
       this.value = value;
       this.name = name;
       this.literal = literal;
@@ -238,8 +228,7 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public int getValue()
-   {
+   public int getValue() {
       return value;
    }
 
@@ -249,8 +238,7 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public String getName()
-   {
+   public String getName() {
       return name;
    }
 
@@ -260,8 +248,7 @@ public enum EmbedInstruction implements Enumerator
     * 
     * @generated
     */
-   public String getLiteral()
-   {
+   public String getLiteral() {
       return literal;
    }
 
@@ -273,8 +260,7 @@ public enum EmbedInstruction implements Enumerator
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       return literal;
    }
 

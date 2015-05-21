@@ -31,8 +31,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
  * @author bernd
  */
 @Mojo(name = "osgify", defaultPhase = LifecyclePhase.COMPILE, requiresDependencyResolution = ResolutionScope.COMPILE)
-public class OsgifyMojo extends AbstractOsgifyManifestMojo
-{
+public class OsgifyMojo extends AbstractOsgifyManifestMojo {
    @Parameter(defaultValue = "${project.build.outputDirectory}/META-INF/MANIFEST.MF")
    private File manifestFile;
 
@@ -40,25 +39,20 @@ public class OsgifyMojo extends AbstractOsgifyManifestMojo
    private boolean enablePDEWorkaround;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       doExecute(Goal.OSGIFY);
-      if (enablePDEWorkaround)
-      {
-         try
-         {
+      if (enablePDEWorkaround) {
+         try {
             FileUtils.copyFile(manifestFile, new File(project.getBasedir(), "META-INF/MANIFEST.MF"));
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw new IllegalStateException(e);
          }
       }
    }
 
    @Override
-   protected File getManifestFile()
-   {
+   protected File getManifestFile() {
       return manifestFile;
    }
 }

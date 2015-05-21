@@ -19,18 +19,14 @@ package org.sourcepit.osgifier.core.java.internal.impl;
 import org.sourcepit.osgifier.core.model.java.JavaFile;
 import org.sourcepit.osgifier.core.model.java.JavaType;
 
-public final class JavaTypeOperations
-{
-   private JavaTypeOperations()
-   {
+public final class JavaTypeOperations {
+   private JavaTypeOperations() {
       super();
    }
 
-   public static JavaFile getFile(JavaType type)
-   {
+   public static JavaFile getFile(JavaType type) {
       JavaType current = type;
-      while (current.getOuterType() != null)
-      {
+      while (current.getOuterType() != null) {
          current = current.getOuterType();
       }
       return (JavaFile) current.eContainer();

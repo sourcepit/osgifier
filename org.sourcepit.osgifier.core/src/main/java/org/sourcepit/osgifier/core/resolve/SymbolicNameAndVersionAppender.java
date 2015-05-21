@@ -35,8 +35,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
-public class SymbolicNameAndVersionAppender
-{
+public class SymbolicNameAndVersionAppender {
    @Inject
    private SymbolicNameResolver symbolicNameResolver;
 
@@ -46,35 +45,28 @@ public class SymbolicNameAndVersionAppender
    @Inject
    private SymbolicNameConflictResolver nameConflictResolver;
 
-   public void appendSymbolicNamesAndVersion(OsgifierContext osgifierContext, PropertiesSource options)
-   {
+   public void appendSymbolicNamesAndVersion(OsgifierContext osgifierContext, PropertiesSource options) {
       final Map<String, BundleCandidate> keyToBundle = new HashMap<String, BundleCandidate>();
       final List<BundleCandidate> sourceBundles = new ArrayList<BundleCandidate>();
 
       final List<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
 
       // register native keys we cannot override
-      for (BundleCandidate bundle : osgifierContext.getBundles())
-      {
-         if (bundle.isNativeBundle())
-         {
+      for (BundleCandidate bundle : osgifierContext.getBundles()) {
+         if (bundle.isNativeBundle()) {
             keyToBundle.put(getBundleKey(bundle), bundle);
          }
-         else
-         {
+         else {
             bundles.add(bundle);
          }
       }
 
       // for all non-native bundles
-      for (BundleCandidate bundle : bundles)
-      {
-         if (bundle.getTargetBundle() != null)
-         {
+      for (BundleCandidate bundle : bundles) {
+         if (bundle.getTargetBundle() != null) {
             sourceBundles.add(bundle);
          }
-         else
-         {
+         else {
             final BundleManifest manifest = BundleManifestFactory.eINSTANCE.createBundleManifest();
             bundle.setManifest(manifest);
 
@@ -91,39 +83,32 @@ public class SymbolicNameAndVersionAppender
             final String bundleKey = getBundleKey(bundle);
 
             final BundleCandidate conflictBundle = keyToBundle.get(bundleKey);
-            if (conflictBundle == null)
-            {
+            if (conflictBundle == null) {
                keyToBundle.put(bundleKey, bundle);
             }
-            else
-            {
+            else {
                final List<String> conflictNames;
-               if (conflictBundle.isNativeBundle())
-               {
+               if (conflictBundle.isNativeBundle()) {
                   conflictNames = Collections.singletonList(conflictBundle.getSymbolicName());
                }
-               else
-               {
+               else {
                   conflictNames = symbolicNameResolver.resolveSymbolicNames(conflictBundle, options);
                }
 
                final List<String> names = symbolicNameResolver.resolveSymbolicNames(bundle, options);
-               if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names))
-               {
+               if (nameConflictResolver.resolveNameConflict(conflictBundle, conflictNames, bundle, names)) {
                   keyToBundle.remove(bundleKey);
                   keyToBundle.put(getBundleKey(conflictBundle), conflictBundle);
                   keyToBundle.put(getBundleKey(bundle), bundle);
                }
-               else
-               {
+               else {
                   // TODO panic!
                }
             }
          }
       }
 
-      for (BundleCandidate bundle : sourceBundles)
-      {
+      for (BundleCandidate bundle : sourceBundles) {
          final BundleCandidate targetBundle = bundle.getTargetBundle();
          final String symbolicName = targetBundle.getSymbolicName();
          final Version version = targetBundle.getVersion();
@@ -139,8 +124,7 @@ public class SymbolicNameAndVersionAppender
       }
    }
 
-   private static String getBundleKey(BundleCandidate bundle)
-   {
+   private static String getBundleKey(BundleCandidate bundle) {
       return bundle.getSymbolicName() + "_" + bundle.getVersion().toString();
    }
 

@@ -26,20 +26,16 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class TypeReferenceVisitor extends JavaTypeVisitor implements ResourceVisitor
-{
+public abstract class TypeReferenceVisitor extends JavaTypeVisitor implements ResourceVisitor {
    @Override
-   protected void visit(JavaType jType)
-   {
+   protected void visit(JavaType jType) {
       final Annotation annotation = jType.getAnnotation("referencedTypes");
-      if (annotation != null)
-      {
+      if (annotation != null) {
          final Set<String> qualifiedNames = annotation.getReferences().keySet();
          foundTypeReference(jType, qualifiedNames);
       }
 
-      for (JavaType innerJType : jType.getInnerTypes())
-      {
+      for (JavaType innerJType : jType.getInnerTypes()) {
          visit(innerJType);
       }
    }

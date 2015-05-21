@@ -36,8 +36,7 @@ import org.apache.bcel.classfile.Signature;
 import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgifier.core.java.util.JavaLangUtils;
 
-public class JavaTypeReferencesCollector extends EmptyVisitor
-{
+public class JavaTypeReferencesCollector extends EmptyVisitor {
    private ConstantPool constantPool;
 
    private Set<String> refs = new LinkedHashSet<String>();
@@ -45,8 +44,7 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
    private Set<String> ignoredRefs = new LinkedHashSet<String>();
 
    @NotNull
-   public static Set<String> collect(@NotNull JavaClass javaClass)
-   {
+   public static Set<String> collect(@NotNull JavaClass javaClass) {
       JavaTypeReferencesCollector collector = new JavaTypeReferencesCollector();
       new DescendingVisitor(javaClass, collector).visit();
       collector.refs.removeAll(collector.ignoredRefs);
@@ -54,46 +52,38 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
    }
 
    @Override
-   public void visitConstantNameAndType(ConstantNameAndType obj)
-   {
+   public void visitConstantNameAndType(ConstantNameAndType obj) {
       final String signature = obj.getSignature(constantPool);
       processSignature(signature);
    }
 
    @Override
-   public void visitMethod(Method obj)
-   {
+   public void visitMethod(Method obj) {
       processSignature(obj.getSignature());
    }
 
-   public void visitParameterAnnotation(ParameterAnnotations obj)
-   {
-      for (ParameterAnnotationEntry parameterAnnotation : obj.getParameterAnnotationEntries())
-      {
-         for (AnnotationEntry annotation : parameterAnnotation.getAnnotationEntries())
-         {
+   public void visitParameterAnnotation(ParameterAnnotations obj) {
+      for (ParameterAnnotationEntry parameterAnnotation : obj.getParameterAnnotationEntries()) {
+         for (AnnotationEntry annotation : parameterAnnotation.getAnnotationEntries()) {
             visitAnnotationEntry(annotation);
          }
       }
    }
 
    @Override
-   public void visitAnnotationEntry(AnnotationEntry obj)
-   {
+   public void visitAnnotationEntry(AnnotationEntry obj) {
       processSignature(obj.getAnnotationType());
    }
 
    @Override
-   public void visitJavaClass(JavaClass obj)
-   {
+   public void visitJavaClass(JavaClass obj) {
       constantPool = obj.getConstantPool();
 
       String name = obj.getClassName();
       ignoredRefs.add(name);
 
       int idx = name.lastIndexOf('$');
-      while (idx > -1)
-      {
+      while (idx > -1) {
          name = name.substring(0, idx);
          ignoredRefs.add(name);
          idx = name.lastIndexOf('$');
@@ -101,44 +91,36 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
    }
 
    @Override
-   public void visitSignature(Signature obj)
-   {
+   public void visitSignature(Signature obj) {
       processSignature(obj.getSignature());
    }
 
-   private void processSignature(final String signature)
-   {
+   private void processSignature(final String signature) {
       final List<String> typeNames = JavaLangUtils.extractTypeNamesFromSignature(signature);
       refs.addAll(typeNames);
    }
 
    @Override
-   public void visitConstantPool(ConstantPool obj)
-   {
+   public void visitConstantPool(ConstantPool obj) {
       constantPool = obj;
    }
 
    @Override
-   public void visitConstantClass(ConstantClass obj)
-   {
+   public void visitConstantClass(ConstantClass obj) {
       addClassOrArrayClassName((String) obj.getConstantValue(constantPool));
    }
 
    @Override
-   public void visitInnerClass(InnerClass obj)
-   {
+   public void visitInnerClass(InnerClass obj) {
       String name = constantPool.getConstantString(obj.getInnerClassIndex(), Constants.CONSTANT_Class);
       ignoredRefs.add(normalizeTypeName(name));
    }
 
-   private static String normalizeTypeName(String name)
-   {
+   private static String normalizeTypeName(String name) {
       StringBuilder sb = new StringBuilder();
       char[] chars = name.toCharArray();
-      for (char c : chars)
-      {
-         switch (c)
-         {
+      for (char c : chars) {
+         switch (c) {
             case '[' :
                break;
             case '/' :
@@ -151,14 +133,11 @@ public class JavaTypeReferencesCollector extends EmptyVisitor
       return sb.toString();
    }
 
-   private void addClassOrArrayClassName(String name)
-   {
-      if (name.charAt(0) == '[')
-      {
+   private void addClassOrArrayClassName(String name) {
+      if (name.charAt(0) == '[') {
          processSignature(name);
       }
-      else
-      {
+      else {
          refs.add(normalizeTypeName(name));
       }
    }

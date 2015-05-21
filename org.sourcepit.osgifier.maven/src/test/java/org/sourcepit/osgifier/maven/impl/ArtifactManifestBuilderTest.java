@@ -43,15 +43,13 @@ import org.sourcepit.osgifier.maven.ArtifactManifestBuilderRequest;
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
-public class ArtifactManifestBuilderTest extends InjectedTest
-{
+public class ArtifactManifestBuilderTest extends InjectedTest {
    private final Environment env = Environment.get("env-test.properties");
 
    @Rule
    public Workspace ws = newWorkspace();
 
-   protected Workspace newWorkspace()
-   {
+   protected Workspace newWorkspace() {
       return new Workspace(new File(env.getBuildDir(), "ws"), false);
    }
 
@@ -68,28 +66,25 @@ public class ArtifactManifestBuilderTest extends InjectedTest
 
 
    @Override
-   public void configure(Binder binder)
-   {
+   public void configure(Binder binder) {
       super.configure(binder);
       binder.bind(ArtifactHandler.class).annotatedWith(Names.named("jar")).toInstance(new ArtifactHandlerImpl("jar"));
    }
 
    @Before
-   public void setupMocks() throws Exception
-   {
+   public void setupMocks() throws Exception {
       final String groupId = "groupId";
       final String artifactId = "artifactId";
 
-      org.eclipse.aether.artifact.Artifact aetherArtifact = artifactFactory.createArtifact(MavenModelUtils
-         .toArtifactKey(groupId, artifactId, "jar", null, "1"));
+      org.eclipse.aether.artifact.Artifact aetherArtifact = artifactFactory.createArtifact(MavenModelUtils.toArtifactKey(
+         groupId, artifactId, "jar", null, "1"));
 
       artifact = MavenArtifactUtils.toArtifact(aetherArtifact);
       artifact.setFile(ws.newDir(artifact.getArtifactId() + "-" + artifact.getVersion() + "." + artifact.getType()));
    }
 
    @Test
-   public void test()
-   {
+   public void test() {
       ArtifactManifestBuilderRequest request = new ArtifactManifestBuilderRequest();
       request.setArtifact(artifact);
 

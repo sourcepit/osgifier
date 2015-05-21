@@ -58,8 +58,7 @@ import org.sourcepit.osgifier.core.packaging.BundleLocalizationWriter;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "generate-manifest", requiresProject = true, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
-public class GenerateManifestMojo extends AbstractOsgifierMojo
-{
+public class GenerateManifestMojo extends AbstractOsgifierMojo {
    /**
     * Mapping between option name and value. These options will be passed to the OSGifier and are intended to customize
     * the OSGifiers default behavior to your needs.<br>
@@ -161,8 +160,7 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
    private ArtifactManifestBuilder manifestBuilder;
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
       final ArtifactManifestBuilderRequest request = newManifestRequest(project);
@@ -174,48 +172,38 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
       write(bundleOutputDirectory, manifest, result.getBundleLocalization());
 
       final BundleManifest sourceManifest = result.getSourceBundleManifest();
-      if (sourceManifest != null)
-      {
+      if (sourceManifest != null) {
          write(sourceBundleOutputDirectory, sourceManifest, result.getSourceBundleLocalization());
       }
 
-      if (pde)
-      {
+      if (pde) {
          // set as derived
-         try
-         {
+         try {
             copyDirectory(bundleOutputDirectory, project.getBasedir());
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw pipe(e);
          }
       }
    }
 
-   private void write(final File dir, final BundleManifest manifest, final BundleLocalization localization)
-   {
+   private void write(final File dir, final BundleManifest manifest, final BundleLocalization localization) {
       final File manifestFile = new File(dir, JarFile.MANIFEST_NAME);
       writeModel(manifestFile, manifest);
-      if (localization != null)
-      {
-         try
-         {
+      if (localization != null) {
+         try {
             BundleLocalizationWriter.write(dir, manifest, localization);
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw pipe(e);
          }
       }
    }
 
-   private ArtifactManifestBuilderRequest newManifestRequest(final MavenProject project)
-   {
+   private ArtifactManifestBuilderRequest newManifestRequest(final MavenProject project) {
       final ArtifactManifestBuilderRequest request = new ArtifactManifestBuilderRequest();
       request.setArtifact(project.getArtifact());
-      if (!skipSource)
-      {
+      if (!skipSource) {
          request.setSourceArtifact(newProjectArtifact(project, sourceClassifier, "jar"));
       }
       request.getDependencies().addAll(project.getArtifacts());
@@ -230,24 +218,18 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
       return request;
    }
 
-   private PropertiesSource getMojoConfigurationOptions()
-   {
-      if (options == null)
-      {
+   private PropertiesSource getMojoConfigurationOptions() {
+      if (options == null) {
          return PropertiesSources.emptyPropertiesSource();
       }
       return trimKeyPrefix("osgifier.", PropertiesSources.toPropertiesSource(options));
    }
 
-   private static PropertiesSource trimKeyPrefix(final String prefix, final PropertiesSource propertiesSource)
-   {
-      return new AbstractPropertiesSource()
-      {
+   private static PropertiesSource trimKeyPrefix(final String prefix, final PropertiesSource propertiesSource) {
+      return new AbstractPropertiesSource() {
          @Override
-         public String get(String key)
-         {
-            if (key.startsWith(prefix))
-            {
+         public String get(String key) {
+            if (key.startsWith(prefix)) {
                return propertiesSource.get(key.substring(9));
             }
             return null;
@@ -255,8 +237,7 @@ public class GenerateManifestMojo extends AbstractOsgifierMojo
       };
    }
 
-   private Artifact newProjectArtifact(final MavenProject project, String classifier, String type)
-   {
+   private Artifact newProjectArtifact(final MavenProject project, String classifier, String type) {
       org.eclipse.aether.artifact.Artifact artifact = artifactFactory.createArtifact(
          RepositoryUtils.toArtifact(project.getArtifact()), classifier, type);
 

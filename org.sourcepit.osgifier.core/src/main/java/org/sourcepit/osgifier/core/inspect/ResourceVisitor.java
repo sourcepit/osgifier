@@ -23,7 +23,6 @@ import org.sourcepit.common.utils.path.Path;
 /**
  * @author Bernd
  */
-public interface ResourceVisitor
-{
+public interface ResourceVisitor {
    void visit(Path path, boolean isDirectory, InputStream content);
 }

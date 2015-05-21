@@ -42,22 +42,19 @@ import org.eclipse.aether.installation.InstallationException;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "install-osgified-artifacts", defaultPhase = LifecyclePhase.INSTALL)
-public class InstallOsgifiedArtifacts extends AbstractOsgifierMojo
-{
+public class InstallOsgifiedArtifacts extends AbstractOsgifierMojo {
    private final LegacySupport buildContext;
 
    private final RepositorySystem repositorySystem;
 
    @Inject
-   public InstallOsgifiedArtifacts(LegacySupport buildContext, RepositorySystem repositorySystem)
-   {
+   public InstallOsgifiedArtifacts(LegacySupport buildContext, RepositorySystem repositorySystem) {
       this.buildContext = buildContext;
       this.repositorySystem = repositorySystem;
    }
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
       @SuppressWarnings("unchecked")
@@ -67,12 +64,10 @@ public class InstallOsgifiedArtifacts extends AbstractOsgifierMojo
 
       final InstallRequest installRequest = new InstallRequest();
       installRequest.setArtifacts(artifacts);
-      try
-      {
+      try {
          repositorySystem.install(session, installRequest);
       }
-      catch (InstallationException e)
-      {
+      catch (InstallationException e) {
          throw pipe(e);
       }
    }

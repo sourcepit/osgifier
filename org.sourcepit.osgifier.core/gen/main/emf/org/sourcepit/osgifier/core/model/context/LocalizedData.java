@@ -36,8 +36,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface LocalizedData extends EObject
-{
+public interface LocalizedData extends EObject {
    /**
     * Returns the value of the '<em><b>Locale</b></em>' attribute.
     * The default value is <code>"\"\""</code>.

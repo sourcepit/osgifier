@@ -32,25 +32,20 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ManifestHandler extends AbstractJavaResourceHandler
-{
+public class ManifestHandler extends AbstractJavaResourceHandler {
    private static final Path PATH_MANIFEST = new Path("META-INF/MANIFEST.MF");
 
    public boolean handle(JavaResourcesRoot jResources, JavaResourceType type, ReadWriteLock modelLock, Path path,
-      InputStream content)
-   {
-      if (FILE_OUTSIDE_PACKAGE == type && PATH_MANIFEST.equals(path))
-      {
+      InputStream content) {
+      if (FILE_OUTSIDE_PACKAGE == type && PATH_MANIFEST.equals(path)) {
          final Resource resource = new GenericManifestResourceImpl();
-         try
-         {
+         try {
             resource.load(content, null);
             final Manifest manifest = (Manifest) resource.getContents().get(0);
             final File mfFile = getFile(jResources, modelLock, path);
             mfFile.addExtension(manifest);
          }
-         catch (IOException e)
-         { // TODO log warning
+         catch (IOException e) { // TODO log warning
          }
          return true;
       }

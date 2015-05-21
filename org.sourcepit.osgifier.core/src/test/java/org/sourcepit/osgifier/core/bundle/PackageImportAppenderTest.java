@@ -45,9 +45,6 @@ import org.sourcepit.common.manifest.osgi.PackageImport;
 import org.sourcepit.common.manifest.osgi.VersionRange;
 import org.sourcepit.common.utils.props.LinkedPropertiesMap;
 import org.sourcepit.common.utils.props.PropertiesMap;
-import org.sourcepit.osgifier.core.bundle.PackageExportAppender;
-import org.sourcepit.osgifier.core.bundle.PackageImportAppender;
-import org.sourcepit.osgifier.core.bundle.VersionRangePolicy;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
@@ -58,8 +55,7 @@ import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class PackageImportAppenderTest extends InjectedTest
-{
+public class PackageImportAppenderTest extends InjectedTest {
    @Inject
    private PackageExportAppender exportAppender;
 
@@ -67,8 +63,7 @@ public class PackageImportAppenderTest extends InjectedTest
    private PackageImportAppender importAppender;
 
    @Test
-   public void testSortAlphabetically()
-   {
+   public void testSortAlphabetically() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
@@ -92,8 +87,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testImportReferencedPackages()
-   {
+   public void testImportReferencedPackages() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -121,8 +115,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testFilterJavaPackages()
-   {
+   public void testFilterJavaPackages() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleReference ref = ContextModelFactory.eINSTANCE.createBundleReference();
@@ -141,8 +134,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testIgnoreUnresolveablePackages()
-   {
+   public void testIgnoreUnresolveablePackages() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -157,8 +149,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testEquivalentVersionsForPublicSelfImports()
-   {
+   public void testEquivalentVersionsForPublicSelfImports() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -174,8 +165,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testDefaultVersionIfPackageIsExportedWithDefaultVersion()
-   {
+   public void testDefaultVersionIfPackageIsExportedWithDefaultVersion() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -196,8 +186,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testIgnorePlatformFamilyPackages()
-   {
+   public void testIgnorePlatformFamilyPackages() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -209,8 +198,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testUseVersionRangeOfReference()
-   {
+   public void testUseVersionRangeOfReference() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -279,8 +267,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testOptionalReference()
-   {
+   public void testOptionalReference() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -300,8 +287,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testIgnoreUnboundedVersionRange()
-   {
+   public void testIgnoreUnboundedVersionRange() {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -320,8 +306,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testImportOwnExports() throws Exception
-   {
+   public void testImportOwnExports() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -349,8 +334,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testVersionErasureOfKnownEEPackages() throws Exception
-   {
+   public void testVersionErasureOfKnownEEPackages() throws Exception {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       addPackageExport(requiredBundle, "javax.activation", "1.2.3");
 
@@ -378,8 +362,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testVersionErasureOfKnownVendorPackages() throws Exception
-   {
+   public void testVersionErasureOfKnownVendorPackages() throws Exception {
       BundleCandidate requiredBundle = newBundleCandidate(null);
       addPackageExport(requiredBundle, "com.sun.javafx.event", "1.2.3");
 
@@ -407,8 +390,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testCustomVersionRangePolicyForPublicImports() throws Exception
-   {
+   public void testCustomVersionRangePolicyForPublicImports() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.publicImportPolicy", VersionRangePolicy.STRICT.literal());
 
@@ -436,8 +418,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testCustomVersionRangePolicyForInternalImports() throws Exception
-   {
+   public void testCustomVersionRangePolicyForInternalImports() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.internalImportPolicy", VersionRangePolicy.GREATER_OR_EQUAL.literal());
 
@@ -466,8 +447,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testCustomVersionRangePolicyForSelfImports() throws Exception
-   {
+   public void testCustomVersionRangePolicyForSelfImports() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.selfImportPolicy", VersionRangePolicy.ANY.literal());
 
@@ -490,8 +470,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testEraseMicro() throws Exception
-   {
+   public void testEraseMicro() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate requiredBundle = newBundleCandidate(null);
@@ -530,8 +509,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testReimportEmbeddedPackages() throws Exception
-   {
+   public void testReimportEmbeddedPackages() throws Exception {
       final PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
@@ -569,8 +547,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testReimportEmbeddedPackagesWithDep() throws Exception
-   {
+   public void testReimportEmbeddedPackagesWithDep() throws Exception {
       final PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate a = newBundleCandidate("1", newJArchive("a.A"));
@@ -618,8 +595,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testReimportEmbeddedPackagesWithPublicAndInternalPackageRequirement() throws Exception
-   {
+   public void testReimportEmbeddedPackagesWithPublicAndInternalPackageRequirement() throws Exception {
       final PropertiesMap options = new LinkedPropertiesMap();
       options.put("osgifier.internalPackages", "c.internal");
 
@@ -668,8 +644,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRecommendedImportPolicy() throws Exception
-   {
+   public void testRecommendedImportPolicy() throws Exception {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       appendTypeWithReferences(jArchive, "a.A1", 47, "b.B");
       appendTypeWithReferences(jArchive, "a.A2", 47, "c.internal.C");
@@ -743,8 +718,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRecommendedImportPolicyOnSelfImports() throws Exception
-   {
+   public void testRecommendedImportPolicyOnSelfImports() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
@@ -783,8 +757,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRequireBundle() throws Exception
-   {
+   public void testRequireBundle() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate c = newBundle("c", "3");
@@ -826,8 +799,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRequireBundleUsePackageImportsForSelfReferences() throws Exception
-   {
+   public void testRequireBundleUsePackageImportsForSelfReferences() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate a = newBundle("a", "1");
@@ -843,8 +815,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRequireBundleWithInternalPackage() throws Exception
-   {
+   public void testRequireBundleWithInternalPackage() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate b = newBundle("b", "2");
@@ -869,8 +840,7 @@ public class PackageImportAppenderTest extends InjectedTest
    }
 
    @Test
-   public void testRequireBundleWithOptional() throws Exception
-   {
+   public void testRequireBundleWithOptional() throws Exception {
       PropertiesMap options = new LinkedPropertiesMap();
 
       BundleCandidate b = newBundle("b", "2");
@@ -892,8 +862,7 @@ public class PackageImportAppenderTest extends InjectedTest
       assertEquals("a;version=\"[1,1.1)\"", mf.getHeaderValue(IMPORT_PACKAGE));
    }
 
-   private BundleCandidate newBundle(String symbolicName, String version)
-   {
+   private BundleCandidate newBundle(String symbolicName, String version) {
       JavaArchive jArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       BundleCandidate a = newBundleCandidate(version, jArchive);
       a.setSymbolicName(symbolicName);

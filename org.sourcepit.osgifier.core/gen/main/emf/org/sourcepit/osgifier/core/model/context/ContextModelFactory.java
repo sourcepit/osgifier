@@ -27,8 +27,7 @@ import org.eclipse.emf.ecore.EFactory;
  * @see org.sourcepit.osgifier.core.model.context.ContextModelPackage
  * @generated
  */
-public interface ContextModelFactory extends EFactory
-{
+public interface ContextModelFactory extends EFactory {
    /**
     * The singleton instance of the factory.
     * <!-- begin-user-doc -->

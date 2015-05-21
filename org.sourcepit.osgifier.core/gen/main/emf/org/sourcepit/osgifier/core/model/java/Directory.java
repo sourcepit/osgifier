@@ -34,8 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Directory extends Resource
-{
+public interface Directory extends Resource {
    /**
     * Returns the value of the '<em><b>Resources</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.java.Resource}.

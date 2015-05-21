@@ -18,7 +18,6 @@ package org.sourcepit.osgifier.core.inspect;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public enum JavaResourceType
-{
+public enum JavaResourceType {
    PACKAGE, CLASS_FILE, DIRECTORY_IN_PACKAGE, FILE_IN_PACKAGE, DIRECTORY_OUTSIDE_PACKAGE, FILE_OUTSIDE_PACKAGE
 }

@@ -40,50 +40,42 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 
 @Named
-public class PackageResolver
-{
+public class PackageResolver {
    private final BundlePackagesService bundlePackages;
 
    private final ExecutionEnvironmentService environmentService;
 
    @Inject
-   public PackageResolver(BundlePackagesService bundlePackages, ExecutionEnvironmentService environmentService)
-   {
+   public PackageResolver(BundlePackagesService bundlePackages, ExecutionEnvironmentService environmentService) {
       this.bundlePackages = bundlePackages;
       this.environmentService = environmentService;
    }
 
    public final List<PackageResolutionResult> resolveRequiredPackages(BundleCandidate bundle,
-      boolean treatInheritedPackagesAsInternal)
-   {
+      boolean treatInheritedPackagesAsInternal) {
       final Collection<String> referencedPackages = getReferencedPackages(bundle);
 
       final Map<String, List<PackageExportDescription>> packageToExportDescriptions = new LinkedHashMap<String, List<PackageExportDescription>>(
          referencedPackages.size());
-      for (String requiredPackage : referencedPackages)
-      {
+      for (String requiredPackage : referencedPackages) {
          final List<PackageExportDescription> exportes = resolve(bundle, requiredPackage);
-         if (exportes.isEmpty())
-         {
-            final boolean hiddenBundlePackage = bundlePackages.getPackagesInfo(bundle).getContainedPackages()
+         if (exportes.isEmpty()) {
+            final boolean hiddenBundlePackage = bundlePackages.getPackagesInfo(bundle)
+               .getContainedPackages()
                .contains(requiredPackage);
-            if (!hiddenBundlePackage)
-            {
+            if (!hiddenBundlePackage) {
                packageToExportDescriptions.put(requiredPackage, exportes);
             }
          }
-         else
-         {
+         else {
             packageToExportDescriptions.put(requiredPackage, exportes);
          }
       }
 
       final Map<BundleCandidate, AccessRestriction> bundleToAccessRestriction = new HashMap<BundleCandidate, AccessRestriction>();
 
-      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet())
-      {
-         if (!entry.getValue().isEmpty())
-         {
+      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet()) {
+         if (!entry.getValue().isEmpty()) {
             final String requiredPackage = entry.getKey();
             final PackageExportDescription selectedExporter = entry.getValue().get(0);
             updateBundleAccessRestriction(bundleToAccessRestriction, bundle, requiredPackage, selectedExporter,
@@ -93,21 +85,17 @@ public class PackageResolver
 
       final List<PackageResolutionResult> result = new ArrayList<PackageResolutionResult>();
 
-      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet())
-      {
+      for (Entry<String, List<PackageExportDescription>> entry : packageToExportDescriptions.entrySet()) {
          final String requiredPackage = entry.getKey();
          final List<PackageExportDescription> exporters = entry.getValue();
          final PackageExportDescription selectedExporter = exporters.isEmpty() ? null : exporters.get(0);
 
          final AccessRestriction accessRestriction;
-         if (selectedExporter == null)
-         {
+         if (selectedExporter == null) {
             accessRestriction = null;
          }
-         else
-         {
-            switch (selectedExporter.getExporterType())
-            {
+         else {
+            switch (selectedExporter.getExporterType()) {
                case OWN_BUNDLE :
                case REQUIRED_BUNDLE :
                   accessRestriction = bundleToAccessRestriction.get(selectedExporter.getBundle());
@@ -132,30 +120,26 @@ public class PackageResolver
    private void updateBundleAccessRestriction(
       final Map<BundleCandidate, AccessRestriction> bundleToAccessRestrictionMap, BundleCandidate bundle,
       final String requiredPackage, final PackageExportDescription exportDescription,
-      boolean treatInheritedPackagesAsInternal)
-   {
-      if (exportDescription != null)
-      {
+      boolean treatInheritedPackagesAsInternal) {
+      if (exportDescription != null) {
          final PackageExporterType exporterType = exportDescription.getExporterType();
-         if (exporterType == REQUIRED_BUNDLE || exporterType == OWN_BUNDLE)
-         {
+         if (exporterType == REQUIRED_BUNDLE || exporterType == OWN_BUNDLE) {
             final BundleCandidate requiredBundle = exportDescription.getBundle();
 
             final AccessRestriction currentAccessRestriction = bundleToAccessRestrictionMap.get(requiredBundle);
-            if (currentAccessRestriction == null || currentAccessRestriction == NONE)
-            {
+            if (currentAccessRestriction == null || currentAccessRestriction == NONE) {
                final PackageExport packageExport = exportDescription.getPackageExport();
 
                AccessRestriction access = BundleUtils.isInternalPackage(packageExport) ? DISCOURAGED : NONE;
 
-               if (access == NONE && treatInheritedPackagesAsInternal)
-               {
+               if (access == NONE && treatInheritedPackagesAsInternal) {
                   // if our bundle implements classes from a public package we assume that we are providing an api
                   // implementation
-                  final boolean roleProvider = bundlePackages.getPackagesInfo(bundle).getRequiredPackages()
-                     .getInherited().contains(requiredPackage);
-                  if (roleProvider)
-                  {
+                  final boolean roleProvider = bundlePackages.getPackagesInfo(bundle)
+                     .getRequiredPackages()
+                     .getInherited()
+                     .contains(requiredPackage);
+                  if (roleProvider) {
                      access = DISCOURAGED;
                   }
                }
@@ -165,33 +149,27 @@ public class PackageResolver
       }
    }
 
-   private List<PackageExportDescription> resolve(BundleCandidate bundle, String requiredPackage)
-   {
+   private List<PackageExportDescription> resolve(BundleCandidate bundle, String requiredPackage) {
       final List<PackageExportDescription> exporters = new ArrayList<PackageExportDescription>();
 
       // self
       {
          final PackageExport packageExport = getPackageExport(bundle, requiredPackage);
-         if (packageExport != null)
-         {
+         if (packageExport != null) {
             exporters.add(PackageExportDescription.exportedByOwnBundle(bundle, packageExport));
          }
       }
 
       // ee or vendor
       final List<String> requiredEEs = bundle.getManifest().getBundleRequiredExecutionEnvironment();
-      if (requiredEEs != null)
-      {
-         if (environmentService.getIntersectingPackagesByIds(requiredEEs).contains(requiredPackage))
-         {
+      if (requiredEEs != null) {
+         if (environmentService.getIntersectingPackagesByIds(requiredEEs).contains(requiredPackage)) {
             exporters.add(PackageExportDescription.exportedByExecutionEnvironment());
          }
 
-         for (ExecutionEnvironmentImplementation vendor : environmentService.getExecutionEnvironmentImplementations())
-         {
+         for (ExecutionEnvironmentImplementation vendor : environmentService.getExecutionEnvironmentImplementations()) {
             if (requiredEEs.contains(vendor.getExecutionEnvironmentId())
-               && vendor.getVendorPackages().contains(requiredPackage))
-            {
+               && vendor.getVendorPackages().contains(requiredPackage)) {
                exporters.add(PackageExportDescription.exportedByVendor());
                break;
             }
@@ -199,13 +177,11 @@ public class PackageResolver
       }
 
       // dependencies
-      for (BundleReference bundleReference : bundle.getDependencies())
-      {
+      for (BundleReference bundleReference : bundle.getDependencies()) {
          final BundleCandidate requiredBundle = bundleReference.getTarget();
 
          final PackageExport packageExport = getPackageExport(requiredBundle, requiredPackage);
-         if (packageExport != null)
-         {
+         if (packageExport != null) {
             exporters.add(PackageExportDescription.exportedByRequiredBundle(bundleReference, packageExport));
          }
       }
@@ -213,18 +189,15 @@ public class PackageResolver
       return exporters;
    }
 
-   private Collection<String> getReferencedPackages(BundleCandidate bundle)
-   {
+   private Collection<String> getReferencedPackages(BundleCandidate bundle) {
       final PackagesInfo packagesInfo = bundlePackages.getPackagesInfo(bundle);
 
       final Collection<String> requiredPackges = new ArrayList<String>(packagesInfo.getRequiredPackages().getAll());
 
       // add self imports after removing ee packages to add ee packages contributed by our bundle also
       final List<PackageExport> exportPackage = bundle.getManifest().getExportPackage();
-      if (exportPackage != null)
-      {
-         for (PackageExport packageExport : exportPackage)
-         {
+      if (exportPackage != null) {
+         for (PackageExport packageExport : exportPackage) {
             requiredPackges.addAll(packageExport.getPackageNames());
          }
       }
@@ -233,15 +206,11 @@ public class PackageResolver
    }
 
 
-   private static final PackageExport getPackageExport(BundleCandidate requiredBundle, String requiredPackage)
-   {
+   private static final PackageExport getPackageExport(BundleCandidate requiredBundle, String requiredPackage) {
       final List<PackageExport> exportPackage = requiredBundle.getManifest().getExportPackage();
-      if (exportPackage != null)
-      {
-         for (PackageExport packageExport : exportPackage)
-         {
-            if (packageExport.getPackageNames().contains(requiredPackage))
-            {
+      if (exportPackage != null) {
+         for (PackageExport packageExport : exportPackage) {
+            if (packageExport.getPackageNames().contains(requiredPackage)) {
                return packageExport;
             }
          }

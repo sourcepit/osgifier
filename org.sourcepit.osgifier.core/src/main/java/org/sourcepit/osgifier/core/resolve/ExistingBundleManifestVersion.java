@@ -30,33 +30,24 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 import org.sourcepit.osgifier.core.model.java.Resource;
 
 @Named("ExistingBundleManifestVersion")
-public class ExistingBundleManifestVersion extends AbstractVersionResolutionStrategy
-{
-   public Priority getPriority()
-   {
+public class ExistingBundleManifestVersion extends AbstractVersionResolutionStrategy {
+   public Priority getPriority() {
       return Priority.MAXIMUM;
    }
 
    @Override
-   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options)
-   {
+   public Version resolveVersion(BundleCandidate bundleCandidate, PropertiesSource options) {
       final JavaResourceBundle jBundle = bundleCandidate.getContent();
-      if (jBundle != null)
-      {
-         for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots())
-         {
+      if (jBundle != null) {
+         for (JavaResourcesRoot jRoot : jBundle.getResourcesRoots()) {
             final Resource resource = jRoot.getResource("META-INF/MANIFEST.MF");
-            if (resource != null)
-            {
+            if (resource != null) {
                final BundleManifest bundleManifest = resource.getExtension(BundleManifest.class);
-               if (bundleManifest != null)
-               {
+               if (bundleManifest != null) {
                   Version version = bundleManifest.getBundleVersion();
-                  if (version != null)
-                  {
+                  if (version != null) {
                      final String ctxQualifier = options.get("osgifier.forceContextQualifier");
-                     if (!isNullOrEmpty(ctxQualifier))
-                     {
+                     if (!isNullOrEmpty(ctxQualifier)) {
                         version = new Version(version.getMajor(), version.getMinor(), version.getMicro(), ctxQualifier);
                      }
                   }

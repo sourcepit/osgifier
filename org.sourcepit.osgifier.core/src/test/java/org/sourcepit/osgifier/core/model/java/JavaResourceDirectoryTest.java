@@ -26,80 +26,57 @@ import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.modeling.utils.EcoreUtils;
 import org.sourcepit.common.modeling.utils.EcoreUtils.RunnableWithEObject;
-import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
-import org.sourcepit.osgifier.core.model.java.JavaPackage;
-import org.sourcepit.osgifier.core.model.java.JavaResourceDirectory;
-import org.sourcepit.osgifier.core.model.java.JavaType;
-import org.sourcepit.osgifier.core.model.java.Resource;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaResourceDirectoryTest
-{
+public class JavaResourceDirectoryTest {
    @Test
-   public void testGetPackages()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetPackages() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetPackages((JavaResourceDirectory) eObject);
          }
       });
    }
 
-   private void testGetPackages(JavaResourceDirectory jDir)
-   {
-      try
-      {
+   private void testGetPackages(JavaResourceDirectory jDir) {
+      try {
          jDir.getPackages().add(JavaModelFactory.eINSTANCE.createJavaPackage());
          fail("expected unmodifiable EList");
       }
-      catch (UnsupportedOperationException e)
-      {
+      catch (UnsupportedOperationException e) {
       }
    }
 
    @Test
-   public void testGetJavaFiles()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetJavaFiles() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetJavaFiles((JavaResourceDirectory) eObject);
          }
       });
    }
 
-   private void testGetJavaFiles(JavaResourceDirectory jDir)
-   {
-      try
-      {
+   private void testGetJavaFiles(JavaResourceDirectory jDir) {
+      try {
          jDir.getJavaFiles().add(JavaModelFactory.eINSTANCE.createJavaClass());
          fail("expected unmodifiable EList");
       }
-      catch (UnsupportedOperationException e)
-      {
+      catch (UnsupportedOperationException e) {
       }
    }
 
    @Test
-   public void testGetPackage()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
+   public void testGetPackage() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
             testGetPackage((JavaResourceDirectory) eObject);
          }
       });
    }
 
-   private void testGetPackage(JavaResourceDirectory jDir)
-   {
+   private void testGetPackage(JavaResourceDirectory jDir) {
       assertThat(jDir.getPackage("org"), IsNull.nullValue());
 
       JavaPackage org = jDir.getPackage("org", true);
@@ -125,14 +102,10 @@ public class JavaResourceDirectoryTest
    }
 
    @Test
-   public void testGetType()
-   {
-      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject()
-      {
-         public void run(EObject eObject)
-         {
-            if (eObject instanceof JavaPackage)
-            {
+   public void testGetType() {
+      EcoreUtils.foreachSupertype(JavaModelPackage.eINSTANCE.getJavaResourceDirectory(), new RunnableWithEObject() {
+         public void run(EObject eObject) {
+            if (eObject instanceof JavaPackage) {
                // see JavaPackage#getResourcesType()
                JavaModelFactory.eINSTANCE.createJavaResourcesRoot().getResources().add((Resource) eObject);
             }
@@ -141,8 +114,7 @@ public class JavaResourceDirectoryTest
       });
    }
 
-   protected void testGetType(JavaResourceDirectory jDir)
-   {
+   protected void testGetType(JavaResourceDirectory jDir) {
       assertThat(jDir.getType("Foo"), IsNull.nullValue());
 
       JavaType foo = jDir.getType("Foo", true);

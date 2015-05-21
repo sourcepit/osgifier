@@ -27,8 +27,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model abstract="true"
  * @generated
  */
-public interface JavaResource extends Resource, JavaElement
-{
+public interface JavaResource extends Resource, JavaElement {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

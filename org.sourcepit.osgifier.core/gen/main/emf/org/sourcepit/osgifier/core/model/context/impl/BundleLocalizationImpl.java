@@ -42,8 +42,7 @@ import org.sourcepit.osgifier.core.model.context.LocalizedData;
  *
  * @generated
  */
-public class BundleLocalizationImpl extends EObjectImpl implements BundleLocalization
-{
+public class BundleLocalizationImpl extends EObjectImpl implements BundleLocalization {
    /**
     * The cached value of the '{@link #getData() <em>Data</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -61,8 +60,7 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * 
     * @generated
     */
-   protected BundleLocalizationImpl()
-   {
+   protected BundleLocalizationImpl() {
       super();
    }
 
@@ -73,8 +71,7 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return ContextModelPackage.Literals.BUNDLE_LOCALIZATION;
    }
 
@@ -84,10 +81,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * 
     * @generated
     */
-   public EList<LocalizedData> getData()
-   {
-      if (data == null)
-      {
+   public EList<LocalizedData> getData() {
+      if (data == null) {
          data = new EObjectContainmentEList<LocalizedData>(LocalizedData.class, this,
             ContextModelPackage.BUNDLE_LOCALIZATION__DATA);
       }
@@ -100,8 +95,7 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * 
     * @generated
     */
-   public void set(String locale, String key, String value)
-   {
+   public void set(String locale, String key, String value) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -113,8 +107,7 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * 
     * @generated
     */
-   public String get(String locale, String key)
-   {
+   public String get(String locale, String key) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -127,10 +120,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_LOCALIZATION__DATA :
             return ((InternalEList<?>) getData()).basicRemove(otherEnd, msgs);
       }
@@ -144,10 +135,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_LOCALIZATION__DATA :
             return getData();
       }
@@ -162,10 +151,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_LOCALIZATION__DATA :
             getData().clear();
             getData().addAll((Collection<? extends LocalizedData>) newValue);
@@ -181,10 +168,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_LOCALIZATION__DATA :
             getData().clear();
             return;
@@ -199,10 +184,8 @@ public class BundleLocalizationImpl extends EObjectImpl implements BundleLocaliz
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_LOCALIZATION__DATA :
             return data != null && !data.isEmpty();
       }

@@ -19,8 +19,7 @@ package org.sourcepit.osgifier.maven;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.osgifier.core.model.context.BundleLocalization;
 
-public class ArtifactManifestBuilderResult
-{
+public class ArtifactManifestBuilderResult {
    private BundleManifest bundleManifest;
 
    private BundleLocalization bundleLocalization;
@@ -29,55 +28,47 @@ public class ArtifactManifestBuilderResult
 
    private BundleLocalization sourceBundleLocalization;
 
-   public BundleManifest getBundleManifest()
-   {
+   public BundleManifest getBundleManifest() {
       return bundleManifest;
    }
 
-   public void setBundleManifest(BundleManifest bundleManifest)
-   {
+   public void setBundleManifest(BundleManifest bundleManifest) {
       this.bundleManifest = bundleManifest;
    }
 
    /**
     * @since 0.22.0
     */
-   public BundleLocalization getBundleLocalization()
-   {
+   public BundleLocalization getBundleLocalization() {
       return bundleLocalization;
    }
 
    /**
     * @since 0.22.0
     */
-   public void setBundleLocalization(BundleLocalization bundleLocalization)
-   {
+   public void setBundleLocalization(BundleLocalization bundleLocalization) {
       this.bundleLocalization = bundleLocalization;
    }
 
-   public BundleManifest getSourceBundleManifest()
-   {
+   public BundleManifest getSourceBundleManifest() {
       return sourceBundleManifest;
    }
 
-   public void setSourceBundleManifest(BundleManifest sourceBundleManifest)
-   {
+   public void setSourceBundleManifest(BundleManifest sourceBundleManifest) {
       this.sourceBundleManifest = sourceBundleManifest;
    }
 
    /**
     * @since 0.22.0
     */
-   public BundleLocalization getSourceBundleLocalization()
-   {
+   public BundleLocalization getSourceBundleLocalization() {
       return sourceBundleLocalization;
    }
 
    /**
     * @since 0.22.0
     */
-   public void setSourceBundleLocalization(BundleLocalization sourceBundleLocalization)
-   {
+   public void setSourceBundleLocalization(BundleLocalization sourceBundleLocalization) {
       this.sourceBundleLocalization = sourceBundleLocalization;
    }
 }

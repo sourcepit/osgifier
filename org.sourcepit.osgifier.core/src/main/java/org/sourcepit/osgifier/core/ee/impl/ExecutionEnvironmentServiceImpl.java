@@ -44,8 +44,7 @@ import org.sourcepit.osgifier.core.ee.ExecutionEnvironmentService;
  */
 @Named
 @Singleton
-public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentService
-{
+public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentService {
    private static final Logger LOGGER = LoggerFactory.getLogger(ExecutionEnvironmentServiceImpl.class);
 
    private final Map<String, ExecutionEnvironment> executionEnvironmentsMap = new HashMap<String, ExecutionEnvironment>();
@@ -56,28 +55,21 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       ArrayList.class);
 
    @Inject
-   public ExecutionEnvironmentServiceImpl(List<ExecutionEnvironmentContributor> contributors)
-   {
+   public ExecutionEnvironmentServiceImpl(List<ExecutionEnvironmentContributor> contributors) {
       initializeExecutionEnvironments(contributors);
       initializeImplementations(contributors);
    }
 
-   private void initializeExecutionEnvironments(List<ExecutionEnvironmentContributor> contributors)
-   {
-      for (ExecutionEnvironmentContributor contributor : contributors)
-      {
+   private void initializeExecutionEnvironments(List<ExecutionEnvironmentContributor> contributors) {
+      for (ExecutionEnvironmentContributor contributor : contributors) {
          final List<ExecutionEnvironment> ees = contributor.getExecutionEnvironments();
-         if (ees != null)
-         {
-            for (ExecutionEnvironment ee : ees)
-            {
+         if (ees != null) {
+            for (ExecutionEnvironment ee : ees) {
                final String eeId = ee.getId();
-               if (executionEnvironmentsMap.containsKey(eeId))
-               {
+               if (executionEnvironmentsMap.containsKey(eeId)) {
                   LOGGER.debug("ExecutionEnvironment {} is already registered", eeId);
                }
-               else
-               {
+               else {
                   executionEnvironmentsMap.put(eeId, ee);
                   LOGGER.debug("Registered execution environment {}", eeId);
                }
@@ -88,22 +80,16 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       Collections.sort(executionEnvironmentsList);
    }
 
-   private void initializeImplementations(List<ExecutionEnvironmentContributor> contributors)
-   {
-      for (ExecutionEnvironmentContributor contributor : contributors)
-      {
+   private void initializeImplementations(List<ExecutionEnvironmentContributor> contributors) {
+      for (ExecutionEnvironmentContributor contributor : contributors) {
          final List<ExecutionEnvironmentImplementation> eeImpls = contributor.getExecutionEnvironmentImplementations();
-         if (eeImpls != null)
-         {
-            for (ExecutionEnvironmentImplementation eeImpl : eeImpls)
-            {
+         if (eeImpls != null) {
+            for (ExecutionEnvironmentImplementation eeImpl : eeImpls) {
                final String eeId = eeImpl.getExecutionEnvironmentId();
-               if (executionEnvironmentsMap.containsKey(eeId))
-               {
+               if (executionEnvironmentsMap.containsKey(eeId)) {
                   executionEnvironmentImpls.get(eeId, true).add(eeImpl);
                }
-               else
-               {
+               else {
                   LOGGER.warn("Execution environment {} is not registered. Ignoring implementation of vendor {}", eeId,
                      eeImpl.getVendor());
                }
@@ -112,56 +98,45 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       }
    }
 
-   public List<ExecutionEnvironment> getExecutionEnvironments()
-   {
+   public List<ExecutionEnvironment> getExecutionEnvironments() {
       return executionEnvironmentsList;
    }
 
-   public List<ExecutionEnvironment> getCompatibleExecutionEnvironments(ExecutionEnvironment executionEnvironment)
-   {
+   public List<ExecutionEnvironment> getCompatibleExecutionEnvironments(ExecutionEnvironment executionEnvironment) {
       final List<ExecutionEnvironment> compatibles = new ArrayList<ExecutionEnvironment>();
       collectCompatibleExecutionEnvironments(compatibles, executionEnvironment);
       return compatibles;
    }
 
    private void collectCompatibleExecutionEnvironments(final List<ExecutionEnvironment> compatibles,
-      ExecutionEnvironment executionEnvironment)
-   {
-      for (ExecutionEnvironment candidateExecEnv : getExecutionEnvironments())
-      {
+      ExecutionEnvironment executionEnvironment) {
+      for (ExecutionEnvironment candidateExecEnv : getExecutionEnvironments()) {
          final String targetId = candidateExecEnv.getId();
          final String candidateId = executionEnvironment.getId();
 
-         if (!targetId.equals(candidateId) && isCompatible(candidateExecEnv, executionEnvironment))
-         {
+         if (!targetId.equals(candidateId) && isCompatible(candidateExecEnv, executionEnvironment)) {
             compatibles.add(candidateExecEnv);
          }
       }
    }
 
-   public List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations()
-   {
+   public List<ExecutionEnvironmentImplementation> getExecutionEnvironmentImplementations() {
       final List<ExecutionEnvironmentImplementation> result = new ArrayList<ExecutionEnvironmentImplementation>();
-      for (ExecutionEnvironment execEnv : getExecutionEnvironments())
-      {
+      for (ExecutionEnvironment execEnv : getExecutionEnvironments()) {
          result.addAll(executionEnvironmentImpls.get(execEnv.getId(), true));
       }
       return result;
    }
 
-   public boolean isCompatible(@NotNull ExecutionEnvironment ee1, @NotNull ExecutionEnvironment ee2)
-   {
+   public boolean isCompatible(@NotNull ExecutionEnvironment ee1, @NotNull ExecutionEnvironment ee2) {
       return ee1.isCompatibleWith(ee2);
    }
 
-   public List<ExecutionEnvironment> getExecutionEnvironments(@NotNull Collection<String> executionEnvironmentIds)
-   {
+   public List<ExecutionEnvironment> getExecutionEnvironments(@NotNull Collection<String> executionEnvironmentIds) {
       List<ExecutionEnvironment> execEnvs = new ArrayList<ExecutionEnvironment>();
-      for (String id : executionEnvironmentIds)
-      {
+      for (String id : executionEnvironmentIds) {
          ExecutionEnvironment execEnv = getExecutionEnvironment(id);
-         if (execEnv == null)
-         {
+         if (execEnv == null) {
             throw new IllegalArgumentException("no execution environment registered for id " + id);
          }
          execEnvs.add(execEnv);
@@ -169,23 +144,19 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       return execEnvs;
    }
 
-   public ExecutionEnvironment getExecutionEnvironment(@NotNull String executionEnvironmentId)
-   {
+   public ExecutionEnvironment getExecutionEnvironment(@NotNull String executionEnvironmentId) {
       return executionEnvironmentsMap.get(executionEnvironmentId);
    }
 
    @Override
-   public List<String> getIntersectingPackagesByIds(Collection<String> executionEnvironmentIds)
-   {
+   public List<String> getIntersectingPackagesByIds(Collection<String> executionEnvironmentIds) {
       return getIntersectingPackages(getExecutionEnvironments(executionEnvironmentIds));
    }
 
    @Override
-   public List<String> getIntersectingPackages(Collection<ExecutionEnvironment> executionEnvironments)
-   {
+   public List<String> getIntersectingPackages(Collection<ExecutionEnvironment> executionEnvironments) {
       final List<Collection<String>> packages = new ArrayList<Collection<String>>(executionEnvironments.size());
-      for (ExecutionEnvironment executionEnvironment : executionEnvironments)
-      {
+      for (ExecutionEnvironment executionEnvironment : executionEnvironments) {
          packages.add(executionEnvironment.getPackages());
       }
       final List<String> result = new ArrayList<String>(newIntersection(packages));
@@ -193,15 +164,12 @@ public class ExecutionEnvironmentServiceImpl implements ExecutionEnvironmentServ
       return result;
    }
 
-   static <T> Set<T> newIntersection(Collection<Collection<T>> collections)
-   {
+   static <T> Set<T> newIntersection(Collection<Collection<T>> collections) {
       final Set<T> intersection = new HashSet<T>();
       final Iterator<Collection<T>> it = collections.iterator();
-      if (it.hasNext())
-      {
+      if (it.hasNext()) {
          intersection.addAll(it.next());
-         while (it.hasNext())
-         {
+         while (it.hasNext()) {
             intersection.retainAll(it.next());
          }
       }

@@ -31,30 +31,24 @@ import org.sourcepit.osgifier.core.model.context.BundleReference;
  * @author Bernd
  */
 @Named
-public class VersionRangeResolver
-{
+public class VersionRangeResolver {
    @Inject
    private Map<String, AbstractVersionRangeResolutionStrategy> strategiesMap;
 
    private List<AbstractVersionRangeResolutionStrategy> strategies;
 
-   public VersionRange resolveVersionRange(BundleReference bundleReference)
-   {
-      for (AbstractVersionRangeResolutionStrategy strategy : getStrategies())
-      {
+   public VersionRange resolveVersionRange(BundleReference bundleReference) {
+      for (AbstractVersionRangeResolutionStrategy strategy : getStrategies()) {
          final VersionRange versionRange = strategy.resolveVersionRange(bundleReference);
-         if (versionRange != null)
-         {
+         if (versionRange != null) {
             return versionRange;
          }
       }
       return VersionRange.INFINITE_RANGE;
    }
 
-   private synchronized List<AbstractVersionRangeResolutionStrategy> getStrategies()
-   {
-      if (strategies == null)
-      {
+   private synchronized List<AbstractVersionRangeResolutionStrategy> getStrategies() {
+      if (strategies == null) {
          strategies = new ArrayList<AbstractVersionRangeResolutionStrategy>(strategiesMap.values());
          Collections.sort(strategies);
       }

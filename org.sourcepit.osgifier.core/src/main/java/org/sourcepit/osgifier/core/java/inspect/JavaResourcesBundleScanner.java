@@ -35,61 +35,50 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
 import org.sourcepit.osgifier.core.util.RelativeDirectoryTraverser;
 import org.sourcepit.osgifier.core.util.ZipTraverser;
 
-public class JavaResourcesBundleScanner
-{
+public class JavaResourcesBundleScanner {
    private Collection<? extends IJavaTypeAnalyzer> typeAnalyzers;
 
-   public void setJavaTypeAnalyzer(Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
+   public void setJavaTypeAnalyzer(Collection<? extends IJavaTypeAnalyzer> typeAnalyzers) {
       this.typeAnalyzers = typeAnalyzers;
    }
 
-   public JavaArchive scan(@NotNull File jarFile)
-   {
+   public JavaArchive scan(@NotNull File jarFile) {
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       scan(javaArchive, jarFile, typeAnalyzers);
       return javaArchive;
    }
 
-   public JavaArchive scan(@NotNull File jarFile, final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
+   public JavaArchive scan(@NotNull File jarFile, final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers) {
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
       scan(javaArchive, jarFile, typeAnalyzers);
       return javaArchive;
    }
 
    public void scan(@NotNull final JavaArchive javaArchive, @NotNull File jarFile,
-      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers) {
       new ZipTraverser(jarFile).travers(newJavaResourceVisitor(javaArchive, "", typeAnalyzers));
    }
 
-   public JavaProject scan(@NotNull File projectDir, String... binDirPaths)
-   {
+   public JavaProject scan(@NotNull File projectDir, String... binDirPaths) {
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
       scan(javaProject, projectDir, typeAnalyzers, binDirPaths);
       return javaProject;
    }
 
    public JavaProject scan(@NotNull File projectDir, final Collection<IJavaTypeAnalyzer> typeAnalyzers,
-      String... binDirPaths)
-   {
+      String... binDirPaths) {
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
       scan(javaProject, projectDir, typeAnalyzers, binDirPaths);
       return javaProject;
    }
 
    public void scan(@NotNull final JavaProject javaProject, @NotNull File projectDir,
-      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers, String... binDirPaths)
-   {
-      if (binDirPaths == null || binDirPaths.length == 0)
-      {
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers, String... binDirPaths) {
+      if (binDirPaths == null || binDirPaths.length == 0) {
          investigateBinDirectory(javaProject, "", projectDir, typeAnalyzers);
       }
-      else
-      {
-         for (final String binDirPath : binDirPaths)
-         {
+      else {
+         for (final String binDirPath : binDirPaths) {
             final File binDir = new File(projectDir, binDirPath);
             investigateBinDirectory(javaProject, binDirPath, binDir, typeAnalyzers);
          }
@@ -97,20 +86,17 @@ public class JavaResourcesBundleScanner
    }
 
    private void investigateBinDirectory(final JavaProject javaProject, final String binDirPath, final File binDir,
-      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers) {
       new RelativeDirectoryTraverser(binDir).travers(newJavaResourceVisitor(javaProject, binDirPath, typeAnalyzers));
    }
 
    protected JavaResourceVisitor newJavaResourceVisitor(final JavaResourceBundle javaBundle, String rootName,
-      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers)
-   {
+      final Collection<? extends IJavaTypeAnalyzer> typeAnalyzers) {
       final ReadWriteLock rwLock = new ReentrantReadWriteLock(false);
 
       final JavaResourceVisitor visitor = new JavaResourceVisitor(javaBundle, rootName, rwLock);
       final JavaClassFileHandler classFileHandler = new JavaClassFileHandler();
-      if (typeAnalyzers != null)
-      {
+      if (typeAnalyzers != null) {
          classFileHandler.getTypeAnalyzers().addAll(typeAnalyzers);
       }
       visitor.getResourceHandlers().add(classFileHandler);

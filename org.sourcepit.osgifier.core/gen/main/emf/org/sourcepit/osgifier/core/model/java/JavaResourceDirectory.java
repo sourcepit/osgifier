@@ -28,8 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface JavaResourceDirectory extends JavaElement, Directory
-{
+public interface JavaResourceDirectory extends JavaElement, Directory {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

@@ -34,8 +34,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface JavaResourcesRoot extends JavaResourceDirectory
-{
+public interface JavaResourcesRoot extends JavaResourceDirectory {
    /**
     * Returns the value of the '<em><b>Package Bundle</b></em>' container reference.
     * It is bidirectional and its opposite is '

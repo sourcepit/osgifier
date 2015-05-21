@@ -35,8 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface JavaType extends QualifiedJavaElement
-{
+public interface JavaType extends QualifiedJavaElement {
    /**
     * Returns the value of the '<em><b>Inner Types</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.java.JavaType}.

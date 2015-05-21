@@ -35,8 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface JavaCompilationUnit extends JavaFile
-{
+public interface JavaCompilationUnit extends JavaFile {
    /**
     * Returns the value of the '<em><b>Import Declarations</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.java.ImportDeclaration}.

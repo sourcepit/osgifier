@@ -24,53 +24,43 @@ import java.util.Map;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Matcher;
 
-public class TypeA
-{
+public class TypeA {
    private Object o;
 
-   public Object getO()
-   {
+   public Object getO() {
       new String().charAt(0);
 
       Boolean b = new Boolean(false);
-      if (b.booleanValue())
-      {
+      if (b.booleanValue()) {
          return null;
       }
       return o;
    }
 
-   public static class Hans<E>
-   {
+   public static class Hans<E> {
       private Long[][] i = new Long[1][8];
 
       private Map<Short[], Boolean[][][]> map = new HashMap<Short[], Boolean[][][]>();
 
-      private Runnable r = new Runnable()
-      {
-         public void run()
-         {
+      private Runnable r = new Runnable() {
+         public void run() {
             Collection<Boolean[][][]> values = map.values();
             values.clear();
             Long.valueOf(i[0][0]);
          }
       };
 
-      public BaseMatcher<E> and(Matcher<? extends E> matcher)
-      {
+      public BaseMatcher<E> and(Matcher<? extends E> matcher) {
          return null;
       }
 
-      public Hans()
-      {
+      public Hans() {
          r.run();
 
          final Integer[] i = new Integer[1];
 
-         new Comparator<String>()
-         {
-            public int compare(String o1, String o2)
-            {
+         new Comparator<String>() {
+            public int compare(String o1, String o2) {
                return i[0];
             }
          }.compare(null, null);

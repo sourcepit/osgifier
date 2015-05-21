@@ -33,9 +33,6 @@ import org.sourcepit.common.manifest.Manifest;
 import org.sourcepit.common.manifest.ManifestFactory;
 import org.sourcepit.common.manifest.resource.ManifestResourceImpl;
 import org.sourcepit.common.utils.path.Path;
-import org.sourcepit.osgifier.core.inspect.DefaultFileHandler;
-import org.sourcepit.osgifier.core.inspect.JavaResourceVisitor;
-import org.sourcepit.osgifier.core.inspect.ManifestHandler;
 import org.sourcepit.osgifier.core.model.java.Directory;
 import org.sourcepit.osgifier.core.model.java.File;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
@@ -43,12 +40,10 @@ import org.sourcepit.osgifier.core.model.java.JavaProject;
 import org.sourcepit.osgifier.core.model.java.JavaResourceDirectory;
 import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 
-public class JavaResourceVisitorTest
-{
+public class JavaResourceVisitorTest {
 
    @Test
-   public void testVisitManifestMF() throws Exception
-   {
+   public void testVisitManifestMF() throws Exception {
       final JavaProject jProject = JavaModelFactory.eINSTANCE.createJavaProject();
 
       JavaResourceVisitor visitor = new JavaResourceVisitor(jProject, "", new ReentrantReadWriteLock());
@@ -80,8 +75,7 @@ public class JavaResourceVisitorTest
    }
 
    @Test
-   public void testVisitFile()
-   {
+   public void testVisitFile() {
       final JavaProject jProject = JavaModelFactory.eINSTANCE.createJavaProject();
       JavaResourceVisitor visitor = new JavaResourceVisitor(jProject, "", new ReentrantReadWriteLock());
       visitor.getResourceHandlers().add(new DefaultFileHandler());

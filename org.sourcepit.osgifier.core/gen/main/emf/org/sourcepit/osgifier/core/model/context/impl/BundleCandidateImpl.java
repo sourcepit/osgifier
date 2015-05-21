@@ -61,8 +61,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
  *
  * @generated
  */
-public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate
-{
+public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandidate {
    /**
     * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -223,8 +222,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   protected BundleCandidateImpl()
-   {
+   protected BundleCandidateImpl() {
       super();
    }
 
@@ -235,8 +233,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return ContextModelPackage.Literals.BUNDLE_CANDIDATE;
    }
 
@@ -246,8 +243,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public File getLocation()
-   {
+   public File getLocation() {
       return location;
    }
 
@@ -257,8 +253,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setLocation(File newLocation)
-   {
+   public void setLocation(File newLocation) {
       File oldLocation = location;
       location = newLocation;
       if (eNotificationRequired())
@@ -272,8 +267,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public JavaResourceBundle getContent()
-   {
+   public JavaResourceBundle getContent() {
       return content;
    }
 
@@ -283,12 +277,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetContent(JavaResourceBundle newContent, NotificationChain msgs)
-   {
+   public NotificationChain basicSetContent(JavaResourceBundle newContent, NotificationChain msgs) {
       JavaResourceBundle oldContent = content;
       content = newContent;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             ContextModelPackage.BUNDLE_CANDIDATE__CONTENT, oldContent, newContent);
          if (msgs == null)
@@ -305,10 +297,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setContent(JavaResourceBundle newContent)
-   {
-      if (newContent != content)
-      {
+   public void setContent(JavaResourceBundle newContent) {
+      if (newContent != content) {
          NotificationChain msgs = null;
          if (content != null)
             msgs = ((InternalEObject) content).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -331,10 +321,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public EList<BundleReference> getDependencies()
-   {
-      if (dependencies == null)
-      {
+   public EList<BundleReference> getDependencies() {
+      if (dependencies == null) {
          dependencies = new EObjectContainmentEList<BundleReference>(BundleReference.class, this,
             ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES);
       }
@@ -347,8 +335,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public Version getVersion()
-   {
+   public Version getVersion() {
       return version;
    }
 
@@ -358,8 +345,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setVersion(Version newVersion)
-   {
+   public void setVersion(Version newVersion) {
       Version oldVersion = version;
       version = newVersion;
       if (eNotificationRequired())
@@ -373,8 +359,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public String getSymbolicName()
-   {
+   public String getSymbolicName() {
       return symbolicName;
    }
 
@@ -384,8 +369,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setSymbolicName(String newSymbolicName)
-   {
+   public void setSymbolicName(String newSymbolicName) {
       String oldSymbolicName = symbolicName;
       symbolicName = newSymbolicName;
       if (eNotificationRequired())
@@ -399,8 +383,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public boolean isNativeBundle()
-   {
+   public boolean isNativeBundle() {
       return nativeBundle;
    }
 
@@ -410,8 +393,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setNativeBundle(boolean newNativeBundle)
-   {
+   public void setNativeBundle(boolean newNativeBundle) {
       boolean oldNativeBundle = nativeBundle;
       nativeBundle = newNativeBundle;
       if (eNotificationRequired())
@@ -425,8 +407,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleManifest getManifest()
-   {
+   public BundleManifest getManifest() {
       return manifest;
    }
 
@@ -436,12 +417,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetManifest(BundleManifest newManifest, NotificationChain msgs)
-   {
+   public NotificationChain basicSetManifest(BundleManifest newManifest, NotificationChain msgs) {
       BundleManifest oldManifest = manifest;
       manifest = newManifest;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             ContextModelPackage.BUNDLE_CANDIDATE__MANIFEST, oldManifest, newManifest);
          if (msgs == null)
@@ -458,10 +437,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setManifest(BundleManifest newManifest)
-   {
-      if (newManifest != manifest)
-      {
+   public void setManifest(BundleManifest newManifest) {
+      if (newManifest != manifest) {
          NotificationChain msgs = null;
          if (manifest != null)
             msgs = ((InternalEObject) manifest).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -484,8 +461,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleLocalization getLocalization()
-   {
+   public BundleLocalization getLocalization() {
       return localization;
    }
 
@@ -495,12 +471,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetLocalization(BundleLocalization newLocalization, NotificationChain msgs)
-   {
+   public NotificationChain basicSetLocalization(BundleLocalization newLocalization, NotificationChain msgs) {
       BundleLocalization oldLocalization = localization;
       localization = newLocalization;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             ContextModelPackage.BUNDLE_CANDIDATE__LOCALIZATION, oldLocalization, newLocalization);
          if (msgs == null)
@@ -517,10 +491,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setLocalization(BundleLocalization newLocalization)
-   {
-      if (newLocalization != localization)
-      {
+   public void setLocalization(BundleLocalization newLocalization) {
+      if (newLocalization != localization) {
          NotificationChain msgs = null;
          if (localization != null)
             msgs = ((InternalEObject) localization).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
@@ -543,14 +515,11 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleCandidate getSourceBundle()
-   {
-      if (sourceBundle != null && sourceBundle.eIsProxy())
-      {
+   public BundleCandidate getSourceBundle() {
+      if (sourceBundle != null && sourceBundle.eIsProxy()) {
          InternalEObject oldSourceBundle = (InternalEObject) sourceBundle;
          sourceBundle = (BundleCandidate) eResolveProxy(oldSourceBundle);
-         if (sourceBundle != oldSourceBundle)
-         {
+         if (sourceBundle != oldSourceBundle) {
             if (eNotificationRequired())
                eNotify(new ENotificationImpl(this, Notification.RESOLVE,
                   ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, oldSourceBundle, sourceBundle));
@@ -565,8 +534,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleCandidate basicGetSourceBundle()
-   {
+   public BundleCandidate basicGetSourceBundle() {
       return sourceBundle;
    }
 
@@ -576,12 +544,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetSourceBundle(BundleCandidate newSourceBundle, NotificationChain msgs)
-   {
+   public NotificationChain basicSetSourceBundle(BundleCandidate newSourceBundle, NotificationChain msgs) {
       BundleCandidate oldSourceBundle = sourceBundle;
       sourceBundle = newSourceBundle;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE, oldSourceBundle, newSourceBundle);
          if (msgs == null)
@@ -598,10 +564,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setSourceBundle(BundleCandidate newSourceBundle)
-   {
-      if (newSourceBundle != sourceBundle)
-      {
+   public void setSourceBundle(BundleCandidate newSourceBundle) {
+      if (newSourceBundle != sourceBundle) {
          NotificationChain msgs = null;
          if (sourceBundle != null)
             msgs = ((InternalEObject) sourceBundle).eInverseRemove(this,
@@ -624,14 +588,11 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleCandidate getTargetBundle()
-   {
-      if (targetBundle != null && targetBundle.eIsProxy())
-      {
+   public BundleCandidate getTargetBundle() {
+      if (targetBundle != null && targetBundle.eIsProxy()) {
          InternalEObject oldTargetBundle = (InternalEObject) targetBundle;
          targetBundle = (BundleCandidate) eResolveProxy(oldTargetBundle);
-         if (targetBundle != oldTargetBundle)
-         {
+         if (targetBundle != oldTargetBundle) {
             if (eNotificationRequired())
                eNotify(new ENotificationImpl(this, Notification.RESOLVE,
                   ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, oldTargetBundle, targetBundle));
@@ -646,8 +607,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public BundleCandidate basicGetTargetBundle()
-   {
+   public BundleCandidate basicGetTargetBundle() {
       return targetBundle;
    }
 
@@ -657,12 +617,10 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public NotificationChain basicSetTargetBundle(BundleCandidate newTargetBundle, NotificationChain msgs)
-   {
+   public NotificationChain basicSetTargetBundle(BundleCandidate newTargetBundle, NotificationChain msgs) {
       BundleCandidate oldTargetBundle = targetBundle;
       targetBundle = newTargetBundle;
-      if (eNotificationRequired())
-      {
+      if (eNotificationRequired()) {
          ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
             ContextModelPackage.BUNDLE_CANDIDATE__TARGET_BUNDLE, oldTargetBundle, newTargetBundle);
          if (msgs == null)
@@ -679,10 +637,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * 
     * @generated
     */
-   public void setTargetBundle(BundleCandidate newTargetBundle)
-   {
-      if (newTargetBundle != targetBundle)
-      {
+   public void setTargetBundle(BundleCandidate newTargetBundle) {
+      if (newTargetBundle != targetBundle) {
          NotificationChain msgs = null;
          if (targetBundle != null)
             msgs = ((InternalEObject) targetBundle).eInverseRemove(this,
@@ -706,10 +662,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__SOURCE_BUNDLE :
             if (sourceBundle != null)
                msgs = ((InternalEObject) sourceBundle).eInverseRemove(this,
@@ -731,10 +685,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
             return basicSetContent(null, msgs);
          case ContextModelPackage.BUNDLE_CANDIDATE__DEPENDENCIES :
@@ -758,10 +710,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
             return getLocation();
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
@@ -798,10 +748,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
             setLocation((File) newValue);
             return;
@@ -844,10 +792,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
             setLocation(LOCATION_EDEFAULT);
             return;
@@ -889,10 +835,8 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_CANDIDATE__LOCATION :
             return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
          case ContextModelPackage.BUNDLE_CANDIDATE__CONTENT :
@@ -924,8 +868,7 @@ public class BundleCandidateImpl extends XAnnotatableImpl implements BundleCandi
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

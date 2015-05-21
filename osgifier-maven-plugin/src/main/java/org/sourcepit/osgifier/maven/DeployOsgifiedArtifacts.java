@@ -43,8 +43,7 @@ import org.eclipse.aether.repository.RemoteRepository;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "deploy-osgified-artifacts", defaultPhase = LifecyclePhase.DEPLOY)
-public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
-{
+public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo {
    private final LegacySupport buildContext;
 
    private final RepositorySystem repositorySystem;
@@ -63,15 +62,13 @@ public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
    private Repository repository;
 
    @Inject
-   public DeployOsgifiedArtifacts(LegacySupport buildContext, RepositorySystem repositorySystem)
-   {
+   public DeployOsgifiedArtifacts(LegacySupport buildContext, RepositorySystem repositorySystem) {
       this.buildContext = buildContext;
       this.repositorySystem = repositorySystem;
    }
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
       final MavenProject project = buildContext.getSession().getCurrentProject();
 
       @SuppressWarnings("unchecked")
@@ -89,8 +86,7 @@ public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
    }
 
    private static RemoteRepository newRemoteRepository(final RepositorySystemSession session, String id, String url,
-      String layout)
-   {
+      String layout) {
       final RemoteRepository.Builder repoBuilder = new RemoteRepository.Builder(id, layout, url);
       RemoteRepository repo = repoBuilder.build();
       repoBuilder.setAuthentication(session.getAuthenticationSelector().getAuthentication(repo));
@@ -98,17 +94,14 @@ public class DeployOsgifiedArtifacts extends AbstractOsgifierMojo
       return repoBuilder.build();
    }
 
-   private void deploy(RepositorySystemSession session, RemoteRepository repository, Collection<Artifact> artifacts)
-   {
+   private void deploy(RepositorySystemSession session, RemoteRepository repository, Collection<Artifact> artifacts) {
       final DeployRequest request = new DeployRequest();
       request.setArtifacts(artifacts);
       request.setRepository(repository);
-      try
-      {
+      try {
          repositorySystem.deploy(session, request);
       }
-      catch (DeploymentException e)
-      {
+      catch (DeploymentException e) {
          throw pipe(e);
       }
    }

@@ -30,175 +30,138 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class AbstractJavaResourceHandler implements JavaResourceHandler
-{
-   protected JavaPackage getJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+public abstract class AbstractJavaResourceHandler implements JavaResourceHandler {
+   protected JavaPackage getJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       final String packageName = getJPackageName(path);
       JavaPackage jPackage = findJavaPackage(jResources, modelLock, packageName);
-      if (jPackage == null)
-      {
+      if (jPackage == null) {
          modelLock.writeLock().lock();
-         try
-         {
+         try {
             jPackage = jResources.getPackage(packageName, true);
          }
-         finally
-         {
+         finally {
             modelLock.writeLock().unlock();
          }
       }
       return jPackage;
    }
 
-   protected JavaPackage findJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, String packageName)
-   {
+   protected JavaPackage findJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, String packageName) {
       modelLock.readLock().lock();
-      try
-      {
+      try {
          return jResources.getPackage(packageName);
       }
-      finally
-      {
+      finally {
          modelLock.readLock().unlock();
       }
    }
 
-   protected JavaType getJavaType(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+   protected JavaType getJavaType(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       final String packageName = getJPackageName(path.getParent());
 
       JavaResourceDirectory jDir;
-      if (packageName == null)
-      {
+      if (packageName == null) {
          jDir = jResources;
       }
-      else
-      {
+      else {
          jDir = findJavaPackage(jResources, modelLock, packageName);
       }
 
       modelLock.writeLock().lock();
-      try
-      {
-         if (jDir == null)
-         {
+      try {
+         if (jDir == null) {
             jDir = jResources.getPackage(packageName, true);
          }
          final String typeName = path.getFileName();
          return jDir.getType(typeName, true);
       }
-      finally
-      {
+      finally {
          modelLock.writeLock().unlock();
       }
    }
 
-   protected Directory getDirectory(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+   protected Directory getDirectory(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       Directory dir = findDirectory(jResources, modelLock, path);
-      if (dir == null)
-      {
+      if (dir == null) {
          modelLock.writeLock().lock();
-         try
-         {
+         try {
             dir = jResources;
-            for (String segment : path.getSegments())
-            {
+            for (String segment : path.getSegments()) {
                dir = dir.getDirectory(segment, true);
             }
             return dir;
          }
-         finally
-         {
+         finally {
             modelLock.writeLock().unlock();
          }
       }
       return dir;
    }
 
-   protected Directory findDirectory(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+   protected Directory findDirectory(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       modelLock.readLock().lock();
-      try
-      {
+      try {
          Directory dir = jResources;
-         for (String segment : path.getSegments())
-         {
+         for (String segment : path.getSegments()) {
             dir = dir.getDirectory(segment);
-            if (dir == null)
-            {
+            if (dir == null) {
                break;
             }
          }
          return dir;
       }
-      finally
-      {
+      finally {
          modelLock.readLock().unlock();
       }
    }
 
-   protected File getFileInJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+   protected File getFileInJavaPackage(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       final Path parentPath = path.getParent();
 
       Directory dir;
-      if (parentPath == null)
-      {
+      if (parentPath == null) {
          dir = jResources;
       }
-      else
-      {
+      else {
          dir = findDirectory(jResources, modelLock, parentPath);
       }
 
       modelLock.writeLock().lock();
-      try
-      {
-         if (dir == null)
-         {
+      try {
+         if (dir == null) {
             dir = getJavaPackage(jResources, modelLock, parentPath);
          }
          return dir.getFile(path.getLastSegment(), true);
       }
-      finally
-      {
+      finally {
          modelLock.writeLock().unlock();
       }
    }
 
-   protected File getFile(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path)
-   {
+   protected File getFile(JavaResourcesRoot jResources, ReadWriteLock modelLock, Path path) {
       final Path parentPath = path.getParent();
 
       Directory dir;
-      if (parentPath == null)
-      {
+      if (parentPath == null) {
          dir = jResources;
       }
-      else
-      {
+      else {
          dir = findDirectory(jResources, modelLock, parentPath);
       }
 
       modelLock.writeLock().lock();
-      try
-      {
-         if (dir == null)
-         {
+      try {
+         if (dir == null) {
             dir = getDirectory(jResources, modelLock, parentPath);
          }
          return dir.getFile(path.getLastSegment(), true);
       }
-      finally
-      {
+      finally {
          modelLock.writeLock().unlock();
       }
    }
 
-   private String getJPackageName(Path path)
-   {
+   private String getJPackageName(Path path) {
       return path == null ? null : JavaLangUtils.toPackageName(path);
    }
 }

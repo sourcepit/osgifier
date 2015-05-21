@@ -27,16 +27,12 @@ import org.apache.maven.model.io.DefaultModelReader;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class ModelFromString
-{
-   public Model fromString(String modelAsString)
-   {
-      try
-      {
+public class ModelFromString {
+   public Model fromString(String modelAsString) {
+      try {
          return new DefaultModelReader().read(new StringReader(modelAsString), null);
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw pipe(e);
       }
    }

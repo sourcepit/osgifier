@@ -75,8 +75,7 @@ import org.sourcepit.osgifier.core.packaging.Repackager;
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
 @Mojo(name = "osgify-artifacts", defaultPhase = LifecyclePhase.PACKAGE)
-public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
-{
+public class OsgifyArtifactsMojo extends AbstractOsgifierMojo {
    private final LegacySupport buildContext;
 
    private final ProjectBuilder projectBuilder;
@@ -134,8 +133,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
    @Inject
    public OsgifyArtifactsMojo(LegacySupport buildContext, ProjectBuilder projectBuilder,
-      OsgifierModelBuilder modelBuilder, Repackager repackager, ArtifactFactory artifactFactory, Logger log)
-   {
+      OsgifierModelBuilder modelBuilder, Repackager repackager, ArtifactFactory artifactFactory, Logger log) {
       this.buildContext = buildContext;
       this.projectBuilder = projectBuilder;
       this.modelBuilder = modelBuilder;
@@ -145,9 +143,9 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
    }
 
    @Override
-   protected void doExecute() throws MojoExecutionException, MojoFailureException
-   {
-      final PropertiesSource options = MojoUtils.getOptions(buildContext.getSession().getCurrentProject()
+   protected void doExecute() throws MojoExecutionException, MojoFailureException {
+      final PropertiesSource options = MojoUtils.getOptions(buildContext.getSession()
+         .getCurrentProject()
          .getProperties(), this.options);
       final Date startTime = buildContext.getSession().getStartTime();
 
@@ -155,10 +153,8 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          artifacts, startTime);
 
       final Collection<BundleCandidate> bundles = new ArrayList<BundleCandidate>();
-      for (BundleCandidate bundle : osgifyContext.getBundles())
-      {
-         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null)
-         {
+      for (BundleCandidate bundle : osgifyContext.getBundles()) {
+         if (!bundle.isNativeBundle() && bundle.getTargetBundle() == null) {
             bundles.add(bundle);
          }
       }
@@ -168,17 +164,14 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       final Map<BundleCandidate, MavenProject> mavenProjectMapping = new HashMap<BundleCandidate, MavenProject>(
          bundles.size());
 
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final MavenArtifact artifact = bundle.getExtension(MavenArtifact.class);
 
-         try
-         {
+         try {
             ProjectBuildingResult result = buildMavenProject(artifact);
             mavenProjectMapping.put(bundle, result.getProject());
          }
-         catch (ProjectBuildingException e)
-         {
+         catch (ProjectBuildingException e) {
             log.warn(
                "Failed to resolve original Maven model for artifact {}. Some information may note be available in genrated pom.",
                artifact, e);
@@ -186,18 +179,15 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
          adoptMavenCoordinates(dependencyModel, bundle);
          final BundleCandidate sourceBundle = bundle.getSourceBundle();
-         if (sourceBundle != null)
-         {
+         if (sourceBundle != null) {
             adoptMavenCoordinates(dependencyModel, sourceBundle);
          }
       }
 
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          injectManifest(dependencyModel, bundle);
          final BundleCandidate sourceBundle = bundle.getSourceBundle();
-         if (sourceBundle != null)
-         {
+         if (sourceBundle != null) {
             injectManifest(dependencyModel, sourceBundle);
          }
       }
@@ -205,16 +195,14 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       ModelUtils.writeModel(getOsgifierContextFile(), osgifyContext);
 
       final Collection<Artifact> artifacts = new ArrayList<Artifact>();
-      for (BundleCandidate bundle : bundles)
-      {
+      for (BundleCandidate bundle : bundles) {
          final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
          final Artifact artifact = artifactFactory.createArtifact(bundleArtifact.getArtifactKey()).setFile(
             bundle.getLocation());
          artifacts.add(artifact);
 
          final BundleCandidate sourceBundle = bundle.getSourceBundle();
-         if (sourceBundle != null)
-         {
+         if (sourceBundle != null) {
             final Artifact sourceArtifact = artifactFactory.createArtifact(artifact, "sources", "jar").setFile(
                sourceBundle.getLocation());
             artifacts.add(sourceArtifact);
@@ -223,8 +211,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          final Model model = buildPom(bundle, dependencyModel);
 
          final MavenProject mavenProject = mavenProjectMapping.get(bundle);
-         if (mavenProject != null)
-         {
+         if (mavenProject != null) {
             final Model oriModel = mavenProject.getModel();
 
             model.setCiManagement(oriModel.getCiManagement());
@@ -241,12 +228,10 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          }
 
          final File pomFile = new File(workDir, getBundleId(bundle) + ".xml");
-         try
-         {
+         try {
             new DefaultModelWriter().write(pomFile, null, model);
          }
-         catch (IOException e)
-         {
+         catch (IOException e) {
             throw pipe(e);
          }
 
@@ -260,31 +245,27 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       printSummary(artifacts);
    }
 
-   private ProjectBuildingResult buildMavenProject(final MavenArtifact artifact) throws ProjectBuildingException
-   {
+   private ProjectBuildingResult buildMavenProject(final MavenArtifact artifact) throws ProjectBuildingException {
       final ProjectBuildingRequest request = new DefaultProjectBuildingRequest(buildContext.getSession()
          .getProjectBuildingRequest());
       request.setProject(null);
       request.setResolveDependencies(false);
       request.setProcessPlugins(false);
 
-      final org.apache.maven.artifact.Artifact projectArtifact = RepositoryUtils.toArtifact(artifactFactory
-         .createArtifact(artifactFactory.createArtifact(artifact.getArtifactKey()), null, "pom"));
+      final org.apache.maven.artifact.Artifact projectArtifact = RepositoryUtils.toArtifact(artifactFactory.createArtifact(
+         artifactFactory.createArtifact(artifact.getArtifactKey()), null, "pom"));
 
       return projectBuilder.build(projectArtifact, true, request);
    }
 
-   private void printSummary(Collection<Artifact> artifacts)
-   {
+   private void printSummary(Collection<Artifact> artifacts) {
       getLog().info("------------------------------------------------------------------------");
       getLog().info("Osgified artifacts:");
       getLog().info("");
 
-      for (Artifact artifact : artifacts)
-      {
+      for (Artifact artifact : artifacts) {
          final String type = artifact.getProperty(ArtifactProperties.TYPE, artifact.getExtension());
-         if ("pom".equals(type))
-         {
+         if ("pom".equals(type)) {
             continue;
          }
 
@@ -293,12 +274,10 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
          getLog().info("   <artifactId>" + artifact.getArtifactId() + "</artifactId>");
          getLog().info("   <version>" + artifact.getVersion() + "</version>");
          final String classifier = artifact.getClassifier();
-         if (!isNullOrEmpty(classifier))
-         {
+         if (!isNullOrEmpty(classifier)) {
             getLog().info("   <classifier>" + classifier + "</classifier>");
          }
-         if (!"jar".equals(type))
-         {
+         if (!"jar".equals(type)) {
             getLog().info("   <type>" + type + "</type>");
          }
          getLog().info("</dependency>");
@@ -306,18 +285,15 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       }
    }
 
-   private File getOsgifierContextFile()
-   {
+   private File getOsgifierContextFile() {
       return new File(workDir, "osgifier-context.xml");
    }
 
-   private String getBundleId(BundleCandidate bundle)
-   {
+   private String getBundleId(BundleCandidate bundle) {
       return bundle.getSymbolicName() + "_" + bundle.getVersion().toFullString();
    }
 
-   private void injectManifest(final DependencyModel dependencyModel, BundleCandidate bundle)
-   {
+   private void injectManifest(final DependencyModel dependencyModel, BundleCandidate bundle) {
       final String bundleId = getBundleId(bundle);
       // ModelUtils.writeModel(new File(workDir, bundleId + ".MF"), EcoreUtil.copy(bundle.getManifest()));
 
@@ -329,8 +305,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       updateBundleLocation(bundle, dependencyModel, destJarFile);
    }
 
-   private void adoptMavenCoordinates(final DependencyModel dependencyModel, BundleCandidate bundle)
-   {
+   private void adoptMavenCoordinates(final DependencyModel dependencyModel, BundleCandidate bundle) {
       final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
       final MavenArtifact mavenArtifact = dependencyModel.getArtifact(bundleArtifact.getArtifactKey());
 
@@ -346,8 +321,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
 
    private static void updateBundleLocation(BundleCandidate bundle, final DependencyModel dependencyModel,
-      final File destJarFile)
-   {
+      final File destJarFile) {
       bundle.setLocation(destJarFile);
       final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
       bundleArtifact.setFile(destJarFile);
@@ -355,8 +329,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       mavenArtifact.setFile(destJarFile);
    }
 
-   private static Model buildPom(BundleCandidate bundle, DependencyModel dependencyModel)
-   {
+   private static Model buildPom(BundleCandidate bundle, DependencyModel dependencyModel) {
       final MavenArtifact bundleArtifact = bundle.getExtension(MavenArtifact.class);
 
       final Model model = new Model();
@@ -366,12 +339,9 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       model.setVersion(bundleArtifact.getVersion());
 
       final DependencyTree dependencyTree = dependencyModel.getDependencyTree(bundleArtifact.getArtifactKey());
-      if (dependencyTree != null)
-      {
-         for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes())
-         {
-            if (dependencyNode.isSelected())
-            {
+      if (dependencyTree != null) {
+         for (DependencyNode dependencyNode : dependencyTree.getDependencyNodes()) {
+            if (dependencyNode.isSelected()) {
                model.addDependency(toDependency(dependencyNode.getArtifact().getArtifactKey(), dependencyNode));
             }
          }
@@ -380,8 +350,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       return model;
    }
 
-   private static Dependency toDependency(ArtifactKey newKey, DependencyNode dependencyNode)
-   {
+   private static Dependency toDependency(ArtifactKey newKey, DependencyNode dependencyNode) {
       final MavenDependency declaredDependency = dependencyNode.getDeclaredDependency();
       final Dependency dependency = new Dependency();
       dependency.setGroupId(newKey.getGroupId());
@@ -393,86 +362,70 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
 
       dependency.setClassifier(newKey.getClassifier());
       final String type = newKey.getType();
-      if (!"jar".equals(type))
-      {
+      if (!"jar".equals(type)) {
          dependency.setType(type);
       }
       final boolean optional = declaredDependency.isOptional();
-      if (optional)
-      {
+      if (optional) {
          dependency.setOptional(optional);
       }
       final String scope = declaredDependency.getScope().toString();
-      if (!"compile".equals(scope))
-      {
+      if (!"compile".equals(scope)) {
          dependency.setScope(scope);
       }
       return dependency;
    }
 
-   private void adoptVersion(final MavenArtifact mavenArtifact, final BundleManifest manifest)
-   {
+   private void adoptVersion(final MavenArtifact mavenArtifact, final BundleManifest manifest) {
       final String version = toMavenVersion(manifest.getBundleVersion());
       mavenArtifact.setVersion(version);
       final Header header = manifest.getHeader("Maven-Version");
-      if (header != null)
-      {
+      if (header != null) {
          header.setValue(version);
       }
    }
 
-   private void adoptArtifactId(final MavenArtifact mavenArtifact, final BundleCandidate bundle)
-   {
+   private void adoptArtifactId(final MavenArtifact mavenArtifact, final BundleCandidate bundle) {
       final String artifactId;
 
       final BundleCandidate targetBundle = bundle.getTargetBundle();
-      if (targetBundle == null)
-      {
+      if (targetBundle == null) {
          artifactId = bundle.getManifest().getBundleSymbolicName().getSymbolicName();
       }
-      else
-      {
+      else {
          artifactId = targetBundle.getManifest().getBundleSymbolicName().getSymbolicName();
       }
 
       mavenArtifact.setArtifactId(artifactId);
 
       final Header header = bundle.getManifest().getHeader("Maven-ArtifactId");
-      if (header != null)
-      {
+      if (header != null) {
          header.setValue(artifactId);
       }
    }
 
-   private void adoptGroupId(final MavenArtifact mavenArtifact, final BundleManifest manifest)
-   {
+   private void adoptGroupId(final MavenArtifact mavenArtifact, final BundleManifest manifest) {
       final String customGroupId = getCustomGroupId(mavenArtifact);
-      if (customGroupId != null)
-      {
+      if (customGroupId != null) {
          mavenArtifact.setGroupId(customGroupId);
          final Header header = manifest.getHeader("Maven-GroupId");
-         if (header != null)
-         {
+         if (header != null) {
             header.setValue(customGroupId);
          }
       }
    }
 
-   private String getCustomGroupId(final MavenArtifact mavenArtifact)
-   {
-      if (this.groupId != null)
-      {
+   private String getCustomGroupId(final MavenArtifact mavenArtifact) {
+      if (this.groupId != null) {
          return this.groupId;
       }
-      if (groupIdPrefix != null)
-      {
+      if (groupIdPrefix != null) {
          return groupIdPrefix + mavenArtifact.getGroupId();
       }
       return null;
    }
 
-   private static String toMavenVersion(Version version)
-   {
+   private static String toMavenVersion(Version version) {
       final StringBuilder sb = new StringBuilder();
       sb.append(version.getMajor());
 
@@ -483,8 +436,7 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo
       sb.append(version.getMicro());
 
       final String qualifier = version.getQualifier();
-      if (!qualifier.isEmpty())
-      {
+      if (!qualifier.isEmpty()) {
          sb.append('-');
          sb.append(qualifier);
       }

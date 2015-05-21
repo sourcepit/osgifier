@@ -16,26 +16,22 @@
 
 package org.sourcepit.osgifier.core.java.internal.impl;
 
-import org.sourcepit.common.constraints.NotNull;
 import org.eclipse.emf.ecore.EObject;
+import org.sourcepit.common.constraints.NotNull;
 import org.sourcepit.osgifier.core.model.java.JavaElement;
 import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class JavaElementOperations
-{
-   private JavaElementOperations()
-   {
+public final class JavaElementOperations {
+   private JavaElementOperations() {
       super();
    }
 
-   public static JavaResourceBundle getResourceBundle(@NotNull JavaElement jElement)
-   {
+   public static JavaResourceBundle getResourceBundle(@NotNull JavaElement jElement) {
       EObject current = jElement;
-      while (current != null && !(current instanceof JavaResourceBundle))
-      {
+      while (current != null && !(current instanceof JavaResourceBundle)) {
          current = current.eContainer();
       }
       return (JavaResourceBundle) current;

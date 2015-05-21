@@ -46,8 +46,7 @@ import org.sourcepit.osgifier.core.model.context.EmbedInstruction;
  *
  * @generated
  */
-public class BundleReferenceImpl extends XAnnotatableImpl implements BundleReference
-{
+public class BundleReferenceImpl extends XAnnotatableImpl implements BundleReference {
    /**
     * The default value of the '{@link #getVersionRange() <em>Version Range</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -153,8 +152,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   protected BundleReferenceImpl()
-   {
+   protected BundleReferenceImpl() {
       super();
    }
 
@@ -165,8 +163,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return ContextModelPackage.Literals.BUNDLE_REFERENCE;
    }
 
@@ -176,8 +173,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public VersionRange getVersionRange()
-   {
+   public VersionRange getVersionRange() {
       return versionRange;
    }
 
@@ -187,8 +183,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public void setVersionRange(VersionRange newVersionRange)
-   {
+   public void setVersionRange(VersionRange newVersionRange) {
       VersionRange oldVersionRange = versionRange;
       versionRange = newVersionRange;
       if (eNotificationRequired())
@@ -202,8 +197,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public boolean isOptional()
-   {
+   public boolean isOptional() {
       return optional;
    }
 
@@ -213,8 +207,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public void setOptional(boolean newOptional)
-   {
+   public void setOptional(boolean newOptional) {
       boolean oldOptional = optional;
       optional = newOptional;
       if (eNotificationRequired())
@@ -228,14 +221,11 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public BundleCandidate getTarget()
-   {
-      if (target != null && target.eIsProxy())
-      {
+   public BundleCandidate getTarget() {
+      if (target != null && target.eIsProxy()) {
          InternalEObject oldTarget = (InternalEObject) target;
          target = (BundleCandidate) eResolveProxy(oldTarget);
-         if (target != oldTarget)
-         {
+         if (target != oldTarget) {
             if (eNotificationRequired())
                eNotify(new ENotificationImpl(this, Notification.RESOLVE, ContextModelPackage.BUNDLE_REFERENCE__TARGET,
                   oldTarget, target));
@@ -250,8 +240,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public BundleCandidate basicGetTarget()
-   {
+   public BundleCandidate basicGetTarget() {
       return target;
    }
 
@@ -261,8 +250,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public void setTarget(BundleCandidate newTarget)
-   {
+   public void setTarget(BundleCandidate newTarget) {
       BundleCandidate oldTarget = target;
       target = newTarget;
       if (eNotificationRequired())
@@ -276,8 +264,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public boolean isProvided()
-   {
+   public boolean isProvided() {
       return provided;
    }
 
@@ -287,8 +274,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public void setProvided(boolean newProvided)
-   {
+   public void setProvided(boolean newProvided) {
       boolean oldProvided = provided;
       provided = newProvided;
       if (eNotificationRequired())
@@ -302,8 +288,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public EmbedInstruction getEmbedInstruction()
-   {
+   public EmbedInstruction getEmbedInstruction() {
       return embedInstruction;
    }
 
@@ -313,8 +298,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * 
     * @generated
     */
-   public void setEmbedInstruction(EmbedInstruction newEmbedInstruction)
-   {
+   public void setEmbedInstruction(EmbedInstruction newEmbedInstruction) {
       EmbedInstruction oldEmbedInstruction = embedInstruction;
       embedInstruction = newEmbedInstruction == null ? EMBED_INSTRUCTION_EDEFAULT : newEmbedInstruction;
       if (eNotificationRequired())
@@ -329,10 +313,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             return getVersionRange();
          case ContextModelPackage.BUNDLE_REFERENCE__OPTIONAL :
@@ -356,10 +338,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             setVersionRange((VersionRange) newValue);
             return;
@@ -386,10 +366,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             setVersionRange(VERSION_RANGE_EDEFAULT);
             return;
@@ -416,10 +394,8 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case ContextModelPackage.BUNDLE_REFERENCE__VERSION_RANGE :
             return VERSION_RANGE_EDEFAULT == null ? versionRange != null : !VERSION_RANGE_EDEFAULT.equals(versionRange);
          case ContextModelPackage.BUNDLE_REFERENCE__OPTIONAL :
@@ -441,8 +417,7 @@ public class BundleReferenceImpl extends XAnnotatableImpl implements BundleRefer
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

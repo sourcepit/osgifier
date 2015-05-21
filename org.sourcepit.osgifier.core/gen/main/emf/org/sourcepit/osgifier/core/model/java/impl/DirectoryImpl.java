@@ -42,8 +42,7 @@ import org.sourcepit.osgifier.core.model.java.Resource;
  *
  * @generated
  */
-public class DirectoryImpl extends ResourceImpl implements Directory
-{
+public class DirectoryImpl extends ResourceImpl implements Directory {
    /**
     * The cached value of the '{@link #getResources() <em>Resources</em>}' containment reference list.
     * <!-- begin-user-doc -->
@@ -61,8 +60,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   protected DirectoryImpl()
-   {
+   protected DirectoryImpl() {
       super();
    }
 
@@ -73,8 +71,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.DIRECTORY;
    }
 
@@ -84,10 +81,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public EList<Resource> getResources()
-   {
-      if (resources == null)
-      {
+   public EList<Resource> getResources() {
+      if (resources == null) {
          resources = new EObjectContainmentWithInverseEList<Resource>(Resource.class, this,
             JavaModelPackage.DIRECTORY__RESOURCES, JavaModelPackage.RESOURCE__PARENT_DIRECTORY);
       }
@@ -100,8 +95,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public Resource getResource(String name)
-   {
+   public Resource getResource(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -113,8 +107,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public EList<Directory> getDirectories()
-   {
+   public EList<Directory> getDirectories() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -126,8 +119,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public Directory getDirectory(String name)
-   {
+   public Directory getDirectory(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -139,8 +131,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public Directory getDirectory(String name, boolean createOnDemand)
-   {
+   public Directory getDirectory(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -152,8 +143,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public File getFile(String name)
-   {
+   public File getFile(String name) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -165,8 +155,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public File getFile(String name, boolean createOnDemand)
-   {
+   public File getFile(String name, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -178,8 +167,7 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * 
     * @generated
     */
-   public EList<File> getFiles()
-   {
+   public EList<File> getFiles() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -193,10 +181,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getResources()).basicAdd(otherEnd, msgs);
       }
@@ -210,10 +196,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             return ((InternalEList<?>) getResources()).basicRemove(otherEnd, msgs);
       }
@@ -227,10 +211,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             return getResources();
       }
@@ -245,10 +227,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             getResources().clear();
             getResources().addAll((Collection<? extends Resource>) newValue);
@@ -264,10 +244,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             getResources().clear();
             return;
@@ -282,10 +260,8 @@ public class DirectoryImpl extends ResourceImpl implements Directory
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.DIRECTORY__RESOURCES :
             return resources != null && !resources.isEmpty();
       }

@@ -17,17 +17,14 @@
 package org.sourcepit.osgifier.core.bundle;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.VersionRange;
-import org.sourcepit.osgifier.core.bundle.BundleUtils;
 
-public class BundleUtilsTest
-{
+public class BundleUtilsTest {
    @Test
-   public void testTrimQualifierFromRange() throws Exception
-   {
+   public void testTrimQualifierFromRange() throws Exception {
       VersionRange range;
 
       range = VersionRange.parse("0.0.0");

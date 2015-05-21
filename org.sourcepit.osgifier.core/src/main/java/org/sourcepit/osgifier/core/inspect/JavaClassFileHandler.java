@@ -38,22 +38,18 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaClassFileHandler extends AbstractJavaResourceHandler
-{
+public class JavaClassFileHandler extends AbstractJavaResourceHandler {
    private final static Logger LOG = LoggerFactory.getLogger(JavaClassFileHandler.class);
 
    private final List<IJavaTypeAnalyzer> typeAnalyzers = new ArrayList<IJavaTypeAnalyzer>();
 
-   public List<IJavaTypeAnalyzer> getTypeAnalyzers()
-   {
+   public List<IJavaTypeAnalyzer> getTypeAnalyzers() {
       return typeAnalyzers;
    }
 
    public boolean handle(JavaResourcesRoot jResources, JavaResourceType type, ReadWriteLock modelLock, Path path,
-      InputStream content)
-   {
-      if (CLASS_FILE != type)
-      {
+      InputStream content) {
+      if (CLASS_FILE != type) {
          return false;
       }
       final JavaType javaType = getJavaType(jResources, modelLock, path);
@@ -61,42 +57,33 @@ public class JavaClassFileHandler extends AbstractJavaResourceHandler
       return true;
    }
 
-   private void analyzeType(final JavaType javaType, InputStream content)
-   {
+   private void analyzeType(final JavaType javaType, InputStream content) {
       final JavaClass javaClass = parseClass(javaType, content);
-      if (javaClass == null)
-      {
+      if (javaClass == null) {
          return;
       }
 
-      org.sourcepit.osgifier.core.model.java.JavaClass jClass = (org.sourcepit.osgifier.core.model.java.JavaClass) javaType
-         .getFile();
+      org.sourcepit.osgifier.core.model.java.JavaClass jClass = (org.sourcepit.osgifier.core.model.java.JavaClass) javaType.getFile();
       jClass.setMajor(javaClass.getMajor());
       jClass.setMinor(javaClass.getMinor());
 
-      if (!typeAnalyzers.isEmpty())
-      {
-         for (IJavaTypeAnalyzer analyzer : typeAnalyzers)
-         {
+      if (!typeAnalyzers.isEmpty()) {
+         for (IJavaTypeAnalyzer analyzer : typeAnalyzers) {
             analyzer.analyze(javaType, javaClass);
          }
       }
    }
 
-   private JavaClass parseClass(final JavaType javaType, InputStream content)
-   {
+   private JavaClass parseClass(final JavaType javaType, InputStream content) {
       final JavaClass javaClass;
-      try
-      {
+      try {
          javaClass = new ClassParser(content, javaType.getQualifiedName()).parse();
       }
-      catch (ClassFormatException e)
-      {
+      catch (ClassFormatException e) {
          LOG.warn("Faild to parse class {}.", javaType.getQualifiedName(), e);
          return null;
       }
-      catch (IOException e)
-      {
+      catch (IOException e) {
          throw new IllegalStateException(e);
       }
       return javaClass;

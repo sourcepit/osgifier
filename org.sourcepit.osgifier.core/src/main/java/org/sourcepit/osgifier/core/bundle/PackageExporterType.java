@@ -15,7 +15,6 @@
  */
 
 package org.sourcepit.osgifier.core.bundle;
-public enum PackageExporterType
-{
+public enum PackageExporterType {
    OWN_BUNDLE, EXECUTION_ENVIRONMENT, VENDOR, REQUIRED_BUNDLE
 }

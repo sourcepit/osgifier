@@ -23,29 +23,25 @@ import javax.inject.Named;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
-import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgifier.core.bundle.BundleHeadersAppender;
+import org.sourcepit.osgifier.core.bundle.BundleManifestAppenderFilter;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
 /**
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
  */
 @Named
-public class MavenGAVHeadersAppender implements BundleHeadersAppender
-{
+public class MavenGAVHeadersAppender implements BundleHeadersAppender {
    @Override
-   public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options)
-   {
+   public void append(BundleCandidate bundle, BundleManifestAppenderFilter filter, PropertiesSource options) {
       final MavenArtifact extension = bundle.getExtension(MavenArtifact.class);
-      if (extension != null)
-      {
+      if (extension != null) {
          final BundleManifest manifest = bundle.getManifest();
          manifest.setHeader("Maven-GroupId", extension.getGroupId());
          manifest.setHeader("Maven-ArtifactId", extension.getArtifactId());
          manifest.setHeader("Maven-Type", extension.getType());
          final String classifier = extension.getClassifier();
-         if (!isNullOrEmpty(classifier))
-         {
+         if (!isNullOrEmpty(classifier)) {
             manifest.setHeader("Maven-Classifier", classifier);
          }
          manifest.setHeader("Maven-Version", extension.getVersion());

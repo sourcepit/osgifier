@@ -37,35 +37,26 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
-public class NativeManifestAppender
-{
+public class NativeManifestAppender {
    public void appendNativeManifests(final OsgifierContext osgifierContext,
-      NativeManifestAppenderFilter generatorFilter, PropertiesSource options)
-   {
+      NativeManifestAppenderFilter generatorFilter, PropertiesSource options) {
       final List<BundleCandidate> overriddenNativeBundles = new ArrayList<BundleCandidate>();
-      for (BundleCandidate bundle : osgifierContext.getBundles())
-      {
-         if (bundle.getLocation() != null)
-         {
-            final FromStream<Manifest> fromStream = new FromStream<Manifest>()
-            {
+      for (BundleCandidate bundle : osgifierContext.getBundles()) {
+         if (bundle.getLocation() != null) {
+            final FromStream<Manifest> fromStream = new FromStream<Manifest>() {
                @Override
-               public Manifest read(InputStream inputStream) throws Exception
-               {
+               public Manifest read(InputStream inputStream) throws Exception {
                   final Resource resource = new GenericManifestResourceImpl();
                   resource.load(inputStream, null);
                   return (Manifest) resource.getContents().get(0);
                }
             };
 
-            try
-            {
+            try {
                final Manifest m = read(fromStream, osgiIn(bundle.getLocation(), "META-INF/MANIFEST.MF"));
-               if (m instanceof BundleManifest)
-               {
+               if (m instanceof BundleManifest) {
                   BundleManifest manifest = (BundleManifest) m;
-                  if (generatorFilter.isAppendNativeManifest(bundle, manifest, options))
-                  {
+                  if (generatorFilter.isAppendNativeManifest(bundle, manifest, options)) {
                      bundle.setNativeBundle(true);
                      bundle.setManifest(manifest);
 
@@ -73,16 +64,13 @@ public class NativeManifestAppender
                      bundle.setSymbolicName(manifest.getBundleSymbolicName().getSymbolicName());
                      bundle.setVersion(manifest.getBundleVersion());
                   }
-                  else
-                  {
+                  else {
                      overriddenNativeBundles.add(bundle);
                   }
                }
             }
-            catch (PipedException e)
-            {
-               if (e.adapt(FileNotFoundException.class) == null)
-               {
+            catch (PipedException e) {
+               if (e.adapt(FileNotFoundException.class) == null) {
                   throw e;
                }
             }

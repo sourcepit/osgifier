@@ -30,20 +30,15 @@ import org.sourcepit.common.manifest.osgi.resource.BundleManifestResourceImpl;
 import org.sourcepit.common.utils.io.Write.ToStream;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
-public final class ModelUtils
-{
-   private ModelUtils()
-   {
+public final class ModelUtils {
+   private ModelUtils() {
       super();
    }
 
-   public static void writeModel(File file, BundleManifest model)
-   {
-      final ToStream<EObject> toStream = new ToStream<EObject>()
-      {
+   public static void writeModel(File file, BundleManifest model) {
+      final ToStream<EObject> toStream = new ToStream<EObject>() {
          @Override
-         public void write(OutputStream out, EObject model) throws Exception
-         {
+         public void write(OutputStream out, EObject model) throws Exception {
             final BundleManifestResourceImpl resource = new BundleManifestResourceImpl();
             resource.getContents().add(model);
             resource.save(out, null);
@@ -52,13 +47,10 @@ public final class ModelUtils
       write(toStream, buffOut(fileOut(file, true)), model);
    }
 
-   public static void writeModel(File file, OsgifierContext model)
-   {
-      final ToStream<EObject> toStream = new ToStream<EObject>()
-      {
+   public static void writeModel(File file, OsgifierContext model) {
+      final ToStream<EObject> toStream = new ToStream<EObject>() {
          @Override
-         public void write(OutputStream out, EObject model) throws Exception
-         {
+         public void write(OutputStream out, EObject model) throws Exception {
             final XMLResourceImpl resource = new XMLResourceImpl();
             resource.getContents().add(model);
             resource.save(out, null);

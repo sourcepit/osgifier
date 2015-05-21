@@ -15,7 +15,6 @@
  */
 
 package org.sourcepit.osgifier.core.bundle;
-public enum AccessRestriction
-{
+public enum AccessRestriction {
    NONE, DISCOURAGED
 }

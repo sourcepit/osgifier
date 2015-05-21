@@ -19,38 +19,31 @@ package org.sourcepit.osgifier.core.bundle;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 
-public interface BundleManifestAppenderFilter
-{
-   static BundleManifestAppenderFilter APPEND_ALL = new BundleManifestAppenderFilter()
-   {
+public interface BundleManifestAppenderFilter {
+   static BundleManifestAppenderFilter APPEND_ALL = new BundleManifestAppenderFilter() {
 
       @Override
-      public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendExecutionEnvironment(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
 
       @Override
-      public boolean isAppendPackageExports(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendPackageExports(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
 
       @Override
-      public boolean isAppendPackageImports(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendPackageImports(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
 
       @Override
-      public boolean isAppendDynamicImports(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendDynamicImports(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
 
       @Override
-      public boolean isAppendRecommendedImportPolicy(BundleCandidate bundle, PropertiesSource options)
-      {
+      public boolean isAppendRecommendedImportPolicy(BundleCandidate bundle, PropertiesSource options) {
          return true;
       }
 

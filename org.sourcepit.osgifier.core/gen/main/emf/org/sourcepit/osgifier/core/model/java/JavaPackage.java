@@ -27,6 +27,5 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface JavaPackage extends JavaResource, QualifiedJavaElement, JavaResourceDirectory, Directory
-{
+public interface JavaPackage extends JavaResource, QualifiedJavaElement, JavaResourceDirectory, Directory {
 } // JavaPackage

@@ -29,23 +29,18 @@ import org.sourcepit.osgifier.core.model.java.JavaResourcesRoot;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class JavaPackageHandler extends AbstractJavaResourceHandler
-{
+public class JavaPackageHandler extends AbstractJavaResourceHandler {
    private final static Logger LOGGER = LoggerFactory.getLogger(JavaPackageHandler.class);
 
    public boolean handle(JavaResourcesRoot jResources, JavaResourceType type, ReadWriteLock modelLock, Path path,
-      InputStream content)
-   {
-      if (PACKAGE != type)
-      {
+      InputStream content) {
+      if (PACKAGE != type) {
          return false;
       }
-      try
-      {
+      try {
          getJavaPackage(jResources, modelLock, path);
       }
-      catch (ClassCastException e)
-      {
+      catch (ClassCastException e) {
          LOGGER.error(path.toString(), e);
          throw e;
       }

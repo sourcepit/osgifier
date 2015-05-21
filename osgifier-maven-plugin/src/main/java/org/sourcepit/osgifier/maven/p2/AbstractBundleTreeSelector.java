@@ -25,30 +25,24 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.BundleReference;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
-public abstract class AbstractBundleTreeSelector implements BundleSelector
-{
+public abstract class AbstractBundleTreeSelector implements BundleSelector {
    @Override
-   public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext)
-   {
+   public Collection<BundleCandidate> selectRootBundles(OsgifierContext bundleContext) {
       final List<BundleCandidate> rootBundles = new ArrayList<BundleCandidate>();
-      for (BundleCandidate bundle : bundleContext.getBundles())
-      {
-         if (isRootBundle(bundle))
-         {
+      for (BundleCandidate bundle : bundleContext.getBundles()) {
+         if (isRootBundle(bundle)) {
             rootBundles.add(bundle);
          }
       }
       return rootBundles;
    }
 
-   protected boolean isRootBundle(BundleCandidate bundle)
-   {
+   protected boolean isRootBundle(BundleCandidate bundle) {
       return select(bundle);
    }
 
    @Override
-   public boolean select(Stack<BundleCandidate> path, BundleReference reference)
-   {
+   public boolean select(Stack<BundleCandidate> path, BundleReference reference) {
       final BundleCandidate bundle = reference.getTarget();
       return bundle != null && select(bundle);
    }

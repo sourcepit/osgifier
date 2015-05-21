@@ -34,8 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface JavaResourceBundle extends JavaElement
-{
+public interface JavaResourceBundle extends JavaElement {
    /**
     * Returns the value of the '<em><b>Resources Roots</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.java.JavaResourcesRoot}.

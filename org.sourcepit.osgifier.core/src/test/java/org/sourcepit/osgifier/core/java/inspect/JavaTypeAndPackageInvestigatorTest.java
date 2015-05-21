@@ -16,13 +16,15 @@
 
 package org.sourcepit.osgifier.core.java.inspect;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.lang.IllegalArgumentException;
 
 import org.eclipse.emf.common.util.EList;
 import org.hamcrest.core.Is;
@@ -30,8 +32,6 @@ import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
 import org.sourcepit.common.modeling.Annotation;
-import org.sourcepit.osgifier.core.java.inspect.JavaResourcesBundleScanner;
-import org.sourcepit.osgifier.core.java.inspect.JavaTypeReferencesAnalyzer;
 import org.sourcepit.osgifier.core.model.java.JavaArchive;
 import org.sourcepit.osgifier.core.model.java.JavaClass;
 import org.sourcepit.osgifier.core.model.java.JavaModelFactory;
@@ -44,29 +44,23 @@ import org.sourcepit.osgifier.test.resources.TypeA;
 /**
  * @author Bernd
  */
-public class JavaTypeAndPackageInvestigatorTest
-{
+public class JavaTypeAndPackageInvestigatorTest {
 
    @Test
-   public void testJar() throws Exception
-   {
-      try
-      {
+   public void testJar() throws Exception {
+      try {
          new JavaResourcesBundleScanner().scan((JavaArchive) null, null, null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
       JavaArchive javaArchive = JavaModelFactory.eINSTANCE.createJavaArchive();
-      try
-      {
+      try {
          new JavaResourcesBundleScanner().scan(javaArchive, null, null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
       File jarFile = new File("target/testResources/org.sourcepit.osgifier.core.jar");
@@ -106,25 +100,20 @@ public class JavaTypeAndPackageInvestigatorTest
    }
 
    @Test
-   public void testProject() throws Exception
-   {
-      try
-      {
+   public void testProject() throws Exception {
+      try {
          new JavaResourcesBundleScanner().scan((JavaProject) null, null, null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
       JavaProject javaProject = JavaModelFactory.eINSTANCE.createJavaProject();
-      try
-      {
+      try {
          new JavaResourcesBundleScanner().scan(javaProject, null, null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      { // noop
+      catch (IllegalArgumentException e) { // noop
       }
 
       File projectDir = new File("target/testResources");
@@ -165,8 +154,7 @@ public class JavaTypeAndPackageInvestigatorTest
    }
 
    @Test
-   public void testWithReferenceCollector()
-   {
+   public void testWithReferenceCollector() {
       File projectDir = new File("target/testResources");
       assertTrue(projectDir.exists());
 

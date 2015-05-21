@@ -35,8 +35,7 @@ import org.sourcepit.common.modeling.XAnnotatable;
  * @model
  * @generated
  */
-public interface OsgifierContext extends XAnnotatable
-{
+public interface OsgifierContext extends XAnnotatable {
    /**
     * Returns the value of the '<em><b>Bundles</b></em>' containment reference list.
     * The list contents are of type {@link org.sourcepit.osgifier.core.model.context.BundleCandidate}.

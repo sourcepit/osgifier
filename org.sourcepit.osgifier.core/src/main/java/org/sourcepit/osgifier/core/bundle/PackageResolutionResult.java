@@ -18,8 +18,7 @@ package org.sourcepit.osgifier.core.bundle;
 
 import java.util.List;
 
-public class PackageResolutionResult
-{
+public class PackageResolutionResult {
    private String requiredPackage;
 
    private PackageExportDescription selectedExporter;
@@ -29,31 +28,26 @@ public class PackageResolutionResult
    private List<PackageExportDescription> exporters;
 
    public PackageResolutionResult(String requiredPackage, PackageExportDescription selectedExporter,
-      AccessRestriction accessRestriction, List<PackageExportDescription> exporters)
-   {
+      AccessRestriction accessRestriction, List<PackageExportDescription> exporters) {
       this.requiredPackage = requiredPackage;
       this.selectedExporter = selectedExporter;
       this.accessRestriction = accessRestriction;
       this.exporters = exporters;
    }
 
-   public String getRequiredPackage()
-   {
+   public String getRequiredPackage() {
       return requiredPackage;
    }
 
-   public PackageExportDescription getSelectedExporter()
-   {
+   public PackageExportDescription getSelectedExporter() {
       return selectedExporter;
    }
 
-   public AccessRestriction getAccessRestriction()
-   {
+   public AccessRestriction getAccessRestriction() {
       return accessRestriction;
    }
 
-   public List<PackageExportDescription> getExporters()
-   {
+   public List<PackageExportDescription> getExporters() {
       return exporters;
    }
 }

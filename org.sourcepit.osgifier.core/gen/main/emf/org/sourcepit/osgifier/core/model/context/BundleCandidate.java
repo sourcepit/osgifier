@@ -49,8 +49,7 @@ import org.sourcepit.osgifier.core.model.java.JavaResourceBundle;
  * @model
  * @generated
  */
-public interface BundleCandidate extends XAnnotatable
-{
+public interface BundleCandidate extends XAnnotatable {
    /**
     * Returns the value of the '<em><b>Location</b></em>' attribute.
     * <!-- begin-user-doc -->

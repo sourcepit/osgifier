@@ -40,17 +40,13 @@ import org.sourcepit.osgifier.core.model.context.LocalizedData;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public abstract class BundleLocalizationWriter<O extends OutputStream>
-{
+public abstract class BundleLocalizationWriter<O extends OutputStream> {
 
    public static Map<String, LocalizedData> write(final File dir, Manifest manifest, BundleLocalization localization)
-      throws IOException
-   {
-      final BundleLocalizationWriter<OutputStream> writer = new BundleLocalizationWriter<OutputStream>()
-      {
+      throws IOException {
+      final BundleLocalizationWriter<OutputStream> writer = new BundleLocalizationWriter<OutputStream>() {
          @Override
-         protected OutputStream openStream(String path) throws IOException
-         {
+         protected OutputStream openStream(String path) throws IOException {
             final File file = new File(dir, path);
             FileUtils.forceMkdir(file.getParentFile());
             file.createNewFile();
@@ -58,8 +54,7 @@ public abstract class BundleLocalizationWriter<O extends OutputStream>
          }
 
          @Override
-         protected void closeStream(OutputStream out) throws IOException
-         {
+         protected void closeStream(OutputStream out) throws IOException {
             out.close();
          }
       };
@@ -67,62 +62,49 @@ public abstract class BundleLocalizationWriter<O extends OutputStream>
    }
 
    public static Map<String, LocalizedData> write(final JarOutputStream out, Manifest manifest,
-      BundleLocalization localization) throws IOException
-   {
-      final BundleLocalizationWriter<JarOutputStream> writer = new BundleLocalizationWriter<JarOutputStream>()
-      {
+      BundleLocalization localization) throws IOException {
+      final BundleLocalizationWriter<JarOutputStream> writer = new BundleLocalizationWriter<JarOutputStream>() {
          @Override
-         protected JarOutputStream openStream(String path) throws IOException
-         {
+         protected JarOutputStream openStream(String path) throws IOException {
             out.putNextEntry(new JarEntry(path));
             return out;
          }
 
          @Override
-         protected void closeStream(JarOutputStream out) throws IOException
-         {
+         protected void closeStream(JarOutputStream out) throws IOException {
             out.closeEntry();
          }
       };
       return writer.write(manifest, localization);
    }
 
-   public Map<String, LocalizedData> write(Manifest manifest, BundleLocalization localization) throws IOException
-   {
+   public Map<String, LocalizedData> write(Manifest manifest, BundleLocalization localization) throws IOException {
       final Map<String, LocalizedData> result = new LinkedHashMap<String, LocalizedData>();
 
       final String prefix = getPathPrefix(manifest);
-      for (LocalizedData localizedData : localization.getData())
-      {
+      for (LocalizedData localizedData : localization.getData()) {
          final List<Entry<String, String>> data = localizedData.getData();
-         if (!data.isEmpty())
-         {
+         if (!data.isEmpty()) {
             final PropertiesMap properties = new LinkedPropertiesMap();
-            for (Entry<String, String> entry : data)
-            {
+            for (Entry<String, String> entry : data) {
                properties.put(entry.getKey(), entry.getValue());
             }
 
             final String path = getPath(prefix, localizedData.getLocale());
             final O out = openStream(path);
-            try
-            {
+            try {
                properties.store(out);
                result.put(path, localizedData);
             }
-            catch (PipedException pipe)
-            {
+            catch (PipedException pipe) {
                pipe.adaptAndThrow(IOException.class);
                throw pipe;
             }
-            finally
-            {
-               try
-               {
+            finally {
+               try {
                   closeStream(out);
                }
-               catch (IOException ioe)
-               { // noop
+               catch (IOException ioe) { // noop
                }
             }
          }
@@ -130,21 +112,17 @@ public abstract class BundleLocalizationWriter<O extends OutputStream>
       return result;
    }
 
-   private String getPathPrefix(Manifest manifest)
-   {
+   private String getPathPrefix(Manifest manifest) {
       String prefix = manifest.getHeaderValue(BundleHeaderName.BUNDLE_LOCALIZATION.getLiteral());
-      if (prefix == null)
-      {
+      if (prefix == null) {
          prefix = "OSGI-INF/l10n/bundle";
       }
       return prefix;
    }
 
-   private String getPath(String prefix, final String locale)
-   {
+   private String getPath(String prefix, final String locale) {
       final StringBuilder name = new StringBuilder(prefix);
-      if (!locale.isEmpty())
-      {
+      if (!locale.isEmpty()) {
          name.append('_');
          name.append(locale);
       }

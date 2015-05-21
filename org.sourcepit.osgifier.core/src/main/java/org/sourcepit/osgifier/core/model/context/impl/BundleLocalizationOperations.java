@@ -24,41 +24,32 @@ import org.sourcepit.osgifier.core.model.context.LocalizedData;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public final class BundleLocalizationOperations
-{
-   private BundleLocalizationOperations()
-   {
+public final class BundleLocalizationOperations {
+   private BundleLocalizationOperations() {
       super();
    }
 
    public static void set(@NotNull BundleLocalization localization, @NotNull String locale, @NotNull String key,
-      String value)
-   {
+      String value) {
       final LocalizedData localizedData = getLocalizedData(localization, locale, value != null);
-      if (localizedData != null)
-      {
-         if (value == null)
-         {
+      if (localizedData != null) {
+         if (value == null) {
             localizedData.getData().removeKey(key);
          }
-         else
-         {
+         else {
             localizedData.getData().put(key, value);
          }
       }
    }
 
-   public static String get(BundleLocalization localization, String locale, String key)
-   {
+   public static String get(BundleLocalization localization, String locale, String key) {
       final LocalizedData localizedData = getLocalizedData(localization, locale);
       return localizedData == null ? null : localizedData.getData().get(key);
    }
 
-   private static LocalizedData getLocalizedData(BundleLocalization localization, String locale, boolean createOnDemand)
-   {
+   private static LocalizedData getLocalizedData(BundleLocalization localization, String locale, boolean createOnDemand) {
       LocalizedData localizedData = getLocalizedData(localization, locale);
-      if (localizedData == null && createOnDemand)
-      {
+      if (localizedData == null && createOnDemand) {
          localizedData = ContextModelFactory.eINSTANCE.createLocalizedData();
          localizedData.setLocale(locale);
          localization.getData().add(localizedData);
@@ -66,12 +57,9 @@ public final class BundleLocalizationOperations
       return localizedData;
    }
 
-   private static LocalizedData getLocalizedData(BundleLocalization localization, String locale)
-   {
-      for (LocalizedData localizedData : localization.getData())
-      {
-         if (locale.equals(localizedData.getLocale()))
-         {
+   private static LocalizedData getLocalizedData(BundleLocalization localization, String locale) {
+      for (LocalizedData localizedData : localization.getData()) {
+         if (locale.equals(localizedData.getLocale())) {
             return localizedData;
          }
       }

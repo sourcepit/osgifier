@@ -37,38 +37,31 @@ import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
  */
-public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
-{
+public class BundleCandidatesCollector implements MavenDependencyWalker.Handler {
    private final Map<String, BundleCandidate> mvnIdToBundleNode = new LinkedHashMap<String, BundleCandidate>();
    private final Map<BundleCandidate, File> bundleNodeToSourceJar = new LinkedHashMap<BundleCandidate, File>();
 
    private final boolean resolveDependenciesOfNativeBundles;
 
-   public BundleCandidatesCollector()
-   {
+   public BundleCandidatesCollector() {
       this(false);
    }
 
-   public BundleCandidatesCollector(boolean resolveDependenciesOfNativeBundles)
-   {
+   public BundleCandidatesCollector(boolean resolveDependenciesOfNativeBundles) {
       this.resolveDependenciesOfNativeBundles = resolveDependenciesOfNativeBundles;
    }
 
-   public List<BundleCandidate> getBundleCandidates()
-   {
+   public List<BundleCandidate> getBundleCandidates() {
       return new ArrayList<BundleCandidate>(mvnIdToBundleNode.values());
    }
 
-   public Map<BundleCandidate, File> getBundleNodeToSourceJarMap()
-   {
+   public Map<BundleCandidate, File> getBundleNodeToSourceJarMap() {
       return bundleNodeToSourceJar;
    }
 
-   public boolean visitNode(Artifact artifact, MavenProject project)
-   {
+   public boolean visitNode(Artifact artifact, MavenProject project) {
       final String id = artifact.getId();
-      if (!mvnIdToBundleNode.containsKey(id))
-      {
+      if (!mvnIdToBundleNode.containsKey(id)) {
          BundleCandidate bundleCandidate = newBundleCandidate(artifact, project);
          mvnIdToBundleNode.put(id, bundleCandidate);
 
@@ -76,8 +69,7 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
          final BundleManifest manifest = lookupBundleManifest(artifact, project);
          bundleCandidate.setManifest(manifest);
 
-         if (isNativeBundle(artifact, project, bundleCandidate))
-         {
+         if (isNativeBundle(artifact, project, bundleCandidate)) {
             bundleCandidate.setNativeBundle(true);
             return resolveDependenciesOfNativeBundles;
          }
@@ -87,28 +79,23 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       return false;
    }
 
-   public void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact)
-   {
+   public void visitSourceNode(Artifact artifact, MavenProject project, Artifact sourceArtifact) {
       final BundleCandidate bundleCandidate = mvnIdToBundleNode.get(artifact.getId());
       bundleNodeToSourceJar.put(bundleCandidate, sourceArtifact.getFile());
    }
 
-   protected boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate)
-   {
+   protected boolean isNativeBundle(Artifact artifact, MavenProject project, BundleCandidate bundleCandidate) {
       return bundleCandidate.getManifest() != null;
    }
 
-   protected BundleCandidate newBundleCandidate(Artifact artifact, MavenProject project)
-   {
+   protected BundleCandidate newBundleCandidate(Artifact artifact, MavenProject project) {
       final BundleCandidate node = ContextModelFactory.eINSTANCE.createBundleCandidate();
-      if (project == null)
-      {
+      if (project == null) {
          MavenArtifact mArtifact = MavenArtifactUtils.toMavenArtifact(artifact);
          node.setLocation(mArtifact.getFile());
          node.addExtension(mArtifact);
       }
-      else
-      {
+      else {
          org.sourcepit.common.maven.model.MavenProject mProject = MavenProjectUtils.toMavenProject(project);
          node.setLocation(artifact.getFile());
          node.addExtension(mProject);
@@ -116,35 +103,28 @@ public class BundleCandidatesCollector implements MavenDependencyWalker.Handler
       return node;
    }
 
-   private BundleManifest lookupBundleManifest(Artifact artifact, MavenProject project)
-   {
-      if (project == null)
-      {
+   private BundleManifest lookupBundleManifest(Artifact artifact, MavenProject project) {
+      if (project == null) {
          Manifest manifest = null;
-         try
-         {
+         try {
             manifest = ManifestUtils.readJarManifest(artifact.getFile());
          }
-         catch (Exception e)
-         {
+         catch (Exception e) {
          }
          return (BundleManifest) (manifest instanceof BundleManifest ? manifest : null);
       }
-      else
-      {
+      else {
          return null;
       }
    }
 
-   public void handleDependency(Artifact fromArtifact, Artifact toArtifact)
-   {
+   public void handleDependency(Artifact fromArtifact, Artifact toArtifact) {
       BundleCandidate fromNode = mvnIdToBundleNode.get(fromArtifact.getId());
       BundleCandidate toNode = mvnIdToBundleNode.get(toArtifact.getId());
       fromNode.getDependencies().add(newBundleReference(toNode, toArtifact));
    }
 
-   private BundleReference newBundleReference(BundleCandidate bundleNode, Artifact mappedArtifact)
-   {
+   private BundleReference newBundleReference(BundleCandidate bundleNode, Artifact mappedArtifact) {
       final BundleReference bundleReference = ContextModelFactory.eINSTANCE.createBundleReference();
       bundleReference.addExtension(MavenArtifactUtils.toMavenDependecy(mappedArtifact));
 

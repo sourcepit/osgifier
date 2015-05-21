@@ -21,21 +21,16 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.lang.IllegalArgumentException;
-
 import org.hamcrest.core.IsEqual;
 import org.junit.Test;
-import org.sourcepit.osgifier.core.util.SymbolicNameUtils;
 
 /**
  * @author Bernd
  */
-public class SymbolicNameUtilsTest
-{
+public class SymbolicNameUtilsTest {
 
    @Test
-   public void testIsValidSymbolicName()
-   {
+   public void testIsValidSymbolicName() {
       assertFalse(SymbolicNameUtils.isValidSymbolicName(null));
       assertFalse(SymbolicNameUtils.isValidSymbolicName(""));
       assertFalse(SymbolicNameUtils.isValidSymbolicName(" "));
@@ -51,24 +46,19 @@ public class SymbolicNameUtilsTest
    }
 
    @Test
-   public void testToValidSymbolicName()
-   {
-      try
-      {
+   public void testToValidSymbolicName() {
+      try {
          SymbolicNameUtils.toValidSymbolicName(null);
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
-      try
-      {
+      try {
          SymbolicNameUtils.toValidSymbolicName("");
          fail();
       }
-      catch (IllegalArgumentException e)
-      {
+      catch (IllegalArgumentException e) {
       }
 
       assertThat(SymbolicNameUtils.toValidSymbolicName(" "), IsEqual.equalTo("_"));

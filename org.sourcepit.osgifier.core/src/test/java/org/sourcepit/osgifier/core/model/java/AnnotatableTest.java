@@ -20,13 +20,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.sourcepit.common.modeling.AbstractAnnotatableTest;
-import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
 
-public class AnnotatableTest extends AbstractAnnotatableTest
-{
+public class AnnotatableTest extends AbstractAnnotatableTest {
    @Override
-   protected void addEPackages(List<EPackage> ePackages)
-   {
+   protected void addEPackages(List<EPackage> ePackages) {
       ePackages.add(JavaModelPackage.eINSTANCE);
    }
 }

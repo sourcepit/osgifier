@@ -22,7 +22,6 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 /**
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
  */
-public interface ContentAppenderParticipant
-{
+public interface ContentAppenderParticipant {
    void appendContents(OsgifierContext context, ContentAppenderFilter filter, PropertiesSource options);
 }

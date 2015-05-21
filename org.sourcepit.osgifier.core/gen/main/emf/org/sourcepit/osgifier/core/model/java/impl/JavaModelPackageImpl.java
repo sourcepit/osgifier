@@ -16,6 +16,8 @@
 
 package org.sourcepit.osgifier.core.model.java.impl;
 
+import static org.sourcepit.osgifier.core.model.java.JavaModelPackage.RESOURCE;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -57,8 +59,7 @@ import org.sourcepit.osgifier.core.model.java.ResourceVisitor;
  * 
  * @generated
  */
-public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPackage
-{
+public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPackage {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
@@ -233,8 +234,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * @see #init()
     * @generated
     */
-   private JavaModelPackageImpl()
-   {
+   private JavaModelPackageImpl() {
       super(eNS_URI, JavaModelFactory.eINSTANCE);
    }
 
@@ -259,8 +259,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * @see #initializePackageContents()
     * @generated
     */
-   public static JavaModelPackage init()
-   {
+   public static JavaModelPackage init() {
       if (isInited)
          return (JavaModelPackage) EPackage.Registry.INSTANCE.getEPackage(JavaModelPackage.eNS_URI);
 
@@ -276,9 +275,9 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       ManifestPackage.eINSTANCE.eClass();
 
       // Obtain or create and register interdependencies
-      ContextModelPackageImpl theContextModelPackage = (ContextModelPackageImpl) (EPackage.Registry.INSTANCE
-         .getEPackage(ContextModelPackage.eNS_URI) instanceof ContextModelPackageImpl ? EPackage.Registry.INSTANCE
-         .getEPackage(ContextModelPackage.eNS_URI) : ContextModelPackage.eINSTANCE);
+      ContextModelPackageImpl theContextModelPackage = (ContextModelPackageImpl) (EPackage.Registry.INSTANCE.getEPackage(ContextModelPackage.eNS_URI) instanceof ContextModelPackageImpl
+         ? EPackage.Registry.INSTANCE.getEPackage(ContextModelPackage.eNS_URI)
+         : ContextModelPackage.eINSTANCE);
 
       // Create package meta-data objects
       theJavaModelPackage.createPackageContents();
@@ -303,8 +302,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getNamed()
-   {
+   public EClass getNamed() {
       return namedEClass;
    }
 
@@ -314,8 +312,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EAttribute getNamed_Name()
-   {
+   public EAttribute getNamed_Name() {
       return (EAttribute) namedEClass.getEStructuralFeatures().get(0);
    }
 
@@ -325,8 +322,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getResource()
-   {
+   public EClass getResource() {
       return resourceEClass;
    }
 
@@ -336,8 +332,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getResource_ParentDirectory()
-   {
+   public EReference getResource_ParentDirectory() {
       return (EReference) resourceEClass.getEStructuralFeatures().get(0);
    }
 
@@ -347,8 +342,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getDirectory()
-   {
+   public EClass getDirectory() {
       return directoryEClass;
    }
 
@@ -358,8 +352,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getDirectory_Resources()
-   {
+   public EReference getDirectory_Resources() {
       return (EReference) directoryEClass.getEStructuralFeatures().get(0);
    }
 
@@ -369,8 +362,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getFile()
-   {
+   public EClass getFile() {
       return fileEClass;
    }
 
@@ -380,8 +372,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaElement()
-   {
+   public EClass getJavaElement() {
       return javaElementEClass;
    }
 
@@ -391,8 +382,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getQualifiedJavaElement()
-   {
+   public EClass getQualifiedJavaElement() {
       return qualifiedJavaElementEClass;
    }
 
@@ -402,8 +392,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaResourceBundle()
-   {
+   public EClass getJavaResourceBundle() {
       return javaResourceBundleEClass;
    }
 
@@ -413,8 +402,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaResourceBundle_ResourcesRoots()
-   {
+   public EReference getJavaResourceBundle_ResourcesRoots() {
       return (EReference) javaResourceBundleEClass.getEStructuralFeatures().get(0);
    }
 
@@ -424,8 +412,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaProject()
-   {
+   public EClass getJavaProject() {
       return javaProjectEClass;
    }
 
@@ -435,8 +422,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaArchive()
-   {
+   public EClass getJavaArchive() {
       return javaArchiveEClass;
    }
 
@@ -446,8 +432,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaResourceDirectory()
-   {
+   public EClass getJavaResourceDirectory() {
       return javaResourceDirectoryEClass;
    }
 
@@ -457,8 +442,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaResourcesRoot()
-   {
+   public EClass getJavaResourcesRoot() {
       return javaResourcesRootEClass;
    }
 
@@ -468,8 +452,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaResourcesRoot_PackageBundle()
-   {
+   public EReference getJavaResourcesRoot_PackageBundle() {
       return (EReference) javaResourcesRootEClass.getEStructuralFeatures().get(0);
    }
 
@@ -479,8 +462,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EAttribute getJavaResourcesRoot_ResourcesType()
-   {
+   public EAttribute getJavaResourcesRoot_ResourcesType() {
       return (EAttribute) javaResourcesRootEClass.getEStructuralFeatures().get(1);
    }
 
@@ -490,8 +472,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaPackage()
-   {
+   public EClass getJavaPackage() {
       return javaPackageEClass;
    }
 
@@ -501,8 +482,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaFile()
-   {
+   public EClass getJavaFile() {
       return javaFileEClass;
    }
 
@@ -512,8 +492,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaFile_Type()
-   {
+   public EReference getJavaFile_Type() {
       return (EReference) javaFileEClass.getEStructuralFeatures().get(0);
    }
 
@@ -523,8 +502,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaClass()
-   {
+   public EClass getJavaClass() {
       return javaClassEClass;
    }
 
@@ -534,8 +512,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EAttribute getJavaClass_Major()
-   {
+   public EAttribute getJavaClass_Major() {
       return (EAttribute) javaClassEClass.getEStructuralFeatures().get(0);
    }
 
@@ -545,8 +522,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EAttribute getJavaClass_Minor()
-   {
+   public EAttribute getJavaClass_Minor() {
       return (EAttribute) javaClassEClass.getEStructuralFeatures().get(1);
    }
 
@@ -556,8 +532,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaCompilationUnit()
-   {
+   public EClass getJavaCompilationUnit() {
       return javaCompilationUnitEClass;
    }
 
@@ -567,8 +542,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaCompilationUnit_ImportDeclarations()
-   {
+   public EReference getJavaCompilationUnit_ImportDeclarations() {
       return (EReference) javaCompilationUnitEClass.getEStructuralFeatures().get(0);
    }
 
@@ -578,8 +552,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getImportDeclaration()
-   {
+   public EClass getImportDeclaration() {
       return importDeclarationEClass;
    }
 
@@ -589,8 +562,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getImportDeclaration_CompilationUnit()
-   {
+   public EReference getImportDeclaration_CompilationUnit() {
       return (EReference) importDeclarationEClass.getEStructuralFeatures().get(0);
    }
 
@@ -600,8 +572,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaType()
-   {
+   public EClass getJavaType() {
       return javaTypeEClass;
    }
 
@@ -611,8 +582,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaType_InnerTypes()
-   {
+   public EReference getJavaType_InnerTypes() {
       return (EReference) javaTypeEClass.getEStructuralFeatures().get(0);
    }
 
@@ -622,8 +592,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EReference getJavaType_OuterType()
-   {
+   public EReference getJavaType_OuterType() {
       return (EReference) javaTypeEClass.getEStructuralFeatures().get(1);
    }
 
@@ -633,8 +602,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getJavaResource()
-   {
+   public EClass getJavaResource() {
       return javaResourceEClass;
    }
 
@@ -644,8 +612,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EClass getResourceVisitor()
-   {
+   public EClass getResourceVisitor() {
       return resourceVisitorEClass;
    }
 
@@ -655,8 +622,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public EEnum getJavaResourcesType()
-   {
+   public EEnum getJavaResourcesType() {
       return javaResourcesTypeEEnum;
    }
 
@@ -666,8 +632,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public JavaModelFactory getJavaModelFactory()
-   {
+   public JavaModelFactory getJavaModelFactory() {
       return (JavaModelFactory) getEFactoryInstance();
    }
 
@@ -687,8 +652,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public void createPackageContents()
-   {
+   public void createPackageContents() {
       if (isCreated)
          return;
       isCreated = true;
@@ -765,8 +729,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
     * 
     * @generated
     */
-   public void initializePackageContents()
-   {
+   public void initializePackageContents() {
       if (isInitialized)
          return;
       isInitialized = true;
@@ -777,8 +740,7 @@ public class JavaModelPackageImpl extends EPackageImpl implements JavaModelPacka
       setNsURI(eNS_URI);
 
       // Obtain other dependent packages
-      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE
-         .getEPackage(CommonModelingPackage.eNS_URI);
+      CommonModelingPackage theCommonModelingPackage = (CommonModelingPackage) EPackage.Registry.INSTANCE.getEPackage(CommonModelingPackage.eNS_URI);
 
       // Create type parameters
 

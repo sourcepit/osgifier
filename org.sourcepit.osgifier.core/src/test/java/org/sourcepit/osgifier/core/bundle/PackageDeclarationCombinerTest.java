@@ -16,7 +16,7 @@
 
 package org.sourcepit.osgifier.core.bundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.sourcepit.common.manifest.osgi.BundleHeaderName.DYNAMICIMPORT_PACKAGE;
 
 import java.util.ArrayList;
@@ -27,15 +27,12 @@ import org.junit.Test;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.common.manifest.osgi.DynamicPackageImport;
-import org.sourcepit.osgifier.core.bundle.PackageDeclarationCombiner;
 
-public class PackageDeclarationCombinerTest
-{
+public class PackageDeclarationCombinerTest {
 
 
    @Test
-   public void testCombineDynamicPackageImports() throws Exception
-   {
+   public void testCombineDynamicPackageImports() throws Exception {
       assertEquals("*", combineDynamicPackageImports("*", "*"));
       assertEquals("*,*;vendor=acme", combineDynamicPackageImports("*", "*;vendor=acme"));
       assertEquals("a;vendor=acme,z", combineDynamicPackageImports("z", "a;vendor=acme"));
@@ -49,11 +46,9 @@ public class PackageDeclarationCombinerTest
             "foo.bar;version=1.0.0"));
    }
 
-   private String combineDynamicPackageImports(String... dynImports)
-   {
+   private String combineDynamicPackageImports(String... dynImports) {
       List<DynamicPackageImport> all = new ArrayList<DynamicPackageImport>();
-      for (String dynImport : dynImports)
-      {
+      for (String dynImport : dynImports) {
          BundleManifest mf = BundleManifestFactory.eINSTANCE.createBundleManifest();
          mf.setHeader(DYNAMICIMPORT_PACKAGE, dynImport);
          all.addAll(mf.getDynamicImportPackage());
@@ -68,16 +63,14 @@ public class PackageDeclarationCombinerTest
    }
 
    @Test
-   public void testMergeDynamicPackageImportPatterns() throws Exception
-   {
+   public void testMergeDynamicPackageImportPatterns() throws Exception {
       List<String> result = PackageDeclarationCombiner.mergeDynamicPackageImportPatterns(Arrays.asList("*", "foo"));
       assertEquals("[*]", result.toString());
 
       result = PackageDeclarationCombiner.mergeDynamicPackageImportPatterns(Arrays.asList("bar", "foo"));
       assertEquals("[bar, foo]", result.toString());
 
-      result = PackageDeclarationCombiner.mergeDynamicPackageImportPatterns(Arrays
-         .asList("bar.*", "foo.*", "bar.foo.*"));
+      result = PackageDeclarationCombiner.mergeDynamicPackageImportPatterns(Arrays.asList("bar.*", "foo.*", "bar.foo.*"));
       assertEquals("[bar.*, foo.*]", result.toString());
 
       result = PackageDeclarationCombiner.mergeDynamicPackageImportPatterns(Arrays.asList("bar.foo.acme", "bar.*",

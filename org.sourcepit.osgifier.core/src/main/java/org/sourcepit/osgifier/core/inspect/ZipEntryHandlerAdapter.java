@@ -27,17 +27,14 @@ import org.sourcepit.common.utils.zip.ZipEntryHandler;
 /**
  * @author Bernd
  */
-public class ZipEntryHandlerAdapter implements ZipEntryHandler
-{
+public class ZipEntryHandlerAdapter implements ZipEntryHandler {
    private final ResourceVisitor visitor;
 
-   public ZipEntryHandlerAdapter(ResourceVisitor visitor)
-   {
+   public ZipEntryHandlerAdapter(ResourceVisitor visitor) {
       this.visitor = visitor;
    }
 
-   public void handle(ZipEntry zipEntry, final InputStream content) throws IOException
-   {
+   public void handle(ZipEntry zipEntry, final InputStream content) throws IOException {
       final Path path = new Path(zipEntry.getName());
       final boolean isDirectory = zipEntry.isDirectory();
       visitor.visit(path, isDirectory, isDirectory ? null : UnclosableInputStream.wrap(content));

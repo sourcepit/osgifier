@@ -29,16 +29,14 @@ import org.sourcepit.osgifier.core.model.java.JavaModelPackage;
  *
  * @generated
  */
-public class FileImpl extends ResourceImpl implements File
-{
+public class FileImpl extends ResourceImpl implements File {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->
     * 
     * @generated
     */
-   protected FileImpl()
-   {
+   protected FileImpl() {
       super();
    }
 
@@ -49,8 +47,7 @@ public class FileImpl extends ResourceImpl implements File
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.FILE;
    }
 

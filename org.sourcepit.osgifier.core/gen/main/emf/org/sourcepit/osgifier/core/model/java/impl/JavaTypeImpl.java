@@ -57,8 +57,7 @@ import org.sourcepit.osgifier.core.model.java.JavaType;
  *
  * @generated
  */
-public class JavaTypeImpl extends EObjectImpl implements JavaType
-{
+public class JavaTypeImpl extends EObjectImpl implements JavaType {
    /**
     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
     * <!-- begin-user-doc -->
@@ -120,8 +119,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   protected JavaTypeImpl()
-   {
+   protected JavaTypeImpl() {
       super();
    }
 
@@ -132,8 +130,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   protected EClass eStaticClass()
-   {
+   protected EClass eStaticClass() {
       return JavaModelPackage.Literals.JAVA_TYPE;
    }
 
@@ -143,8 +140,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public String getName()
-   {
+   public String getName() {
       return name;
    }
 
@@ -154,8 +150,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public void setName(String newName)
-   {
+   public void setName(String newName) {
       String oldName = name;
       name = newName;
       if (eNotificationRequired())
@@ -168,10 +163,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public EList<EObject> getExtensions()
-   {
-      if (extensions == null)
-      {
+   public EList<EObject> getExtensions() {
+      if (extensions == null) {
          extensions = new EObjectContainmentEList<EObject>(EObject.class, this, JavaModelPackage.JAVA_TYPE__EXTENSIONS);
       }
       return extensions;
@@ -183,10 +176,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public EList<Annotation> getAnnotations()
-   {
-      if (annotations == null)
-      {
+   public EList<Annotation> getAnnotations() {
+      if (annotations == null) {
          annotations = new EObjectContainmentWithInverseEList<Annotation>(Annotation.class, this,
             JavaModelPackage.JAVA_TYPE__ANNOTATIONS, CommonModelingPackage.ANNOTATION__TARGET);
       }
@@ -199,10 +190,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public EList<JavaType> getInnerTypes()
-   {
-      if (innerTypes == null)
-      {
+   public EList<JavaType> getInnerTypes() {
+      if (innerTypes == null) {
          innerTypes = new EObjectContainmentWithInverseEList<JavaType>(JavaType.class, this,
             JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaModelPackage.JAVA_TYPE__OUTER_TYPE);
       }
@@ -215,8 +204,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public JavaType getOuterType()
-   {
+   public JavaType getOuterType() {
       if (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE)
          return null;
       return (JavaType) eInternalContainer();
@@ -228,8 +216,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public NotificationChain basicSetOuterType(JavaType newOuterType, NotificationChain msgs)
-   {
+   public NotificationChain basicSetOuterType(JavaType newOuterType, NotificationChain msgs) {
       msgs = eBasicSetContainer((InternalEObject) newOuterType, JavaModelPackage.JAVA_TYPE__OUTER_TYPE, msgs);
       return msgs;
    }
@@ -240,11 +227,9 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public void setOuterType(JavaType newOuterType)
-   {
+   public void setOuterType(JavaType newOuterType) {
       if (newOuterType != eInternalContainer()
-         || (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE && newOuterType != null))
-      {
+         || (eContainerFeatureID() != JavaModelPackage.JAVA_TYPE__OUTER_TYPE && newOuterType != null)) {
          if (EcoreUtil.isAncestor(this, newOuterType))
             throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
          NotificationChain msgs = null;
@@ -268,8 +253,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public JavaFile getFile()
-   {
+   public JavaFile getFile() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -281,8 +265,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public String getQualifiedName()
-   {
+   public String getQualifiedName() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -294,8 +277,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public JavaResourceBundle getResourceBundle()
-   {
+   public JavaResourceBundle getResourceBundle() {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -307,8 +289,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source)
-   {
+   public Annotation getAnnotation(String source) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -320,8 +301,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public Annotation getAnnotation(String source, boolean createOnDemand)
-   {
+   public Annotation getAnnotation(String source, boolean createOnDemand) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -333,8 +313,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public String getAnnotationData(String source, String key)
-   {
+   public String getAnnotationData(String source, String key) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -346,8 +325,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public String setAnnotationData(String source, String key, String value)
-   {
+   public String setAnnotationData(String source, String key, String value) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -359,8 +337,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public <T extends EObject> T getExtension(Class<T> extensionType)
-   {
+   public <T extends EObject> T getExtension(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -372,8 +349,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType)
-   {
+   public <T extends EObject> EList<T> getExtensions(Class<T> extensionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -385,8 +361,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public <T extends EObject> void addExtension(T extension)
-   {
+   public <T extends EObject> void addExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -398,8 +373,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtension(T extension)
-   {
+   public <T extends EObject> void removeExtension(T extension) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -411,8 +385,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * 
     * @generated
     */
-   public <T extends EObject> void removeExtensions(Class<T> extentionType)
-   {
+   public <T extends EObject> void removeExtensions(Class<T> extentionType) {
       // TODO: implement this method
       // Ensure that you remove @generated or mark it @generated NOT
       throw new UnsupportedOperationException();
@@ -426,10 +399,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     */
    @SuppressWarnings("unchecked")
    @Override
-   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
             return ((InternalEList<InternalEObject>) (InternalEList<?>) getAnnotations()).basicAdd(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__INNER_TYPES :
@@ -449,10 +420,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-   {
-      switch (featureID)
-      {
+   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__EXTENSIONS :
             return ((InternalEList<?>) getExtensions()).basicRemove(otherEnd, msgs);
          case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
@@ -472,10 +441,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-   {
-      switch (eContainerFeatureID())
-      {
+   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+      switch (eContainerFeatureID()) {
          case JavaModelPackage.JAVA_TYPE__OUTER_TYPE :
             return eInternalContainer().eInverseRemove(this, JavaModelPackage.JAVA_TYPE__INNER_TYPES, JavaType.class,
                msgs);
@@ -490,10 +457,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public Object eGet(int featureID, boolean resolve, boolean coreType)
-   {
-      switch (featureID)
-      {
+   public Object eGet(int featureID, boolean resolve, boolean coreType) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__NAME :
             return getName();
          case JavaModelPackage.JAVA_TYPE__EXTENSIONS :
@@ -516,10 +481,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     */
    @SuppressWarnings("unchecked")
    @Override
-   public void eSet(int featureID, Object newValue)
-   {
-      switch (featureID)
-      {
+   public void eSet(int featureID, Object newValue) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__NAME :
             setName((String) newValue);
             return;
@@ -549,10 +512,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public void eUnset(int featureID)
-   {
-      switch (featureID)
-      {
+   public void eUnset(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__NAME :
             setName(NAME_EDEFAULT);
             return;
@@ -579,10 +540,8 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public boolean eIsSet(int featureID)
-   {
-      switch (featureID)
-      {
+   public boolean eIsSet(int featureID) {
+      switch (featureID) {
          case JavaModelPackage.JAVA_TYPE__NAME :
             return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
          case JavaModelPackage.JAVA_TYPE__EXTENSIONS :
@@ -604,32 +563,25 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (derivedFeatureID)
-         {
+   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_TYPE__EXTENSIONS :
                return CommonModelingPackage.EXTENDABLE__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (derivedFeatureID) {
             case JavaModelPackage.JAVA_TYPE__ANNOTATIONS :
                return CommonModelingPackage.ANNOTATABLE__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (derivedFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (derivedFeatureID) {
             default :
                return -1;
          }
@@ -644,32 +596,25 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-   {
-      if (baseClass == Extendable.class)
-      {
-         switch (baseFeatureID)
-         {
+   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+      if (baseClass == Extendable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.EXTENDABLE__EXTENSIONS :
                return JavaModelPackage.JAVA_TYPE__EXTENSIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == Annotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == Annotatable.class) {
+         switch (baseFeatureID) {
             case CommonModelingPackage.ANNOTATABLE__ANNOTATIONS :
                return JavaModelPackage.JAVA_TYPE__ANNOTATIONS;
             default :
                return -1;
          }
       }
-      if (baseClass == XAnnotatable.class)
-      {
-         switch (baseFeatureID)
-         {
+      if (baseClass == XAnnotatable.class) {
+         switch (baseFeatureID) {
             default :
                return -1;
          }
@@ -684,8 +629,7 @@ public class JavaTypeImpl extends EObjectImpl implements JavaType
     * @generated
     */
    @Override
-   public String toString()
-   {
+   public String toString() {
       if (eIsProxy())
          return super.toString();
 

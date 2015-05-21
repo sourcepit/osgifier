@@ -27,8 +27,7 @@ package org.sourcepit.osgifier.core.model.java;
  * @model
  * @generated
  */
-public interface JavaArchive extends JavaResourceBundle
-{
+public interface JavaArchive extends JavaResourceBundle {
    /**
     * <!-- begin-user-doc -->
     * <!-- end-user-doc -->

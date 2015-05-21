@@ -19,8 +19,7 @@ package org.sourcepit.osgifier.core.java;
 import java.util.Collection;
 import java.util.Map;
 
-public class PackagesInfo
-{
+public class PackagesInfo {
    private final Collection<String> packages;
 
    private final RequiredPackages requiredPackages;
@@ -28,25 +27,21 @@ public class PackagesInfo
    private final Map<String, RequiredPackages> packageToRequiredPackagesMap;
 
    public PackagesInfo(Collection<String> packages, RequiredPackages referencedPackages,
-      Map<String, RequiredPackages> packageToRequiredPackagesMap)
-   {
+      Map<String, RequiredPackages> packageToRequiredPackagesMap) {
       this.packages = packages;
       this.requiredPackages = referencedPackages;
       this.packageToRequiredPackagesMap = packageToRequiredPackagesMap;
    }
 
-   public Collection<String> getContainedPackages()
-   {
+   public Collection<String> getContainedPackages() {
       return packages;
    }
 
-   public RequiredPackages getRequiredPackages()
-   {
+   public RequiredPackages getRequiredPackages() {
       return requiredPackages;
    }
 
-   public RequiredPackages getRequiredPackagesOf(String packageName)
-   {
+   public RequiredPackages getRequiredPackagesOf(String packageName) {
       return packageToRequiredPackagesMap.get(packageName);
    }
 }
