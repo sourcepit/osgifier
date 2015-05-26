@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.sourcepit.osgifier.maven.resolve;
+package org.sourcepit.osgifier.maven;
 
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
 
@@ -22,7 +22,8 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import org.apache.maven.model.Model;
-import org.apache.maven.model.io.DefaultModelReader;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -30,10 +31,14 @@ import org.apache.maven.model.io.DefaultModelReader;
 public class ModelFromString {
    public Model fromString(String modelAsString) {
       try {
-         return new DefaultModelReader().read(new StringReader(modelAsString), null);
+
+         return new MavenXpp3Reader().read(new StringReader(modelAsString), false);
       }
       catch (IOException e) {
          throw pipe(e);
+      }
+      catch (XmlPullParserException e) {
+         throw new IllegalArgumentException(e.getMessage(), e);
       }
    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.sourcepit.osgifier.maven.resolve;
+package org.sourcepit.osgifier.maven;
 
 import static org.apache.commons.lang.StringUtils.isEmpty;
 import static org.apache.commons.lang.StringUtils.isNotEmpty;
@@ -129,7 +129,7 @@ public class MavenModelHeadersAppender implements BundleHeadersAppender {
    }
 
 
-   static BundleLicense toBundleLicense(License license) {
+   public static BundleLicense toBundleLicense(License license) {
       final BundleLicense bundleLicense = BundleManifestFactory.eINSTANCE.createBundleLicense();
 
       final String name = license.getName();

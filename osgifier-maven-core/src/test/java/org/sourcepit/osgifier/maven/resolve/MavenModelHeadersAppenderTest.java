@@ -27,6 +27,8 @@ import org.sourcepit.common.manifest.osgi.BundleLicense;
 import org.sourcepit.common.manifest.osgi.BundleManifestFactory;
 import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.ContextModelFactory;
+import org.sourcepit.osgifier.maven.MavenModelHeadersAppender;
+import org.sourcepit.osgifier.maven.ModelToString;
 
 public class MavenModelHeadersAppenderTest {
 

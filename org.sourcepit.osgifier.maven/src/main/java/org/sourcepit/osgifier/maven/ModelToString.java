@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.sourcepit.osgifier.maven.resolve;
+package org.sourcepit.osgifier.maven;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.sourcepit.common.utils.lang.Exceptions.pipe;
@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.maven.model.Model;
-import org.apache.maven.model.io.DefaultModelWriter;
+import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
 
 /**
  * @author Bernd Vogt <bernd.vogt@sourcepit.org>
@@ -32,7 +32,7 @@ public class ModelToString {
    public String toString(final Model model) {
       final StringWriter w = new StringWriter();
       try {
-         new DefaultModelWriter().write(w, null, model);
+         new MavenXpp3Writer().write(w, model);
          return w.toString();
       }
       catch (IOException e) {

@@ -44,6 +44,7 @@ import org.sourcepit.osgifier.core.model.context.BundleCandidate;
 import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 import org.sourcepit.osgifier.core.resolve.ContentAppenderFilter;
 import org.sourcepit.osgifier.core.resolve.ContentAppenderParticipant;
+import org.sourcepit.osgifier.maven.ModelToString;
 
 /**
  * @author Bernd Vogt <Bernd.Vogt@bosch-si.com>
