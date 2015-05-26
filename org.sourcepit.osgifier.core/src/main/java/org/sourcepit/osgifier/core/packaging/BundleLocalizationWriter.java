@@ -54,7 +54,7 @@ public abstract class BundleLocalizationWriter<O extends OutputStream> {
          }
 
          @Override
-         protected void closeStream(OutputStream out) throws IOException {
+         protected void closeStream(OutputStream out, String path) throws IOException {
             out.close();
          }
       };
@@ -71,7 +71,7 @@ public abstract class BundleLocalizationWriter<O extends OutputStream> {
          }
 
          @Override
-         protected void closeStream(JarOutputStream out) throws IOException {
+         protected void closeStream(JarOutputStream out, String path) throws IOException {
             out.closeEntry();
          }
       };
@@ -102,7 +102,7 @@ public abstract class BundleLocalizationWriter<O extends OutputStream> {
             }
             finally {
                try {
-                  closeStream(out);
+                  closeStream(out, path);
                }
                catch (IOException ioe) { // noop
                }
@@ -133,5 +133,5 @@ public abstract class BundleLocalizationWriter<O extends OutputStream> {
 
    protected abstract O openStream(String path) throws IOException;
 
-   protected abstract void closeStream(O out) throws IOException;
+   protected abstract void closeStream(O out, String path) throws IOException;
 }
