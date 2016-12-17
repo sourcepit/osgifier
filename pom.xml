@@ -19,7 +19,7 @@
 	<parent>
 		<groupId>org.sourcepit</groupId>
 		<artifactId>srcpit-parent</artifactId>
-		<version>21</version>
+		<version>22-SNAPSHOT</version>
 	</parent>
 	<groupId>org.sourcepit.osgifier</groupId>
 	<artifactId>osgifier</artifactId>
@@ -313,7 +313,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 				<plugin>
 					<groupId>org.sourcepit.osgifier</groupId>
 					<artifactId>osgifier-maven-plugin</artifactId>
-					<version>0.23.0</version>
+					<version>0.24.1</version>
 					<configuration>
 						<pde>true</pde>
 					</configuration>
