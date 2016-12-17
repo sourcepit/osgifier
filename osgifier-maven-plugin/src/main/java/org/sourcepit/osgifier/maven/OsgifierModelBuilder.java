@@ -32,6 +32,7 @@ import org.apache.maven.project.ProjectBuildingException;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sourcepit.common.maven.model.MavenArtifact;
 import org.sourcepit.common.utils.props.PropertiesSource;
 import org.sourcepit.maven.dependency.model.ArtifactAttachmentFactory;
@@ -44,8 +45,8 @@ import org.sourcepit.osgifier.core.model.context.OsgifierContext;
 
 @Named
 public class OsgifierModelBuilder {
-   @Inject
-   private Logger log;
+   
+   private static final Logger LOG = LoggerFactory.getLogger(OsgifierModelBuilder.class);
 
    @Inject
    private DependencyModelResolver dependencyModelResolver;
@@ -58,33 +59,33 @@ public class OsgifierModelBuilder {
 
    public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options,
       Collection<Dependency> dependencies, Date timestamp) {
-      log.info("");
-      log.info("Resolving bundle candidates...");
+      LOG.info("");
+      LOG.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(dependencies);
       final OsgifierContext osgifyModel = createStubModel(dependencyModel);
-      log.info("------------------------------------------------------------------------");
+      LOG.info("------------------------------------------------------------------------");
 
-      log.info("");
+      LOG.info("");
 
       return build(filter, options, osgifyModel, timestamp);
    }
 
    public OsgifierContext build(OsgifierContextInflatorFilter filter, PropertiesSource options, MavenProject project,
       Date timestamp) {
-      log.info("");
-      log.info("Resolving bundle candidates...");
+      LOG.info("");
+      LOG.info("Resolving bundle candidates...");
       final DependencyModel dependencyModel = resolve(project);
       final OsgifierContext osgifyModel = createStubModel(dependencyModel);
-      log.info("------------------------------------------------------------------------");
+      LOG.info("------------------------------------------------------------------------");
 
-      log.info("");
+      LOG.info("");
 
       return build(filter, options, osgifyModel, timestamp);
    }
 
    private OsgifierContext build(final OsgifierContextInflatorFilter filter, PropertiesSource options,
       final OsgifierContext osgifyModel, Date timestamp) {
-      log.info("Generating OSGi metadata...");
+      LOG.info("Generating OSGi metadata...");
       inflator.inflate(filter, options, osgifyModel, timestamp);
       return osgifyModel;
    }
