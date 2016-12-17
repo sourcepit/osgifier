@@ -49,7 +49,6 @@ import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.project.ProjectBuildingResult;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.artifact.ArtifactProperties;
-import org.slf4j.Logger;
 import org.sourcepit.common.manifest.Header;
 import org.sourcepit.common.manifest.osgi.BundleManifest;
 import org.sourcepit.common.manifest.osgi.Version;
@@ -85,8 +84,6 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo {
    private final Repackager repackager;
 
    private final ArtifactFactory artifactFactory;
-
-   private final Logger log;
 
    @Parameter(required = true)
    private List<Dependency> artifacts;
@@ -133,13 +130,12 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo {
 
    @Inject
    public OsgifyArtifactsMojo(LegacySupport buildContext, ProjectBuilder projectBuilder,
-      OsgifierModelBuilder modelBuilder, Repackager repackager, ArtifactFactory artifactFactory, Logger log) {
+      OsgifierModelBuilder modelBuilder, Repackager repackager, ArtifactFactory artifactFactory) {
       this.buildContext = buildContext;
       this.projectBuilder = projectBuilder;
       this.modelBuilder = modelBuilder;
       this.repackager = repackager;
       this.artifactFactory = artifactFactory;
-      this.log = log;
    }
 
    @Override
@@ -172,9 +168,9 @@ public class OsgifyArtifactsMojo extends AbstractOsgifierMojo {
             mavenProjectMapping.put(bundle, result.getProject());
          }
          catch (ProjectBuildingException e) {
-            log.warn(
-               "Failed to resolve original Maven model for artifact {}. Some information may note be available in genrated pom.",
-               artifact, e);
+            getLog().warn(String.format(
+               "Failed to resolve original Maven model for artifact %s. Some information may note be available in genrated pom.",
+               artifact), e);
          }
 
          adoptMavenCoordinates(dependencyModel, bundle);
