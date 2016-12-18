@@ -23,7 +23,7 @@
 	</parent>
 	<groupId>org.sourcepit.osgifier</groupId>
 	<artifactId>osgifier</artifactId>
-	<version>0.25.0-SNAPSHOT</version>
+	<version>0.25.0</version>
 	<packaging>pom</packaging>
 
 	<name>OSGifier</name>
@@ -145,7 +145,7 @@ This is done by the following goals of the  [OSGifier Maven Plugin](#osgifier-ma
 	<scm>
 		<connection>scm:git:git@github.com:sourcepit/osgifier.git</connection>
 		<url>https://github.com/sourcepit/osgifier</url>
-		<tag>HEAD</tag>
+		<tag>0.25.0</tag>
 	</scm>
 
 	<issueManagement>
