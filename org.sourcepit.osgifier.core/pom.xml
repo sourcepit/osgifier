@@ -226,21 +226,18 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
+				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
 						<id>jar-test-resources</id>
 						<phase>process-test-classes</phase>
 						<goals>
-							<goal>jar</goal>
+							<goal>run</goal>
 						</goals>
 						<configuration>
-							<useDefaultManifestFile>true</useDefaultManifestFile>
-							<defaultManifestFile>${project.build.directory}/testResources/META-INF/MANIFEST.MF</defaultManifestFile>
-							<finalName>${project.artifactId}</finalName>
-							<classesDirectory>${project.build.directory}/testResources</classesDirectory>
-							<outputDirectory>${project.build.directory}/testResources</outputDirectory>
+							<target>
+								<jar destfile="${project.build.directory}/testResources/org.sourcepit.osgifier.core.jar" basedir="${project.build.directory}/testResources" />
+							</target>
 						</configuration>
 					</execution>
 				</executions>
